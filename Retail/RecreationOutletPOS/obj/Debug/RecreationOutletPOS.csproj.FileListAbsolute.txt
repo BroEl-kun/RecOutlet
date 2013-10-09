@@ -1,0 +1,10 @@
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe.config
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.pdb
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csprojResolveAssemblyReference.cache
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.SalesForm.resources
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Properties.Resources.resources
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csproj.GenerateResource.Cache
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
+c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.InventoryForm.resources
