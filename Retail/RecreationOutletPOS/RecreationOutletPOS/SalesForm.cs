@@ -17,8 +17,18 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
-        private void SalesForm_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/11/2013 
+        /// 
+        /// Brings up a MODAL dialog to manually add an item from a select category list
+        /// </summary>
+        /// <param name="sender">the form component that called this method</param>
+        /// <param name="e">Associated events tied to the sender?</param>
+        private void btnAddItem_Click(object sender, EventArgs e)
         {
+            AddItemForm addItemForm = new AddItemForm();
+            addItemForm.ShowDialog();
         }
     }
 }
