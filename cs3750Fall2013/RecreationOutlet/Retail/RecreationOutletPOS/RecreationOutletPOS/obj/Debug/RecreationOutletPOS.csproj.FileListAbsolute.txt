@@ -8,3 +8,5 @@ c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletP
 c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
 c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
 c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.InventoryForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.AddItemForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.OLDSalesForm.resources

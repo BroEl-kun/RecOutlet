@@ -1,5 +1,11 @@
 ﻿namespace RecreationOutletPOS
 {
+    /// <summary>
+    /// Created By: Michael Vuong
+    /// Last Updated: 10/11/2013 by Michael Vuong
+    /// 
+    /// Represent a form that will allow the user to look up inventory information
+    /// </summary>
     partial class InventoryForm
     {
         /// <summary>
