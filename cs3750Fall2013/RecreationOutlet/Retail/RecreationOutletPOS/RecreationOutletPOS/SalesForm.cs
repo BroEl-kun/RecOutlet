@@ -30,5 +30,22 @@ namespace RecreationOutletPOS
             AddItemForm addItemForm = new AddItemForm();
             addItemForm.ShowDialog();
         }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 10/12/2013 
+        /// 
+        /// Adds an item to the ListView
+        /// </summary>
+        private void addItem(int id, String item, double price, int quantity, double discount, double total)
+        {
+            ListViewItem lvi = new ListViewItem(id.ToString());
+            lvi.SubItems.Add(item);
+            lvi.SubItems.Add("$" + price);
+            lvi.SubItems.Add(quantity.ToString());
+            lvi.SubItems.Add("-$" + discount.ToString());
+            lvi.SubItems.Add("$" + total);
+            lsvCheckOutItems.Items.Add(lvi);
+        }
     }
 }
