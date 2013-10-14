@@ -13,3 +13,15 @@ C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletP
 C:\Users\Nate Maurer\Desktop\New folder\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe.config
 C:\Users\Nate Maurer\Desktop\New folder\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
 C:\Users\Nate Maurer\Desktop\New folder\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe.config
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.pdb
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csprojResolveAssemblyReference.cache
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.AddItemForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.InventoryForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.OLDSalesForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Properties.Resources.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.SalesForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csproj.GenerateResource.Cache

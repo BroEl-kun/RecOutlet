@@ -32,6 +32,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pnlCategories = new System.Windows.Forms.Panel();
             this.btnMiscCamp = new System.Windows.Forms.Button();
             this.btnWaterSports = new System.Windows.Forms.Button();
@@ -51,11 +52,22 @@
             this.btnFood = new System.Windows.Forms.Button();
             this.btnEmergency = new System.Windows.Forms.Button();
             this.btnAsIs = new System.Windows.Forms.Button();
-            this.dgvCategoryItems = new System.Windows.Forms.DataGridView();
+            this.iTEMBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.masterDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.masterDataSet = new RecreationOutletPOS.masterDataSet();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
-            this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.tbItemSearch = new System.Windows.Forms.TextBox();
+            this.lblEnterSearch = new System.Windows.Forms.Label();
+            this.iTEMTableAdapter = new RecreationOutletPOS.masterDataSetTableAdapters.ITEMTableAdapter();
+            this.lvData = new System.Windows.Forms.ListView();
+            this.Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlCategories.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iTEMBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.masterDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.masterDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCategories
@@ -248,49 +260,116 @@
             this.btnAsIs.Text = "As-Is";
             this.btnAsIs.UseVisualStyleBackColor = true;
             // 
-            // dgvCategoryItems
+            // iTEMBindingSource
             // 
-            this.dgvCategoryItems.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvCategoryItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCategoryItems.Location = new System.Drawing.Point(12, 12);
-            this.dgvCategoryItems.Name = "dgvCategoryItems";
-            this.dgvCategoryItems.Size = new System.Drawing.Size(609, 255);
-            this.dgvCategoryItems.TabIndex = 14;
+            this.iTEMBindingSource.DataMember = "ITEM";
+            this.iTEMBindingSource.DataSource = this.masterDataSetBindingSource;
+            // 
+            // masterDataSetBindingSource
+            // 
+            this.masterDataSetBindingSource.DataSource = this.masterDataSet;
+            this.masterDataSetBindingSource.Position = 0;
+            // 
+            // masterDataSet
+            // 
+            this.masterDataSet.DataSetName = "masterDataSet";
+            this.masterDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(452, 457);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(167, 48);
+            this.btnCancel.TabIndex = 16;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAddItem
             // 
             this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(452, 457);
+            this.btnAddItem.Location = new System.Drawing.Point(12, 457);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(167, 48);
-            this.btnAddItem.TabIndex = 16;
+            this.btnAddItem.TabIndex = 17;
             this.btnAddItem.Text = "Add Item";
             this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
-            // btnDeleteItem
+            // tbItemSearch
             // 
-            this.btnDeleteItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(12, 457);
-            this.btnDeleteItem.Name = "btnDeleteItem";
-            this.btnDeleteItem.Size = new System.Drawing.Size(167, 48);
-            this.btnDeleteItem.TabIndex = 17;
-            this.btnDeleteItem.Text = "Delete Item";
-            this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.tbItemSearch.Location = new System.Drawing.Point(12, 35);
+            this.tbItemSearch.Name = "tbItemSearch";
+            this.tbItemSearch.Size = new System.Drawing.Size(609, 20);
+            this.tbItemSearch.TabIndex = 18;
+            this.tbItemSearch.TextChanged += new System.EventHandler(this.tbItemSearch_TextChanged);
+            // 
+            // lblEnterSearch
+            // 
+            this.lblEnterSearch.AutoSize = true;
+            this.lblEnterSearch.Location = new System.Drawing.Point(12, 19);
+            this.lblEnterSearch.Name = "lblEnterSearch";
+            this.lblEnterSearch.Size = new System.Drawing.Size(93, 13);
+            this.lblEnterSearch.TabIndex = 19;
+            this.lblEnterSearch.Text = "Enter search term:";
+            // 
+            // iTEMTableAdapter
+            // 
+            this.iTEMTableAdapter.ClearBeforeFill = true;
+            // 
+            // lvData
+            // 
+            this.lvData.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ID,
+            this.Item,
+            this.Price});
+            this.lvData.FullRowSelect = true;
+            this.lvData.HideSelection = false;
+            this.lvData.LabelWrap = false;
+            this.lvData.Location = new System.Drawing.Point(12, 62);
+            this.lvData.MinimumSize = new System.Drawing.Size(64, 0);
+            this.lvData.MultiSelect = false;
+            this.lvData.Name = "lvData";
+            this.lvData.Size = new System.Drawing.Size(609, 205);
+            this.lvData.TabIndex = 20;
+            this.lvData.UseCompatibleStateImageBehavior = false;
+            this.lvData.View = System.Windows.Forms.View.Details;
+            // 
+            // Item
+            // 
+            this.Item.Text = "Item";
+            this.Item.Width = 420;
+            // 
+            // Price
+            // 
+            this.Price.Text = "Price";
+            this.Price.Width = 128;
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
             // 
             // AddItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(633, 508);
-            this.Controls.Add(this.btnDeleteItem);
+            this.Controls.Add(this.lvData);
+            this.Controls.Add(this.lblEnterSearch);
+            this.Controls.Add(this.tbItemSearch);
             this.Controls.Add(this.btnAddItem);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.pnlCategories);
-            this.Controls.Add(this.dgvCategoryItems);
             this.Name = "AddItemForm";
-            this.Text = "AddItemForm";
+            this.Text = "Manual Item Addition";
+            this.Load += new System.EventHandler(this.AddItemForm_Load);
             this.pnlCategories.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCategoryItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iTEMBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.masterDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.masterDataSet)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -315,8 +394,17 @@
         private System.Windows.Forms.Button btnFood;
         private System.Windows.Forms.Button btnEmergency;
         private System.Windows.Forms.Button btnAsIs;
-        private System.Windows.Forms.DataGridView dgvCategoryItems;
+        private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAddItem;
-        private System.Windows.Forms.Button btnDeleteItem;
+        private System.Windows.Forms.TextBox tbItemSearch;
+        private System.Windows.Forms.Label lblEnterSearch;
+        private System.Windows.Forms.BindingSource masterDataSetBindingSource;
+        private masterDataSet masterDataSet;
+        private System.Windows.Forms.BindingSource iTEMBindingSource;
+        private masterDataSetTableAdapters.ITEMTableAdapter iTEMTableAdapter;
+        private System.Windows.Forms.ListView lvData;
+        private System.Windows.Forms.ColumnHeader Item;
+        private System.Windows.Forms.ColumnHeader Price;
+        private System.Windows.Forms.ColumnHeader ID;
     }
 }
