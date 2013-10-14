@@ -96,5 +96,16 @@ namespace RecreationOutletPOS
                 // NOTE: Must recalculate price here
             }
         }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Processes the checkout, adds a transaction to the db and updates the inventory count
+        /// </summary>
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
