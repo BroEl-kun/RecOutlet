@@ -25,11 +25,19 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/14/2013
+        /// 
+        /// NOTE- this.iTEMTableAdapter.Fill(this.masterDataSet.ITEM); was commented to get the program to work with
+        /// the new connection string established
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddItemForm_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'masterDataSet.ITEM' table. You can move, or remove it, as needed.
-            this.iTEMTableAdapter.Fill(this.masterDataSet.ITEM);
-            
+            //this.iTEMTableAdapter.Fill(this.masterDataSet.ITEM);
         }
 
 

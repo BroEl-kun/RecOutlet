@@ -12,8 +12,10 @@ namespace RecreationOutletPOS
 {
     class ManualItemAddition
     {
-        private string connStr = "Data Source=(local);Initial Catalog=master;Integrated Security=True";
-
+        //private string connStr = "Data Source=(local);Initial Catalog=master;Integrated Security=True";
+        private string connStr = "Data Source=titan.cs.weber.edu,10433;Initial Catalog=RecreationOutlet_Test1;" +
+                                 "Integrated Security=False;User ID=recreation;Password=outlet;Connect Timeout=15;" +
+                                 "Encrypt=False;TrustServerCertificate=False";
 
 
 
