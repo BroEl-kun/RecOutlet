@@ -90,8 +90,11 @@ namespace RecreationOutletPOS
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-            lsvCheckOutItems.Items.RemoveAt(lsvCheckOutItems.SelectedIndices[0]);
-            priceTotal(total);
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            {
+                lsvCheckOutItems.Items.RemoveAt(lsvCheckOutItems.SelectedIndices[0]);
+                // NOTE: Must recalculate price here
+            }
         }
     }
 }
