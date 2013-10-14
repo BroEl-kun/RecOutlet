@@ -40,7 +40,7 @@ namespace RecreationOutletPOS
             
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            AddItemForm addItemForm = new AddItemForm();
+            AddItemForm addItemForm = new AddItemForm(this);
             addItemForm.ShowDialog();
         }
 
@@ -57,7 +57,7 @@ namespace RecreationOutletPOS
         /// 
         /// Modified to work more directly with the priceTotal method.
         /// </summary>
-        private void addItem(int id, String item, double price, int quantity, double discount, double total)
+        public void addItem(int id, String item, double price, int quantity, double discount, double total)
         {
             ListViewItem lvi = new ListViewItem(id.ToString());
             lvi.SubItems.Add(item);
@@ -86,6 +86,12 @@ namespace RecreationOutletPOS
             summaryTax.Text = "$" + tax.ToString();
             summaryTotal.Text = "$" + total.ToString();
 
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            lsvCheckOutItems.Items.RemoveAt(lsvCheckOutItems.SelectedIndices[0]);
+            priceTotal(total);
         }
     }
 }

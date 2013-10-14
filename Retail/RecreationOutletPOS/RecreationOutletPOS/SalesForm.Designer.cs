@@ -128,10 +128,13 @@
             this.Discount,
             this.Total});
             this.lsvCheckOutItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvCheckOutItems.FullRowSelect = true;
+            this.lsvCheckOutItems.HideSelection = false;
             listViewItem1.Tag = "123";
             this.lsvCheckOutItems.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.lsvCheckOutItems.Location = new System.Drawing.Point(12, 87);
+            this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";
             this.lsvCheckOutItems.Size = new System.Drawing.Size(754, 306);
             this.lsvCheckOutItems.TabIndex = 23;
@@ -281,6 +284,7 @@
             this.btnDeleteItem.TabIndex = 28;
             this.btnDeleteItem.Text = "Delete Item";
             this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
             // SalesForm
             // 
