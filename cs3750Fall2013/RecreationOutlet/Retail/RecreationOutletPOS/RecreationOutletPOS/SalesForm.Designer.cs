@@ -28,13 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "123",
-            "Coffee Mug",
-            "$9.99",
-            "1",
-            "$0.00",
-            "$9.99"}, -1);
             this.btnSettings = new System.Windows.Forms.Button();
             this.btnReports = new System.Windows.Forms.Button();
             this.btnInventory = new System.Windows.Forms.Button();
@@ -130,9 +123,6 @@
             this.lsvCheckOutItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckOutItems.FullRowSelect = true;
             this.lsvCheckOutItems.HideSelection = false;
-            listViewItem1.Tag = "123";
-            this.lsvCheckOutItems.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
             this.lsvCheckOutItems.Location = new System.Drawing.Point(12, 87);
             this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";

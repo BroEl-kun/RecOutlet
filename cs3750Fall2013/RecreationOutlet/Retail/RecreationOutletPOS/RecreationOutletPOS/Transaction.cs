@@ -31,6 +31,8 @@ namespace RecreationOutletPOS
         private string paymentType;
         private int previousTransactionID;
 
+        public int rowsInserted;
+
         Dictionary<string, string> transactionDetails;
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace RecreationOutletPOS
         {
             this.transactionDetails = transactionDetails;
 
-            addTransactionToDb(this.transactionDetails);
+            rowsInserted = addTransactionToDb(this.transactionDetails);
         }
 
         /// <summary>
