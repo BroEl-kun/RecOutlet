@@ -49,20 +49,26 @@ namespace RecreationOutletPOS
             DataSet ds = new DataSet();
 
             ManualItemAddition dt = new ManualItemAddition();
-            ds = dt.showData(searchTerm);
 
-            lvData.Items.Clear();
-
-            if (ds.Tables["Results"].Rows.Count != 0)
+            try
             {
-                foreach (DataRow row in ds.Tables["Results"].Rows)
+                ds = dt.showData(searchTerm);
+
+                lvData.Items.Clear();
+
+                if (ds.Tables["Results"].Rows.Count != 0)
                 {
-                    ListViewItem li = new ListViewItem();
-                    //li.SubItems.Add(row["ItemID"].ToString());
-                    li.SubItems.Add(row["Description"].ToString());
-                    li.SubItems.Add(row["SellPrice"].ToString());
-                    lvData.Items.Add(li);
+                    foreach (DataRow row in ds.Tables["Results"].Rows)
+                    {
+                        ListViewItem li = new ListViewItem(row["ItemID"].ToString());
+                        li.SubItems.Add(row["Description"].ToString());
+                        li.SubItems.Add(row["SellPrice"].ToString());
+                        lvData.Items.Add(li);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
             }
         }
 
