@@ -171,30 +171,49 @@ namespace RecreationOutletPOS
             string paymentType = "Cash";
             int previousTransactionID = 0;
 
-            summaryTotal.Text = summaryTotal.Text.Replace("$", string.Empty);
+            string newTotalText = summaryTotal.Text.Replace("$", string.Empty);
 
-            try
+            if (lsvCheckOutItems.Items.Count > 0)
             {
-                Decimal.TryParse(summaryTotal.Text, out transTotal);
 
-                transaction.Add("TransactionID", transactionID.ToString());
-                transaction.Add("StoreID", storeID.ToString());
-                transaction.Add("EmployeeID", employeeID.ToString());
-                transaction.Add("TransDate", transDate.ToString());
-                transaction.Add("TerminalID", terminalID);
-                transaction.Add("TransTotal", transTotal.ToString());
-                transaction.Add("TransTax", transTax.ToString());
-                transaction.Add("ManagerID", managerID.ToString());
-                transaction.Add("PaymentType", paymentType);
-                transaction.Add("PreviousTransactionID", previousTransactionID.ToString());
+                try
+                {
+                    Decimal.TryParse(newTotalText, out transTotal);
 
-                Transaction newTransaction = new Transaction(transaction);
+                    transaction.Add("TransactionID", transactionID.ToString());
+                    transaction.Add("StoreID", storeID.ToString());
+                    transaction.Add("EmployeeID", employeeID.ToString());
+                    transaction.Add("TransDate", transDate.ToString());
+                    transaction.Add("TerminalID", terminalID);
+                    transaction.Add("TransTotal", transTotal.ToString());
+                    transaction.Add("TransTax", transTax.ToString());
+                    transaction.Add("ManagerID", managerID.ToString());
+                    transaction.Add("PaymentType", paymentType);
+                    transaction.Add("PreviousTransactionID", previousTransactionID.ToString());
 
+                    DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                    if (result == DialogResult.Yes)
+                    {
+                        Transaction newTransaction = new Transaction(transaction);
+
+                        MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        lsvCheckOutItems.Items.Clear();
+                        recalculate();
+                    }
+                    
+                }
+
+                catch (Exception ex)
+                {
+
+                }
             }
-
-            catch (Exception ex)
+            else
             {
-
+                MessageBox.Show("There are no items to checkout.", "Transaction",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
