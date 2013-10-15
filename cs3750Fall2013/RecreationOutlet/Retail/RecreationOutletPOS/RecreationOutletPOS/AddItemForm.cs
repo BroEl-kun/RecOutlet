@@ -38,6 +38,31 @@ namespace RecreationOutletPOS
         {
             // TODO: This line of code loads data into the 'masterDataSet.ITEM' table. You can move, or remove it, as needed.
             //this.iTEMTableAdapter.Fill(this.masterDataSet.ITEM);
+
+
+            DataSet ds;
+            ManualItemAddition dt = new ManualItemAddition();
+
+            try
+            {
+                ds = dt.showData(searchTerm);
+
+                lvData.Items.Clear();
+
+                if (ds.Tables["Results"].Rows.Count != 0)
+                {
+                    foreach (DataRow row in ds.Tables["Results"].Rows)
+                    {
+                        ListViewItem li = new ListViewItem(row["ItemID"].ToString());
+                        li.SubItems.Add(row["Description"].ToString());
+                        li.SubItems.Add(row["SellPrice"].ToString());
+                        lvData.Items.Add(li);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
 
