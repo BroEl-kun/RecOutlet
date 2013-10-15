@@ -28,9 +28,9 @@ namespace RecreationOutletPOS
 
         
 
-        private double cost = 0; //Nate wrote this.
-        private double tax = 0; //Nate wrote this.
-        private double total = 0; //Nate wrote this.
+        private double cost = 0; //Modified by Nate on 10/12/2013
+        private double tax = 0; //Modified by Nate on 10/12/2013
+        private double total = 0; //Modified by Nate on 10/12/2013
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -52,13 +52,6 @@ namespace RecreationOutletPOS
         /// 
         /// Adds an item to the ListView
         /// </summary>
-        /// 
-        /// <summary>
-        /// Programmer: Nate Maurer
-        /// Last Modified: 10/12/2013 
-        /// 
-        /// Modified to work more directly with the priceTotal method.
-        /// </summary>
         public void addItem(int id, String item, double price, int quantity, double discount, double total)
         {
             ListViewItem lvi = new ListViewItem(id.ToString());
@@ -69,7 +62,7 @@ namespace RecreationOutletPOS
             lvi.SubItems.Add("$" + total);
             lsvCheckOutItems.Items.Add(lvi);
 
-            //priceTotal(total); //Nate wrote this.
+            //priceTotal(total); //Modified by Nate on 10/12/2013
             recalculate();
         }
 
