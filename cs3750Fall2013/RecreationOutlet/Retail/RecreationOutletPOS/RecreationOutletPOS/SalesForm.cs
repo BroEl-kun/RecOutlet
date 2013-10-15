@@ -112,8 +112,6 @@ namespace RecreationOutletPOS
                 {
                     string costStr = lsvCheckOutItems.Items[i].SubItems[2].Text;
                     costStr = costStr.Replace("$", "");
-                    string totalStr = lsvCheckOutItems.Items[i].SubItems[5].Text;
-                    costStr = totalStr.Replace("$", "");
 
                     itemCost += Convert.ToDecimal(costStr);
                 }
@@ -160,7 +158,44 @@ namespace RecreationOutletPOS
         /// </summary>
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
+            Dictionary<string, string> transaction = new Dictionary<string, string>();
 
+            int transactionID = 001;
+            int storeID = 1;
+            int employeeID = 123;
+            DateTime transDate = DateTime.Now;
+            string terminalID = "t0";
+            Decimal transTotal;
+            Decimal transTax = 25;
+            int managerID = 1;
+            string paymentType = "Cash";
+            int previousTransactionID = 0;
+
+            summaryTotal.Text = summaryTotal.Text.Replace("$", string.Empty);
+
+            try
+            {
+                Decimal.TryParse(summaryTotal.Text, out transTotal);
+
+                transaction.Add("TransactionID", transactionID.ToString());
+                transaction.Add("StoreID", storeID.ToString());
+                transaction.Add("EmployeeID", employeeID.ToString());
+                transaction.Add("TransDate", transDate.ToString());
+                transaction.Add("TerminalID", terminalID);
+                transaction.Add("TransTotal", transTotal.ToString());
+                transaction.Add("TransTax", transTax.ToString());
+                transaction.Add("ManagerID", managerID.ToString());
+                transaction.Add("PaymentType", paymentType);
+                transaction.Add("PreviousTransactionID", previousTransactionID.ToString());
+
+                Transaction newTransaction = new Transaction(transaction);
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
