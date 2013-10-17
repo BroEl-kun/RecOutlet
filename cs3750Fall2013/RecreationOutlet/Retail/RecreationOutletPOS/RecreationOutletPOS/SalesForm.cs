@@ -223,5 +223,10 @@ namespace RecreationOutletPOS
                 recalculate();
             }
         }
+
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
