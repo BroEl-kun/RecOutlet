@@ -107,10 +107,18 @@ namespace RecreationOutletPOS
             if (lvData.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvData.SelectedItems[0];
+                int id = 0;
+
+                try
+                {
+                    int.TryParse(lvi.SubItems[0].Text, out id);
+                }
+                catch (Exception ex) { }
+
                 string name = lvi.SubItems[1].Text;
                 double price = Convert.ToDouble(lvi.SubItems[2].Text.Replace("$",""));
                 this.Close();
-                mainForm.addItem(1, name, price, 1, 0.00, price);
+                mainForm.addItem(id, name, price, 1, 0.00, price);
             }
             else
             {
