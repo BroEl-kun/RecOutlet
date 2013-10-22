@@ -12,6 +12,8 @@ namespace RecreationOutletPOS
 {
     public partial class SalesForm : Form
     {
+        TransactionList tList = new TransactionList();
+
         public SalesForm()
         {
             InitializeComponent();
@@ -51,18 +53,15 @@ namespace RecreationOutletPOS
         /// Last Updated: 10/12/2013 
         /// 
         /// Adds an item to the ListView
+        /// 
+        /// Modified by Jaed Norberg on 10/20/2013
+        ///     - Converted listview operations into class operations
+        ///         (all previous operations were moved to the updateListView function)
         /// </summary>
         public void addItem(int id, String item, double price, int quantity, double discount, double total)
         {
-            ListViewItem lvi = new ListViewItem(id.ToString());
-            lvi.SubItems.Add(item);
-            lvi.SubItems.Add("$" + price);
-            lvi.SubItems.Add(quantity.ToString());
-            lvi.SubItems.Add("-$" + discount.ToString());
-            lvi.SubItems.Add("$" + total);
-            lsvCheckOutItems.Items.Add(lvi);
-
-            //priceTotal(total); //Modified by Nate on 10/12/2013
+            tList.addItem(id, item, price, quantity, discount);
+            updateListView();
             recalculate();
         }
 
@@ -91,6 +90,9 @@ namespace RecreationOutletPOS
         /// Recalculates costs from the items in the listview.
         /// This takes the values from the listview and places
         /// the total in the summary labels.
+        /// 
+        /// Modified by Jaed Norberg on 10/20/2013
+        ///     - Changed listview operations to class operations
         /// </summary>
         private void recalculate()
         {
@@ -101,13 +103,13 @@ namespace RecreationOutletPOS
 
             try
             {
-                for (int i = 0; i < lsvCheckOutItems.Items.Count; i++)
+                foreach (TransactionItem t in tList.transData)
                 {
-                    string costStr = lsvCheckOutItems.Items[i].SubItems[2].Text;
-                    costStr = costStr.Replace("$", "");
-
-                    itemCost += Convert.ToDecimal(costStr);
+                    double costStr = t.getTotal();
+                    int qtyStr = t.getQuantity();
+                    itemCost += Convert.ToDecimal(costStr * qtyStr);
                 }
+
                 appliedTax = itemCost * taxRate;
                 itemTotalCost = itemCost + appliedTax;
 
@@ -125,22 +127,43 @@ namespace RecreationOutletPOS
         }
 
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013 
+        /// 
+        /// Updates the listview by pulling from the
+        /// active TransactionList class.
+        /// </summary>
+        private void updateListView()
+        {
+            try
+            {
+                lsvCheckOutItems.Items.Clear();
+                foreach (TransactionItem t in tList.transData)
+                {
+                    ListViewItem lvi = new ListViewItem(t.getID().ToString());
+                    lvi.SubItems.Add(t.getName());
+                    lvi.SubItems.Add("$" + t.getPrice());
+                    lvi.SubItems.Add(t.getQuantity().ToString());
+                    lvi.SubItems.Add("-$" + t.getDiscount().ToString());
+                    lvi.SubItems.Add("$" + t.getTotal());
+                    lsvCheckOutItems.Items.Add(lvi);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+
+
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-            if (lsvCheckOutItems.SelectedItems.Count > 0)
-            {
-                if (lsvCheckOutItems.Items.Count > 0)
-                {
-                    lsvCheckOutItems.Items.RemoveAt(lsvCheckOutItems.SelectedIndices[0]);
-                }
-                else
-                {
-                    MessageBox.Show("There's nothing to delete.", "Item Deletion",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
-                recalculate();
-                // NOTE: Must recalculate price here
-            }
+            int currentItem = lsvCheckOutItems.SelectedIndices[0];
+
+            tList.deleteItem(currentItem, 1);
+            updateListView();
+            recalculate();
         }
 
         /// <summary>
@@ -221,6 +244,7 @@ namespace RecreationOutletPOS
                     lsvCheckOutItems.Items.Clear();
                 }
                 recalculate();
+                updateListView();
             }
         }
 
