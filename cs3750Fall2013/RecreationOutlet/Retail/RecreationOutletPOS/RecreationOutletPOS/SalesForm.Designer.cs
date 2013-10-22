@@ -184,9 +184,9 @@
             this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.summaryTax.Location = new System.Drawing.Point(192, 36);
             this.summaryTax.Name = "summaryTax";
-            this.summaryTax.Size = new System.Drawing.Size(61, 22);
+            this.summaryTax.Size = new System.Drawing.Size(55, 22);
             this.summaryTax.TabIndex = 5;
-            this.summaryTax.Text = "0.00%";
+            this.summaryTax.Text = "$0.00";
             // 
             // summarySubTotal
             // 
@@ -196,7 +196,7 @@
             this.summarySubTotal.Name = "summarySubTotal";
             this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
             this.summarySubTotal.TabIndex = 3;
-            this.summarySubTotal.Text = "$9.99";
+            this.summarySubTotal.Text = "$0.00";
             // 
             // lblSubtotal
             // 
@@ -216,7 +216,7 @@
             this.summaryTotal.Name = "summaryTotal";
             this.summaryTotal.Size = new System.Drawing.Size(55, 22);
             this.summaryTotal.TabIndex = 4;
-            this.summaryTotal.Text = "$9.99";
+            this.summaryTotal.Text = "$0.00";
             // 
             // lblTax
             // 

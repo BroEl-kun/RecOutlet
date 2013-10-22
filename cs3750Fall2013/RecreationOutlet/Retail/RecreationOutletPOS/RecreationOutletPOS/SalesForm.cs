@@ -159,11 +159,14 @@ namespace RecreationOutletPOS
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
-            int currentItem = lsvCheckOutItems.SelectedIndices[0];
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            {
+                int currentItem = lsvCheckOutItems.SelectedIndices[0];
 
-            tList.deleteItem(currentItem, 1);
-            updateListView();
-            recalculate();
+                tList.deleteItem(currentItem, 1);
+                updateListView();
+                recalculate();
+            }
         }
 
         /// <summary>
