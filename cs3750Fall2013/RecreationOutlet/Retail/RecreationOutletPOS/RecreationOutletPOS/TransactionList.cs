@@ -54,7 +54,7 @@ namespace RecreationOutletPOS
 
         // DELETE ITEM
         // Attempts to delete an item at the specified list position,
-        // first decrementing it by the given quantity, or, if the
+        // first decrementing it by the given quantity, or if the
         // quantity exceeds what's in the list, it will remove it
         // entirely.
         public void deleteItem(int pos, int quantity)
