@@ -91,6 +91,7 @@
       <DependentUpon>SalesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Transaction.cs" />
+    <Compile Include="TransactionList.cs" />
     <EmbeddedResource Include="AddItemForm.resx">
       <DependentUpon>AddItemForm.cs</DependentUpon>
     </EmbeddedResource>
