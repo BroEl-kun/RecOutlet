@@ -107,7 +107,8 @@ namespace RecreationOutletPOS
                 {
                     double costStr = t.getTotal();
                     int qtyStr = t.getQuantity();
-                    itemCost += Convert.ToDecimal(costStr * qtyStr);
+                    //itemCost += Convert.ToDecimal(costStr * qtyStr);      // temporarily removed for redundancy
+                    itemCost += Convert.ToDecimal(costStr);
                 }
 
                 appliedTax = itemCost * taxRate;
