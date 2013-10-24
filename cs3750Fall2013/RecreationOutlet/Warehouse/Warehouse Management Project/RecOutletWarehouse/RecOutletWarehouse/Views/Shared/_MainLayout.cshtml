@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Main.css" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="title-wrapper">
+                <p id="site-main-title">Recreation Outlet Inventory Management System</p>
+            </div>
+        </header>
+        <div id="body">
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="center-text">
+                    <p>&copy; @DateTime.Now.Year - Recreation Outlet</p>
+                </div>
+                
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

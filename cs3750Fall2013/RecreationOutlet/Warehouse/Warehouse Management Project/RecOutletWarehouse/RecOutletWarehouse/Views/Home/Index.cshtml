@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Index</h2>
+<p>Hopefully this is using the _MainLayout...</p>
+    
+<table class="button-columns center-element center-text">
+    <tr>
+        <td><input type="button" value="Purchase Order Management" class="main-menu-button"
+                onclick="location.href='@Url.Action("Index","PurchaseOrder")'" />
+        </td>
+        <td><input type="button" value="Merchandise Transfers" class="main-menu-button"
+                onclick="location.href='@Url.Action("Index","MerchTransfer")'" />
+        </td>
+    </tr>
+    <tr>
+        <td><input type="button" value="Invoice Management" class="main-menu-button"
+                onclick="location.href='@Url.Action("Index","Invoice")'" />
+        </td>
+        <td><input type="button" value="Store Reports" class="main-menu-button"
+                onclick="location.href='@Url.Action("Index","StoreReports")'" />
+        </td>
+    </tr>
+    <tr>
+        <td><input type="button" value="Item Management" class="main-menu-button"
+                onclick="location.href='@Url.Action("Index","Item")'" /></td>
+        <td><input type="button" value="Warehouse Reports" class="main-menu-button"
+                onclick="location.href='@Url.Action("Index","WarehouseReports")'" /></td>
+    </tr>
+</table>
