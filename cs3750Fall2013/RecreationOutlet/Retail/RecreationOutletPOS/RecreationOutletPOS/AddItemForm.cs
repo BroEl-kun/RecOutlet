@@ -14,14 +14,36 @@ namespace RecreationOutletPOS
 {
     public partial class AddItemForm : Form
     {
-        SalesForm mainForm;
+        SalesForm salesForm;
+        ReturnsForm returnsForm;
 
         private string searchTerm = "";
-        
 
-        public AddItemForm(SalesForm mainForm)
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/23/2013
+        ///
+        /// Constructor for the SalesForm calling this
+        /// </summary>
+        /// <param name="inForm">The form that called this form</param>
+        public AddItemForm(SalesForm inForm)
         {
-            this.mainForm = mainForm;
+            this.salesForm = inForm;
+
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/23/2013
+        ///
+        /// Constructor for the ReturnForm calling this
+        /// </summary>
+        /// <param name="inForm">The form that called this form</param>
+        public AddItemForm(ReturnsForm inForm)
+        {
+            this.returnsForm = inForm;
+
             InitializeComponent();
         }
 
@@ -64,8 +86,6 @@ namespace RecreationOutletPOS
             {
             }
         }
-
-
 
         private void tbItemSearch_TextChanged(object sender, EventArgs e)
         {
@@ -118,7 +138,18 @@ namespace RecreationOutletPOS
                 string name = lvi.SubItems[1].Text;
                 double price = Convert.ToDouble(lvi.SubItems[2].Text.Replace("$",""));
                 this.Close();
-                mainForm.addItem(id, name, price, 1, 0.00, price);
+
+                // Determine which form called this form
+                // Programmer
+                if (salesForm != null)
+                {
+                    salesForm.addItem(id, name, price, 1, 0.00, price);
+                }
+
+                else if (returnsForm != null)
+                {
+                    returnsForm.addItem(id, name, price, 1, 0.00, price);
+                }
             }
             else
             {
@@ -126,5 +157,6 @@ namespace RecreationOutletPOS
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+
     }
 }

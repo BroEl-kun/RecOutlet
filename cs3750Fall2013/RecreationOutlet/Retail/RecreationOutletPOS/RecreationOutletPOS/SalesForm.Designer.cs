@@ -86,6 +86,7 @@
             this.btnInventory.TabIndex = 17;
             this.btnInventory.Text = "Inventory";
             this.btnInventory.UseVisualStyleBackColor = true;
+            this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
             // 
             // btnReturns
             // 
@@ -97,6 +98,7 @@
             this.btnReturns.TabIndex = 16;
             this.btnReturns.Text = "Returns";
             this.btnReturns.UseVisualStyleBackColor = true;
+            this.btnReturns.Click += new System.EventHandler(this.btnReturns_Click);
             // 
             // btnSales
             // 
@@ -111,7 +113,6 @@
             this.btnSales.TabIndex = 15;
             this.btnSales.Text = "Sales";
             this.btnSales.UseVisualStyleBackColor = false;
-            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // lsvCheckOutItems
             // 

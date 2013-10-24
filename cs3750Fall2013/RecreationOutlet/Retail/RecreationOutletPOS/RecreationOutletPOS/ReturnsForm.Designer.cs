@@ -33,15 +33,11 @@
             this.btnInventory = new System.Windows.Forms.Button();
             this.btnReturns = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
-            this.btnCheckOut = new System.Windows.Forms.Button();
+            this.btnConfirmReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.pnlSummary = new System.Windows.Forms.Panel();
-            this.summaryTax = new System.Windows.Forms.Label();
-            this.summarySubTotal = new System.Windows.Forms.Label();
-            this.lblSubtotal = new System.Windows.Forms.Label();
-            this.summaryTotal = new System.Windows.Forms.Label();
-            this.lblTax = new System.Windows.Forms.Label();
+            this.summaryReturnTotal = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lsvCheckOutItems = new System.Windows.Forms.ListView();
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -86,11 +82,13 @@
             this.btnInventory.TabIndex = 22;
             this.btnInventory.Text = "Inventory";
             this.btnInventory.UseVisualStyleBackColor = true;
+            this.btnInventory.Click += new System.EventHandler(this.btnInventory_Click);
             // 
             // btnReturns
             // 
             this.btnReturns.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btnReturns.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnReturns.Enabled = false;
             this.btnReturns.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReturns.Location = new System.Drawing.Point(143, 12);
             this.btnReturns.Name = "btnReturns";
@@ -108,15 +106,17 @@
             this.btnDeleteItem.TabIndex = 34;
             this.btnDeleteItem.Text = "Delete Item";
             this.btnDeleteItem.UseVisualStyleBackColor = true;
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
-            // btnCheckOut
+            // btnConfirmReturn
             // 
-            this.btnCheckOut.Location = new System.Drawing.Point(772, 457);
-            this.btnCheckOut.Name = "btnCheckOut";
-            this.btnCheckOut.Size = new System.Drawing.Size(137, 49);
-            this.btnCheckOut.TabIndex = 33;
-            this.btnCheckOut.Text = "Check Out";
-            this.btnCheckOut.UseVisualStyleBackColor = true;
+            this.btnConfirmReturn.Location = new System.Drawing.Point(772, 457);
+            this.btnConfirmReturn.Name = "btnConfirmReturn";
+            this.btnConfirmReturn.Size = new System.Drawing.Size(137, 49);
+            this.btnConfirmReturn.TabIndex = 33;
+            this.btnConfirmReturn.Text = "Confirm Return";
+            this.btnConfirmReturn.UseVisualStyleBackColor = true;
+            this.btnConfirmReturn.Click += new System.EventHandler(this.btnConfirmReturn_Click);
             // 
             // btnClear
             // 
@@ -136,71 +136,28 @@
             this.btnAddItem.TabIndex = 31;
             this.btnAddItem.Text = "Manual Item Add";
             this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // pnlSummary
             // 
             this.pnlSummary.BackColor = System.Drawing.SystemColors.Window;
             this.pnlSummary.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSummary.Controls.Add(this.summaryTax);
-            this.pnlSummary.Controls.Add(this.summarySubTotal);
-            this.pnlSummary.Controls.Add(this.lblSubtotal);
-            this.pnlSummary.Controls.Add(this.summaryTotal);
-            this.pnlSummary.Controls.Add(this.lblTax);
+            this.pnlSummary.Controls.Add(this.summaryReturnTotal);
             this.pnlSummary.Controls.Add(this.lblTotal);
             this.pnlSummary.Location = new System.Drawing.Point(474, 399);
             this.pnlSummary.Name = "pnlSummary";
             this.pnlSummary.Size = new System.Drawing.Size(292, 109);
             this.pnlSummary.TabIndex = 30;
             // 
-            // summaryTax
+            // summaryReturnTotal
             // 
-            this.summaryTax.AutoSize = true;
-            this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTax.Location = new System.Drawing.Point(192, 36);
-            this.summaryTax.Name = "summaryTax";
-            this.summaryTax.Size = new System.Drawing.Size(61, 22);
-            this.summaryTax.TabIndex = 5;
-            this.summaryTax.Text = "0.00%";
-            // 
-            // summarySubTotal
-            // 
-            this.summarySubTotal.AutoSize = true;
-            this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summarySubTotal.Location = new System.Drawing.Point(192, 11);
-            this.summarySubTotal.Name = "summarySubTotal";
-            this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
-            this.summarySubTotal.TabIndex = 3;
-            this.summarySubTotal.Text = "$9.99";
-            // 
-            // lblSubtotal
-            // 
-            this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubtotal.Location = new System.Drawing.Point(8, 10);
-            this.lblSubtotal.Name = "lblSubtotal";
-            this.lblSubtotal.Size = new System.Drawing.Size(76, 22);
-            this.lblSubtotal.TabIndex = 0;
-            this.lblSubtotal.Text = "Subtotal";
-            // 
-            // summaryTotal
-            // 
-            this.summaryTotal.AutoSize = true;
-            this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTotal.Location = new System.Drawing.Point(192, 71);
-            this.summaryTotal.Name = "summaryTotal";
-            this.summaryTotal.Size = new System.Drawing.Size(55, 22);
-            this.summaryTotal.TabIndex = 4;
-            this.summaryTotal.Text = "$9.99";
-            // 
-            // lblTax
-            // 
-            this.lblTax.AutoSize = true;
-            this.lblTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTax.Location = new System.Drawing.Point(8, 36);
-            this.lblTax.Name = "lblTax";
-            this.lblTax.Size = new System.Drawing.Size(41, 22);
-            this.lblTax.TabIndex = 1;
-            this.lblTax.Text = "Tax";
+            this.summaryReturnTotal.AutoSize = true;
+            this.summaryReturnTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryReturnTotal.Location = new System.Drawing.Point(192, 71);
+            this.summaryReturnTotal.Name = "summaryReturnTotal";
+            this.summaryReturnTotal.Size = new System.Drawing.Size(55, 22);
+            this.summaryReturnTotal.TabIndex = 4;
+            this.summaryReturnTotal.Text = "$0.00";
             // 
             // lblTotal
             // 
@@ -208,9 +165,9 @@
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotal.Location = new System.Drawing.Point(8, 71);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(51, 22);
+            this.lblTotal.Size = new System.Drawing.Size(110, 22);
             this.lblTotal.TabIndex = 2;
-            this.lblTotal.Text = "Total";
+            this.lblTotal.Text = "Return Total";
             // 
             // lsvCheckOutItems
             // 
@@ -281,7 +238,7 @@
             this.ClientSize = new System.Drawing.Size(921, 520);
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.btnDeleteItem);
-            this.Controls.Add(this.btnCheckOut);
+            this.Controls.Add(this.btnConfirmReturn);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAddItem);
             this.Controls.Add(this.pnlSummary);
@@ -305,15 +262,11 @@
         private System.Windows.Forms.Button btnInventory;
         private System.Windows.Forms.Button btnReturns;
         private System.Windows.Forms.Button btnDeleteItem;
-        private System.Windows.Forms.Button btnCheckOut;
+        private System.Windows.Forms.Button btnConfirmReturn;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.Panel pnlSummary;
-        private System.Windows.Forms.Label summaryTax;
-        private System.Windows.Forms.Label summarySubTotal;
-        private System.Windows.Forms.Label lblSubtotal;
-        private System.Windows.Forms.Label summaryTotal;
-        private System.Windows.Forms.Label lblTax;
+        private System.Windows.Forms.Label summaryReturnTotal;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.ListView lsvCheckOutItems;
         private System.Windows.Forms.ColumnHeader ID;
