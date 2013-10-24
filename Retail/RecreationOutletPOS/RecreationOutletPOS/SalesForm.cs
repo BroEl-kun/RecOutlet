@@ -255,5 +255,18 @@ namespace RecreationOutletPOS
         {
 
         }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 10/23/2013
+        /// 
+        /// Switch to ReturnsForm (Work in progress)
+        /// </summary>
+        private void btnReturns_Click_1(object sender, EventArgs e)
+        {
+            ReturnsForm myNewForm = new ReturnsForm();
+            this.Hide();
+            myNewForm.Show();
+        }
     }
 }
