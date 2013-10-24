@@ -34,6 +34,7 @@ namespace RecreationOutletPOS
                     if (id == t.getID())
                     {
                         t.setQuantity(t.getQuantity() + quantity);
+                        t.updateTotal();
                         foundMatch = true;
                         break;
                     }
@@ -111,7 +112,12 @@ namespace RecreationOutletPOS
             this.quantity = quantity;
             this.discount = discount;
 
-            this.total = price - discount;
+            this.total = quantity * (price - discount);
+        }
+
+        public void updateTotal()
+        {
+            this.total = quantity * (price - discount);
         }
 
 
