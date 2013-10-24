@@ -247,14 +247,27 @@ namespace RecreationOutletPOS
                 {
                     lsvCheckOutItems.Items.Clear();
                 }
+
                 recalculate();
                 updateListView();
             }
         }
 
-        private void btnSales_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnReturns_Click(object sender, EventArgs e)
         {
+            ReturnsForm returnsForm = new ReturnsForm();
+            returnsForm.Show();
+        }
 
+        private void btnInventory_Click(object sender, EventArgs e)
+        {
+            InventoryForm inventoryForm = new InventoryForm();
+            inventoryForm.Show();
         }
 
         /// <summary>
