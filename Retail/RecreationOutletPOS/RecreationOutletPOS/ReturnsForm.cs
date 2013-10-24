@@ -17,7 +17,20 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 10/23/2013
+        /// 
+        /// Switch to SalesForm (Work in progress)
+        /// </summary>
         private void btnSales_Click(object sender, EventArgs e)
+        {
+            SalesForm myNewForm = new SalesForm();
+            this.Hide();
+            myNewForm.Show();
+        }
+
+        private void btnReturns_Click(object sender, EventArgs e)
         {
 
         }
