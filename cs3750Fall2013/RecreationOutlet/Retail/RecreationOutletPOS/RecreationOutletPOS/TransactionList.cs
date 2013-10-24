@@ -65,7 +65,10 @@ namespace RecreationOutletPOS
                 TransactionItem t = transData.ElementAt(pos);
 
                 if (t.getQuantity() > quantity)
+                {
                     t.setQuantity(t.getQuantity() - quantity);
+                    t.updateTotal();
+                }
                 else
                     transData.RemoveAt(pos);
             }
