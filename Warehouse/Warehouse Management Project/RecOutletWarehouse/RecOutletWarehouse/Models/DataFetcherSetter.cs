@@ -7,5 +7,8 @@ namespace RecOutletWarehouse.Models
 {
     public class DataFetcherSetter
     {
+
+
+
     }
 }
