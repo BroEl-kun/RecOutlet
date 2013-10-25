@@ -5,3 +5,36 @@
 }
 
 <h2>Create a new Purchase Order</h2>
+@using (Html.BeginForm()) {
+    <table>
+        <tr>
+            <td>Purchase Order ID:</td>
+            <td>@Html.TextBoxFor(newPO => newPO.PurchaseOrderId)</td>
+        </tr>
+        <tr>
+            <td>Vendor ID:</td>
+            <td>@Html.TextBoxFor(newPO => newPO.VendorId)</td>
+        </tr>
+        <tr>
+            <td>PO Order Date:</td>
+            <td>@Html.TextBoxFor(newPO => newPO.OrderDate, new { @value = DateTime.Now.Date })</td>
+        </tr>
+        <tr>
+            <td>PO Estimated Ship Date:</td>
+            <td>@Html.TextBoxFor(newPO => newPO.EstShipDate)</td>
+        </tr>
+        <tr>
+            <td>PO Estimated Freight Cost:</td>
+            <td>@Html.TextBoxFor(newPO => newPO.FreightCost)</td>
+        </tr>
+        <tr>
+            <td>PO Terms:</td>
+            <td>@Html.TextBoxFor(newPO => newPO.Terms)</td>
+        </tr>
+        <tr>
+            <td>Order Comments:</td>
+            <td>@Html.TextAreaFor(newPO => newPO.Comments)</td>
+        </tr>
+    </table>
+    <input type="submit" value="Create New PO" />
+}
