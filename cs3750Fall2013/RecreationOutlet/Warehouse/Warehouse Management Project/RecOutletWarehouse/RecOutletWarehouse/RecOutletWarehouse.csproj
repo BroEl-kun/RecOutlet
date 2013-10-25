@@ -110,6 +110,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataFetcherSetter.cs" />
+    <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
+    <Compile Include="Models\PurchaseOrder\PurchaseOrderLineItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
