@@ -51,6 +51,7 @@
             this.btnCheckOut = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
+            this.tbScanner = new System.Windows.Forms.TextBox();
             this.pnlSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,6 +134,7 @@
             this.lsvCheckOutItems.TabIndex = 23;
             this.lsvCheckOutItems.UseCompatibleStateImageBehavior = false;
             this.lsvCheckOutItems.View = System.Windows.Forms.View.Details;
+            this.lsvCheckOutItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvCheckOutItems_KeyDown);
             // 
             // ID
             // 
@@ -281,11 +283,20 @@
             this.btnDeleteItem.UseVisualStyleBackColor = true;
             this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 
+            // tbScanner
+            // 
+            this.tbScanner.Location = new System.Drawing.Point(773, 87);
+            this.tbScanner.Name = "tbScanner";
+            this.tbScanner.Size = new System.Drawing.Size(136, 20);
+            this.tbScanner.TabIndex = 29;
+            this.tbScanner.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScanner_KeyPress);
+            // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.tbScanner);
             this.Controls.Add(this.btnDeleteItem);
             this.Controls.Add(this.btnCheckOut);
             this.Controls.Add(this.btnClear);
@@ -299,9 +310,11 @@
             this.Controls.Add(this.btnSales);
             this.Name = "SalesForm";
             this.Text = "SalesForm";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SalesForm_KeyPress);
             this.pnlSummary.ResumeLayout(false);
             this.pnlSummary.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -330,5 +343,6 @@
         private System.Windows.Forms.Button btnCheckOut;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDeleteItem;
+        private System.Windows.Forms.TextBox tbScanner;
     }
 }

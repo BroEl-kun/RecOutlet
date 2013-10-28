@@ -61,9 +61,11 @@
             this.lblEnterSearch = new System.Windows.Forms.Label();
             this.iTEMTableAdapter = new RecreationOutletPOS.masterDataSetTableAdapters.ITEMTableAdapter();
             this.lvData = new System.Windows.Forms.ListView();
+            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblQty = new System.Windows.Forms.Label();
+            this.tbItemQuantity = new System.Windows.Forms.TextBox();
             this.pnlCategories.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iTEMBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.masterDataSetBindingSource)).BeginInit();
@@ -301,7 +303,7 @@
             // 
             this.tbItemSearch.Location = new System.Drawing.Point(12, 35);
             this.tbItemSearch.Name = "tbItemSearch";
-            this.tbItemSearch.Size = new System.Drawing.Size(609, 20);
+            this.tbItemSearch.Size = new System.Drawing.Size(521, 20);
             this.tbItemSearch.TabIndex = 18;
             this.tbItemSearch.TextChanged += new System.EventHandler(this.tbItemSearch_TextChanged);
             // 
@@ -328,13 +330,17 @@
             this.lvData.HideSelection = false;
             this.lvData.LabelWrap = false;
             this.lvData.Location = new System.Drawing.Point(12, 62);
-            this.lvData.MinimumSize = new System.Drawing.Size(64, 0);
+            this.lvData.MinimumSize = new System.Drawing.Size(64, 4);
             this.lvData.MultiSelect = false;
             this.lvData.Name = "lvData";
             this.lvData.Size = new System.Drawing.Size(609, 205);
             this.lvData.TabIndex = 20;
             this.lvData.UseCompatibleStateImageBehavior = false;
             this.lvData.View = System.Windows.Forms.View.Details;
+            // 
+            // ID
+            // 
+            this.ID.Text = "ID";
             // 
             // Item
             // 
@@ -346,15 +352,31 @@
             this.Price.Text = "Price";
             this.Price.Width = 128;
             // 
-            // ID
+            // lblQty
             // 
-            this.ID.Text = "ID";
+            this.lblQty.AutoSize = true;
+            this.lblQty.Location = new System.Drawing.Point(539, 19);
+            this.lblQty.Name = "lblQty";
+            this.lblQty.Size = new System.Drawing.Size(49, 13);
+            this.lblQty.TabIndex = 21;
+            this.lblQty.Text = "Quantity:";
+            // 
+            // tbItemQuantity
+            // 
+            this.tbItemQuantity.Location = new System.Drawing.Point(539, 35);
+            this.tbItemQuantity.Name = "tbItemQuantity";
+            this.tbItemQuantity.Size = new System.Drawing.Size(82, 20);
+            this.tbItemQuantity.TabIndex = 22;
+            this.tbItemQuantity.Text = "1";
+            this.tbItemQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbItemQuantity_KeyPress);
             // 
             // AddItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(633, 508);
+            this.Controls.Add(this.tbItemQuantity);
+            this.Controls.Add(this.lblQty);
             this.Controls.Add(this.lvData);
             this.Controls.Add(this.lblEnterSearch);
             this.Controls.Add(this.tbItemSearch);
@@ -406,5 +428,7 @@
         private System.Windows.Forms.ColumnHeader Item;
         private System.Windows.Forms.ColumnHeader Price;
         private System.Windows.Forms.ColumnHeader ID;
+        private System.Windows.Forms.Label lblQty;
+        private System.Windows.Forms.TextBox tbItemQuantity;
     }
 }
