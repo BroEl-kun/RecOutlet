@@ -31,14 +31,14 @@
             this.cmbCommissionTo = new System.Windows.Forms.ComboBox();
             this.lblCommissionTo = new System.Windows.Forms.Label();
             this.pnlCheckoutSummary = new System.Windows.Forms.Panel();
-            this.btnConfirmCheckOut = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.summaryTax = new System.Windows.Forms.Label();
-            this.summarySubTotal = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
-            this.summaryTotal = new System.Windows.Forms.Label();
             this.lblTax = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.btnConfirmCheckOut = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.summaryTotal = new System.Windows.Forms.Label();
+            this.summaryTax = new System.Windows.Forms.Label();
+            this.summarySubTotal = new System.Windows.Forms.Label();
             this.pnlCheckoutSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,46 +81,6 @@
             this.pnlCheckoutSummary.Size = new System.Drawing.Size(395, 129);
             this.pnlCheckoutSummary.TabIndex = 2;
             // 
-            // btnConfirmCheckOut
-            // 
-            this.btnConfirmCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmCheckOut.Location = new System.Drawing.Point(525, 389);
-            this.btnConfirmCheckOut.Name = "btnConfirmCheckOut";
-            this.btnConfirmCheckOut.Size = new System.Drawing.Size(166, 57);
-            this.btnConfirmCheckOut.TabIndex = 3;
-            this.btnConfirmCheckOut.Text = "Confirm Check Out";
-            this.btnConfirmCheckOut.UseVisualStyleBackColor = true;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(342, 389);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(166, 57);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // summaryTax
-            // 
-            this.summaryTax.AutoSize = true;
-            this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTax.Location = new System.Drawing.Point(300, 41);
-            this.summaryTax.Name = "summaryTax";
-            this.summaryTax.Size = new System.Drawing.Size(55, 22);
-            this.summaryTax.TabIndex = 11;
-            this.summaryTax.Text = "$0.00";
-            // 
-            // summarySubTotal
-            // 
-            this.summarySubTotal.AutoSize = true;
-            this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summarySubTotal.Location = new System.Drawing.Point(300, 15);
-            this.summarySubTotal.Name = "summarySubTotal";
-            this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
-            this.summarySubTotal.TabIndex = 9;
-            this.summarySubTotal.Text = "$0.00";
-            // 
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
@@ -130,16 +90,6 @@
             this.lblSubtotal.Size = new System.Drawing.Size(76, 22);
             this.lblSubtotal.TabIndex = 6;
             this.lblSubtotal.Text = "Subtotal";
-            // 
-            // summaryTotal
-            // 
-            this.summaryTotal.AutoSize = true;
-            this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTotal.Location = new System.Drawing.Point(300, 94);
-            this.summaryTotal.Name = "summaryTotal";
-            this.summaryTotal.Size = new System.Drawing.Size(55, 22);
-            this.summaryTotal.TabIndex = 10;
-            this.summaryTotal.Text = "$0.00";
             // 
             // lblTax
             // 
@@ -160,6 +110,57 @@
             this.lblTotal.Size = new System.Drawing.Size(51, 22);
             this.lblTotal.TabIndex = 8;
             this.lblTotal.Text = "Total";
+            // 
+            // btnConfirmCheckOut
+            // 
+            this.btnConfirmCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmCheckOut.Location = new System.Drawing.Point(525, 389);
+            this.btnConfirmCheckOut.Name = "btnConfirmCheckOut";
+            this.btnConfirmCheckOut.Size = new System.Drawing.Size(166, 57);
+            this.btnConfirmCheckOut.TabIndex = 3;
+            this.btnConfirmCheckOut.Text = "Confirm Check Out";
+            this.btnConfirmCheckOut.UseVisualStyleBackColor = true;
+            this.btnConfirmCheckOut.Click += new System.EventHandler(this.btnConfirmCheckOut_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(342, 389);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(166, 57);
+            this.btnCancel.TabIndex = 4;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // summaryTotal
+            // 
+            this.summaryTotal.AutoSize = true;
+            this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryTotal.Location = new System.Drawing.Point(300, 94);
+            this.summaryTotal.Name = "summaryTotal";
+            this.summaryTotal.Size = new System.Drawing.Size(55, 22);
+            this.summaryTotal.TabIndex = 10;
+            this.summaryTotal.Text = "$0.00";
+            // 
+            // summaryTax
+            // 
+            this.summaryTax.AutoSize = true;
+            this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryTax.Location = new System.Drawing.Point(300, 41);
+            this.summaryTax.Name = "summaryTax";
+            this.summaryTax.Size = new System.Drawing.Size(55, 22);
+            this.summaryTax.TabIndex = 11;
+            this.summaryTax.Text = "$0.00";
+            // 
+            // summarySubTotal
+            // 
+            this.summarySubTotal.AutoSize = true;
+            this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summarySubTotal.Location = new System.Drawing.Point(300, 15);
+            this.summarySubTotal.Name = "summarySubTotal";
+            this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
+            this.summarySubTotal.TabIndex = 9;
+            this.summarySubTotal.Text = "$0.00";
             // 
             // CheckOutForm
             // 
@@ -187,11 +188,11 @@
         private System.Windows.Forms.Panel pnlCheckoutSummary;
         private System.Windows.Forms.Button btnConfirmCheckOut;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label summaryTax;
-        private System.Windows.Forms.Label summarySubTotal;
         private System.Windows.Forms.Label lblSubtotal;
-        private System.Windows.Forms.Label summaryTotal;
         private System.Windows.Forms.Label lblTax;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.Label summaryTax;
+        private System.Windows.Forms.Label summarySubTotal;
+        private System.Windows.Forms.Label summaryTotal;
     }
 }

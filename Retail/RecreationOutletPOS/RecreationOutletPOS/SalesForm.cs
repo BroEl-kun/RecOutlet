@@ -85,7 +85,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Jaed Norberg
-        /// Last Updated: 10/14/2013 
+        /// Last Updated: 10/27/2013  (by Michael Vuong)
         /// 
         /// Recalculates costs from the items in the listview.
         /// This takes the values from the listview and places
@@ -130,7 +130,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Jaed Norberg
-        /// Last Updated: 10/14/2013 
+        /// Last Updated: 10/27/2013 (by Michael Vuong)
         /// 
         /// Updates the listview by pulling from the
         /// active TransactionList class.
@@ -172,7 +172,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/14/2013
+        /// Last Updated: 10/27/2013
         /// 
         /// Processes the checkout, adds a transaction to the db and updates the inventory count
         /// </summary>
@@ -191,11 +191,12 @@ namespace RecreationOutletPOS
             string paymentType = "Cash";
             int previousTransactionID = 0;
 
+            string subtotal = summarySubTotal.Text.Replace("$", string.Empty);
+            string tax = summaryTax.Text.Replace("$", string.Empty); 
             string newTotalText = summaryTotal.Text.Replace("$", string.Empty);
-
+            
             if (lsvCheckOutItems.Items.Count > 0)
             {
-
                 try
                 {
                     Decimal.TryParse(newTotalText, out transTotal);
@@ -210,19 +211,16 @@ namespace RecreationOutletPOS
                     transaction.Add("ManagerID", managerID.ToString());
                     transaction.Add("PaymentType", paymentType);
                     transaction.Add("PreviousTransactionID", previousTransactionID.ToString());
+                    transaction.Add("SummarySubtotal", subtotal);
+                    transaction.Add("SummaryTax", tax);
 
-                    DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-                    if (result == DialogResult.Yes)
-                    {
-                        Transaction newTransaction = new Transaction(transaction);
+                    CheckOutForm checkOutForm = new CheckOutForm(transaction);
+                    checkOutForm.ShowDialog();
 
-                        MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
-                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        lsvCheckOutItems.Items.Clear();
-                        recalculate();
-                    }
-                    
+                    tList.transData.Clear();
+
+                    recalculate();
+                    updateListView();
                 }
 
                 catch (Exception ex)
@@ -230,6 +228,7 @@ namespace RecreationOutletPOS
 
                 }
             }
+
             else
             {
                 MessageBox.Show("There are no items to checkout.", "Transaction",
@@ -254,16 +253,23 @@ namespace RecreationOutletPOS
         }
 
         /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/27/2013
         /// 
+        /// Opens up the Returns section of the POS
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnReturns_Click(object sender, EventArgs e)
         {
             ReturnsForm returnsForm = new ReturnsForm();
             returnsForm.Show();
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/27/2013
+        /// 
+        /// Opens up the Inventory section of the POS
+        /// </summary>
         private void btnInventory_Click(object sender, EventArgs e)
         {
             InventoryForm inventoryForm = new InventoryForm();
