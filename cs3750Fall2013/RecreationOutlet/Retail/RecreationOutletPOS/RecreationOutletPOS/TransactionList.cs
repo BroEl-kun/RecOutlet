@@ -76,6 +76,20 @@ namespace RecreationOutletPOS
             {
             }
         }
+
+
+        // CLEAR DATA
+        // Removes all data from the list.
+        public void clearData()
+        {
+            try
+            {
+                transData.Clear();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 
 

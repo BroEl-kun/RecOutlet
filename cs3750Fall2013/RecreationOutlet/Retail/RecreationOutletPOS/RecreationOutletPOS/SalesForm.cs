@@ -244,7 +244,7 @@ namespace RecreationOutletPOS
                         MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                 if (result == DialogResult.Yes)
                 {
-                    lsvCheckOutItems.Items.Clear();
+                    tList.clearData();
                 }
 
                 recalculate();
@@ -287,6 +287,76 @@ namespace RecreationOutletPOS
             ReturnsForm myNewForm = new ReturnsForm();
             this.Hide();
             myNewForm.Show();
+        }
+
+        
+
+        private void lsvCheckOutItems_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Delete:
+                    if (lsvCheckOutItems.SelectedItems.Count > 0)
+                    {
+                        int currentItem = lsvCheckOutItems.SelectedIndices[0];
+
+                        tList.deleteItem(currentItem, 1);
+                        updateListView();
+                        recalculate();
+                    }
+                    break;
+            }
+        }
+
+
+
+        private void SalesForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+        }
+
+        private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // enter key is pressed
+            if (e.KeyChar == 13)
+            {
+                DataSet ds;
+                ManualItemAddition dt = new ManualItemAddition();
+
+                try
+                {
+                    string ID = tbScanner.Text;
+                    ds = dt.retrieveItem(ID);
+
+                    if (ds.Tables["Results"].Rows.Count != 0)
+                    {
+                        foreach (DataRow row in ds.Tables["Results"].Rows)
+                        {
+                            int id;
+                            string name;
+                            double price;
+
+                            int.TryParse(row["ItemID"].ToString(), out id);
+                            name = (row["Description"].ToString());
+                            double.TryParse(row["SellPrice"].ToString(), out price);
+
+                            addItem(id, name, price, 1, 0.00, price);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The request didn't return anything.", "Item Scan",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("There was an error processing the request.", "Item Scan",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+
+                tbScanner.Text = "";
+            }
         }
     }
 }

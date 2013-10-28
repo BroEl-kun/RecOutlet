@@ -127,11 +127,12 @@ namespace RecreationOutletPOS
             if (lvData.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvData.SelectedItems[0];
-                int id = 0;
+                int id = 0, quantity = 0;
 
                 try
                 {
                     int.TryParse(lvi.SubItems[0].Text, out id);
+                    int.TryParse(tbItemQuantity.Text, out quantity);
                 }
                 catch (Exception ex) { }
 
@@ -144,12 +145,12 @@ namespace RecreationOutletPOS
                 // Last Updated: 10/27/2013
                 if (salesForm != null)
                 {
-                    salesForm.addItem(id, name, price, 1, 0.00, price);
+                    salesForm.addItem(id, name, price, quantity, 0.00, price);
                 }
 
                 else if (returnsForm != null)
                 {
-                    returnsForm.addItem(id, name, price, 1, 0.00, price);
+                    returnsForm.addItem(id, name, price, quantity, 0.00, price);
                 }
             }
             else
@@ -158,6 +159,14 @@ namespace RecreationOutletPOS
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+
+        private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        
 
     }
 }
