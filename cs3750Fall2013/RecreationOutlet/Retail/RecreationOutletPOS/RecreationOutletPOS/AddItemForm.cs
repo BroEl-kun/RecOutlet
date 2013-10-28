@@ -140,7 +140,8 @@ namespace RecreationOutletPOS
                 this.Close();
 
                 // Determine which form called this form
-                // Programmer
+                // Programmer: Michael Vuong
+                // Last Updated: 10/27/2013
                 if (salesForm != null)
                 {
                     salesForm.addItem(id, name, price, 1, 0.00, price);
