@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder
+﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderCreationViewModel
 @{
     ViewBag.Title = "Create New Purchase Order";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -9,32 +9,33 @@
     <table>
         <tr>
             <td>Purchase Order ID:</td>
-            <td>@Html.TextBoxFor(newPO => newPO.PurchaseOrderId)</td>
+            <td>@Html.TextBoxFor(model => model.PO.PurchaseOrderId)</td>
         </tr>
         <tr>
             <td>Vendor ID:</td>
-            <td>@Html.TextBoxFor(newPO => newPO.VendorId)</td>
+            <td>@Html.TextBoxFor(model => model.PO.VendorId)</td>
         </tr>
         <tr>
             <td>PO Order Date:</td>
-            <td>@Html.TextBoxFor(newPO => newPO.OrderDate, new { @value = DateTime.Now.Date })</td>
+            <td>@Html.TextBoxFor(model => model.PO.OrderDate, new { @value = DateTime.Now.Date })</td>
         </tr>
         <tr>
             <td>PO Estimated Ship Date:</td>
-            <td>@Html.TextBoxFor(newPO => newPO.EstShipDate)</td>
+            <td>@Html.TextBoxFor(model => model.PO.EstShipDate)</td>
         </tr>
         <tr>
             <td>PO Estimated Freight Cost:</td>
-            <td>@Html.TextBoxFor(newPO => newPO.FreightCost)</td>
+            <td>@Html.TextBoxFor(model => model.PO.FreightCost)</td>
         </tr>
         <tr>
             <td>PO Terms:</td>
-            <td>@Html.TextBoxFor(newPO => newPO.Terms)</td>
+            <td>@Html.TextBoxFor(model => model.PO.Terms)</td>
         </tr>
         <tr>
             <td>Order Comments:</td>
-            <td>@Html.TextAreaFor(newPO => newPO.Comments)</td>
+            <td>@Html.TextAreaFor(model => model.PO.Comments)</td>
         </tr>
     </table>
     <input type="submit" value="Create New PO" />
+    <input type="button" value="Cancel (TODO)" />
 }
