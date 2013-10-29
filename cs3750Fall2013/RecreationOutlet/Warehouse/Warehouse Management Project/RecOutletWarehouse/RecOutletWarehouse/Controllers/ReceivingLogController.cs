@@ -56,15 +56,15 @@ namespace RecOutletWarehouse.Controllers
             }
             else
             {
-                DataFetcherSetter db = new DataFetcherSetter();
+                //DataFetcherSetter db = new DataFetcherSetter();
 
-                db.NewReceivingLog(RL.ReceivingID,
-                    RL.POLineItemID, RL.BackorderID,
-                    RL.QtyTypeID, RL.ReceiveDate,
-                    RL.ReceivingNotes, RL.ReceivedQty);
+                //db.NewReceivingLog(RL.ReceivingID,
+                //    RL.POLineItemID, RL.BackorderID,
+                //    RL.QtyTypeID, RL.ReceiveDate,
+                //    RL.ReceivingNotes, RL.ReceivedQty);
 
                 //return View("Create");
-                return View();
+                return View(RL);
             }
         }
 
