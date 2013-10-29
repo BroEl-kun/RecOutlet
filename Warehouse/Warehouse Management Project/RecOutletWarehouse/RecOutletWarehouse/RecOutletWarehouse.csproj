@@ -106,12 +106,14 @@
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\ReceivingLogController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataFetcherSetter.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderLineItem.cs" />
+    <Compile Include="Models\ReceivingLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\PurchaseOrder\AddPOLineItem.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ReceivingLog\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

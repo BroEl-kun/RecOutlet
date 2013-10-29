@@ -76,3 +76,29 @@ C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\S
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\RecOutletWarehouse.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\RecOutletWarehouse.pdb
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Microsoft.Web.Infrastructure.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Newtonsoft.Json.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Net.Http.Formatting.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Helpers.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Http.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Http.WebHost.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Mvc.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Razor.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.Razor.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Newtonsoft.Json.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Net.Http.Formatting.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Helpers.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Http.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Http.WebHost.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Mvc.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Razor.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.Razor.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
