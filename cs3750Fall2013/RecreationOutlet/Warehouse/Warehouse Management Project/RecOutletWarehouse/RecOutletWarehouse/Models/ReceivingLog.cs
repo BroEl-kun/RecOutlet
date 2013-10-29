@@ -22,3 +22,7 @@ namespace RecOutletWarehouse.Models
         public ushort ReceivedQty { get; set; }
     }
 }
+
+//So we'll need the po line items but what they will really be putting in is the PO_ID then we will get all the line items from the PO (perhaps using his PurchaseOrder getter/setter)
+//then they will need to put in the quantity, employee id, etc.
+//another method will then calc the dif between ordered and received and input into the database for backordered.

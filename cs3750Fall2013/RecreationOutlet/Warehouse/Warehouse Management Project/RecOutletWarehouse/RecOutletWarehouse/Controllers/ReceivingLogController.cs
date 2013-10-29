@@ -28,7 +28,8 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /ReceivingLog/Create
 
-        public ActionResult Create()
+        //public ActionResult Create()
+        public ActionResult CreateNewRL()
         {
             return View();
         }
@@ -56,15 +57,15 @@ namespace RecOutletWarehouse.Controllers
             }
             else
             {
-                //DataFetcherSetter db = new DataFetcherSetter();
+                DataFetcherSetter db = new DataFetcherSetter();
 
-                //db.NewReceivingLog(RL.ReceivingID,
-                //    RL.POLineItemID, RL.BackorderID,
-                //    RL.QtyTypeID, RL.ReceiveDate,
-                //    RL.ReceivingNotes, RL.ReceivedQty);
+                db.NewReceivingLog(RL.ReceivingID,
+                    RL.POLineItemID, RL.BackorderID,
+                    RL.QtyTypeID, RL.ReceiveDate,
+                    RL.ReceivingNotes, RL.ReceivedQty);
 
-                //return View("Create");
-                return View(RL);
+                return View("CreateNewRL");
+                //return View(RL);
             }
         }
 
