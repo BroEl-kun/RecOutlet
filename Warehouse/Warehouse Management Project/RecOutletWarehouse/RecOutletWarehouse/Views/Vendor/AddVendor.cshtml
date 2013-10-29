@@ -1,0 +1,45 @@
+﻿@model RecOutletWarehouse.Models.AddVendor.AddVendor
+
+@{
+    ViewBag.Title = "Add New Vendor";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Add New Vender</h2>
+@using (Html.BeginForm()) {
+    <table>
+        <tr>
+            <td>Vender ID:</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.VendorID)</td>
+        </tr>
+        <tr>
+            <td>Vendor Name:</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.VendorName)</td>
+        </tr>
+        <tr>
+            <td>Contact Name:</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.ContactName)</td>
+        </tr>
+        <tr>
+            <td>Contact Phone Number:</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.ContactPhone)</td>
+        </tr>
+        <tr>
+            <td>Contact Fax Number:</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.ContactFax)</td>
+        </tr>
+        <tr>
+            <td>Alternet Phone Number:</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.AltPhone)</td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td>@Html.TextAreaFor(newVendor => newVendor.Address)</td>
+        </tr>
+         <tr>
+            <td>Website:</td>
+            <td>@Html.TextAreaFor(newVendor => newVendor.Website)</td>
+        </tr>
+    </table>
+    <input type="submit" value="Add New Vendor" />
+}
