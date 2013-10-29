@@ -65,6 +65,7 @@
     <Compile Include="InventoryForm.Designer.cs">
       <DependentUpon>InventoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventorySearch.cs" />
     <Compile Include="ManualItemAddition.cs" />
     <Compile Include="masterDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
