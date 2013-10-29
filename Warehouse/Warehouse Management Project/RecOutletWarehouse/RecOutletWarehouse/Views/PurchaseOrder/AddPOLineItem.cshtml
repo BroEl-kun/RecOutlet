@@ -1,6 +1,47 @@
-﻿@{
+﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderCreationViewModel
+
+@{
     ViewBag.Title = "AddPOLineItem";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>AddPOLineItem</h2>
+<h2>Add Items to Purchase Order</h2>
+<fieldset>
+    <legend>Purchase Order General Information</legend>
+    <table>
+        <tr>
+            <td>PO #:</td>
+            <td>@Html.DisplayFor(model => model.PO.PurchaseOrderId)</td>
+            <td>Vendor:</td>
+            <td>@Html.DisplayFor(model => model.PO.VendorId) (TODO: show vendor name)</td>
+        </tr>
+        <tr>
+            <td>PO ordered on:</td>
+            <td>@Html.DisplayFor(model => model.PO.OrderDate)</td>
+            <td>PO estimated ship date: </td>
+            <td>@Html.DisplayFor(model => model.PO.EstShipDate)</td>
+        </tr>
+    </table>
+</fieldset>
+<h3>Add new items to this purchase order</h3>
+@using (@Html.BeginForm("AddPOLineItem", "PurchaseOrder", new { id = Model.PO.PurchaseOrderId }, FormMethod.Post)) {
+    <table>
+        <tr class="table-header">
+            <td>RPC #</td>
+            <td>Wholesale Cost</td>
+            <td>Qty to order</td>
+            <td>Qty type</td>
+        </tr>
+        @for (int i = 0; i < 10; i++) {
+            <tr>
+                <td>@Html.TextBoxFor(model => model.LineItems[i].RecRPC)</td>
+                <td>@Html.TextBoxFor(model => model.LineItems[i].WholesaleCost)</td>
+                <td>@Html.TextBoxFor(model => model.LineItems[i].QtyOrdered)</td>
+                <td>@Html.TextBoxFor(model => model.LineItems[i].QtyTypeId)</td>
+            </tr>
+        }
+    </table>
+    <input type="submit" value="Add These Items to the PO" />
+    <input type="button" value="Cancel, Discard PO TODO" />
+    <input type="button" value="Create PO, Discard Changes TODO" />
+}
