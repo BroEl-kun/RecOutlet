@@ -39,6 +39,8 @@ namespace RecreationOutletPOS
 
                 conn.Open();
 
+                // % is a wild card for SQL where having one before and after the searchTerm means search for this substring
+                // in the field we're searching 
                 cmd.Parameters.AddWithValue("@str", "%" + searchTerm + "%");
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
