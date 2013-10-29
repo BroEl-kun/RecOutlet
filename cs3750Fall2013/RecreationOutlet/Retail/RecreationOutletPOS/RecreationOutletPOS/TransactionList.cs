@@ -29,7 +29,7 @@ namespace RecreationOutletPOS
             {
                 bool foundMatch = false;
 
-                foreach (TransactionItem t in transData)
+                /*foreach (TransactionItem t in transData)
                 {
                     if (id == t.getID())
                     {
@@ -38,9 +38,9 @@ namespace RecreationOutletPOS
                         foundMatch = true;
                         break;
                     }
-                }
+                }*/
 
-                if (!foundMatch)
+                //if (!foundMatch)
                 {
                     newItem = new TransactionItem(id, name, price, quantity, discount);
                     if (newItem != null)
