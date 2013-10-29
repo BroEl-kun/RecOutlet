@@ -114,6 +114,7 @@
     <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderLineItem.cs" />
     <Compile Include="Models\ReceivingLog.cs" />
+    <Compile Include="Models\Vendor\AddVendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
