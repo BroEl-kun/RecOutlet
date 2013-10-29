@@ -26,6 +26,8 @@ namespace RecOutletWarehouse.Models
         /// Changelog:
         /// Version 1.0: 10-25-13 (T.M.)
         /// - Initial Creation
+        /// Version 1.1: 10-28-13 (C.P.)
+        /// - Added ReceivingLog
         public void NewPurchaseOrder(int POID, int vendorID, int POCreateBy, DateTime POOrderDate,
                                      DateTime POEstShipDate, decimal POFreightCost, string POTerms,
                                      string POComments) {
@@ -53,6 +55,35 @@ namespace RecOutletWarehouse.Models
                 }//.SqlComand
             }//.SqlConnection
         }//.NewPurchaseOrder
-    
+
+        public void NewReceivingLog(int ReceivingID, int POLineItemID, int BackorderID, byte QtyTypeID,
+                                    DateTime ReceiveDate, string ReceivingNotes, ushort ReceivedQty)
+        {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString))
+            {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = thisConnection;
+                    command.CommandText = "EXEC dbo.CreateReceivingLog "    //Please note this Stored Procedure is not yet made
+                                              + "@ReceivingID, @POLineItemID, @BackorderID, @QtyTypeID,"
+                                              + "@ReceiveDate, @ReceivingNotes, @ReceivedQty";
+                    command.Parameters.AddWithValue("@ReceivingID", ReceivingID);
+                    command.Parameters.AddWithValue("@POLineItemID", POLineItemID);
+                    command.Parameters.AddWithValue("@BackorderID", BackorderID);
+                    command.Parameters.AddWithValue("@QtyTypeID", QtyTypeID);
+                    command.Parameters.AddWithValue("@ReceiveDate", ReceiveDate);
+                    command.Parameters.AddWithValue("@ReceivingNotes", ReceivingNotes);
+                    command.Parameters.AddWithValue("@ReceivedQty", ReceivedQty);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+
+                }//.SqlComand
+            }//.SqlConnection
+        }//.NewReceivingLog
+
     }
 }
