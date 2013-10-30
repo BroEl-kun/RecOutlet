@@ -22,6 +22,7 @@ namespace RecOutletWarehouse.Controllers
         public class PurchaseOrderCreationViewModel {
             public PurchaseOrder PO { get; set; }
             public List<PurchaseOrderLineItem> LineItems { get; set; }
+
         }
 
         //
@@ -33,7 +34,27 @@ namespace RecOutletWarehouse.Controllers
             return View();
         }
 
+        
         public ActionResult CreateNewPO() {
+            DataFetcherSetter db = new DataFetcherSetter();
+            int nextPO = db.getLastPONumForDate(DateTime.Now.Date); 
+            string POforForm;
+
+            if (nextPO != 0) {
+                //format for displaying in the form
+                nextPO++; //increment the last number of the PO
+                POforForm = nextPO.ToString();
+                POforForm = POforForm.Insert(2, "-");
+                POforForm = POforForm.Insert(5, "-");
+                POforForm = POforForm.Insert(10, "-");
+                
+            }
+            else {
+                POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
+                POforForm = POforForm + "-01";
+            }
+
+            ViewBag.PO = POforForm;
 
             return View();
         }
