@@ -142,6 +142,32 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        public int getLastPONumForDate(DateTime date) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT MAX(POID) "
+                                        + "FROM PURCHASE_ORDER "
+                                        + "WHERE POOrderDate = @date";
+                    command.Parameters.AddWithValue("@date", date);
+
+                    var test = command.ExecuteScalar();
+                    if (test.ToString() == "")
+                        return 0;
+
+                    int PO = Convert.ToInt32(test);
+
+                    command.Parameters.Clear();
+
+                    return PO;
+                }
+
+            }
+
+        }
+
         /// <summary>
         /// Constructs a list of line items associated with a specified PO
         /// </summary>

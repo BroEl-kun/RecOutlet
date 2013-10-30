@@ -9,7 +9,7 @@
     <table>
         <tr>
             <td>Purchase Order ID:</td>
-            <td>@Html.TextBoxFor(model => model.PO.PurchaseOrderId)</td>
+            <td>@Html.TextBoxFor(model => model.PO.PurchaseOrderId, new { @Value = ViewBag.PO })</td>
         </tr>
         <tr>
             <td>Vendor ID:</td>
@@ -17,11 +17,11 @@
         </tr>
         <tr>
             <td>PO Order Date:</td>
-            <td>@Html.TextBoxFor(model => model.PO.OrderDate, new { @value = DateTime.Now.Date })</td>
+            <td>@Html.TextBox("PO.OrderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })</td>
         </tr>
         <tr>
             <td>PO Estimated Ship Date:</td>
-            <td>@Html.TextBoxFor(model => model.PO.EstShipDate)</td>
+            <td>@Html.TextBox("PO.EstShipDate", DateTime.Now.AddDays(10).ToString("yyyy-MM-dd"), new{ type="date" })</td>
         </tr>
         <tr>
             <td>PO Estimated Freight Cost:</td>
