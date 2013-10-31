@@ -127,12 +127,13 @@ namespace RecreationOutletPOS
             if (lvData.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvData.SelectedItems[0];
-                int id = 0, quantity = 0;
+                int id = 0, quantity = 1;
 
                 try
                 {
                     int.TryParse(lvi.SubItems[0].Text, out id);
-                    int.TryParse(tbItemQuantity.Text, out quantity);
+                    if (tbItemQuantity.Text != "")
+                        int.TryParse(tbItemQuantity.Text, out quantity);
                 }
                 catch (Exception ex) { }
 
