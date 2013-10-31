@@ -9,7 +9,10 @@
     <table>
         <tr>
             <td>Purchase Order ID:</td>
-            <td>@Html.TextBoxFor(model => model.PO.PurchaseOrderId, new { @Value = ViewBag.PO })</td>
+            <td>
+                @Html.TextBoxFor(model => model.PO.PurchaseOrderId, new { @Value = ViewBag.PO })
+                @Html.ValidationMessageFor(model => model.PO.PurchaseOrderId)
+            </td>
         </tr>
         <tr>
             <td>Vendor ID:</td>
