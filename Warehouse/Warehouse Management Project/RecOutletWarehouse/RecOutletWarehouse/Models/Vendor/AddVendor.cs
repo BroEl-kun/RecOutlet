@@ -9,7 +9,7 @@ namespace RecOutletWarehouse.Models.AddVendor
     public class AddVendor
     {
 
-        public int VendorID { get; set; }
+        public int VendorId { get; set; }
 
         public string VendorName { get; set; }
 
