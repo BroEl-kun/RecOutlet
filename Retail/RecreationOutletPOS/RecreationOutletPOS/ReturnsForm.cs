@@ -19,7 +19,8 @@ namespace RecreationOutletPOS
     public partial class ReturnsForm : Form
     {
         TransactionList tList = new TransactionList();
-        
+        InventoryForm iForm;
+
         public ReturnsForm()
         {
             InitializeComponent();
@@ -33,9 +34,10 @@ namespace RecreationOutletPOS
         /// </summary>
         private void btnSales_Click(object sender, EventArgs e)
         {
-            SalesForm myNewForm = new SalesForm();
             this.Hide();
-            myNewForm.Show();
+            this.Owner.Show();
+            this.Owner.Location = this.Location;
+            this.Owner.Size = this.Size;
         }
 
         private void btnReturns_Click(object sender, EventArgs e)
@@ -146,8 +148,10 @@ namespace RecreationOutletPOS
 
         private void btnInventory_Click(object sender, EventArgs e)
         {
-            InventoryForm inventoryForm = new InventoryForm();
-            inventoryForm.Show();
+            this.Hide();
+            iForm.Show();
+            iForm.Location = this.Location;
+            iForm.Size = this.Size;
         }
     }
 }
