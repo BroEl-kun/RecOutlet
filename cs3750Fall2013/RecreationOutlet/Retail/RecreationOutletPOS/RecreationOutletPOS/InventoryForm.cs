@@ -102,6 +102,14 @@ namespace RecreationOutletPOS
             }
         }
 
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Owner.Show();
+            this.Owner.Location = this.Location;
+            this.Owner.Size = this.Size;
+        }
+
 
     }
 }
