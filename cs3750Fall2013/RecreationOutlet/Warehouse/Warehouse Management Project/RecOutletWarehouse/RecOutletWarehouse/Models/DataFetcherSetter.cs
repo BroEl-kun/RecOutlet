@@ -237,5 +237,38 @@ namespace RecOutletWarehouse.Models
             }//.SqlConnection
         }//.NewReceivingLog
 
+        public void AddNewVendor(int vendorId, string vendorName, string contactName, string contactPhone,
+                                    string contactFax, string altPhone, string address, string website)
+        {
+
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString))
+            {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = thisConnection;
+                    command.CommandText = "INSERT into VENDOR (@vendorId, @vendorName, @contactName, @contactPhone," +
+                        " @contactFax, @altPhone, @address, @website)";
+
+                    //TODO: not totally sure how vendorId get generated...
+                    command.Parameters.AddWithValue("@vendorId", vendorId);
+                    command.Parameters.AddWithValue("@vendorName", vendorName);
+                    command.Parameters.AddWithValue("@contactName", contactName);
+                    command.Parameters.AddWithValue("@contactPhone", contactName);
+                    command.Parameters.AddWithValue("@contactFax", contactFax);
+                    command.Parameters.AddWithValue("@altPhone", altPhone);
+                    command.Parameters.AddWithValue("@address", address);
+                    command.Parameters.AddWithValue("@website", website);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+
+                }
+            }
+
+        }
+
     }
 }
