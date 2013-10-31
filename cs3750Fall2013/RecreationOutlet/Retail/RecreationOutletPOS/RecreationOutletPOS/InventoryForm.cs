@@ -110,6 +110,14 @@ namespace RecreationOutletPOS
             this.Owner.Size = this.Size;
         }
 
+        private void btnSales_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Owner.Show();
+            this.Owner.Location = this.Location;
+            this.Owner.Size = this.Size;
+        }
+
 
     }
 }
