@@ -35,10 +35,14 @@ namespace RecOutletWarehouse.Models
         /// <param name="POFreightCost">The PO's Estimated Freight Cost</param>
         /// <param name="POTerms">The PO's Terms</param>
         /// <param name="POComments">Additional Comments</param>
+        /// <returns>A Boolean value that indicates whether the operation succeeded</returns>
         /// Changelog:
         /// Version 1.0: 10-25-13 (T.M.)
         /// - Initial Creation
-        public void NewPurchaseOrder(int POID, int vendorID, int POCreateBy, DateTime POOrderDate,
+        /// Version 1.1: 10-31-13 (T.M.)
+        /// - Modified to return a boolean value indicating success or failure
+        /// - Added Validation
+        public Boolean NewPurchaseOrder(int POID, int vendorID, int POCreateBy, DateTime POOrderDate,
                                      DateTime POEstShipDate, decimal POFreightCost, string POTerms,
                                      string POComments) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
@@ -46,6 +50,12 @@ namespace RecOutletWarehouse.Models
 
                 using (SqlCommand command = new SqlCommand()) {
                     command.Connection = thisConnection;
+
+                    PurchaseOrder.PurchaseOrder PO = RetrievePObyPOID(POID);
+                    if (PO.PurchaseOrderId != null)
+                        return false;
+
+
                     command.CommandText = "EXEC dbo.CreatePurchaseOrder "
                                               + "@POID, @vendorID, @POCreateBy, @POOrderDate,"
                                               + "@POEstShipdate, @POFreightCost, @POTerms, @POComments";
@@ -61,6 +71,8 @@ namespace RecOutletWarehouse.Models
                     command.ExecuteNonQuery();
 
                     command.Parameters.Clear();
+
+                    return true;
 
                 }//.SqlComand
             }//.SqlConnection
@@ -110,6 +122,8 @@ namespace RecOutletWarehouse.Models
         /// Changelog
         ///     Version 1.0: 10-28-2013 (T.M.)
         ///         - Initial Creation
+        ///     Version 1.1: 10-31-2013 (T.M.)
+        ///         - Modified to validate the presence of rows before assigning values to an object
         public PurchaseOrder.PurchaseOrder RetrievePObyPOID(long POID) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -123,19 +137,19 @@ namespace RecOutletWarehouse.Models
 
                     SqlDataReader reader = command.ExecuteReader();
                     reader.Read();
-                    
-                    PO.PurchaseOrderId = POID.ToString();
-                    PO.VendorId = Convert.ToInt32(reader["VendorID"].ToString());
-                    PO.CreatedBy = Convert.ToInt32(reader["POCreatedBy"].ToString());
-                    PO.OrderDate = Convert.ToDateTime(reader["POOrderDate"].ToString());
-                    PO.EstShipDate = Convert.ToDateTime(reader["POEstimatedShipDate"].ToString());
-                    PO.FreightCost = Convert.ToDecimal(reader["POFreightCost"].ToString());
-                    PO.Terms = reader["POTerms"].ToString();
-                    PO.Comments = reader["POComments"].ToString();
-
+                    if (reader.HasRows) {
+                        PO.PurchaseOrderId = POID.ToString();
+                        PO.VendorId = Convert.ToInt32(reader["VendorID"].ToString());
+                        PO.CreatedBy = Convert.ToInt32(reader["POCreatedBy"].ToString());
+                        PO.OrderDate = Convert.ToDateTime(reader["POOrderDate"].ToString());
+                        PO.EstShipDate = Convert.ToDateTime(reader["POEstimatedShipDate"].ToString());
+                        PO.FreightCost = Convert.ToDecimal(reader["POFreightCost"].ToString());
+                        PO.Terms = reader["POTerms"].ToString();
+                        PO.Comments = reader["POComments"].ToString();
+                    }
                     reader.Dispose();
                     command.Parameters.Clear();
-
+                    
                     return PO;
                 }
 
