@@ -67,25 +67,30 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>A redirect to AddPOLineItem</returns>
         [HttpPost]
         public ActionResult CreateNewPO(PurchaseOrderCreationViewModel POVM) {
+            DataFetcherSetter db = new DataFetcherSetter();
+
+            string POtoInt = POVM.PO.PurchaseOrderId;
+            POtoInt = POtoInt.Replace("-", string.Empty);
+
+            int convertedPO = Convert.ToInt32(POtoInt);
+
+            Boolean successfulInsert = db.NewPurchaseOrder(convertedPO,
+                POVM.PO.VendorId, POVM.PO.CreatedBy,
+                POVM.PO.OrderDate, POVM.PO.EstShipDate,
+                POVM.PO.FreightCost, POVM.PO.Terms,
+                POVM.PO.Comments);
+
+            if (!successfulInsert) {
+                ModelState.AddModelError("PO.PurchaseOrderId", "That PO already exists.");
+            }
+
             if (!ModelState.IsValid) {
                 return View(POVM);
             }
             else {
-                DataFetcherSetter db = new DataFetcherSetter();
                 
                 //TODO: Move the character replacement logic to a
                 //tools class and enhance its functionality
-                string POtoInt = POVM.PO.PurchaseOrderId;
-                POtoInt = POtoInt.Replace("-", string.Empty);
-
-                int convertedPO = Convert.ToInt32(POtoInt);
-
-                db.NewPurchaseOrder(convertedPO,
-                    POVM.PO.VendorId, POVM.PO.CreatedBy,
-                    POVM.PO.OrderDate, POVM.PO.EstShipDate,
-                    POVM.PO.FreightCost, POVM.PO.Terms,
-                    POVM.PO.Comments);
-
 
                 return RedirectToAction("AddPOLineItem", new { id = convertedPO });
             }
