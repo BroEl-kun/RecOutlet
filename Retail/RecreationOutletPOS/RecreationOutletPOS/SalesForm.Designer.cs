@@ -52,6 +52,8 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
             this.tbScanner = new System.Windows.Forms.TextBox();
+            this.tbItemQuantity = new System.Windows.Forms.TextBox();
+            this.lblQuantity = new System.Windows.Forms.Label();
             this.pnlSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -291,11 +293,31 @@
             this.tbScanner.TabIndex = 29;
             this.tbScanner.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScanner_KeyPress);
             // 
+            // tbItemQuantity
+            // 
+            this.tbItemQuantity.Location = new System.Drawing.Point(841, 113);
+            this.tbItemQuantity.Name = "tbItemQuantity";
+            this.tbItemQuantity.Size = new System.Drawing.Size(68, 20);
+            this.tbItemQuantity.TabIndex = 30;
+            this.tbItemQuantity.Text = "1";
+            this.tbItemQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbItemQuantity_KeyPress);
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Location = new System.Drawing.Point(772, 116);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(49, 13);
+            this.lblQuantity.TabIndex = 31;
+            this.lblQuantity.Text = "Quantity:";
+            // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.lblQuantity);
+            this.Controls.Add(this.tbItemQuantity);
             this.Controls.Add(this.tbScanner);
             this.Controls.Add(this.btnDeleteItem);
             this.Controls.Add(this.btnCheckOut);
@@ -344,5 +366,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDeleteItem;
         private System.Windows.Forms.TextBox tbScanner;
+        private System.Windows.Forms.TextBox tbItemQuantity;
+        private System.Windows.Forms.Label lblQuantity;
     }
 }

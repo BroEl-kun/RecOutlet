@@ -16,7 +16,7 @@ namespace RecreationOutletPOS
                                  "Integrated Security=False;User ID=recreation;Password=outlet;Connect Timeout=15;" +
                                  "Encrypt=False;TrustServerCertificate=False";
 
-
+        
 
         /// <summary>
         /// Programmer: Jaed Norberg

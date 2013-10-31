@@ -29,6 +29,10 @@ namespace RecreationOutletPOS
             {
                 bool foundMatch = false;
 
+                // This particular section combines all items with a given ID.
+                // It has been removed so items can be scanned separately
+                // with an additional quantity input, and discounts applied
+                // to each group.
                 /*foreach (TransactionItem t in transData)
                 {
                     if (id == t.getID())

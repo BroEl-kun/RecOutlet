@@ -309,7 +309,9 @@ namespace RecreationOutletPOS
         }
 
 
-
+        //----------------------------------------------------------
+        // Key Press Handling
+        //----------------------------------------------------------
         private void SalesForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -317,16 +319,23 @@ namespace RecreationOutletPOS
 
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // enter key is pressed
+            // Enter key is pressed
+            //      Carries out item addition by entering an ID or scanning
+            //      a barcode in the scanner text field.
             if (e.KeyChar == 13)
             {
                 DataSet ds;
                 ManualItemAddition dt = new ManualItemAddition();
 
+                int quantity = 1;
+
                 try
                 {
                     string ID = tbScanner.Text;
                     ds = dt.retrieveItem(ID);
+
+                    if (tbItemQuantity.Text != "")
+                        int.TryParse(tbItemQuantity.Text, out quantity);
 
                     if (ds.Tables["Results"].Rows.Count != 0)
                     {
@@ -340,7 +349,7 @@ namespace RecreationOutletPOS
                             name = (row["Description"].ToString());
                             double.TryParse(row["SellPrice"].ToString(), out price);
 
-                            addItem(id, name, price, 1, 0.00, price);
+                            addItem(id, name, price, quantity, 0.00, price);
                         }
                     }
                     else
@@ -359,11 +368,21 @@ namespace RecreationOutletPOS
             }
         }
 
+        private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
         private void SalesForm_Load_1(object sender, EventArgs e)
         {
             
         }
 
+
+        //----------------------------------------------------------
+        // Tabs
+        //----------------------------------------------------------
         private void btnSales_Click(object sender, EventArgs e)
         {
 
