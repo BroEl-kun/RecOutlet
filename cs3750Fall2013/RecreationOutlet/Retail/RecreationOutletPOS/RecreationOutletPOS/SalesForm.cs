@@ -13,7 +13,9 @@ namespace RecreationOutletPOS
     public partial class SalesForm : Form
     {
         TransactionList tList = new TransactionList();
-
+        ReturnsForm rForm = new ReturnsForm();
+        InventoryForm iForm = new InventoryForm();
+        
         public SalesForm()
         {
             InitializeComponent();
@@ -253,44 +255,42 @@ namespace RecreationOutletPOS
         }
 
         /// <summary>
-        /// Programmer: Michael Vuong
+        /// Programmer: Michael Vuong, Aaron Sorensen
         /// Last Updated: 10/27/2013
         /// 
         /// Opens up the Returns section of the POS
         /// </summary>
         private void btnReturns_Click(object sender, EventArgs e)
         {
-            ReturnsForm returnsForm = new ReturnsForm();
-            returnsForm.Show();
+            rForm.Owner = this;
+            rForm.Size = this.Size;
+            this.Hide();
+            rForm.Show();
+            rForm.Location = this.Location;
         }
 
         /// <summary>
-        /// Programmer: Michael Vuong
+        /// Programmer: Michael Vuong, Aaron Sorensen
         /// Last Updated: 10/27/2013
         /// 
         /// Opens up the Inventory section of the POS
         /// </summary>
         private void btnInventory_Click(object sender, EventArgs e)
         {
-            InventoryForm inventoryForm = new InventoryForm();
-            inventoryForm.Show();
+            iForm.Owner = this;
+            iForm.Size = this.Size;
+            this.Hide();
+            iForm.Show();
+            iForm.Location = this.Location;
         }
 
-        /// <summary>
-        /// Programmer: Aaron Sorensen
-        /// Last Updated: 10/23/2013
-        /// 
-        /// Switch to ReturnsForm (Work in progress)
-        /// </summary>
+
         private void btnReturns_Click_1(object sender, EventArgs e)
         {
-            ReturnsForm myNewForm = new ReturnsForm();
-            this.Hide();
-            myNewForm.Show();
+            
         }
 
         
-
         private void lsvCheckOutItems_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -357,6 +357,21 @@ namespace RecreationOutletPOS
 
                 tbScanner.Text = "";
             }
+        }
+
+        private void SalesForm_Load_1(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReports_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
