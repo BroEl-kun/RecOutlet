@@ -1,0 +1,29 @@
+﻿@model RecOutletWarehouse.Models.ProductLine.ProductLine
+
+
+@{
+    ViewBag.Title = "CreateNewPL";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Create New Product Line</h2>
+ <table>
+        <tr>
+            <td>Product Line ID:</td>                                           <!--generate? -->
+            <td>@Html.TextBoxFor(newPL => newPL.ProductLineID)</td>
+        </tr>
+        <tr>
+            <td>Product Line Name:</td>
+            <td>@Html.TextBoxFor(newPL => newPL.ProductLineName)</td>
+        </tr>
+        <tr>
+            <td>Vendor ID:</td>                                                 <!--will be autofilled if directed from vender page -->
+            <td>@Html.TextBoxFor(newPL => newPL.VendorID)</td>
+        </tr>
+        <tr>
+            <td>Sales Representative ID:</td>                                   <!--drop down box of repids -->
+            <td>@Html.TextBoxFor(newPL => newPL.RepID)</td>
+        </tr>
+       
+    </table>
+    <input type="submit" value="Create New Product Line" />
