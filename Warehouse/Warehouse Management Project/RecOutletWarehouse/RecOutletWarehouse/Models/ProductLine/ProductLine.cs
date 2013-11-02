@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RecOutletWarehouse.Models.ProductLine
 {
-    public class AddVendor
+    public class ProductLine
     {
 
         public int ProductLineID { get; set; }
