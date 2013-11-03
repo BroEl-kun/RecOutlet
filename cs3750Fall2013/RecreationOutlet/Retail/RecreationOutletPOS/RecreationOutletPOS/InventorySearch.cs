@@ -16,9 +16,7 @@ namespace RecreationOutletPOS
     /// </summary>
     class InventorySearch
     {
-        private string connStr = "Data Source=titan.cs.weber.edu,10433;Initial Catalog=RecreationOutlet_Test1;" +
-                                 "Integrated Security=False;User ID=recreation;Password=outlet;Connect Timeout=15;" +
-                                 "Encrypt=False;TrustServerCertificate=False";
+        private string connStr = HelperMethods.connStr();
 
         /// <summary>
         /// Programmer: Michael Vuong
