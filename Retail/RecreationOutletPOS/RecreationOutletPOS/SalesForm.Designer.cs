@@ -133,6 +133,7 @@
             this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";
             this.lsvCheckOutItems.Size = new System.Drawing.Size(754, 306);
+            this.lsvCheckOutItems.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lsvCheckOutItems.TabIndex = 23;
             this.lsvCheckOutItems.UseCompatibleStateImageBehavior = false;
             this.lsvCheckOutItems.View = System.Windows.Forms.View.Details;

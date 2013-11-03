@@ -10,13 +10,15 @@ using System.Data.SqlClient;
 
 namespace RecreationOutletPOS
 {
+    /// <summary>
+    /// Programmer: Jaed Norberg
+    /// Last Updated: 11/03/2013
+    /// 
+    /// This class controls database interactions in the manual item addition form.    
+    /// </summary>
     class ManualItemAddition
     {
-        private string connStr = "Data Source=titan.cs.weber.edu,10433;Initial Catalog=RecreationOutlet_Test1;" +
-                                 "Integrated Security=False;User ID=recreation;Password=outlet;Connect Timeout=15;" +
-                                 "Encrypt=False;TrustServerCertificate=False";
-
-        
+        private string connStr = HelperMethods.connStr();
 
         /// <summary>
         /// Programmer: Jaed Norberg
