@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ItemManagementController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\ReceivingLogController.cs" />
     <Compile Include="Controllers\VendorController.cs" />
@@ -112,7 +113,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataFetcherSetter.cs" />
+<<<<<<< .mine
+    <Compile Include="Models\ItemManagement\ItemManagementModel.cs" />
+=======
     <Compile Include="Models\ProductLine\ProductLine.cs" />
+>>>>>>> .r1147
     <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderLineItem.cs" />
     <Compile Include="Models\ReceivingLog.cs" />
@@ -203,7 +208,11 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+<<<<<<< .mine
+    <Content Include="Views\ItemManagement\Index.cshtml" />
+=======
     <Content Include="Views\ProductLine\CreateNewPL.cshtml" />
+>>>>>>> .r1147
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
