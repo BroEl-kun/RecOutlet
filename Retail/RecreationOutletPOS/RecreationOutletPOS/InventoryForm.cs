@@ -14,6 +14,7 @@ namespace RecreationOutletPOS
     {
         public string selectedInventory;
         public string selectedSearchColumn;
+        SalesForm salesForm;
         
         /// <summary>
         /// Programmer: Michael Vuong
@@ -21,8 +22,9 @@ namespace RecreationOutletPOS
         /// 
         /// Constructor
         /// </summary>
-        public InventoryForm()
+        public InventoryForm(SalesForm inForm)
         {
+            this.salesForm = inForm;
             InitializeComponent();
 
             // Sets the default value for the drop down boxes
@@ -111,6 +113,20 @@ namespace RecreationOutletPOS
         }
 
         private void btnSales_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Owner.Show();
+            this.Owner.Location = this.Location;
+            this.Owner.Size = this.Size;
+        }
+
+        private void btnReturns_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            salesForm.showReturns();
+        }
+
+        private void btnSales_Click_2(object sender, EventArgs e)
         {
             this.Hide();
             this.Owner.Show();
