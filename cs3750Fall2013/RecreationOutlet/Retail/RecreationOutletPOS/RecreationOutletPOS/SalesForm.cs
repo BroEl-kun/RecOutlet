@@ -417,5 +417,10 @@ namespace RecreationOutletPOS
             iForm.Show();
             iForm.Location = this.Location;
         }
+
+        private void btnSales_Click_2(object sender, EventArgs e)
+        {
+
+        }
     }
 }
