@@ -53,7 +53,6 @@ namespace RecOutletWarehouse.Controllers
                 POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
                 POforForm = POforForm + "-01";
             }
-
             ViewBag.PO = POforForm;
 
             return View();
@@ -74,14 +73,26 @@ namespace RecOutletWarehouse.Controllers
 
             int convertedPO = Convert.ToInt32(POtoInt);
 
-            Boolean successfulInsert = db.NewPurchaseOrder(convertedPO,
-                POVM.PO.VendorId, POVM.PO.CreatedBy,
-                POVM.PO.OrderDate, POVM.PO.EstShipDate,
-                POVM.PO.FreightCost, POVM.PO.Terms,
-                POVM.PO.Comments);
+            //find the vendor ID for the provided vendor name
+            short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.Vendor));
 
-            if (!successfulInsert) {
-                ModelState.AddModelError("PO.PurchaseOrderId", "That PO already exists.");
+            if (vendorId == 0) {
+                ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
+            }
+            else if (vendorId == -1) {
+                ModelState.AddModelError("PO.Vendor", "Please be more specific. TODO: better error message");
+            }
+            else {
+                //if the vendorID is valid, check to see if the PO already exists
+                Boolean validPO = db.NewPurchaseOrder(convertedPO,
+                    vendorId, POVM.PO.CreatedBy,
+                    POVM.PO.OrderDate, POVM.PO.EstShipDate,
+                    POVM.PO.FreightCost, POVM.PO.Terms,
+                    POVM.PO.Comments); //TODO: Associate the employeeID with this
+
+                if (!validPO) {
+                    ModelState.AddModelError("PO.PurchaseOrderId", "That PO already exists.");
+                }
             }
 
             if (!ModelState.IsValid) {

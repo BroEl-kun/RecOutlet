@@ -14,9 +14,21 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /ItemMangement/
 
-        public ActionResult Index()
+        public ActionResult CreateNewItem()
         {
+
+
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateNewItem(AddItem item) {
+            if (ModelState.IsValid) {
+
+                RedirectToAction("Index", "Home");
+            }
+
+            return View(item);
         }
 
     }
