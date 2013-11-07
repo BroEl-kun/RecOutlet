@@ -4,6 +4,11 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <p>This is where the tabs will go</p>
+    
+}
+
 <h2>Create a new Purchase Order</h2>
 @using (Html.BeginForm()) {
     <table>
@@ -16,7 +21,7 @@
         </tr>
         <tr>
             <td>Vendor ID:</td>
-            <td>@Html.TextBoxFor(model => model.PO.VendorId)</td>
+            <td>@Html.TextBoxFor(model => model.PO.Vendor)</td>
         </tr>
         <tr>
             <td>PO Order Date:</td>
