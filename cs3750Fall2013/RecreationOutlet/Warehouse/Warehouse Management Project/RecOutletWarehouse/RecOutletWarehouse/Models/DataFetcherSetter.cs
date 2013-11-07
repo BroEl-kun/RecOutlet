@@ -67,6 +67,7 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.AddWithValue("@POFreightCost", POFreightCost);
                     command.Parameters.AddWithValue("@POTerms", POTerms);
                     command.Parameters.AddWithValue("@POComments", POComments);
+                    //TODO: Associate the EmployeeID
 
                     command.ExecuteNonQuery();
 
@@ -139,7 +140,7 @@ namespace RecOutletWarehouse.Models
                     reader.Read();
                     if (reader.HasRows) {
                         PO.PurchaseOrderId = POID.ToString();
-                        PO.VendorId = Convert.ToInt32(reader["VendorID"].ToString());
+                        PO.Vendor = reader["VendorID"].ToString();
                         PO.CreatedBy = Convert.ToInt32(reader["POCreatedBy"].ToString());
                         PO.OrderDate = Convert.ToDateTime(reader["POOrderDate"].ToString());
                         PO.EstShipDate = Convert.ToDateTime(reader["POEstimatedShipDate"].ToString());
@@ -220,6 +221,39 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.Clear();
 
                     return LineItemList;
+
+                }
+            }
+        }
+
+        public short GetVendorIdForVendorName(string vendorName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+
+                    command.CommandText = "SELECT VendorId "
+                                        + "FROM VENDOR "
+                                        + "WHERE VendorName = @vendor";
+                    command.Parameters.AddWithValue("@vendor", vendorName);
+
+                    List<string> results = new List<string>();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        results.Add(reader["VendorId"].ToString());
+                    }
+
+                    if (results.Count() > 1) {
+                        return -1; //error code for too many results
+                    }
+                    else if (results.Count() < 1) {
+                        return 0; //error code for no results
+                    }
+                    else {
+                        return Convert.ToInt16(results[0]);
+                    }
 
                 }
             }
