@@ -113,6 +113,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataFetcherSetter.cs" />
+    <Compile Include="Models\ItemManagement\AddItem.cs" />
     <Compile Include="Models\ItemManagement\ItemManagementModel.cs" />
     <Compile Include="Models\ProductLine\ProductLine.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
@@ -207,6 +208,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\ItemManagement\Index.cshtml" />
     <Content Include="Views\ProductLine\CreateNewPL.cshtml" />
+    <Content Include="Views\ItemManagement\CreateNewItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
