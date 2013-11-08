@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Models.PurchaseOrder;
+using RecOutletWarehouse.Models.AddVendor;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -34,7 +35,7 @@ namespace RecOutletWarehouse.Controllers
             return View();
         }
 
-        
+        [HttpGet]
         public ActionResult CreateNewPO() {
             DataFetcherSetter db = new DataFetcherSetter();
             int nextPO = db.getLastPONumForDate(DateTime.Now.Date); 

@@ -61,7 +61,7 @@ namespace RecOutletWarehouse.Models
                                               + "@POEstShipdate, @POFreightCost, @POTerms, @POComments";
                     command.Parameters.AddWithValue("@POID", POID);
                     command.Parameters.AddWithValue("@vendorID", vendorID);
-                    command.Parameters.AddWithValue("@POCreateBy", POCreateBy);
+                    command.Parameters.AddWithValue("@POCreateBy", 1); //TODO: Work in a validated user
                     command.Parameters.AddWithValue("@POOrderDate", POOrderDate);
                     command.Parameters.AddWithValue("@POEstShipDate", POEstShipDate);
                     command.Parameters.AddWithValue("@POFreightCost", POFreightCost);
@@ -140,7 +140,7 @@ namespace RecOutletWarehouse.Models
                     reader.Read();
                     if (reader.HasRows) {
                         PO.PurchaseOrderId = POID.ToString();
-                        PO.Vendor = reader["VendorID"].ToString();
+                        PO.Vendor = GetVendorNameForVendorId(Convert.ToInt16(reader["VendorId"]));
                         PO.CreatedBy = Convert.ToInt32(reader["POCreatedBy"].ToString());
                         PO.OrderDate = Convert.ToDateTime(reader["POOrderDate"].ToString());
                         PO.EstShipDate = Convert.ToDateTime(reader["POEstimatedShipDate"].ToString());
@@ -245,6 +245,8 @@ namespace RecOutletWarehouse.Models
                         results.Add(reader["VendorId"].ToString());
                     }
 
+                    reader.Dispose();
+
                     if (results.Count() > 1) {
                         return -1; //error code for too many results
                     }
@@ -255,6 +257,28 @@ namespace RecOutletWarehouse.Models
                         return Convert.ToInt16(results[0]);
                     }
 
+                }
+            }
+        }
+
+        public string GetVendorNameForVendorId(short VendorId) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT VendorName "
+                                        + "FROM VENDOR "
+                                        + "WHERE VendorId = @VendorId";
+                    command.Parameters.AddWithValue("@VendorId", VendorId);
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    string vendorName = reader["VendorName"].ToString();
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return vendorName;
                 }
             }
         }
@@ -318,5 +342,40 @@ namespace RecOutletWarehouse.Models
 
         }
 
+        public List<AddVendor.AddVendor> SearchVendorByName(string vendorName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<AddVendor.AddVendor> vendorList = new List<AddVendor.AddVendor>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * "
+                                        + "FROM VENDOR "
+                                        + "WHERE VendorName LIKE @vendorName";
+                    command.Parameters.AddWithValue("@vendorName", "%" + vendorName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        vendorList.Add(new AddVendor.AddVendor{
+                            VendorId = Convert.ToInt32(reader["VendorId"]),
+                            VendorName = reader["VendorName"].ToString(),
+                            ContactName = reader["ContactName"].ToString(),
+                            ContactPhone = reader["ContactPhone"].ToString(),
+                            AltPhone = reader["AltPhone"].ToString(),
+                            Address = reader["Address"].ToString(),
+                            Website = reader["Website"].ToString()
+                            
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return vendorList;
+                }
+
+
+            }
+        }
     }
 }
