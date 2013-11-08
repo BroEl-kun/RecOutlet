@@ -21,7 +21,8 @@
         </tr>
         <tr>
             <td>Vendor ID:</td>
-            <td>@Html.TextBoxFor(model => model.PO.Vendor)</td>
+            <td>@Html.TextBoxFor(model => model.PO.Vendor, new { @id = "vendor" })</td>
+            @*<td><input type="text" id="vendor" /></td>*@
         </tr>
         <tr>
             <td>PO Order Date:</td>
@@ -47,3 +48,32 @@
     <input type="submit" value="Create New PO" />
     <input type="button" value="Cancel (TODO)" />
 }
+
+<script type="text/javascript">
+    var url = '@Url.RouteUrl("DefaultApi", 
+        new { httproute = "", controller = "WarehouseApi" })';
+    $('#vendor').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.VendorName,
+                            value: item.VendorId
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#vendor').val(ui.item.label);
+            $('#Id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
+</script>  

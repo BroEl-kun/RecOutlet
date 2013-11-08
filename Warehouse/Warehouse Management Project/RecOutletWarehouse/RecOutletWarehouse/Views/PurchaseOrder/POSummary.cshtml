@@ -13,7 +13,7 @@
             <td>PO #:</td>
             <td>@Html.DisplayFor(model => model.PO.PurchaseOrderId)</td>
             <td>Vendor:</td>
-            <td>@Html.DisplayFor(model => model.PO.VendorId) (TODO: show vendor name)</td>
+            <td>@Html.DisplayFor(model => model.PO.Vendor)</td>
         </tr>
         <tr>
             <td>PO ordered on:</td>
@@ -22,7 +22,7 @@
             <td>@Html.DisplayFor(model => model.PO.EstShipDate)</td>
         </tr>
     </table>
-    <p>TODO: Modify datetime fields so they don't include the "time"; right-align PO#, Vendor, etc.</p>
+    <p>TODO: right-align PO#, Vendor, etc.</p>
 </fieldset>
 
 <fieldset>
