@@ -1,0 +1,165 @@
+﻿@model RecOutletWarehouse.Models.ItemManagement.AddItem
+
+@{
+    ViewBag.Title = "CreateNewItem";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>CreateNewItem</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>AddItem</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecRPC)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecRPC)
+            @Html.ValidationMessageFor(model => model.RecRPC)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UPC)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UPC)
+            @Html.ValidationMessageFor(model => model.UPC)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Vendor)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Vendor)
+            @Html.ValidationMessageFor(model => model.Vendor)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductLine)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductLine)
+            @Html.ValidationMessageFor(model => model.ProductLine)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemName)
+            @Html.ValidationMessageFor(model => model.ItemName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemDescription)
+            @Html.ValidationMessageFor(model => model.ItemDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Department)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Department)
+            @Html.ValidationMessageFor(model => model.Department)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Category)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Category)
+            @Html.ValidationMessageFor(model => model.Category)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Subcategory)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Subcategory)
+            @Html.ValidationMessageFor(model => model.Subcategory)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ItemId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ItemId)
+            @Html.ValidationMessageFor(model => model.ItemId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.restrictedAge)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.restrictedAge)
+            @Html.ValidationMessageFor(model => model.restrictedAge)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SellPrice)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SellPrice)
+            @Html.ValidationMessageFor(model => model.SellPrice)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MSRP)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MSRP)
+            @Html.ValidationMessageFor(model => model.MSRP)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SeasonCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SeasonCode)
+            @Html.ValidationMessageFor(model => model.SeasonCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TaxRate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TaxRate)
+            @Html.ValidationMessageFor(model => model.TaxRate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy)
+            @Html.ValidationMessageFor(model => model.CreatedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedDate)
+            @Html.ValidationMessageFor(model => model.CreatedDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
