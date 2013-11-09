@@ -22,7 +22,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateNewItem(AddItem item) {
+        public ActionResult CreateNewItem(Item item) {
             if (ModelState.IsValid) {
 
                 RedirectToAction("Index", "Home");
