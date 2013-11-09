@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.ItemManagement.AddItem
+﻿@model RecOutletWarehouse.Models.ItemManagement.Item
 
 @{
     ViewBag.Title = "CreateNewItem";
@@ -37,6 +37,13 @@
             @Html.EditorFor(model => model.Vendor)
             @Html.ValidationMessageFor(model => model.Vendor)
         </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VendorItemID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorItemID)
+            @Html.ValidationMessageFor(model => model.VendorItemID)
+        </div>        
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ProductLine)

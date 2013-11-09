@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace RecOutletWarehouse.Models.ItemManagement {
-    public class AddItem {
+    public class Item {
 
         public long RecRPC { get; set; }
 
@@ -14,6 +14,9 @@ namespace RecOutletWarehouse.Models.ItemManagement {
 
         [Required]
         public string Vendor { get; set; }
+
+        [Required]
+        public int VendorItemID { get; set; }
 
         [Required]
         public string ProductLine { get; set; }
