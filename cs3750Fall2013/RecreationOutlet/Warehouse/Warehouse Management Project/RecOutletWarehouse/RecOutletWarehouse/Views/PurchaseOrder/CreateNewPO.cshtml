@@ -6,10 +6,9 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
-        <li><a href="~/Views/PurchaseOrder/SearchPO">Browse / Search POs</a></li>
-        <li class="active"><a href="~/Views/PurchaseOrder/CreateNewPO">Create New PO</a></li>
-    </ul>
-    
+        <li>@Html.ActionLink("Browse/Search POs","SearchPO")</li>
+        <li class="active">@Html.ActionLink("Create New PO","CreateNewPO")</li>
+    </ul>  
 }
 
 <h2>Create a new Purchase Order</h2>
@@ -25,7 +24,6 @@
         <tr>
             <td>Vendor ID:</td>
             <td>@Html.TextBoxFor(model => model.PO.Vendor, new { @id = "vendor" })</td>
-            @*<td><input type="text" id="vendor" /></td>*@
         </tr>
         <tr>
             <td>PO Order Date:</td>

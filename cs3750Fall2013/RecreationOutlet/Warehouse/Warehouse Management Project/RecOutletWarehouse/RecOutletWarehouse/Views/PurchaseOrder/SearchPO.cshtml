@@ -1,8 +1,13 @@
 ﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderCreationViewModel
 
 @{
-    ViewBag.Title = "POListAndSearch";
+    ViewBag.Title = "Browse Purchase Orders";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Browse/Search POs","SearchPO")</li>
+        <li>@Html.ActionLink("Create New PO","CreateNewPO")</li>
+    </ul>  
+}
 <h2>Browse / Search Purchase Orders</h2>
