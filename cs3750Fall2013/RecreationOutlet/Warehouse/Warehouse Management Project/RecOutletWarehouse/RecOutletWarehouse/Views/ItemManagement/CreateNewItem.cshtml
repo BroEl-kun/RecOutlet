@@ -1,4 +1,5 @@
-﻿@model RecOutletWarehouse.Models.ItemManagement.Item
+﻿@using System.Web.Optimization;
+@model RecOutletWarehouse.Models.ItemManagement.Item
 
 @{
     ViewBag.Title = "Item Creation";
@@ -18,14 +19,14 @@
                 <td>Vendor Name:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.Vendor)
+                        @Html.TextBoxFor(model => model.Vendor, new { @id = "vendor" })
                         @Html.ValidationMessageFor(model => model.Vendor)
                     </div>
                 </td>
                 <td>Product Line:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.ProductLine)
+                        @Html.TextBoxFor(model => model.ProductLine, new { @id = "productLine" })
                         @Html.ValidationMessageFor(model => model.ProductLine)
                     </div>
                 </td>
@@ -73,21 +74,21 @@
                 <td>Department:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.Department)
+                        @Html.TextBoxFor(model => model.Department, new { @id = "dept" })
                         @Html.ValidationMessageFor(model => model.Department)
                     </div>
                 </td>
                 <td>Category:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.Category)
+                        @Html.TextBoxFor(model => model.Category, new { @id = "cat" })
                         @Html.ValidationMessageFor(model => model.Category)
                     </div>
                 </td>
                 <td>Sub-category:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.Subcategory)
+                        @Html.TextBoxFor(model => model.Subcategory, new { @id = "subcat" })
                         @Html.ValidationMessageFor(model => model.Subcategory)
                     </div>
                 </td>
@@ -162,6 +163,145 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@*@section Scripts {
+    <script type="text/javascript">
+        var url = '@Url.RouteUrl("DefaultApi", 
+        new { httproute = "", controller = "VendorApi" })';
+        $('#vendor').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: url,
+                    data: { query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.VendorName,
+                                value: item.VendorId
+                            }
+                        }));
+                    }
+                })
+            },
+            select: function (event, ui) {
+                $('#vendor').val(ui.item.label);
+                $('#Id').val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+
+        var url2 = '@Url.RouteUrl("DefaultApi", 
+        new { httproute = "", controller = "ProductLineApi" })';
+        $('#productLine').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: url2,
+                    data: { query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.ProductLineName,
+                                value: item.ProductLineId
+                            }
+                        }));
+                    }
+                })
+            },
+            select: function (event, ui) {
+                $('#productLine').val(ui.item.label);
+                $('#Id').val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+
+        var url3 = '@Url.RouteUrl("DefaultApi", 
+        new { httproute = "", controller = "DepartmentApi" })';
+        $('#dept').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: url3,
+                    data: { query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.DepartmentName,
+                                value: item.DepartmentId
+                            }
+                        }));
+                    }
+                })
+            },
+            select: function (event, ui) {
+                $('#dept').val(ui.item.label);
+                $('#Id').val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+
+        var url4 = '@Url.RouteUrl("DefaultApi", 
+        new { httproute = "", controller = "CategoryApi" })';
+        $('#cat').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: url4,
+                    data: { query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.CategoryName,
+                                value: item.CategoryId
+                            }
+                        }));
+                    }
+                })
+            },
+            select: function (event, ui) {
+                $('#cat').val(ui.item.label);
+                $('#Id').val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+
+        var url5 = '@Url.RouteUrl("DefaultApi", 
+        new { httproute = "", controller = "SubcategoryApi" })';
+        $('#subcat').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: url5,
+                    data: { query: request.term },
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+                                label: item.SubcategoryName,
+                                value: item.SubcategoryId
+                            }
+                        }));
+                    }
+                })
+            },
+            select: function (event, ui) {
+                $('#subcat').val(ui.item.label);
+                $('#Id').val(ui.item.value);
+                return false;
+            },
+            minLength: 1
+        });
+    </script> 
+
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}*@
+
+ 
+}

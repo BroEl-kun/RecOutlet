@@ -379,6 +379,119 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        public List<ProductLine> SearchProductLinesByName(string plName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<ProductLine> plList = new List<ProductLine>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * "
+                                        + "FROM PRODUCT_LINE "
+                                        + "WHERE ProductLineName LIKE @plName";
+                    command.Parameters.AddWithValue("@plName", "%" + plName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        plList.Add(new ProductLine {
+                            ProductLineID = Convert.ToInt32(reader["ProductLineID"]),
+                            ProductLineName = reader["ProductLineName"].ToString(),
+                            VendorID = Convert.ToInt16(reader["VendorID"]),
+                            RepID = Convert.ToInt16(reader["RepID"])
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return plList;
+                }
+            }
+        }
+
+        public List<Department> SearchDepartmentsByName(string deptName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<Department> deptList = new List<Department>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * "
+                                        + "FROM ITEM_DEPARTMENT "
+                                        + "WHERE DepartmentName LIKE @deptName";
+                    command.Parameters.AddWithValue("@deptName", "%" + deptName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        deptList.Add(new Department {
+                            DepartmentID = Convert.ToByte(reader["DepartmentID"]),
+                            DepartmentName = reader["DepartmentName"].ToString(),
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return deptList;
+                }
+            }
+        }
+
+        public List<Category> SearchCategoriesByName(string catName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<Category> catList = new List<Category>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * "
+                                        + "FROM ITEM_CATEGORY "
+                                        + "WHERE CategoryName LIKE @catName";
+                    command.Parameters.AddWithValue("@catName", "%" + catName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        catList.Add(new Category {
+                            CategoryID = Convert.ToByte(reader["CategoryID"]),
+                            CategoryName = reader["CategoryName"].ToString(),
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return catList;
+                }
+            }
+        }
+
+        public List<SubCategory> SearchSubcategoriesByName(string subcatName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<SubCategory> subcatList = new List<SubCategory>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * "
+                                        + "FROM ITEM_SUBCATEGORY "
+                                        + "WHERE SubcategoryName LIKE @subcatName";
+                    command.Parameters.AddWithValue("@subcatName", "%" + subcatName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        subcatList.Add(new SubCategory {
+                            SubcategoryID = Convert.ToByte(reader["SubcategoryID"]),
+                            SubcategoryName = reader["SubcategoryName"].ToString(),
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return subcatList;
+                }
+            }
+        }
 
         /***********************************************
          * DFS Methods regarding the ITEM table follow

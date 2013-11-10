@@ -16,7 +16,8 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult CreateNewItem()
         {
-
+           // DataFetcherSetter db = new DataFetcherSetter();
+            //List<SubCategory> testList = db.SearchSubcategoriesByName("a");
 
             return View();
         }
