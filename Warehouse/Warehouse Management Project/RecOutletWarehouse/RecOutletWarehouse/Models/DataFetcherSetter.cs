@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Configuration;
 using RecOutletWarehouse.Models.PurchaseOrder;
+using RecOutletWarehouse.Models.ItemManagement;
 
 namespace RecOutletWarehouse.Models
 {
@@ -377,5 +378,53 @@ namespace RecOutletWarehouse.Models
 
             }
         }
+
+
+        /***********************************************
+         * DFS Methods regarding the ITEM table follow
+         ***********************************************/
+
+        public void AddNewItem(Item item) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "EXEC dbo.CreateItem "
+                                        + "@RecRPC, @ItemUPC, @DepartmentID, "
+                                        + "@CategoryID, @ItemID, @VendorItemID, @SubcategoryID, "
+                                        + "@ProductLineID, @Description, @SeasonCode, @MSRP, "
+                                        + "@SellPrice, @RestrictedAge, @TaxRateID, @ItemCreatedBy, "
+                                        + "@ItemCreatedDate, @ItemName";
+                    //NOTE: legacyID is not included in the INSERT
+
+                    command.Parameters.AddWithValue("@RecRPC", item.RecRPC);
+                    command.Parameters.AddWithValue("@ItemUPC", item.UPC);
+                    command.Parameters.AddWithValue("@DepartmentID", 8); //CHANGE
+                    command.Parameters.AddWithValue("@CategoryID", 5); //CHANGE
+                    command.Parameters.AddWithValue("@ItemID", item.ItemId);
+                    command.Parameters.AddWithValue("@VendorItemID", item.VendorItemID);
+                    command.Parameters.AddWithValue("@SubcategoryID", 6); //CHANGE
+                    command.Parameters.AddWithValue("@ProductLineID", 2); //CHANGE
+                    command.Parameters.AddWithValue("@Description", item.ItemDescription);
+                    command.Parameters.AddWithValue("@SeasonCode", item.SeasonCode);
+                    command.Parameters.AddWithValue("@MSRP", item.MSRP);
+                    command.Parameters.AddWithValue("@SellPrice", item.SellPrice);
+                    command.Parameters.AddWithValue("@RestrictedAge", item.restrictedAge);
+                    command.Parameters.AddWithValue("@TaxRateID", 1); //CHANGE
+                    command.Parameters.AddWithValue("@ItemCreatedBy", item.CreatedBy);
+                    command.Parameters.AddWithValue("@ItemCreatedDate", item.CreatedDate);
+                    command.Parameters.AddWithValue("@ItemName", item.ItemName);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+                }
+            }
+        }
+
+        /**********************************************
+         * ITEM DFS methods end
+         **********************************************/
     }
 }
