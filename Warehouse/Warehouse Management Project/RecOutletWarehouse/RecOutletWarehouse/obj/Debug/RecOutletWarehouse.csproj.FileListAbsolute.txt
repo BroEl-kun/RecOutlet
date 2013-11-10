@@ -128,3 +128,8 @@ C:\Users\Mat\Documents\RecreationOutlet\Warehouse\Warehouse Management Project\R
 C:\Users\Mat\Documents\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
 C:\Users\Mat\Documents\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
 C:\Users\Mat\Documents\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
+C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\Antlr3.Runtime.dll
+C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.dll
+C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\WebGrease.dll
+C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\Antlr3.Runtime.pdb
+C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.xml

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -7,9 +8,10 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
     <title>@ViewBag.Title</title>
 
-    <!--Scripts-->
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
+    <!--Scripts (why can't I have these at the bottom???)-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", false)
 </head>
 <body>
     <div class="content-wrapper">
@@ -29,10 +31,8 @@
                 <div class="center-text">
                     <p>&copy; @DateTime.Now.Year - Recreation Outlet</p>
                 </div>
-                
             </div>
         </footer>
     </div>
-
 </body>
 </html>
