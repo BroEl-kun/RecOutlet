@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,11 +33,6 @@ namespace RecreationOutletPOS
             recalculate();
         }
 
-        
-
-        private double cost = 0; //Modified by Nate on 10/12/2013
-        private double tax = 0; //Modified by Nate on 10/12/2013
-        private double total = 0; //Modified by Nate on 10/12/2013
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -69,23 +65,6 @@ namespace RecreationOutletPOS
             recalculate();
         }
 
-        /// <summary>
-        /// Programmer: Nate Maurer
-        /// Last Updated: 10/12/2013 
-        /// 
-        /// Calculates the sub-total, sales tax, and total cost of the purchase.
-        /// </summary>
-        private void priceTotal(double price)
-        {
-            cost += price;
-            tax = cost * .0645;
-            total = cost + tax;
-
-            summarySubTotal.Text = "$" + cost.ToString();
-            summaryTax.Text = "$" + tax.ToString();
-            summaryTotal.Text = "$" + total.ToString();
-        }
-
 
         /// <summary>
         /// Programmer: Jaed Norberg
@@ -107,14 +86,15 @@ namespace RecreationOutletPOS
 
             try
             {
+                // Get the total value based on all items in the transaction
                 foreach (TransactionItem t in tList.transData)
                 {
                     double costStr = t.getTotal();
                     int qtyStr = t.getQuantity();
-                    //itemCost += Convert.ToDecimal(costStr * qtyStr);      // temporarily removed for redundancy
                     itemCost += Convert.ToDecimal(costStr);
                 }
 
+                // Calculate tax
                 appliedTax = itemCost * taxRate;
                 itemTotalCost = itemCost + appliedTax;
 
@@ -122,6 +102,7 @@ namespace RecreationOutletPOS
                 appliedTax = Decimal.Round(appliedTax, 2);
                 itemTotalCost = Decimal.Round(itemTotalCost, 2);
 
+                // Set the label values
                 summarySubTotal.Text = "$" + itemCost.ToString();
                 summaryTax.Text = "$" + appliedTax.ToString();
                 summaryTotal.Text = "$" + itemTotalCost.ToString();
@@ -255,6 +236,14 @@ namespace RecreationOutletPOS
                 updateListView();
             }
         }
+
+
+        private void lsvCheckOutItems_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            //lsvCheckOutItems.ListViewItemSorter = new ListViewItemComparer(e.Column);
+            //lsvCheckOutItems.Sort();
+        }
+
 
         /// <summary>
         /// Programmer: Michael Vuong, Aaron Sorensen
@@ -421,6 +410,32 @@ namespace RecreationOutletPOS
         private void btnSales_Click_2(object sender, EventArgs e)
         {
 
+        }
+    }
+
+
+
+
+
+    // Implements the manual sorting of items by columns.
+    // This code is thanks to Microsoft's documentation.
+    class ListViewItemComparer : IComparer
+    {
+        private int col;
+        public ListViewItemComparer()
+        {
+            col = 0;
+        }
+        public ListViewItemComparer(int column)
+        {
+            col = column;
+        }
+        public int Compare(object x, object y)
+        {
+            int result;
+            result = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
+
+            return result;
         }
     }
 }

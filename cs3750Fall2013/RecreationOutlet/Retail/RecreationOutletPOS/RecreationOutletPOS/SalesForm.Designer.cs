@@ -137,6 +137,7 @@
             this.lsvCheckOutItems.TabIndex = 23;
             this.lsvCheckOutItems.UseCompatibleStateImageBehavior = false;
             this.lsvCheckOutItems.View = System.Windows.Forms.View.Details;
+            this.lsvCheckOutItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvCheckOutItems_ColumnClick);
             this.lsvCheckOutItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvCheckOutItems_KeyDown);
             // 
             // ID

@@ -179,9 +179,19 @@ namespace RecreationOutletPOS
         //----------------------------------------
         // Setters
         //----------------------------------------
+        public void setPrice(double newPrice)
+        {
+            this.price = newPrice;
+        }
+
         public void setQuantity(int newQuantity)
         {
             this.quantity = newQuantity;
+        }
+
+        public void setDiscount(double newDiscount)
+        {
+            this.discount = newDiscount;
         }
     }
 }
