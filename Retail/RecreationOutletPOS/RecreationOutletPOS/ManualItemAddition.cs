@@ -28,7 +28,7 @@ namespace RecreationOutletPOS
         /// </summary>
         public DataSet showData(string searchTerm)
         {
-            string sql = "SELECT ItemID, Description, SellPrice FROM ITEM " + 
+            string sql = "SELECT ItemID, Description, SellPrice FROM ITEM " +
                 "WHERE Description LIKE @str;";
 
             SqlConnection conn = new SqlConnection(connStr);
