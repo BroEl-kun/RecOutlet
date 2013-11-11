@@ -159,9 +159,20 @@
     
         <p>
             <input type="submit" value="Create New Item" />
+            <input type='button' value="Cancel" onclick="prompt()" />
         </p>
 
 }
+
+<script>
+    function prompt() {
+        var p = confirm("Are you sure you want to exit without creating the item?");
+
+        if (p == true) {
+            window.location = "@Url.Action("Index", "Home")"
+        }
+    }
+</script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
