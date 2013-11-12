@@ -123,12 +123,19 @@ namespace RecreationOutletPOS
         /// </summary>
         private void readCard(object sender, EventArgs e)
         {
-            if (ccField.Text.Length > 10)
-            {
-                char[] delimiterChars = { '%', '^', '/', '?', ';', '=' };
-                String rawString = ccField.Text;
+            String stringy = ccField.Text;
+            stringy = stringy.Replace(" ", "");
+            //MessageBox.Show(stringy.Length.ToString());
 
+            if (stringy.Length == 100)
+            {
+                MessageBox.Show("Done!");
+                
+                String rawString = ccField.Text;
                 rawString = rawString.Replace(" ", "");
+                
+                char[] delimiterChars = { '%', '^', '/', '?', ';', '=' };
+                
                 string[] parsed = rawString.Split(delimiterChars);
 
                 PAN = parsed[1];
@@ -136,11 +143,11 @@ namespace RecreationOutletPOS
                 fName = parsed[3];
                 ccNum = parsed[6];
                 
-                MessageBox.Show("PAN: " + PAN + "\n" + "Last Name: " + lName + "\n" + "First Name: "  + fName + "\n" + "ccNum: "  + ccNum);
+                MessageBox.Show(PAN + "\n" + lName + "\n" + fName + "\n" + ccNum);
             }
             else
             {
-                ccField.Text = "";
+                //ccField.Text = "";
             }
         }
 
