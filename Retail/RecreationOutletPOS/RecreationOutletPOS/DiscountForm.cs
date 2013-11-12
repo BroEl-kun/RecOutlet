@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,11 +32,17 @@ namespace RecreationOutletPOS
 
         private void tbDiscountPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string inPrice = tbDiscountPrice.Text;
-            double price = Convert.ToDouble(inPrice);
+            try
+            {
+                string inPrice = tbDiscountPrice.Text;
+                double price = Convert.ToDouble(inPrice);
 
-            d.setDiscount(price);
+                d.setDiscount(price);
+            }
+            catch(Exception ex)
+            {
+            }
 
         }
     }
-}
+}*/

@@ -407,12 +407,12 @@ namespace RecreationOutletPOS
         /// 
         /// Opens up the form to manually add a discount.
         /// </summary>
-        private void btnDiscount_Click(object sender, EventArgs e)
+        /*private void btnDiscount_Click(object sender, EventArgs e)
         {
             DiscountForm discountForm = new DiscountForm(this);
             discountForm.ShowDialog();
             
-        }
+        }*/
     }
 
 
