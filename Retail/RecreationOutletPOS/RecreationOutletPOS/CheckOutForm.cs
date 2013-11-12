@@ -12,7 +12,8 @@ namespace RecreationOutletPOS
 {
     public partial class CheckOutForm : Form
     {
-        Dictionary<string, string> transaction;
+        public Dictionary<string, string> transaction;
+        public TransactionList transItems;
         private int radChecked = 0;
         String PAN;    //Primary Account Number
         String lName;
@@ -26,9 +27,10 @@ namespace RecreationOutletPOS
         /// Constructor
         /// </summary>
         /// <param name="transaction">The new transaction details to display</param>
-        public CheckOutForm(Dictionary<string, string> transaction)
+        public CheckOutForm(Dictionary<string, string> transaction, TransactionList transItems)
         {
             this.transaction = transaction;
+            this.transItems = transItems;
 
             InitializeComponent();
             ccField.Width = 0;
@@ -83,6 +85,10 @@ namespace RecreationOutletPOS
                 if (result == DialogResult.Yes)
                 {
                     Transaction newTransaction = new Transaction(transaction);
+
+                    ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction, transItems);
+
+                    receiptGenerator.printReceiptToFile();
 
                     MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

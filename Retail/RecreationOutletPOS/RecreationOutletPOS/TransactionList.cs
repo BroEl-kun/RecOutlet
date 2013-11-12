@@ -8,12 +8,12 @@ namespace RecreationOutletPOS
 {
     /// <summary>
     /// Programmer: Jaed Norberg
-    /// Last Updated: 10/20/2013 
+    /// Last Updated: 11/11/2013 (Michael Vuong)
     /// 
     /// This class is used to store list data that the listview
     /// reads from. It stores a list of TransactionItem classes.
     /// </summary>
-    class TransactionList
+    public class TransactionList
     {
         public List<TransactionItem> transData = new List<TransactionItem>();
 
@@ -99,13 +99,13 @@ namespace RecreationOutletPOS
 
     /// <summary>
     /// Programmer: Jaed Norberg
-    /// Last Updated: 10/20/2013 
+    /// Last Updated: 11/11/2013 (Michael Vuong)
     /// 
     /// This class is used by the TransactionList class.
     /// Each instance stores the data that would otherwise
     /// appear in a row on the listview.
     /// </summary>
-    class TransactionItem
+    public class TransactionItem
     {
         int id;
         string name;
