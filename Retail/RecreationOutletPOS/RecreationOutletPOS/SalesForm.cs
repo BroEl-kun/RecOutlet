@@ -401,6 +401,18 @@ namespace RecreationOutletPOS
             iForm.Show();
             iForm.Location = this.Location;
         }
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/11/2013
+        /// 
+        /// Opens up the form to manually add a discount.
+        /// </summary>
+        private void btnDiscount_Click(object sender, EventArgs e)
+        {
+            DiscountForm discountForm = new DiscountForm(this);
+            discountForm.ShowDialog();
+            
+        }
     }
 
 
