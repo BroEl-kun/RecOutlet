@@ -169,16 +169,8 @@
         $("#vendor").focus();
     });
 
-    function prompt() {
-        var p = confirm("Are you sure you want to exit without creating the item?");
-
-        if (p == true) {
-            window.location = "@Url.Action("Index", "Home")"
-        }
-    }
-
     window.onbeforeunload = function () {
-        return "Wait!";
+        return "Changes to new item will not be saved.";
     };
 
     function prompt() {
