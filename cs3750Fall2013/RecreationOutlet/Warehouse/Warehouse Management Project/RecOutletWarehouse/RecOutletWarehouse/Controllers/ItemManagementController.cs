@@ -38,6 +38,8 @@ namespace RecOutletWarehouse.Controllers
                 item.TaxRate = 5; //TODO: A lot of things :)
                 if (item.UPC == null)
                     item.UPC = 0; //TODO: Fix this
+                if (item.restrictedAge == null)
+                    item.restrictedAge = 0; //TODO: Fix this
                 db.AddNewItem(item);
                 RedirectToAction("Index", "Home");
             }
