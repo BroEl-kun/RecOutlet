@@ -384,11 +384,6 @@ namespace RecreationOutletPOS
 
         }
 
-        private void btnSales_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         public void showReturns()
         {
             rForm.Owner = this;
@@ -405,11 +400,6 @@ namespace RecreationOutletPOS
             this.Hide();
             iForm.Show();
             iForm.Location = this.Location;
-        }
-
-        private void btnSales_Click_2(object sender, EventArgs e)
-        {
-
         }
     }
 
