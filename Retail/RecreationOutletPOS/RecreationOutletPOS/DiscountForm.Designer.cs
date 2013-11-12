@@ -1,0 +1,71 @@
+﻿namespace RecreationOutletPOS
+{
+    partial class DiscountForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.tbDiscountPrice = new System.Windows.Forms.TextBox();
+            this.lblDiscPrice = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // tbDiscountPrice
+            // 
+            this.tbDiscountPrice.Location = new System.Drawing.Point(94, 47);
+            this.tbDiscountPrice.Name = "tbDiscountPrice";
+            this.tbDiscountPrice.Size = new System.Drawing.Size(151, 20);
+            this.tbDiscountPrice.TabIndex = 0;
+            this.tbDiscountPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDiscountPrice_KeyPress);
+            // 
+            // lblDiscPrice
+            // 
+            this.lblDiscPrice.AutoSize = true;
+            this.lblDiscPrice.Location = new System.Drawing.Point(12, 50);
+            this.lblDiscPrice.Name = "lblDiscPrice";
+            this.lblDiscPrice.Size = new System.Drawing.Size(76, 13);
+            this.lblDiscPrice.TabIndex = 1;
+            this.lblDiscPrice.Text = "Discount Price";
+            // 
+            // DiscountForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(297, 118);
+            this.Controls.Add(this.lblDiscPrice);
+            this.Controls.Add(this.tbDiscountPrice);
+            this.Name = "DiscountForm";
+            this.Text = "DiscountForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TextBox tbDiscountPrice;
+        private System.Windows.Forms.Label lblDiscPrice;
+    }
+}
