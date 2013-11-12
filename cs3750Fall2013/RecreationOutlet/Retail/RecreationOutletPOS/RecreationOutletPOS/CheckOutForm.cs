@@ -33,7 +33,7 @@ namespace RecreationOutletPOS
             this.transItems = transItems;
 
             InitializeComponent();
-            ccField.Width = 0;
+            //ccField.Width = 0;
             setCheckoutInfo(transaction);
         }
 
