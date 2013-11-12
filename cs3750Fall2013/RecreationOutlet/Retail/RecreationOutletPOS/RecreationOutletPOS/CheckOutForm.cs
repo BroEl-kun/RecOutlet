@@ -135,7 +135,7 @@ namespace RecreationOutletPOS
                 fName = parsed[3];
                 ccNum = parsed[6];
                 
-                MessageBox.Show(PAN + "\n" + lName + "\n" + fName + "\n" + ccNum + "\n" + parsed[7]);
+                MessageBox.Show("PAN: " + PAN + "\n" + "Last Name: " + lName + "\n" + "First Name: "  + fName + "\n" + "ccNum: "  + ccNum);
             }
             else
             {
