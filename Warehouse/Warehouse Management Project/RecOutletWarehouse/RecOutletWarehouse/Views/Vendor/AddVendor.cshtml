@@ -41,7 +41,7 @@
             <td>@Html.TextAreaFor(newVendor => newVendor.Website)</td>
         </tr>
     </table>
-    <input type="submit" value="Add New Vendor" />
+    <input type="submit" value="Add New Vendor" onclick="submit()"/>
     <input type="button" value="Cancel" onclick="prompt()" />
     
 }
@@ -51,11 +51,23 @@
         $("#VendorId").focus();
     });
 
-    window.onbeforeunload = function () {
-        return "Changes to new vendor will not be saved.";
-    };
+    //window.onbeforeunload = function () {
+    //    return "Changes to new vendor will not be saved.";
+    //};
 
     function prompt() {
+        var p = confirm("Changes to vendor have not been saved! Continue?");
+
+        if (p == true) {
             window.location = "@Url.Action("Index", "Home")"
-    }
+            }
+        }
+
+    function submit() {
+        var s = confirm("New vendor has been created!");
+
+        if (s == true) {
+            window.location = "@Url.Action("Index", "Home")"
+            }
+        }
 </script>

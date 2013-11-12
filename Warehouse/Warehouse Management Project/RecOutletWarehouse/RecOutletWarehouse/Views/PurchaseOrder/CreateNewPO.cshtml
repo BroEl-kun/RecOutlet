@@ -46,7 +46,7 @@
             <td>@Html.TextAreaFor(model => model.PO.Comments)</td>
         </tr>
     </table>
-    <input type="submit" value="Create New PO" />
+    <input type="submit" value="Create New PO" onclick="submit()"/>
     <input type="button" value="Cancel" onclick="prompt()" />
 }
 
@@ -56,10 +56,18 @@
     });
 
     function prompt() {
-        var p = confirm("Changes to PO will not be saved.");
+        var p = confirm("Changes to PO have not been saved! Continue?");
 
         if (p == true) {
             window.location = "@Url.Action("Index", "Home")"
+        }
+
+        function submit() {
+            var p = confirm("New PO has been created!");
+
+            if (p == true) {
+                window.location = "@Url.Action("Index", "Home")"
+            }
         }
     }
 
