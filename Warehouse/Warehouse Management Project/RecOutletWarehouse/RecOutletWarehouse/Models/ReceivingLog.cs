@@ -13,13 +13,15 @@ namespace RecOutletWarehouse.Models
 
         public int BackorderID { get; set; }
         //byte = 8 bits 0-255
-        public byte QtyTypeID { get; set; }
+        //public byte QtyTypeID { get; set; }
+        public short QtyTypeID { get; set; }
 
         public DateTime ReceiveDate { get; set; }
 
         public string ReceivingNotes { get; set; }
         //unsigned short 16 bits 0 to 65535
-        public ushort ReceivedQty { get; set; }
+        //public ushort ReceivedQty { get; set; }
+        public short ReceivedQty { get; set; }
     }
 }
 

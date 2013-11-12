@@ -3,14 +3,152 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@*submitForms = function(){*@
+
+<script type ="text/javascript">
+function submitForms(control) {
+    //document.forms["form1"].submit();
+    //document.forms["form2"].submit();
+    
+    //var y = "RLform" + 0;
+    //document.write(y);
+    //document.write(document.forms[0].name);
+    //document.write(document.forms[1].name);
+    //document.write(Model.Count());
+    //document.write(control);
+    alert(control);
+    var z = document.forms.length;  //need to use ajax.
+
+    if (control < z) {
+        //document.forms[control + ""].onsubmit(submitForms(control + 1));
+        document.forms[control + ""].submit();
+        //control++;
+        document.forms[control + ""].onsubmit(submitForms(control+1));
+    }
+
+    //document.write(document.getElementById[1 + ""].name);
+    //document.write(document.forms[1].name);
+    //document.forms["0"].submit();
+    //document.forms["1"].submit();
+
+    ////for (var i = 1; i <= Model.Count() ; i++) //offset due to first form
+    //for (var i = 1; i < z ; i++) //offset due to first form
+    //{
+    //    //document.forms["RLform" + i].submit();
+    //    //document.forms[i].submit();
+    //    //document.write(document.forms["RLform"].name);
+    //    //document.write(document.forms[i].name);
+    //    //document.write("hi");
+    //    //document.getElementById(i + "").submit();
+    //}
+
+}
+</script>
+
 <h2>Index</h2>
 <div class="center-element center-text">
     <table class="button-columns">
         <tr>
-            <td><input type="button" value="Create New Receiving Log" class="main-menu-button"
+            @*<td><input type="button" value="Create New Receiving Log" class="main-menu-button"
                 onclick="location.href='@Url.Action("CreateNewRL","ReceivingLog")'" /></td>
             <td><input type="button" value="Search for Receiving Log" class="main-menu-button"
-                onclick="location.href='@Url.Action("Search","ReceivingLog")'" /></td>
+                onclick="location.href='@Url.Action("Search","ReceivingLog")'" /></td>*@
+
+            @*<select name="FavWebSite" size="5">
+                <option value="SM">http://www.scriptingmaster.com</option>
+                <option value="Google">http://www.google.com</option>
+                <option value="MSN">http://www.msn.com</option>
+                <option value="yahoo">http://www.yahoo.com</option>
+                <option value="microsoft">http://www.microsoft.com</option>
+            </select>*@
+
+            
+
         </tr>
     </table>
+
+    @using (Html.BeginForm("findPO", "ReceivingLog"))
+    {
+        <input type="text" id="po" name="po" />          
+        <input type="submit" value="Begin RL" />
+    }
+
+    <br />
+
+@model List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem>
+
+@if(Model != null) {
+    
+//using (Html.BeginForm("MarkedReceived", "ReceivingLog"))
+//{
+    
+    var count = 1;
+    
+    <table id="RLtable">
+    
+        @*@using (Html.BeginForm("MarkedReceived", "ReceivingLog"))
+        {*@
+
+        @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objItem in Model)
+        {
+            
+            //var x = "RLform" + Model.IndexOf(objItem);
+            //var itemName = objItem.ToString();
+            //var cindex = Model.IndexOf(objItem);
+            //Model.
+            
+            using (Html.BeginForm("MarkedReceived", "ReceivingLog", new { name = count + "", id = count + "" }) )
+            {
+            
+            <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
+                <td>
+                    PO Line Item:
+                    @objItem.POLineItem
+                </td>
+                <td>
+                    Purchase Order: @objItem.POID
+                    @*@objItem.POLineItem*@
+                    @Html.Hidden("POLineItem", @objItem.POLineItem)
+                </td>
+                <td>
+                    Item RPC: @objItem.RecRPC
+                    @Html.Hidden("RecRPC", @objItem.RecRPC)
+                </td>
+                <td>
+                    Quantity Ordered: @objItem.QtyOrdered
+                    @Html.Hidden("QtyOrdered", @objItem.QtyOrdered)
+                </td>
+                <td>
+                    Quantity Type ID: @objItem.QtyTypeId
+                    @Html.Hidden("QtyTypeId", @objItem.QtyTypeId)
+                </td>
+                <td>
+                    Receive Date: 
+                    @Html.TextBox("ReceivedDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type="date" } )
+                </td>
+                <td>
+                    Quantity Received: <input type="number" id="QtyReceived" name="QtyReceived" /> @*radio button option will come later*@
+                </td>
+                <td>
+                    Notes: 
+                    <input type="text" id="Notes" name="Notes" />
+                </td>
+                <td><input type="submit" value="Record Received" /></td>
+            </tr>
+            
+           @*RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item = objItem;*@
+            
+        }
+            count++;
+        }
+
+        @*}*@
+
+    </table>
+
+        <input type="button" value="Record Received" onclick="submitForms(1)" />
+    //}
+}
+<br />
+
 </div>

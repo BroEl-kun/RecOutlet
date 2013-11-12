@@ -210,6 +210,9 @@ namespace RecOutletWarehouse.Models
 
                     while (reader.Read()) {
                         LineItemList.Add(new PurchaseOrderLineItem{
+                            //Added
+                            POLineItem = Convert.ToInt32(reader["POLineItemID"]),
+                            //
                             POID = (reader["POID"].ToString()),
                             RecRPC = Convert.ToInt64(reader["RecRPC"]),
                             WholesaleCost = Convert.ToDecimal(reader["WholesaleCost"]),
@@ -284,19 +287,55 @@ namespace RecOutletWarehouse.Models
             }
         }
 
-        public void NewReceivingLog(int ReceivingID, int POLineItemID, int BackorderID, byte QtyTypeID,
-                                    DateTime ReceiveDate, string ReceivingNotes, ushort ReceivedQty) {
+        public void NewReceivingLog(//int ReceivingID, 
+            int POLineItemID, int BackorderID, short QtyTypeID, //byte QtyTypeID,
+                                    DateTime ReceiveDate, string ReceivingNotes, short ReceivedQty) {
+            //ushort ReceivedQty) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
 
                 using (SqlCommand command = new SqlCommand()) {
                     command.Connection = thisConnection;
                     command.CommandText = "EXEC dbo.CreateReceivingLog "    //Please note this Stored Procedure is not yet made
-                                              + "@ReceivingID, @POLineItemID, @BackorderID, @QtyTypeID,"
+                                              //+ "@ReceivingID, 
+                                              + "@POLineItemID, @BackorderID, @QtyTypeID,"
                                               + "@ReceiveDate, @ReceivingNotes, @ReceivedQty";
-                    command.Parameters.AddWithValue("@ReceivingID", ReceivingID);
+                    //command.Parameters.AddWithValue("@ReceivingID", ReceivingID);
                     command.Parameters.AddWithValue("@POLineItemID", POLineItemID);
                     command.Parameters.AddWithValue("@BackorderID", BackorderID);
+                    command.Parameters.AddWithValue("@QtyTypeID", QtyTypeID);
+                    command.Parameters.AddWithValue("@ReceiveDate", ReceiveDate);
+                    command.Parameters.AddWithValue("@ReceivingNotes", ReceivingNotes);
+                    command.Parameters.AddWithValue("@ReceivedQty", ReceivedQty);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+
+                }//.SqlComand
+            }//.SqlConnection
+        }//.NewReceivingLog
+
+        public void NewReceivingLog(//int ReceivingID, 
+            int POLineItemID, short QtyTypeID, //byte QtyTypeID,
+                                    DateTime ReceiveDate, string ReceivingNotes, short ReceivedQty)
+        {
+            //ushort ReceivedQty) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString))
+            {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = thisConnection;
+                    command.CommandText = "EXEC dbo.CreateReceivingLog "    //Please note this Stored Procedure is not yet made
+                        //+ "@ReceivingID, 
+                                              + "@POLineItemID," // @BackorderID, 
+                                              + "@QtyTypeID,"
+                                              + "@ReceiveDate, @ReceivingNotes, @ReceivedQty";
+                    //command.Parameters.AddWithValue("@ReceivingID", ReceivingID);
+                    command.Parameters.AddWithValue("@POLineItemID", POLineItemID);
+                    //command.Parameters.AddWithValue("@BackorderID", null);
                     command.Parameters.AddWithValue("@QtyTypeID", QtyTypeID);
                     command.Parameters.AddWithValue("@ReceiveDate", ReceiveDate);
                     command.Parameters.AddWithValue("@ReceivingNotes", ReceivingNotes);

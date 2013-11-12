@@ -133,3 +133,8 @@ C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\S
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\WebGrease.dll
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\Antlr3.Runtime.pdb
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.xml
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Antlr3.Runtime.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\WebGrease.dll
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Antlr3.Runtime.pdb
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.xml
