@@ -19,6 +19,8 @@ namespace RecOutletWarehouse.Models.PurchaseOrder {
         public short QtyOrdered { get; set; }
 
         public short QtyTypeId { get; set; } //TODO: figure out if this is necessary
+       // public byte QtyTypeId { get; set; } //TODO: figure out if this is necessary\
+        //public ushort QtyTypeId { get; set; } //TODO: figure out if this is necessary
 
         public decimal WholesaleCost { get; set; }
 
