@@ -15,10 +15,11 @@ namespace RecreationOutletPOS
         public Dictionary<string, string> transaction;
         public TransactionList transItems;
         private int radChecked = 0;
-        String PAN;    //Primary Account Number
-        String lName;
-        String fName;
-        String ccNum;
+        private String PAN;     //Primary Account Number
+        private String lName;
+        private String fName;
+        private String ccNum;
+        private String ccEnd;   //Last 4 of CC Number
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -33,7 +34,8 @@ namespace RecreationOutletPOS
             this.transItems = transItems;
 
             InitializeComponent();
-            //ccField.Width = 0;
+            ccField.Width = 0;
+            lblSwipe.Visible = false;
             setCheckoutInfo(transaction);
         }
 
@@ -121,15 +123,18 @@ namespace RecreationOutletPOS
         /// 
         /// Parses input from the card reader from hidden textField
         /// </summary>
+        int breaks = 0;
         private void readCard(object sender, EventArgs e)
         {
-            String stringy = ccField.Text;
-            stringy = stringy.Replace(" ", "");
-            //MessageBox.Show(stringy.Length.ToString());
-
-            if (stringy.Length == 100)
+            string SubString = ccField.Text.Substring(ccField.Text.Length - 1);
+            if (SubString == "?")
             {
-                MessageBox.Show("Done!");
+                breaks += 1;
+            }
+
+            if (breaks == 2)
+            {
+                MessageBox.Show("");
                 
                 String rawString = ccField.Text;
                 rawString = rawString.Replace(" ", "");
@@ -138,17 +143,30 @@ namespace RecreationOutletPOS
                 
                 string[] parsed = rawString.Split(delimiterChars);
 
+                if (parsed.Length != 9)
+                {
+                    MessageBox.Show("Card Read Failed");
+                    return;
+                }
                 PAN = parsed[1];
                 lName = parsed[2];
                 fName = parsed[3];
                 ccNum = parsed[6];
-                
-                MessageBox.Show(PAN + "\n" + lName + "\n" + fName + "\n" + ccNum);
+                ccEnd = ccNum.Substring(ccNum.Length - 4);
+
+                breaks = 0;
+
+                MessageBox.Show(PAN + "\n" + lName + "\n" + fName + "\n" + ccEnd + "\n" + parsed.Length);
+
+                ccField.Text = "";
             }
-            else
-            {
-                //ccField.Text = "";
-            }
+        }
+
+        //Runs when hidden textfield loses focus
+        private void ccFocus(object sender, EventArgs e)
+        {
+            radCredit.Checked = false;
+            lblSwipe.Visible = false;
         }
 
         /// <summary>
@@ -162,6 +180,7 @@ namespace RecreationOutletPOS
             if (radCash.Checked)
             {
                 radChecked = 1;
+                lblSwipe.Visible = false;
             }
         }
 
@@ -171,10 +190,16 @@ namespace RecreationOutletPOS
             {
                 radChecked = 2;
                 ccField.Focus();
+                lblSwipe.Visible = true;
             }
         }
 
         private void readCard()
+        {
+
+        }
+
+        private void ccFocus()
         {
 
         }
