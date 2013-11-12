@@ -116,6 +116,7 @@
             this.btnSales.TabIndex = 15;
             this.btnSales.Text = "Sales";
             this.btnSales.UseVisualStyleBackColor = false;
+            this.btnSales.Click += new System.EventHandler(this.btnSales_Click);
             // 
             // lsvCheckOutItems
             // 
