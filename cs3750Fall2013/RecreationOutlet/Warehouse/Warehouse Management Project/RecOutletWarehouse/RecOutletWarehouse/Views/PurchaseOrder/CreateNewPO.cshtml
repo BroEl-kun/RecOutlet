@@ -56,7 +56,11 @@
     });
 
     function prompt() {
-        window.location = "@Url.Action("Index", "Home")"
+        var p = confirm("Exit without saving changes to PO?");
+
+        if (p == true) {
+            window.location = "@Url.Action("Index", "Home")"
+        }
     }
 </script>
 
