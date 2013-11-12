@@ -27,10 +27,17 @@ namespace RecOutletWarehouse.Controllers
             DataFetcherSetter db = new DataFetcherSetter();
 
             if (ModelState.IsValid) {
+                string RPC = item.Department.ToString();
+                RPC += item.Category.ToString();
+
+
+
                 item.CreatedDate = DateTime.Now.Date;
                 item.CreatedBy = 1; //TODO: Associate with logged-in user
                 item.ItemId = 1; //TODO: Autogenerate
                 item.TaxRate = 5; //TODO: A lot of things :)
+                if (item.UPC == null)
+                    item.UPC = 0; //TODO: Fix this
                 db.AddNewItem(item);
                 RedirectToAction("Index", "Home");
             }
