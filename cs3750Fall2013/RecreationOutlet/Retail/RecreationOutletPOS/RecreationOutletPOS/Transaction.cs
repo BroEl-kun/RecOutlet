@@ -10,7 +10,7 @@ namespace RecreationOutletPOS
 {
     /// <summary>
     /// Programmer: Michael Vuong
-    /// Last Updated: 10/14/2013
+    /// Last Updated: 11/11/2013
     /// 
     /// Represents a single transaction when checking out
     /// </summary>
@@ -33,7 +33,7 @@ namespace RecreationOutletPOS
 
         public int rowsInserted;
 
-        Dictionary<string, string> transactionDetails;
+        public Dictionary<string, string> transactionDetails;
 
         /// <summary>
         /// Programmer: Michael Vuong

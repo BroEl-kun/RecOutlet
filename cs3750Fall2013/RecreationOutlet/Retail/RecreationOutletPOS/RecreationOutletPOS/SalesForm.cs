@@ -199,7 +199,7 @@ namespace RecreationOutletPOS
                     transaction.Add("SummarySubtotal", subtotal);
                     transaction.Add("SummaryTax", tax);
 
-                    CheckOutForm checkOutForm = new CheckOutForm(transaction);
+                    CheckOutForm checkOutForm = new CheckOutForm(transaction, tList);
                     checkOutForm.ShowDialog();
 
                     tList.transData.Clear();
