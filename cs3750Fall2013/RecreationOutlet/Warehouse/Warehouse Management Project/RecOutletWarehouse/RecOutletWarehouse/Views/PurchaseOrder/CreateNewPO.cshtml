@@ -50,6 +50,12 @@
     <input type="button" value="Cancel (TODO)" />
 }
 
+<script type ="text/javascript">
+    $(function () {
+        $("#vendor").focus();
+    });
+</script>
+
 <script type="text/javascript">
     var url = '@Url.RouteUrl("DefaultApi", 
         new { httproute = "", controller = "VendorApi" })';
