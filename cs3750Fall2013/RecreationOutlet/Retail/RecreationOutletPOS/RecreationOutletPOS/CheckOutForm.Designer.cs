@@ -31,14 +31,17 @@
             this.cmbCommissionTo = new System.Windows.Forms.ComboBox();
             this.lblCommissionTo = new System.Windows.Forms.Label();
             this.pnlCheckoutSummary = new System.Windows.Forms.Panel();
+            this.summaryTax = new System.Windows.Forms.Label();
+            this.summarySubTotal = new System.Windows.Forms.Label();
             this.lblSubtotal = new System.Windows.Forms.Label();
+            this.summaryTotal = new System.Windows.Forms.Label();
             this.lblTax = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.btnConfirmCheckOut = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.summaryTotal = new System.Windows.Forms.Label();
-            this.summaryTax = new System.Windows.Forms.Label();
-            this.summarySubTotal = new System.Windows.Forms.Label();
+            this.radCash = new System.Windows.Forms.RadioButton();
+            this.radCredit = new System.Windows.Forms.RadioButton();
+            this.ccField = new System.Windows.Forms.TextBox();
             this.pnlCheckoutSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +84,26 @@
             this.pnlCheckoutSummary.Size = new System.Drawing.Size(395, 129);
             this.pnlCheckoutSummary.TabIndex = 2;
             // 
+            // summaryTax
+            // 
+            this.summaryTax.AutoSize = true;
+            this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryTax.Location = new System.Drawing.Point(300, 41);
+            this.summaryTax.Name = "summaryTax";
+            this.summaryTax.Size = new System.Drawing.Size(55, 22);
+            this.summaryTax.TabIndex = 11;
+            this.summaryTax.Text = "$0.00";
+            // 
+            // summarySubTotal
+            // 
+            this.summarySubTotal.AutoSize = true;
+            this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summarySubTotal.Location = new System.Drawing.Point(300, 15);
+            this.summarySubTotal.Name = "summarySubTotal";
+            this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
+            this.summarySubTotal.TabIndex = 9;
+            this.summarySubTotal.Text = "$0.00";
+            // 
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
@@ -90,6 +113,16 @@
             this.lblSubtotal.Size = new System.Drawing.Size(76, 22);
             this.lblSubtotal.TabIndex = 6;
             this.lblSubtotal.Text = "Subtotal";
+            // 
+            // summaryTotal
+            // 
+            this.summaryTotal.AutoSize = true;
+            this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.summaryTotal.Location = new System.Drawing.Point(300, 94);
+            this.summaryTotal.Name = "summaryTotal";
+            this.summaryTotal.Size = new System.Drawing.Size(55, 22);
+            this.summaryTotal.TabIndex = 10;
+            this.summaryTotal.Text = "$0.00";
             // 
             // lblTax
             // 
@@ -132,41 +165,48 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // summaryTotal
+            // radCash
             // 
-            this.summaryTotal.AutoSize = true;
-            this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTotal.Location = new System.Drawing.Point(300, 94);
-            this.summaryTotal.Name = "summaryTotal";
-            this.summaryTotal.Size = new System.Drawing.Size(55, 22);
-            this.summaryTotal.TabIndex = 10;
-            this.summaryTotal.Text = "$0.00";
+            this.radCash.AutoSize = true;
+            this.radCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radCash.Location = new System.Drawing.Point(561, 281);
+            this.radCash.Name = "radCash";
+            this.radCash.Size = new System.Drawing.Size(80, 29);
+            this.radCash.TabIndex = 5;
+            this.radCash.TabStop = true;
+            this.radCash.Text = "Cash";
+            this.radCash.UseVisualStyleBackColor = true;
+            this.radCash.CheckedChanged += new System.EventHandler(this.radCash_CheckedChanged);
             // 
-            // summaryTax
+            // radCredit
             // 
-            this.summaryTax.AutoSize = true;
-            this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTax.Location = new System.Drawing.Point(300, 41);
-            this.summaryTax.Name = "summaryTax";
-            this.summaryTax.Size = new System.Drawing.Size(55, 22);
-            this.summaryTax.TabIndex = 11;
-            this.summaryTax.Text = "$0.00";
+            this.radCredit.AutoSize = true;
+            this.radCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radCredit.Location = new System.Drawing.Point(561, 322);
+            this.radCredit.Name = "radCredit";
+            this.radCredit.Size = new System.Drawing.Size(87, 29);
+            this.radCredit.TabIndex = 6;
+            this.radCredit.TabStop = true;
+            this.radCredit.Text = "Credit";
+            this.radCredit.UseVisualStyleBackColor = true;
+            this.radCredit.CheckedChanged += new System.EventHandler(this.radCredit_CheckedChanged);
             // 
-            // summarySubTotal
+            // ccField
             // 
-            this.summarySubTotal.AutoSize = true;
-            this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summarySubTotal.Location = new System.Drawing.Point(300, 15);
-            this.summarySubTotal.Name = "summarySubTotal";
-            this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
-            this.summarySubTotal.TabIndex = 9;
-            this.summarySubTotal.Text = "$0.00";
+            this.ccField.Location = new System.Drawing.Point(27, 409);
+            this.ccField.Name = "ccField";
+            this.ccField.Size = new System.Drawing.Size(100, 20);
+            this.ccField.TabIndex = 7;
+            this.ccField.TextChanged += new System.EventHandler(this.readCard);
             // 
             // CheckOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 458);
+            this.Controls.Add(this.ccField);
+            this.Controls.Add(this.radCredit);
+            this.Controls.Add(this.radCash);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnConfirmCheckOut);
             this.Controls.Add(this.pnlCheckoutSummary);
@@ -194,5 +234,8 @@
         private System.Windows.Forms.Label summaryTax;
         private System.Windows.Forms.Label summarySubTotal;
         private System.Windows.Forms.Label summaryTotal;
+        private System.Windows.Forms.RadioButton radCash;
+        private System.Windows.Forms.RadioButton radCredit;
+        private System.Windows.Forms.TextBox ccField;
     }
 }
