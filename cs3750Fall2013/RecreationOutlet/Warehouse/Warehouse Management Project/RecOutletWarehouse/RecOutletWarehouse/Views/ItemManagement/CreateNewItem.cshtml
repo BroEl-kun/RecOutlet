@@ -158,7 +158,7 @@
     <!--End TODOS-->
     
         <p>
-            <input type="submit" value="Create New Item" />
+            <input type="submit" value="Create New Item" onclick="submit()"/>
             <input type='button' value="Cancel" onclick="prompt()" />
         </p>
 
@@ -169,12 +169,24 @@
         $("#vendor").focus();
     });
 
-    window.onbeforeunload = function () {
-        return "Changes to new item will not be saved.";
-    };
+    //window.onbeforeunload = function () {
+    //    return "Changes to new item will not be saved.";
+    //};
 
     function prompt() {
-        window.location = "@Url.Action("Index", "Home")"
+        var p = confirm("Changes to item have not been saved! Continue?");
+
+        if (p == true) {
+            window.location = "@Url.Action("Index", "Home")"
+        }
+    }
+
+    function submit() {
+        var p = confirm("New item has been created!");
+
+        if (p == true) {
+            window.location = "@Url.Action("Index", "Home")"
+        }
     }
 </script>
 
