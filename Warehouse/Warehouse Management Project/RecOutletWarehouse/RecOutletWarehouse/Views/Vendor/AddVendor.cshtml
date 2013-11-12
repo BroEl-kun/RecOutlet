@@ -10,7 +10,7 @@
     <table>
         <tr>
             <td>Vender ID:</td>
-            <td>@Html.TextBoxFor(newVendor => newVendor.VendorId)</td>
+            <td>@Html.TextBoxFor(newVendor => newVendor.VendorId, new { id = "VendorId"} )</td>
         </tr>
         <tr>
             <td>Vendor Name:</td>
@@ -42,4 +42,11 @@
         </tr>
     </table>
     <input type="submit" value="Add New Vendor" />
+    
 }
+
+<script type ="text/javascript">
+        $(function () {
+            $("#VendorId").focus();
+        });
+</script>
