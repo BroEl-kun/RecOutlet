@@ -47,13 +47,21 @@
         </tr>
     </table>
     <input type="submit" value="Create New PO" />
-    <input type="button" value="Cancel (TODO)" />
+    <input type="button" value="Cancel" onclick="prompt()" />
 }
 
 <script type ="text/javascript">
     $(function () {
         $("#vendor").focus();
     });
+
+    window.onbeforeunload = function () {
+        return "Wait!";
+    };
+
+    function prompt() {
+        window.location = "@Url.Action("Index", "Home")"
+    }
 </script>
 
 <script type="text/javascript">

@@ -42,11 +42,20 @@
         </tr>
     </table>
     <input type="submit" value="Add New Vendor" />
+    <input type="button" value="Cancel" onclick="prompt()" />
     
 }
 
 <script type ="text/javascript">
-        $(function () {
-            $("#VendorId").focus();
-        });
+    $(function () {
+        $("#VendorId").focus();
+    });
+
+    window.onbeforeunload = function () {
+        return "Wait!";
+    };
+
+    function prompt() {
+            window.location = "@Url.Action("Index", "Home")"
+    }
 </script>
