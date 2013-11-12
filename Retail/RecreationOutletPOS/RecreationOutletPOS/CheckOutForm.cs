@@ -13,7 +13,12 @@ namespace RecreationOutletPOS
     public partial class CheckOutForm : Form
     {
         Dictionary<string, string> transaction;
-        
+        private int radChecked = 0;
+        String PAN;    //Primary Account Number
+        String lName;
+        String fName;
+        String ccNum;
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 10/27/2013
@@ -26,7 +31,7 @@ namespace RecreationOutletPOS
             this.transaction = transaction;
 
             InitializeComponent();
-
+            ccField.Width = 0;
             setCheckoutInfo(transaction);
         }
 
@@ -60,7 +65,17 @@ namespace RecreationOutletPOS
         /// </summary>
         private void btnConfirmCheckOut_Click(object sender, EventArgs e)
         {
+            if (radChecked == 1)
+            {
+                //Cash Checkout
+            }
+            else
+            {
+                //Card Checkout
+                cardCheckout();
+            }
             try
+
             {
                 DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
@@ -80,6 +95,74 @@ namespace RecreationOutletPOS
             {
 
             }
+        }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 11/11/2013
+        /// 
+        /// Runs credit card checkout
+        /// </summary>
+        private void cardCheckout()
+        {
+            
+        }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 11/11/2013
+        /// 
+        /// Parses input from the card reader from hidden textField
+        /// </summary>
+        private void readCard(object sender, EventArgs e)
+        {
+            if (ccField.Text.Length > 10)
+            {
+                char[] delimiterChars = { '%', '^', '/', '?', ';', '=' };
+                String rawString = ccField.Text;
+
+                rawString = rawString.Replace(" ", "");
+                string[] parsed = rawString.Split(delimiterChars);
+
+                PAN = parsed[1];
+                lName = parsed[2];
+                fName = parsed[3];
+                ccNum = parsed[6];
+                
+                MessageBox.Show(PAN + "\n" + lName + "\n" + fName + "\n" + ccNum + "\n" + parsed[7]);
+            }
+            else
+            {
+                ccField.Text = "";
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 11/11/2013
+        /// 
+        /// Controls radio buttons
+        /// </summary>
+        private void radCash_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radCash.Checked)
+            {
+                radChecked = 1;
+            }
+        }
+
+        private void radCredit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radCredit.Checked)
+            {
+                radChecked = 2;
+                ccField.Focus();
+            }
+        }
+
+        private void readCard()
+        {
+
         }
     }
 }
