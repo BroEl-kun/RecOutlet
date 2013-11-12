@@ -42,6 +42,7 @@
             this.radCash = new System.Windows.Forms.RadioButton();
             this.radCredit = new System.Windows.Forms.RadioButton();
             this.ccField = new System.Windows.Forms.TextBox();
+            this.lblSwipe = new System.Windows.Forms.Label();
             this.pnlCheckoutSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,17 +194,31 @@
             // 
             // ccField
             // 
-            this.ccField.Location = new System.Drawing.Point(27, 409);
+            this.ccField.Location = new System.Drawing.Point(12, 431);
             this.ccField.Name = "ccField";
             this.ccField.Size = new System.Drawing.Size(100, 20);
             this.ccField.TabIndex = 7;
             this.ccField.TextChanged += new System.EventHandler(this.readCard);
+            this.ccField.Leave += new System.EventHandler(this.ccFocus);
+            // 
+            // lblSwipe
+            // 
+            this.lblSwipe.AutoSize = true;
+            this.lblSwipe.BackColor = System.Drawing.SystemColors.Control;
+            this.lblSwipe.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSwipe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblSwipe.Location = new System.Drawing.Point(65, 403);
+            this.lblSwipe.Name = "lblSwipe";
+            this.lblSwipe.Size = new System.Drawing.Size(184, 25);
+            this.lblSwipe.TabIndex = 8;
+            this.lblSwipe.Text = "Swipe Card Now";
             // 
             // CheckOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 458);
+            this.Controls.Add(this.lblSwipe);
             this.Controls.Add(this.ccField);
             this.Controls.Add(this.radCredit);
             this.Controls.Add(this.radCash);
@@ -237,5 +252,6 @@
         private System.Windows.Forms.RadioButton radCash;
         private System.Windows.Forms.RadioButton radCredit;
         private System.Windows.Forms.TextBox ccField;
+        private System.Windows.Forms.Label lblSwipe;
     }
 }
