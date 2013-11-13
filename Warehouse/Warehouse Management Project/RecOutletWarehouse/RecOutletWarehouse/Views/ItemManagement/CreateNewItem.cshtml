@@ -35,7 +35,7 @@
                     <div class="editor-field">
                         @Html.EditorFor(model => model.VendorItemID)
                         @Html.ValidationMessageFor(model => model.VendorItemID)
-                        <a href="#">What's this?</a>
+                        <a href="#" title="This is the vendor's internal ID for this item.">What's this?</a>
                     </div>    
                 </td>
             </tr>
@@ -164,6 +164,14 @@
 
 }
 
+<!--"What's this?" Tooltip-->
+<script>
+    $(function() {
+        $(document).tooltip();
+    });
+</script>
+
+<!--Confirmation alerts follow-->
 <script>
     $(function () {
         $("#vendor").focus();
@@ -190,145 +198,146 @@
     }
 </script>
 
-    <script type="text/javascript">
-        var url = '@Url.RouteUrl("DefaultApi", 
-        new { httproute = "", controller = "VendorApi" })';
-        $('#vendor').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: url,
-                    data: { query: request.term },
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.VendorName,
-                                value: item.VendorId
-                            }
-                        }));
-                    }
-                })
-            },
-            select: function (event, ui) {
-                $('#vendor').val(ui.item.label);
-                $('#Id').val(ui.item.value);
-                return false;
-            },
-            minLength: 1
-        });
+<!--Autocomplete scripts follow-->
+<script type="text/javascript">
+    var url = '@Url.RouteUrl("DefaultApi", 
+    new { httproute = "", controller = "VendorApi" })';
+    $('#vendor').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.VendorName,
+                            value: item.VendorId
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#vendor').val(ui.item.label);
+            $('#Id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
 
-        var url2 = '@Url.RouteUrl("DefaultApi", 
-        new { httproute = "", controller = "ProductLineApi" })';
-        $('#productLine').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: url2,
-                    data: { query: request.term },
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.ProductLineName,
-                                value: item.ProductLineId
-                            }
-                        }));
-                    }
-                })
-            },
-            select: function (event, ui) {
-                $('#productLine').val(ui.item.label);
-                $('#Id').val(ui.item.value);
-                return false;
-            },
-            minLength: 1
-        });
+    var url2 = '@Url.RouteUrl("DefaultApi", 
+    new { httproute = "", controller = "ProductLineApi" })';
+    $('#productLine').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url2,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.ProductLineName,
+                            value: item.ProductLineId
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#productLine').val(ui.item.label);
+            $('#Id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
 
-        var url3 = '@Url.RouteUrl("DefaultApi", 
-        new { httproute = "", controller = "DepartmentApi" })';
-        $('#dept').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: url3,
-                    data: { query: request.term },
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.DepartmentName,
-                                value: item.DepartmentId
-                            }
-                        }));
-                    }
-                })
-            },
-            select: function (event, ui) {
-                $('#dept').val(ui.item.label);
-                $('#Id').val(ui.item.value);
-                return false;
-            },
-            minLength: 1
-        });
+    var url3 = '@Url.RouteUrl("DefaultApi", 
+    new { httproute = "", controller = "DepartmentApi" })';
+    $('#dept').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url3,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.DepartmentName,
+                            value: item.DepartmentId
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#dept').val(ui.item.label);
+            $('#Id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
 
-        var url4 = '@Url.RouteUrl("DefaultApi", 
-        new { httproute = "", controller = "CategoryApi" })';
-        $('#cat').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: url4,
-                    data: { query: request.term },
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.CategoryName,
-                                value: item.CategoryId
-                            }
-                        }));
-                    }
-                })
-            },
-            select: function (event, ui) {
-                $('#cat').val(ui.item.label);
-                $('#Id').val(ui.item.value);
-                return false;
-            },
-            minLength: 1
-        });
+    var url4 = '@Url.RouteUrl("DefaultApi", 
+    new { httproute = "", controller = "CategoryApi" })';
+    $('#cat').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url4,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.CategoryName,
+                            value: item.CategoryId
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#cat').val(ui.item.label);
+            $('#Id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
 
-        var url5 = '@Url.RouteUrl("DefaultApi", 
-        new { httproute = "", controller = "SubcategoryApi" })';
-        $('#subcat').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: url5,
-                    data: { query: request.term },
-                    dataType: 'json',
-                    type: 'GET',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item.SubcategoryName,
-                                value: item.SubcategoryId
-                            }
-                        }));
-                    }
-                })
-            },
-            select: function (event, ui) {
-                $('#subcat').val(ui.item.label);
-                $('#Id').val(ui.item.value);
-                return false;
-            },
-            minLength: 1
-        });
-    </script> 
+    var url5 = '@Url.RouteUrl("DefaultApi", 
+    new { httproute = "", controller = "SubcategoryApi" })';
+    $('#subcat').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url5,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.SubcategoryName,
+                            value: item.SubcategoryId
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#subcat').val(ui.item.label);
+            $('#Id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
+</script> 
 
+<!--Validation scripts-->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
  
 }
