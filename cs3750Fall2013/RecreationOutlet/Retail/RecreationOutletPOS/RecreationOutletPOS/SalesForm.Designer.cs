@@ -189,23 +189,25 @@
             // 
             // summaryTax
             // 
-            this.summaryTax.AutoSize = true;
             this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTax.Location = new System.Drawing.Point(192, 36);
+            this.summaryTax.Location = new System.Drawing.Point(94, 36);
             this.summaryTax.Name = "summaryTax";
-            this.summaryTax.Size = new System.Drawing.Size(55, 22);
+            this.summaryTax.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.summaryTax.Size = new System.Drawing.Size(153, 22);
             this.summaryTax.TabIndex = 5;
             this.summaryTax.Text = "$0.00";
+            this.summaryTax.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // summarySubTotal
             // 
-            this.summarySubTotal.AutoSize = true;
             this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summarySubTotal.Location = new System.Drawing.Point(192, 11);
+            this.summarySubTotal.Location = new System.Drawing.Point(90, 11);
             this.summarySubTotal.Name = "summarySubTotal";
-            this.summarySubTotal.Size = new System.Drawing.Size(55, 22);
+            this.summarySubTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.summarySubTotal.Size = new System.Drawing.Size(157, 22);
             this.summarySubTotal.TabIndex = 3;
             this.summarySubTotal.Text = "$0.00";
+            this.summarySubTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblSubtotal
             // 
@@ -219,13 +221,14 @@
             // 
             // summaryTotal
             // 
-            this.summaryTotal.AutoSize = true;
             this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTotal.Location = new System.Drawing.Point(192, 71);
+            this.summaryTotal.Location = new System.Drawing.Point(94, 71);
             this.summaryTotal.Name = "summaryTotal";
-            this.summaryTotal.Size = new System.Drawing.Size(55, 22);
+            this.summaryTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.summaryTotal.Size = new System.Drawing.Size(153, 22);
             this.summaryTotal.TabIndex = 4;
             this.summaryTotal.Text = "$0.00";
+            this.summaryTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lblTax
             // 

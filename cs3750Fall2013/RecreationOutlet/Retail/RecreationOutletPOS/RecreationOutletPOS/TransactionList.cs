@@ -17,6 +17,12 @@ namespace RecreationOutletPOS
     {
         public List<TransactionItem> transData = new List<TransactionItem>();
 
+        private double subtotal;
+        private double tax;
+        private double total;
+
+        private double taxRate = 0.065;
+
         // ADD ITEM
         // Attempts to add an item with the specified values, with ID being the key. If
         // it finds a match, it will increase the quantity. If not, it will add a new
@@ -49,13 +55,14 @@ namespace RecreationOutletPOS
                     newItem = new TransactionItem(id, name, price, quantity, discount);
                     if (newItem != null)
                         transData.Add(newItem);
+
+                    recalculate();
                 }
             }
             catch (Exception ex)
             {
             }
         }
-
 
         // DELETE ITEM
         // Attempts to delete an item at the specified list position,
@@ -75,12 +82,13 @@ namespace RecreationOutletPOS
                 }
                 else
                     transData.RemoveAt(pos);
+
+                recalculate();
             }
             catch (Exception ex)
             {
             }
         }
-
 
         // CLEAR DATA
         // Removes all data from the list.
@@ -89,12 +97,58 @@ namespace RecreationOutletPOS
             try
             {
                 transData.Clear();
+                recalculate();
             }
             catch (Exception ex)
             {
             }
         }
+
+        // RECALCULATE
+        // Removes all data from the list.
+        public void recalculate()
+        {
+            try
+            {
+                subtotal = 0.00;
+                tax = 0.00;
+                total = 0.00;
+
+                foreach (TransactionItem ti in transData)
+                {
+                    subtotal += ((ti.getPrice() - ti.getDiscount())) * ti.getQuantity();
+                }
+
+                tax = subtotal * taxRate;
+                total = subtotal + tax;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        // GET SUBTOTAL
+        // Retrieves the subtotal.
+        public double getSubtotal()
+        {
+            return subtotal;
+        }
+
+        // GET TAX
+        // Retrieves the tax.
+        public double getTax()
+        {
+            return tax;
+        }
+
+        // GET TOTAL
+        // Retrieves the total.
+        public double getTotal()
+        {
+            return total;
+        }
     }
+
 
 
     /// <summary>
