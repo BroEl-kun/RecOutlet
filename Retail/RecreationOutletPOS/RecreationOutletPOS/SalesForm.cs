@@ -30,7 +30,7 @@ namespace RecreationOutletPOS
             summaryTax.Text = "$0.00";
             summaryTotal.Text = "$0.00";
 
-            recalculate();
+            updateListView();
         }
 
 
@@ -62,54 +62,6 @@ namespace RecreationOutletPOS
         {
             tList.addItem(id, item, price, quantity, discount);
             updateListView();
-            recalculate();
-        }
-
-
-        /// <summary>
-        /// Programmer: Jaed Norberg
-        /// Last Updated: 10/27/2013  (by Michael Vuong)
-        /// 
-        /// Recalculates costs from the items in the listview.
-        /// This takes the values from the listview and places
-        /// the total in the summary labels.
-        /// 
-        /// Modified by Jaed Norberg on 10/20/2013
-        ///     - Changed listview operations to class operations
-        /// </summary>
-        private void recalculate()
-        {
-            Decimal itemCost = 0.0M;
-            Decimal taxRate = 0.0645M;
-            Decimal appliedTax = 0.0M;
-            Decimal itemTotalCost = 0.0M;
-
-            try
-            {
-                // Get the total value based on all items in the transaction
-                foreach (TransactionItem t in tList.transData)
-                {
-                    double costStr = t.getTotal();
-                    int qtyStr = t.getQuantity();
-                    itemCost += Convert.ToDecimal(costStr);
-                }
-
-                // Calculate tax
-                appliedTax = itemCost * taxRate;
-                itemTotalCost = itemCost + appliedTax;
-
-                itemCost = Decimal.Round(itemCost, 2);
-                appliedTax = Decimal.Round(appliedTax, 2);
-                itemTotalCost = Decimal.Round(itemTotalCost, 2);
-
-                // Set the label values
-                summarySubTotal.Text = "$" + itemCost.ToString();
-                summaryTax.Text = "$" + appliedTax.ToString();
-                summaryTotal.Text = "$" + itemTotalCost.ToString();
-            }
-            catch (Exception ex)
-            {
-            }
         }
 
 
@@ -135,6 +87,10 @@ namespace RecreationOutletPOS
                     lvi.SubItems.Add("$" + t.getTotal());
                     lsvCheckOutItems.Items.Add(lvi);
                 }
+
+                summarySubTotal.Text = String.Format("{0:C2}", tList.getSubtotal()) + "\n";
+                summaryTax.Text = String.Format("{0:C2}", tList.getTax()) + "\n";
+                summaryTotal.Text = String.Format("{0:C2}", tList.getTotal()) + "\n";
             }
             catch (Exception ex)
             {
@@ -151,7 +107,6 @@ namespace RecreationOutletPOS
 
                 tList.deleteItem(currentItem, 1);
                 updateListView();
-                recalculate();
             }
         }
 
@@ -204,7 +159,6 @@ namespace RecreationOutletPOS
 
                     tList.transData.Clear();
 
-                    recalculate();
                     updateListView();
                 }
 
@@ -232,7 +186,6 @@ namespace RecreationOutletPOS
                     tList.clearData();
                 }
 
-                recalculate();
                 updateListView();
             }
         }
@@ -293,7 +246,6 @@ namespace RecreationOutletPOS
 
                         tList.deleteItem(currentItem, 1);
                         updateListView();
-                        recalculate();
                     }
                     break;
             }
@@ -328,6 +280,9 @@ namespace RecreationOutletPOS
                     if (tbItemQuantity.Text != "")
                         int.TryParse(tbItemQuantity.Text, out quantity);
 
+                    if (quantity < 1)
+                        quantity = 1;
+
                     if (ds.Tables["Results"].Rows.Count != 0)
                     {
                         foreach (DataRow row in ds.Tables["Results"].Rows)
@@ -341,6 +296,7 @@ namespace RecreationOutletPOS
                             double.TryParse(row["SellPrice"].ToString(), out price);
 
                             addItem(id, name, price, quantity, 0.00, price);
+                            tbItemQuantity.Text = "1";
                         }
                     }
                     else
