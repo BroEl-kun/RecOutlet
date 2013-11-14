@@ -77,6 +77,7 @@
     var url = '@Url.RouteUrl("DefaultApi", 
         new { httproute = "", controller = "VendorApi" })';
     $('#vendor').autocomplete({
+        autoFocus: true, //set autofocus to the first item in the list
         source: function (request, response) {
             $.ajax({
                 url: url,
