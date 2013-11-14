@@ -735,6 +735,44 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Gets the last (max) item number given to an item with the specified department, category, and subcategory.
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="dept">The department number of the item we're seeking</param>
+        /// <param name="cat">The category number of the item we're seeking</param>
+        /// <param name="subcat">The subcategory number of the item we're seeking</param>
+        /// <returns>An integer representing the item number of the "last" (max) item with the specified attributes</returns>
+        /// Changelog:
+        ///     Version 1.0 - 11-13-13 (T.M.)
+        ///         - Initial creation
+        public int GetLastItemForDeptCatSubcat(byte dept, byte cat, short subcat) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT MAX(ItemID) "
+                                        + "FROM ITEM "
+                                        + "WHERE DepartmentID = @DepartmentID "
+                                        + "AND CategoryID = @CategoryID "
+                                        + "AND SubcategoryID = @SubcategoryID";
+                    command.Parameters.AddWithValue("@DepartmentID", dept);
+                    command.Parameters.AddWithValue("@CategoryID", cat);
+                    command.Parameters.AddWithValue("@SubcategoryID", subcat);
+
+                    var maxItemId = command.ExecuteScalar();
+                    command.Parameters.Clear();
+
+                    if (maxItemId.ToString() == "")
+                        return 1;
+                    else
+                        return Convert.ToInt32(maxItemId);
+                }
+            }
+
+        }
+
         /**********************************************
          * ITEM DFS methods end
          **********************************************/
