@@ -31,13 +31,17 @@ namespace RecOutletWarehouse.Controllers
 
                 item.CreatedDate = DateTime.Now.Date;
                 item.CreatedBy = 1; //TODO: Associate with logged-in user
-                item.ItemId = 1; //TODO: Autogenerate
+                //item.ItemId = 1; //TODO: Autogenerate
+                
                 item.TaxRate = 5; //TODO: A lot of things :)
                 if (item.UPC == null)
                     item.UPC = 0; //TODO: Fix this
                 if (item.restrictedAge == null)
                     item.restrictedAge = 0; //TODO: Fix this
                 item = db.ConvertNamesToIDs(item);
+                item.ItemId = db.GetLastItemForDeptCatSubcat(Convert.ToByte(item.Department),
+                                                            Convert.ToByte(item.Category),
+                                                            Convert.ToInt16(item.Subcategory)) + 1;
                 item.RecRPC = WarehouseUtilities.GenerateRPC(item);
 
                 db.AddNewItem(item);
