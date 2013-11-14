@@ -23,6 +23,10 @@ namespace RecOutletWarehouse.Models
     /// -----------------------------------------------------------------------------------------------------------------------------
     public class DataFetcherSetter
     {
+        /********************************************************
+         * DFS methods regarding purchase orders and purchase
+         * order line items follow
+         ********************************************************/
         /// <summary>
         /// This method inserts a purchase order with the supplied attributes into the database.
         /// It should be accessed with a controller method.
@@ -158,6 +162,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Gets the last puchase order number (POID) for a given date
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="date">The date for which the PO was created</param>
+        /// <returns>An int representing the last purchase order</returns>
+        /// Changelog:
+        ///     Version 1.0 - 10-?-13 (T.M.)
+        ///         - Initial creation
         public int getLastPONumForDate(DateTime date) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -230,6 +243,19 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /********************************************************
+         * Puchase order and PO line item DFS methods end
+         ********************************************************/
+
+        /// <summary>
+        /// Gets the vendor ID for a specified vendor name
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="vendorName">The vendorName for which we need a vendorID</param>
+        /// <returns>A short representing the VendorID</returns>
+        /// Changelog:
+        ///     Version 1.0 - 11-5-13 (T.M.)
+        ///         - Initial creation
         public short GetVendorIdForVendorName(string vendorName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -265,6 +291,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Returns the vendor name for a specified vendor ID
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="VendorId">The vendor ID for which we need the vendor name</param>
+        /// <returns>A string representing the vendor name</returns>
+        /// Changelog
+        ///     Version 1.0 11-5-13 (T.M.)
+        ///         - Initial creation
         public string GetVendorNameForVendorId(short VendorId) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -382,6 +417,20 @@ namespace RecOutletWarehouse.Models
 
         }
 
+        /**********************************************
+         * DFS Methods regarding Ajax autocomplete
+         * fields follow
+         **********************************************/
+
+        /// <summary>
+        /// Populates a list of vendors containing a certain query string
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="vendorName">The query string to be checked</param>
+        /// <returns>A list of all vendors containing the query string</returns>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial creation
         public List<AddVendor.AddVendor> SearchVendorByName(string vendorName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -418,6 +467,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Populates a list of product lines containing a certain query string
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="plName">The query string to be checked</param>
+        /// <returns>A list of all product lines containing the query string</returns>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial creation
         public List<ProductLine> SearchProductLinesByName(string plName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -448,6 +506,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Populates a list of departments containing a certain query string
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="deptName">The query string to be checked</param>
+        /// <returns>A list of all departments containing the query string</returns>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial creation
         public List<Department> SearchDepartmentsByName(string deptName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -476,6 +543,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Populates a list of categories containing a certain query string
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="catName">The query string to be checked</param>
+        /// <returns>A list of all categories containing a certain query string</returns>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial creation
         public List<Category> SearchCategoriesByName(string catName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -504,6 +580,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Populates a list of subcategories containing a certain query string
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="subcatName">The query string to be checked</param>
+        /// <returns>A list of all subcategories containing the query string</returns>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial creation
         public List<SubCategory> SearchSubcategoriesByName(string subcatName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -533,9 +618,21 @@ namespace RecOutletWarehouse.Models
         }
 
         /***********************************************
-         * DFS Methods regarding the ITEM table follow
+         * Ajax autocomplete DFS methods end
          ***********************************************/
 
+        /***********************************************
+         * DFS methods regarding the ITEM table follow
+         ***********************************************/
+
+        /// <summary>
+        /// Adds a new item with the attributes of the specified instance of the item class to the database.
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="item">The instance of the Item model class attributes are retrieved from</param>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial creation
         public void AddNewItem(Item item) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -552,11 +649,11 @@ namespace RecOutletWarehouse.Models
 
                     command.Parameters.AddWithValue("@RecRPC", item.RecRPC);
                     command.Parameters.AddWithValue("@ItemUPC", item.UPC);
-                    command.Parameters.AddWithValue("@DepartmentID", 8); //CHANGE
-                    command.Parameters.AddWithValue("@CategoryID", 5); //CHANGE
+                    command.Parameters.AddWithValue("@DepartmentID", item.Department); 
+                    command.Parameters.AddWithValue("@CategoryID", item.Category); 
                     command.Parameters.AddWithValue("@ItemID", item.ItemId);
                     command.Parameters.AddWithValue("@VendorItemID", item.VendorItemID);
-                    command.Parameters.AddWithValue("@SubcategoryID", 6); //CHANGE
+                    command.Parameters.AddWithValue("@SubcategoryID", item.Subcategory); 
                     command.Parameters.AddWithValue("@ProductLineID", 2); //CHANGE
                     command.Parameters.AddWithValue("@Description", item.ItemDescription);
                     command.Parameters.AddWithValue("@SeasonCode", item.SeasonCode);
@@ -571,6 +668,69 @@ namespace RecOutletWarehouse.Models
                     command.ExecuteNonQuery();
 
                     command.Parameters.Clear();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Converts the Department, Category, and Subcategory fields into ID fields appropriate to their
+        /// respective database fields
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="item">The instance of the Item model class to be converted</param>
+        /// <returns>An instance of the Item class with converted Department, Category, and Subcategory fields</returns>
+        /// Changelog
+        ///     Version 1.0 - 11-13-2013 (T.M.)
+        ///         - Initial Creation
+        public Item ConvertNamesToIDs(Item item) {
+            Item convertedItem = item;
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT DISTINCT d.DepartmentID AS DeptID "
+                                        + "FROM ITEM_DEPARTMENT d, ITEM i "
+                                        + "WHERE d.DepartmentName = @DepartmentName";
+                    command.Parameters.AddWithValue("@DepartmentName", item.Department);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    convertedItem.Department = reader["DeptID"].ToString();
+                    if (reader.Read()) //check if there's more than one entry
+                        convertedItem.Department = "-1";
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    command.CommandText = "SELECT DISTINCT c.CategoryID AS CatID "
+                                        + "FROM ITEM_CATEGORY c, ITEM i "
+                                        + "WHERE c.CategoryName = @CatName";
+                    command.Parameters.AddWithValue("@CatName", item.Category);
+
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    convertedItem.Category = reader["CatID"].ToString();
+                    if (reader.Read()) //check if there's more than one entry
+                        convertedItem.Category = "-1";
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    command.CommandText = "SELECT DISTINCT c.SubcategoryID AS CatID "
+                                        + "FROM ITEM_SUBCATEGORY c, ITEM i "
+                                        + "WHERE c.SubcategoryName = @CatName";
+                    command.Parameters.AddWithValue("@CatName", item.Subcategory);
+
+                    reader = command.ExecuteReader();
+                    reader.Read();
+                    convertedItem.Subcategory = reader["CatID"].ToString();
+                    if (reader.Read()) //check if there's more than one entry
+                        convertedItem.Subcategory = "-1";
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+
+                    return convertedItem;
                 }
             }
         }

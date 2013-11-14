@@ -138,6 +138,7 @@
     <Compile Include="Models\ReceivingLog.cs" />
     <Compile Include="Models\Vendor\AddVendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\WarehouseUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
