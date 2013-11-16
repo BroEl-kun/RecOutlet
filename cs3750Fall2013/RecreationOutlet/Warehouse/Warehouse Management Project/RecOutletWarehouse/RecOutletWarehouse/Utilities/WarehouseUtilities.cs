@@ -38,7 +38,7 @@ namespace RecOutletWarehouse.Utilities {
         }
 
         public static void PrintRPC(long RPC) {
-            //TODO: Exception handling
+            //TODO: Exception handling (what happens if the printer is not connected?)
             ThermalLabel RPCLabel = new ThermalLabel(UnitType.Inch, 2, 2);
             RPCLabel.GapLength = 0.2;
 
