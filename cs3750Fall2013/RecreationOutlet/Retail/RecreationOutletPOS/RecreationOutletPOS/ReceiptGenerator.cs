@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Aliases for the Enum's inner classes
+using TransKey = RecreationOutletPOS.Enum.TransKey;
+using PaymentType = RecreationOutletPOS.Enum.PaymentType;
+
 namespace RecreationOutletPOS
 {
     /// <summary>
@@ -41,18 +45,6 @@ namespace RecreationOutletPOS
             Receipt = generateReceiptHeader();
             Receipt = generateReceiptBody(transaction.transactionDetails, Receipt);
             Receipt = generateReceiptFooter(Receipt);
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 11/11/2013
-        /// 
-        /// Returns the receipt that was generated when the class was created
-        /// </summary>
-        /// <returns>receipt generated when the class was created</returns>
-        public string getGeneratedReceipt()
-        {
-            return Receipt;
         }
 
         /// <summary>
@@ -148,7 +140,7 @@ namespace RecreationOutletPOS
         /// transaction (incuding items purchased)
         /// </summary>
         /// <returns>a receipt string with the body filled in</returns>
-        private string generateReceiptBody(Dictionary<string, string> transactionDetails, string receiptString)
+        private string generateReceiptBody(Dictionary<TransKey, string> transactionDetails, string receiptString)
         {
             try
             {
@@ -161,16 +153,16 @@ namespace RecreationOutletPOS
                 }
 
                 // IF paymenttype == credit or debit, execute
-                if (transactionDetails["PaymentType"] == "Credit" || transactionDetails["PaymentType"] == "Debit")
-                {
-                    receiptString = addCreditCardInfo(receiptString);
-                }
+                //if (transactionDetails[TransKey.PAYMENT_TYPE] == PaymentType.CREDIT.ToString() || transactionDetails["PaymentType"] == "Debit")
+                //{
+                //    receiptString = addCreditCardInfo(receiptString);
+                //}
 
                 receiptString += horizontal_line_single;
 
-                receiptString += "Subtotal: " + "\x9\x9" + transactionDetails["SummarySubtotal"] +"\n";
-                receiptString += "Taxes: " + "\x9\x9" + transactionDetails["SummaryTax"] + "\n";
-                receiptString += "Trans. Total: " + "\x9\x9" + transactionDetails["TransTotal"] +"\n";
+                receiptString += "Subtotal: " + "\x9\x9" + transactionDetails[TransKey.TRANS_SUBTOTAL] +"\n";
+                receiptString += "Taxes: " + "\x9\x9" + transactionDetails[TransKey.TRANS_TAX] + "\n";
+                receiptString += "Trans. Total: " + "\x9\x9" + transactionDetails[TransKey.TRANS_TOTAL] +"\n";
                 
                 //// IF paymenttype == cash, execute
                 ////receiptString += addTenderedCurrency(receiptString);
@@ -181,9 +173,9 @@ namespace RecreationOutletPOS
                 receiptString += horizontal_line_single;
 
                 receiptString = addCashier(receiptString);
-                receiptString += "POS: " + "\x9\x9" + transactionDetails["TerminalID"] +"\n";
-                receiptString += "Trans#: " + "\x9\x9" + transactionDetails["TransactionID"] +"\n";
-                receiptString += "Trans. Time: " + "\x9" + DateTime.Now + "\n";     
+                receiptString += "POS: " + "\x9\x9" + transactionDetails[TransKey.TERMINAL_ID] +"\n";
+                receiptString += "Trans#: " + "\x9\x9" + transactionDetails[TransKey.TRANSACTION_ID] +"\n";
+                receiptString += "Trans. Time: " + "\x9" + transactionDetails[TransKey.TRANS_DATE] + "\n";     
                 
                 receiptString += horizontal_line_single;
 
@@ -288,7 +280,7 @@ namespace RecreationOutletPOS
                 receiptString += "\nCard Type:" + "\x9\x9" + "<CARD_TYPE>" + "\n";
                 receiptString += "Credit Card: " + "\x9\x9" + "<CREDIT_CARD_NUM>" + "\n";
                 receiptString += "Authorization Code: " + "\x9\x9" + "<AUTHORIZATION_CODE>" + "\n";
-                receiptString += "Credit Card Total: " + "\x9\x9" + transaction.transactionDetails["SummaryTax"] + "\n";
+                //receiptString += "Credit Card Total: " + "\x9\x9" + transaction.transactionDetails[TransKey.CA] + "\n";
             }
 
             catch (Exception ex)

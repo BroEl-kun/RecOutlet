@@ -90,8 +90,8 @@ namespace RecreationOutletPOS
                         li.SubItems.Add(row["ProductLineID"].ToString());
                         li.SubItems.Add(row["SeasonCode"].ToString());
                         li.SubItems.Add(row["RestrictedAge"].ToString());
-                        li.SubItems.Add(row["CreatedBy"].ToString());
-                        li.SubItems.Add(row["CreatedDate"].ToString());
+                        //li.SubItems.Add(row["CreatedBy"].ToString());
+                        //li.SubItems.Add(row["CreatedDate"].ToString());
                         li.SubItems.Add(row["LegacyID"].ToString());
                         li.SubItems.Add(row["MSRP"].ToString());
 

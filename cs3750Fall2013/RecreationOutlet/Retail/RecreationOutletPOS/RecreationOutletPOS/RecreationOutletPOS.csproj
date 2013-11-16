@@ -59,6 +59,7 @@
     <Compile Include="CheckOutForm.Designer.cs">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enum.cs" />
     <Compile Include="HelperMethods.cs" />
     <Compile Include="InventoryForm.cs">
       <SubType>Form</SubType>
