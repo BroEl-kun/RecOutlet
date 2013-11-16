@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Aliases for the Enum's inner classes
+using TransKey = RecreationOutletPOS.Enum.TransKey;
+
 namespace RecreationOutletPOS
 {
     public partial class CheckOutForm : Form
     {
-        public Dictionary<string, string> transaction;
+        public Dictionary<TransKey, string> transaction;
         public TransactionList transItems;
         private int radChecked = 0;
         private String PAN;     //Primary Account Number
@@ -23,17 +26,18 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/27/2013
+        /// Last Updated: 11/16/2013
         /// 
         /// Constructor
         /// </summary>
         /// <param name="transaction">The new transaction details to display</param>
-        public CheckOutForm(Dictionary<string, string> transaction, TransactionList transItems)
+        public CheckOutForm(Dictionary<TransKey, string> transaction, TransactionList transItems)
         {
+            InitializeComponent();
+
             this.transaction = transaction;
             this.transItems = transItems;
 
-            InitializeComponent();
             ccField.Width = 0;
             lblSwipe.Visible = false;
             setCheckoutInfo(transaction);
@@ -46,13 +50,13 @@ namespace RecreationOutletPOS
         /// Sets the summary information from the sales screen to be re-displayed in the checkout screen 
         /// </summary>
         /// <param name="transaction">the dictionary to get the summary infor from the sales form screen</param>
-        private void setCheckoutInfo(Dictionary<string, string> transaction)
+        private void setCheckoutInfo(Dictionary<TransKey, string> transaction)
         {
             try
             {
-                summarySubTotal.Text = "$" + transaction["SummarySubtotal"];
-                summaryTax.Text = "$" + transaction["SummaryTax"];
-                summaryTotal.Text = "$" + transaction["TransTotal"];
+                summarySubTotal.Text = "$" + transaction[TransKey.TRANS_SUBTOTAL];
+                summaryTax.Text = "$" + transaction[TransKey.TRANS_TAX];
+                summaryTotal.Text = "$" + transaction[TransKey.TRANS_TOTAL];
             }
 
             catch (Exception ex)
@@ -63,24 +67,25 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/27/2013
+        /// Last Updated: 11/16/2013
         /// 
         /// Confirms the checkout and inserts a new transaction record into the database
         /// </summary>
         private void btnConfirmCheckOut_Click(object sender, EventArgs e)
         {
-            if (radChecked == 1)
-            {
-                //Cash Checkout
-            }
-            else
-            {
-                //Card Checkout
-                cardCheckout();
-            }
             try
-
             {
+                if (radChecked == 1)
+                {
+                    //Cash Checkout
+                }
+
+                else
+                {
+                    //Card Checkout
+                    cardCheckout();
+                }
+                
                 DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
@@ -90,8 +95,8 @@ namespace RecreationOutletPOS
 
                     ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction, transItems);
 
-                    //receiptGenerator.printReceiptToFile();
-                    receiptGenerator.printToPrinter();
+                    receiptGenerator.printReceiptToFile();
+                    //receiptGenerator.printToPrinter();
 
                     MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

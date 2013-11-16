@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Aliases for the Enum's inner classes
+using TransKey = RecreationOutletPOS.Enum.TransKey;
+
 namespace RecreationOutletPOS
 {
     /// <summary>
@@ -33,7 +36,7 @@ namespace RecreationOutletPOS
 
         public int rowsInserted;
 
-        public Dictionary<string, string> transactionDetails;
+        public Dictionary<TransKey, string> transactionDetails;
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -41,7 +44,7 @@ namespace RecreationOutletPOS
         /// 
         /// Constructor
         /// </summary>
-        public Transaction(Dictionary<string, string> transactionDetails)
+        public Transaction(Dictionary<TransKey, string> transactionDetails)
         {
             this.transactionDetails = transactionDetails;
 
@@ -55,18 +58,18 @@ namespace RecreationOutletPOS
         /// DONT USE FOR NOW - May be needed later however
         /// </summary>
         /// <param name="transactionDetails"></param>
-        public void initializeTransactionDetails(Dictionary<string, string> transactionDetails)
+        public void initializeTransactionDetails(Dictionary<TransKey, string> transactionDetails)
         {
             try
             {
-                Int32.TryParse(transactionDetails["TransactionID"], out transactionID);
-                Int32.TryParse(transactionDetails["StoreID"], out storeID);
-                Int32.TryParse(transactionDetails["EmployeeID"], out employeeID);
+                Int32.TryParse(transactionDetails[TransKey.TRANSACTION_ID], out transactionID);
+                Int32.TryParse(transactionDetails[TransKey.STORE_ID], out storeID);
+                Int32.TryParse(transactionDetails[TransKey.EMPLOYEE_ID], out employeeID);
 
                 transDate = DateTime.Now;
-                terminalID = transactionDetails["TerminalID"].ToString();
+                terminalID = transactionDetails[TransKey.TERMINAL_ID];
 
-                Decimal.TryParse(transactionDetails["TransTotal"], out transTotal);
+                Decimal.TryParse(transactionDetails[TransKey.TRANS_TOTAL], out transTotal);
             }
 
             catch(Exception ex)
@@ -82,7 +85,7 @@ namespace RecreationOutletPOS
         /// Inserts a new transaction into the STORE_TRANSACTION data table
         /// </summary>
         /// <returns>The result of performing the INSERT into the database</returns>
-        public int addTransactionToDb(Dictionary<string, string> transactionDetails)
+        public int addTransactionToDb(Dictionary<TransKey, string> transactionDetails)
         {
             string sql = "INSERT INTO STORE_TRANSACTION([StoreID], [EmployeeID], [TransactionDate], [TerminalID], [TransTotal], [TransTax], [ManagerID], [PaymentType], [PreviousTransactionID])" +
                          "VALUES(@StoreID, @EmployeeID, @TransDate, @TerminalID, @TransTotal, @TransTax, @ManagerID, @PaymentType, @PreviousTransactionID);";
@@ -99,15 +102,15 @@ namespace RecreationOutletPOS
                 cmd.Connection = conn;
 
                 //cmd.Parameters.AddWithValue("@TransactionID", transactionDetails["TransactionID"]);
-                cmd.Parameters.AddWithValue("@StoreID", transactionDetails["StoreID"]);
-                cmd.Parameters.AddWithValue("@EmployeeID", transactionDetails["EmployeeID"]);
-                cmd.Parameters.AddWithValue("@TransDate", transactionDetails["TransDate"]);
-                cmd.Parameters.AddWithValue("@TerminalID", transactionDetails["TerminalID"]);
-                cmd.Parameters.AddWithValue("@TransTotal", transactionDetails["TransTotal"]);
-                cmd.Parameters.AddWithValue("@TransTax", transactionDetails["TransTax"]);
-                cmd.Parameters.AddWithValue("@ManagerID", transactionDetails["ManagerID"]);
-                cmd.Parameters.AddWithValue("@PaymentType", transactionDetails["PaymentType"]);
-                cmd.Parameters.AddWithValue("@PreviousTransactionID", transactionDetails["PreviousTransactionID"]);
+                cmd.Parameters.AddWithValue("@StoreID", transactionDetails[TransKey.STORE_ID]);
+                cmd.Parameters.AddWithValue("@EmployeeID", transactionDetails[TransKey.EMPLOYEE_ID]);
+                cmd.Parameters.AddWithValue("@TransDate", transactionDetails[TransKey.TRANS_DATE]);
+                cmd.Parameters.AddWithValue("@TerminalID", transactionDetails[TransKey.TERMINAL_ID]);
+                cmd.Parameters.AddWithValue("@TransTotal", transactionDetails[TransKey.TRANS_TOTAL]);
+                cmd.Parameters.AddWithValue("@TransTax", transactionDetails[TransKey.TRANS_TAX]);
+                cmd.Parameters.AddWithValue("@ManagerID", transactionDetails[TransKey.MANAGER_ID]);
+                cmd.Parameters.AddWithValue("@PaymentType", transactionDetails[TransKey.PAYMENT_TYPE]);
+                cmd.Parameters.AddWithValue("@PreviousTransactionID", transactionDetails[TransKey.PREVIOUS_TRANS_ID]);
 
                 conn.Open();
 

@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Aliases for the Enum's inner classes
+using TransKey = RecreationOutletPOS.Enum.TransKey;
+
 namespace RecreationOutletPOS
 {
     public partial class SalesForm : Form
@@ -112,14 +115,15 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/27/2013
+        /// Last Updated: 11/16/2013
         /// 
         /// Processes the checkout, adds a transaction to the db and updates the inventory count
         /// </summary>
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
-            Dictionary<string, string> transaction = new Dictionary<string, string>();
+            Dictionary<TransKey, string> transaction = new Dictionary<TransKey, string>();
 
+            // NOTE- this harcoded code needs to be changed 
             int transactionID = 001;
             int storeID = 1;
             int employeeID = 123;
@@ -141,18 +145,17 @@ namespace RecreationOutletPOS
                 {
                     Decimal.TryParse(newTotalText, out transTotal);
 
-                    transaction.Add("TransactionID", transactionID.ToString());
-                    transaction.Add("StoreID", storeID.ToString());
-                    transaction.Add("EmployeeID", employeeID.ToString());
-                    transaction.Add("TransDate", transDate.ToString());
-                    transaction.Add("TerminalID", terminalID);
-                    transaction.Add("TransTotal", transTotal.ToString());
-                    transaction.Add("TransTax", transTax.ToString());
-                    transaction.Add("ManagerID", managerID.ToString());
-                    transaction.Add("PaymentType", paymentType);
-                    transaction.Add("PreviousTransactionID", previousTransactionID.ToString());
-                    transaction.Add("SummarySubtotal", subtotal);
-                    transaction.Add("SummaryTax", tax);
+                    transaction.Add(TransKey.TRANSACTION_ID, transactionID.ToString());
+                    transaction.Add(TransKey.STORE_ID, storeID.ToString());
+                    transaction.Add(TransKey.EMPLOYEE_ID, employeeID.ToString());
+                    transaction.Add(TransKey.TRANS_DATE, transDate.ToString());
+                    transaction.Add(TransKey.TERMINAL_ID, terminalID);
+                    transaction.Add(TransKey.TRANS_TOTAL, transTotal.ToString());
+                    transaction.Add(TransKey.TRANS_TAX, transTax.ToString());
+                    transaction.Add(TransKey.MANAGER_ID, managerID.ToString());
+                    transaction.Add(TransKey.PAYMENT_TYPE, paymentType);
+                    transaction.Add(TransKey.PREVIOUS_TRANS_ID, previousTransactionID.ToString());
+                    transaction.Add(TransKey.TRANS_SUBTOTAL, subtotal);
 
                     CheckOutForm checkOutForm = new CheckOutForm(transaction, tList);
                     checkOutForm.ShowDialog();
