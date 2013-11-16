@@ -20,7 +20,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/28/2013 
+        /// Last Updated: 11/16/2013 
         /// 
         /// Pulls the data from the database using a given "searchColumn" (which correlates to a column in the database)
         /// and searches that column for "searchCriteria" (the substring of interest we're looking for in that column)
@@ -40,14 +40,18 @@ namespace RecreationOutletPOS
 
             try
             {
-                cmd = new SqlCommand(sql, conn);
+                // Do not grab anything if the search criteria is null or white space
+                if (!string.IsNullOrWhiteSpace(searchCriteria))
+                {
+                    cmd = new SqlCommand(sql, conn);
 
-                conn.Open();
+                    conn.Open();
 
-                cmd.Parameters.AddWithValue("@searchCriteria", "%" + searchCriteria + "%");
+                    cmd.Parameters.AddWithValue("@searchCriteria", "%" + searchCriteria + "%");
 
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds.Tables[0]);
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(ds.Tables[0]);
+                }
             }
 
             catch (Exception ex)

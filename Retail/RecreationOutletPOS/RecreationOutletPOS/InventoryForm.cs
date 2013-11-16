@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
+
 namespace RecreationOutletPOS
 {
     public partial class InventoryForm : Form
@@ -80,20 +82,20 @@ namespace RecreationOutletPOS
                     {
                         ListViewItem li = new ListViewItem(row["ItemID"].ToString());
                         
-                        li.SubItems.Add(row["RecRPC"].ToString());
-                        li.SubItems.Add(row["ItemUPC"].ToString());
-                        li.SubItems.Add(row["Description"].ToString());
-                        li.SubItems.Add(row["SellPrice"].ToString());
-                        li.SubItems.Add(row["DepartmentID"].ToString());
-                        li.SubItems.Add(row["CategoryID"].ToString());
-                        li.SubItems.Add(row["TaxRateID"].ToString());
-                        li.SubItems.Add(row["ProductLineID"].ToString());
-                        li.SubItems.Add(row["SeasonCode"].ToString());
-                        li.SubItems.Add(row["RestrictedAge"].ToString());
-                        li.SubItems.Add(row["ItemCreatedBy"].ToString());
-                        li.SubItems.Add(row["ItemCreatedDate"].ToString());
-                        li.SubItems.Add(row["LegacyID"].ToString());
-                        li.SubItems.Add(row["MSRP"].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.REC_RPC.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.ITEM_UPC.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.DESCRIPTION.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.SELL_PRICE.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.DEPARTMENT_ID.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.CATEGORY_ID.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.TAX_RATE_ID.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.PRODUCT_LINE_ID.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.SEASON_CODE.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.RESTRICTED_AGE.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.ITEM_CREATED_BY.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.ITEM_CREATED_DATE.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.LEGACY_ID.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.MSRP.ToString()].ToString());
 
                         lsvCurrentInventory.Items.Add(li);
                     }

@@ -101,6 +101,56 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/16/2013
+        /// 
+        /// Represents the the ITEM table's and contains enums for each column
+        /// </summary>
+        public sealed class ItemTableColumn
+        {
+            private readonly String tableColumnName;
+
+            public static readonly ItemTableColumn REC_RPC = new ItemTableColumn("RecRPC");
+            public static readonly ItemTableColumn ITEM_UPC = new ItemTableColumn("ItemUPC");
+            public static readonly ItemTableColumn DESCRIPTION = new ItemTableColumn("Description");
+            public static readonly ItemTableColumn SELL_PRICE = new ItemTableColumn("SellPrice");
+            public static readonly ItemTableColumn DEPARTMENT_ID = new ItemTableColumn("DepartmentID");
+            public static readonly ItemTableColumn CATEGORY_ID = new ItemTableColumn("CategoryID");
+            public static readonly ItemTableColumn TAX_RATE_ID = new ItemTableColumn("TaxRateID");
+            public static readonly ItemTableColumn PRODUCT_LINE_ID = new ItemTableColumn("ProductLineID");
+            public static readonly ItemTableColumn SEASON_CODE = new ItemTableColumn("SeasonCode");
+            public static readonly ItemTableColumn RESTRICTED_AGE = new ItemTableColumn("RestrictedAge");
+            public static readonly ItemTableColumn ITEM_CREATED_BY = new ItemTableColumn("ItemCreatedBy");
+            public static readonly ItemTableColumn ITEM_CREATED_DATE = new ItemTableColumn("ItemCreatedDate");
+            public static readonly ItemTableColumn LEGACY_ID = new ItemTableColumn("LegacyID");
+            public static readonly ItemTableColumn MSRP = new ItemTableColumn("MSRP");
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/14/2013
+            /// 
+            /// Constructor
+            /// </summary>
+            /// <param name="tableColumnName"></param>
+            public ItemTableColumn(String tableColumnName)
+            {
+                this.tableColumnName = tableColumnName;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/14/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return tableColumnName;
+            }
+        }
+
 
     }
 }
