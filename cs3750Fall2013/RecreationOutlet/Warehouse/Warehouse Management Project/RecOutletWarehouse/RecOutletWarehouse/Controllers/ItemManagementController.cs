@@ -41,7 +41,6 @@ namespace RecOutletWarehouse.Controllers
                                                             Convert.ToByte(item.Category),
                                                             Convert.ToInt16(item.Subcategory)) + 1;
                 item.RecRPC = WarehouseUtilities.GenerateRPC(item);
-
                 db.AddNewItem(item);
                 
                 RedirectToAction("Index", "Home");
