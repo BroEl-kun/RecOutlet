@@ -69,7 +69,7 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    Double.TryParse(tbDiscountPrice.Text, out inPercent);
+                    Double.TryParse(tbDiscountPerc.Text, out inPercent);
                 }
                 catch (Exception ex)
                 {

@@ -20,26 +20,37 @@ namespace RecreationOutletPOS
         /// Constructor for the SalesForm calling this
         /// </summary>
         SalesForm salesForm;
+        int selectedItem;
         
-        public PriceOverideForm(SalesForm inForm)
+        public PriceOverideForm(SalesForm inForm, int selectedItem)
         {
              this.salesForm = inForm;
+             this.selectedItem = selectedItem;
 
              InitializeComponent();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void txtPriceOveride_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
             {
-                //SubItems[2].Text = "-$" + txtPriceOveride.Text;
-                //string inPrice = lvi.SubItems[2].Text;
-                //salesForm.overideItemPrice(inPrice);
+                double inPrice = 0.0;
+
+                try
+                {
+                    Double.TryParse(txtPriceOveride.Text, out inPrice);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+
+                salesForm.overideItemPrice(inPrice, selectedItem);
+                this.Close();
+            }
+            if (e.KeyChar == (char)Keys.Escape)
+            {
                 this.Close();
             }
         }
