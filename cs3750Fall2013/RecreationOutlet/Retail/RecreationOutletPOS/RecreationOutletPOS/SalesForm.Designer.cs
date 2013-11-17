@@ -264,6 +264,7 @@
             // 
             // btnCheckOut
             // 
+            this.btnCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnCheckOut.Location = new System.Drawing.Point(772, 457);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(137, 49);
@@ -274,6 +275,7 @@
             // 
             // btnClear
             // 
+            this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.btnClear.Location = new System.Drawing.Point(772, 399);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(137, 37);
@@ -321,21 +323,23 @@
             // 
             // btnDiscount
             // 
-            this.btnDiscount.Location = new System.Drawing.Point(772, 206);
+            this.btnDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnDiscount.Location = new System.Drawing.Point(775, 230);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(137, 50);
             this.btnDiscount.TabIndex = 32;
-            this.btnDiscount.Text = "Discount";
+            this.btnDiscount.Text = "Discount Override";
             this.btnDiscount.UseVisualStyleBackColor = true;
             this.btnDiscount.Click += new System.EventHandler(this.btnDiscount_Click);
             // 
             // btnPrice
             // 
-            this.btnPrice.Location = new System.Drawing.Point(772, 262);
+            this.btnPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnPrice.Location = new System.Drawing.Point(775, 287);
             this.btnPrice.Name = "btnPrice";
             this.btnPrice.Size = new System.Drawing.Size(137, 50);
             this.btnPrice.TabIndex = 33;
-            this.btnPrice.Text = "Change Price";
+            this.btnPrice.Text = "Price Override";
             this.btnPrice.UseVisualStyleBackColor = true;
             this.btnPrice.Click += new System.EventHandler(this.btnPrice_Click);
             // 
@@ -398,6 +402,8 @@
         private System.Windows.Forms.TextBox tbScanner;
         private System.Windows.Forms.TextBox tbItemQuantity;
         private System.Windows.Forms.Label lblQuantity;
+        private System.Windows.Forms.Button btnDiscount;
+        private System.Windows.Forms.Button btnPrice;
         //private System.Windows.Forms.Button btnDiscount;
         //private System.Windows.Forms.Button btnPrice;
     }

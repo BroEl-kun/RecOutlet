@@ -37,20 +37,11 @@ namespace RecreationOutletPOS
         }
 
 
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 10/11/2013 
-        /// 
-        /// Brings up a MODAL dialog to manually add an item from a select category list
-        /// </summary>
-        /// <param name="sender">the form component that called this method</param>
-        /// <param name="e">Associated events tied to the sender?</param>
-        private void btnAddItem_Click(object sender, EventArgs e)
-        {
-            AddItemForm addItemForm = new AddItemForm(this);
-            addItemForm.ShowDialog();
-        }
 
+        #region Functions
+        //----------------------------------------------------------
+        // Functions
+        //----------------------------------------------------------
         /// <summary>
         /// Programmer: Aaron Sorensen
         /// Last Updated: 10/12/2013 
@@ -84,10 +75,10 @@ namespace RecreationOutletPOS
                 {
                     ListViewItem lvi = new ListViewItem(t.getID().ToString());
                     lvi.SubItems.Add(t.getName());
-                    lvi.SubItems.Add("$" + t.getPrice());
+                    lvi.SubItems.Add("$" + t.getPrice().ToString());
                     lvi.SubItems.Add(t.getQuantity().ToString());
-                    lvi.SubItems.Add("-$" + t.getDiscount().ToString());
-                    lvi.SubItems.Add("$" + t.getTotal());
+                    lvi.SubItems.Add("- $" + t.getDiscount().ToString());
+                    lvi.SubItems.Add("$" + t.getTotal().ToString());
                     lsvCheckOutItems.Items.Add(lvi);
                 }
 
@@ -100,7 +91,86 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/16/2013
+        /// 
+        /// Applies the discount to the class and updates the listview.
+        /// 
+        /// Modified By: Jaed Norberg on 11/17/2013
+        /// -   Added functionality for percentage-based discounts.
+        /// </summary>
+        public void discountItem(int type, double inPrice, int selectedItem)
+        {
+            TransactionItem t = tList.transData[selectedItem];
 
+            try
+            {
+                if (type == 0)
+                {
+                    t.setDiscount(inPrice);
+                    t.updateTotal();
+                    tList.recalculate();
+                }
+                if (type == 1)
+                {
+                    t.setDiscount(t.getPrice() * inPrice);
+                    t.updateTotal();
+
+                }
+
+                tList.recalculate();
+                updateListView();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/16/2013
+        /// 
+        /// Applies the overidden price to the class and updates the listview.
+        /// </summary>
+        public void overideItemPrice(string inPrice)
+        {
+            TransactionItem t = new TransactionItem();
+
+            try
+            {
+                double price = Convert.ToDouble(inPrice);
+                t.setPrice(price);
+                tList.recalculate();
+            }
+            catch (Exception ex)
+            {
+            }
+            updateListView();
+
+        }
+        #endregion
+
+
+        #region Button Click Handling
+
+        //----------------------------------------------------------
+        // Button Click Handling
+        //----------------------------------------------------------
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/11/2013 
+        /// 
+        /// Brings up a MODAL dialog to manually add an item from a select category list
+        /// </summary>
+        /// <param name="sender">the form component that called this method</param>
+        /// <param name="e">Associated events tied to the sender?</param>
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            AddItemForm addItemForm = new AddItemForm(this);
+            addItemForm.ShowDialog();
+        }
 
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
@@ -136,9 +206,9 @@ namespace RecreationOutletPOS
             int previousTransactionID = 0;
 
             string subtotal = summarySubTotal.Text.Replace("$", string.Empty);
-            string tax = summaryTax.Text.Replace("$", string.Empty); 
+            string tax = summaryTax.Text.Replace("$", string.Empty);
             string newTotalText = summaryTotal.Text.Replace("$", string.Empty);
-            
+
             if (lsvCheckOutItems.Items.Count > 0)
             {
                 try
@@ -193,71 +263,60 @@ namespace RecreationOutletPOS
             }
         }
 
-
-        private void lsvCheckOutItems_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            //lsvCheckOutItems.ListViewItemSorter = new ListViewItemComparer(e.Column);
-            //lsvCheckOutItems.Sort();
-        }
-
-
         /// <summary>
-        /// Programmer: Michael Vuong, Aaron Sorensen
-        /// Last Updated: 10/27/2013
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/11/2013
         /// 
-        /// Opens up the Returns section of the POS
+        /// Opens up the form to manually add a discount.
         /// </summary>
-        private void btnReturns_Click(object sender, EventArgs e)
+        private void btnDiscount_Click(object sender, EventArgs e)
         {
-            rForm.Owner = this;
-            rForm.Size = this.Size;
-            this.Hide();
-            rForm.Show();
-            rForm.Location = this.Location;
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong, Aaron Sorensen
-        /// Last Updated: 10/27/2013
-        /// 
-        /// Opens up the Inventory section of the POS
-        /// </summary>
-        private void btnInventory_Click(object sender, EventArgs e)
-        {
-            iForm.Owner = this;
-            iForm.Size = this.Size;
-            this.Hide();
-            iForm.Show();
-            iForm.Location = this.Location;
-        }
-
-
-        private void btnReturns_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-        private void lsvCheckOutItems_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
             {
-                case Keys.Delete:
-                    if (lsvCheckOutItems.SelectedItems.Count > 0)
-                    {
-                        int currentItem = lsvCheckOutItems.SelectedIndices[0];
+                ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                DiscountForm discountForm = new DiscountForm(this, lsvCheckOutItems.SelectedItems[0].Index);
+                discountForm.ShowDialog();
+            }
 
-                        tList.deleteItem(currentItem, 1);
-                        updateListView();
-                    }
-                    break;
+            else
+            {
+                MessageBox.Show("Please select an item to add a discount for.", "Discount",
+                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+
+        }
+
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/14/2013
+        /// 
+        /// Opens up the form to manually change the price of an item.
+        /// </summary>
+        private void btnPrice_Click(object sender, EventArgs e)
+        {
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            {
+
+                ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                PriceOverideForm priceOverideForm = new PriceOverideForm(this);
+                priceOverideForm.ShowDialog();
+            }
+
+            else
+            {
+                MessageBox.Show("Please select an item to change a price for.", "Change Price",
+                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+        #endregion
 
+
+        #region Key Press Handling
 
         //----------------------------------------------------------
         // Key Press Handling
         //----------------------------------------------------------
+
         private void SalesForm_KeyPress(object sender, KeyPressEventArgs e)
         {
             
@@ -328,17 +387,56 @@ namespace RecreationOutletPOS
         {
             
         }
+        #endregion
 
 
+        #region Tab Handling
         //----------------------------------------------------------
-        // Tabs
+        // Tab Handling
         //----------------------------------------------------------
+
         private void btnSales_Click(object sender, EventArgs e)
         {
 
         }
 
         private void btnReports_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong, Aaron Sorensen
+        /// Last Updated: 10/27/2013
+        /// 
+        /// Opens up the Returns section of the POS
+        /// </summary>
+        private void btnReturns_Click(object sender, EventArgs e)
+        {
+            rForm.Owner = this;
+            rForm.Size = this.Size;
+            this.Hide();
+            rForm.Show();
+            rForm.Location = this.Location;
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong, Aaron Sorensen
+        /// Last Updated: 10/27/2013
+        /// 
+        /// Opens up the Inventory section of the POS
+        /// </summary>
+        private void btnInventory_Click(object sender, EventArgs e)
+        {
+            iForm.Owner = this;
+            iForm.Size = this.Size;
+            this.Hide();
+            iForm.Show();
+            iForm.Location = this.Location;
+        }
+
+
+        private void btnReturns_Click_1(object sender, EventArgs e)
         {
 
         }
@@ -360,98 +458,37 @@ namespace RecreationOutletPOS
             iForm.Show();
             iForm.Location = this.Location;
         }
-        /// <summary>
-        /// Programmer: Nate Maurer
-        /// Last Updated: 11/11/2013
-        /// 
-        /// Opens up the form to manually add a discount.
-        /// </summary>
-        /*private void btnDiscount_Click(object sender, EventArgs e)
+        #endregion
+
+
+        #region Listview Input
+        //----------------------------------------------------------
+        // Listview Input
+        //----------------------------------------------------------
+        private void lsvCheckOutItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            if (lsvCheckOutItems.SelectedItems.Count > 0)
-            {
-                ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
-                DiscountForm discountForm = new DiscountForm(this, lvi);
-                discountForm.ShowDialog();
-
-            }
-
-            else
-            {
-                MessageBox.Show("Please select an item to add a discount for.", "Discount",
-                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
-
-        }
-        /// <summary>
-        /// Programmer: Nate Maurer
-        /// Last Updated: 11/16/2013
-        /// 
-        /// Applies the discount to the class and updates the listview.
-        /// </summary>
-        public void discountItem(string inPrice)
-        {
-            TransactionItem t = new TransactionItem();
-            
-            try
-            {
-                double price = Convert.ToDouble(inPrice);
-                t.setDiscount(price);
-                tList.recalculate();
-            }
-            catch (Exception ex)
-            {
-            }
-            updateListView();
-
+            //lsvCheckOutItems.ListViewItemSorter = new ListViewItemComparer(e.Column);
+            //lsvCheckOutItems.Sort();
         }
 
-        /// <summary>
-        /// Programmer: Nate Maurer
-        /// Last Updated: 11/14/2013
-        /// 
-        /// Opens up the form to manually change the price of an item.
-        /// </summary>
-        private void btnPrice_Click(object sender, EventArgs e)
+        private void lsvCheckOutItems_KeyDown(object sender, KeyEventArgs e)
         {
-            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            switch (e.KeyCode)
             {
+                case Keys.Delete:
+                    if (lsvCheckOutItems.SelectedItems.Count > 0)
+                    {
+                        int currentItem = lsvCheckOutItems.SelectedIndices[0];
 
-                ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
-                PriceOverideForm priceOverideForm = new PriceOverideForm(this);
-                priceOverideForm.ShowDialog();
-
-            }
-
-            else
-            {
-                MessageBox.Show("Please select an item to change a price for.", "Change Price",
-                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        tList.deleteItem(currentItem, 1);
+                        updateListView();
+                    }
+                    break;
             }
         }
-        /// <summary>
-        /// Programmer: Nate Maurer
-        /// Last Updated: 11/16/2013
-        /// 
-        /// Applies the overidden price to the class and updates the listview.
-        /// </summary>
-        public void overideItemPrice(string inPrice)
-        {
-            TransactionItem t = new TransactionItem();
-
-            try
-            {
-                double price = Convert.ToDouble(inPrice);
-                t.setPrice(price);
-                tList.recalculate();
-            }
-            catch (Exception ex)
-            {
-            }
-            updateListView();
-
-        }
-    }*/
+        #endregion
+    }
+        
 
 
 

@@ -19,9 +19,12 @@ C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\Recreatio
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csprojResolveAssemblyReference.cache
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.AddItemForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.InventoryForm.resources
-C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.OLDSalesForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Properties.Resources.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.SalesForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csproj.GenerateResource.Cache
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.ReturnsForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.CheckOutForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.CheckOutForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.ReturnsForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DiscountForm.resources
+C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
