@@ -1,4 +1,4 @@
-﻿/*using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,20 +21,18 @@ namespace RecreationOutletPOS
         /// </summary>
         /// 
         SalesForm salesForm;
-        ListViewItem lvi;
+        int selectedItem;
 
-        public DiscountForm(SalesForm inForm, ListViewItem lvi)
+        public DiscountForm(SalesForm inForm, int selectedItem)
         {
             this.salesForm = inForm;
+            this.selectedItem = selectedItem;
 
             InitializeComponent();
-
-            this.lvi = lvi;
         }
 
         private void DiscountForm_Load(object sender, EventArgs e)
         {
-
             tbDiscountPrice.Focus();
         }
 
@@ -42,12 +40,50 @@ namespace RecreationOutletPOS
         {
             if (e.KeyChar == (char)Keys.Return)
             {
-                    lvi.SubItems[4].Text = "-$" + tbDiscountPrice.Text;
-                    string inPrice = lvi.SubItems[4].Text;
-                    salesForm.discountItem(inPrice);
-                    this.Close();
-            }
+                double inPrice = 0.0;
 
+                try
+                {
+                    Double.TryParse(tbDiscountPrice.Text, out inPrice);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Discount",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+
+                salesForm.discountItem(0, inPrice, selectedItem);
+                this.Close();
+            }
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
+            }
+        }
+
+        private void tbDiscountPerc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                double inPercent = 0.0;
+
+                try
+                {
+                    Double.TryParse(tbDiscountPrice.Text, out inPercent);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+
+                salesForm.discountItem(1, inPercent, selectedItem);
+                this.Close();
+            }
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
-}*/
+}

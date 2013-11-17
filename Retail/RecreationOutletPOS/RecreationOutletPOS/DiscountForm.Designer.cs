@@ -1,4 +1,4 @@
-﻿/*namespace RecreationOutletPOS
+﻿namespace RecreationOutletPOS
 {
     partial class DiscountForm
     {
@@ -32,6 +32,7 @@
             this.lblDiscPrice = new System.Windows.Forms.Label();
             this.tbDiscountPerc = new System.Windows.Forms.TextBox();
             this.lblDiscPerc = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tbDiscountPrice
@@ -57,7 +58,7 @@
             this.tbDiscountPerc.Name = "tbDiscountPerc";
             this.tbDiscountPerc.Size = new System.Drawing.Size(143, 20);
             this.tbDiscountPerc.TabIndex = 2;
-            this.tbDiscountPerc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDiscountPrice_KeyPress);
+            this.tbDiscountPerc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDiscountPerc_KeyPress);
             // 
             // lblDiscPerc
             // 
@@ -68,11 +69,23 @@
             this.lblDiscPerc.TabIndex = 3;
             this.lblDiscPerc.Text = "Discount Percentage:     %";
             // 
+            // lblDescription
+            // 
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(12, 9);
+            this.lblDescription.MaximumSize = new System.Drawing.Size(300, 0);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(282, 26);
+            this.lblDescription.TabIndex = 4;
+            this.lblDescription.Text = "Enter the discount as either a value or percentage. This is applied to individual" +
+    " items.";
+            // 
             // DiscountForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(297, 118);
+            this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblDiscPerc);
             this.Controls.Add(this.tbDiscountPerc);
             this.Controls.Add(this.lblDiscPrice);
@@ -91,5 +104,6 @@
         private System.Windows.Forms.Label lblDiscPrice;
         private System.Windows.Forms.TextBox tbDiscountPerc;
         private System.Windows.Forms.Label lblDiscPerc;
+        private System.Windows.Forms.Label lblDescription;
     }
-}*/
+}

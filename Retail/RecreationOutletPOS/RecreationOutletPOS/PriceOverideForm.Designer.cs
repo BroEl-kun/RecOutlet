@@ -1,4 +1,4 @@
-﻿/*namespace RecreationOutletPOS
+﻿namespace RecreationOutletPOS
 {
     partial class PriceOverideForm
     {
@@ -69,4 +69,4 @@
         private System.Windows.Forms.TextBox txtPriceOveride;
         private System.Windows.Forms.Label lblPrice;
     }
-}*/
+}

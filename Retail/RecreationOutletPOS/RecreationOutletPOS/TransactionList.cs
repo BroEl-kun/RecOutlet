@@ -176,7 +176,7 @@ namespace RecreationOutletPOS
             this.quantity = 0;
             this.discount = 0.00;
 
-            this.total = price - discount;
+            this.total = (price - discount);
         }
 
         public TransactionItem(int id, string name, double price, int quantity, double discount)
