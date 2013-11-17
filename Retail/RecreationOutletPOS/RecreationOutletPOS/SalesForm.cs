@@ -368,11 +368,90 @@ namespace RecreationOutletPOS
         /// </summary>
         /*private void btnDiscount_Click(object sender, EventArgs e)
         {
-            DiscountForm discountForm = new DiscountForm(this);
-            discountForm.ShowDialog();
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            {
+                ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                DiscountForm discountForm = new DiscountForm(this, lvi);
+                discountForm.ShowDialog();
+
+            }
+
+            else
+            {
+                MessageBox.Show("Please select an item to add a discount for.", "Discount",
+                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+
+        }
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/16/2013
+        /// 
+        /// Applies the discount to the class and updates the listview.
+        /// </summary>
+        public void discountItem(string inPrice)
+        {
+            TransactionItem t = new TransactionItem();
             
-        }*/
-    }
+            try
+            {
+                double price = Convert.ToDouble(inPrice);
+                t.setDiscount(price);
+                tList.recalculate();
+            }
+            catch (Exception ex)
+            {
+            }
+            updateListView();
+
+        }
+
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/14/2013
+        /// 
+        /// Opens up the form to manually change the price of an item.
+        /// </summary>
+        private void btnPrice_Click(object sender, EventArgs e)
+        {
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            {
+
+                ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                PriceOverideForm priceOverideForm = new PriceOverideForm(this);
+                priceOverideForm.ShowDialog();
+
+            }
+
+            else
+            {
+                MessageBox.Show("Please select an item to change a price for.", "Change Price",
+                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 11/16/2013
+        /// 
+        /// Applies the overidden price to the class and updates the listview.
+        /// </summary>
+        public void overideItemPrice(string inPrice)
+        {
+            TransactionItem t = new TransactionItem();
+
+            try
+            {
+                double price = Convert.ToDouble(inPrice);
+                t.setPrice(price);
+                tList.recalculate();
+            }
+            catch (Exception ex)
+            {
+            }
+            updateListView();
+
+        }
+    }*/
 
 
 

@@ -55,6 +55,7 @@
             this.tbItemQuantity = new System.Windows.Forms.TextBox();
             this.lblQuantity = new System.Windows.Forms.Label();
             this.btnDiscount = new System.Windows.Forms.Button();
+            this.btnPrice = new System.Windows.Forms.Button();
             this.pnlSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -284,7 +285,7 @@
             // btnDeleteItem
             // 
             this.btnDeleteItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(773, 306);
+            this.btnDeleteItem.Location = new System.Drawing.Point(772, 343);
             this.btnDeleteItem.Name = "btnDeleteItem";
             this.btnDeleteItem.Size = new System.Drawing.Size(137, 50);
             this.btnDeleteItem.TabIndex = 28;
@@ -326,12 +327,24 @@
             this.btnDiscount.TabIndex = 32;
             this.btnDiscount.Text = "Discount";
             this.btnDiscount.UseVisualStyleBackColor = true;
+            this.btnDiscount.Click += new System.EventHandler(this.btnDiscount_Click);
+            // 
+            // btnPrice
+            // 
+            this.btnPrice.Location = new System.Drawing.Point(772, 262);
+            this.btnPrice.Name = "btnPrice";
+            this.btnPrice.Size = new System.Drawing.Size(137, 50);
+            this.btnPrice.TabIndex = 33;
+            this.btnPrice.Text = "Change Price";
+            this.btnPrice.UseVisualStyleBackColor = true;
+            this.btnPrice.Click += new System.EventHandler(this.btnPrice_Click);
             // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.btnPrice);
             this.Controls.Add(this.btnDiscount);
             this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.tbItemQuantity);
@@ -385,6 +398,7 @@
         private System.Windows.Forms.TextBox tbScanner;
         private System.Windows.Forms.TextBox tbItemQuantity;
         private System.Windows.Forms.Label lblQuantity;
-        private System.Windows.Forms.Button btnDiscount;
+        //private System.Windows.Forms.Button btnDiscount;
+        //private System.Windows.Forms.Button btnPrice;
     }
 }
