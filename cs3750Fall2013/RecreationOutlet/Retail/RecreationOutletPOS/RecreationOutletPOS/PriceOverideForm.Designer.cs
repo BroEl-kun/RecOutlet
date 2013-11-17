@@ -34,17 +34,16 @@
             // 
             // txtPriceOveride
             // 
-            this.txtPriceOveride.Location = new System.Drawing.Point(64, 56);
+            this.txtPriceOveride.Location = new System.Drawing.Point(64, 75);
             this.txtPriceOveride.Name = "txtPriceOveride";
-            this.txtPriceOveride.Size = new System.Drawing.Size(100, 20);
+            this.txtPriceOveride.Size = new System.Drawing.Size(125, 20);
             this.txtPriceOveride.TabIndex = 0;
-            this.txtPriceOveride.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.txtPriceOveride.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPriceOveride_KeyPress);
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(12, 59);
+            this.lblPrice.Location = new System.Drawing.Point(12, 78);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(55, 13);
             this.lblPrice.TabIndex = 1;

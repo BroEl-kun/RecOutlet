@@ -114,9 +114,8 @@ namespace RecreationOutletPOS
                 }
                 if (type == 1)
                 {
-                    t.setDiscount(t.getPrice() * inPrice);
+                    t.setDiscount(t.getPrice() * (inPrice/100));
                     t.updateTotal();
-
                 }
 
                 tList.recalculate();
@@ -133,21 +132,20 @@ namespace RecreationOutletPOS
         /// 
         /// Applies the overidden price to the class and updates the listview.
         /// </summary>
-        public void overideItemPrice(string inPrice)
+        public void overideItemPrice(double inPrice, int selectedItem)
         {
-            TransactionItem t = new TransactionItem();
+            TransactionItem t = tList.transData[selectedItem];
 
             try
             {
-                double price = Convert.ToDouble(inPrice);
-                t.setPrice(price);
+                t.setPrice(inPrice);
+                t.updateTotal();
                 tList.recalculate();
+                updateListView();
             }
             catch (Exception ex)
             {
             }
-            updateListView();
-
         }
         #endregion
 
@@ -274,7 +272,7 @@ namespace RecreationOutletPOS
             if (lsvCheckOutItems.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
-                DiscountForm discountForm = new DiscountForm(this, lsvCheckOutItems.SelectedItems[0].Index);
+                DiscountForm discountForm = new DiscountForm(this, lvi.Index);
                 discountForm.ShowDialog();
             }
 
@@ -296,9 +294,8 @@ namespace RecreationOutletPOS
         {
             if (lsvCheckOutItems.SelectedItems.Count > 0)
             {
-
                 ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
-                PriceOverideForm priceOverideForm = new PriceOverideForm(this);
+                PriceOverideForm priceOverideForm = new PriceOverideForm(this, lvi.Index);
                 priceOverideForm.ShowDialog();
             }
 
