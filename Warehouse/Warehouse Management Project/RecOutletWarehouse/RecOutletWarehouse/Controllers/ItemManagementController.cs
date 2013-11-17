@@ -37,10 +37,11 @@ namespace RecOutletWarehouse.Controllers
                 if (item.restrictedAge == null)
                     item.restrictedAge = 0; //TODO: Fix this
                 item = db.ConvertNamesToIDs(item);
-                item.ItemId = db.GetLastItemForDeptCatSubcat(Convert.ToByte(item.Department),
+                item.ItemId = db.GetNextItemForDeptCatSubcat(Convert.ToByte(item.Department),
                                                             Convert.ToByte(item.Category),
-                                                            Convert.ToInt16(item.Subcategory)) + 1;
+                                                            Convert.ToInt16(item.Subcategory));
                 item.RecRPC = WarehouseUtilities.GenerateRPC(item);
+                //WarehouseUtilities.PrintRPCLabel(item); //testing purposes only
                 db.AddNewItem(item);
                 
                 RedirectToAction("Index", "Home");

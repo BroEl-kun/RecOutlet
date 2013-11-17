@@ -746,7 +746,7 @@ namespace RecOutletWarehouse.Models
         /// Changelog:
         ///     Version 1.0 - 11-13-13 (T.M.)
         ///         - Initial creation
-        public int GetLastItemForDeptCatSubcat(byte dept, byte cat, short subcat) {
+        public int GetNextItemForDeptCatSubcat(byte dept, byte cat, short subcat) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
 
@@ -765,9 +765,9 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.Clear();
 
                     if (maxItemId.ToString() == "")
-                        return 1;
+                        return 1; //first item in dept/cat/subcat combo; represents 000001
                     else
-                        return Convert.ToInt32(maxItemId);
+                        return (Convert.ToInt32(maxItemId) + 1); //return next item number
                 }
             }
 
