@@ -37,22 +37,31 @@ namespace RecOutletWarehouse.Utilities {
             return zebraPrinter;
         }
 
-        public static void PrintRPC(long RPC) {
+        public static void PrintRPCLabel(RecOutletWarehouse.Models.ItemManagement.Item item) {
             //TODO: Exception handling (what happens if the printer is not connected?)
             ThermalLabel RPCLabel = new ThermalLabel(UnitType.Inch, 2, 2);
             RPCLabel.GapLength = 0.2;
 
-            BarcodeItem RPCItem = new BarcodeItem(0.2, 1, 2, 1,
-                BarcodeSymbology.Codabar, RPC.ToString());
+            BarcodeItem RPCItem = new BarcodeItem(0.15, 1.35, 2, 1,
+                BarcodeSymbology.Codabar, item.RecRPC.ToString());
             RPCItem.AddChecksum = false;
             RPCItem.CodabarStartChar = CodabarStartStopChar.A;
             RPCItem.CodabarStopChar = CodabarStartStopChar.D;
             RPCItem.DisplayStartStopChar = false;
 
-            RPCItem.BarHeight = .75;
+            RPCItem.BarHeight = .5;
             RPCItem.BarWidth = .0101;
+            RPCItem.Font.Size = 6; //must be less than 8 or digits will be left off RPC # at the bottom of label
+
+            //Add descriptive text
+            TextItem itemName = new TextItem(0.15, 1.2, 2, 1, item.ItemName);
+            itemName.Font.Name = Neodynamic.SDK.Printing.Font.NativePrinterFontB;
+            itemName.Font.Unit = FontUnit.Point;
+            itemName.Font.Size = 6;
+            
 
             RPCLabel.Items.Add(RPCItem);
+            RPCLabel.Items.Add(itemName);
 
             using (PrintJob pj = new PrintJob()) {
                 PrinterSettings lp2824 = new PrinterSettings();
