@@ -21,26 +21,31 @@ namespace RecreationOutletPOS
         /// </summary>
         /// 
         SalesForm salesForm;
-        TransactionItem d = new TransactionItem();
+        ListViewItem lvi;
 
-        public DiscountForm(SalesForm inForm)
+        public DiscountForm(SalesForm inForm, ListViewItem lvi)
         {
             this.salesForm = inForm;
 
             InitializeComponent();
+
+            this.lvi = lvi;
+        }
+
+        private void DiscountForm_Load(object sender, EventArgs e)
+        {
+
+            tbDiscountPrice.Focus();
         }
 
         private void tbDiscountPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
-            try
+            if (e.KeyChar == (char)Keys.Return)
             {
-                string inPrice = tbDiscountPrice.Text;
-                double price = Convert.ToDouble(inPrice);
-
-                d.setDiscount(price);
-            }
-            catch(Exception ex)
-            {
+                    lvi.SubItems[4].Text = "-$" + tbDiscountPrice.Text;
+                    string inPrice = lvi.SubItems[4].Text;
+                    salesForm.discountItem(inPrice);
+                    this.Close();
             }
 
         }
