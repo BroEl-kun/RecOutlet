@@ -1,0 +1,44 @@
+﻿@model RecOutletWarehouse.Models.ItemManagement.LabelPrinting
+
+@{
+    ViewBag.Title = "PrintLabels";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Create New Item","CreateNewItem")</li>
+        <li class="active">@Html.ActionLink("Print Item Labels","PrintLabels")</li>
+    </ul>  
+}
+
+<h2>Print RPC or UPC Labels</h2>
+
+@using(Html.BeginForm()){
+    <fieldset>
+        <legend>Item information</legend>
+        <p>If you know the RPC or UPC number of the item, please enter it below:</p>
+        <table>
+            <tr>
+                <td>Item RPC: </td>
+                <td>@Html.TextBoxFor(item => item.RPC, new { @Value = ViewBag.RPC })</td>
+                <td>Item UPC: </td>
+                <td>@Html.TextBoxFor(item => item.UPC)</td>
+            </tr>
+        </table>
+        <hr />
+        <p>If you don't know the RPC/UPC, you can search for the item using the following fields:</p>
+        <table>
+            <tr>
+                <td>Item Name:</td>
+                <td>@Html.TextBoxFor(item => item.ItemName)</td>
+            </tr>
+        </table>
+
+        <p>Type of labels to print: @Html.RadioButtonFor(model => model.LabelType, "RPC") RPC @Html.RadioButtonFor(model => model.LabelType, "UPC") UPC</p>
+        <p>Number of labels to print: @Html.EditorFor(model => model.LabelQty) @Html.ValidationMessageFor(model => model.LabelQty)</p>
+
+        <input type="submit" value="Print Labels" onclick="submit()"/>
+    
+    </fieldset>
+}

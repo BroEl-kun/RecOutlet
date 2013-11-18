@@ -24,7 +24,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateNewItem(Item item) {
+        public ActionResult CreateNewItem(Item item, string labelRedirect = "") {
             DataFetcherSetter db = new DataFetcherSetter();
 
             if (ModelState.IsValid) {
@@ -41,13 +41,43 @@ namespace RecOutletWarehouse.Controllers
                                                             Convert.ToByte(item.Category),
                                                             Convert.ToInt16(item.Subcategory));
                 item.RecRPC = WarehouseUtilities.GenerateRPC(item);
-                //WarehouseUtilities.PrintRPCLabel(item); //testing purposes only
                 db.AddNewItem(item);
-                
-                RedirectToAction("Index", "Home");
+                if (labelRedirect == "Create Item and Print Labels") {
+                    return RedirectToAction("PrintLabels", new { id = item.RecRPC});
+                }
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View(item);
+        }
+
+        public ActionResult PrintLabels(long? id) {
+            ViewBag.RPC = id.ToString();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult PrintLabels(LabelPrinting labelModel) {
+            DataFetcherSetter db = new DataFetcherSetter();
+            Item tempItem = new Item();
+            if (!ModelState.IsValid) {
+                return View(labelModel);
+            }
+            if (labelModel.RPC != "") {
+                tempItem = db.GetItemForRPC(Convert.ToInt64(labelModel.RPC));
+            }
+            //TODO: add logic that will search for an item given a UPC or item info and NOT an RPC
+
+            if (labelModel.LabelType == "RPC") {
+                WarehouseUtilities.PrintRPCLabel(tempItem, labelModel.LabelQty);
+            }
+
+            if (labelModel.LabelType == "UPC") {
+                //TODO: print a UPC label given labelModel's information
+            }
+
+            return View();
         }
 
     }
