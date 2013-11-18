@@ -773,6 +773,15 @@ namespace RecOutletWarehouse.Models
 
         }
 
+        /// <summary>
+        /// Creates an Item object from the row in the database identified by the RPC parameter
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="RPC">The RPC of the item to be created</param>
+        /// <returns>An Item object with complete parameters</returns>
+        /// Changelog:
+        ///     Version 1.0 - 11-18-13 (T.M.)
+        ///         - Initial creation
         public Item GetItemForRPC(long RPC) {
             //TODO: allow this to accept UPCs too
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
