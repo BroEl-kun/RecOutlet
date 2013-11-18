@@ -6,6 +6,13 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Create New Item","CreateNewItem")</li>
+        <li>@Html.ActionLink("Print Item Labels","PrintLabels")</li>
+    </ul>  
+}
+
 <h2>Add a New Item to the Database</h2>
 
 @using (Html.BeginForm()) {
@@ -147,18 +154,19 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.RecRPC)
             @Html.ValidationMessageFor(model => model.RecRPC)
-        </div>*@
+        </div>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ItemId)
         </div>
         <div class="editor-field">
             @Html.ValidationMessageFor(model => model.ItemId)
-        </div>
+        </div>*@
     <!--End TODOS-->
     
         <p>
             <input type="submit" value="Create New Item" onclick="submit()"/>
+            <input type="submit" value="Create Item and Print Labels" name="labelRedirect" onclick="submit()" />
             <input type='button' value="Cancel" onclick="prompt()" />
         </p>
 

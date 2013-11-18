@@ -773,6 +773,49 @@ namespace RecOutletWarehouse.Models
 
         }
 
+        public Item GetItemForRPC(long RPC) {
+            //TODO: allow this to accept UPCs too
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * FROM ITEM WHERE RecRPC = @RecRPC";
+                        //NOTE: legacyID is not included in the INSERT
+
+                    command.Parameters.AddWithValue("@RecRPC", RPC);
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+
+                    Item searchResult = new Item {
+                        RecRPC = Convert.ToInt64(reader["RecRPC"]),
+                        UPC = Convert.ToInt64(reader["ItemUPC"]),
+                        ItemName = reader["Name"].ToString(),
+                        ItemDescription = reader["Description"].ToString(),
+                        VendorItemID = Convert.ToInt32(reader["VendorItemID"]),
+                        ProductLine = "Test", //FIX
+                        Category = reader["CategoryID"].ToString(),
+                        Department = reader["DepartmentID"].ToString(),
+                        Subcategory = reader["SubcategoryID"].ToString(),
+                        MSRP = Convert.ToDecimal(reader["MSRP"]),
+                        SellPrice = Convert.ToDecimal(reader["SellPrice"]),
+                        TaxRate = Convert.ToDecimal(reader["TaxRateID"]), //FIX
+                        restrictedAge = Convert.ToByte(reader["RestrictedAge"]),
+                        //legacyID needs to be added
+                        CreatedBy = Convert.ToInt16(reader["ItemCreatedBy"]),
+                        CreatedDate = Convert.ToDateTime(reader["ItemCreatedDate"])
+                    };
+
+                    if (reader.Read()) { //if there's more than one result
+                        return null;
+                    }
+                    else
+                        return searchResult;
+                }
+            }
+        }
+
         /**********************************************
          * ITEM DFS methods end
          **********************************************/

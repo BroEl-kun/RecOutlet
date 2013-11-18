@@ -37,7 +37,7 @@ namespace RecOutletWarehouse.Utilities {
             return zebraPrinter;
         }
 
-        public static void PrintRPCLabel(RecOutletWarehouse.Models.ItemManagement.Item item) {
+        public static void PrintRPCLabel(RecOutletWarehouse.Models.ItemManagement.Item item, int qty) {
             //TODO: Exception handling (what happens if the printer is not connected?)
             ThermalLabel RPCLabel = new ThermalLabel(UnitType.Inch, 2, 2);
             RPCLabel.GapLength = 0.2;
@@ -71,7 +71,7 @@ namespace RecOutletWarehouse.Utilities {
                 lp2824.PrinterName = SelectZebraPrinter();
 
                 pj.PrinterSettings = lp2824;
-                pj.Copies = 1;
+                pj.Copies = qty;
                 pj.Print(RPCLabel);
             }
         }
