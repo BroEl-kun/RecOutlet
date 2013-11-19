@@ -41,14 +41,16 @@ namespace RecOutletWarehouse.Models
         /// <param name="POFreightCost">The PO's Estimated Freight Cost</param>
         /// <param name="POTerms">The PO's Terms</param>
         /// <param name="POComments">Additional Comments</param>
-        /// <returns>A Boolean value that indicates whether the operation succeeded</returns>
         /// Changelog:
-        /// Version 1.0: 10-25-13 (T.M.)
-        /// - Initial Creation
-        /// Version 1.1: 10-31-13 (T.M.)
-        /// - Modified to return a boolean value indicating success or failure
-        /// - Added Validation
-        public Boolean NewPurchaseOrder(int POID, int vendorID, int POCreateBy, DateTime POOrderDate,
+        ///     Version 1.0: 10-25-13 (T.M.)
+        ///         - Initial Creation
+        ///     Version 1.1: 10-31-13 (T.M.)
+        ///         - Modified to return a boolean value indicating success or failure
+        ///         - Added Validation
+        ///     Version 1.2: 11-18-13 (T.M.)
+        ///         - No longer returns a boolean; just inserts into the database
+        ///         - Now handles and converts nulls
+        public void CreateNewPurchaseOrder(int POID, int vendorID, int POCreateBy, DateTime POOrderDate,
                                      DateTime POEstShipDate, decimal POFreightCost, string POTerms,
                                      string POComments) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
@@ -56,11 +58,6 @@ namespace RecOutletWarehouse.Models
 
                 using (SqlCommand command = new SqlCommand()) {
                     command.Connection = thisConnection;
-
-                    PurchaseOrder.PurchaseOrder PO = RetrievePObyPOID(POID);
-                    if (PO.PurchaseOrderId != null)
-                        return false;
-
 
                     command.CommandText = "EXEC dbo.CreatePurchaseOrder "
                                               + "@POID, @vendorID, @POCreateBy, @POOrderDate,"
@@ -71,15 +68,13 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.AddWithValue("@POOrderDate", POOrderDate);
                     command.Parameters.AddWithValue("@POEstShipDate", POEstShipDate);
                     command.Parameters.AddWithValue("@POFreightCost", POFreightCost);
-                    command.Parameters.AddWithValue("@POTerms", POTerms);
-                    command.Parameters.AddWithValue("@POComments", POComments);
+                    command.Parameters.AddWithValue("@POTerms", CheckForDbNull(POTerms));
+                    command.Parameters.AddWithValue("@POComments", CheckForDbNull(POComments));
                     //TODO: Associate the EmployeeID
 
                     command.ExecuteNonQuery();
 
                     command.Parameters.Clear();
-
-                    return true;
 
                 }//.SqlComand
             }//.SqlConnection
