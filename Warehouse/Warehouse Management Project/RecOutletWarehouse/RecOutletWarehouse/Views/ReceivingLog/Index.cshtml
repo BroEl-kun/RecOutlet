@@ -6,10 +6,40 @@
 @*submitForms = function(){*@
 
 <script type ="text/javascript">
+
+    //$(function () {
+    //    $('form').submit(function () {
+    //        //if ($(this).valid()) {
+    //        //$.ajax
+
+    //        if (this.name == "orig") {
+    //            this.onsubmit();
+    //            this.submitForms();
+    //        }
+    //        else {
+    //            $.post
+    //                    ({
+    //                        url: this.action,
+    //                        type: this.method,
+    //                        data: $(this).serialize(),
+    //                        success: function (result) {
+    //                            //  $('#result').html(result);
+    //                            alert(result);
+    //                        }
+    //                    });
+    //            //}
+    //            alert("some");
+    //            return false;
+    //        }
+    //    });
+    //});
+    
 function submitForms(control) {
     //document.forms["form1"].submit();
     //document.forms["form2"].submit();
     
+    
+
     //var y = "RLform" + 0;
     //document.write(y);
     //document.write(document.forms[0].name);
@@ -21,11 +51,64 @@ function submitForms(control) {
 
     if (control < z) {
         //document.forms[control + ""].onsubmit(submitForms(control + 1));
-        document.forms[control + ""].submit();
-        //control++;
-        document.forms[control + ""].onsubmit(submitForms(control+1));
-    }
 
+        //document.forms[control + ""].submit();
+
+        //control++;
+        //document.forms[control + ""].onsubmit(submitForms(control+1),kill());
+        //submitForms(control + 1);
+
+        //document.forms[control + ""].submit();
+
+        //$(function () {
+        //    $(control + '').submit(function () {
+        //       // if ($(this).valid()) {
+        //        //$.ajax({
+        //        //$.post({
+        //        //        url: this.action,
+        //        //        type: this.method,
+        //        //        data: $(this).serialize(),
+        //        //        success: function (result) {
+        //        //            //  $('#result').html(result);
+                            
+        //        //        }
+        //        //    });
+        //        //}
+        //        alert("in");
+        //        return false;
+        //    });
+        //});
+
+       // //$(function () {
+       //     $('form').submit(function () {
+       //         //if ($(this).valid()) {
+       //         //$.ajax
+       //         $.post
+       //                 ({
+       //                     url: this.action,
+       //                     type: this.method,
+       //                     data: $(this).serialize(),
+       //                     success: function (result) {
+       //                         //  $('#result').html(result);
+       //                         alert(result);
+       //                     }
+       //                 });
+       //         //}
+       //         alert("some");
+       //         return false;
+       //     });
+       //// });
+
+        //document.forms[control + ""].onsubmit(submitForms(control + 1), kill());//, document.forms[control + ""].submit(kill()));
+
+        document.forms[control + ""].onsubmit(submitForms(control + 1));
+
+        document.forms[control + ""].submit();
+
+        //document.forms[control + ""].onsubmit("return false;");
+        //return false;
+    }
+    //alert("end");
     //document.write(document.getElementById[1 + ""].name);
     //document.write(document.forms[1].name);
     //document.forms["0"].submit();
@@ -42,6 +125,10 @@ function submitForms(control) {
     //    //document.getElementById(i + "").submit();
     //}
 
+}
+
+function kill() {
+    return false;
 }
 </script>
 
@@ -67,7 +154,7 @@ function submitForms(control) {
         </tr>
     </table>
 
-    @using (Html.BeginForm("findPO", "ReceivingLog"))
+    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "orig", id = "orig" } ))
     {
         <input type="text" id="po" name="po" />          
         <input type="submit" value="Begin RL" />
@@ -97,7 +184,7 @@ function submitForms(control) {
             //var cindex = Model.IndexOf(objItem);
             //Model.
             
-            using (Html.BeginForm("MarkedReceived", "ReceivingLog", new { name = count + "", id = count + "" }) )
+            using (Html.BeginForm("MarkedReceived", "ReceivingLog", FormMethod.Post, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
             {
             
             <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
@@ -147,6 +234,7 @@ function submitForms(control) {
     </table>
 
         <input type="button" value="Record Received" onclick="submitForms(1)" />
+ 
     //}
 }
 <br />
