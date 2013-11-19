@@ -257,6 +257,8 @@ namespace RecOutletWarehouse.Models
         /// Changelog:
         ///     Version 1.0 - 11-5-13 (T.M.)
         ///         - Initial creation
+        ///     Version 1.01 - 11-18-13 (T.M.)
+        ///         - Checks for and modifies nulls
         public short GetVendorIdForVendorName(string vendorName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -267,7 +269,7 @@ namespace RecOutletWarehouse.Models
                     command.CommandText = "SELECT VendorId "
                                         + "FROM VENDOR "
                                         + "WHERE VendorName = @vendor";
-                    command.Parameters.AddWithValue("@vendor", vendorName);
+                    command.Parameters.AddWithValue("@vendor", CheckForDbNull(vendorName));
 
                     List<string> results = new List<string>();
                     SqlDataReader reader = command.ExecuteReader();
@@ -649,8 +651,8 @@ namespace RecOutletWarehouse.Models
         /// Changelog
         ///     Version 1.0 - 11-13-2013 (T.M.)
         ///         - Initial creation
-        ///     Version 1.1 - 11/18/13( M.S)
-        ///         -Added legacyID
+        ///     Version 1.01 - 11-18-2013 (T.M.)
+        ///         - Now gets Product Line appropriately
         public void AddNewItem(Item item) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -667,12 +669,12 @@ namespace RecOutletWarehouse.Models
 
                     command.Parameters.AddWithValue("@RecRPC", item.RecRPC);
                     command.Parameters.AddWithValue("@ItemUPC", item.UPC);
-                    command.Parameters.AddWithValue("@DepartmentID", item.Department);
+                    command.Parameters.AddWithValue("@DepartmentID", item.Department); 
                     command.Parameters.AddWithValue("@CategoryID", item.Category); 
                     command.Parameters.AddWithValue("@ItemID", item.ItemId);
                     command.Parameters.AddWithValue("@VendorItemID", item.VendorItemID);
                     command.Parameters.AddWithValue("@SubcategoryID", item.Subcategory); 
-                    command.Parameters.AddWithValue("@ProductLineID", 2); //CHANGE
+                    command.Parameters.AddWithValue("@ProductLineID", item.ProductLine);
                     command.Parameters.AddWithValue("@Description", item.ItemDescription);
                     command.Parameters.AddWithValue("@SeasonCode", item.SeasonCode);
                     command.Parameters.AddWithValue("@MSRP", item.MSRP);
@@ -682,7 +684,6 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.AddWithValue("@ItemCreatedBy", item.CreatedBy);
                     command.Parameters.AddWithValue("@ItemCreatedDate", item.CreatedDate);
                     command.Parameters.AddWithValue("@ItemName", item.ItemName);
-                   // command.Parameters.AddWithValue("@LegacyID", item.Legacy); 
 
                     command.ExecuteNonQuery();
 
@@ -692,15 +693,18 @@ namespace RecOutletWarehouse.Models
         }
 
         /// <summary>
-        /// Converts the Department, Category, and Subcategory fields into ID fields appropriate to their
+        /// Converts the Vendor, Product Line, Department, Category, and Subcategory fields into ID fields appropriate to their
         /// respective database fields
         /// </summary>
         /// <author>Tyler M.</author>
         /// <param name="item">The instance of the Item model class to be converted</param>
-        /// <returns>An instance of the Item class with converted Department, Category, and Subcategory fields</returns>
+        /// <returns>An instance of the Item class with converted Vendor, Product Line, Department, Category, and Subcategory fields</returns>
         /// Changelog
         ///     Version 1.0 - 11-13-2013 (T.M.)
         ///         - Initial Creation
+        ///     Version 1.1 - 11-18-2013 (T.M.)
+        ///         - Converts Vendor and Product Line
+        ///         - Checks for and converts nulls
         public Item ConvertNamesToIDs(Item item) {
             Item convertedItem = item;
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
@@ -708,40 +712,101 @@ namespace RecOutletWarehouse.Models
 
                 using (SqlCommand command = new SqlCommand()) {
                     command.Connection = thisConnection;
+
+                    //Convert Vendor
+                    command.CommandText = "SELECT DISTINCT v.VendorID AS VendorID "
+                                        + "FROM VENDOR v, ITEM i "
+                                        + "WHERE v.VendorName = @VendorName";
+                    command.Parameters.AddWithValue("@VendorName", CheckForDbNull(item.Vendor));
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read()) { //check for any entries
+                        convertedItem.Vendor = reader["VendorID"].ToString();
+                    }
+                    else {
+                        convertedItem.Vendor = "0";
+                    }
+
+                    if (reader.Read()) //now, check if there's more than one entry
+                        convertedItem.Vendor = "-1";
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    //Convert Product Line
+                    command.CommandText = "SELECT DISTINCT pl.ProductLineID AS PLID "
+                                        + "FROM PRODUCT_LINE pl, ITEM i "
+                                        + "WHERE pl.ProductLineName = @plName "
+                                        + "AND pl.VendorID = @vendorID";
+                    command.Parameters.AddWithValue("@plName", CheckForDbNull(item.ProductLine));
+                    command.Parameters.AddWithValue("@vendorID", CheckForDbNull(item.Vendor)); //since this is after the vendor conversion,
+                                                                                               //we don't need to convert it again
+                    reader = command.ExecuteReader();
+                    if (reader.Read()) { //check for any entries
+                        convertedItem.ProductLine = reader["PLID"].ToString();
+                    }
+                    else {
+                        convertedItem.ProductLine = "0";
+                    }
+
+                    if (reader.Read()) //now, check if there's more than one entry
+                        convertedItem.ProductLine = "-1";
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    //Convert Department
                     command.CommandText = "SELECT DISTINCT d.DepartmentID AS DeptID "
                                         + "FROM ITEM_DEPARTMENT d, ITEM i "
                                         + "WHERE d.DepartmentName = @DepartmentName";
-                    command.Parameters.AddWithValue("@DepartmentName", item.Department);
+                    command.Parameters.AddWithValue("@DepartmentName", CheckForDbNull(item.Department));
 
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    convertedItem.Department = reader["DeptID"].ToString();
-                    if (reader.Read()) //check if there's more than one entry
+                    reader = command.ExecuteReader();
+                    if (reader.Read()) { //check for any entries
+                        convertedItem.Department = reader["DeptID"].ToString();
+                    }
+                    else {
+                        convertedItem.Department = "0";
+                    }
+
+                    if (reader.Read()) //now, check if there's more than one entry
                         convertedItem.Department = "-1";
                     reader.Dispose();
                     command.Parameters.Clear();
 
+                    //Convert Category
                     command.CommandText = "SELECT DISTINCT c.CategoryID AS CatID "
                                         + "FROM ITEM_CATEGORY c, ITEM i "
                                         + "WHERE c.CategoryName = @CatName";
-                    command.Parameters.AddWithValue("@CatName", item.Category);
+                    command.Parameters.AddWithValue("@CatName", CheckForDbNull(item.Category));
 
                     reader = command.ExecuteReader();
-                    reader.Read();
-                    convertedItem.Category = reader["CatID"].ToString();
+
+                    if (reader.Read()) { //check for any entries
+                        convertedItem.Category = reader["CatID"].ToString();
+                    }
+                    else {
+                        convertedItem.Category = "0";
+                    }
+
                     if (reader.Read()) //check if there's more than one entry
                         convertedItem.Category = "-1";
                     reader.Dispose();
                     command.Parameters.Clear();
 
-                    command.CommandText = "SELECT DISTINCT c.SubcategoryID AS CatID "
+                    //Convert Subcategory
+                    command.CommandText = "SELECT DISTINCT c.SubcategoryID AS SubcatID "
                                         + "FROM ITEM_SUBCATEGORY c, ITEM i "
                                         + "WHERE c.SubcategoryName = @CatName";
-                    command.Parameters.AddWithValue("@CatName", item.Subcategory);
+                    command.Parameters.AddWithValue("@CatName", CheckForDbNull(item.Subcategory));
 
                     reader = command.ExecuteReader();
-                    reader.Read();
-                    convertedItem.Subcategory = reader["CatID"].ToString();
+
+                    if (reader.Read()) { //check for any entries
+                        convertedItem.Subcategory = reader["SubcatID"].ToString();
+                    }
+                    else {
+                        convertedItem.Subcategory = "0";
+                    }
+
                     if (reader.Read()) //check if there's more than one entry
                         convertedItem.Subcategory = "-1";
 
@@ -820,7 +885,6 @@ namespace RecOutletWarehouse.Models
                         RecRPC = Convert.ToInt64(reader["RecRPC"]),
                         UPC = Convert.ToInt64(reader["ItemUPC"]),
                         ItemName = reader["Name"].ToString(),
-                        Legacy = Convert.ToInt16(reader["Legacy"]),
                         ItemDescription = reader["Description"].ToString(),
                         VendorItemID = Convert.ToInt32(reader["VendorItemID"]),
                         ProductLine = "Test", //FIX

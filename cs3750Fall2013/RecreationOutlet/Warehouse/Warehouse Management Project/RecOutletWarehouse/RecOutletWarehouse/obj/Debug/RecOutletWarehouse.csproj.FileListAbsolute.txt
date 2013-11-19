@@ -73,7 +73,6 @@ C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\S
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.xml
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.xml
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.WebPages.Razor.xml
-C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
 D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\RecOutletWarehouse.dll
@@ -139,3 +138,4 @@ D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWareh
 D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Antlr3.Runtime.pdb
 D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.xml
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\Neodynamic.SDK.ThermalLabel.dll
+C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
