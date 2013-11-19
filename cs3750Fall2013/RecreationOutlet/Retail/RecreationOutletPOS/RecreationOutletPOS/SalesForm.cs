@@ -231,7 +231,7 @@ namespace RecreationOutletPOS
                     CheckOutForm checkOutForm = new CheckOutForm(transaction, tList);
                     checkOutForm.ShowDialog();
 
-                    tList.transData.Clear();
+                    tList.clearData();
 
                     updateListView();
                 }
