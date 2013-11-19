@@ -160,6 +160,10 @@ input[type="checkbox"].input-validation-error {
     display: none;
 }
 
+.required {
+    color: red;
+}
+
 /* Styles to test new editor and display templates.
 ----------------------------------------------------------*/
 .loud-1 {

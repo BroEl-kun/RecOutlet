@@ -1,5 +1,5 @@
 ﻿using RecOutletWarehouse.Models;
-using RecOutletWarehouse.Models.AddVendor;
+using RecOutletWarehouse.Models.VendorManagement;
 using RecOutletWarehouse.Models.ItemManagement;
 using System;
 using System.Collections.Generic;
@@ -12,9 +12,9 @@ namespace RecOutletWarehouse.Controllers {
     public class VendorApiController : ApiController {
 
         [HttpGet]
-        public IEnumerable<AddVendor> GetVendors(string query = "") {
+        public IEnumerable<Vendor> GetVendors(string query = "") {
             DataFetcherSetter db = new DataFetcherSetter();
-            List<AddVendor> vendors = db.SearchVendorByName(query);
+            List<Vendor> vendors = db.SearchVendorByName(query);
             return vendors;
         }
     }

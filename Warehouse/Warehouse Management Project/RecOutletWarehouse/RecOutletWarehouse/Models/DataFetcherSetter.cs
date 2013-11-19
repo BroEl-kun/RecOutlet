@@ -7,6 +7,7 @@ using System.Web;
 using System.Configuration;
 using RecOutletWarehouse.Models.PurchaseOrder;
 using RecOutletWarehouse.Models.ItemManagement;
+using RecOutletWarehouse.Models.VendorManagement;
 
 namespace RecOutletWarehouse.Models
 {
@@ -383,8 +384,25 @@ namespace RecOutletWarehouse.Models
                 }//.SqlComand
             }//.SqlConnection
         }//.NewReceivingLog
-
-        public void AddNewVendor(int vendorId, string vendorName, string contactName, string contactPhone,
+        
+        /// <summary>
+        /// Adds a new vendor to the database
+        /// </summary>
+        /// <author>Mat S.</author>
+        /// <param name="vendorName">The name associated with the added vendor</param>
+        /// <param name="contactName">The vendor's contact's name</param>
+        /// <param name="contactPhone">The contact's primary phone number</param>
+        /// <param name="contactFax">The contact's fax number</param>
+        /// <param name="altPhone">The vendor's alternate phone number</param>
+        /// <param name="address">The vendor's address</param>
+        /// <param name="website">The vendor's website</param>
+        /// Changelog
+        ///     Version 1.0 - 11-2-13 (M.S.)
+        ///         - Initial creation
+        ///     Version 1.1 - 11-18-13
+        ///         - DbNull checking added
+        ///         - Removed VendorID requirement
+        public void AddNewVendor(string vendorName, string contactName, string contactPhone,
                                     string contactFax, string altPhone, string address, string website)
         {
 
@@ -395,18 +413,16 @@ namespace RecOutletWarehouse.Models
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = thisConnection;
-                    command.CommandText = "INSERT into VENDOR (@vendorId, @vendorName, @contactName, @contactPhone," +
-                        " @contactFax, @altPhone, @address, @website)";
+                    command.CommandText = "EXEC dbo.CreateVendor @vendorName, @contactName, @contactPhone, "
+                                        + "@contactFax, @altPhone, @address, @website";
 
-                    //TODO: not totally sure how vendorId get generated...
-                    command.Parameters.AddWithValue("@vendorId", vendorId);
                     command.Parameters.AddWithValue("@vendorName", vendorName);
-                    command.Parameters.AddWithValue("@contactName", contactName);
-                    command.Parameters.AddWithValue("@contactPhone", contactName);
-                    command.Parameters.AddWithValue("@contactFax", contactFax);
-                    command.Parameters.AddWithValue("@altPhone", altPhone);
+                    command.Parameters.AddWithValue("@contactName", CheckForDbNull(contactName));
+                    command.Parameters.AddWithValue("@contactPhone", contactPhone);
+                    command.Parameters.AddWithValue("@contactFax", CheckForDbNull(contactFax));
+                    command.Parameters.AddWithValue("@altPhone", CheckForDbNull(altPhone));
                     command.Parameters.AddWithValue("@address", address);
-                    command.Parameters.AddWithValue("@website", website);
+                    command.Parameters.AddWithValue("@website", CheckForDbNull(website));
 
                     command.ExecuteNonQuery();
 
@@ -431,12 +447,12 @@ namespace RecOutletWarehouse.Models
         /// Changelog
         ///     Version 1.0 - 11-13-2013 (T.M.)
         ///         - Initial creation
-        public List<AddVendor.AddVendor> SearchVendorByName(string vendorName) {
+        public List<Vendor> SearchVendorByName(string vendorName) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
 
                 using (SqlCommand command = new SqlCommand()) {
-                    List<AddVendor.AddVendor> vendorList = new List<AddVendor.AddVendor>();
+                    List<Vendor> vendorList = new List<Vendor>();
                     command.Connection = thisConnection;
                     command.CommandText = "SELECT * "
                                         + "FROM VENDOR "
@@ -445,7 +461,7 @@ namespace RecOutletWarehouse.Models
                     SqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read()) {
-                        vendorList.Add(new AddVendor.AddVendor{
+                        vendorList.Add(new Vendor{
                             VendorId = Convert.ToInt32(reader["VendorId"]),
                             VendorName = reader["VendorName"].ToString(),
                             ContactName = reader["ContactName"].ToString(),
@@ -828,5 +844,32 @@ namespace RecOutletWarehouse.Models
         /**********************************************
          * ITEM DFS methods end
          **********************************************/
+
+        /**********************************************
+         * DataFetcherSetter utility methods follow
+         * (Keep this section at the end of the document)
+         * ********************************************/
+        /// <summary>
+        /// Checks an object to see if its value is null, and, if it is, converts
+        /// the null to a DbNull (a database-friendly null format)
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="value">The object we're checking for "nullness"</param>
+        /// <returns>If "value" is null, returns DbNull.
+        /// If "value" is not null, it returns "value"</returns>
+        /// Changelog
+        ///     Version 1.0 (T.M.)
+        ///         - Initial creation
+        public static object CheckForDbNull(object value) {
+            if (value == null) {
+                return DBNull.Value; //convert nulls to DBNulls
+            }
+
+            return value;
+        }
+
+        /**********************************************
+         * DataFetcherSetter utility methods end
+         * ********************************************/
     }
 }
