@@ -22,28 +22,46 @@
             </td>
         </tr>
         <tr>
-            <td>Vendor ID:</td>
-            <td>@Html.TextBoxFor(model => model.PO.Vendor, new { @id = "vendor" })</td>
+            <td>Vendor:</td>
+            <td>
+                @Html.TextBoxFor(model => model.PO.Vendor, new { @id = "vendor" })
+                @Html.ValidationMessageFor(model => model.PO.Vendor)
+            </td>
         </tr>
         <tr>
             <td>PO Order Date:</td>
-            <td>@Html.TextBox("PO.OrderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })</td>
+            <td>
+                @Html.TextBox("PO.OrderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+                @Html.ValidationMessageFor(model => model.PO.OrderDate)
+            </td>
         </tr>
         <tr>
             <td>PO Estimated Ship Date:</td>
-            <td>@Html.TextBox("PO.EstShipDate", DateTime.Now.AddDays(10).ToString("yyyy-MM-dd"), new{ type="date" })</td>
+            <td>
+                @Html.TextBox("PO.EstShipDate", DateTime.Now.AddDays(10).ToString("yyyy-MM-dd"), new{ type="date" })
+                @Html.ValidationMessageFor(model => model.PO.EstShipDate)
+            </td>
         </tr>
         <tr>
             <td>PO Estimated Freight Cost:</td>
-            <td>@Html.TextBoxFor(model => model.PO.FreightCost)</td>
+            <td>
+                @Html.TextBoxFor(model => model.PO.FreightCost)
+                @Html.ValidationMessageFor(model => model.PO.FreightCost)
+            </td>
         </tr>
         <tr>
             <td>PO Terms:</td>
-            <td>@Html.TextBoxFor(model => model.PO.Terms)</td>
+            <td>
+                @Html.TextBoxFor(model => model.PO.Terms)
+                @Html.ValidationMessageFor(model => model.PO.Terms)
+            </td>
         </tr>
         <tr>
             <td>Order Comments:</td>
-            <td>@Html.TextAreaFor(model => model.PO.Comments)</td>
+            <td>
+                @Html.TextAreaFor(model => model.PO.Comments)
+                @Html.ValidationMessageFor(model => model.PO.Comments)
+            </td>
         </tr>
     </table>
     <input type="submit" value="Create New PO" onclick="submit()"/>

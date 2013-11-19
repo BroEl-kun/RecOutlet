@@ -54,35 +54,35 @@ namespace RecOutletWarehouse.Controllers
         [HttpPost]
         public ActionResult CreateNewPO(PurchaseOrderCreationViewModel POVM) {
             DataFetcherSetter db = new DataFetcherSetter();
-            
+
             ViewBag.PO = POVM.PO.PurchaseOrderId;
 
+            //TODO: Move the character replacement logic to a
+            //tools class and enhance its functionality
             string POtoInt = POVM.PO.PurchaseOrderId;
             POtoInt = POtoInt.Replace("-", string.Empty);
 
-            int convertedPO = Convert.ToInt32(POtoInt);
+            int convertedPO = Convert.ToInt32(POtoInt);    
 
             //find the vendor ID for the provided vendor name
             short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.Vendor));
             
             //CUSTOM VALIDATION FOLLOWS
+            if (db.RetrievePObyPOID(Convert.ToInt64(convertedPO)).PurchaseOrderId != null){
+                ModelState.AddModelError("PO.PurchaseOrderId", "That PO Number already exists.");
+            }
             if (vendorId == 0) {
                 ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
             }
             else if (vendorId == -1) {
                 ModelState.AddModelError("PO.Vendor", "Please be more specific. TODO: better error message");
             }
-            else {
-                //if the vendorID is valid, check to see if the PO already exists
-                Boolean validPO = db.NewPurchaseOrder(convertedPO,
-                    vendorId, POVM.PO.CreatedBy,
-                    POVM.PO.OrderDate, POVM.PO.EstShipDate,
-                    POVM.PO.FreightCost, POVM.PO.Terms,
-                    POVM.PO.Comments); //TODO: Associate the employeeID with this
 
-                if (!validPO) {
-                    ModelState.AddModelError("PO.PurchaseOrderId", "That PO already exists.");
-                }
+            if (POVM.PO.OrderDate < DateTime.Now.Date) {
+                ModelState.AddModelError("PO.OrderDate", "That date has passed");
+            }
+            if (POVM.PO.EstShipDate < POVM.PO.OrderDate) {
+                ModelState.AddModelError("PO.EstShipDate", "The estimated ship date cannot occur before the order date");
             }
 
             //CUSTOM VALIDATION ENDS
@@ -91,9 +91,14 @@ namespace RecOutletWarehouse.Controllers
                 return View(POVM);
             }
             else {
-                
-                //TODO: Move the character replacement logic to a
-                //tools class and enhance its functionality
+            
+
+
+                db.CreateNewPurchaseOrder(convertedPO,
+                    vendorId, POVM.PO.CreatedBy,
+                    POVM.PO.OrderDate, POVM.PO.EstShipDate,
+                    POVM.PO.FreightCost, POVM.PO.Terms,
+                    POVM.PO.Comments); //TODO: Associate the employeeID with this
 
                 return RedirectToAction("AddPOLineItem", new { id = convertedPO });
             }
