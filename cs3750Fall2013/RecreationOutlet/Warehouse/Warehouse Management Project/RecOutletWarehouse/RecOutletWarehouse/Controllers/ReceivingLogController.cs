@@ -127,7 +127,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult findPO(string po)
+        public ActionResult findPO(string po)   //Validation. Also perhaps on success populate a box saying so upon return to index?
         //public void findPO(string po)
         {
             //need to find the PO from the db
@@ -164,7 +164,9 @@ namespace RecOutletWarehouse.Controllers
         //public void MarkedReceived(RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objItem, string ReceivedDate, ushort QtyReceived, string Notes)
        
             //public void MarkedReceived(RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objItem, string ReceivedDate, short QtyReceived, string Notes)
-        public void MarkedReceived(FormCollection form, string ReceivedDate, short QtyReceived, string Notes)
+        //public void MarkedReceived(FormCollection form, string ReceivedDate, short QtyReceived, string Notes)
+        //public void MarkedReceived(FormCollection form)
+        public ActionResult MarkedReceived(FormCollection form)
            // public ActionResult MarkedReceived(FormCollection form, string ReceivedDate, short QtyReceived, string Notes)
         
             //public void MarkedReceived(RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item, string ReceivedDate, short QtyReceived, string Notes)
@@ -182,6 +184,14 @@ namespace RecOutletWarehouse.Controllers
             //RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objItem = Model[cindex];
            // RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem itemName = objItem[cindex];
 
+            //Console.Out.WriteLine(form["count"].ToString());
+            //String test1 = form["count"].ToString();
+
+            for (int i = 1; i < Convert.ToInt16(form["count"].ToString()); i++) //count is already incremented 1 to many times
+            {
+                //Console.Out.WriteLine("attempting form " + i);
+                //String test2 = form["count"].ToString();
+
                 ReceivingLog RL = new ReceivingLog();
 
                 //NewReceivingLog(RL.ReceivingID,
@@ -189,32 +199,36 @@ namespace RecOutletWarehouse.Controllers
                 //    RL.QtyTypeID, RL.ReceiveDate,
                 //    RL.ReceivingNotes, RL.ReceivedQty);
 
-               // RL.POLineItemID = int.Parse(objItem.POLineItem.ToString());
+                // RL.POLineItemID = int.Parse(objItem.POLineItem.ToString());
                 //RL.POLineItemID = objItem.POLineItem;
                 //RL.POLineItemID = Convert.ToInt32(form.GetValue("POLineItem"));
-            //RL.POLineItemID = form.
+                //RL.POLineItemID = form.
                 //RL.POLineItemID = Convert.ToInt32(form.GetValue("POLineItem").ToString());
-                RL.POLineItemID = Convert.ToInt32(form["POLineItem"].ToString());
-                
-            //RL.POLineItemID = itemName.POLineItem;
+                //String test3 = form["POLineItem" + i].ToString();
+                RL.POLineItemID = Convert.ToInt32(form["POLineItem" + i].ToString());
+
+                //RL.POLineItemID = itemName.POLineItem;
                 //RL.BackorderID
 
-            //if(
+                //if(
 
                 //RL.QtyTypeID = objItem.QtyTypeId;
-            //RL.QtyTypeID = Convert.ToInt16(form.GetValue("QtyTypeID").ToString());
-                RL.QtyTypeID = Convert.ToInt16(form["QtyTypeID"].ToString());
+                //RL.QtyTypeID = Convert.ToInt16(form.GetValue("QtyTypeID").ToString());
+                RL.QtyTypeID = Convert.ToInt16(form["QtyTypeID" + i].ToString());
 
                 //RL.QtyTypeID = itemName.QtyTypeId;
-                RL.ReceiveDate = Convert.ToDateTime(ReceivedDate);
-                RL.ReceivingNotes = Notes;
-                RL.ReceivedQty = QtyReceived;   //sooo have to make sure they don't put in something funky
-                
-            //}
+                //RL.ReceiveDate = Convert.ToDateTime(ReceivedDate);
+                RL.ReceiveDate = Convert.ToDateTime(form["ReceivedDate" + i].ToString());
+                //RL.ReceivingNotes = Notes;
+                RL.ReceivingNotes = form["Notes" + i].ToString();
+                //RL.ReceivedQty = QtyReceived;   //sooo have to make sure they don't put in something funky
+                RL.ReceivedQty = Convert.ToInt16(form["QtyReceived" + i].ToString());
 
-            //return View("Index", RL);
-            //    return View("Index");
-            //return View("CreateNewRL", RL);
+                //}
+
+                //return View("Index", RL);
+                //    return View("Index");
+                //return View("CreateNewRL", RL);
 
                 DataFetcherSetter db = new DataFetcherSetter();
 
@@ -223,13 +237,15 @@ namespace RecOutletWarehouse.Controllers
                 //    RL.QtyTypeID, RL.ReceiveDate,
                 //    RL.ReceivingNotes, RL.ReceivedQty);
 
-            //Will need to handle backorder stuff
+                //Will need to handle backorder stuff
                 db.NewReceivingLog(//RL.ReceivingID,
-                    RL.POLineItemID, 
+                    RL.POLineItemID,
                     RL.QtyTypeID, RL.ReceiveDate,
                     RL.ReceivingNotes, RL.ReceivedQty);
 
-              //  return View("Index");
+            }
+
+              return View("Index");
         }
     }
 }
