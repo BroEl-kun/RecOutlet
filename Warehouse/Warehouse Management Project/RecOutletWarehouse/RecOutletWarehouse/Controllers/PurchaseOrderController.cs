@@ -39,22 +39,8 @@ namespace RecOutletWarehouse.Controllers
         public ActionResult CreateNewPO() {
             DataFetcherSetter db = new DataFetcherSetter();
             int nextPO = db.getLastPONumForDate(DateTime.Now.Date); 
-            string POforForm;
 
-            if (nextPO != 0) {
-                //format for displaying in the form
-                nextPO++; //increment the last number of the PO
-                POforForm = nextPO.ToString();
-                POforForm = POforForm.Insert(2, "-");
-                POforForm = POforForm.Insert(5, "-");
-                POforForm = POforForm.Insert(10, "-");
-                
-            }
-            else {
-                POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
-                POforForm = POforForm + "-01";
-            }
-            ViewBag.PO = POforForm;
+            ViewBag.PO = createPOForForm(nextPO);
 
             return View();
         }
@@ -68,6 +54,8 @@ namespace RecOutletWarehouse.Controllers
         [HttpPost]
         public ActionResult CreateNewPO(PurchaseOrderCreationViewModel POVM) {
             DataFetcherSetter db = new DataFetcherSetter();
+            
+            ViewBag.PO = POVM.PO.PurchaseOrderId;
 
             string POtoInt = POVM.PO.PurchaseOrderId;
             POtoInt = POtoInt.Replace("-", string.Empty);
@@ -76,7 +64,8 @@ namespace RecOutletWarehouse.Controllers
 
             //find the vendor ID for the provided vendor name
             short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.Vendor));
-
+            
+            //CUSTOM VALIDATION FOLLOWS
             if (vendorId == 0) {
                 ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
             }
@@ -95,6 +84,8 @@ namespace RecOutletWarehouse.Controllers
                     ModelState.AddModelError("PO.PurchaseOrderId", "That PO already exists.");
                 }
             }
+
+            //CUSTOM VALIDATION ENDS
 
             if (!ModelState.IsValid) {
                 return View(POVM);
@@ -187,6 +178,28 @@ namespace RecOutletWarehouse.Controllers
         }
 
 
+
+        //PURCHASE ORDER UTILITY METHODS FOLLOW
+
+        public static string createPOForForm(int PO) {
+            string POforForm;
+
+            if (PO != 0) {
+                //format for displaying in the form
+                PO++; //increment the last number of the PO
+                POforForm = PO.ToString();
+                POforForm = POforForm.Insert(2, "-");
+                POforForm = POforForm.Insert(5, "-");
+                POforForm = POforForm.Insert(10, "-");
+
+            }
+            else {
+                POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
+                POforForm = POforForm + "-01";
+            }
+
+            return POforForm;
+        }
 
     }
 }

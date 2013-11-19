@@ -23,21 +23,21 @@
         <legend>Vendor Information</legend>
         <table>
             <tr>
-                <td>Vendor Name:</td>
+                <td>Vendor Name<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Vendor, new { @id = "vendor" })
                         @Html.ValidationMessageFor(model => model.Vendor)
                     </div>
                 </td>
-                <td>Product Line:</td>
+                <td>Product Line<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.ProductLine, new { @id = "productLine" })
                         @Html.ValidationMessageFor(model => model.ProductLine)
                     </div>
                 </td>
-                <td>Vendor's Item #:</td>
+                <td>Vendor's Item #<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.VendorItemID)
@@ -53,14 +53,14 @@
         <legend>Item Information</legend>
         <table>
             <tr>
-                <td>Item UPC:</td>
+                <td>Item UPC</td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.UPC)
                         @Html.ValidationMessageFor(model => model.UPC)
                     </div>
                 </td>
-                <td>Item Name:</td>
+                <td>Item Name<strong class="required">*</strong></td>
                 <td >
                     <div class="editor-field">
                         @Html.EditorFor(model => model.ItemName)
@@ -78,28 +78,28 @@
             <tr>
                 <td colspan="6">
                     <div class="editor-field">
-                        Type a description for the item:<br />
+                        Type a description for the item<strong class="required">*</strong><br />
                         @Html.TextAreaFor(model => model.ItemDescription)
                         @Html.ValidationMessageFor(model => model.ItemDescription)
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>Department:</td>
+                <td>Department<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Department, new { @id = "dept" })
                         @Html.ValidationMessageFor(model => model.Department)
                     </div>
                 </td>
-                <td>Category:</td>
+                <td>Category<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Category, new { @id = "cat" })
                         @Html.ValidationMessageFor(model => model.Category)
                     </div>
                 </td>
-                <td>Sub-category:</td>
+                <td>Sub-category<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Subcategory, new { @id = "subcat" })
@@ -116,21 +116,21 @@
 
         <table>
             <tr>
-                <td>MSRP:</td>
+                <td>MSRP</td>
                 <td>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.MSRP)
                         @Html.ValidationMessageFor(model => model.MSRP)
                     </div>
                 </td>
-                <td>Regular Selling Price:</td>
+                <td>Regular Selling Price<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.SellPrice)
                         @Html.ValidationMessageFor(model => model.SellPrice)
                     </div>
                 </td>
-                <td>Restricted Age:</td>
+                <td>Restricted Age</td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.restrictedAge)
@@ -139,7 +139,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Seasonal Code:</td>
+                <td>Seasonal Code<strong class="required">*</strong></td>
                 <td colspan="5">
                     <div class="editor-field">
                         @Html.RadioButtonFor(model => model.SeasonCode, "All") All                      
