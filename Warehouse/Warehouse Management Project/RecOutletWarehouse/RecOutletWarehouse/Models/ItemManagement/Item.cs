@@ -24,6 +24,8 @@ namespace RecOutletWarehouse.Models.ItemManagement {
         [Required]
         public string ItemName { get; set; }
 
+        public short? Legacy { get; set; }
+
         [Required]
         public string ItemDescription { get; set; }
 
