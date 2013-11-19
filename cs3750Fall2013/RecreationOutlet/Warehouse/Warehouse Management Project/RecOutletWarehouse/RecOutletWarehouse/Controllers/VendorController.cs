@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RecOutletWarehouse.Models.AddVendor;
+using RecOutletWarehouse.Models.VendorManagement;
 using RecOutletWarehouse.Models;
 
 namespace RecOutletWarehouse.Controllers
@@ -23,7 +23,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddVendor(AddVendor vendor)
+        public ActionResult AddVendor(Vendor vendor)
         {
             if (!ModelState.IsValid)
             {
@@ -34,8 +34,7 @@ namespace RecOutletWarehouse.Controllers
             {
                 DataFetcherSetter db = new DataFetcherSetter();
 
-                db.AddNewVendor(vendor.VendorId,
-                    vendor.VendorName, vendor.ContactName,
+                db.AddNewVendor(vendor.VendorName, vendor.ContactName,
                     vendor.ContactPhone, vendor.ContactFax,
                     vendor.AltPhone, vendor.Address,
                     vendor.Website);

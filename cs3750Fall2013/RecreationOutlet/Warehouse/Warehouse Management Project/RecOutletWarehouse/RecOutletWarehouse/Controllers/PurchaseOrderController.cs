@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Models.PurchaseOrder;
-using RecOutletWarehouse.Models.AddVendor;
+using RecOutletWarehouse.Models.VendorManagement;
 
 namespace RecOutletWarehouse.Controllers
 {
