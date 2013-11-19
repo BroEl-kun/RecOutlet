@@ -185,7 +185,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/16/2013
+        /// Last Updated: 11/18/2013
         /// 
         /// Processes the checkout, adds a transaction to the db and updates the inventory count
         /// </summary>
@@ -195,16 +195,17 @@ namespace RecreationOutletPOS
 
             // NOTE- this harcoded code needs to be changed 
             int transactionID = 001;
+            string paymentType = "Cash";
+
+            // Needs to remain hardcoded for now
             int storeID = 1;
             int employeeID = 123;
-            DateTime transDate = DateTime.Now;
-            string terminalID = "t0";
-            Decimal transTotal;
-            Decimal transTax = 25;
             int managerID = 1;
-            string paymentType = "Cash";
             int previousTransactionID = 0;
+            string terminalID = "t0";
 
+            Decimal transTotal;
+            
             string subtotal = summarySubTotal.Text.Replace("$", string.Empty);
             string tax = summaryTax.Text.Replace("$", string.Empty);
             string newTotalText = summaryTotal.Text.Replace("$", string.Empty);
@@ -215,13 +216,13 @@ namespace RecreationOutletPOS
                 {
                     Decimal.TryParse(newTotalText, out transTotal);
 
-                    transaction.Add(TransKey.TRANSACTION_ID, transactionID.ToString());
+                    transaction.Add(TransKey.TRANS_ID, transactionID.ToString());
                     transaction.Add(TransKey.STORE_ID, storeID.ToString());
                     transaction.Add(TransKey.EMPLOYEE_ID, employeeID.ToString());
-                    transaction.Add(TransKey.TRANS_DATE, transDate.ToString());
+                    transaction.Add(TransKey.TRANS_DATE, DateTime.Now.ToString());
                     transaction.Add(TransKey.TERMINAL_ID, terminalID);
                     transaction.Add(TransKey.TRANS_TOTAL, transTotal.ToString());
-                    transaction.Add(TransKey.TRANS_TAX, transTax.ToString());
+                    transaction.Add(TransKey.TRANS_TAX, tax.ToString());
                     transaction.Add(TransKey.MANAGER_ID, managerID.ToString());
                     transaction.Add(TransKey.PAYMENT_TYPE, paymentType);
                     transaction.Add(TransKey.PREVIOUS_TRANS_ID, previousTransactionID.ToString());

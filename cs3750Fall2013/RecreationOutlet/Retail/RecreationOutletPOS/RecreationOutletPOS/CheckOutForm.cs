@@ -93,7 +93,7 @@ namespace RecreationOutletPOS
                 {
                     Transaction newTransaction = new Transaction(transaction);
 
-                    ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction, transItems);
+                    ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
 
                     receiptGenerator.printReceiptToFile();
                     //receiptGenerator.printToPrinter();
