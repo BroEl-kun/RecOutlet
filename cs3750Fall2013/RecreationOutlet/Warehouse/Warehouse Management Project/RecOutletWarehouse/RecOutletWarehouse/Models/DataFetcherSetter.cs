@@ -649,6 +649,8 @@ namespace RecOutletWarehouse.Models
         /// Changelog
         ///     Version 1.0 - 11-13-2013 (T.M.)
         ///         - Initial creation
+        ///     Version 1.1 - 11/18/13( M.S)
+        ///         -Added legacyID
         public void AddNewItem(Item item) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -665,7 +667,7 @@ namespace RecOutletWarehouse.Models
 
                     command.Parameters.AddWithValue("@RecRPC", item.RecRPC);
                     command.Parameters.AddWithValue("@ItemUPC", item.UPC);
-                    command.Parameters.AddWithValue("@DepartmentID", item.Department); 
+                    command.Parameters.AddWithValue("@DepartmentID", item.Department);
                     command.Parameters.AddWithValue("@CategoryID", item.Category); 
                     command.Parameters.AddWithValue("@ItemID", item.ItemId);
                     command.Parameters.AddWithValue("@VendorItemID", item.VendorItemID);
@@ -680,6 +682,7 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.AddWithValue("@ItemCreatedBy", item.CreatedBy);
                     command.Parameters.AddWithValue("@ItemCreatedDate", item.CreatedDate);
                     command.Parameters.AddWithValue("@ItemName", item.ItemName);
+                   // command.Parameters.AddWithValue("@LegacyID", item.Legacy); 
 
                     command.ExecuteNonQuery();
 
@@ -817,6 +820,7 @@ namespace RecOutletWarehouse.Models
                         RecRPC = Convert.ToInt64(reader["RecRPC"]),
                         UPC = Convert.ToInt64(reader["ItemUPC"]),
                         ItemName = reader["Name"].ToString(),
+                        Legacy = Convert.ToInt16(reader["Legacy"]),
                         ItemDescription = reader["Description"].ToString(),
                         VendorItemID = Convert.ToInt32(reader["VendorItemID"]),
                         ProductLine = "Test", //FIX
