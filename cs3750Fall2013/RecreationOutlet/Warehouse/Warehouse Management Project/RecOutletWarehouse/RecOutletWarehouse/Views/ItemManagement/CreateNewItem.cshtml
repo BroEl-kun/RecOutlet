@@ -61,10 +61,17 @@
                     </div>
                 </td>
                 <td>Item Name:</td>
-                <td colspan="3">
+                <td >
                     <div class="editor-field">
                         @Html.EditorFor(model => model.ItemName)
                         @Html.ValidationMessageFor(model => model.ItemName)
+                    </div>
+                </td>
+                 <td>Legacy Item ID:</td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Legacy)
+                        @Html.ValidationMessageFor(model => model.Legacy)
                     </div>
                 </td>
             </tr>
