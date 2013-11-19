@@ -165,6 +165,7 @@ namespace RecOutletWarehouse.Controllers
        
             //public void MarkedReceived(RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objItem, string ReceivedDate, short QtyReceived, string Notes)
         public void MarkedReceived(FormCollection form, string ReceivedDate, short QtyReceived, string Notes)
+           // public ActionResult MarkedReceived(FormCollection form, string ReceivedDate, short QtyReceived, string Notes)
         
             //public void MarkedReceived(RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item, string ReceivedDate, short QtyReceived, string Notes)
         //public void MarkedReceived(RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem itemName, string ReceivedDate, short QtyReceived, string Notes)
@@ -228,6 +229,7 @@ namespace RecOutletWarehouse.Controllers
                     RL.QtyTypeID, RL.ReceiveDate,
                     RL.ReceivingNotes, RL.ReceivedQty);
 
+              //  return View("Index");
         }
     }
 }
