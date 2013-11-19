@@ -23,17 +23,6 @@ namespace RecreationOutletPOS
                                  "Integrated Security=False;User ID=recreation;Password=outlet;Connect Timeout=15;" +
                                  "Encrypt=False;TrustServerCertificate=False";
 
-        private int transactionID;
-        private int storeID;
-        private int employeeID;
-        private DateTime transDate;
-        private string terminalID;
-        private Decimal transTotal;
-        private Decimal transTax;
-        private int managerID;
-        private string paymentType;
-        private int previousTransactionID;
-
         public int rowsInserted;
 
         public Dictionary<TransKey, string> transactionDetails;
@@ -49,33 +38,6 @@ namespace RecreationOutletPOS
             this.transactionDetails = transactionDetails;
 
             rowsInserted = addTransactionToDb(this.transactionDetails);
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 10/14/2013
-        /// 
-        /// DONT USE FOR NOW - May be needed later however
-        /// </summary>
-        /// <param name="transactionDetails"></param>
-        public void initializeTransactionDetails(Dictionary<TransKey, string> transactionDetails)
-        {
-            try
-            {
-                Int32.TryParse(transactionDetails[TransKey.TRANSACTION_ID], out transactionID);
-                Int32.TryParse(transactionDetails[TransKey.STORE_ID], out storeID);
-                Int32.TryParse(transactionDetails[TransKey.EMPLOYEE_ID], out employeeID);
-
-                transDate = DateTime.Now;
-                terminalID = transactionDetails[TransKey.TERMINAL_ID];
-
-                Decimal.TryParse(transactionDetails[TransKey.TRANS_TOTAL], out transTotal);
-            }
-
-            catch(Exception ex)
-            {
-
-            }
         }
 
         /// <summary>
