@@ -25,6 +25,8 @@ namespace RecreationOutletPOS
             rForm = new ReturnsForm(this);
             iForm = new InventoryForm(this);
             InitializeComponent();
+
+            this.KeyPreview = true;
         }
 
         public void SalesForm_Load(Object sender, EventArgs e)
@@ -314,9 +316,38 @@ namespace RecreationOutletPOS
         // Key Press Handling
         //----------------------------------------------------------
 
+
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 11/18/2013 
+        /// 
+        /// Intercepts all keypresses in order to determine which component
+        /// receives focus.
+        /// There are two potential implementations:
+        ///     - Check for specific key (an example being a digit or delimiting character)
+        ///     - Check against banned keys (an example being that the delete key is a hotkey for the listview, and shouldn't shift focus)
         private void SalesForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            // make a list of banned characters
+
+            /*char[] bannedChars = new char[]
+            {
+                (char)Keys.Delete
+            };
+
+            bool flag = true;
+
+            for (int i = 0; i < bannedChars.Length; i++)
+            {
+                if (e.KeyChar == bannedChars[i])
+                    flag = false;
+            }
+
+            if (flag)
+                tbScanner.Focus();*/
+
+            if (e.KeyChar == (Char)Keys.A)
+                tbScanner.Focus();
         }
 
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
@@ -333,7 +364,12 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    string ID = tbScanner.Text;
+                    // Barcodes using a CODABAR standard will have extra delimiting characters
+                    string newText = tbScanner.Text;
+                    newText = newText.Trim('A');
+                    newText = newText.Trim('D');
+
+                    string ID = newText;
                     ds = dt.retrieveItem(ID);
 
                     if (tbItemQuantity.Text != "")
