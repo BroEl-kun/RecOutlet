@@ -349,6 +349,15 @@ namespace RecreationOutletPOS
 
             if (e.KeyChar == (Char)Keys.A)
                 tbScanner.Focus();
+
+            if (e.KeyChar >= 48 && e.KeyChar <= 57)
+            {
+                if (!tbItemQuantity.Focused && !tbScanner.Focused)
+                {
+                    tbScanner.Text = e.KeyChar.ToString();
+                    tbScanner.Focus();
+                }
+            }
         }
 
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
