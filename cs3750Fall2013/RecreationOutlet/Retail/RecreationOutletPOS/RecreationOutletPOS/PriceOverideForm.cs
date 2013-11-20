@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+//using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -38,15 +39,27 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    Double.TryParse(txtPriceOveride.Text, out inPrice);
+                    /*if (Regex.IsMatch(txtPriceOveride.Text, @"[^a-z^A-Z^!^@^#^$^%^&^*^(^)^-^\-^+^\+^<^\<^>^:^/:^{^\{^}^\}^|^\|^?^\?^~^\~]"))
+                    {
+                        MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk); 
+                    }
+
+                    else
+                    {*/
+
+                        Double.TryParse(txtPriceOveride.Text, out inPrice);
+                        //salesForm.overideItemPrice(inPrice, selectedItem);
+                    //}
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);  //kept here for now for functionality sake
                 }
 
-                salesForm.overideItemPrice(inPrice, selectedItem);
+
+                salesForm.overideItemPrice(inPrice, selectedItem);  //kept here for now for functionality sake
                 this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
