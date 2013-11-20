@@ -430,6 +430,93 @@ namespace RecOutletWarehouse.Models
 
         }
 
+        public int AddNewProductLine(ProductLine pl) {
+            //validate passed attributes
+            int testNum;
+            bool isNum = int.TryParse(pl.Vendor, out testNum);
+            if (!isNum) {
+                return 1;
+            }
+            isNum = int.TryParse(pl.SalesRep, out testNum);
+            if (!isNum) {
+                return 1;
+            }
+
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "INSERT INTO PRODUCT_LINE (ProductLineName, VendorID, RepID) "
+                                        + "VALUES (@plName, @vendorID, @repID)";
+                    command.Parameters.AddWithValue("@plName", pl.ProductLineName);
+                    command.Parameters.AddWithValue("@vendorID", pl.Vendor);
+                    command.Parameters.AddWithValue("@repID", pl.SalesRep);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+
+                    return 0; //success; TODO: make return codes match up across methods
+                }
+            }
+        }
+
+        public ProductLine convertPLNameFieldsToIDs(ProductLine pl) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT DISTINCT v.VendorID "
+                                        + "FROM VENDOR v, PRODUCT_LINE p "
+                                        + "WHERE v.VendorName = @vendorName";
+                    //TODO: evaluate above for unnecessary join operation
+                    command.Parameters.AddWithValue("@vendorName", pl.Vendor);
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    ProductLine convertedPL = pl;
+
+                    if (reader.Read()) { //check for any entries
+                        convertedPL.Vendor = reader["VendorID"].ToString();
+                    }
+                    else {
+                        convertedPL.Vendor = "0";
+                    }
+
+                    if (reader.Read()) //now, check if there's more than one entry
+                        convertedPL.Vendor = "-1";
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    //convert repID
+
+                    command.CommandText = "SELECT DISTINCT RepID "
+                                        + "FROM SALES_REP "
+                                        + "WHERE SalesRepName = @repName";
+                    //TODO: evaluate above for unnecessary join operation
+                    command.Parameters.AddWithValue("@repName", pl.SalesRep);
+
+                    reader = command.ExecuteReader();
+
+                    if (reader.Read()) { //check for any entries
+                        convertedPL.SalesRep = reader["RepID"].ToString();
+                    }
+                    else {
+                        convertedPL.SalesRep = "0";
+                    }
+
+                    if (reader.Read()) //now, check if there's more than one entry
+                        convertedPL.SalesRep = "-1";
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return convertedPL;
+                }
+            }
+        }
+
         /**********************************************
          * DFS Methods regarding Ajax autocomplete
          * fields follow
@@ -506,8 +593,8 @@ namespace RecOutletWarehouse.Models
                         plList.Add(new ProductLine {
                             ProductLineID = Convert.ToInt32(reader["ProductLineID"]),
                             ProductLineName = reader["ProductLineName"].ToString(),
-                            VendorID = Convert.ToInt16(reader["VendorID"]),
-                            RepID = Convert.ToInt16(reader["RepID"])
+                            Vendor = reader["VendorID"].ToString(),
+                            SalesRep = reader["RepID"].ToString()
                         });
                     }
 

@@ -126,6 +126,13 @@ td {
 	        border-bottom: 0;
         }
 
+
+.no-list {
+    list-style: none;
+}
+    .no-list li {
+        display: inline;
+    }
 /*Errors and Validation
 ----------------------------------------------------------*/
 .error {

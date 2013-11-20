@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.ProductLine.ProductLine
+﻿@model RecOutletWarehouse.Controllers.VendorController.ProductLineSalesRepViewModel
 
 
 @{
@@ -6,24 +6,60 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $('.newrep').hide();
+        });
+
+        $("input:radio[name$='existingrep']").click(function () {
+            var $this = $(this);
+            if ($this.val() == "Yes") {
+                $('.existrep').show();
+                $('.newrep').hide();
+            } else {
+                $('.existrep').hide();
+                $('.newrep').show();
+            }
+        });
+    });
+</script>
+
 <h2>Create New Product Line</h2>
- <table>
-        <tr>
-            <td>Product Line ID:</td>                                           <!--generate? -->
-            <td>@Html.TextBoxFor(newPL => newPL.ProductLineID)</td>
-        </tr>
-        <tr>
-            <td>Product Line Name:</td>
-            <td>@Html.TextBoxFor(newPL => newPL.ProductLineName)</td>
-        </tr>
-        <tr>
-            <td>Vendor ID:</td>                                                 <!--will be autofilled if directed from vender page -->
-            <td>@Html.TextBoxFor(newPL => newPL.VendorID)</td>
-        </tr>
-        <tr>
-            <td>Sales Representative ID:</td>                                   <!--drop down box of repids -->
-            <td>@Html.TextBoxFor(newPL => newPL.RepID)</td>
-        </tr>
-       
-    </table>
+@using(Html.BeginForm()){
+    <fieldset>
+        <legend>Product line information</legend>
+        <ul class="no-list">
+            <li>
+                Vendor: @Html.TextBoxFor(newPL => newPL.productLine.Vendor)
+            </li>
+            <li>
+                Product Line Name: @Html.TextBoxFor(newPL => newPL.productLine.ProductLineName)
+            </li>
+        </ul>
+    </fieldset>
+    
+    <p>This is a representative we've used before: <input type="radio" name="existingrep" checked value="Yes"/>Yes <input type="radio" name="existingrep" value="No"/>No</p>
+
+    <fieldset class="existrep">
+        <legend>Find an existing rep</legend>
+        <ul class="no-list">
+            <li>Rep Name: @Html.TextBoxFor(newPL => newPL.productLine.SalesRep)</li>
+        </ul>
+    </fieldset>
+    
+    <fieldset class="newrep">
+        <legend>New sales representative information</legend>
+
+        <table>
+            <tr>
+                <td colspan="2">Rep Name: @Html.TextBoxFor(newPL => newPL.rep.SalesRepName)</td>
+            </tr>
+            <tr>
+                <td>Rep phone number: @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone)</td>
+                <td>Rep Email address: @Html.TextBoxFor(newPL => newPL.rep.SalesRepEmail)</td>
+            </tr>
+        </table>
+    </fieldset>
     <input type="submit" value="Create New Product Line" />
+}
