@@ -56,14 +56,27 @@ namespace RecOutletWarehouse.Controllers
         [HttpPost]
         public ActionResult CreateNewPL(ProductLineSalesRepViewModel pl) {
             DataFetcherSetter db = new DataFetcherSetter();
+            int insertSuccessCode;
+
+            if (pl.productLine.SalesRep == null && (pl.rep.SalesRepName == null && pl.rep.SalesRepPhone == null)) {
+                ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
+            }
 
             if (!ModelState.IsValid) {
 
                 return View(pl);
             }
-            pl.productLine.SalesRep = pl.rep.SalesRepName; //TODO: See if there's a better way to do this
+
+            //if the user chose to create a new rep...
+            if (pl.productLine.SalesRep == null) {
+                pl.productLine.SalesRep = pl.rep.SalesRepName; //TODO: See if there's a better way to do this
+                insertSuccessCode = db.AddNewSalesRep(pl.rep);
+                if (insertSuccessCode != 0) { //TODO: Check for exceptions
+                }
+            }
+
             pl.productLine = db.convertPLNameFieldsToIDs(pl.productLine);
-            int insertSuccessCode = db.AddNewProductLine(pl.productLine);
+            insertSuccessCode = db.AddNewProductLine(pl.productLine);
             if (insertSuccessCode == 0)
                 return View(); //TODO: confirmation
 

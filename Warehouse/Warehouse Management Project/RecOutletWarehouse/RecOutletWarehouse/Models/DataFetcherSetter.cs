@@ -430,6 +430,11 @@ namespace RecOutletWarehouse.Models
 
         }
 
+        /// <summary>
+        /// Adds a product line with the specified parameters to the database.
+        /// </summary>
+        /// <param name="pl">The ProductLine object to be added to the database.</param>
+        /// <returns>A code indicating the success or failure of the database INSERT.</returns>
         public int AddNewProductLine(ProductLine pl) {
             //validate passed attributes
             int testNum;
@@ -462,6 +467,15 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        /// <summary>
+        /// Converts the Vendor name and Sales Rep name to their associated IDs
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="pl">The product line fields are to be converted for.</param>
+        /// <returns>A ProductLine object with converted attributes.</returns>
+        /// Changelog:
+        ///     Version 1.0 - 11-20-13 (T.M.)
+        ///         - Initial creation
         public ProductLine convertPLNameFieldsToIDs(ProductLine pl) {
             using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
                 thisConnection.Open();
@@ -513,6 +527,36 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.Clear();
 
                     return convertedPL;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Inserts a new Sales Rep into the database.
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="rep">The SalesRep object to be inserted.</param>
+        /// <returns>An integer code indicating success or failure of the INSERT statement</returns>
+        /// Changelog:
+        ///     Version 1.0 - 11-20-13 (T.M.)
+        ///         - Initial creation
+        public int AddNewSalesRep(SalesRep rep) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "INSERT INTO SALES_REP (SalesRepName, SalesRepPhone, SalesRepEmail) "
+                                        + "VALUES (@repName, @repPhone, @repEmail)";
+                    command.Parameters.AddWithValue("@repName", rep.SalesRepName);
+                    command.Parameters.AddWithValue("@repPhone", rep.SalesRepPhone);
+                    command.Parameters.AddWithValue("@repEmail", CheckForDbNull(rep.SalesRepEmail));
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+
+                    return 0; //success
                 }
             }
         }
@@ -713,6 +757,46 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.Clear();
 
                     return subcatList;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates a list of SalesRep objects to assist in Sales Rep autocomplete fields.
+        /// The list contains all elements with a "name" containing a certain query string.
+        /// </summary>
+        /// <author>Tyler M.</author>
+        /// <param name="repName">The query string the search is based on.</param>
+        /// <returns>A list of SalesRep objects whose name contains the query string.</returns>
+        /// Changelog:
+        ///     Version 1.0 - 11-20-13 (T.M.)
+        ///         - Initial creation
+        public List<SalesRep> SearchRepsByName(string repName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<SalesRep> repList = new List<SalesRep>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT * "
+                                        + "FROM SALES_REP "
+                                        + "WHERE SalesRepName LIKE @repName";
+                    command.Parameters.AddWithValue("@repName", "%" + repName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        repList.Add(new SalesRep {
+                            SalesRepID = Convert.ToInt16(reader["RepID"]),
+                            SalesRepName = reader["SalesRepName"].ToString(),
+                            SalesRepPhone = reader["SalesRepPhone"].ToString(),
+                            SalesRepEmail = reader["SalesRepEmail"].ToString()
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return repList;
                 }
             }
         }
@@ -999,6 +1083,7 @@ namespace RecOutletWarehouse.Models
          * DataFetcherSetter utility methods follow
          * (Keep this section at the end of the document)
          * ********************************************/
+
         /// <summary>
         /// Checks an object to see if its value is null, and, if it is, converts
         /// the null to a DbNull (a database-friendly null format)
