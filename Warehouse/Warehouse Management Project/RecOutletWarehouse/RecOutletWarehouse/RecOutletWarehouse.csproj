@@ -140,6 +140,7 @@
     <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrderLineItem.cs" />
     <Compile Include="Models\ReceivingLog.cs" />
+    <Compile Include="Models\VendorManagement\SalesRep.cs" />
     <Compile Include="Models\VendorManagement\Vendor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\WarehouseUtilities.cs" />
@@ -237,7 +238,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\ItemManagement\Index.cshtml" />
-    <Content Include="Views\ProductLine\CreateNewPL.cshtml" />
+    <Content Include="Views\Vendor\CreateNewPL.cshtml" />
     <Content Include="Views\ItemManagement\CreateNewItem.cshtml" />
     <Content Include="Views\PurchaseOrder\SearchPO.cshtml">
       <SubType>Code</SubType>
