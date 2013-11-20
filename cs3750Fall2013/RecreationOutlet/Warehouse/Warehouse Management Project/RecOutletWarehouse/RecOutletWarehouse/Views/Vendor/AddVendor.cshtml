@@ -5,6 +5,14 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Add a Vendor", "AddVendor")</li>
+        <li>@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
+        <li>@Html.ActionLink("Manage Sales Reps","ManageReps")</li>
+    </ul>  
+}
+
 <h2>Add New Vendor</h2>
 @using (Html.BeginForm()) {
     <table>

@@ -52,4 +52,13 @@ namespace RecOutletWarehouse.Controllers {
             return db.SearchSubcategoriesByName(query);
         }
     }
+
+    public class SalesRepApiController : ApiController {
+
+        [HttpGet]
+        public IEnumerable<SalesRep> GetSalesReps(string query = "") {
+            DataFetcherSetter db = new DataFetcherSetter();
+            return db.SearchRepsByName(query);
+        }
+    }
 }
