@@ -133,19 +133,18 @@ namespace RecreationOutletPOS
             string refundExchange = "\nRefund within 7 Days of purchase with receipt.\n" +
                                     "Exchange/Credit within 30 days \nwith receipt.\n\n";
 
-
             try
             {
-                receiptBuilder.Append(PrinterCode.CENTER_ALIGN.ToString());
-                receiptBuilder.Append("\n");
+                receiptBuilder.Append(PrinterCode.CENTER_ALIGN.ToString()).Append("\n");
 
-                receiptBuilder = addCreditCardInfo(receiptBuilder);
-
-                itemsSold = formatLine(itemsSold, transItems.Count.ToString(), RECEIPT_PAPER_LENGTH);
+                itemsSold = formatLine(itemsSold, transItems.Count.ToString());
 
                 receiptBuilder.Append(itemsSold).Append("\n");
 
                 receiptBuilder.Append(refundExchange);
+
+                receiptBuilder.Append(ReceiptFormat.SIGNATURE_LINE);
+                receiptBuilder.Append("signature").Append("\n\n");
 
                 receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_BEGIN.ToString());
                 receiptBuilder.Append("Thank You!");
@@ -191,7 +190,7 @@ namespace RecreationOutletPOS
 
                     itemPrice = item.getPrice().ToString();
 
-                    receiptItem = formatLine(receiptItem, itemPrice, RECEIPT_PAPER_LENGTH);
+                    receiptItem = formatLine(receiptItem, itemPrice);
 
                     receiptBuilder.Append(receiptItem);
                 }
@@ -217,15 +216,15 @@ namespace RecreationOutletPOS
         {
             string transSummary = string.Empty;
 
-            string subtotal = "Subtotal:";
-            string tax = "Tax:";
-            string total = "Total:";
+            string subtotal = "Subtotal";
+            string tax = "Tax";
+            string total = "Total";
 
             try
             {
-                transSummary += formatLine(subtotal, transDetails[TransKey.TRANS_SUBTOTAL], RECEIPT_PAPER_LENGTH);
-                transSummary += formatLine(tax, transDetails[TransKey.TRANS_TAX], RECEIPT_PAPER_LENGTH);
-                transSummary += formatLine(total, transDetails[TransKey.TRANS_TOTAL], RECEIPT_PAPER_LENGTH);
+                transSummary += formatLine(subtotal, transDetails[TransKey.TRANS_SUBTOTAL]);
+                transSummary += formatLine(tax, transDetails[TransKey.TRANS_TAX]);
+                transSummary += formatLine(total, transDetails[TransKey.TRANS_TOTAL]);
 
                 receiptBuilder.Append("\n");
                 receiptBuilder.Append(transSummary);
@@ -253,11 +252,11 @@ namespace RecreationOutletPOS
             string transRecords = string.Empty;
             string cashierID = string.Empty;
 
-            string store = "Store: ";
-            string cashier = "Cashier: ";
-            string register = "Register: ";
-            string datetime = "Date: ";
-            string transID = "Trans #: ";
+            string store = "Store";
+            string cashier = "Cashier";
+            string register = "Register";
+            string datetime = "Date";
+            string transID = "Trans #";
 
             try
             {
@@ -271,11 +270,11 @@ namespace RecreationOutletPOS
                     cashierID = transDetails[TransKey.EMPLOYEE_ID];
                 }
                 
-                store = formatLine(store, transDetails[TransKey.STORE_ID], RECEIPT_PAPER_LENGTH);
-                register = formatLine(register, transDetails[TransKey.TERMINAL_ID], RECEIPT_PAPER_LENGTH);
-                cashier = formatLine(cashier, cashierID, RECEIPT_PAPER_LENGTH);
-                datetime = formatLine(datetime, transDetails[TransKey.TRANS_DATE], RECEIPT_PAPER_LENGTH);
-                transID = formatLine(transID, transDetails[TransKey.TRANS_ID], RECEIPT_PAPER_LENGTH);
+                store = formatLine(store, transDetails[TransKey.STORE_ID]);
+                register = formatLine(register, transDetails[TransKey.TERMINAL_ID]);
+                cashier = formatLine(cashier, cashierID);
+                datetime = formatLine(datetime, transDetails[TransKey.TRANS_DATE]);
+                transID = formatLine(transID, transDetails[TransKey.TRANS_ID]);
 
                 receiptBuilder.Append("\n");
 
@@ -306,8 +305,8 @@ namespace RecreationOutletPOS
         {
             string creditCardInfo = string.Empty;
 
-            string card = "Card: ";
-            string cardTender = "Card Tender: ";
+            string card = "Card";
+            string cardTender = "Card Tender";
 
             bool isCardPayment = false;
 
@@ -320,8 +319,8 @@ namespace RecreationOutletPOS
                 {
                     receiptBuilder.Append("\n");
 
-                    card = formatLine(card, transDetails[TransKey.CARD_NUMBER], RECEIPT_PAPER_LENGTH);
-                    cardTender = formatLine(cardTender, transDetails[TransKey.TENDERED], RECEIPT_PAPER_LENGTH);
+                    card = formatLine(card, transDetails[TransKey.CARD_NUMBER]);
+                    cardTender = formatLine(cardTender, transDetails[TransKey.TENDERED]);
 
                     receiptBuilder.Append(card);
                     receiptBuilder.Append(cardTender);
@@ -346,8 +345,8 @@ namespace RecreationOutletPOS
         /// <returns>The working receiptString with the tendered currency added to it</returns>
         private StringBuilder addTenderedCurrency(StringBuilder receiptBuilder)
         {
-            string tendered = "Tendered: ";
-            string change = "Change: ";
+            string tendered = "Tendered";
+            string change = "Change";
 
             double tender = 0.0;
             double transTotal = 0.0;
@@ -373,12 +372,12 @@ namespace RecreationOutletPOS
                     tenderReceived = new Decimal(tender);
                     total = new Decimal(transTotal);
 
-                    tendered = formatLine(tendered, transDetails[TransKey.TENDERED], RECEIPT_PAPER_LENGTH);
+                    tendered = formatLine(tendered, transDetails[TransKey.TENDERED]);
                     receiptBuilder.Append(tendered);
 
                     calculatedChange = tenderReceived - total;
 
-                    change = formatLine(change, calculatedChange.ToString(), RECEIPT_PAPER_LENGTH);
+                    change = formatLine(change, calculatedChange.ToString());
 
                     receiptBuilder.Append(change);
                 }
@@ -427,7 +426,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/11/2013
+        /// Last Updated: 11/20/2013
         /// 
         /// Prints the receipt to the Star TSP100 Cutter thermal receipt printer
         /// </summary>
@@ -435,7 +434,7 @@ namespace RecreationOutletPOS
         /// <param name="transItems">The items of purchase on the current transaction</param>
         public void printToPrinter()
         {
-            string printerName = "Star TSP100 Cutter (TSP143)";
+            string printerName = ReceiptFormat.PRINTER_NAME.ToString();
 
             try
             {
@@ -462,14 +461,14 @@ namespace RecreationOutletPOS
         /// <param name="workingLine">The working line to format, this is also the beginning part of the line</param>
         /// <param name="endItem">The item to append to the end of the working line</param>
         /// <returns>A formatted line, with the working line having the endItem appended to it</returns>
-        private string formatLine(string workingLine, string endItem, int desiredLength)
+        private string formatLine(string workingLine, string endItem)
         {
             int spacesToPad = 0;
             int endItemLength = 0;
 
             try
             {
-                spacesToPad = desiredLength;
+                spacesToPad = RECEIPT_PAPER_LENGTH;
 
                 // Get the end item length, so we know how many spaces to subtract from the
                 // number of spaces we need to append to the working line
