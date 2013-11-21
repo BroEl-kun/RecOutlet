@@ -44,7 +44,8 @@ namespace RecOutletWarehouse.Controllers
                     vendor.Website);
 
                 //TODO: change this to the actual view i need to return like Success! or something.
-                return View("Index");
+                ViewBag.Success = "Vendor successfully created.";
+                return View();
             }
         }
 
@@ -73,12 +74,19 @@ namespace RecOutletWarehouse.Controllers
                 insertSuccessCode = db.AddNewSalesRep(pl.rep);
                 if (insertSuccessCode != 0) { //TODO: Check for exceptions
                 }
+                else {
+                    ViewBag.RepSuccess = "Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                }
             }
+            string tempProductLine = pl.productLine.ProductLineName;
+            string tempVendorName = pl.productLine.Vendor;
 
             pl.productLine = db.convertPLNameFieldsToIDs(pl.productLine);
             insertSuccessCode = db.AddNewProductLine(pl.productLine);
-            if (insertSuccessCode == 0)
+            if (insertSuccessCode == 0) {
+                ViewBag.ProductLineSuccess = "Product Line " + tempProductLine + " successfully created and assigned to vendor " + tempVendorName + ".";
                 return View(); //TODO: confirmation
+            }
 
             return View();
         }

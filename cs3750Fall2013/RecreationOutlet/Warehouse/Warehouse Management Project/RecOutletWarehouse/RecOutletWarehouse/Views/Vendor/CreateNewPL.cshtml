@@ -36,6 +36,15 @@
 </script>
 
 <h2>Create New Product Line</h2>
+<ul>
+@if (ViewBag.ProductLineSuccess != null) {
+    <li class="successful-insert">@ViewBag.ProductLineSuccess<br /></li>
+}
+@if (ViewBag.RepSuccess != null) {
+    <li class="successful-insert">@ViewBag.RepSuccess</li>
+}
+</ul>    
+
 @using(Html.BeginForm()){
     <fieldset>
         <legend>Product line information</legend>

@@ -14,6 +14,13 @@
 }
 
 <h2>Add New Vendor</h2>
+
+@if (ViewBag.Success != null) {
+    <ul>
+        <li class="successful-insert">@ViewBag.Success</li>
+    </ul>
+}
+
 @using (Html.BeginForm()) {
     <table>
         <tr>
