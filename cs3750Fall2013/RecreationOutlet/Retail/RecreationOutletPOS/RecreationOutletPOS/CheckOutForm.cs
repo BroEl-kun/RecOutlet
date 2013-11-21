@@ -38,7 +38,7 @@ namespace RecreationOutletPOS
             this.transaction = transaction;
             this.transItems = transItems;
 
-            //ccField.Width = 0;
+            ccField.Width = 0;
             lblSwipe.Visible = false;
             setCheckoutInfo(transaction);
         }
