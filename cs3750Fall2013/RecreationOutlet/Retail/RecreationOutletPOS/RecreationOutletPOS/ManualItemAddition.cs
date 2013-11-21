@@ -28,8 +28,8 @@ namespace RecreationOutletPOS
         /// </summary>
         public DataSet showData(string searchTerm)
         {
-            string sql = "SELECT ItemID, Description, SellPrice FROM ITEM " +
-                "WHERE Description LIKE @str;";
+            string sql = "SELECT RecRPC, Name, SellPrice FROM ITEM " +
+                "WHERE  Name LIKE @str;";
 
             SqlConnection conn = new SqlConnection(connStr);
             DataSet ds = new DataSet();
@@ -74,8 +74,8 @@ namespace RecreationOutletPOS
         /// </summary>
         public DataSet retrieveItem(string ID)
         {
-            string sql = "SELECT ItemID, Description, SellPrice FROM ITEM " +
-                "WHERE ItemID = @str;";
+            string sql = "SELECT RecRPC, Name, SellPrice FROM ITEM " +
+                "WHERE RecRPC = @str;";
 
             SqlConnection conn = new SqlConnection(connStr);
             DataSet ds = new DataSet();
