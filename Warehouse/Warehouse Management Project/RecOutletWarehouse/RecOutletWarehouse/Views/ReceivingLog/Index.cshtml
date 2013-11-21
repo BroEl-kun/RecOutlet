@@ -1,4 +1,5 @@
-﻿@{
+﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
@@ -7,142 +8,6 @@
 
 <script type ="text/javascript">
 
-//    $(function () {
-//        $('form').submit(function () {
-//            //if ($(this).valid()) {
-//            //$.ajax( {
-//            //alert($(this).attr("name"));
-//            //alert($('form').attr("name"));
-
-//            //if ( $('form').attr('name') == "orig") {
-//            //    //this.onsubmit();
-//            //    //this.submitForms();
-//            //    //<input type="text" id="po" name="po" />          
-//            //    //<input type="submit" value="Begin RL" />
-//            //    $.ajax({
-//            //        url: this.action,
-//            //        type: "POST",
-//            //        data: form.serialize(),
-//            //        success: function (data) { alert("success " + data) }
-//            //    });
-//            //}
-//            //else {
-//            //    $.post
-//            //            ({
-//            //                url: this.action,
-//            //                type: this.method,
-//            //                data: $(this).serialize(),
-//            //                success: function (result) {
-//            //                    //  $('#result').html(result);
-//            //                    alert(result);
-//            //                }
-//            //            });
-//            //    //}
-//                alert("some");
-//            //    return false;
-//            //}
-//            ////} )
-//        });
-//    });
-    
-//function submitForms(control) {
-//    //document.forms["form1"].submit();
-//    //document.forms["form2"].submit();
-    
-    
-
-//    //var y = "RLform" + 0;
-//    //document.write(y);
-//    //document.write(document.forms[0].name);
-//    //document.write(document.forms[1].name);
-//    //document.write(Model.Count());
-//    //document.write(control);
-//    alert(control);
-//    var z = document.forms.length;  //need to use ajax.
-//    //alert(document.forms[control + ""].id);
-    
-//    if (control < z) {
-//        //document.forms[control + ""].onsubmit(submitForms(control + 1));
-
-//        //document.forms[control + ""].submit();
-
-//        //control++;
-//        //document.forms[control + ""].onsubmit(submitForms(control+1),kill());
-//        //submitForms(control + 1);
-
-//        //document.forms[control + ""].submit();
-
-//        //$(function () {
-//        //    $(control + '').submit(function () {
-//        //       // if ($(this).valid()) {
-//        //        //$.ajax({
-//        //        //$.post({
-//        //        //        url: this.action,
-//        //        //        type: this.method,
-//        //        //        data: $(this).serialize(),
-//        //        //        success: function (result) {
-//        //        //            //  $('#result').html(result);
-                            
-//        //        //        }
-//        //        //    });
-//        //        //}
-//        //        alert("in");
-//        //        return false;
-//        //    });
-//        //});
-
-//       // //$(function () {
-//       //     $('form').submit(function () {
-//       //         //if ($(this).valid()) {
-//       //         //$.ajax
-//       //         $.post
-//       //                 ({
-//       //                     url: this.action,
-//       //                     type: this.method,
-//       //                     data: $(this).serialize(),
-//       //                     success: function (result) {
-//       //                         //  $('#result').html(result);
-//       //                         alert(result);
-//       //                     }
-//       //                 });
-//       //         //}
-//       //         alert("some");
-//       //         return false;
-//       //     });
-//       //// });
-
-//        //document.forms[control + ""].onsubmit(submitForms(control + 1), kill());//, document.forms[control + ""].submit(kill()));
-
-//        document.forms[control + ""].onsubmit(submitForms(control + 1));
-
-//        document.forms[control + ""].submit();
-//        //document.forms[control + ""].ajaxSubmit();
-
-//        //document.forms[control + ""].onsubmit("return false;");
-//        //return false;
-//    }
-//    //alert("end");
-//    //document.write(document.getElementById[1 + ""].name);
-//    //document.write(document.forms[1].name);
-//    //document.forms["0"].submit();
-//    //document.forms["1"].submit();
-
-//    ////for (var i = 1; i <= Model.Count() ; i++) //offset due to first form
-//    //for (var i = 1; i < z ; i++) //offset due to first form
-//    //{
-//    //    //document.forms["RLform" + i].submit();
-//    //    //document.forms[i].submit();
-//    //    //document.write(document.forms["RLform"].name);
-//    //    //document.write(document.forms[i].name);
-//    //    //document.write("hi");
-//    //    //document.getElementById(i + "").submit();
-//    //}
-
-//}
-
-function kill() {
-    return false;
-}
 </script>
 
 <h2>Index</h2>
@@ -167,7 +32,7 @@ function kill() {
         </tr>
     </table>
 
-    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "orig", id = "orig" } ))
+    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "orig", id = "orig" }))
     {
         <input type="text" id="po" name="po" />          
         <input type="submit" value="Begin RL" />
@@ -175,70 +40,60 @@ function kill() {
 
     <br />
 
-@model List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem>
 
-@if(Model != null) {
-    
-//using (Html.BeginForm("MarkedReceived", "ReceivingLog"))
-//{
-    
-    var count = 1;
-    
-    @*<table id="RLtable">*@
-    
-        @*@using (Html.BeginForm("MarkedReceived", "ReceivingLog"))
-        {*@
+@if (Model != null)
+{
+    //ReceivingLogCreationViewModel
+    //var count = 1;
+    var count = 0;
 
-        using (Html.BeginForm("MarkedReceived", "ReceivingLog", FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
-        {
+    //using (Html.BeginForm("MarkedReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    //using (Html.BeginForm("CreateReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    using (Html.BeginForm("CreateReceived", "ReceivingLog", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    //using (Html.BeginForm("CreateReceived", "ReceivingLogController", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    //CreateReceived
+    //using(Html.BeginForm())
+    {
             <table id="RLtable">
             
-            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objItem in Model)
+            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)
             {
-            
-            //var x = "RLform" + Model.IndexOf(objItem);
-            //var itemName = objItem.ToString();
-            //var cindex = Model.IndexOf(objItem);
-            //Model.
-            
-            //using (Html.BeginForm("MarkedReceived", "ReceivingLog", FormMethod.Post, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
-            //using (Ajax.BeginForm("MarkedReceived", "ReceivingLog", new {}, new AjaxOptions {} ))
-            //{
             
             <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
                 <td>
                     PO Line Item:
-                    @objItem.POLineItem
+                    @objPO.POLineItem
+                    @Html.HiddenFor(model => model.RL[count].POLineItemID, new { @Value = @objPO.POLineItem })
                 </td>
                 <td>
-                    Purchase Order: @objItem.POID
-                    @*@objItem.POLineItem*@
-                    @Html.Hidden("POLineItem" + count, @objItem.POLineItem)
+                    Purchase Order: @objPO.POID
+                    @*{ViewBag.POID = @objPO.POID;}*@
+                    @Html.Hidden("POID", @objPO.POID)
                 </td>
                 <td>
-                    Item RPC: @objItem.RecRPC
-                    @Html.Hidden("RecRPC" + count, @objItem.RecRPC)
+                    Item RPC: @objPO.RecRPC
                 </td>
                 <td>
-                    Quantity Ordered: @objItem.QtyOrdered
-                    @Html.Hidden("QtyOrdered" + count, @objItem.QtyOrdered)
+                    Quantity Ordered: @objPO.QtyOrdered
                 </td>
                 <td>
-                    Quantity Type ID: @objItem.QtyTypeId
-                    @Html.Hidden("QtyTypeId" + count, @objItem.QtyTypeId)
+                    Quantity Type ID: @objPO.QtyTypeId
+                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeId } )
                 </td>
                 <td>
                     Receive Date: 
-                    @Html.TextBox("ReceivedDate" + count, DateTime.Now.ToString("yyyy-MM-dd"), new { type="date" } )
+                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date })
+                    @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
+                    @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
                 </td>
                 <td>
-                    Quantity Received: @*<input type="number" id="QtyReceived" name="QtyReceived" /> @*radio button option will come later*@
-                    @Html.TextBox("QtyReceived" + count, "", new { @type = "number" })
+                    Quantity Received: 
+                    @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered } )
+                    @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
                 </td>
                 <td>
                     Notes: 
-                    @*<input type="text" id="Notes" name="Notes" />*@
-                    @Html.TextArea("Notes" + count, "", new { })
+                    @Html.TextAreaFor(model => model.RL[count].ReceivingNotes)
                 </td>
                 @*<td><input type="submit" value="Record Received" /></td>*@
             </tr>
@@ -246,23 +101,15 @@ function kill() {
            @*RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item = objItem;*@
             
                 count++;
-                
-            }
-            @*count++;*@
 
-            @*<tr>
-                <td>
-                    @Html.Hidden("count", count)
-                    <input type="submit" value="Record Received" />
-                </td>
-            </tr>*@
+            }
 
             </table>
     
-            @Html.Hidden("count", count)
+            @*Html.Hidden("count", count)*@
             <input type="submit" value="Record Received" />
     
-        }
+    }
 
         @*}*@
 
@@ -271,7 +118,11 @@ function kill() {
         @*<input type="button" value="Record Received" onclick="submitForms(1)" />*@
  
     //}
+//}
+
+
 }
+
 <br />
 
 </div>
