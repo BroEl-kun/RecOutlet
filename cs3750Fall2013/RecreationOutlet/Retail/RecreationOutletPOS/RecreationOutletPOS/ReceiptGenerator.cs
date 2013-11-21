@@ -26,7 +26,7 @@ namespace RecreationOutletPOS
         public StringBuilder receiptBuilder;
 
         // The receipt paper will roughly fit about 50 characters per line  
-        public const int RECEIPT_PAPER_LENGTH = 50;
+        public const int RECEIPT_PAPER_LENGTH = 49;
 
         public string receipt;
         public int numberOfItemsSold = 0;
@@ -48,9 +48,7 @@ namespace RecreationOutletPOS
 
             receiptBuilder = generateReceiptHeader();
             receiptBuilder = generateReceiptBody();
-            //receipt = generateReceiptFooter(receipt);
-
-            //receipt = generateSampleReceipt();
+            receiptBuilder = generateReceiptFooter();
 
             receipt = receiptBuilder.ToString();
         }
@@ -190,25 +188,26 @@ namespace RecreationOutletPOS
         /// Generates the footer of the receipt
         /// </summary>
         /// <returns></returns>
-        private string generateReceiptFooter(string receiptString)
+        private StringBuilder generateReceiptFooter()
         {
             try
             {
-                receiptString += "\x1b\x1d\x61\x1";             //Center Alignment - Refer to Pg. 3-29
+                receiptBuilder.Append(PrinterCode.CENTER_ALIGN.ToString());
+                receiptBuilder.Append("\n");
+                
+                //// IF paymenttype = credit/debit, execute next 3 lines
+                //receiptString += "I agree to pay above total amount \n according to the card issuer agreement\n\n";
 
-                // IF paymenttype = credit/debit, execute next 3 lines
-                receiptString += "I agree to pay above total amount \n according to the card issuer agreement\n\n";
+                //receiptString += ReceiptFormat.SIGNATURE_LINE;
+                //receiptString += "signature\n\n";
 
-                receiptString += ReceiptFormat.SIGNATURE_LINE;
-                receiptString += "signature\n\n";
+                receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_BEGIN.ToString());
+                receiptBuilder.Append("Thank You!");
+                receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_END.ToString());
 
-                receiptString += "\x1b\x45";                    //Select Emphasized Printing - Pg. 3-14
-                receiptString += "Thank You!\n";
-                receiptString += "\x1b\x46";                    //Cancel Emphasized Printing - Pg. 3-14
+                receiptBuilder.Append(PrinterCode.OPEN_DRAWER.ToString());
 
-                receiptString += "\x7";                         //Open Cash Drawer
-
-                receiptString += "\x1b\x64\x02";                                            //Cut  - Pg. 3-41
+                receiptBuilder.Append(PrinterCode.CUT_RECEIPT.ToString());
             }
 
             catch (Exception ex)
@@ -216,7 +215,7 @@ namespace RecreationOutletPOS
 
             }
 
-            return receiptString;
+            return receiptBuilder;
         }
 
         /// <summary>
