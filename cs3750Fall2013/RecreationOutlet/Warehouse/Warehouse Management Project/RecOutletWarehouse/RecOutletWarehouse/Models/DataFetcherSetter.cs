@@ -202,23 +202,66 @@ namespace RecOutletWarehouse.Models
         /// Changelog:
         ///     Version 1.0: 10-28-2013 (T.M.)
         ///         - Initial Creation and bugfixes
-        public List<PurchaseOrderLineItem> ListLineItemsForPO(int PO) {
-            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+        //public List<PurchaseOrderLineItem> ListLineItemsForPO(int PO) {
+        //    using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+        //        thisConnection.Open();
+
+        //        using (SqlCommand command = new SqlCommand()) {
+        //            command.Connection = thisConnection;
+
+        //            command.CommandText = "SELECT * FROM PO_LINEITEM "
+        //                                + "WHERE POID = @POID";
+        //            command.Parameters.AddWithValue("@POID", PO);
+
+        //            SqlDataReader reader = command.ExecuteReader();
+
+        //            List<PurchaseOrderLineItem> LineItemList = new List<PurchaseOrderLineItem>();
+
+        //            while (reader.Read()) {
+        //                LineItemList.Add(new PurchaseOrderLineItem{
+        //                    //Added
+        //                    POLineItem = Convert.ToInt32(reader["POLineItemID"]),
+        //                    //
+        //                    POID = (reader["POID"].ToString()),
+        //                    RecRPC = Convert.ToInt64(reader["RecRPC"]),
+        //                    WholesaleCost = Convert.ToDecimal(reader["WholesaleCost"]),
+        //                    QtyOrdered = Convert.ToInt16(reader["QtyOrdered"]),
+        //                    QtyTypeId = Convert.ToInt16(reader["QtyTypeID"])
+        //                });
+        //            }
+
+        //            reader.Dispose();
+        //            command.Parameters.Clear();
+
+        //            return LineItemList;
+
+        //        }
+        //    }
+        //}
+
+        public List<PurchaseOrderLineItem> ListLineItemsForPO(int PO)
+        {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString))
+            {
                 thisConnection.Open();
 
-                using (SqlCommand command = new SqlCommand()) {
+                using (SqlCommand command = new SqlCommand())
+                {
                     command.Connection = thisConnection;
 
                     command.CommandText = "SELECT * FROM PO_LINEITEM "
-                                        + "WHERE POID = @POID";
+                                        + "WHERE POID = @POID AND POLineItemID NOT IN (SELECT P.POLineItemID FROM PO_LINEITEM P INNER JOIN RECEIVING_LOG R ON P.POLineItemID = R.POLineItemID)";
+                    //Not in: And has no backlog or QtyReceived = QtyOrdered
                     command.Parameters.AddWithValue("@POID", PO);
 
                     SqlDataReader reader = command.ExecuteReader();
 
                     List<PurchaseOrderLineItem> LineItemList = new List<PurchaseOrderLineItem>();
 
-                    while (reader.Read()) {
-                        LineItemList.Add(new PurchaseOrderLineItem{
+                    while (reader.Read())
+                    {
+                        LineItemList.Add(new PurchaseOrderLineItem
+                        {
                             //Added
                             POLineItem = Convert.ToInt32(reader["POLineItemID"]),
                             //
