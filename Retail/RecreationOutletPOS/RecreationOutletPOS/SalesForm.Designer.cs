@@ -322,7 +322,7 @@
             // btnDiscount
             // 
             this.btnDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDiscount.Location = new System.Drawing.Point(775, 230);
+            this.btnDiscount.Location = new System.Drawing.Point(772, 231);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(137, 50);
             this.btnDiscount.TabIndex = 32;
@@ -333,7 +333,7 @@
             // btnPrice
             // 
             this.btnPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPrice.Location = new System.Drawing.Point(775, 287);
+            this.btnPrice.Location = new System.Drawing.Point(772, 287);
             this.btnPrice.Name = "btnPrice";
             this.btnPrice.Size = new System.Drawing.Size(137, 50);
             this.btnPrice.TabIndex = 33;

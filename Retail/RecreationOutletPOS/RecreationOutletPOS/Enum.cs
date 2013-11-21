@@ -175,9 +175,11 @@ namespace RecreationOutletPOS
         {
             private readonly String receiptFormat;
 
+            public static readonly ReceiptFormat PRINTER_NAME = new ReceiptFormat("Star TSP100 Cutter (TSP143)");
+
             public static readonly ReceiptFormat DASHED_HORIZ_LINE = new ReceiptFormat("-------------------------------------------------\n");
-            public static readonly ReceiptFormat SIGNATURE_LINE = new ReceiptFormat("__________________________________\n");
-            public static readonly ReceiptFormat TRANS_SUMMARY_OFFSET = new ReceiptFormat("                        ");
+            public static readonly ReceiptFormat SIGNATURE_LINE = new ReceiptFormat("x_______________________________________\n");
+
 
             /// <summary>
             /// Programmer: Michael Vuong
