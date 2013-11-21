@@ -136,11 +136,9 @@
             this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";
             this.lsvCheckOutItems.Size = new System.Drawing.Size(754, 306);
-            this.lsvCheckOutItems.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lsvCheckOutItems.TabIndex = 23;
             this.lsvCheckOutItems.UseCompatibleStateImageBehavior = false;
             this.lsvCheckOutItems.View = System.Windows.Forms.View.Details;
-            this.lsvCheckOutItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lsvCheckOutItems_ColumnClick);
             this.lsvCheckOutItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsvCheckOutItems_KeyDown);
             // 
             // ID
@@ -291,7 +289,7 @@
             this.btnDeleteItem.Name = "btnDeleteItem";
             this.btnDeleteItem.Size = new System.Drawing.Size(137, 50);
             this.btnDeleteItem.TabIndex = 28;
-            this.btnDeleteItem.Text = "Delete Item";
+            this.btnDeleteItem.Text = "Void Item";
             this.btnDeleteItem.UseVisualStyleBackColor = true;
             this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
             // 

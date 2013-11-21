@@ -24,6 +24,8 @@ namespace RecreationOutletPOS
         private String ccNum;
         private String ccEnd;   //Last 4 of CC Number
 
+        private SalesForm parent;
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 11/16/2013
@@ -31,7 +33,7 @@ namespace RecreationOutletPOS
         /// Constructor
         /// </summary>
         /// <param name="transaction">The new transaction details to display</param>
-        public CheckOutForm(Dictionary<TransKey, string> transaction, TransactionList transItems)
+        public CheckOutForm(SalesForm parent, Dictionary<TransKey, string> transaction, TransactionList transItems)
         {
             InitializeComponent();
 
@@ -41,6 +43,8 @@ namespace RecreationOutletPOS
             ccField.Width = 0;
             lblSwipe.Visible = false;
             setCheckoutInfo(transaction);
+
+            this.parent = parent;
         }
 
         /// <summary>
@@ -106,6 +110,7 @@ namespace RecreationOutletPOS
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                     this.Close();
+                    parent.voidTransaction();
                 }
             }
 
@@ -193,6 +198,11 @@ namespace RecreationOutletPOS
                 ccField.Focus();
                 lblSwipe.Visible = true;
             }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

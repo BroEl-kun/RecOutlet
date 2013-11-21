@@ -149,6 +149,30 @@ namespace RecreationOutletPOS
             {
             }
         }
+
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 11/20/2013
+        /// 
+        /// Deletes the selected item with the supplied amount.
+        /// </summary>
+        public void voidItem(int item, int amount)
+        {
+            tList.deleteItem(item, amount);
+            updateListView();
+        }
+
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 11/20/2013
+        /// 
+        /// Clears the entire list and voids the transaction.
+        /// </summary>
+        public void voidTransaction()
+        {
+            tList.clearData();
+            updateListView();
+        }
         #endregion
 
 
@@ -178,8 +202,13 @@ namespace RecreationOutletPOS
             {
                 int currentItem = lsvCheckOutItems.SelectedIndices[0];
 
-                tList.deleteItem(currentItem, 1);
-                updateListView();
+                DeleteItem voidForm = new DeleteItem(this, currentItem);
+                voidForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Select an item to void.", "Item Void",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -228,12 +257,12 @@ namespace RecreationOutletPOS
                     transaction.Add(TransKey.PREVIOUS_TRANS_ID, previousTransactionID.ToString());
                     transaction.Add(TransKey.TRANS_SUBTOTAL, subtotal);
 
-                    CheckOutForm checkOutForm = new CheckOutForm(transaction, tList);
+                    CheckOutForm checkOutForm = new CheckOutForm(this, transaction, tList);
                     checkOutForm.ShowDialog();
 
-                    tList.clearData();
+                    //tList.clearData();
 
-                    updateListView();
+                    //updateListView();
                 }
 
                 catch (Exception ex)
@@ -257,10 +286,14 @@ namespace RecreationOutletPOS
                         MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                 if (result == DialogResult.Yes)
                 {
-                    tList.clearData();
+                    tbItemQuantity.Text = "1";
+                    voidTransaction();
                 }
-
-                updateListView();
+            }
+            else
+            {
+                MessageBox.Show("There is nothing to clear.", "Transaction Clear",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -508,11 +541,6 @@ namespace RecreationOutletPOS
         //----------------------------------------------------------
         // Listview Input
         //----------------------------------------------------------
-        private void lsvCheckOutItems_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            //lsvCheckOutItems.ListViewItemSorter = new ListViewItemComparer(e.Column);
-            //lsvCheckOutItems.Sort();
-        }
 
         private void lsvCheckOutItems_KeyDown(object sender, KeyEventArgs e)
         {
@@ -530,32 +558,5 @@ namespace RecreationOutletPOS
             }
         }
         #endregion
-    }
-        
-
-
-
-
-
-    // Implements the manual sorting of items by columns.
-    // This code is thanks to Microsoft's documentation.
-    class ListViewItemComparer : IComparer
-    {
-        private int col;
-        public ListViewItemComparer()
-        {
-            col = 0;
-        }
-        public ListViewItemComparer(int column)
-        {
-            col = column;
-        }
-        public int Compare(object x, object y)
-        {
-            int result;
-            result = String.Compare(((ListViewItem)x).SubItems[col].Text, ((ListViewItem)y).SubItems[col].Text);
-
-            return result;
-        }
     }
 }
