@@ -43,6 +43,8 @@
             this.radCredit = new System.Windows.Forms.RadioButton();
             this.ccField = new System.Windows.Forms.TextBox();
             this.lblSwipe = new System.Windows.Forms.Label();
+            this.txtCashTender = new System.Windows.Forms.TextBox();
+            this.lblTenderPrompt = new System.Windows.Forms.Label();
             this.pnlCheckoutSummary.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -214,11 +216,32 @@
             this.lblSwipe.TabIndex = 8;
             this.lblSwipe.Text = "Swipe Card Now";
             // 
+            // txtCashTender
+            // 
+            this.txtCashTender.Location = new System.Drawing.Point(12, 289);
+            this.txtCashTender.Name = "txtCashTender";
+            this.txtCashTender.Size = new System.Drawing.Size(100, 20);
+            this.txtCashTender.TabIndex = 9;
+            // 
+            // lblTenderPrompt
+            // 
+            this.lblTenderPrompt.AutoSize = true;
+            this.lblTenderPrompt.BackColor = System.Drawing.SystemColors.Control;
+            this.lblTenderPrompt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenderPrompt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblTenderPrompt.Location = new System.Drawing.Point(118, 284);
+            this.lblTenderPrompt.Name = "lblTenderPrompt";
+            this.lblTenderPrompt.Size = new System.Drawing.Size(149, 25);
+            this.lblTenderPrompt.TabIndex = 10;
+            this.lblTenderPrompt.Text = "Enter Tender";
+            // 
             // CheckOutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(703, 458);
+            this.Controls.Add(this.lblTenderPrompt);
+            this.Controls.Add(this.txtCashTender);
             this.Controls.Add(this.lblSwipe);
             this.Controls.Add(this.ccField);
             this.Controls.Add(this.radCredit);
@@ -254,5 +277,7 @@
         private System.Windows.Forms.RadioButton radCredit;
         private System.Windows.Forms.TextBox ccField;
         private System.Windows.Forms.Label lblSwipe;
+        private System.Windows.Forms.TextBox txtCashTender;
+        private System.Windows.Forms.Label lblTenderPrompt;
     }
 }

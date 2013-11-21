@@ -6,9 +6,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 // Aliases for the Enum's inner classes
 using TransKey = RecreationOutletPOS.Enum.TransKey;
 
@@ -224,20 +224,24 @@ namespace RecreationOutletPOS
 
             // NOTE- this harcoded code needs to be changed 
             int transactionID = 001;
-            string paymentType = "Cash";
 
             // Needs to remain hardcoded for now
-            int storeID = 1;
+            int storeID = 01;
             int employeeID = 123;
-            int managerID = 1;
+            int managerID = 999;
             int previousTransactionID = 0;
-            string terminalID = "t0";
+            string terminalID = "Reg 001";
 
             Decimal transTotal;
-            
+   
             string subtotal = summarySubTotal.Text.Replace("$", string.Empty);
             string tax = summaryTax.Text.Replace("$", string.Empty);
             string newTotalText = summaryTotal.Text.Replace("$", string.Empty);
+
+            // Gets rid of the random newline characters at the ends
+            subtotal = subtotal.Substring(0, subtotal.Length - 1);
+            tax = tax.Substring(0, tax.Length - 1);
+            newTotalText = newTotalText.Substring(0, newTotalText.Length - 1);
 
             if (lsvCheckOutItems.Items.Count > 0)
             {
@@ -253,7 +257,6 @@ namespace RecreationOutletPOS
                     transaction.Add(TransKey.TRANS_TOTAL, transTotal.ToString());
                     transaction.Add(TransKey.TRANS_TAX, tax.ToString());
                     transaction.Add(TransKey.MANAGER_ID, managerID.ToString());
-                    transaction.Add(TransKey.PAYMENT_TYPE, paymentType);
                     transaction.Add(TransKey.PREVIOUS_TRANS_ID, previousTransactionID.ToString());
                     transaction.Add(TransKey.TRANS_SUBTOTAL, subtotal);
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 // Aliases for the Enum's inner classes
 using TransKey = RecreationOutletPOS.Enum.TransKey;
+using PaymentType = RecreationOutletPOS.Enum.PaymentType;
 
 namespace RecreationOutletPOS
 {
@@ -28,7 +29,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/16/2013
+        /// Last Updated: 11/20/2013
         /// 
         /// Constructor
         /// </summary>
@@ -41,7 +42,12 @@ namespace RecreationOutletPOS
             this.transItems = transItems;
 
             ccField.Width = 0;
+
+            txtCashTender.Visible = false;
+
             lblSwipe.Visible = false;
+            lblTenderPrompt.Visible = false;
+
             setCheckoutInfo(transaction);
 
             this.parent = parent;
@@ -71,17 +77,34 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/16/2013
+        /// Last Updated: 11/20/2013
         /// 
         /// Confirms the checkout and inserts a new transaction record into the database
         /// </summary>
         private void btnConfirmCheckOut_Click(object sender, EventArgs e)
         {
+            bool isValidTransaction = false;
+
             try
             {
                 if (radChecked == 1)
                 {
-                    //Cash Checkout
+                    isValidTransaction = isValidTender();
+
+                    // NOTE- Search for alternative method later, this is bad!
+                    // These ifs are in the case an error is made in the cash tendering
+                    if (transaction.ContainsKey(TransKey.PAYMENT_TYPE))
+                    {
+                        transaction.Remove(TransKey.PAYMENT_TYPE);
+                    }
+
+                    if (transaction.ContainsKey(TransKey.TENDERED))
+                    {
+                        transaction.Remove(TransKey.TENDERED);
+                    }
+
+                    transaction.Add(TransKey.PAYMENT_TYPE, PaymentType.CASH.ToString());
+                    transaction.Add(TransKey.TENDERED, txtCashTender.Text);
                 }
 
                 else
@@ -92,6 +115,29 @@ namespace RecreationOutletPOS
                         MessageBox.Show("Please Scan Card");
                         return;
                     }
+
+                    isValidTransaction = true;
+
+                    // NOTE- Search for alternative method later, this is bad!
+                    // These ifs are in the case an error is made in the cash tendering
+                    if (transaction.ContainsKey(TransKey.PAYMENT_TYPE))
+                    {
+                        transaction.Remove(TransKey.PAYMENT_TYPE);
+                    }
+
+                    if (transaction.ContainsKey(TransKey.TENDERED))
+                    {
+                        transaction.Remove(TransKey.TENDERED);
+                    }
+
+                    if (transaction.ContainsKey(TransKey.CARD_NUMBER))
+                    {
+                        transaction.Remove(TransKey.CARD_NUMBER);
+                    }
+
+                    transaction.Add(TransKey.PAYMENT_TYPE, PaymentType.CREDIT.ToString());
+                    transaction.Add(TransKey.TENDERED, transaction[TransKey.TRANS_TOTAL]);
+                    transaction.Add(TransKey.CARD_NUMBER, ccEnd);
                 }
                 
                 DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
@@ -99,18 +145,67 @@ namespace RecreationOutletPOS
 
                 if (result == DialogResult.Yes)
                 {
-                    Transaction newTransaction = new Transaction(transaction);
+                    if (isValidTransaction)
+                    {
+                        Transaction newTransaction = new Transaction(transaction);
 
-                    ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
+                        ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
 
-                    receiptGenerator.printReceiptToFile();
-                    //receiptGenerator.printToPrinter();
+                        receiptGenerator.printReceiptToFile();
+                        //receiptGenerator.printToPrinter();
 
-                    MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
-                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                    this.Close();
-                    parent.voidTransaction();
+                        this.Close();
+                        parent.voidTransaction();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("The entered cash tender is invalid or is less than the total", 
+                                        "Item Void", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/20/2013
+        /// 
+        /// Checks if the tender given for cash is valid
+        /// </summary>
+        /// <returns>Whether this transaction is valid or not</returns>
+        private bool isValidTender()
+        {
+            bool validTender = false;
+
+            double tenderInput = 0.0;
+            double total = 0.0;
+
+            Decimal cashTender;
+            Decimal transTotal;
+            Decimal difference; 
+
+            try
+            {
+                Double.TryParse(txtCashTender.Text, out tenderInput);
+                Double.TryParse(transaction[TransKey.TRANS_TOTAL], out total);
+
+                cashTender = new Decimal(tenderInput);
+                transTotal = new Decimal(total);
+
+                difference = cashTender - transTotal;
+
+                if (difference > 0)
+                {
+                    validTender = true;
                 }
             }
 
@@ -118,17 +213,8 @@ namespace RecreationOutletPOS
             {
 
             }
-        }
 
-        /// <summary>
-        /// Programmer: Aaron Sorensen
-        /// Last Updated: 11/11/2013
-        /// 
-        /// Runs credit card checkout
-        /// </summary>
-        private void cardCheckout()
-        {
-            
+            return validTender;
         }
 
         /// <summary>
@@ -168,7 +254,12 @@ namespace RecreationOutletPOS
                 }
         }
 
-        //Runs when hidden textfield loses focus
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 11/20/2013
+        /// 
+        /// Runs when hidden textfield loses focus
+        /// </summary>
         private void ccFocus(object sender, EventArgs e)
         {
             radCredit.Checked = false;
@@ -177,7 +268,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Aaron Sorensen
-        /// Last Updated: 11/11/2013
+        /// Last Updated: 11/20/2013 (By Michael Vuong)
         /// 
         /// Controls radio buttons
         /// </summary>
@@ -186,17 +277,33 @@ namespace RecreationOutletPOS
             if (radCash.Checked)
             {
                 radChecked = 1;
+
+                txtCashTender.Visible = true;
+                txtCashTender.Focus();
+
                 lblSwipe.Visible = false;
+                lblTenderPrompt.Visible = true;
             }
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 11/20/2013 (By Michael Vuong)
+        /// 
+        /// Controls the radio buttons
+        /// </summary>
         private void radCredit_CheckedChanged(object sender, EventArgs e)
         {
             if (radCredit.Checked)
             {
                 radChecked = 2;
+                
                 ccField.Focus();
+
                 lblSwipe.Visible = true;
+                lblTenderPrompt.Visible = false;
+
+                txtCashTender.Visible = false;
             }
         }
 

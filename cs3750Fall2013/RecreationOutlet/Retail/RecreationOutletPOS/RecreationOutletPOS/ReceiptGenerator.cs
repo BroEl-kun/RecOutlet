@@ -100,11 +100,10 @@ namespace RecreationOutletPOS
                 receiptBuilder.Append(PrinterCode.LEFT_ALIGN.ToString()).Append("\n");
 
                 receiptBuilder = addItemsToReceipt(receiptBuilder);
-                receiptBuilder = addCreditCardInfo(receiptBuilder);
-                //receiptBuilder = addTransSummary(receiptBuilder);
-                //receiptBuilder = addTenderedCurrency(receiptBuilder);
 
-                receiptBuilder = addCashier(receiptBuilder);
+                receiptBuilder = addCreditCardInfo(receiptBuilder);
+                receiptBuilder = addTransSummary(receiptBuilder);
+                receiptBuilder = addTenderedCurrency(receiptBuilder);
                 receiptBuilder = addTransRecordInfo(receiptBuilder);
 
                 ////Barcode - Pg. 3-39 - 3-40
@@ -163,54 +162,6 @@ namespace RecreationOutletPOS
             }
 
             return receiptBuilder;
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 11/16/2013
-        /// 
-        /// Sample receipt taken from sample code from: 
-        /// http://www.starmicronics.com/support/SDKDocumentation.aspx
-        /// </summary>
-        /// <returns></returns>
-        private string generateSampleReceipt()
-        {
-            string buffer = "\x1b\x1d\x61\x1";             //Center Alignment - Refer to Pg. 3-29
-
-            buffer = buffer + "\x5B" + "If loaded.. Logo1 goes here" + "\x5D\n";
-            buffer = buffer + "\x1B\x1C\x70\x1\x0";          //Stored Logo Printing - Refer to Pg. 3-38
-            buffer = buffer + "Star Clothing Boutique\n";
-            buffer = buffer + "1150 King Georges Post Rd.\n";
-            buffer = buffer + "Edison, NJ 08837\n\n";
-            buffer = buffer + "\x1b\x1d\x61\x0";             //Left Alignment - Refer to Pg. 3-29
-            buffer = buffer + "\x1b\x44\x2\x10\x22\x0";      //Setting Horizontal Tab - Pg. 3-27
-            buffer = buffer + "Date: 12/31/2008 " + "\x9" + " Time: 9:10 PM";      //Moving Horizontal Tab - Pg. 3-26
-            buffer = buffer + "\n------------------------------------------------ \n";
-            buffer = buffer + "\x1b\x45";                    //Select Emphasized Printing - Pg. 3-14
-            buffer = buffer + "SALE\n";
-            buffer = buffer + "\x1b\x46";                    //Cancel Emphasized Printing - Pg. 3-14
-            buffer = buffer + "300678566 " + "\x9" + "  PLAN T-SHIRT" + "\x9" + "         10.99\n";
-            buffer = buffer + "300692003 " + "\x9" + "  BLACK DENIM" + "\x9" + "         29.99\n";
-            buffer = buffer + "300651148 " + "\x9" + "  BLUE DENIM" + "\x9" + "         29.99\n";
-            buffer = buffer + "300642980 " + "\x9" + "  STRIPE DRESS" + "\x9" + "         49.99\n";
-            buffer = buffer + "300638471 " + "\x9" + "  BLACK BOOT" + "\x9" + "         35.99\n\n";
-            buffer = buffer + "Subtotal " + "\x9" + "" + "\x9" + "        156.95";
-            buffer = buffer + "Tax " + "\x9" + "" + "\x9" + "" + "         00.00";
-            buffer = buffer + "\n------------------------------------------------ \n";
-            buffer = buffer + "Total" + "\x6" + "" + "\x9" + "\x1b\x69\x1\x1" + "         $156.95\n";    //Character Expansion - Pg. 3-10
-            buffer = buffer + "\x1b\x69\x0\x0";                                                          //Cancel Expansion - Pg. 3-10
-            buffer = buffer + "\n------------------------------------------------ \n";
-            buffer = buffer + "Charge\n" + "$159.95\n";
-            buffer = buffer + "Visa XXXX-XXXX-XXXX-0123\n\n";
-            buffer = buffer + "\x1b\x34" + "Refunds and Exchanges" + "\x1b\x35\n";                       //Specify/Cencel White/Black Invert - Pg. 3-16
-            buffer = buffer + "Within " + "\x1b\x2d\x1" + "30 days" + "\x1b\x2d\x0" + " with receipt\n"; //Specify/Cancel Underline Printing - Pg. 3-15
-            buffer = buffer + "And tags attached\n\n";
-            buffer = buffer + "\x1b\x1d\x61\x1";             //Center Alignment - Refer to Pg. 3-29
-            buffer = buffer + "\x1b\x62\x6\x2\x2" + " 12ab34cd56" + "\x1e\n";             //Barcode - Pg. 3-39 - 3-40
-            buffer = buffer + "\x1b\x64\x02";                                            //Cut  - Pg. 3-41
-            buffer = buffer + "\x7";                                                    //Open Cash Drawer
-
-            return buffer;
         }
 
         #endregion
@@ -300,46 +251,13 @@ namespace RecreationOutletPOS
         private StringBuilder addTransRecordInfo(StringBuilder receiptBuilder)
         {
             string transRecords = string.Empty;
+            string cashierID = string.Empty;
 
             string store = "Store: ";
+            string cashier = "Cashier: ";
             string register = "Register: ";
             string datetime = "Date: ";
             string transID = "Trans #: ";
-
-            try
-            {
-                store = formatLine(store, transDetails[TransKey.STORE_ID], RECEIPT_PAPER_LENGTH);
-                register = formatLine(register, transDetails[TransKey.TERMINAL_ID], RECEIPT_PAPER_LENGTH);
-                datetime = formatLine(datetime, transDetails[TransKey.TRANS_DATE], RECEIPT_PAPER_LENGTH);
-                transID = formatLine(transID, transDetails[TransKey.TRANS_ID], RECEIPT_PAPER_LENGTH);
-
-                receiptBuilder.Append("\n");
-
-                receiptBuilder.Append(store);
-                receiptBuilder.Append(register);
-                receiptBuilder.Append(datetime);
-                receiptBuilder.Append(transID);
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-
-            return receiptBuilder;
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 11/20/2013
-        /// 
-        /// Determines if the cashier is either a sales associate or a manager
-        /// </summary>
-        /// <returns>The ID of the cashier</returns>
-        private StringBuilder addCashier(StringBuilder receiptBuilder)
-        {
-            string cashier = "Cashier: ";
-            string cashierID = string.Empty;
 
             try
             {
@@ -352,12 +270,20 @@ namespace RecreationOutletPOS
                 {
                     cashierID = transDetails[TransKey.EMPLOYEE_ID];
                 }
+                
+                store = formatLine(store, transDetails[TransKey.STORE_ID], RECEIPT_PAPER_LENGTH);
+                register = formatLine(register, transDetails[TransKey.TERMINAL_ID], RECEIPT_PAPER_LENGTH);
+                cashier = formatLine(cashier, cashierID, RECEIPT_PAPER_LENGTH);
+                datetime = formatLine(datetime, transDetails[TransKey.TRANS_DATE], RECEIPT_PAPER_LENGTH);
+                transID = formatLine(transID, transDetails[TransKey.TRANS_ID], RECEIPT_PAPER_LENGTH);
 
                 receiptBuilder.Append("\n");
 
-                cashier = formatLine(cashier, cashierID, RECEIPT_PAPER_LENGTH);
-
+                receiptBuilder.Append(store);
+                receiptBuilder.Append(register);
                 receiptBuilder.Append(cashier);
+                receiptBuilder.Append(datetime);
+                receiptBuilder.Append(transID);
             }
 
             catch (Exception ex)
@@ -395,7 +321,7 @@ namespace RecreationOutletPOS
                     receiptBuilder.Append("\n");
 
                     card = formatLine(card, transDetails[TransKey.CARD_NUMBER], RECEIPT_PAPER_LENGTH);
-                    cardTender = formatLine(cardTender, transDetails[TransKey.TRANS_TOTAL], RECEIPT_PAPER_LENGTH);
+                    cardTender = formatLine(cardTender, transDetails[TransKey.TENDERED], RECEIPT_PAPER_LENGTH);
 
                     receiptBuilder.Append(card);
                     receiptBuilder.Append(cardTender);
