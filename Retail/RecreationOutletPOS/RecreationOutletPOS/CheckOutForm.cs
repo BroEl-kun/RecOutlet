@@ -38,7 +38,7 @@ namespace RecreationOutletPOS
             this.transaction = transaction;
             this.transItems = transItems;
 
-            ccField.Width = 0;
+            //ccField.Width = 0;
             lblSwipe.Visible = false;
             setCheckoutInfo(transaction);
         }
@@ -83,7 +83,11 @@ namespace RecreationOutletPOS
                 else
                 {
                     //Card Checkout
-                    cardCheckout();
+                    if (PAN == null)
+                    {
+                        MessageBox.Show("Please Scan Card");
+                        return;
+                    }
                 }
                 
                 DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
@@ -128,43 +132,35 @@ namespace RecreationOutletPOS
         /// 
         /// Parses input from the card reader from hidden textField
         /// </summary>
-        int breaks = 0;
-        private void readCard(object sender, EventArgs e)
+        private void readCard(object sender, KeyPressEventArgs e)
         {
-            string SubString = ccField.Text.Substring(ccField.Text.Length - 1);
-            if (SubString == "?")
+            if (e.KeyChar == 13)
             {
-                breaks += 1;
-            }
+                    String rawString = ccField.Text;
+                    rawString = rawString.Replace(" ", "");
 
-            if (breaks == 2)
-            {
-                MessageBox.Show("");
-                
-                String rawString = ccField.Text;
-                rawString = rawString.Replace(" ", "");
-                
-                char[] delimiterChars = { '%', '^', '/', '?', ';', '=' };
-                
-                string[] parsed = rawString.Split(delimiterChars);
+                    char[] delimiterChars = { '%', '^', '/', '?', ';', '=' };
 
-                if (parsed.Length != 9)
-                {
-                    MessageBox.Show("Card Read Failed");
+                    string[] parsed = rawString.Split(delimiterChars);
+
+                    if (parsed.Length != 9)
+                    {
+                        MessageBox.Show("Card Read Failed");
+                        ccField.Text = "";
+                        return;
+                    }
+
+                    PAN = parsed[1];
+                    lName = parsed[2];
+                    fName = parsed[3];
+                    ccNum = parsed[6];
+                    ccEnd = ccNum.Substring(ccNum.Length - 4);
+
+                    MessageBox.Show("Card read success!");
+
+                    ccField.Text = "";
                     return;
                 }
-                PAN = parsed[1];
-                lName = parsed[2];
-                fName = parsed[3];
-                ccNum = parsed[6];
-                ccEnd = ccNum.Substring(ccNum.Length - 4);
-
-                breaks = 0;
-
-                MessageBox.Show(PAN + "\n" + lName + "\n" + fName + "\n" + ccEnd + "\n" + parsed.Length);
-
-                ccField.Text = "";
-            }
         }
 
         //Runs when hidden textfield loses focus
@@ -197,16 +193,6 @@ namespace RecreationOutletPOS
                 ccField.Focus();
                 lblSwipe.Visible = true;
             }
-        }
-
-        private void readCard()
-        {
-
-        }
-
-        private void ccFocus()
-        {
-
         }
     }
 }
