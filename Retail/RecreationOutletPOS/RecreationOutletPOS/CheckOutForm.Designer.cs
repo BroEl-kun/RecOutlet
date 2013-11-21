@@ -198,7 +198,7 @@
             this.ccField.Name = "ccField";
             this.ccField.Size = new System.Drawing.Size(100, 20);
             this.ccField.TabIndex = 7;
-            this.ccField.TextChanged += new System.EventHandler(this.readCard);
+            this.ccField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.readCard);
             this.ccField.Leave += new System.EventHandler(this.ccFocus);
             // 
             // lblSwipe
