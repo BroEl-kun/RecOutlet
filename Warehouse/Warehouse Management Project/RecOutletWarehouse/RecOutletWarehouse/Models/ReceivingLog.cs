@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace RecOutletWarehouse.Models
 {
@@ -16,6 +18,7 @@ namespace RecOutletWarehouse.Models
         //public byte QtyTypeID { get; set; }
         public short QtyTypeID { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime ReceiveDate { get; set; }
 
         public string ReceivingNotes { get; set; }
