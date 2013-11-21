@@ -133,6 +133,11 @@ td {
     .no-list li {
         display: inline;
     }
+
+.successful-insert {
+    font-weight:bold;
+    color:green;
+}
 /*Errors and Validation
 ----------------------------------------------------------*/
 .error {

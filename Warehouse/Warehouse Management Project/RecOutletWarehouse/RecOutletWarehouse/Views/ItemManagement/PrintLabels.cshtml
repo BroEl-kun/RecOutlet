@@ -14,6 +14,12 @@
 
 <h2>Print RPC or UPC Labels</h2>
 
+@if(ViewBag.ItemSuccessfulInsert != null){
+<ul>
+    <li class="successful-insert">@ViewBag.ItemSuccessfulInsert</li>
+</ul>
+}
+
 @using(Html.BeginForm()){
     <fieldset>
         <legend>Item information</legend>

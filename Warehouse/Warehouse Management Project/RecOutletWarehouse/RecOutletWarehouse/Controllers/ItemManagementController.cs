@@ -86,11 +86,12 @@ namespace RecOutletWarehouse.Controllers
 
             if (ModelState.IsValid) {
                 db.AddNewItem(item);
+                ViewBag.ItemSuccessfulInsert = item.ItemName + "created with RPC " + item.RecRPC + ".";
                 if (labelRedirect == "Create Item and Print Labels") {
                     return RedirectToAction("PrintLabels", new { id = item.RecRPC});
                 }
 
-                return RedirectToAction("Index", "Home");
+                return View(new Item());
             }
 
             return View(item);
