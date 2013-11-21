@@ -39,17 +39,16 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    /*if (Regex.IsMatch(txtPriceOveride.Text, @"[^a-z^A-Z^!^@^#^$^%^&^*^(^)^-^\-^+^\+^<^\<^>^:^/:^{^\{^}^\}^|^\|^?^\?^~^\~]"))
-                    {
-                        MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
-                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk); 
-                    }
+                    //if (Regex.IsMatch(txtPriceOveride.Text, @"[^\d{0,6}(\.\d{0,2})?]"))
+                    //{
+                       Double.TryParse(txtPriceOveride.Text, out inPrice);
+                       //salesForm.overideItemPrice(inPrice, selectedItem);  
+                    //}
 
-                    else
-                    {*/
-
-                        Double.TryParse(txtPriceOveride.Text, out inPrice);
-                        //salesForm.overideItemPrice(inPrice, selectedItem);
+                    //else
+                    //{
+                      // MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
+                       //MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     //}
                 }
                 catch (Exception ex)
