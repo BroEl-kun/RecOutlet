@@ -6,21 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Aliases for the Enum's inner classes
+using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
+
 namespace RecreationOutletPOS
 {
     /// <summary>
     /// Programmer: Michael Vuong
-    /// Last Updated: 10/28/2013
+    /// Last Updated: 11/21/2013
     /// 
     /// Contain methods necessary for searching through the store and warehouse's inventory
     /// </summary>
-    class InventorySearch
+    public class InventorySearch
     {
         private string connStr = HelperMethods.connStr();
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/16/2013 
+        /// Last Updated: 11/21/2013 
+        /// 
+        /// NOTE- searching by ItemCreatedDate will search by DAY by default
         /// 
         /// Pulls the data from the database using a given "searchColumn" (which correlates to a column in the database)
         /// and searches that column for "searchCriteria" (the substring of interest we're looking for in that column)
@@ -36,7 +41,7 @@ namespace RecreationOutletPOS
 
             DataSet ds = new DataSet();
 
-            ds.Tables.Add("Results");
+            ds.Tables.Add(SqlResultSet.ITEM_RESULTSET.ToString());
 
             try
             {
@@ -66,6 +71,5 @@ namespace RecreationOutletPOS
 
             return ds;
         }
-
     }
 }

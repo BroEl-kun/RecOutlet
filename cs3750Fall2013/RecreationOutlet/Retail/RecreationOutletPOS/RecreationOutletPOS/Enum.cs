@@ -109,11 +109,90 @@ namespace RecreationOutletPOS
 
         #endregion
 
+        #region ListView Enums
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/21/2013
+        /// 
+        /// Represents the ListView columns NAMES used in the POS
+        /// </summary>
+        public sealed class ListViewColumn
+        {
+            private readonly String columnName;
+
+            public static readonly ListViewColumn ITEM_ID = new ListViewColumn("ItemID");
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/20/2013
+            /// 
+            /// Constructor
+            /// </summary>
+            /// <param name="columnName"></param>
+            public ListViewColumn(String columnName)
+            {
+                this.columnName = columnName;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/21/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return columnName;
+            }
+        }
+
+        #endregion
+
         #region Database Table Enums
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/16/2013
+        /// Last Updated: 11/21/2013
+        /// 
+        /// Represents the different result set names to store SQL Query results 
+        /// FORMAT: TABLENAME_ResultSet
+        /// </summary>
+        public sealed class SqlResultSet
+        {
+            private readonly String resultSet;
+
+            public static readonly SqlResultSet ITEM_RESULTSET = new SqlResultSet("ITEM_ResultSet");
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/14/2013
+            /// 
+            /// Constructor
+            /// </summary>
+            /// <param name="resultSet"></param>
+            public SqlResultSet(String resultSet)
+            {
+                this.resultSet = resultSet;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/14/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return resultSet;
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/21/2013
         /// 
         /// Represents the the ITEM table's and contains enums for each column
         /// </summary>
@@ -123,6 +202,7 @@ namespace RecreationOutletPOS
 
             public static readonly ItemTableColumn REC_RPC = new ItemTableColumn("RecRPC");
             public static readonly ItemTableColumn ITEM_UPC = new ItemTableColumn("ItemUPC");
+            public static readonly ItemTableColumn NAME = new ItemTableColumn("Name");
             public static readonly ItemTableColumn DESCRIPTION = new ItemTableColumn("Description");
             public static readonly ItemTableColumn SELL_PRICE = new ItemTableColumn("SellPrice");
             public static readonly ItemTableColumn DEPARTMENT_ID = new ItemTableColumn("DepartmentID");

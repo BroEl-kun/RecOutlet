@@ -8,7 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Aliases for the Enum's inner classes
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
+using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
+using ListViewColumn = RecreationOutletPOS.Enum.ListViewColumn;
 
 namespace RecreationOutletPOS
 {
@@ -58,7 +61,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/28/2013
+        /// Last Updated: 11/21/2013
         /// 
         /// Live search for the Inventory section of the POS
         /// </summary>
@@ -76,11 +79,11 @@ namespace RecreationOutletPOS
 
                 lsvCurrentInventory.Items.Clear();
 
-                if (ds.Tables["Results"].Rows.Count != 0)
+                if (ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows.Count != 0)
                 {
-                    foreach (DataRow row in ds.Tables["Results"].Rows)
+                    foreach (DataRow row in ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows)
                     {
-                        ListViewItem li = new ListViewItem(row["ItemID"].ToString());
+                        ListViewItem li = new ListViewItem(row[ListViewColumn.ITEM_ID.ToString()].ToString());
                         
                         li.SubItems.Add(row[ItemTableColumn.REC_RPC.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.ITEM_UPC.ToString()].ToString());

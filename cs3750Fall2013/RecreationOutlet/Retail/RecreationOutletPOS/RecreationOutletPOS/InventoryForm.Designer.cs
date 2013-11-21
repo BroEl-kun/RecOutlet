@@ -47,6 +47,7 @@
             this.ItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RecRPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ItemUPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SellPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.DepartmentID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -172,6 +173,7 @@
             this.ItemID,
             this.RecRPC,
             this.ItemUPC,
+            this.ItemName,
             this.Description,
             this.SellPrice,
             this.DepartmentID,
@@ -200,17 +202,22 @@
             // ItemID
             // 
             this.ItemID.Text = "ItemID";
-            this.ItemID.Width = 110;
+            this.ItemID.Width = 150;
             // 
             // RecRPC
             // 
             this.RecRPC.Text = "RecRPC";
-            this.RecRPC.Width = 100;
+            this.RecRPC.Width = 170;
             // 
             // ItemUPC
             // 
             this.ItemUPC.Text = "ItemUPC";
-            this.ItemUPC.Width = 100;
+            this.ItemUPC.Width = 170;
+            // 
+            // ItemName
+            // 
+            this.ItemName.Text = "Name";
+            this.ItemName.Width = 240;
             // 
             // Description
             // 
@@ -235,7 +242,7 @@
             // TaxRateID
             // 
             this.TaxRateID.Text = "TaxRateID";
-            this.TaxRateID.Width = 70;
+            this.TaxRateID.Width = 90;
             // 
             // ProductLineID
             // 
@@ -250,17 +257,17 @@
             // RestrictedAge
             // 
             this.RestrictedAge.Text = "RestrictedAge";
-            this.RestrictedAge.Width = 90;
+            this.RestrictedAge.Width = 120;
             // 
             // CreatedBy
             // 
             this.CreatedBy.Text = "CreatedBy";
-            this.CreatedBy.Width = 90;
+            this.CreatedBy.Width = 110;
             // 
             // CreatedDate
             // 
             this.CreatedDate.Text = "CreatedDate";
-            this.CreatedDate.Width = 90;
+            this.CreatedDate.Width = 120;
             // 
             // LegacyID
             // 
@@ -291,13 +298,14 @@
             "ItemUPC",
             "ItemID",
             "ProductLineID",
+            "Name",
             "Description",
             "SeasonCode",
             "CategoryID",
             "DepartmentID",
             "RestrictedAge",
-            "CreatedBy",
-            "CreatedDate",
+            "ItemCreatedBy",
+            "ItemCreatedDate",
             "LegacyID",
             "MSRP",
             "SellPrice",
@@ -362,6 +370,7 @@
         private System.Windows.Forms.ColumnHeader MSRP;
         private System.Windows.Forms.ColumnHeader SellPrice;
         private System.Windows.Forms.ColumnHeader TaxRateID;
+        private System.Windows.Forms.ColumnHeader ItemName;
 
     }
 }
