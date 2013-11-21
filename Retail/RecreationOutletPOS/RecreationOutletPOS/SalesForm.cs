@@ -432,8 +432,8 @@ namespace RecreationOutletPOS
                             string name;
                             double price;
 
-                            int.TryParse(row["ItemID"].ToString(), out id);
-                            name = (row["Description"].ToString());
+                            int.TryParse(row["RecRPC"].ToString(), out id);
+                            name = (row["Name"].ToString());
                             double.TryParse(row["SellPrice"].ToString(), out price);
 
                             addItem(id, name, price, quantity, 0.00, price);

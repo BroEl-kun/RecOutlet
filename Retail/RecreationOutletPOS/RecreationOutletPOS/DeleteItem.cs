@@ -26,12 +26,14 @@ namespace RecreationOutletPOS
         private void btnOK_Click(object sender, EventArgs e)
         {
             int amount = 0;
+            bool failFlag = false;
 
             if (tbQuantity.Text == "")
             {
                 MessageBox.Show("Quantity field can't be left blank.", "Item Void",
                     MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 tbQuantity.Text = "1";
+                failFlag = true;
             }
 
             try
@@ -45,8 +47,11 @@ namespace RecreationOutletPOS
                 tbQuantity.Text = "1";
             }
 
-            parent.voidItem(item, amount);
-            this.Close();
+            if (!failFlag)
+            {
+                parent.voidItem(item, amount);
+                this.Close();
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
