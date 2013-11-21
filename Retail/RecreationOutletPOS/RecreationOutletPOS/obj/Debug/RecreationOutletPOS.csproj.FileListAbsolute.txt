@@ -30,4 +30,3 @@ C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\Recreatio
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DiscountForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csprojResolveAssemblyReference.cache
