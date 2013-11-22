@@ -15,6 +15,12 @@ using ListViewColumn = RecreationOutletPOS.Enum.ListViewColumn;
 
 namespace RecreationOutletPOS
 {
+    /// <summary>
+    /// Programmer: Michael Vuong
+    /// Last Updated: 11/21/2013
+    /// 
+    /// Inventory form used for searching inventory from other stores or warehouse
+    /// </summary>
     public partial class InventoryForm : Form
     {
         public string selectedInventory;
@@ -23,19 +29,86 @@ namespace RecreationOutletPOS
         
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 10/28/2013
+        /// Last Updated: 11/21/2013
         /// 
         /// Constructor
         /// </summary>
         public InventoryForm(SalesForm inForm)
         {
-            this.salesForm = inForm;
             InitializeComponent();
+
+            this.salesForm = inForm;
+
+            // Initialize the drop down box values
+            setInventoryFromValues();
+            setSearchByValues();
 
             // Sets the default value for the drop down boxes
             cmbInventoryFrom.SelectedIndex = 0;
-            cmbSearchBy.SelectedIndex = 4;
+            cmbSearchBy.SelectedIndex = 2;
         }
+
+        #region Dropdown Populating Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/21/2013
+        /// 
+        /// Populates the Search By dropdown box 
+        /// </summary>
+        private void setSearchByValues()
+        {
+            List<ItemTableColumn> searchByValues = ItemTableColumn.getItemTableColumns();
+            
+            try
+            {
+                foreach (ItemTableColumn columnEnum in searchByValues)
+                {
+                    cmbSearchBy.Items.Add(columnEnum.ToString());
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/21/2013
+        /// 
+        /// NOTE- hardcoded store names for now, this should be changed later when its
+        /// possible to retrieve store names and their inventory
+        /// 
+        /// Populates the Inventory From dropdown box
+        /// </summary>
+        private void setInventoryFromValues()
+        {
+            List<string> inventoryLocations = new List<string>();
+
+            try
+            {
+                inventoryLocations.Add("<This Store>");
+                inventoryLocations.Add("Store 1");
+                inventoryLocations.Add("Store 2");
+                inventoryLocations.Add("Warehouse");
+                
+                foreach (string location in inventoryLocations)
+                {
+                    cmbInventoryFrom.Items.Add(location);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        #endregion
+
+        #region Event Handling
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -122,5 +195,7 @@ namespace RecreationOutletPOS
             this.Hide();
             salesForm.showReturns();
         }
+
+        #endregion
     }
 }

@@ -230,6 +230,44 @@ namespace RecreationOutletPOS
 
             /// <summary>
             /// Programmer: Michael Vuong
+            /// Last Updated: 11/21/2013
+            /// 
+            /// Creats a list of Item table columns enums in the form of a List
+            /// </summary>
+            /// <returns>the Item table columns enums in the form of a List</returns>
+            public static List<ItemTableColumn> getItemTableColumns()
+            {
+                List<ItemTableColumn> itemTableColumns = new List<ItemTableColumn>();
+                
+                try
+                {
+                    itemTableColumns.Add(ItemTableColumn.REC_RPC);
+                    itemTableColumns.Add(ItemTableColumn.ITEM_UPC);
+                    itemTableColumns.Add(ItemTableColumn.NAME);
+                    itemTableColumns.Add(ItemTableColumn.DESCRIPTION);
+                    itemTableColumns.Add(ItemTableColumn.SELL_PRICE);
+                    itemTableColumns.Add(ItemTableColumn.DEPARTMENT_ID);
+                    itemTableColumns.Add(ItemTableColumn.CATEGORY_ID);
+                    itemTableColumns.Add(ItemTableColumn.TAX_RATE_ID);
+                    itemTableColumns.Add(ItemTableColumn.PRODUCT_LINE_ID);
+                    itemTableColumns.Add(ItemTableColumn.SEASON_CODE);
+                    itemTableColumns.Add(ItemTableColumn.RESTRICTED_AGE);
+                    itemTableColumns.Add(ItemTableColumn.ITEM_CREATED_BY);
+                    itemTableColumns.Add(ItemTableColumn.ITEM_CREATED_DATE);
+                    itemTableColumns.Add(ItemTableColumn.LEGACY_ID);
+                    itemTableColumns.Add(ItemTableColumn.MSRP);
+                }
+
+                catch (Exception ex)
+                {
+                   
+                }
+
+                return itemTableColumns;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
             /// Last Updated: 11/14/2013
             /// 
             /// Overridden to return the string class property
