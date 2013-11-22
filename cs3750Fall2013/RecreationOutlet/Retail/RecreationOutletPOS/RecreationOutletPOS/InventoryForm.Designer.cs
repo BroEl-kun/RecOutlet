@@ -127,11 +127,6 @@
             // 
             this.cmbInventoryFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbInventoryFrom.FormattingEnabled = true;
-            this.cmbInventoryFrom.Items.AddRange(new object[] {
-            "<This Store>",
-            "Store 2",
-            "Store 3",
-            "Warehouse"});
             this.cmbInventoryFrom.Location = new System.Drawing.Point(117, 99);
             this.cmbInventoryFrom.Name = "cmbInventoryFrom";
             this.cmbInventoryFrom.Size = new System.Drawing.Size(118, 21);
@@ -293,23 +288,6 @@
             // 
             this.cmbSearchBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSearchBy.FormattingEnabled = true;
-            this.cmbSearchBy.Items.AddRange(new object[] {
-            "RecRPC",
-            "ItemUPC",
-            "ItemID",
-            "ProductLineID",
-            "Name",
-            "Description",
-            "SeasonCode",
-            "CategoryID",
-            "DepartmentID",
-            "RestrictedAge",
-            "ItemCreatedBy",
-            "ItemCreatedDate",
-            "LegacyID",
-            "MSRP",
-            "SellPrice",
-            "TaxRateID"});
             this.cmbSearchBy.Location = new System.Drawing.Point(350, 99);
             this.cmbSearchBy.Name = "cmbSearchBy";
             this.cmbSearchBy.Size = new System.Drawing.Size(137, 21);
