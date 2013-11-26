@@ -190,6 +190,7 @@ namespace RecreationOutletPOS
 
                         li.SubItems.Add(row[ItemTableColumn.REC_RPC.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.ITEM_UPC.ToString()].ToString());
+                        li.SubItems.Add(row[ItemTableColumn.NAME.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.DESCRIPTION.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.SELL_PRICE.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.DEPARTMENT_ID.ToString()].ToString());
