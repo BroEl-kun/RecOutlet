@@ -57,13 +57,6 @@ namespace RecreationOutletPOS
             }
 
             return ds;
-
-            // ID
-            // item name
-            // price
-            // quantity
-            // discount
-            // total
         }
 
         /// <summary>
