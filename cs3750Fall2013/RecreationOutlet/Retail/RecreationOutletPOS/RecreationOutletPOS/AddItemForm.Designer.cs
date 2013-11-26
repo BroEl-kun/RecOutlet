@@ -108,6 +108,7 @@
             this.btnMiscCamp.TabIndex = 15;
             this.btnMiscCamp.Text = "Misc Camp";
             this.btnMiscCamp.UseVisualStyleBackColor = true;
+            this.btnMiscCamp.Click += new System.EventHandler(this.btnMiscCamp_Click);
             // 
             // btnWaterSports
             // 
