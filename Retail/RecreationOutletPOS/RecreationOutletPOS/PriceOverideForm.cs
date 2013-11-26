@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-//using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -39,26 +39,26 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    //if (Regex.IsMatch(txtPriceOveride.Text, @"[^\d{0,6}(\.\d{0,2})?]"))
-                    //{
-                       Double.TryParse(txtPriceOveride.Text, out inPrice);
-                       //salesForm.overideItemPrice(inPrice, selectedItem);  
-                    //}
+                    if (Regex.IsMatch(txtPriceOveride.Text, @"[^\d{3\}(\.\d{2\})?]"))
+                    {
+                        MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
+                      MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
 
-                    //else
-                    //{
-                      // MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
-                       //MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    //}
+                    else
+                    {
+                        Double.TryParse(txtPriceOveride.Text, out inPrice);
+                        salesForm.overideItemPrice(inPrice, selectedItem); 
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
-                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);  //kept here for now for functionality sake
+                   // MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
+                     //   MessageBoxButtons.OK, MessageBoxIcon.Asterisk);  //kept here for now for functionality sake
                 }
 
 
-                salesForm.overideItemPrice(inPrice, selectedItem);  //kept here for now for functionality sake
+                //salesForm.overideItemPrice(inPrice, selectedItem);  //kept here for now for functionality sake
                 this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
