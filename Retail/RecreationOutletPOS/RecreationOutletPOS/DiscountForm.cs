@@ -32,6 +32,17 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        //Constructor for combined form -Aaron
+        Combined combined;
+        public DiscountForm(Combined inForm, int selectedItem)
+        {
+            this.combined = inForm;
+            this.selectedItem = selectedItem;
+
+            InitializeComponent();
+        }
+        //--------------------------------------
+
         private void DiscountForm_Load(object sender, EventArgs e)
         {
             tbDiscountPrice.Focus();
