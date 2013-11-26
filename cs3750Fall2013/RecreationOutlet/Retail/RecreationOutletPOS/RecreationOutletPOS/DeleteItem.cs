@@ -23,6 +23,17 @@ namespace RecreationOutletPOS
             this.item = item;
         }
 
+        //Constructor for combined form -Aaron
+        Combined combined;
+        public DeleteItem(Combined parent, int item)
+        {
+            InitializeComponent();
+
+            this.combined = parent;
+            this.item = item;
+        }
+        //-------------------------------------
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             int amount = 0;
@@ -63,6 +74,11 @@ namespace RecreationOutletPOS
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+        }
+
+        private void tbQuantity_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
