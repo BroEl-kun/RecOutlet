@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -44,15 +45,23 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    Double.TryParse(tbDiscountPrice.Text, out inPrice);
+                    if (Regex.IsMatch(tbDiscountPrice.Text, @"[^\d{3\}(\.\d{2\})?]"))
+                    {
+                        MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Discount",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+
+                    else
+                    {
+                        Double.TryParse(tbDiscountPrice.Text, out inPrice);
+                        salesForm.discountItem(0, inPrice, selectedItem);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Discount",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    
                 }
 
-                salesForm.discountItem(0, inPrice, selectedItem);
                 this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
@@ -69,15 +78,25 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    Double.TryParse(tbDiscountPerc.Text, out inPercent);
+                    //if (Regex.IsMatch(tbDiscountPrice.Text, @"[^\d{2\}(\.\d{2\})?]"))
+                    //{
+                      //  MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
+                        //MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    //}
+                    //else
+                    //{
+                        Double.TryParse(tbDiscountPerc.Text, out inPercent);
+                        //salesForm.discountItem(1, inPercent, selectedItem);
+                    //}
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //For now, keep this here for functionality sake
                 }
 
-                salesForm.discountItem(1, inPercent, selectedItem);
+                salesForm.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
+
                 this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
