@@ -47,6 +47,16 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        //Constuctor for combined form -Aaron
+        Combined combined;
+        public AddItemForm(Combined inForm)
+        {
+            this.combined = inForm;
+
+            InitializeComponent();
+        }
+        //------------------------------------
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 10/14/2013
@@ -165,6 +175,11 @@ namespace RecreationOutletPOS
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+        }
+
+        private void btnMiscCamp_Click(object sender, EventArgs e)
+        {
+
         }
 
         
