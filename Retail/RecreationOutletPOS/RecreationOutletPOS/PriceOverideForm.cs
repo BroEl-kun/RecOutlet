@@ -31,6 +31,17 @@ namespace RecreationOutletPOS
              InitializeComponent();
         }
 
+        //Constructor for combined form -Aaron
+        Combined combined;
+        public PriceOverideForm(Combined inForm, int selectedItem)
+        {
+            this.combined = inForm;
+            this.selectedItem = selectedItem;
+
+            InitializeComponent();
+        }
+        //------------------------------------
+
         private void txtPriceOveride_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -65,6 +76,11 @@ namespace RecreationOutletPOS
             {
                 this.Close();
             }
+        }
+
+        private void PriceOverideForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
