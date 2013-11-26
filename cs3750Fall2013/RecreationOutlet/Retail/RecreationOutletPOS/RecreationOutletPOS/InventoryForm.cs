@@ -130,15 +130,45 @@ namespace RecreationOutletPOS
         private void cmbSearchBy_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedSearchColumn = cmbSearchBy.Text;
+
+            searchDatabase();
         }
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/21/2013
+        /// Last Updated: 11/26/2013
         /// 
         /// Live search for the Inventory section of the POS
         /// </summary>
         private void txtSearchValue_TextChanged(object sender, EventArgs e)
+        {
+            searchDatabase();
+        }
+
+        private void btnSales_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Owner.Show();
+            this.Owner.Location = this.Location;
+            this.Owner.Size = this.Size;
+        }
+
+        private void btnReturns_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            salesForm.showReturns();
+        }
+
+        #region Helper Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/26/2013
+        /// 
+        /// Searches the database using the Search textbox's value as the search criteria and
+        /// the Selected Search By value as the column to search in
+        /// </summary>
+        private void searchDatabase()
         {
             string searchTerm = txtSearchValue.Text;
 
@@ -157,7 +187,7 @@ namespace RecreationOutletPOS
                     foreach (DataRow row in ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows)
                     {
                         ListViewItem li = new ListViewItem(row[ListViewColumn.ITEM_ID.ToString()].ToString());
-                        
+
                         li.SubItems.Add(row[ItemTableColumn.REC_RPC.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.ITEM_UPC.ToString()].ToString());
                         li.SubItems.Add(row[ItemTableColumn.DESCRIPTION.ToString()].ToString());
@@ -182,19 +212,7 @@ namespace RecreationOutletPOS
             }
         }
 
-        private void btnSales_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            this.Owner.Show();
-            this.Owner.Location = this.Location;
-            this.Owner.Size = this.Size;
-        }
-
-        private void btnReturns_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            salesForm.showReturns();
-        }
+        #endregion
 
         #endregion
     }
