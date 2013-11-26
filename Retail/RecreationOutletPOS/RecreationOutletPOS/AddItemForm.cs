@@ -105,8 +105,8 @@ namespace RecreationOutletPOS
                 {
                     foreach (DataRow row in ds.Tables["Results"].Rows)
                     {
-                        ListViewItem li = new ListViewItem(row["ItemID"].ToString());
-                        li.SubItems.Add(row["Description"].ToString());
+                        ListViewItem li = new ListViewItem(row["RecRPC"].ToString());
+                        li.SubItems.Add(row["Name"].ToString());
                         li.SubItems.Add(row["SellPrice"].ToString());
                         lvData.Items.Add(li);
                     }

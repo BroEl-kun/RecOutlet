@@ -412,8 +412,8 @@ namespace RecreationOutletPOS
                 {
                     // Barcodes using a CODABAR standard will have extra delimiting characters
                     string newText = tbScanner.Text;
-                    newText = newText.Trim('A');
-                    newText = newText.Trim('D');
+                    //newText = newText.Trim('A');
+                    //newText = newText.Trim('D');
 
                     string ID = newText;
                     ds = dt.retrieveItem(ID);
