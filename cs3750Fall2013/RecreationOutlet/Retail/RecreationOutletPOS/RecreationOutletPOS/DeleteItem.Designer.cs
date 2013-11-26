@@ -70,6 +70,7 @@
             this.tbQuantity.Size = new System.Drawing.Size(251, 20);
             this.tbQuantity.TabIndex = 3;
             this.tbQuantity.Text = "1";
+            this.tbQuantity.TextChanged += new System.EventHandler(this.tbQuantity_TextChanged);
             this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
             // 
             // DeleteItem
