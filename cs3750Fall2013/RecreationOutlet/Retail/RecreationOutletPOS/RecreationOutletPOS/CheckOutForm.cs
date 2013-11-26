@@ -53,6 +53,28 @@ namespace RecreationOutletPOS
             this.parent = parent;
         }
 
+        //Constructor for combined form -Aaron
+        Combined combined;
+        public CheckOutForm(Combined parent, Dictionary<TransKey, string> transaction, TransactionList transItems)
+        {
+            InitializeComponent();
+
+            this.transaction = transaction;
+            this.transItems = transItems;
+
+            ccField.Width = 0;
+
+            txtCashTender.Visible = false;
+
+            lblSwipe.Visible = false;
+            lblTenderPrompt.Visible = false;
+
+            setCheckoutInfo(transaction);
+
+            this.combined = parent;
+        }
+        //------------------------------------
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 10/27/2013
@@ -310,6 +332,11 @@ namespace RecreationOutletPOS
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtCashTender_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
