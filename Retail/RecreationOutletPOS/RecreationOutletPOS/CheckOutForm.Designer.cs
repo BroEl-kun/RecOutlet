@@ -222,6 +222,7 @@
             this.txtCashTender.Name = "txtCashTender";
             this.txtCashTender.Size = new System.Drawing.Size(100, 20);
             this.txtCashTender.TabIndex = 9;
+            this.txtCashTender.TextChanged += new System.EventHandler(this.txtCashTender_TextChanged);
             // 
             // lblTenderPrompt
             // 
