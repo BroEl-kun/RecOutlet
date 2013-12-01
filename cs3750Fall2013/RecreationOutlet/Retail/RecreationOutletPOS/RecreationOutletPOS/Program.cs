@@ -16,7 +16,8 @@ namespace RecreationOutletPOS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SalesForm());
+            //Application.Run(new SalesForm());
+            Application.Run(new Combined());
         }
     }
 }
