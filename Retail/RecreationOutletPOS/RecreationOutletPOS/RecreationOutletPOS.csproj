@@ -59,6 +59,10 @@
     <Compile Include="CheckOutForm.Designer.cs">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Combined.cs" />
+    <Compile Include="Combined.Designer.cs">
+      <DependentUpon>Combined.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeleteItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CheckOutForm.resx">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Combined.resx">
+      <DependentUpon>Combined.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteItem.resx">
       <DependentUpon>DeleteItem.cs</DependentUpon>
