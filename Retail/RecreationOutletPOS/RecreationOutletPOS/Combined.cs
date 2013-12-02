@@ -54,7 +54,9 @@ namespace RecreationOutletPOS
             
         }
 
-        //SalesForm
+
+        #region --- Sales Forms Content ---
+
         #region Functions
         //----------------------------------------------------------
         // Functions
@@ -529,7 +531,10 @@ namespace RecreationOutletPOS
         //---End Tabbing---//
         #endregion
 
-        //--------------Returns form----------------
+        #endregion 
+
+        #region --- Returns Form Content ---
+
         private void btnAddItem_Click2(object sender, EventArgs e)
         {
             AddItemForm addItemForm = new AddItemForm(this);
@@ -636,8 +641,10 @@ namespace RecreationOutletPOS
 
         }
 
+        #endregion 
 
-        //--------------- Inventory form -------------------
+        #region --- Inventory Form Content ---
+
         #region Dropdown Populating Methods
 
         /// <summary>
@@ -797,5 +804,7 @@ namespace RecreationOutletPOS
         }
 
         #endregion
+
+        #endregion 
     }
 }

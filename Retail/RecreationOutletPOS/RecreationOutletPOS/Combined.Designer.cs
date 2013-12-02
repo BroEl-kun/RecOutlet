@@ -52,30 +52,6 @@
             this.btnCheckOut = new System.Windows.Forms.Button();
             this.btnDeleteItem = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.grpInventory = new System.Windows.Forms.GroupBox();
-            this.cmbSearchBy = new System.Windows.Forms.ComboBox();
-            this.lblSearchBy = new System.Windows.Forms.Label();
-            this.lsvCurrentInventory = new System.Windows.Forms.ListView();
-            this.ItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RecRPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ItemUPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.SellPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.DepartmentID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CategoryID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TaxRateID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ProductLineID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.SeasonCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.RestrictedAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CreatedBy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.CreatedDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.LegacyID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MSRP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lblSearch = new System.Windows.Forms.Label();
-            this.txtSearchValue = new System.Windows.Forms.TextBox();
-            this.lblInventoryFrom = new System.Windows.Forms.Label();
-            this.cmbInventoryFrom = new System.Windows.Forms.ComboBox();
             this.grpReturns = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnConfirmReturn = new System.Windows.Forms.Button();
@@ -96,11 +72,35 @@
             this.btnReturns = new System.Windows.Forms.Button();
             this.btnSales = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.cmbInventoryFrom = new System.Windows.Forms.ComboBox();
+            this.lblInventoryFrom = new System.Windows.Forms.Label();
+            this.txtSearchValue = new System.Windows.Forms.TextBox();
+            this.lblSearch = new System.Windows.Forms.Label();
+            this.lsvCurrentInventory = new System.Windows.Forms.ListView();
+            this.ItemID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RecRPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ItemUPC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ItemName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SellPrice = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DepartmentID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CategoryID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TaxRateID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProductLineID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SeasonCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.RestrictedAge = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CreatedBy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CreatedDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LegacyID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MSRP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblSearchBy = new System.Windows.Forms.Label();
+            this.cmbSearchBy = new System.Windows.Forms.ComboBox();
+            this.grpInventory = new System.Windows.Forms.GroupBox();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
-            this.grpInventory.SuspendLayout();
             this.grpReturns.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.grpInventory.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSales
@@ -340,189 +340,6 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // grpInventory
-            // 
-            this.grpInventory.Controls.Add(this.cmbSearchBy);
-            this.grpInventory.Controls.Add(this.lblSearchBy);
-            this.grpInventory.Controls.Add(this.lsvCurrentInventory);
-            this.grpInventory.Controls.Add(this.lblSearch);
-            this.grpInventory.Controls.Add(this.txtSearchValue);
-            this.grpInventory.Controls.Add(this.lblInventoryFrom);
-            this.grpInventory.Controls.Add(this.cmbInventoryFrom);
-            this.grpInventory.Location = new System.Drawing.Point(5, 70);
-            this.grpInventory.Name = "grpInventory";
-            this.grpInventory.Size = new System.Drawing.Size(914, 446);
-            this.grpInventory.TabIndex = 40;
-            this.grpInventory.TabStop = false;
-            // 
-            // cmbSearchBy
-            // 
-            this.cmbSearchBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSearchBy.FormattingEnabled = true;
-            this.cmbSearchBy.Location = new System.Drawing.Point(349, 19);
-            this.cmbSearchBy.Name = "cmbSearchBy";
-            this.cmbSearchBy.Size = new System.Drawing.Size(137, 21);
-            this.cmbSearchBy.TabIndex = 52;
-            // 
-            // lblSearchBy
-            // 
-            this.lblSearchBy.AutoSize = true;
-            this.lblSearchBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchBy.Location = new System.Drawing.Point(270, 20);
-            this.lblSearchBy.Name = "lblSearchBy";
-            this.lblSearchBy.Size = new System.Drawing.Size(73, 17);
-            this.lblSearchBy.TabIndex = 51;
-            this.lblSearchBy.Text = "Search By";
-            // 
-            // lsvCurrentInventory
-            // 
-            this.lsvCurrentInventory.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.lsvCurrentInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ItemID,
-            this.RecRPC,
-            this.ItemUPC,
-            this.ItemName,
-            this.Description,
-            this.SellPrice,
-            this.DepartmentID,
-            this.CategoryID,
-            this.TaxRateID,
-            this.ProductLineID,
-            this.SeasonCode,
-            this.RestrictedAge,
-            this.CreatedBy,
-            this.CreatedDate,
-            this.LegacyID,
-            this.MSRP});
-            this.lsvCurrentInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lsvCurrentInventory.FullRowSelect = true;
-            this.lsvCurrentInventory.HideSelection = false;
-            this.lsvCurrentInventory.LabelWrap = false;
-            this.lsvCurrentInventory.Location = new System.Drawing.Point(11, 58);
-            this.lsvCurrentInventory.MultiSelect = false;
-            this.lsvCurrentInventory.Name = "lsvCurrentInventory";
-            this.lsvCurrentInventory.Size = new System.Drawing.Size(893, 370);
-            this.lsvCurrentInventory.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lsvCurrentInventory.TabIndex = 50;
-            this.lsvCurrentInventory.UseCompatibleStateImageBehavior = false;
-            this.lsvCurrentInventory.View = System.Windows.Forms.View.Details;
-            // 
-            // ItemID
-            // 
-            this.ItemID.Text = "ItemID";
-            this.ItemID.Width = 150;
-            // 
-            // RecRPC
-            // 
-            this.RecRPC.Text = "RecRPC";
-            this.RecRPC.Width = 170;
-            // 
-            // ItemUPC
-            // 
-            this.ItemUPC.Text = "ItemUPC";
-            this.ItemUPC.Width = 170;
-            // 
-            // ItemName
-            // 
-            this.ItemName.Text = "Name";
-            this.ItemName.Width = 240;
-            // 
-            // Description
-            // 
-            this.Description.Text = "Description";
-            this.Description.Width = 350;
-            // 
-            // SellPrice
-            // 
-            this.SellPrice.Text = "SellPrice";
-            this.SellPrice.Width = 90;
-            // 
-            // DepartmentID
-            // 
-            this.DepartmentID.Text = "DepartmentID";
-            this.DepartmentID.Width = 100;
-            // 
-            // CategoryID
-            // 
-            this.CategoryID.Text = "CategoryID";
-            this.CategoryID.Width = 80;
-            // 
-            // TaxRateID
-            // 
-            this.TaxRateID.Text = "TaxRateID";
-            this.TaxRateID.Width = 90;
-            // 
-            // ProductLineID
-            // 
-            this.ProductLineID.Text = "ProductLineID";
-            this.ProductLineID.Width = 110;
-            // 
-            // SeasonCode
-            // 
-            this.SeasonCode.Text = "SeasonCode";
-            this.SeasonCode.Width = 100;
-            // 
-            // RestrictedAge
-            // 
-            this.RestrictedAge.Text = "RestrictedAge";
-            this.RestrictedAge.Width = 120;
-            // 
-            // CreatedBy
-            // 
-            this.CreatedBy.Text = "CreatedBy";
-            this.CreatedBy.Width = 110;
-            // 
-            // CreatedDate
-            // 
-            this.CreatedDate.Text = "CreatedDate";
-            this.CreatedDate.Width = 120;
-            // 
-            // LegacyID
-            // 
-            this.LegacyID.Text = "LegacyID";
-            this.LegacyID.Width = 90;
-            // 
-            // MSRP
-            // 
-            this.MSRP.Text = "MSRP";
-            this.MSRP.Width = 90;
-            // 
-            // lblSearch
-            // 
-            this.lblSearch.AutoSize = true;
-            this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearch.Location = new System.Drawing.Point(518, 19);
-            this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(53, 17);
-            this.lblSearch.TabIndex = 49;
-            this.lblSearch.Text = "Search";
-            // 
-            // txtSearchValue
-            // 
-            this.txtSearchValue.Location = new System.Drawing.Point(577, 19);
-            this.txtSearchValue.Name = "txtSearchValue";
-            this.txtSearchValue.Size = new System.Drawing.Size(327, 20);
-            this.txtSearchValue.TabIndex = 48;
-            // 
-            // lblInventoryFrom
-            // 
-            this.lblInventoryFrom.AutoSize = true;
-            this.lblInventoryFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInventoryFrom.Location = new System.Drawing.Point(11, 20);
-            this.lblInventoryFrom.Name = "lblInventoryFrom";
-            this.lblInventoryFrom.Size = new System.Drawing.Size(102, 17);
-            this.lblInventoryFrom.TabIndex = 47;
-            this.lblInventoryFrom.Text = "Inventory From";
-            // 
-            // cmbInventoryFrom
-            // 
-            this.cmbInventoryFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbInventoryFrom.FormattingEnabled = true;
-            this.cmbInventoryFrom.Location = new System.Drawing.Point(116, 19);
-            this.cmbInventoryFrom.Name = "cmbInventoryFrom";
-            this.cmbInventoryFrom.Size = new System.Drawing.Size(118, 21);
-            this.cmbInventoryFrom.TabIndex = 46;
-            // 
             // grpReturns
             // 
             this.grpReturns.Controls.Add(this.button1);
@@ -721,6 +538,189 @@
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = true;
             // 
+            // cmbInventoryFrom
+            // 
+            this.cmbInventoryFrom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInventoryFrom.FormattingEnabled = true;
+            this.cmbInventoryFrom.Location = new System.Drawing.Point(116, 19);
+            this.cmbInventoryFrom.Name = "cmbInventoryFrom";
+            this.cmbInventoryFrom.Size = new System.Drawing.Size(118, 21);
+            this.cmbInventoryFrom.TabIndex = 46;
+            // 
+            // lblInventoryFrom
+            // 
+            this.lblInventoryFrom.AutoSize = true;
+            this.lblInventoryFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryFrom.Location = new System.Drawing.Point(11, 20);
+            this.lblInventoryFrom.Name = "lblInventoryFrom";
+            this.lblInventoryFrom.Size = new System.Drawing.Size(102, 17);
+            this.lblInventoryFrom.TabIndex = 47;
+            this.lblInventoryFrom.Text = "Inventory From";
+            // 
+            // txtSearchValue
+            // 
+            this.txtSearchValue.Location = new System.Drawing.Point(577, 19);
+            this.txtSearchValue.Name = "txtSearchValue";
+            this.txtSearchValue.Size = new System.Drawing.Size(327, 20);
+            this.txtSearchValue.TabIndex = 48;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearch.Location = new System.Drawing.Point(518, 19);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(53, 17);
+            this.lblSearch.TabIndex = 49;
+            this.lblSearch.Text = "Search";
+            // 
+            // lsvCurrentInventory
+            // 
+            this.lsvCurrentInventory.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.lsvCurrentInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ItemID,
+            this.RecRPC,
+            this.ItemUPC,
+            this.ItemName,
+            this.Description,
+            this.SellPrice,
+            this.DepartmentID,
+            this.CategoryID,
+            this.TaxRateID,
+            this.ProductLineID,
+            this.SeasonCode,
+            this.RestrictedAge,
+            this.CreatedBy,
+            this.CreatedDate,
+            this.LegacyID,
+            this.MSRP});
+            this.lsvCurrentInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsvCurrentInventory.FullRowSelect = true;
+            this.lsvCurrentInventory.HideSelection = false;
+            this.lsvCurrentInventory.LabelWrap = false;
+            this.lsvCurrentInventory.Location = new System.Drawing.Point(11, 58);
+            this.lsvCurrentInventory.MultiSelect = false;
+            this.lsvCurrentInventory.Name = "lsvCurrentInventory";
+            this.lsvCurrentInventory.Size = new System.Drawing.Size(893, 370);
+            this.lsvCurrentInventory.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.lsvCurrentInventory.TabIndex = 50;
+            this.lsvCurrentInventory.UseCompatibleStateImageBehavior = false;
+            this.lsvCurrentInventory.View = System.Windows.Forms.View.Details;
+            // 
+            // ItemID
+            // 
+            this.ItemID.Text = "ItemID";
+            this.ItemID.Width = 150;
+            // 
+            // RecRPC
+            // 
+            this.RecRPC.Text = "RecRPC";
+            this.RecRPC.Width = 170;
+            // 
+            // ItemUPC
+            // 
+            this.ItemUPC.Text = "ItemUPC";
+            this.ItemUPC.Width = 170;
+            // 
+            // ItemName
+            // 
+            this.ItemName.Text = "Name";
+            this.ItemName.Width = 240;
+            // 
+            // Description
+            // 
+            this.Description.Text = "Description";
+            this.Description.Width = 350;
+            // 
+            // SellPrice
+            // 
+            this.SellPrice.Text = "SellPrice";
+            this.SellPrice.Width = 90;
+            // 
+            // DepartmentID
+            // 
+            this.DepartmentID.Text = "DepartmentID";
+            this.DepartmentID.Width = 100;
+            // 
+            // CategoryID
+            // 
+            this.CategoryID.Text = "CategoryID";
+            this.CategoryID.Width = 80;
+            // 
+            // TaxRateID
+            // 
+            this.TaxRateID.Text = "TaxRateID";
+            this.TaxRateID.Width = 90;
+            // 
+            // ProductLineID
+            // 
+            this.ProductLineID.Text = "ProductLineID";
+            this.ProductLineID.Width = 110;
+            // 
+            // SeasonCode
+            // 
+            this.SeasonCode.Text = "SeasonCode";
+            this.SeasonCode.Width = 100;
+            // 
+            // RestrictedAge
+            // 
+            this.RestrictedAge.Text = "RestrictedAge";
+            this.RestrictedAge.Width = 120;
+            // 
+            // CreatedBy
+            // 
+            this.CreatedBy.Text = "CreatedBy";
+            this.CreatedBy.Width = 110;
+            // 
+            // CreatedDate
+            // 
+            this.CreatedDate.Text = "CreatedDate";
+            this.CreatedDate.Width = 120;
+            // 
+            // LegacyID
+            // 
+            this.LegacyID.Text = "LegacyID";
+            this.LegacyID.Width = 90;
+            // 
+            // MSRP
+            // 
+            this.MSRP.Text = "MSRP";
+            this.MSRP.Width = 90;
+            // 
+            // lblSearchBy
+            // 
+            this.lblSearchBy.AutoSize = true;
+            this.lblSearchBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchBy.Location = new System.Drawing.Point(270, 20);
+            this.lblSearchBy.Name = "lblSearchBy";
+            this.lblSearchBy.Size = new System.Drawing.Size(73, 17);
+            this.lblSearchBy.TabIndex = 51;
+            this.lblSearchBy.Text = "Search By";
+            // 
+            // cmbSearchBy
+            // 
+            this.cmbSearchBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSearchBy.FormattingEnabled = true;
+            this.cmbSearchBy.Location = new System.Drawing.Point(349, 19);
+            this.cmbSearchBy.Name = "cmbSearchBy";
+            this.cmbSearchBy.Size = new System.Drawing.Size(137, 21);
+            this.cmbSearchBy.TabIndex = 52;
+            // 
+            // grpInventory
+            // 
+            this.grpInventory.Controls.Add(this.cmbSearchBy);
+            this.grpInventory.Controls.Add(this.lblSearchBy);
+            this.grpInventory.Controls.Add(this.lsvCurrentInventory);
+            this.grpInventory.Controls.Add(this.lblSearch);
+            this.grpInventory.Controls.Add(this.txtSearchValue);
+            this.grpInventory.Controls.Add(this.lblInventoryFrom);
+            this.grpInventory.Controls.Add(this.cmbInventoryFrom);
+            this.grpInventory.Location = new System.Drawing.Point(5, 70);
+            this.grpInventory.Name = "grpInventory";
+            this.grpInventory.Size = new System.Drawing.Size(914, 446);
+            this.grpInventory.TabIndex = 40;
+            this.grpInventory.TabStop = false;
+            // 
             // Combined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -741,11 +741,11 @@
             this.grpSales.PerformLayout();
             this.pnlSummary.ResumeLayout(false);
             this.pnlSummary.PerformLayout();
-            this.grpInventory.ResumeLayout(false);
-            this.grpInventory.PerformLayout();
             this.grpReturns.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.grpInventory.ResumeLayout(false);
+            this.grpInventory.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -796,9 +796,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.GroupBox grpInventory;
-        private System.Windows.Forms.ComboBox cmbSearchBy;
-        private System.Windows.Forms.Label lblSearchBy;
+        private System.Windows.Forms.ComboBox cmbInventoryFrom;
+        private System.Windows.Forms.Label lblInventoryFrom;
+        private System.Windows.Forms.TextBox txtSearchValue;
+        private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.ListView lsvCurrentInventory;
         private System.Windows.Forms.ColumnHeader ItemID;
         private System.Windows.Forms.ColumnHeader RecRPC;
@@ -816,9 +817,8 @@
         private System.Windows.Forms.ColumnHeader CreatedDate;
         private System.Windows.Forms.ColumnHeader LegacyID;
         private System.Windows.Forms.ColumnHeader MSRP;
-        private System.Windows.Forms.Label lblSearch;
-        private System.Windows.Forms.TextBox txtSearchValue;
-        private System.Windows.Forms.Label lblInventoryFrom;
-        private System.Windows.Forms.ComboBox cmbInventoryFrom;
+        private System.Windows.Forms.Label lblSearchBy;
+        private System.Windows.Forms.ComboBox cmbSearchBy;
+        private System.Windows.Forms.GroupBox grpInventory;
     }
 }
