@@ -54,6 +54,53 @@ namespace RecreationOutletPOS
             
         }
 
+        #region *** Tab Handling ***
+
+        private void btnSales_MouseClick(object sender, MouseEventArgs e)
+        {
+            setTab(btnSales, grpSales);
+        }
+
+        private void btnReturns_MouseClick(object sender, MouseEventArgs e)
+        {
+            setTab(btnReturns, grpReturns);
+        }
+
+        private void btnInventory_MouseClick(object sender, MouseEventArgs e)
+        {
+            setTab(btnInventory, grpInventory);
+        }
+
+        private void setTab(Button b, GroupBox g)
+        {
+            //enableButtons
+            btnSales.Enabled = true;
+            btnSales.UseVisualStyleBackColor = true;
+            btnReturns.Enabled = true;
+            btnReturns.UseVisualStyleBackColor = true;
+            btnInventory.Enabled = true;
+            btnInventory.UseVisualStyleBackColor = true;
+            btnReports.Enabled = true;
+            btnReports.UseVisualStyleBackColor = true;
+
+            //hideGroups
+            grpSales.Visible = false;
+            grpReturns.Visible = false;
+            grpInventory.Visible = false;
+
+            //setTab
+            b.Enabled = false;
+            b.BackColor = SystemColors.ControlDark;
+            g.Visible = true;
+        }
+
+        private void btnReturns_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
 
         #region --- Sales Forms Content ---
 
@@ -483,54 +530,6 @@ namespace RecreationOutletPOS
         }
         #endregion
 
-        #region Tab Handling
-        //---Tabbing---//
-        private void btnSales_MouseClick(object sender, MouseEventArgs e)
-        {
-            setTab(btnSales, grpSales);
-        }
-
-        private void btnReturns_MouseClick(object sender, MouseEventArgs e)
-        {
-            setTab(btnReturns, grpReturns);
-        }
-
-        private void btnInventory_MouseClick(object sender, MouseEventArgs e)
-        {
-            setTab(btnInventory, grpInventory);
-        }
-
-        private void setTab(Button b, GroupBox g)
-        {
-            //enableButtons
-            btnSales.Enabled = true;
-            btnSales.UseVisualStyleBackColor = true;
-            btnReturns.Enabled = true;
-            btnReturns.UseVisualStyleBackColor = true;
-            btnInventory.Enabled = true;
-            btnInventory.UseVisualStyleBackColor = true;
-            btnReports.Enabled = true;
-            btnReports.UseVisualStyleBackColor = true;
-
-            //hideGroups
-            grpSales.Visible = false;
-            grpReturns.Visible = false;
-            grpInventory.Visible = false;
-
-            //setTab
-            b.Enabled = false;
-            b.BackColor = SystemColors.ControlDark;
-            g.Visible = true;
-        }
-
-        private void btnReturns_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //---End Tabbing---//
-        #endregion
-
         #endregion 
 
         #region --- Returns Form Content ---
@@ -804,6 +803,11 @@ namespace RecreationOutletPOS
         }
 
         #endregion
+
+        private void txtSearchValue_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
 
         #endregion 
     }

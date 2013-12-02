@@ -563,6 +563,7 @@
             this.txtSearchValue.Name = "txtSearchValue";
             this.txtSearchValue.Size = new System.Drawing.Size(327, 20);
             this.txtSearchValue.TabIndex = 48;
+            this.txtSearchValue.TextChanged += new System.EventHandler(this.txtSearchValue_TextChanged_1);
             // 
             // lblSearch
             // 
@@ -715,7 +716,7 @@
             this.grpInventory.Controls.Add(this.txtSearchValue);
             this.grpInventory.Controls.Add(this.lblInventoryFrom);
             this.grpInventory.Controls.Add(this.cmbInventoryFrom);
-            this.grpInventory.Location = new System.Drawing.Point(5, 70);
+            this.grpInventory.Location = new System.Drawing.Point(5, 74);
             this.grpInventory.Name = "grpInventory";
             this.grpInventory.Size = new System.Drawing.Size(914, 446);
             this.grpInventory.TabIndex = 40;
