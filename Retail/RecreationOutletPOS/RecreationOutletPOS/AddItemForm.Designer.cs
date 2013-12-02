@@ -52,14 +52,10 @@
             this.btnFood = new System.Windows.Forms.Button();
             this.btnEmergency = new System.Windows.Forms.Button();
             this.btnAsIs = new System.Windows.Forms.Button();
-            this.iTEMBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.masterDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.masterDataSet = new RecreationOutletPOS.masterDataSet();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.tbItemSearch = new System.Windows.Forms.TextBox();
             this.lblEnterSearch = new System.Windows.Forms.Label();
-            this.iTEMTableAdapter = new RecreationOutletPOS.masterDataSetTableAdapters.ITEMTableAdapter();
             this.lvData = new System.Windows.Forms.ListView();
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -67,9 +63,6 @@
             this.lblQty = new System.Windows.Forms.Label();
             this.tbItemQuantity = new System.Windows.Forms.TextBox();
             this.pnlCategories.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.iTEMBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.masterDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.masterDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCategories
@@ -263,21 +256,6 @@
             this.btnAsIs.Text = "As-Is";
             this.btnAsIs.UseVisualStyleBackColor = true;
             // 
-            // iTEMBindingSource
-            // 
-            this.iTEMBindingSource.DataMember = "ITEM";
-            this.iTEMBindingSource.DataSource = this.masterDataSetBindingSource;
-            // 
-            // masterDataSetBindingSource
-            // 
-            this.masterDataSetBindingSource.DataSource = this.masterDataSet;
-            this.masterDataSetBindingSource.Position = 0;
-            // 
-            // masterDataSet
-            // 
-            this.masterDataSet.DataSetName = "masterDataSet";
-            this.masterDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -316,10 +294,6 @@
             this.lblEnterSearch.Size = new System.Drawing.Size(93, 13);
             this.lblEnterSearch.TabIndex = 19;
             this.lblEnterSearch.Text = "Enter search term:";
-            // 
-            // iTEMTableAdapter
-            // 
-            this.iTEMTableAdapter.ClearBeforeFill = true;
             // 
             // lvData
             // 
@@ -388,9 +362,6 @@
             this.Text = "Manual Item Addition";
             this.Load += new System.EventHandler(this.AddItemForm_Load);
             this.pnlCategories.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.iTEMBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.masterDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.masterDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,10 +392,6 @@
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.TextBox tbItemSearch;
         private System.Windows.Forms.Label lblEnterSearch;
-        private System.Windows.Forms.BindingSource masterDataSetBindingSource;
-        private masterDataSet masterDataSet;
-        private System.Windows.Forms.BindingSource iTEMBindingSource;
-        private masterDataSetTableAdapters.ITEMTableAdapter iTEMTableAdapter;
         private System.Windows.Forms.ListView lvData;
         private System.Windows.Forms.ColumnHeader Item;
         private System.Windows.Forms.ColumnHeader Price;
