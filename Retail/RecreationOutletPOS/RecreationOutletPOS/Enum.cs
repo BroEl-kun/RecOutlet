@@ -341,6 +341,9 @@ namespace RecreationOutletPOS
             public static readonly PrinterCode TEXT_EMPHASIZE_BEGIN = new PrinterCode("\x1b\x45");
             public static readonly PrinterCode TEXT_EMPHASIZE_END = new PrinterCode("\x1b\x46");
 
+            public static readonly PrinterCode BARCODE_BEGIN = new PrinterCode("\x1b\x62\x6\x2\x2");
+            public static readonly PrinterCode BARCODE_END = new PrinterCode("\x1e");
+
             public static readonly PrinterCode CUT_RECEIPT = new PrinterCode("\x1b\x64\x02");
             public static readonly PrinterCode OPEN_DRAWER = new PrinterCode("\x7");
 

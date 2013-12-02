@@ -59,7 +59,9 @@
     <Compile Include="CheckOutForm.Designer.cs">
       <DependentUpon>CheckOutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Combined.cs" />
+    <Compile Include="Combined.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Combined.Designer.cs">
       <DependentUpon>Combined.cs</DependentUpon>
     </Compile>

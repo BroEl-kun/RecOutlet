@@ -150,6 +150,10 @@ namespace RecreationOutletPOS
                 receiptBuilder.Append("Thank You!");
                 receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_END.ToString());
 
+                receiptBuilder.Append(PrinterCode.BARCODE_BEGIN.ToString());
+                receiptBuilder.Append(transDetails[TransKey.TRANS_ID]);
+                receiptBuilder.Append(PrinterCode.BARCODE_END.ToString()).Append("\n");
+
                 receiptBuilder.Append(PrinterCode.OPEN_DRAWER.ToString());
 
                 receiptBuilder.Append(PrinterCode.CUT_RECEIPT.ToString());

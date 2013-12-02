@@ -31,4 +31,4 @@ C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\Recreatio
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DiscountForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DeleteItem.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csprojResolveAssemblyReference.cache
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Combined.resources
