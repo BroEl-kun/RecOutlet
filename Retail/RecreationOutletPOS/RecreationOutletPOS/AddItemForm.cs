@@ -16,6 +16,7 @@ namespace RecreationOutletPOS
     {
         SalesForm salesForm;
         ReturnsForm returnsForm;
+        int listView;
 
         private string searchTerm = "";
 
@@ -49,10 +50,10 @@ namespace RecreationOutletPOS
 
         //Constuctor for combined form -Aaron
         Combined combined;
-        public AddItemForm(Combined inForm)
+        public AddItemForm(Combined inForm, int list)
         {
             this.combined = inForm;
-
+            this.listView = list;
             InitializeComponent();
         }
         //------------------------------------
@@ -166,7 +167,15 @@ namespace RecreationOutletPOS
 
                 else if (combined != null)
                 {
-                    combined.addItem(id, name, price, quantity, 0.00, price);
+                    //Check which group called this form
+                    if (listView == 1)
+                    {
+                        combined.addItem(id, name, price, quantity, 0.00, price);
+                    }
+                    else if (listView == 2)
+                    {
+                        combined.addItem2(id, name, price, quantity, 0.00, price);
+                    }
                 }
             }
             else
