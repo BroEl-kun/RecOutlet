@@ -574,7 +574,7 @@ namespace RecreationOutletPOS
 
             try
             {
-                foreach (TransactionItem t in tList.transData)
+                foreach (TransactionItem t in tList2.transData)
                 {
                     double costStr = t.getTotal();
                     int qtyStr = t.getQuantity();
@@ -625,11 +625,11 @@ namespace RecreationOutletPOS
 
         private void btnDeleteItem_ClickRet(object sender, EventArgs e)
         {
-            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            if (listView1.SelectedItems.Count > 0)
             {
-                int currentItem = lsvCheckOutItems.SelectedIndices[0];
+                int currentItem = listView1.SelectedIndices[0];
 
-                tList.deleteItem(currentItem, 1);
+                tList2.deleteItem(currentItem, 1);
                 //updateListView();
                 recalculate();
             }
