@@ -254,6 +254,7 @@
             this.Controls.Add(this.cmbCommissionTo);
             this.Name = "CheckOutForm";
             this.Text = "CheckOutForm";
+            this.Load += new System.EventHandler(this.CheckOutForm_Load);
             this.pnlCheckoutSummary.ResumeLayout(false);
             this.pnlCheckoutSummary.PerformLayout();
             this.ResumeLayout(false);
