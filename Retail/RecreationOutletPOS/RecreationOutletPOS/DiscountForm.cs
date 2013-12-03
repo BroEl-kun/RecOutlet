@@ -96,21 +96,28 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    //if (Regex.IsMatch(tbDiscountPrice.Text, @"[^\d{2\}(\.\d{2\})?]"))
-                    //{
-                        //MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
-                      //  MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    //}
-                    //else
-                   //{
+                    if (Regex.IsMatch(tbDiscountPerc.Text, @"[^\d{2\}(\.\d{2\})?]"))
+                    {
+                        MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                   {
                         Double.TryParse(tbDiscountPerc.Text, out inPercent);
-                        //salesForm.discountItem(1, inPercent, selectedItem);
-                    //}
+                        if (salesForm != null)
+                        {
+                            salesForm.discountItem(1, inPercent, selectedItem);
+                        }
+                        else if (combined != null)
+                        {
+                            combined.discountItem(1, inPercent, selectedItem);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //For now, keep this here for functionality sake
+                   // MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
+                    //MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //For now, keep this here for functionality sake
                 }
 
                 if (salesForm != null)
