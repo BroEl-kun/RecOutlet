@@ -17,7 +17,8 @@
     <div class="content-wrapper">
         <header>
             <div class="title-wrapper">
-                <p id="site-main-title">Recreation Outlet Inventory Management System</p>
+                @*<p id="site-main-title">Recreation Outlet Inventory Management System</p>*@
+                <a href="@Url.Action("Index", "Home")" id = "logo-link"><img src="@Url.Content("~/Content/RecOutletlogo.png")", alt="Home" /></a>
             </div>
         </header>
         <div id="body">
@@ -34,5 +35,8 @@
             </div>
         </footer>
     </div>
+
+
 </body>
+
 </html>
