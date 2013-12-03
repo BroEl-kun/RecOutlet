@@ -32,6 +32,11 @@ header {
     font-size: 36px;
 }
 
+#logo-link {
+    padding: 40px;
+    line-height: 0;
+}
+
 /* main 
 ----------------------------------------------------*/
 .content-wrapper {
