@@ -270,7 +270,8 @@ namespace RecreationOutletPOS
                     ccNum = parsed[6];
                     ccEnd = ccNum.Substring(ccNum.Length - 4);
 
-                    MessageBox.Show("Card read success!");
+                    //MessageBox.Show("Card read success!");
+                    lblSwipe.Text = "Card read success";
 
                     ccField.Text = "";
                     return;
@@ -336,6 +337,11 @@ namespace RecreationOutletPOS
         }
 
         private void txtCashTender_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CheckOutForm_Load(object sender, EventArgs e)
         {
 
         }
