@@ -226,7 +226,7 @@ namespace RecreationOutletPOS
 
                 difference = cashTender - transTotal;
 
-                if (difference > 0)
+                if (difference >= 0)
                 {
                     validTender = true;
                 }
