@@ -630,6 +630,11 @@ namespace RecreationOutletPOS
                 int currentItem = listView1.SelectedIndices[0];
 
                 tList2.deleteItem(currentItem, 1);
+
+                foreach (ListViewItem eachItem in listView1.SelectedItems)
+                {
+                    listView1.Items.Remove(eachItem);
+                }
                 //updateListView();
                 recalculate();
             }
