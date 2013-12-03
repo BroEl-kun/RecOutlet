@@ -737,7 +737,7 @@
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.btnSettings);
             this.Name = "Combined";
-            this.Text = "Combined";
+            this.Text = "RecreationOutletPOS";
             this.Load += new System.EventHandler(this.Combined_Load);
             this.grpSales.ResumeLayout(false);
             this.grpSales.PerformLayout();
