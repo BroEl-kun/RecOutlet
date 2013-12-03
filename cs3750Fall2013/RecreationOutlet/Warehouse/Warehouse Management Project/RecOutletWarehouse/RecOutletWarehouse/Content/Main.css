@@ -176,6 +176,19 @@ input[type="checkbox"].input-validation-error {
     color: red;
 }
 
+.VendorState {
+    width: 25px;
+}
+.VendorZip {
+    width: 50px;
+}
+.VendorPhone {
+    width: 100px;
+}
+.VendorWebSite {
+    width: 350px;
+}
+
 /* Styles to test new editor and display templates.
 ----------------------------------------------------------*/
 .loud-1 {
@@ -191,4 +204,10 @@ input[type="checkbox"].input-validation-error {
     color: yellow;
     background-color: blue;
 }
+#SuccessMessage {
+    color: green;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 /*End test styles*/
