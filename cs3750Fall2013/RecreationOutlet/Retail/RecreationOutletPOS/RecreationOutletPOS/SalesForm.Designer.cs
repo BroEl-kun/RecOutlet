@@ -181,7 +181,7 @@
             this.pnlSummary.Controls.Add(this.summaryTotal);
             this.pnlSummary.Controls.Add(this.lblTax);
             this.pnlSummary.Controls.Add(this.lblTotal);
-            this.pnlSummary.Location = new System.Drawing.Point(474, 399);
+            this.pnlSummary.Location = new System.Drawing.Point(474, 403);
             this.pnlSummary.Name = "pnlSummary";
             this.pnlSummary.Size = new System.Drawing.Size(292, 109);
             this.pnlSummary.TabIndex = 24;
@@ -189,7 +189,7 @@
             // summaryTax
             // 
             this.summaryTax.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTax.Location = new System.Drawing.Point(94, 36);
+            this.summaryTax.Location = new System.Drawing.Point(134, 36);
             this.summaryTax.Name = "summaryTax";
             this.summaryTax.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.summaryTax.Size = new System.Drawing.Size(153, 22);
@@ -200,7 +200,7 @@
             // summarySubTotal
             // 
             this.summarySubTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summarySubTotal.Location = new System.Drawing.Point(90, 11);
+            this.summarySubTotal.Location = new System.Drawing.Point(130, 14);
             this.summarySubTotal.Name = "summarySubTotal";
             this.summarySubTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.summarySubTotal.Size = new System.Drawing.Size(157, 22);
@@ -221,10 +221,10 @@
             // summaryTotal
             // 
             this.summaryTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summaryTotal.Location = new System.Drawing.Point(94, 71);
+            this.summaryTotal.Location = new System.Drawing.Point(134, 71);
             this.summaryTotal.Name = "summaryTotal";
             this.summaryTotal.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.summaryTotal.Size = new System.Drawing.Size(153, 22);
+            this.summaryTotal.Size = new System.Drawing.Size(153, 26);
             this.summaryTotal.TabIndex = 4;
             this.summaryTotal.Text = "$0.00";
             this.summaryTotal.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -263,7 +263,7 @@
             // btnCheckOut
             // 
             this.btnCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCheckOut.Location = new System.Drawing.Point(772, 457);
+            this.btnCheckOut.Location = new System.Drawing.Point(331, 463);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(137, 49);
             this.btnCheckOut.TabIndex = 27;
@@ -274,7 +274,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnClear.Location = new System.Drawing.Point(772, 399);
+            this.btnClear.Location = new System.Drawing.Point(331, 403);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(137, 37);
             this.btnClear.TabIndex = 26;
@@ -322,7 +322,7 @@
             // btnDiscount
             // 
             this.btnDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDiscount.Location = new System.Drawing.Point(772, 231);
+            this.btnDiscount.Location = new System.Drawing.Point(772, 215);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(137, 50);
             this.btnDiscount.TabIndex = 32;
@@ -333,7 +333,7 @@
             // btnPrice
             // 
             this.btnPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPrice.Location = new System.Drawing.Point(772, 287);
+            this.btnPrice.Location = new System.Drawing.Point(772, 271);
             this.btnPrice.Name = "btnPrice";
             this.btnPrice.Size = new System.Drawing.Size(137, 50);
             this.btnPrice.TabIndex = 33;
@@ -353,8 +353,8 @@
             this.Controls.Add(this.tbScanner);
             this.Controls.Add(this.btnDeleteItem);
             this.Controls.Add(this.btnCheckOut);
-            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnAddItem);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pnlSummary);
             this.Controls.Add(this.lsvCheckOutItems);
             this.Controls.Add(this.btnSettings);

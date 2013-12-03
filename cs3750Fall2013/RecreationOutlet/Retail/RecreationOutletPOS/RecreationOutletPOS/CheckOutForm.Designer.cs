@@ -58,16 +58,16 @@
             "Associate 2",
             "Manager 1",
             "Manager 2"});
-            this.cmbCommissionTo.Location = new System.Drawing.Point(158, 32);
+            this.cmbCommissionTo.Location = new System.Drawing.Point(135, 11);
             this.cmbCommissionTo.Name = "cmbCommissionTo";
-            this.cmbCommissionTo.Size = new System.Drawing.Size(264, 21);
+            this.cmbCommissionTo.Size = new System.Drawing.Size(280, 21);
             this.cmbCommissionTo.TabIndex = 0;
             // 
             // lblCommissionTo
             // 
             this.lblCommissionTo.AutoSize = true;
             this.lblCommissionTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCommissionTo.Location = new System.Drawing.Point(23, 33);
+            this.lblCommissionTo.Location = new System.Drawing.Point(12, 9);
             this.lblCommissionTo.Name = "lblCommissionTo";
             this.lblCommissionTo.Size = new System.Drawing.Size(117, 20);
             this.lblCommissionTo.TabIndex = 1;
@@ -82,9 +82,9 @@
             this.pnlCheckoutSummary.Controls.Add(this.summaryTotal);
             this.pnlCheckoutSummary.Controls.Add(this.lblTax);
             this.pnlCheckoutSummary.Controls.Add(this.lblTotal);
-            this.pnlCheckoutSummary.Location = new System.Drawing.Point(27, 88);
+            this.pnlCheckoutSummary.Location = new System.Drawing.Point(12, 48);
             this.pnlCheckoutSummary.Name = "pnlCheckoutSummary";
-            this.pnlCheckoutSummary.Size = new System.Drawing.Size(395, 129);
+            this.pnlCheckoutSummary.Size = new System.Drawing.Size(403, 130);
             this.pnlCheckoutSummary.TabIndex = 2;
             // 
             // summaryTax
@@ -150,7 +150,7 @@
             // btnConfirmCheckOut
             // 
             this.btnConfirmCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmCheckOut.Location = new System.Drawing.Point(525, 389);
+            this.btnConfirmCheckOut.Location = new System.Drawing.Point(27, 293);
             this.btnConfirmCheckOut.Name = "btnConfirmCheckOut";
             this.btnConfirmCheckOut.Size = new System.Drawing.Size(166, 57);
             this.btnConfirmCheckOut.TabIndex = 3;
@@ -161,7 +161,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(342, 389);
+            this.btnCancel.Location = new System.Drawing.Point(242, 293);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(166, 57);
             this.btnCancel.TabIndex = 4;
@@ -173,7 +173,7 @@
             // 
             this.radCash.AutoSize = true;
             this.radCash.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radCash.Location = new System.Drawing.Point(561, 281);
+            this.radCash.Location = new System.Drawing.Point(328, 200);
             this.radCash.Name = "radCash";
             this.radCash.Size = new System.Drawing.Size(80, 29);
             this.radCash.TabIndex = 5;
@@ -186,7 +186,7 @@
             // 
             this.radCredit.AutoSize = true;
             this.radCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radCredit.Location = new System.Drawing.Point(561, 322);
+            this.radCredit.Location = new System.Drawing.Point(328, 237);
             this.radCredit.Name = "radCredit";
             this.radCredit.Size = new System.Drawing.Size(87, 29);
             this.radCredit.TabIndex = 6;
@@ -197,7 +197,7 @@
             // 
             // ccField
             // 
-            this.ccField.Location = new System.Drawing.Point(12, 431);
+            this.ccField.Location = new System.Drawing.Point(12, 258);
             this.ccField.Name = "ccField";
             this.ccField.Size = new System.Drawing.Size(100, 20);
             this.ccField.TabIndex = 7;
@@ -210,7 +210,7 @@
             this.lblSwipe.BackColor = System.Drawing.SystemColors.Control;
             this.lblSwipe.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSwipe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblSwipe.Location = new System.Drawing.Point(65, 403);
+            this.lblSwipe.Location = new System.Drawing.Point(118, 253);
             this.lblSwipe.Name = "lblSwipe";
             this.lblSwipe.Size = new System.Drawing.Size(184, 25);
             this.lblSwipe.TabIndex = 8;
@@ -218,7 +218,7 @@
             // 
             // txtCashTender
             // 
-            this.txtCashTender.Location = new System.Drawing.Point(12, 289);
+            this.txtCashTender.Location = new System.Drawing.Point(12, 202);
             this.txtCashTender.Name = "txtCashTender";
             this.txtCashTender.Size = new System.Drawing.Size(100, 20);
             this.txtCashTender.TabIndex = 9;
@@ -230,7 +230,7 @@
             this.lblTenderPrompt.BackColor = System.Drawing.SystemColors.Control;
             this.lblTenderPrompt.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTenderPrompt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblTenderPrompt.Location = new System.Drawing.Point(118, 284);
+            this.lblTenderPrompt.Location = new System.Drawing.Point(118, 202);
             this.lblTenderPrompt.Name = "lblTenderPrompt";
             this.lblTenderPrompt.Size = new System.Drawing.Size(149, 25);
             this.lblTenderPrompt.TabIndex = 10;
@@ -240,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(703, 458);
+            this.ClientSize = new System.Drawing.Size(434, 358);
             this.Controls.Add(this.lblTenderPrompt);
             this.Controls.Add(this.txtCashTender);
             this.Controls.Add(this.lblSwipe);
