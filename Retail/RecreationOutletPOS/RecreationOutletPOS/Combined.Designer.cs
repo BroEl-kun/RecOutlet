@@ -121,6 +121,7 @@
             this.grpSales.Size = new System.Drawing.Size(914, 446);
             this.grpSales.TabIndex = 0;
             this.grpSales.TabStop = false;
+            this.grpSales.Visible = false;
             // 
             // lsvCheckOutItems
             // 
@@ -134,7 +135,7 @@
             this.lsvCheckOutItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckOutItems.FullRowSelect = true;
             this.lsvCheckOutItems.HideSelection = false;
-            this.lsvCheckOutItems.Location = new System.Drawing.Point(8, 16);
+            this.lsvCheckOutItems.Location = new System.Drawing.Point(9, 13);
             this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";
             this.lsvCheckOutItems.Size = new System.Drawing.Size(754, 306);
@@ -716,7 +717,7 @@
             this.grpInventory.Controls.Add(this.txtSearchValue);
             this.grpInventory.Controls.Add(this.lblInventoryFrom);
             this.grpInventory.Controls.Add(this.cmbInventoryFrom);
-            this.grpInventory.Location = new System.Drawing.Point(5, 74);
+            this.grpInventory.Location = new System.Drawing.Point(5, 70);
             this.grpInventory.Name = "grpInventory";
             this.grpInventory.Size = new System.Drawing.Size(914, 446);
             this.grpInventory.TabIndex = 40;
@@ -727,14 +728,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpSales);
+            this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
-            this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReturns);
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.btnSettings);
-            this.Controls.Add(this.grpSales);
             this.Name = "Combined";
             this.Text = "Combined";
             this.Load += new System.EventHandler(this.Combined_Load);
