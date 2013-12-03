@@ -139,3 +139,4 @@ D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWareh
 D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\System.Web.Optimization.xml
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\bin\Neodynamic.SDK.ThermalLabel.dll
 C:\Users\stuff_000\Desktop\RecOutSVN\RecOutletWarehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
+D:\CS3750\RecreationOutlet\Warehouse\Warehouse Management Project\RecOutletWarehouse\RecOutletWarehouse\bin\Neodynamic.SDK.ThermalLabel.dll
