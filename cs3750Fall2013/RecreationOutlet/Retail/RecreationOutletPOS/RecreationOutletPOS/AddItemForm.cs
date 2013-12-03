@@ -163,6 +163,11 @@ namespace RecreationOutletPOS
                 {
                     returnsForm.addItem(id, name, price, quantity, 0.00, price);
                 }
+
+                else if (combined != null)
+                {
+                    combined.addItem(id, name, price, quantity, 0.00, price);
+                }
             }
             else
             {
