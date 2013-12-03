@@ -533,6 +533,7 @@
             // btnSettings
             // 
             this.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSettings.Enabled = false;
             this.btnSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSettings.Location = new System.Drawing.Point(822, 9);
             this.btnSettings.Name = "btnSettings";
@@ -730,9 +731,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReturns);
-            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnReturns);
