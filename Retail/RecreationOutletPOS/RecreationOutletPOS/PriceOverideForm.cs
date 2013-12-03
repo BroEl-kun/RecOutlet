@@ -59,7 +59,14 @@ namespace RecreationOutletPOS
                     else
                     {
                         Double.TryParse(txtPriceOveride.Text, out inPrice);
-                        salesForm.overideItemPrice(inPrice, selectedItem); 
+                        if (salesForm != null)
+                        {
+                            salesForm.overideItemPrice(inPrice, selectedItem);
+                        }
+                        else if (combined != null)
+                        {
+                            combined.overideItemPrice(inPrice, selectedItem);
+                        }
                     }
                 }
                 catch (Exception ex)
