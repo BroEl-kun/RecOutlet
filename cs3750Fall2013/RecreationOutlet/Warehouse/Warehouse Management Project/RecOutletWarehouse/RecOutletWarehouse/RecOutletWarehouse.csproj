@@ -244,6 +244,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\ItemManagement\PrintLabels.cshtml" />
+    <Content Include="Views\ReceivingLog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -267,7 +268,7 @@
     <Content Include="Views\PurchaseOrder\AddPOLineItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ReceivingLog\Index.cshtml" />
+    <Content Include="Views\ReceivingLog\IndexOLD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\ReceivingLog\CreateNewRL.cshtml" />
@@ -292,7 +293,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>52502</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1053/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
