@@ -135,7 +135,7 @@
             this.lsvCheckOutItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvCheckOutItems.FullRowSelect = true;
             this.lsvCheckOutItems.HideSelection = false;
-            this.lsvCheckOutItems.Location = new System.Drawing.Point(9, 13);
+            this.lsvCheckOutItems.Location = new System.Drawing.Point(152, 13);
             this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";
             this.lsvCheckOutItems.Size = new System.Drawing.Size(754, 306);
@@ -254,7 +254,7 @@
             // lblQuantity
             // 
             this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(768, 45);
+            this.lblQuantity.Location = new System.Drawing.Point(7, 42);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(49, 13);
             this.lblQuantity.TabIndex = 47;
@@ -263,7 +263,7 @@
             // btnPrice
             // 
             this.btnPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPrice.Location = new System.Drawing.Point(768, 216);
+            this.btnPrice.Location = new System.Drawing.Point(7, 213);
             this.btnPrice.Name = "btnPrice";
             this.btnPrice.Size = new System.Drawing.Size(137, 50);
             this.btnPrice.TabIndex = 49;
@@ -273,7 +273,7 @@
             // 
             // tbItemQuantity
             // 
-            this.tbItemQuantity.Location = new System.Drawing.Point(837, 42);
+            this.tbItemQuantity.Location = new System.Drawing.Point(76, 39);
             this.tbItemQuantity.Name = "tbItemQuantity";
             this.tbItemQuantity.Size = new System.Drawing.Size(68, 20);
             this.tbItemQuantity.TabIndex = 46;
@@ -283,7 +283,7 @@
             // btnAddItem
             // 
             this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(768, 81);
+            this.btnAddItem.Location = new System.Drawing.Point(7, 78);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(137, 50);
             this.btnAddItem.TabIndex = 41;
@@ -293,7 +293,7 @@
             // 
             // tbScanner
             // 
-            this.tbScanner.Location = new System.Drawing.Point(771, 16);
+            this.tbScanner.Location = new System.Drawing.Point(10, 13);
             this.tbScanner.Name = "tbScanner";
             this.tbScanner.Size = new System.Drawing.Size(136, 20);
             this.tbScanner.TabIndex = 45;
@@ -302,7 +302,7 @@
             // btnDiscount
             // 
             this.btnDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDiscount.Location = new System.Drawing.Point(768, 160);
+            this.btnDiscount.Location = new System.Drawing.Point(7, 157);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(137, 50);
             this.btnDiscount.TabIndex = 48;
@@ -313,7 +313,7 @@
             // btnCheckOut
             // 
             this.btnCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCheckOut.Location = new System.Drawing.Point(328, 383);
+            this.btnCheckOut.Location = new System.Drawing.Point(771, 385);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(137, 49);
             this.btnCheckOut.TabIndex = 43;
@@ -324,7 +324,7 @@
             // btnDeleteItem
             // 
             this.btnDeleteItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(768, 272);
+            this.btnDeleteItem.Location = new System.Drawing.Point(7, 269);
             this.btnDeleteItem.Name = "btnDeleteItem";
             this.btnDeleteItem.Size = new System.Drawing.Size(137, 50);
             this.btnDeleteItem.TabIndex = 44;
@@ -335,7 +335,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnClear.Location = new System.Drawing.Point(328, 325);
+            this.btnClear.Location = new System.Drawing.Point(771, 327);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(137, 37);
             this.btnClear.TabIndex = 42;
@@ -731,8 +731,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpSales);
+            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
