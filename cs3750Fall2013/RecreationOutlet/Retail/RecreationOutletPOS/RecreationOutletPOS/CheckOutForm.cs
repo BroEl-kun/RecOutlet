@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -134,7 +135,7 @@ namespace RecreationOutletPOS
                     //Card Checkout
                     if (PAN == null)
                     {
-                        MessageBox.Show("Please Scan Card");
+                        MessageBox.Show("Please Swipe Card");
                         return;
                     }
 
@@ -248,9 +249,18 @@ namespace RecreationOutletPOS
         /// </summary>
         private void readCard(object sender, KeyPressEventArgs e)
         {
+            //When enter key is pressed
             if (e.KeyChar == 13)
             {
                     String rawString = ccField.Text;
+
+                    //If card is already read then confirm checkout
+                    if (rawString == "")
+                    {
+                        btnConfirmCheckOut.PerformClick();
+                        return;
+                    }
+
                     rawString = rawString.Replace(" ", "");
 
                     char[] delimiterChars = { '%', '^', '/', '?', ';', '=' };
@@ -344,6 +354,34 @@ namespace RecreationOutletPOS
         private void CheckOutForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 12/3/2013
+        /// 
+        /// Keeps valid input in cash field
+        /// </summary>
+        private void checkCash(object sender, KeyEventArgs e)
+        {
+            double Num;
+            bool isNum = double.TryParse(txtCashTender.Text, out Num);
+            
+            //Number not entered
+            if (!isNum)
+            {
+                txtCashTender.Text = "";
+                
+                /*char last = txtCashTender.Text[txtCashTender.Text.Length - 1];
+                if (last == '?')
+                {
+                    txtCashTender.Text = "";
+                }
+                else
+                {
+                    txtCashTender.Text = txtCashTender.Text.Substring(0, txtCashTender.Text.Length - 1);
+                }*/
+            }
         }
     }
 }
