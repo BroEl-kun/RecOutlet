@@ -23,8 +23,17 @@ namespace RecOutletWarehouse.Models.VendorManagement
 
         public string AltPhone { get; set; }
 
-        [Required(ErrorMessage="Please supply the vendor's address")]
+        [Required(ErrorMessage="Please supply the vendor's street address")]
         public string Address { get; set; }
+
+        [Required(ErrorMessage = "Please supply the vendor's City")]
+        public string City { get; set; }
+
+        [Required(ErrorMessage = "Please supply the vendor's State")]
+        public string State { get; set; }
+
+        [Required(ErrorMessage = "Please supply the vendor's Zip")]
+        public int Zip { get; set; }
 
         [DataType(DataType.Url, ErrorMessage="Please enter a valid Internet URL")]
         public string Website { get; set; }
