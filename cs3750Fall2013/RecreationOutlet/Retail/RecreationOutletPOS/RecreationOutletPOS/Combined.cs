@@ -640,11 +640,6 @@ namespace RecreationOutletPOS
             }
         }
 
-        private void btnConfirmReturn_ClickbtnConfirmReturn_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         #endregion 
 
         #region --- Inventory Form Content ---
