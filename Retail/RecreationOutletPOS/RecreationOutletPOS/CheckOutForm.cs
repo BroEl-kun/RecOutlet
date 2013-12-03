@@ -180,7 +180,8 @@ namespace RecreationOutletPOS
                             MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                         this.Close();
-                        parent.voidTransaction();
+                        //parent.voidTransaction();
+                        combined.voidTransaction();
                     }
 
                     else

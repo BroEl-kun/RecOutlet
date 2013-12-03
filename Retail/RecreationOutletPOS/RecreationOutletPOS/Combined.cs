@@ -425,7 +425,7 @@ namespace RecreationOutletPOS
         /// There are two potential implementations:
         ///     - Check for specific key (an example being a digit or delimiting character)
         ///     - Check against banned keys (an example being that the delete key is a hotkey for the listview, and shouldn't shift focus)
-        private void SalesForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void Combined_KeyPress(object sender, KeyPressEventArgs e)
         {
             // make a list of banned characters
 
@@ -457,6 +457,7 @@ namespace RecreationOutletPOS
                 }
             }
         }
+
 
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -518,15 +519,11 @@ namespace RecreationOutletPOS
             }
         }
 
+
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
-        }
-
-        private void SalesForm_Load_1(object sender, EventArgs e)
-        {
-
         }
         #endregion
 
@@ -810,5 +807,6 @@ namespace RecreationOutletPOS
         }
 
         #endregion 
+
     }
 }

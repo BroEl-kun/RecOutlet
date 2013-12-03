@@ -278,6 +278,7 @@
             this.tbItemQuantity.Size = new System.Drawing.Size(68, 20);
             this.tbItemQuantity.TabIndex = 46;
             this.tbItemQuantity.Text = "1";
+            this.tbItemQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbItemQuantity_KeyPress);
             // 
             // btnAddItem
             // 
@@ -296,6 +297,7 @@
             this.tbScanner.Name = "tbScanner";
             this.tbScanner.Size = new System.Drawing.Size(136, 20);
             this.tbScanner.TabIndex = 45;
+            this.tbScanner.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScanner_KeyPress);
             // 
             // btnDiscount
             // 
@@ -728,8 +730,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.grpSales);
+            this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
@@ -739,6 +741,7 @@
             this.Name = "Combined";
             this.Text = "RecreationOutletPOS";
             this.Load += new System.EventHandler(this.Combined_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Combined_KeyPress);
             this.grpSales.ResumeLayout(false);
             this.grpSales.PerformLayout();
             this.pnlSummary.ResumeLayout(false);
