@@ -394,7 +394,7 @@
             this.button3.TabIndex = 37;
             this.button3.Text = "Manual Item Add";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.btnAddItem_Click);
+            this.button3.Click += new System.EventHandler(this.btnAddItem_Click2);
             // 
             // panel1
             // 
@@ -728,8 +728,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReturns);
+            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
