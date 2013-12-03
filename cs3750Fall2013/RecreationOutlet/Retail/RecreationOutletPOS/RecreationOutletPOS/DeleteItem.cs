@@ -60,7 +60,14 @@ namespace RecreationOutletPOS
 
             if (!failFlag)
             {
-                parent.voidItem(item, amount);
+                if (parent != null)
+                {
+                    parent.voidItem(item, amount);
+                }
+                else if (combined != null)
+                {
+                    combined.voidItem(item, amount);
+                }
                 this.Close();
             }
         }
