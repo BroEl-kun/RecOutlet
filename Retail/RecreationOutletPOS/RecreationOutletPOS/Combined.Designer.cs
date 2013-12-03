@@ -374,7 +374,7 @@
             this.btnConfirmReturn.TabIndex = 39;
             this.btnConfirmReturn.Text = "Confirm Return";
             this.btnConfirmReturn.UseVisualStyleBackColor = true;
-            this.btnConfirmReturn.Click += new System.EventHandler(this.btnConfirmReturn_ClickbtnConfirmReturn_Click_1);
+            this.btnConfirmReturn.Click += new System.EventHandler(this.btnConfirmReturn_Click);
             // 
             // button2
             // 
