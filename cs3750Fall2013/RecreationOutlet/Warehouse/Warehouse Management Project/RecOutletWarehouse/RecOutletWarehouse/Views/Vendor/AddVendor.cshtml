@@ -22,57 +22,88 @@
 }
 
 @using (Html.BeginForm()) {
-    <table>
+    <fieldset>
+        <legend>Vendor</legend>
+             <table>
+
         <tr>
             <td>Vendor Name<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.VendorName, new { @id = "VendorName" })
                 @Html.ValidationMessageFor(newVendor => newVendor.VendorName)
             </td>
-        </tr>
-        <tr>
-            <td>Contact Name</td>
+
+            <td>Website</td>
+            <td colspan="5">
+                @Html.TextBoxFor(newVendor => newVendor.Website, new { @class = "VendorWebSite" })
+                @Html.ValidationMessageFor(newVendor => newVendor.Website)
+            </td>
+
+            </tr><tr>
+             <td>Address<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.Address)
+                @Html.ValidationMessageFor(newVendor => newVendor.Address)
+            </td>
+
+            <td>City<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.City)
+                @Html.ValidationMessageFor(newVendor => newVendor.City)
+            </td>
+
+            <td>State<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.State, new { @class = "VendorState" })
+                @Html.ValidationMessageFor(newVendor => newVendor.State)
+            </td>
+
+             <td>Zip<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.Zip, new { @class = "VendorZip" })
+                @Html.ValidationMessageFor(newVendor => newVendor.Zip)
+            </td>
+
+            </tr>
+            
+
+            
+       </table>
+        </fieldset>
+    
+       <fieldset>
+        <legend>Contact Information</legend>
+             <table>
+                 <tr>
+                  <td>Name</td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.ContactName)
                 @Html.ValidationMessageFor(newVendor => newVendor.ContactName)
             </td>
-        </tr>
-        <tr>
-            <td>Contact Phone Number<strong class="required">*</strong></td>
+
+            <td>Phone Number<strong class="required">*</strong></td>
             <td>
-                @Html.TextBoxFor(newVendor => newVendor.ContactPhone)
+                @Html.TextBoxFor(newVendor => newVendor.ContactPhone, new { @class = "VendorPhone" })
                 @Html.ValidationMessageFor(newVendor => newVendor.ContactPhone)
             </td>
-        </tr>
-        <tr>
-            <td>Contact Fax Number</td>
+            </tr>
+
+            <tr>
+            <td>Fax Number</td>
             <td>
-                @Html.TextBoxFor(newVendor => newVendor.ContactFax)
+                @Html.TextBoxFor(newVendor => newVendor.ContactFax, new { @class = "VendorPhone" })
                 @Html.ValidationMessageFor(newVendor => newVendor.ContactFax)
             </td>
-        </tr>
-        <tr>
+    
             <td>Alternate Phone Number</td>
             <td>
-                @Html.TextBoxFor(newVendor => newVendor.AltPhone)
+                @Html.TextBoxFor(newVendor => newVendor.AltPhone, new { @class = "VendorPhone" })
                 @Html.ValidationMessageFor(newVendor => newVendor.AltPhone)
             </td>
-        </tr>
-        <tr>
-            <td>Address<strong class="required">*</strong></td>
-            <td>
-                @Html.TextAreaFor(newVendor => newVendor.Address)
-                @Html.ValidationMessageFor(newVendor => newVendor.Address)
-            </td>
-        </tr>
-         <tr>
-            <td>Website</td>
-            <td>
-                @Html.TextAreaFor(newVendor => newVendor.Website)
-                @Html.ValidationMessageFor(newVendor => newVendor.Website)
-            </td>
-        </tr>
-    </table>
+   
+           </tr>
+      </table>
+        </fieldset>
     <input type="submit" value="Add New Vendor" onclick="submit()"/>
     <input type="button" value="Cancel" onclick="prompt()" />
     
