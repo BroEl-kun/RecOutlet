@@ -313,7 +313,7 @@
             // btnCheckOut
             // 
             this.btnCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCheckOut.Location = new System.Drawing.Point(768, 388);
+            this.btnCheckOut.Location = new System.Drawing.Point(328, 383);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(137, 49);
             this.btnCheckOut.TabIndex = 43;
@@ -335,7 +335,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnClear.Location = new System.Drawing.Point(768, 328);
+            this.btnClear.Location = new System.Drawing.Point(328, 325);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(137, 37);
             this.btnClear.TabIndex = 42;
