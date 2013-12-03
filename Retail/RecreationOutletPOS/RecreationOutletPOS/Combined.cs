@@ -255,7 +255,7 @@ namespace RecreationOutletPOS
         /// <param name="e">Associated events tied to the sender?</param>
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            AddItemForm addItemForm = new AddItemForm(this);
+            AddItemForm addItemForm = new AddItemForm(this, 1);
             addItemForm.ShowDialog();
         }
 
@@ -536,7 +536,7 @@ namespace RecreationOutletPOS
 
         private void btnAddItem_Click2(object sender, EventArgs e)
         {
-            AddItemForm addItemForm = new AddItemForm(this);
+            AddItemForm addItemForm = new AddItemForm(this, 2);
             addItemForm.ShowDialog();
         }
 
@@ -552,8 +552,8 @@ namespace RecreationOutletPOS
         /// </summary>
         public void addItem2(int id, String item, double price, int quantity, double discount, double total)
         {
-            tList.addItem(id, item, price, quantity, discount);
-            updateListView();
+            tList2.addItem(id, item, price, quantity, discount);
+            updateListView2();
             recalculate();
         }
 
@@ -601,8 +601,8 @@ namespace RecreationOutletPOS
         {
             try
             {
-                lsvCheckOutItems.Items.Clear();
-                foreach (TransactionItem t in tList.transData)
+                listView1.Items.Clear();
+                foreach (TransactionItem t in tList2.transData)
                 {
                     ListViewItem lvi = new ListViewItem(t.getID().ToString());
                     lvi.SubItems.Add(t.getName());
@@ -610,7 +610,7 @@ namespace RecreationOutletPOS
                     lvi.SubItems.Add(t.getQuantity().ToString());
                     lvi.SubItems.Add("-$" + t.getDiscount().ToString());
                     lvi.SubItems.Add("$" + t.getTotal());
-                    lsvCheckOutItems.Items.Add(lvi);
+                    listView1.Items.Add(lvi);
                 }
             }
             catch (Exception ex)
