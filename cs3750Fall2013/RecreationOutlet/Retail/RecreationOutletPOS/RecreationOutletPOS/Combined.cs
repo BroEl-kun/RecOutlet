@@ -453,6 +453,7 @@ namespace RecreationOutletPOS
                 if (!tbItemQuantity.Focused && !tbScanner.Focused)
                 {
                     tbScanner.Text = e.KeyChar.ToString();
+                    tbScanner.GotFocus += delegate { tbScanner.Select(tbScanner.Text.Length, tbScanner.Text.Length); };
                     tbScanner.Focus();
                 }
             }
