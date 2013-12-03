@@ -174,13 +174,14 @@ namespace RecreationOutletPOS
             {
                 if (type == 0)
                 {
-                    t.setDiscount(inPrice);
+                    t.setDiscount(Math.Round(inPrice,2));
                     t.updateTotal();
                     tList.recalculate();
                 }
                 if (type == 1)
                 {
-                    t.setDiscount(t.getPrice() * (inPrice / 100));
+                    double calc = Math.Round((t.getPrice() * (inPrice / 100)), 2);
+                    t.setDiscount(calc);
                     t.updateTotal();
                 }
 
