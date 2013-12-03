@@ -98,11 +98,11 @@ namespace RecreationOutletPOS
                 {
                     //if (Regex.IsMatch(tbDiscountPrice.Text, @"[^\d{2\}(\.\d{2\})?]"))
                     //{
-                      //  MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
-                        //MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        //MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
+                      //  MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     //}
                     //else
-                    //{
+                   //{
                         Double.TryParse(tbDiscountPerc.Text, out inPercent);
                         //salesForm.discountItem(1, inPercent, selectedItem);
                     //}
