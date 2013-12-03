@@ -65,7 +65,14 @@ namespace RecreationOutletPOS
                     else
                     {
                         Double.TryParse(tbDiscountPrice.Text, out inPrice);
-                        salesForm.discountItem(0, inPrice, selectedItem);
+                        if (salesForm != null)
+                        {
+                            salesForm.discountItem(0, inPrice, selectedItem);
+                        }
+                        else if (combined != null)
+                        {
+                            combined.discountItem(0, inPrice, selectedItem);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -106,7 +113,14 @@ namespace RecreationOutletPOS
                     MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //For now, keep this here for functionality sake
                 }
 
-                salesForm.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
+                if (salesForm != null)
+                {
+                    salesForm.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
+                }
+                else if (combined != null)
+                {
+                    combined.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
+                }
 
                 this.Close();
             }
