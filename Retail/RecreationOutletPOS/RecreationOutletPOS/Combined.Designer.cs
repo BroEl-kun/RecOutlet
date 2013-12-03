@@ -360,7 +360,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(769, 175);
+            this.button1.Location = new System.Drawing.Point(7, 181);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(137, 50);
             this.button1.TabIndex = 40;
@@ -390,7 +390,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(769, 105);
+            this.button3.Location = new System.Drawing.Point(7, 111);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(137, 50);
             this.button3.TabIndex = 37;
@@ -441,7 +441,7 @@
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(9, 13);
+            this.listView1.Location = new System.Drawing.Point(150, 13);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(754, 306);
@@ -731,9 +731,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpInventory);
-            this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnReturns);
