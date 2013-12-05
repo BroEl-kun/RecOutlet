@@ -82,6 +82,8 @@ namespace RecreationOutletPOS
                     setTab(btnReturns, grpReturns);
                 if (e.KeyCode == Keys.D3)
                     setTab(btnInventory, grpInventory);
+                if (e.KeyCode == Keys.D4)
+                    setTab(btnReports, grpReports);
 
                 modifierKeyHandled = true;
             }
