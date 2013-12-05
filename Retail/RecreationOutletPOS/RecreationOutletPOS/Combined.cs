@@ -27,6 +27,9 @@ namespace RecreationOutletPOS
         public string selectedInventory;
         public string selectedSearchColumn;
 
+        public string fromDateFilter;
+        public string toDateFilter;
+
         // keyboard event handling
         bool modifierKeyHandled = false;
 
@@ -830,6 +833,88 @@ namespace RecreationOutletPOS
         private void txtSearchValue_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        #endregion 
+
+        #region --- Reports Form Content ---
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/4/2013
+        /// 
+        /// A single mouse click event that will be used for ALL reports
+        /// </summary>
+        public void btnViewReport_MouseClick(object sender, MouseEventArgs e)
+        {
+            Button callingButton = (Button) sender;
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(fromDateFilter) || string.IsNullOrWhiteSpace(toDateFilter))
+                {
+                    MessageBox.Show("One or more dates not specified", "Invalid Date(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                //else if (HelperMethods.validateDate(fromDateFilter) && HelperMethods.validateDate(toDateFilter))
+                //{
+                //    switch (callingButton.Text)
+                //    {
+                //        case "Transactions Report":
+                //            showTransactionReports();
+                //            break;
+                //    }
+                //}
+
+                //else
+                //{
+                //    MessageBox.Show("One or more invalid dates entered", "Invalid Date(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //}
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/4/2013
+        /// 
+        /// Shows a list of all transactions within the date range specified in the
+        /// From and To Date textboxes
+        /// </summary>
+        private void showTransactionReports()
+        {
+            try
+            {
+                MessageBox.Show("Transaction showing!");
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/4/2013
+        /// 
+        /// Shows a list of all commissions within the date range specified in the
+        /// From and To Date textboxes
+        private void showCommissionReports()
+        {
+            try
+            {
+                MessageBox.Show("Commission showing!");
+            }
+
+            catch (Exception ex)
+            {
+
+            }
         }
 
         #endregion 
