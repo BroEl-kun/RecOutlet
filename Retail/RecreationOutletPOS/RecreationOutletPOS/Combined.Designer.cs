@@ -591,7 +591,7 @@
             this.txtSearchValue.Name = "txtSearchValue";
             this.txtSearchValue.Size = new System.Drawing.Size(327, 20);
             this.txtSearchValue.TabIndex = 48;
-            this.txtSearchValue.TextChanged += new System.EventHandler(this.txtSearchValue_TextChanged_1);
+            this.txtSearchValue.TextChanged += new System.EventHandler(this.txtSearchValue_TextChanged);
             // 
             // lblSearch
             // 
@@ -734,6 +734,7 @@
             this.cmbSearchBy.Name = "cmbSearchBy";
             this.cmbSearchBy.Size = new System.Drawing.Size(137, 21);
             this.cmbSearchBy.TabIndex = 52;
+            this.cmbSearchBy.SelectedIndexChanged += new System.EventHandler(this.cmbSearchBy_SelectedIndexChanged);
             // 
             // grpInventory
             // 
@@ -963,9 +964,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpReports);
             this.Controls.Add(this.grpSales);
-            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
