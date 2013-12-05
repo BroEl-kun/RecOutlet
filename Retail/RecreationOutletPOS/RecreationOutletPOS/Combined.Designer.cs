@@ -97,7 +97,7 @@
             this.cmbSearchBy = new System.Windows.Forms.ComboBox();
             this.grpInventory = new System.Windows.Forms.GroupBox();
             this.grpReports = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpReportTypes = new System.Windows.Forms.GroupBox();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
@@ -110,8 +110,8 @@
             this.button13 = new System.Windows.Forms.Button();
             this.btnCommissionReport = new System.Windows.Forms.Button();
             this.btnTransactionReport = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.grpReportFilters = new System.Windows.Forms.GroupBox();
+            this.grpDatePeriod = new System.Windows.Forms.GroupBox();
             this.txtFromDate = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDateTo = new System.Windows.Forms.TextBox();
@@ -122,9 +122,9 @@
             this.panel1.SuspendLayout();
             this.grpInventory.SuspendLayout();
             this.grpReports.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.grpReportTypes.SuspendLayout();
+            this.grpReportFilters.SuspendLayout();
+            this.grpDatePeriod.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSales
@@ -752,35 +752,35 @@
             // 
             // grpReports
             // 
-            this.grpReports.Controls.Add(this.groupBox2);
-            this.grpReports.Controls.Add(this.groupBox1);
+            this.grpReports.Controls.Add(this.grpReportTypes);
+            this.grpReports.Controls.Add(this.grpReportFilters);
             this.grpReports.Location = new System.Drawing.Point(5, 70);
             this.grpReports.Name = "grpReports";
             this.grpReports.Size = new System.Drawing.Size(914, 446);
             this.grpReports.TabIndex = 42;
             this.grpReports.TabStop = false;
             // 
-            // groupBox2
+            // grpReportTypes
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.groupBox2.Controls.Add(this.button9);
-            this.groupBox2.Controls.Add(this.button10);
-            this.groupBox2.Controls.Add(this.button11);
-            this.groupBox2.Controls.Add(this.button12);
-            this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Controls.Add(this.button8);
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button13);
-            this.groupBox2.Controls.Add(this.btnCommissionReport);
-            this.groupBox2.Controls.Add(this.btnTransactionReport);
-            this.groupBox2.Location = new System.Drawing.Point(9, 158);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(897, 272);
-            this.groupBox2.TabIndex = 47;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Reports";
+            this.grpReportTypes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.grpReportTypes.Controls.Add(this.button9);
+            this.grpReportTypes.Controls.Add(this.button10);
+            this.grpReportTypes.Controls.Add(this.button11);
+            this.grpReportTypes.Controls.Add(this.button12);
+            this.grpReportTypes.Controls.Add(this.button7);
+            this.grpReportTypes.Controls.Add(this.button8);
+            this.grpReportTypes.Controls.Add(this.button5);
+            this.grpReportTypes.Controls.Add(this.button6);
+            this.grpReportTypes.Controls.Add(this.button4);
+            this.grpReportTypes.Controls.Add(this.button13);
+            this.grpReportTypes.Controls.Add(this.btnCommissionReport);
+            this.grpReportTypes.Controls.Add(this.btnTransactionReport);
+            this.grpReportTypes.Location = new System.Drawing.Point(9, 158);
+            this.grpReportTypes.Name = "grpReportTypes";
+            this.grpReportTypes.Size = new System.Drawing.Size(897, 272);
+            this.grpReportTypes.TabIndex = 47;
+            this.grpReportTypes.TabStop = false;
+            this.grpReportTypes.Text = "Reports";
             // 
             // button9
             // 
@@ -900,29 +900,29 @@
             this.btnTransactionReport.Text = "Transactions Report";
             this.btnTransactionReport.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // grpReportFilters
             // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Location = new System.Drawing.Point(9, 16);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(897, 136);
-            this.groupBox1.TabIndex = 46;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Report Filters";
+            this.grpReportFilters.BackColor = System.Drawing.SystemColors.Control;
+            this.grpReportFilters.Controls.Add(this.grpDatePeriod);
+            this.grpReportFilters.Location = new System.Drawing.Point(9, 16);
+            this.grpReportFilters.Name = "grpReportFilters";
+            this.grpReportFilters.Size = new System.Drawing.Size(897, 136);
+            this.grpReportFilters.TabIndex = 46;
+            this.grpReportFilters.TabStop = false;
+            this.grpReportFilters.Text = "Report Filters";
             // 
-            // groupBox3
+            // grpDatePeriod
             // 
-            this.groupBox3.Controls.Add(this.txtFromDate);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.txtDateTo);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Location = new System.Drawing.Point(22, 35);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 90);
-            this.groupBox3.TabIndex = 4;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Date Period";
+            this.grpDatePeriod.Controls.Add(this.txtFromDate);
+            this.grpDatePeriod.Controls.Add(this.label2);
+            this.grpDatePeriod.Controls.Add(this.txtDateTo);
+            this.grpDatePeriod.Controls.Add(this.label3);
+            this.grpDatePeriod.Location = new System.Drawing.Point(22, 35);
+            this.grpDatePeriod.Name = "grpDatePeriod";
+            this.grpDatePeriod.Size = new System.Drawing.Size(200, 90);
+            this.grpDatePeriod.TabIndex = 4;
+            this.grpDatePeriod.TabStop = false;
+            this.grpDatePeriod.Text = "Date Period";
             // 
             // txtFromDate
             // 
@@ -961,9 +961,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReports);
             this.Controls.Add(this.grpInventory);
-            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
@@ -985,10 +985,10 @@
             this.grpInventory.ResumeLayout(false);
             this.grpInventory.PerformLayout();
             this.grpReports.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.grpReportTypes.ResumeLayout(false);
+            this.grpReportFilters.ResumeLayout(false);
+            this.grpDatePeriod.ResumeLayout(false);
+            this.grpDatePeriod.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1064,7 +1064,7 @@
         private System.Windows.Forms.ComboBox cmbSearchBy;
         private System.Windows.Forms.GroupBox grpInventory;
         private System.Windows.Forms.GroupBox grpReports;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpReportTypes;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
@@ -1077,8 +1077,8 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button btnCommissionReport;
         private System.Windows.Forms.Button btnTransactionReport;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox grpReportFilters;
+        private System.Windows.Forms.GroupBox grpDatePeriod;
         private System.Windows.Forms.TextBox txtFromDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDateTo;
