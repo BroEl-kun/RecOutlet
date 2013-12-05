@@ -137,6 +137,11 @@ namespace RecreationOutletPOS
             setTab(btnInventory, grpInventory);
         }
 
+        private void btnReports_MouseClick(object sender, MouseEventArgs e)
+        {
+            setTab(btnReports, grpReports);
+        }
+
         private void setTab(Button b, GroupBox g)
         {
             //enableButtons
@@ -153,16 +158,12 @@ namespace RecreationOutletPOS
             grpSales.Visible = false;
             grpReturns.Visible = false;
             grpInventory.Visible = false;
+            grpReports.Visible = false;
 
             //setTab
             b.Enabled = false;
             b.BackColor = SystemColors.ControlDark;
             g.Visible = true;
-        }
-
-        private void btnReturns_Click(object sender, EventArgs e)
-        {
-
         }
 
         #endregion

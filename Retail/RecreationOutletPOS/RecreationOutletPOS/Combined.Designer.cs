@@ -96,11 +96,35 @@
             this.lblSearchBy = new System.Windows.Forms.Label();
             this.cmbSearchBy = new System.Windows.Forms.ComboBox();
             this.grpInventory = new System.Windows.Forms.GroupBox();
+            this.grpReports = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.btnCommissionReport = new System.Windows.Forms.Button();
+            this.btnTransactionReport = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtFromDate = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDateTo = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.grpReturns.SuspendLayout();
             this.panel1.SuspendLayout();
             this.grpInventory.SuspendLayout();
+            this.grpReports.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSales
@@ -489,6 +513,7 @@
             this.btnReports.TabIndex = 37;
             this.btnReports.Text = "Reports";
             this.btnReports.UseVisualStyleBackColor = true;
+            this.btnReports.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnReports_MouseClick);
             // 
             // btnInventory
             // 
@@ -512,7 +537,6 @@
             this.btnReturns.TabIndex = 35;
             this.btnReturns.Text = "Returns";
             this.btnReturns.UseVisualStyleBackColor = true;
-            this.btnReturns.Click += new System.EventHandler(this.btnReturns_Click);
             this.btnReturns.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnReturns_MouseClick);
             // 
             // btnSales
@@ -726,14 +750,221 @@
             this.grpInventory.TabIndex = 40;
             this.grpInventory.TabStop = false;
             // 
+            // grpReports
+            // 
+            this.grpReports.Controls.Add(this.groupBox2);
+            this.grpReports.Controls.Add(this.groupBox1);
+            this.grpReports.Location = new System.Drawing.Point(5, 70);
+            this.grpReports.Name = "grpReports";
+            this.grpReports.Size = new System.Drawing.Size(914, 446);
+            this.grpReports.TabIndex = 42;
+            this.grpReports.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.groupBox2.Controls.Add(this.button9);
+            this.groupBox2.Controls.Add(this.button10);
+            this.groupBox2.Controls.Add(this.button11);
+            this.groupBox2.Controls.Add(this.button12);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.button13);
+            this.groupBox2.Controls.Add(this.btnCommissionReport);
+            this.groupBox2.Controls.Add(this.btnTransactionReport);
+            this.groupBox2.Location = new System.Drawing.Point(9, 158);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(897, 272);
+            this.groupBox2.TabIndex = 47;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Reports";
+            // 
+            // button9
+            // 
+            this.button9.Enabled = false;
+            this.button9.Location = new System.Drawing.Point(655, 205);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(189, 52);
+            this.button9.TabIndex = 55;
+            this.button9.Text = "Some Report";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Enabled = false;
+            this.button10.Location = new System.Drawing.Point(655, 147);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(189, 52);
+            this.button10.TabIndex = 54;
+            this.button10.Text = "Some Report";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Enabled = false;
+            this.button11.Location = new System.Drawing.Point(655, 89);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(189, 52);
+            this.button11.TabIndex = 53;
+            this.button11.Text = "Some Report";
+            this.button11.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Enabled = false;
+            this.button12.Location = new System.Drawing.Point(655, 31);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(189, 52);
+            this.button12.TabIndex = 52;
+            this.button12.Text = "Some Report";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Enabled = false;
+            this.button7.Location = new System.Drawing.Point(353, 205);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(189, 52);
+            this.button7.TabIndex = 51;
+            this.button7.Text = "Some Report";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Enabled = false;
+            this.button8.Location = new System.Drawing.Point(353, 147);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(189, 52);
+            this.button8.TabIndex = 50;
+            this.button8.Text = "Some Report";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Enabled = false;
+            this.button5.Location = new System.Drawing.Point(353, 89);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(189, 52);
+            this.button5.TabIndex = 49;
+            this.button5.Text = "Some Report";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(353, 31);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(189, 52);
+            this.button6.TabIndex = 48;
+            this.button6.Text = "Some Report";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(55, 205);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(189, 52);
+            this.button4.TabIndex = 47;
+            this.button4.Text = "Some Report";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Enabled = false;
+            this.button13.Location = new System.Drawing.Point(55, 147);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(189, 52);
+            this.button13.TabIndex = 46;
+            this.button13.Text = "Some Report";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // btnCommissionReport
+            // 
+            this.btnCommissionReport.Location = new System.Drawing.Point(55, 89);
+            this.btnCommissionReport.Name = "btnCommissionReport";
+            this.btnCommissionReport.Size = new System.Drawing.Size(189, 52);
+            this.btnCommissionReport.TabIndex = 45;
+            this.btnCommissionReport.Text = "Commission Report";
+            this.btnCommissionReport.UseVisualStyleBackColor = true;
+            // 
+            // btnTransactionReport
+            // 
+            this.btnTransactionReport.Location = new System.Drawing.Point(55, 31);
+            this.btnTransactionReport.Name = "btnTransactionReport";
+            this.btnTransactionReport.Size = new System.Drawing.Size(189, 52);
+            this.btnTransactionReport.TabIndex = 44;
+            this.btnTransactionReport.Text = "Transactions Report";
+            this.btnTransactionReport.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Location = new System.Drawing.Point(9, 16);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(897, 136);
+            this.groupBox1.TabIndex = 46;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Report Filters";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtFromDate);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.txtDateTo);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Location = new System.Drawing.Point(22, 35);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(200, 90);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Date Period";
+            // 
+            // txtFromDate
+            // 
+            this.txtFromDate.Location = new System.Drawing.Point(54, 25);
+            this.txtFromDate.Name = "txtFromDate";
+            this.txtFromDate.Size = new System.Drawing.Size(123, 20);
+            this.txtFromDate.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 54);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(20, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "To";
+            // 
+            // txtDateTo
+            // 
+            this.txtDateTo.Location = new System.Drawing.Point(54, 51);
+            this.txtDateTo.Name = "txtDateTo";
+            this.txtDateTo.Size = new System.Drawing.Size(123, 20);
+            this.txtDateTo.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "From";
+            // 
             // Combined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpReports);
+            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReturns);
-            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnReturns);
@@ -753,6 +984,11 @@
             this.panel1.PerformLayout();
             this.grpInventory.ResumeLayout(false);
             this.grpInventory.PerformLayout();
+            this.grpReports.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -827,5 +1063,25 @@
         private System.Windows.Forms.Label lblSearchBy;
         private System.Windows.Forms.ComboBox cmbSearchBy;
         private System.Windows.Forms.GroupBox grpInventory;
+        private System.Windows.Forms.GroupBox grpReports;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button btnCommissionReport;
+        private System.Windows.Forms.Button btnTransactionReport;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtFromDate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDateTo;
+        private System.Windows.Forms.Label label3;
     }
 }
