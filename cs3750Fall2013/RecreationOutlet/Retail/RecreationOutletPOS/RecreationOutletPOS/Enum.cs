@@ -279,6 +279,55 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/4/2013
+        /// 
+        /// Represents the different departments to categorize items in the database
+        /// </summary>
+        public sealed class Department
+        {
+            private readonly String department;
+
+            private static readonly Department CLIMBING = new Department("Climbing");
+            private static readonly Department WINTER_CLOTHING = new Department("Winter Clothing");
+            private static readonly Department FOOTWEAR = new Department("Footwear");
+            private static readonly Department PACKS = new Department("Packs");
+            private static readonly Department EMERGENCY = new Department("Emergency");
+            private static readonly Department SNOW_HARDGOODS = new Department("Snow Hardgoods");
+            private static readonly Department MENS_OUTERWEAR = new Department("Men's Outerwear");
+            private static readonly Department STOVES = new Department("Stoves");
+            private static readonly Department WATER_SPORTS = new Department("Water Sports");
+            private static readonly Department FURNITURE = new Department("Furniture");
+            private static readonly Department OUTDOOR_SPORTS = new Department("Outdoor Sports");
+            private static readonly Department IMPULSE_MERCHANDISE = new Department("Impulse Merchandise");
+            private static readonly Department FOOD = new Department("Food");
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/4/2013
+            /// 
+            /// Constructor
+            /// </summary>
+            /// <param name="department"></param>
+            public Department(String department)
+            {
+                this.department = department;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/4/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return department;
+            }
+        }
+
         #endregion
 
         #region Receipt/Receipt Printer Enums

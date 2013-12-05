@@ -6,9 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 using System.Data;
 
+// Alias to user the Enum's inner classes
+using Department = RecreationOutletPOS.Enum.Department;
 
 namespace RecreationOutletPOS
 {
