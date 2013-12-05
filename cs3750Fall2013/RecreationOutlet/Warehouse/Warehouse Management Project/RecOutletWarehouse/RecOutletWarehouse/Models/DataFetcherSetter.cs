@@ -292,7 +292,7 @@ namespace RecOutletWarehouse.Models
                 {
                     command.Connection = thisConnection;
 
-                    command.CommandText = ";WITH RL_POS_CTE AS (SELECT PL.POID FROM RECEIVING_LOG RL INNER JOIN PO_LINEITEM PL ON RL.POLineItemID = PL.POLineItemID"
+                    command.CommandText = ";WITH RL_POS_CTE AS (SELECT PL.POID FROM RECEIVING_LOG RL INNER JOIN PO_LINEITEM PL ON RL.POLineItemID = PL.POLineItemID "
                                             + "LEFT JOIN BACKORDER BO ON RL.ReceivingID = BO.ReceivingID WHERE BO.BackorderID IS NULL GROUP BY PL.POID)"
                                             + "SELECT TOP 50 PO.POID, PO.VendorID, PO.POCreatedBy, PO.POOrderDate, PO.POEstimatedShipDate, PO.POCreatedDate, "
                                             + "PO.POFreightCost, PO.POTerms, PO.POComments, PO.ShippingID FROM PURCHASE_ORDER PO WHERE PO.POID NOT IN "

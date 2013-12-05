@@ -1,16 +1,45 @@
 ﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
 @{
+    //ViewBag.Title = "Create Receiving Log";
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
 @*submitForms = function(){*@
 
-<script type ="text/javascript">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+    #feedback { font-size: 1.4em; }
+    #selectable .ui-selecting { background: #FECA40; }
+    #selectable .ui-selected { background: #F39814; color: white; }
+    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+</style>
+@*<script type ="text/javascript">*@
+<script>
+    $(function () {
+        $("#selectable").selectable({ selected: function (event, ui) { } })
+    });
 
+    $(function () {
+        $("#selectable").on("selectableselected", function (event, ui) {
+            //$("#po").val($("#selectable").index(event.currentTarget).text());
+            //$("#po").val(event.currentTarget.innerText);
+            $("#po").val($("#selectable").text());
+            //$("#po").text("hello")
+            //$("po").html("hello");
+            //alert("hello");
+            //var poText = $("po").text();
+            //var poText = $("#po").val();
+            //alert(poText);
+        })
+    });
 </script>
 
-<h2>Index</h2>
+<h2>Create Receiving Log</h2>
 <div class="center-element center-text">
     <table class="button-columns">
         <tr>
@@ -31,10 +60,10 @@
 
         </tr>
     </table>
-
     @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "orig", id = "orig" }))
     {
         <input type="text" id="po" name="po" />          
+        //<input type="text" id="po" />
         <input type="submit" value="Begin RL" />
     }
 
@@ -46,6 +75,11 @@
     //ReceivingLogCreationViewModel
     //var count = 1;
     var count = 0;
+    
+    if (count != 0)
+    {
+        <hr />
+    }
 
     //using (Html.BeginForm("MarkedReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
     //using (Html.BeginForm("CreateReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
@@ -123,6 +157,28 @@
 
 }
 
+@if(ViewBag.NonReceivedPOs != null)
+{
+
+    
+    <ol id="selectable">
+            
+            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)
+            {
+            
+            <li class="ui-widget-content">
+                PO Line Item:
+                @objPO.PurchaseOrderId
+            </li>
+
+            }
+
+        </ol>
+    
+}
+
 <br />
+
+    
 
 </div>
