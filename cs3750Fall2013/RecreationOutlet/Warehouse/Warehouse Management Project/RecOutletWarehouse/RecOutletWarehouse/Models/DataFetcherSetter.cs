@@ -282,6 +282,53 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        public List<PurchaseOrder.PurchaseOrder> GetNonReceivedPOs()
+        {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString))
+            {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = thisConnection;
+
+                    command.CommandText = ";WITH RL_POS_CTE AS (SELECT PL.POID FROM RECEIVING_LOG RL INNER JOIN PO_LINEITEM PL ON RL.POLineItemID = PL.POLineItemID"
+                                            + "LEFT JOIN BACKORDER BO ON RL.ReceivingID = BO.ReceivingID WHERE BO.BackorderID IS NULL GROUP BY PL.POID)"
+                                            + "SELECT TOP 50 PO.POID, PO.VendorID, PO.POCreatedBy, PO.POOrderDate, PO.POEstimatedShipDate, PO.POCreatedDate, "
+                                            + "PO.POFreightCost, PO.POTerms, PO.POComments, PO.ShippingID FROM PURCHASE_ORDER PO WHERE PO.POID NOT IN "
+                                            + "(SELECT POID FROM RL_POS_CTE) ORDER BY PO.POEstimatedShipDate";
+                    //Not in: And has no backlog or QtyReceived = QtyOrdered
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    List<PurchaseOrder.PurchaseOrder> POItemList = new List<PurchaseOrder.PurchaseOrder>();
+
+                    while (reader.Read())
+                    {
+                        POItemList.Add(new PurchaseOrder.PurchaseOrder
+                        {
+                            //Added
+                            PurchaseOrderId = (reader["POID"].ToString()),
+                            Vendor = (reader["VendorID"].ToString()),
+                            CreatedBy = Convert.ToInt32(reader["POCreatedBy"]),
+                            OrderDate = Convert.ToDateTime(reader["POOrderDate"]),
+                            EstShipDate = Convert.ToDateTime(reader["POEstimatedShipDate"]),
+                            FreightCost = Convert.ToDecimal(reader["POFreightCost"]),
+                            Terms = (reader["POTerms"].ToString()),
+                            Comments = (reader["POComments"].ToString())
+
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return POItemList;
+
+                }
+            }
+        }
+
         /********************************************************
          * Puchase order and PO line item DFS methods end
          ********************************************************/
