@@ -8,6 +8,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+
+
 // Aliases for the Enum's inner classes
 using TransKey = RecreationOutletPOS.Enum.TransKey;
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
@@ -23,6 +26,11 @@ namespace RecreationOutletPOS
 
         public string selectedInventory;
         public string selectedSearchColumn;
+
+        // keyboard event handling
+        bool modifierKeyHandled = false;
+
+
 
         public Combined()
         {
@@ -53,6 +61,64 @@ namespace RecreationOutletPOS
             //Inventoryform
             
         }
+
+
+
+        #region Form Events and Hotkeys
+
+
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 12/4/2013 
+        /// 
+        /// Intercepts key combinations before executing the KeyPress event.
+        private void Combined_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Shift)
+            {
+                if (e.KeyCode == Keys.D1)
+                    setTab(btnSales, grpSales);
+                if (e.KeyCode == Keys.D2)
+                    setTab(btnReturns, grpReturns);
+                if (e.KeyCode == Keys.D3)
+                    setTab(btnInventory, grpInventory);
+
+                modifierKeyHandled = true;
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 12/4/2013 
+        /// 
+        /// Intercepts all keypresses in order to determine which component
+        /// receives focus.
+        private void Combined_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (modifierKeyHandled)
+            {
+                e.Handled = true;
+                modifierKeyHandled = false;
+            }
+
+            // number keys will focus the scanner textbox by default
+            if (tbScanner.Visible)
+            {
+                if (e.KeyChar >= 48 && e.KeyChar <= 57)
+                {
+                    if (!tbItemQuantity.Focused && !tbScanner.Focused)
+                    {
+                        tbScanner.Text = e.KeyChar.ToString();
+                        tbScanner.GotFocus += delegate { tbScanner.Select(tbScanner.Text.Length, tbScanner.Text.Length); };
+                        tbScanner.Focus();
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+
 
         #region *** Tab Handling ***
 
@@ -416,51 +482,6 @@ namespace RecreationOutletPOS
         // Key Press Handling
         //----------------------------------------------------------
 
-
-        /// <summary>
-        /// Programmer: Jaed Norberg
-        /// Last Updated: 11/18/2013 
-        /// 
-        /// Intercepts all keypresses in order to determine which component
-        /// receives focus.
-        /// There are two potential implementations:
-        ///     - Check for specific key (an example being a digit or delimiting character)
-        ///     - Check against banned keys (an example being that the delete key is a hotkey for the listview, and shouldn't shift focus)
-        private void Combined_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // make a list of banned characters
-
-            /*char[] bannedChars = new char[]
-            {
-                (char)Keys.Delete
-            };
-
-            bool flag = true;
-
-            for (int i = 0; i < bannedChars.Length; i++)
-            {
-                if (e.KeyChar == bannedChars[i])
-                    flag = false;
-            }
-
-            if (flag)
-                tbScanner.Focus();*/
-
-            if (e.KeyChar == (Char)Keys.A)
-                tbScanner.Focus();
-
-            if (e.KeyChar >= 48 && e.KeyChar <= 57)
-            {
-                if (!tbItemQuantity.Focused && !tbScanner.Focused)
-                {
-                    tbScanner.Text = e.KeyChar.ToString();
-                    tbScanner.GotFocus += delegate { tbScanner.Select(tbScanner.Text.Length, tbScanner.Text.Length); };
-                    tbScanner.Focus();
-                }
-            }
-        }
-
-
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Enter key is pressed
@@ -809,6 +830,5 @@ namespace RecreationOutletPOS
         }
 
         #endregion 
-
     }
 }
