@@ -823,17 +823,7 @@ namespace RecreationOutletPOS
 
         #endregion
 
-        private void InventoryForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
         #endregion
-
-        private void txtSearchValue_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
 
         #endregion 
 
