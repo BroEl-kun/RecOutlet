@@ -21,6 +21,15 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult Index()
         {
+            DataFetcherSetter db = new DataFetcherSetter();
+
+            List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder> objItem = new List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder>();
+
+            //Why does the LineItem portion come back null?
+            objItem = db.GetNonReceivedPOs();
+
+            ViewBag.NonReceivedPOs = objItem;
+
             return View();
         }
 
@@ -38,6 +47,15 @@ namespace RecOutletWarehouse.Controllers
         //public ActionResult Create()
         public ActionResult CreateNewRL()
         {
+            DataFetcherSetter db = new DataFetcherSetter();
+
+            List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder> objItem = new List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder>();
+
+            //Why does the LineItem portion come back null?
+            objItem = db.GetNonReceivedPOs();
+
+            ViewBag.NonReceivedPOs = objItem;
+
             //return View();
             return View("Index");
         }
