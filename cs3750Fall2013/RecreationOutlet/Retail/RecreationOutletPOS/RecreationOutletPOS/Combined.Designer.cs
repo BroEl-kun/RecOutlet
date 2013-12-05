@@ -762,7 +762,7 @@
             // 
             // grpReportTypes
             // 
-            this.grpReportTypes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.grpReportTypes.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.grpReportTypes.Controls.Add(this.button9);
             this.grpReportTypes.Controls.Add(this.button10);
             this.grpReportTypes.Controls.Add(this.button11);
@@ -890,6 +890,7 @@
             this.btnCommissionReport.TabIndex = 45;
             this.btnCommissionReport.Text = "Commission Report";
             this.btnCommissionReport.UseVisualStyleBackColor = true;
+            this.btnCommissionReport.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnViewReport_MouseClick);
             // 
             // btnTransactionReport
             // 
@@ -899,6 +900,7 @@
             this.btnTransactionReport.TabIndex = 44;
             this.btnTransactionReport.Text = "Transactions Report";
             this.btnTransactionReport.UseVisualStyleBackColor = true;
+            this.btnTransactionReport.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnViewReport_MouseClick);
             // 
             // grpReportFilters
             // 
@@ -961,8 +963,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReports);
+            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
