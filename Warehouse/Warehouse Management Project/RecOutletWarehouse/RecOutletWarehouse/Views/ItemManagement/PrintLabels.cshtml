@@ -44,7 +44,7 @@
         <p>Type of labels to print: @Html.RadioButtonFor(model => model.LabelType, "RPC") RPC @Html.RadioButtonFor(model => model.LabelType, "UPC") UPC</p>
         <p>Number of labels to print: @Html.EditorFor(model => model.LabelQty) @Html.ValidationMessageFor(model => model.LabelQty)</p>
 
-        <input type="submit" value="Print Labels" onclick="submit()"/>
+        <input type="submit" value="Print Labels" onclick="submit()" class="button"/>
     
     </fieldset>
 }
