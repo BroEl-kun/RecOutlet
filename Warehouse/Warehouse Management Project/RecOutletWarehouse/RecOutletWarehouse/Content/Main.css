@@ -84,6 +84,7 @@ h2 {
     min-width:100px;
     min-height:30px;
     white-space:normal;
+    margin-right:20px;
 }
     .button:hover {
         color:#262626;
