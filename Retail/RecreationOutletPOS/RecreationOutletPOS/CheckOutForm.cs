@@ -174,8 +174,8 @@ namespace RecreationOutletPOS
 
                         ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
 
-                        receiptGenerator.printReceiptToFile();
-                        //receiptGenerator.printToPrinter();
+                        //receiptGenerator.printReceiptToFile();
+                        receiptGenerator.printToPrinter();
 
                         MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
                             MessageBoxButtons.OK, MessageBoxIcon.Asterisk);

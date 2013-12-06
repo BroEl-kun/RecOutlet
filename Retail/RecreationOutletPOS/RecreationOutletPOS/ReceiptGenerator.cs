@@ -25,8 +25,8 @@ namespace RecreationOutletPOS
         public List<TransactionItem> transItems;
         public StringBuilder receiptBuilder;
 
-        // The receipt paper will roughly fit about 49 characters per line  
-        public const int RECEIPT_PAPER_LENGTH = 49;
+        // The receipt paper will roughly fit about 48 characters per line  
+        public const int RECEIPT_PAPER_LENGTH = 48;
 
         public string receipt;
         public int numberOfItemsSold = 0;
@@ -148,7 +148,7 @@ namespace RecreationOutletPOS
 
                 receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_BEGIN.ToString());
                 receiptBuilder.Append("Thank You!");
-                receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_END.ToString());
+                receiptBuilder.Append(PrinterCode.TEXT_EMPHASIZE_END.ToString()).Append("\n\n");;
 
                 receiptBuilder.Append(PrinterCode.BARCODE_BEGIN.ToString());
                 receiptBuilder.Append(transDetails[TransKey.TRANS_ID]);

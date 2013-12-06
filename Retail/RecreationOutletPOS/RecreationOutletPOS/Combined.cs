@@ -359,7 +359,7 @@ namespace RecreationOutletPOS
             Dictionary<TransKey, string> transaction = new Dictionary<TransKey, string>();
 
             // NOTE- this harcoded code needs to be changed 
-            int transactionID = 001;
+            int transactionID = 809032934;
 
             // Needs to remain hardcoded for now
             int storeID = 01;
