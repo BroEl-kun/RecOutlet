@@ -233,8 +233,7 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.VendorName,
-                            value: item.VendorId
+                            label: item.VendorName
                         }
                     }));
                 }
@@ -242,7 +241,7 @@
         },
         select: function (event, ui) {
             $('#vendor').val(ui.item.label);
-            $('#Id').val(ui.item.value);
+            $('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
@@ -261,8 +260,7 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.ProductLineName,
-                            value: item.ProductLineId
+                            label: item.ProductLineName
                         }
                     }));
                 }
@@ -270,7 +268,7 @@
         },
         select: function (event, ui) {
             $('#productLine').val(ui.item.label);
-            $('#Id').val(ui.item.value);
+            $('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
@@ -289,8 +287,7 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.DepartmentName,
-                            value: item.DepartmentId
+                            label: item.DepartmentName
                         }
                     }));
                 }
@@ -298,7 +295,7 @@
         },
         select: function (event, ui) {
             $('#dept').val(ui.item.label);
-            $('#Id').val(ui.item.value);
+            $('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
@@ -317,8 +314,7 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.CategoryName,
-                            value: item.CategoryId
+                            label: item.CategoryName
                         }
                     }));
                 }
@@ -326,7 +322,7 @@
         },
         select: function (event, ui) {
             $('#cat').val(ui.item.label);
-            $('#Id').val(ui.item.value);
+            $('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
@@ -345,8 +341,7 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.SubcategoryName,
-                            value: item.SubcategoryId
+                            label: item.SubcategoryName
                         }
                     }));
                 }
@@ -354,7 +349,7 @@
         },
         select: function (event, ui) {
             $('#subcat').val(ui.item.label);
-            $('#Id').val(ui.item.value);
+            $('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
@@ -364,5 +359,4 @@
 <!--Validation scripts-->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
- 
 }
