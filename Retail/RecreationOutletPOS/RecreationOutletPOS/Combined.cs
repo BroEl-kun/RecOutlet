@@ -946,6 +946,26 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Inserts today's date into both date filter textboxes
+        /// </summary>
+        private void btnTodayOnly_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFromDateFilter.Text = DateTime.Now.ToShortDateString();
+                txtToDateFilter.Text = DateTime.Now.ToShortDateString();
+            }
+
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
         #endregion
 
         #region Reporting Methods
@@ -999,11 +1019,13 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/4/2013
         /// 
         /// Shows a list of all commissions within the date range specified in the
         /// From and To Date textboxes
+        ///< /summary>
         private void showCommissionReports()
         {
             try
