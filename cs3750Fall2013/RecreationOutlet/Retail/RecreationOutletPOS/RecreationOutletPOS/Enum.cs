@@ -107,6 +107,44 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// 
+        /// </summary>
+        public sealed class ReportType
+        {
+            private readonly String reportType;
+
+            public static readonly ReportType TRANSACTIONS = new ReportType("Transactions Report");
+            public static readonly ReportType COMMISSIONS = new ReportType("Commissions Report");
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/7/2013
+            /// 
+            /// ReportTypeonstructor
+            /// </summary>
+            /// <param name="reportType"></param>
+            public ReportType(String reportType)
+            {
+                this.reportType = reportType;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/7/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return reportType;
+            }
+        }
+
         #endregion
 
         #region ListView Enums

@@ -107,7 +107,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             this.btnCommissionReport = new System.Windows.Forms.Button();
             this.btnTransactionReport = new System.Windows.Forms.Button();
             this.grpReportFilters = new System.Windows.Forms.GroupBox();
@@ -773,7 +773,7 @@
             this.grpReportTypes.Controls.Add(this.button5);
             this.grpReportTypes.Controls.Add(this.button6);
             this.grpReportTypes.Controls.Add(this.button4);
-            this.grpReportTypes.Controls.Add(this.button13);
+            this.grpReportTypes.Controls.Add(this.btnTest);
             this.grpReportTypes.Controls.Add(this.btnCommissionReport);
             this.grpReportTypes.Controls.Add(this.btnTransactionReport);
             this.grpReportTypes.Location = new System.Drawing.Point(9, 158);
@@ -873,15 +873,15 @@
             this.button4.Text = "Some Report";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // button13
+            // btnTest
             // 
-            this.button13.Enabled = false;
-            this.button13.Location = new System.Drawing.Point(55, 147);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(189, 52);
-            this.button13.TabIndex = 46;
-            this.button13.Text = "Some Report";
-            this.button13.UseVisualStyleBackColor = true;
+            this.btnTest.Enabled = false;
+            this.btnTest.Location = new System.Drawing.Point(55, 147);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(189, 52);
+            this.btnTest.TabIndex = 46;
+            this.btnTest.Text = "Some Report";
+            this.btnTest.UseVisualStyleBackColor = true;
             // 
             // btnCommissionReport
             // 
@@ -964,9 +964,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpReports);
             this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpInventory);
-            this.Controls.Add(this.grpReports);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
@@ -1077,7 +1077,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnCommissionReport;
         private System.Windows.Forms.Button btnTransactionReport;
         private System.Windows.Forms.GroupBox grpReportFilters;
