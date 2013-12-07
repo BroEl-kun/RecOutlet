@@ -15,6 +15,8 @@ namespace RecreationOutletPOS
     {
         private static string connStr = HelperMethods.connStr();
 
+        #region SELECT Statement Methods
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/7/2013
@@ -67,5 +69,7 @@ namespace RecreationOutletPOS
 
             return ds;
         }
+
+        #endregion
     }
 }

@@ -308,6 +308,37 @@ namespace RecreationOutletPOS
 
             /// <summary>
             /// Programmer: Michael Vuong
+            /// Last Updated: 12/7/2013
+            /// 
+            /// Creats a list of Item table columns enums in the form of a List for
+            /// the list view in the ShowReportForm 
+            /// </summary>
+            /// <returns>the Item table columns enums in the form of a List</returns>
+            public static List<ItemTableColumn> getReportColumns()
+            {
+                List<ItemTableColumn> reportColumns = new List<ItemTableColumn>();
+
+                try
+                {
+                    reportColumns.Add(ItemTableColumn.REC_RPC);
+                    reportColumns.Add(ItemTableColumn.ITEM_UPC);
+                    reportColumns.Add(ItemTableColumn.NAME);
+                    reportColumns.Add(ItemTableColumn.SELL_PRICE);
+                    reportColumns.Add(ItemTableColumn.DEPARTMENT_ID);
+                    reportColumns.Add(ItemTableColumn.CATEGORY_ID);
+                }
+
+                catch (Exception ex)
+                {
+
+                }
+
+                return reportColumns;
+            }
+
+
+            /// <summary>
+            /// Programmer: Michael Vuong
             /// Last Updated: 11/14/2013
             /// 
             /// Overridden to return the string class property
@@ -316,6 +347,52 @@ namespace RecreationOutletPOS
             public override String ToString()
             {
                 return tableColumnName;
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Enums that represent the columns in the STORE_TRANSACTION table
+        /// </summary>
+        public sealed class StoreTransColumn
+        {
+            private readonly String tableColumn;
+
+            public static readonly StoreTransColumn TRANS_ID = new StoreTransColumn("TransactionID");
+            public static readonly StoreTransColumn STORE_ID = new StoreTransColumn("StoreID");
+            public static readonly StoreTransColumn EMPLOYEE_ID = new StoreTransColumn("EmployeeID");
+            public static readonly StoreTransColumn TRANS_DATE = new StoreTransColumn("TransactionDate");
+            public static readonly StoreTransColumn TERMINAL_ID = new StoreTransColumn("TerminalID");
+            public static readonly StoreTransColumn TRANS_TOTAL = new StoreTransColumn("TransTotal");
+            public static readonly StoreTransColumn TRANS_TAX = new StoreTransColumn("TransTax");
+            public static readonly StoreTransColumn MANAGER_ID = new StoreTransColumn("ManagerID");
+            public static readonly StoreTransColumn PAYMENT_TYPE = new StoreTransColumn("PaymentType");
+            public static readonly StoreTransColumn PREV_TRANS_ID = new StoreTransColumn("PreviousTransactionID");
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/7/2013
+            /// 
+            /// Constructor
+            /// </summary>
+            /// <param name="tableColumn"></param>
+            public StoreTransColumn(String tableColumn)
+            {
+                this.tableColumn = tableColumn;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/7/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return tableColumn;
             }
         }
 
@@ -335,7 +412,7 @@ namespace RecreationOutletPOS
             private static readonly Department PACKS = new Department("Packs");
             private static readonly Department EMERGENCY = new Department("Emergency");
             private static readonly Department SNOW_HARDGOODS = new Department("Snow Hardgoods");
-            private static readonly Department MENS_OUTERWEAR = new Department("Men's Outerwear");
+            private static readonly Department OUTERWEAR = new Department("Outerwear");
             private static readonly Department STOVES = new Department("Stoves");
             private static readonly Department WATER_SPORTS = new Department("Water Sports");
             private static readonly Department FURNITURE = new Department("Furniture");
@@ -367,6 +444,8 @@ namespace RecreationOutletPOS
                 return department;
             }
         }
+
+
 
         #endregion
 

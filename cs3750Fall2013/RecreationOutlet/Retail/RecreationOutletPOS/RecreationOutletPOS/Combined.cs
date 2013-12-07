@@ -9,8 +9,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-
 // Aliases for the Enum's inner classes
 using TransKey = RecreationOutletPOS.Enum.TransKey;
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
@@ -894,6 +892,7 @@ namespace RecreationOutletPOS
         public void btnViewReport_MouseClick(object sender, MouseEventArgs e)
         {
             Button callingButton = (Button)sender;
+            ShowReportForm reportForm;
 
             try
             {
@@ -910,7 +909,8 @@ namespace RecreationOutletPOS
                 // If the date period dates are valid
                 else if (HelperMethods.isValidDate(fromDateFilter) && HelperMethods.isValidDate(toDateFilter))
                 {
-                    determineReportType(callingButton.Text);
+                    reportForm = new ShowReportForm(callingButton.Text);
+                    reportForm.Show();
                 }
 
                 else
@@ -918,6 +918,26 @@ namespace RecreationOutletPOS
                     MessageBox.Show("One or more invalid dates entered", "Invalid Date(s)",
                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Inserts today's date into both date filter textboxes
+        /// </summary>
+        private void btnTodayOnly_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                txtFromDateFilter.Text = DateTime.Now.ToShortDateString();
+                txtToDateFilter.Text = DateTime.Now.ToShortDateString();
             }
 
             catch (Exception ex)
@@ -946,100 +966,7 @@ namespace RecreationOutletPOS
             }
         }
 
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/7/2013
-        /// 
-        /// Inserts today's date into both date filter textboxes
-        /// </summary>
-        private void btnTodayOnly_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                txtFromDateFilter.Text = DateTime.Now.ToShortDateString();
-                txtToDateFilter.Text = DateTime.Now.ToShortDateString();
-            }
-
-            catch (Exception ex)
-            {
-                
-            }
-        }
-
         #endregion
-
-        #region Reporting Methods
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/7/2013
-        /// 
-        /// Determines which report type to show based on what report button the
-        /// user selected
-        /// </summary>
-        /// <param name="buttonText">
-        /// The text of the calling button used to determine 
-        /// which report to show
-        /// </param>
-        private void determineReportType(string callingButtonText)
-        {
-            try
-            {
-                if (callingButtonText == ReportType.TRANSACTIONS.ToString())
-                    showTransactionReports();
-
-                else if (callingButtonText == ReportType.COMMISSIONS.ToString())
-                    showCommissionReports();
-            }
-
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/4/2013
-        /// 
-        /// Shows a list of all transactions within the date range specified in the
-        /// From and To Date textboxes
-        /// </summary>
-        private void showTransactionReports()
-        {
-            try
-            {
-                MessageBox.Show("Transaction showing!");
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/4/2013
-        /// 
-        /// Shows a list of all commissions within the date range specified in the
-        /// From and To Date textboxes
-        ///< /summary>
-        private void showCommissionReports()
-        {
-            try
-            {
-                MessageBox.Show("Commission showing!");
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        #endregion 
 
         #region Button Text Setter Methods
 
