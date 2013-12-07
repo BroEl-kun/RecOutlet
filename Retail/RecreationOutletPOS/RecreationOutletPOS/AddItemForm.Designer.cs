@@ -32,26 +32,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pnlCategories = new System.Windows.Forms.Panel();
-            this.btnMiscCamp = new System.Windows.Forms.Button();
-            this.btnWaterSports = new System.Windows.Forms.Button();
-            this.btnTents = new System.Windows.Forms.Button();
-            this.btnClimbing = new System.Windows.Forms.Button();
-            this.btnSocks = new System.Windows.Forms.Button();
-            this.btnSleepingPads = new System.Windows.Forms.Button();
-            this.btnNonTax = new System.Windows.Forms.Button();
-            this.btnWinterClothing = new System.Windows.Forms.Button();
-            this.btnStoves = new System.Windows.Forms.Button();
-            this.btnSnowHardgoods = new System.Windows.Forms.Button();
-            this.btnOtherClothing = new System.Windows.Forms.Button();
-            this.btnSleepingBags = new System.Windows.Forms.Button();
-            this.btnFootwear = new System.Windows.Forms.Button();
-            this.btnFurniture = new System.Windows.Forms.Button();
-            this.btnPacks = new System.Windows.Forms.Button();
-            this.btnFood = new System.Windows.Forms.Button();
-            this.btnEmergency = new System.Windows.Forms.Button();
-            this.btnAsIs = new System.Windows.Forms.Button();
+            this.rbtnImpulseMerchandise = new System.Windows.Forms.RadioButton();
+            this.rbtnOutdoorSports = new System.Windows.Forms.RadioButton();
+            this.rbtnOuterwear = new System.Windows.Forms.RadioButton();
+            this.rbtnWinterClothing = new System.Windows.Forms.RadioButton();
+            this.rbtnStoves = new System.Windows.Forms.RadioButton();
+            this.rbtnSnowHardgoods = new System.Windows.Forms.RadioButton();
+            this.rbtnPacks = new System.Windows.Forms.RadioButton();
+            this.rbtnWaterSports = new System.Windows.Forms.RadioButton();
+            this.rbtnFurniture = new System.Windows.Forms.RadioButton();
+            this.rbtnFootwear = new System.Windows.Forms.RadioButton();
+            this.rbtnFood = new System.Windows.Forms.RadioButton();
+            this.rbtnClimbing = new System.Windows.Forms.RadioButton();
+            this.rbtnEmergency = new System.Windows.Forms.RadioButton();
+            this.rbtnAsIs = new System.Windows.Forms.RadioButton();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.tbItemSearch = new System.Windows.Forms.TextBox();
@@ -70,196 +65,199 @@
             this.pnlCategories.AutoScroll = true;
             this.pnlCategories.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pnlCategories.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlCategories.Controls.Add(this.btnMiscCamp);
-            this.pnlCategories.Controls.Add(this.btnWaterSports);
-            this.pnlCategories.Controls.Add(this.btnTents);
-            this.pnlCategories.Controls.Add(this.btnClimbing);
-            this.pnlCategories.Controls.Add(this.btnSocks);
-            this.pnlCategories.Controls.Add(this.btnSleepingPads);
-            this.pnlCategories.Controls.Add(this.btnNonTax);
-            this.pnlCategories.Controls.Add(this.btnWinterClothing);
-            this.pnlCategories.Controls.Add(this.btnStoves);
-            this.pnlCategories.Controls.Add(this.btnSnowHardgoods);
-            this.pnlCategories.Controls.Add(this.btnOtherClothing);
-            this.pnlCategories.Controls.Add(this.btnSleepingBags);
-            this.pnlCategories.Controls.Add(this.btnFootwear);
-            this.pnlCategories.Controls.Add(this.btnFurniture);
-            this.pnlCategories.Controls.Add(this.btnPacks);
-            this.pnlCategories.Controls.Add(this.btnFood);
-            this.pnlCategories.Controls.Add(this.btnEmergency);
-            this.pnlCategories.Controls.Add(this.btnAsIs);
+            this.pnlCategories.Controls.Add(this.rbtnImpulseMerchandise);
+            this.pnlCategories.Controls.Add(this.rbtnOutdoorSports);
+            this.pnlCategories.Controls.Add(this.rbtnOuterwear);
+            this.pnlCategories.Controls.Add(this.rbtnWinterClothing);
+            this.pnlCategories.Controls.Add(this.rbtnStoves);
+            this.pnlCategories.Controls.Add(this.rbtnSnowHardgoods);
+            this.pnlCategories.Controls.Add(this.rbtnPacks);
+            this.pnlCategories.Controls.Add(this.rbtnWaterSports);
+            this.pnlCategories.Controls.Add(this.rbtnFurniture);
+            this.pnlCategories.Controls.Add(this.rbtnFootwear);
+            this.pnlCategories.Controls.Add(this.rbtnFood);
+            this.pnlCategories.Controls.Add(this.rbtnClimbing);
+            this.pnlCategories.Controls.Add(this.rbtnEmergency);
+            this.pnlCategories.Controls.Add(this.rbtnAsIs);
             this.pnlCategories.Location = new System.Drawing.Point(12, 273);
             this.pnlCategories.Name = "pnlCategories";
-            this.pnlCategories.Size = new System.Drawing.Size(609, 178);
+            this.pnlCategories.Size = new System.Drawing.Size(609, 165);
             this.pnlCategories.TabIndex = 15;
             // 
-            // btnMiscCamp
+            // rbtnImpulseMerchandise
             // 
-            this.btnMiscCamp.Location = new System.Drawing.Point(265, 4);
-            this.btnMiscCamp.Name = "btnMiscCamp";
-            this.btnMiscCamp.Size = new System.Drawing.Size(81, 73);
-            this.btnMiscCamp.TabIndex = 15;
-            this.btnMiscCamp.Text = "Misc Camp";
-            this.btnMiscCamp.UseVisualStyleBackColor = true;
-            this.btnMiscCamp.Click += new System.EventHandler(this.btnMiscCamp_Click);
+            this.rbtnImpulseMerchandise.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnImpulseMerchandise.Location = new System.Drawing.Point(523, 83);
+            this.rbtnImpulseMerchandise.Name = "rbtnImpulseMerchandise";
+            this.rbtnImpulseMerchandise.Size = new System.Drawing.Size(81, 73);
+            this.rbtnImpulseMerchandise.TabIndex = 43;
+            this.rbtnImpulseMerchandise.Text = "Impulse Merchandise";
+            this.rbtnImpulseMerchandise.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnImpulseMerchandise.UseVisualStyleBackColor = true;
+            this.rbtnImpulseMerchandise.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnWaterSports
+            // rbtnOutdoorSports
             // 
-            this.btnWaterSports.Location = new System.Drawing.Point(700, 83);
-            this.btnWaterSports.Name = "btnWaterSports";
-            this.btnWaterSports.Size = new System.Drawing.Size(81, 73);
-            this.btnWaterSports.TabIndex = 27;
-            this.btnWaterSports.Text = "Water Sports";
-            this.btnWaterSports.UseVisualStyleBackColor = true;
+            this.rbtnOutdoorSports.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnOutdoorSports.Location = new System.Drawing.Point(523, 4);
+            this.rbtnOutdoorSports.Name = "rbtnOutdoorSports";
+            this.rbtnOutdoorSports.Size = new System.Drawing.Size(81, 73);
+            this.rbtnOutdoorSports.TabIndex = 42;
+            this.rbtnOutdoorSports.Text = "Outdoor Sports";
+            this.rbtnOutdoorSports.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnOutdoorSports.UseVisualStyleBackColor = true;
+            this.rbtnOutdoorSports.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnTents
+            // rbtnOuterwear
             // 
-            this.btnTents.Location = new System.Drawing.Point(613, 83);
-            this.btnTents.Name = "btnTents";
-            this.btnTents.Size = new System.Drawing.Size(81, 73);
-            this.btnTents.TabIndex = 26;
-            this.btnTents.Text = "Tents";
-            this.btnTents.UseVisualStyleBackColor = true;
+            this.rbtnOuterwear.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnOuterwear.Location = new System.Drawing.Point(437, 83);
+            this.rbtnOuterwear.Name = "rbtnOuterwear";
+            this.rbtnOuterwear.Size = new System.Drawing.Size(81, 73);
+            this.rbtnOuterwear.TabIndex = 41;
+            this.rbtnOuterwear.Text = "Outerwear";
+            this.rbtnOuterwear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnOuterwear.UseVisualStyleBackColor = true;
+            this.rbtnOuterwear.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnClimbing
+            // rbtnWinterClothing
             // 
-            this.btnClimbing.Location = new System.Drawing.Point(4, 83);
-            this.btnClimbing.Name = "btnClimbing";
-            this.btnClimbing.Size = new System.Drawing.Size(81, 73);
-            this.btnClimbing.TabIndex = 2;
-            this.btnClimbing.Text = "Climbing";
-            this.btnClimbing.UseVisualStyleBackColor = true;
+            this.rbtnWinterClothing.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnWinterClothing.Location = new System.Drawing.Point(437, 4);
+            this.rbtnWinterClothing.Name = "rbtnWinterClothing";
+            this.rbtnWinterClothing.Size = new System.Drawing.Size(81, 73);
+            this.rbtnWinterClothing.TabIndex = 40;
+            this.rbtnWinterClothing.Text = "Winter Clothing";
+            this.rbtnWinterClothing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnWinterClothing.UseVisualStyleBackColor = true;
+            this.rbtnWinterClothing.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnSocks
+            // rbtnStoves
             // 
-            this.btnSocks.Location = new System.Drawing.Point(526, 83);
-            this.btnSocks.Name = "btnSocks";
-            this.btnSocks.Size = new System.Drawing.Size(81, 73);
-            this.btnSocks.TabIndex = 25;
-            this.btnSocks.Text = "Socks";
-            this.btnSocks.UseVisualStyleBackColor = true;
+            this.rbtnStoves.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnStoves.Location = new System.Drawing.Point(352, 83);
+            this.rbtnStoves.Name = "rbtnStoves";
+            this.rbtnStoves.Size = new System.Drawing.Size(81, 73);
+            this.rbtnStoves.TabIndex = 39;
+            this.rbtnStoves.Text = "Stoves";
+            this.rbtnStoves.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnStoves.UseVisualStyleBackColor = true;
+            this.rbtnStoves.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnSleepingPads
+            // rbtnSnowHardgoods
             // 
-            this.btnSleepingPads.Location = new System.Drawing.Point(439, 83);
-            this.btnSleepingPads.Name = "btnSleepingPads";
-            this.btnSleepingPads.Size = new System.Drawing.Size(81, 73);
-            this.btnSleepingPads.TabIndex = 24;
-            this.btnSleepingPads.Text = "Sleeping Pads";
-            this.btnSleepingPads.UseVisualStyleBackColor = true;
+            this.rbtnSnowHardgoods.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnSnowHardgoods.Location = new System.Drawing.Point(352, 4);
+            this.rbtnSnowHardgoods.Name = "rbtnSnowHardgoods";
+            this.rbtnSnowHardgoods.Size = new System.Drawing.Size(81, 73);
+            this.rbtnSnowHardgoods.TabIndex = 38;
+            this.rbtnSnowHardgoods.Text = "Snow Hardgoods";
+            this.rbtnSnowHardgoods.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnSnowHardgoods.UseVisualStyleBackColor = true;
+            this.rbtnSnowHardgoods.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnNonTax
+            // rbtnPacks
             // 
-            this.btnNonTax.Location = new System.Drawing.Point(265, 83);
-            this.btnNonTax.Name = "btnNonTax";
-            this.btnNonTax.Size = new System.Drawing.Size(81, 73);
-            this.btnNonTax.TabIndex = 23;
-            this.btnNonTax.Text = "Non-Tax";
-            this.btnNonTax.UseVisualStyleBackColor = true;
+            this.rbtnPacks.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnPacks.Location = new System.Drawing.Point(265, 83);
+            this.rbtnPacks.Name = "rbtnPacks";
+            this.rbtnPacks.Size = new System.Drawing.Size(81, 73);
+            this.rbtnPacks.TabIndex = 37;
+            this.rbtnPacks.Text = "Packs";
+            this.rbtnPacks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnPacks.UseVisualStyleBackColor = true;
+            this.rbtnPacks.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnWinterClothing
+            // rbtnWaterSports
             // 
-            this.btnWinterClothing.Location = new System.Drawing.Point(700, 4);
-            this.btnWinterClothing.Name = "btnWinterClothing";
-            this.btnWinterClothing.Size = new System.Drawing.Size(81, 73);
-            this.btnWinterClothing.TabIndex = 22;
-            this.btnWinterClothing.Text = "Winter Clothing";
-            this.btnWinterClothing.UseVisualStyleBackColor = true;
+            this.rbtnWaterSports.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnWaterSports.Location = new System.Drawing.Point(265, 4);
+            this.rbtnWaterSports.Name = "rbtnWaterSports";
+            this.rbtnWaterSports.Size = new System.Drawing.Size(81, 73);
+            this.rbtnWaterSports.TabIndex = 36;
+            this.rbtnWaterSports.Text = "Water Sports";
+            this.rbtnWaterSports.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnWaterSports.UseVisualStyleBackColor = true;
+            this.rbtnWaterSports.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnStoves
+            // rbtnFurniture
             // 
-            this.btnStoves.Location = new System.Drawing.Point(613, 4);
-            this.btnStoves.Name = "btnStoves";
-            this.btnStoves.Size = new System.Drawing.Size(81, 73);
-            this.btnStoves.TabIndex = 21;
-            this.btnStoves.Text = "Stoves";
-            this.btnStoves.UseVisualStyleBackColor = true;
+            this.rbtnFurniture.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnFurniture.Location = new System.Drawing.Point(178, 83);
+            this.rbtnFurniture.Name = "rbtnFurniture";
+            this.rbtnFurniture.Size = new System.Drawing.Size(81, 73);
+            this.rbtnFurniture.TabIndex = 35;
+            this.rbtnFurniture.Text = "Furniture";
+            this.rbtnFurniture.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnFurniture.UseVisualStyleBackColor = true;
+            this.rbtnFurniture.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnSnowHardgoods
+            // rbtnFootwear
             // 
-            this.btnSnowHardgoods.Location = new System.Drawing.Point(526, 4);
-            this.btnSnowHardgoods.Name = "btnSnowHardgoods";
-            this.btnSnowHardgoods.Size = new System.Drawing.Size(81, 73);
-            this.btnSnowHardgoods.TabIndex = 20;
-            this.btnSnowHardgoods.Text = "Snow Hardgoods";
-            this.btnSnowHardgoods.UseVisualStyleBackColor = true;
+            this.rbtnFootwear.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnFootwear.Location = new System.Drawing.Point(178, 4);
+            this.rbtnFootwear.Name = "rbtnFootwear";
+            this.rbtnFootwear.Size = new System.Drawing.Size(81, 73);
+            this.rbtnFootwear.TabIndex = 34;
+            this.rbtnFootwear.Text = "Footwear";
+            this.rbtnFootwear.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnFootwear.UseVisualStyleBackColor = true;
+            this.rbtnFootwear.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnOtherClothing
+            // rbtnFood
             // 
-            this.btnOtherClothing.Location = new System.Drawing.Point(352, 4);
-            this.btnOtherClothing.Name = "btnOtherClothing";
-            this.btnOtherClothing.Size = new System.Drawing.Size(81, 73);
-            this.btnOtherClothing.TabIndex = 16;
-            this.btnOtherClothing.Text = "Other Clothing";
-            this.btnOtherClothing.UseVisualStyleBackColor = true;
+            this.rbtnFood.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnFood.Location = new System.Drawing.Point(91, 83);
+            this.rbtnFood.Name = "rbtnFood";
+            this.rbtnFood.Size = new System.Drawing.Size(81, 73);
+            this.rbtnFood.TabIndex = 33;
+            this.rbtnFood.Text = "Food";
+            this.rbtnFood.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnFood.UseVisualStyleBackColor = true;
+            this.rbtnFood.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnSleepingBags
+            // rbtnClimbing
             // 
-            this.btnSleepingBags.Location = new System.Drawing.Point(439, 4);
-            this.btnSleepingBags.Name = "btnSleepingBags";
-            this.btnSleepingBags.Size = new System.Drawing.Size(81, 73);
-            this.btnSleepingBags.TabIndex = 19;
-            this.btnSleepingBags.Text = "Sleeping Bags";
-            this.btnSleepingBags.UseVisualStyleBackColor = true;
+            this.rbtnClimbing.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnClimbing.Location = new System.Drawing.Point(4, 83);
+            this.rbtnClimbing.Name = "rbtnClimbing";
+            this.rbtnClimbing.Size = new System.Drawing.Size(81, 73);
+            this.rbtnClimbing.TabIndex = 32;
+            this.rbtnClimbing.Text = "Climbing";
+            this.rbtnClimbing.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnClimbing.UseVisualStyleBackColor = true;
+            this.rbtnClimbing.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnFootwear
+            // rbtnEmergency
             // 
-            this.btnFootwear.Location = new System.Drawing.Point(178, 4);
-            this.btnFootwear.Name = "btnFootwear";
-            this.btnFootwear.Size = new System.Drawing.Size(81, 73);
-            this.btnFootwear.TabIndex = 18;
-            this.btnFootwear.Text = "Footwear";
-            this.btnFootwear.UseVisualStyleBackColor = true;
+            this.rbtnEmergency.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnEmergency.Location = new System.Drawing.Point(91, 4);
+            this.rbtnEmergency.Name = "rbtnEmergency";
+            this.rbtnEmergency.Size = new System.Drawing.Size(81, 73);
+            this.rbtnEmergency.TabIndex = 31;
+            this.rbtnEmergency.Text = "Emergency";
+            this.rbtnEmergency.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnEmergency.UseVisualStyleBackColor = true;
+            this.rbtnEmergency.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
-            // btnFurniture
+            // rbtnAsIs
             // 
-            this.btnFurniture.Location = new System.Drawing.Point(178, 83);
-            this.btnFurniture.Name = "btnFurniture";
-            this.btnFurniture.Size = new System.Drawing.Size(81, 73);
-            this.btnFurniture.TabIndex = 17;
-            this.btnFurniture.Text = "Furniture";
-            this.btnFurniture.UseVisualStyleBackColor = true;
-            // 
-            // btnPacks
-            // 
-            this.btnPacks.Location = new System.Drawing.Point(352, 83);
-            this.btnPacks.Name = "btnPacks";
-            this.btnPacks.Size = new System.Drawing.Size(81, 73);
-            this.btnPacks.TabIndex = 14;
-            this.btnPacks.Text = "Packs";
-            this.btnPacks.UseVisualStyleBackColor = true;
-            // 
-            // btnFood
-            // 
-            this.btnFood.Location = new System.Drawing.Point(91, 83);
-            this.btnFood.Name = "btnFood";
-            this.btnFood.Size = new System.Drawing.Size(81, 73);
-            this.btnFood.TabIndex = 14;
-            this.btnFood.Text = "Food";
-            this.btnFood.UseVisualStyleBackColor = true;
-            // 
-            // btnEmergency
-            // 
-            this.btnEmergency.Location = new System.Drawing.Point(91, 3);
-            this.btnEmergency.Name = "btnEmergency";
-            this.btnEmergency.Size = new System.Drawing.Size(81, 73);
-            this.btnEmergency.TabIndex = 3;
-            this.btnEmergency.Text = "Emergency";
-            this.btnEmergency.UseVisualStyleBackColor = true;
-            // 
-            // btnAsIs
-            // 
-            this.btnAsIs.Location = new System.Drawing.Point(4, 3);
-            this.btnAsIs.Name = "btnAsIs";
-            this.btnAsIs.Size = new System.Drawing.Size(81, 73);
-            this.btnAsIs.TabIndex = 0;
-            this.btnAsIs.Text = "As-Is";
-            this.btnAsIs.UseVisualStyleBackColor = true;
+            this.rbtnAsIs.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbtnAsIs.Checked = true;
+            this.rbtnAsIs.Location = new System.Drawing.Point(4, 4);
+            this.rbtnAsIs.Name = "rbtnAsIs";
+            this.rbtnAsIs.Size = new System.Drawing.Size(81, 73);
+            this.rbtnAsIs.TabIndex = 23;
+            this.rbtnAsIs.TabStop = true;
+            this.rbtnAsIs.Text = "As Is";
+            this.rbtnAsIs.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbtnAsIs.UseVisualStyleBackColor = true;
+            this.rbtnAsIs.CheckedChanged += new System.EventHandler(this.rbtnDepartment_CheckedChanged);
             // 
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(452, 457);
+            this.btnCancel.Location = new System.Drawing.Point(454, 448);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(167, 48);
             this.btnCancel.TabIndex = 16;
@@ -270,7 +268,7 @@
             // btnAddItem
             // 
             this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(12, 457);
+            this.btnAddItem.Location = new System.Drawing.Point(12, 448);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(167, 48);
             this.btnAddItem.TabIndex = 17;
@@ -370,24 +368,6 @@
         #endregion
 
         private System.Windows.Forms.Panel pnlCategories;
-        private System.Windows.Forms.Button btnMiscCamp;
-        private System.Windows.Forms.Button btnWaterSports;
-        private System.Windows.Forms.Button btnTents;
-        private System.Windows.Forms.Button btnClimbing;
-        private System.Windows.Forms.Button btnSocks;
-        private System.Windows.Forms.Button btnSleepingPads;
-        private System.Windows.Forms.Button btnNonTax;
-        private System.Windows.Forms.Button btnWinterClothing;
-        private System.Windows.Forms.Button btnStoves;
-        private System.Windows.Forms.Button btnSnowHardgoods;
-        private System.Windows.Forms.Button btnOtherClothing;
-        private System.Windows.Forms.Button btnSleepingBags;
-        private System.Windows.Forms.Button btnFootwear;
-        private System.Windows.Forms.Button btnFurniture;
-        private System.Windows.Forms.Button btnPacks;
-        private System.Windows.Forms.Button btnFood;
-        private System.Windows.Forms.Button btnEmergency;
-        private System.Windows.Forms.Button btnAsIs;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.TextBox tbItemSearch;
@@ -398,5 +378,19 @@
         private System.Windows.Forms.ColumnHeader ID;
         private System.Windows.Forms.Label lblQty;
         private System.Windows.Forms.TextBox tbItemQuantity;
+        private System.Windows.Forms.RadioButton rbtnAsIs;
+        private System.Windows.Forms.RadioButton rbtnEmergency;
+        private System.Windows.Forms.RadioButton rbtnFood;
+        private System.Windows.Forms.RadioButton rbtnClimbing;
+        private System.Windows.Forms.RadioButton rbtnFurniture;
+        private System.Windows.Forms.RadioButton rbtnFootwear;
+        private System.Windows.Forms.RadioButton rbtnPacks;
+        private System.Windows.Forms.RadioButton rbtnWaterSports;
+        private System.Windows.Forms.RadioButton rbtnStoves;
+        private System.Windows.Forms.RadioButton rbtnSnowHardgoods;
+        private System.Windows.Forms.RadioButton rbtnOuterwear;
+        private System.Windows.Forms.RadioButton rbtnWinterClothing;
+        private System.Windows.Forms.RadioButton rbtnImpulseMerchandise;
+        private System.Windows.Forms.RadioButton rbtnOutdoorSports;
     }
 }

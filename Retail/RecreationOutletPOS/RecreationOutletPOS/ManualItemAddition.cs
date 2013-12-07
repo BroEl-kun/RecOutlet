@@ -26,10 +26,13 @@ namespace RecreationOutletPOS
         /// 
         /// Pulls the data from the database using the provided search term.
         /// </summary>
-        public DataSet showData(string searchTerm)
+        public DataSet showData(string searchTerm, int department)
         {
             string sql = "SELECT RecRPC, Name, SellPrice FROM ITEM " +
-                "WHERE  Name LIKE @str;";
+                "WHERE Name LIKE @str";
+
+            if (department != 0)
+                sql += " AND DepartmentID = @dep";
 
             SqlConnection conn = new SqlConnection(connStr);
             DataSet ds = new DataSet();
@@ -44,6 +47,7 @@ namespace RecreationOutletPOS
                 // % is a wild card for SQL where having one before and after the searchTerm means search for this substring
                 // in the field we're searching 
                 cmd.Parameters.AddWithValue("@str", "%" + searchTerm + "%");
+                cmd.Parameters.AddWithValue("@dep", department);
 
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 da.Fill(ds.Tables[0]);

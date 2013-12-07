@@ -33,6 +33,7 @@ namespace RecreationOutletPOS
 
         // keyboard event handling
         bool modifierKeyHandled = false;
+            
 
 
         /// <summary>
@@ -86,8 +87,9 @@ namespace RecreationOutletPOS
         /// Intercepts key combinations before executing the KeyPress event.
         private void Combined_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Shift)
+            if (e.Control)
             {
+                // ctrl + number keys switch between tabs)
                 if (e.KeyCode == Keys.D1)
                     setTab(btnSales, grpSales);
                 if (e.KeyCode == Keys.D2)
@@ -96,6 +98,13 @@ namespace RecreationOutletPOS
                     setTab(btnInventory, grpInventory);
                 if (e.KeyCode == Keys.D4)
                     setTab(btnReports, grpReports);
+
+                if (e.KeyCode == Keys.F)
+                {
+                    AddItemForm addItemForm = new AddItemForm(this, 1);
+                    addItemForm.ShowDialog();
+                }
+
 
                 modifierKeyHandled = true;
             }
@@ -591,6 +600,11 @@ namespace RecreationOutletPOS
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+
+            if (e.KeyChar == 13)
+            {
+                tbScanner.Focus();
+            }
         }
         #endregion
 
