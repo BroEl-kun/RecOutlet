@@ -117,6 +117,7 @@
             this.txtToDateFilter = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnTodayOnly = new System.Windows.Forms.Button();
+            this.btnTestDates = new System.Windows.Forms.Button();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.grpReturns.SuspendLayout();
@@ -874,6 +875,7 @@
             // grpReportFilters
             // 
             this.grpReportFilters.BackColor = System.Drawing.SystemColors.Control;
+            this.grpReportFilters.Controls.Add(this.btnTestDates);
             this.grpReportFilters.Controls.Add(this.btnPastMonth);
             this.grpReportFilters.Controls.Add(this.btnPastWeek);
             this.grpReportFilters.Controls.Add(this.grpDatePeriod);
@@ -971,14 +973,24 @@
             this.btnTodayOnly.UseVisualStyleBackColor = true;
             this.btnTodayOnly.Click += new System.EventHandler(this.btnTodayOnly_Click);
             // 
+            // btnTestDates
+            // 
+            this.btnTestDates.Location = new System.Drawing.Point(623, 54);
+            this.btnTestDates.Name = "btnTestDates";
+            this.btnTestDates.Size = new System.Drawing.Size(75, 23);
+            this.btnTestDates.TabIndex = 7;
+            this.btnTestDates.Text = "Test Dates";
+            this.btnTestDates.UseVisualStyleBackColor = true;
+            this.btnTestDates.Click += new System.EventHandler(this.btnTestDates_Click);
+            // 
             // Combined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.grpSales);
-            this.Controls.Add(this.grpInventory);
             this.Controls.Add(this.grpReports);
+            this.Controls.Add(this.grpInventory);
+            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
@@ -1099,5 +1111,6 @@
         private System.Windows.Forms.TextBox txtToDateFilter;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnTodayOnly;
+        private System.Windows.Forms.Button btnTestDates;
     }
 }

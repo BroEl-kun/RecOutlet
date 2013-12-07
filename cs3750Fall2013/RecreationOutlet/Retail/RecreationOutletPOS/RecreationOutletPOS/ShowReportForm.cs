@@ -8,12 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using StoreTransColumn = RecreationOutletPOS.Enum.StoreTransColumn;
 using ReportType = RecreationOutletPOS.Enum.ReportType;
+using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
+using ListViewRowID = RecreationOutletPOS.Enum.ListViewRowID;
 
 namespace RecreationOutletPOS
 {
     public partial class ShowReportForm : Form
     {
+        public string fromDateFilter;
+        public string toDateFilter;
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/7/2013
@@ -21,9 +27,12 @@ namespace RecreationOutletPOS
         /// Constructor
         /// </summary>
         /// <param name="callingButtonText">Used to determine which report to generate</param>
-        public ShowReportForm(string callingButtonText)
+        public ShowReportForm(string callingButtonText, string begDate, string endDate)
         {
             InitializeComponent();
+
+            fromDateFilter = begDate;
+            toDateFilter = endDate;
 
             determineReportType(callingButtonText);
         }
@@ -71,9 +80,12 @@ namespace RecreationOutletPOS
         /// </summary>
         private void showTransactionReports()
         {
+            DataSet ds;
+            
             try
             {
-                
+                ds = SqlHandler.getTransactionReport(fromDateFilter, toDateFilter);
+                populateListView(ds);
             }
 
             catch (Exception ex)
@@ -103,5 +115,42 @@ namespace RecreationOutletPOS
         }
 
         #endregion 
+
+        #region ListView Populating Methods
+
+        private void populateListView(DataSet ds)
+        {
+            try
+            {
+                lvReportResults.Items.Clear();
+
+                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count != 0)
+                {
+                    foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
+                    {
+                        ListViewItem li = new ListViewItem(row[ListViewRowID.TRANS_ID.ToString()].ToString());
+
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_TAX.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.PAYMENT_TYPE.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_DATE.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.EMPLOYEE_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.MANAGER_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.STORE_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TERMINAL_ID.ToString()].ToString());
+
+                        lvReportResults.Items.Add(li);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #endregion
     }
 }

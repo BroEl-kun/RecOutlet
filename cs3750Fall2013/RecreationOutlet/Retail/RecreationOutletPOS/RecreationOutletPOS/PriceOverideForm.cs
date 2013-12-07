@@ -41,6 +41,8 @@ namespace RecreationOutletPOS
 
             InitializeComponent();
         }
+
+
         /// <summary>
         /// Programmer: Nate Maurer
         /// Last Updated: 12/7/2013
@@ -69,8 +71,8 @@ namespace RecreationOutletPOS
 
                     else
                     {
-                        PinNumberForm pinForm = new PinNumberForm(this);
-                        pinForm.ShowDialog();
+                        //PinNumberForm pinForm = new PinNumberForm(this);
+                        //pinForm.ShowDialog();
 
                         if (confirmed)
                         {
