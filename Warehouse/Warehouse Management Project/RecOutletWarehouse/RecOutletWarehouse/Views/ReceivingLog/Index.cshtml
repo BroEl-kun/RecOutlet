@@ -7,10 +7,15 @@
 
 @*submitForms = function(){*@
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
+<!-- Data Table Stuffs? -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
 <style>
     #feedback { font-size: 1.4em; }
     #selectable .ui-selecting { background: #FECA40; }
@@ -22,6 +27,10 @@
 <script>
     $(function () {
         $("#selectable").selectable({ selected: function (event, ui) { } })
+    });
+
+    $(document).ready(function () {
+        $("#potable").dataTable();
     });
 
     $(function () {
@@ -37,6 +46,32 @@
             //alert(poText);
         })
     });
+
+    //$(function () {
+    //    $("#po").val(
+    //});
+
+    $(function () {
+        $("#recDate").datepicker();
+    });
+</script>
+<script type="text/javascript">
+    //function fillPOwithID()
+    //{
+    //    document.getElementById("po").value();
+    //}
+
+    function fillPOwithID(ID) {
+        //alert(ID);
+        document.getElementById("po").value = ID;
+        //document.forms["orig"].submit();
+        //document.forms["origForm"].submit();
+        //document.orig.submit();
+        //document.origForm.submit();
+        //document.getElementById("orig").submit();
+        //document.getElementsByName("origForm").submit();
+        //alert("submit?");
+    }
 </script>
 
 <h2>Create Receiving Log</h2>
@@ -60,9 +95,11 @@
 
         </tr>
     </table>
-    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "orig", id = "orig" }))
+
+    PO ID:
+    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "origForm", id = "orig" }))
     {
-        <input type="text" id="po" name="po" />          
+        <input type="text" placeholder="" id="po" name="po" />          
         //<input type="text" id="po" />
         <input type="submit" value="Begin RL" class="button"/>
     }
@@ -75,11 +112,6 @@
     //ReceivingLogCreationViewModel
     //var count = 1;
     var count = 0;
-    
-    if (count != 0)
-    {
-        <hr />
-    }
 
     //using (Html.BeginForm("MarkedReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
     //using (Html.BeginForm("CreateReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
@@ -89,40 +121,55 @@
     //using(Html.BeginForm())
     {
             <table id="RLtable">
+
+                <tr>
+                    <td colspan="6">
+                        Current PO:
+                        @ViewBag.CurrentPO
+                    </td>
+                </tr>
             
             @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)
             {
             
             <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
-                <td>
+                @*<td>
                     PO Line Item:
                     @objPO.POLineItem
                     @Html.HiddenFor(model => model.RL[count].POLineItemID, new { @Value = @objPO.POLineItem })
-                </td>
-                <td>
+                </td>*@
+                @*<td>
                     Purchase Order: @objPO.POID
-                    @*{ViewBag.POID = @objPO.POID;}*@
+                    //{ViewBag.POID = @objPO.POID;}
                     @Html.Hidden("POID", @objPO.POID)
-                </td>
+                </td>*@
                 <td>
                     Item RPC: @objPO.RecRPC
                 </td>
                 <td>
-                    Quantity Ordered: @objPO.QtyOrdered
+                    Qty Ordered: @objPO.QtyOrdered
                 </td>
                 <td>
-                    Quantity Type ID: @objPO.QtyTypeId
-                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeId } )
+                    Qty Type ID: 
+                    @*@objPO.QtyTypeId*@
+                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeId })
+                    @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
+                    <select>
+                        <option selected>1 - Each</option>
+                        <option>2 - Case</option>
+                        <option>3 - Pallet</option>
+                    </select>
+                    
                 </td>
                 <td>
                     Receive Date: 
-                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date })
+                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date, id = "recDate" })
                     @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
                     @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
                 </td>
                 <td>
-                    Quantity Received: 
-                    @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered } )
+                    Qty Received: 
+                    @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })
                     @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
                 </td>
                 <td>
@@ -141,7 +188,7 @@
             </table>
     
             @*Html.Hidden("count", count)*@
-            <input type="submit" value="Record Received" />
+            <input type="submit" value="Record Received" class="button" />
     
     }
 
@@ -152,16 +199,16 @@
         @*<input type="button" value="Record Received" onclick="submitForms(1)" />*@
  
     //}
-//}
+    //}
 
 
 }
 
-@if(ViewBag.NonReceivedPOs != null)
+@if (ViewBag.NonReceivedPOs != null)
 {
 
     
-    <ol id="selectable">
+   @* <ol id="selectable">
             
             @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)
             {
@@ -174,6 +221,39 @@
             }
 
         </ol>
+    *@
+    
+    <table id="potable">
+        <thead>
+            <tr>
+                <th>PO ID:</th>
+                <th>Est Ship Date:</th>
+                <th>Order Date:</th>
+                <th>Vendor:</th>
+                <th>Created By:</th>
+                <th>Comments:</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)
+            {
+            
+            <tr>
+                <td><a href="javascript:fillPOwithID(@objPO.PurchaseOrderId)">@objPO.PurchaseOrderId</a></td>
+                <td>@objPO.EstShipDate</td>
+                <td>@objPO.OrderDate</td>
+                <td>@objPO.Vendor</td>
+                <td>@objPO.CreatedBy</td>
+                <td>@objPO.Comments</td>
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
     
 }
 
