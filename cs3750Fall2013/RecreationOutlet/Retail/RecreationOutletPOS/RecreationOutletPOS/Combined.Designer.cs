@@ -112,10 +112,14 @@
             this.btnTransactionReport = new System.Windows.Forms.Button();
             this.grpReportFilters = new System.Windows.Forms.GroupBox();
             this.grpDatePeriod = new System.Windows.Forms.GroupBox();
-            this.txtFromDate = new System.Windows.Forms.TextBox();
+            this.txtFromDateFilter = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtDateTo = new System.Windows.Forms.TextBox();
+            this.txtToDateFilter = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnTodayOnly = new System.Windows.Forms.Button();
+            this.btnPastWeek = new System.Windows.Forms.Button();
+            this.btnPastMonth = new System.Windows.Forms.Button();
+            this.btnClearDates = new System.Windows.Forms.Button();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.grpReturns.SuspendLayout();
@@ -776,9 +780,9 @@
             this.grpReportTypes.Controls.Add(this.btnTest);
             this.grpReportTypes.Controls.Add(this.btnCommissionReport);
             this.grpReportTypes.Controls.Add(this.btnTransactionReport);
-            this.grpReportTypes.Location = new System.Drawing.Point(9, 158);
+            this.grpReportTypes.Location = new System.Drawing.Point(9, 167);
             this.grpReportTypes.Name = "grpReportTypes";
-            this.grpReportTypes.Size = new System.Drawing.Size(897, 272);
+            this.grpReportTypes.Size = new System.Drawing.Size(897, 263);
             this.grpReportTypes.TabIndex = 47;
             this.grpReportTypes.TabStop = false;
             this.grpReportTypes.Text = "Reports";
@@ -889,7 +893,7 @@
             this.btnCommissionReport.Name = "btnCommissionReport";
             this.btnCommissionReport.Size = new System.Drawing.Size(189, 52);
             this.btnCommissionReport.TabIndex = 45;
-            this.btnCommissionReport.Text = "Commission Report";
+            this.btnCommissionReport.Text = "Commissions Report";
             this.btnCommissionReport.UseVisualStyleBackColor = true;
             this.btnCommissionReport.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnViewReport_MouseClick);
             // 
@@ -906,33 +910,37 @@
             // grpReportFilters
             // 
             this.grpReportFilters.BackColor = System.Drawing.SystemColors.Control;
+            this.grpReportFilters.Controls.Add(this.btnPastMonth);
+            this.grpReportFilters.Controls.Add(this.btnPastWeek);
             this.grpReportFilters.Controls.Add(this.grpDatePeriod);
+            this.grpReportFilters.Controls.Add(this.btnTodayOnly);
             this.grpReportFilters.Location = new System.Drawing.Point(9, 16);
             this.grpReportFilters.Name = "grpReportFilters";
-            this.grpReportFilters.Size = new System.Drawing.Size(897, 136);
+            this.grpReportFilters.Size = new System.Drawing.Size(897, 145);
             this.grpReportFilters.TabIndex = 46;
             this.grpReportFilters.TabStop = false;
             this.grpReportFilters.Text = "Report Filters";
             // 
             // grpDatePeriod
             // 
-            this.grpDatePeriod.Controls.Add(this.txtFromDate);
+            this.grpDatePeriod.Controls.Add(this.btnClearDates);
+            this.grpDatePeriod.Controls.Add(this.txtFromDateFilter);
             this.grpDatePeriod.Controls.Add(this.label2);
-            this.grpDatePeriod.Controls.Add(this.txtDateTo);
+            this.grpDatePeriod.Controls.Add(this.txtToDateFilter);
             this.grpDatePeriod.Controls.Add(this.label3);
-            this.grpDatePeriod.Location = new System.Drawing.Point(22, 35);
+            this.grpDatePeriod.Location = new System.Drawing.Point(6, 30);
             this.grpDatePeriod.Name = "grpDatePeriod";
-            this.grpDatePeriod.Size = new System.Drawing.Size(200, 90);
+            this.grpDatePeriod.Size = new System.Drawing.Size(200, 109);
             this.grpDatePeriod.TabIndex = 4;
             this.grpDatePeriod.TabStop = false;
             this.grpDatePeriod.Text = "Date Period";
             // 
-            // txtFromDate
+            // txtFromDateFilter
             // 
-            this.txtFromDate.Location = new System.Drawing.Point(54, 25);
-            this.txtFromDate.Name = "txtFromDate";
-            this.txtFromDate.Size = new System.Drawing.Size(123, 20);
-            this.txtFromDate.TabIndex = 0;
+            this.txtFromDateFilter.Location = new System.Drawing.Point(54, 25);
+            this.txtFromDateFilter.Name = "txtFromDateFilter";
+            this.txtFromDateFilter.Size = new System.Drawing.Size(123, 20);
+            this.txtFromDateFilter.TabIndex = 0;
             // 
             // label2
             // 
@@ -943,12 +951,12 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "To";
             // 
-            // txtDateTo
+            // txtToDateFilter
             // 
-            this.txtDateTo.Location = new System.Drawing.Point(54, 51);
-            this.txtDateTo.Name = "txtDateTo";
-            this.txtDateTo.Size = new System.Drawing.Size(123, 20);
-            this.txtDateTo.TabIndex = 1;
+            this.txtToDateFilter.Location = new System.Drawing.Point(54, 51);
+            this.txtToDateFilter.Name = "txtToDateFilter";
+            this.txtToDateFilter.Size = new System.Drawing.Size(123, 20);
+            this.txtToDateFilter.TabIndex = 1;
             // 
             // label3
             // 
@@ -958,6 +966,45 @@
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "From";
+            // 
+            // btnTodayOnly
+            // 
+            this.btnTodayOnly.Location = new System.Drawing.Point(212, 45);
+            this.btnTodayOnly.Name = "btnTodayOnly";
+            this.btnTodayOnly.Size = new System.Drawing.Size(75, 23);
+            this.btnTodayOnly.TabIndex = 4;
+            this.btnTodayOnly.Text = "Today Only";
+            this.btnTodayOnly.UseVisualStyleBackColor = true;
+            // 
+            // btnPastWeek
+            // 
+            this.btnPastWeek.Enabled = false;
+            this.btnPastWeek.Location = new System.Drawing.Point(212, 74);
+            this.btnPastWeek.Name = "btnPastWeek";
+            this.btnPastWeek.Size = new System.Drawing.Size(75, 23);
+            this.btnPastWeek.TabIndex = 5;
+            this.btnPastWeek.Text = "Past Week";
+            this.btnPastWeek.UseVisualStyleBackColor = true;
+            // 
+            // btnPastMonth
+            // 
+            this.btnPastMonth.Enabled = false;
+            this.btnPastMonth.Location = new System.Drawing.Point(212, 102);
+            this.btnPastMonth.Name = "btnPastMonth";
+            this.btnPastMonth.Size = new System.Drawing.Size(75, 23);
+            this.btnPastMonth.TabIndex = 6;
+            this.btnPastMonth.Text = "Past Month";
+            this.btnPastMonth.UseVisualStyleBackColor = true;
+            // 
+            // btnClearDates
+            // 
+            this.btnClearDates.Location = new System.Drawing.Point(54, 80);
+            this.btnClearDates.Name = "btnClearDates";
+            this.btnClearDates.Size = new System.Drawing.Size(75, 23);
+            this.btnClearDates.TabIndex = 4;
+            this.btnClearDates.Text = "Clear Filters";
+            this.btnClearDates.UseVisualStyleBackColor = true;
+            this.btnClearDates.Click += new System.EventHandler(this.btnClearDates_Click);
             // 
             // Combined
             // 
@@ -1082,9 +1129,13 @@
         private System.Windows.Forms.Button btnTransactionReport;
         private System.Windows.Forms.GroupBox grpReportFilters;
         private System.Windows.Forms.GroupBox grpDatePeriod;
-        private System.Windows.Forms.TextBox txtFromDate;
+        private System.Windows.Forms.TextBox txtFromDateFilter;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtDateTo;
+        private System.Windows.Forms.TextBox txtToDateFilter;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnPastMonth;
+        private System.Windows.Forms.Button btnPastWeek;
+        private System.Windows.Forms.Button btnClearDates;
+        private System.Windows.Forms.Button btnTodayOnly;
     }
 }
