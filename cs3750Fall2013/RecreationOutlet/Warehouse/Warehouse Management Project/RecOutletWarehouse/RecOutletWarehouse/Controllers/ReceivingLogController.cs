@@ -163,6 +163,8 @@ namespace RecOutletWarehouse.Controllers
             //return RedirectToAction("CreateNewRL")
             //return View("POSummary");
 
+            ViewBag.CurrentPO = po;
+
             //1108201301
             DataFetcherSetter db = new DataFetcherSetter();
 
