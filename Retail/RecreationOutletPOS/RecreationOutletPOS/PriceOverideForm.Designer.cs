@@ -34,7 +34,7 @@
             // 
             // txtPriceOveride
             // 
-            this.txtPriceOveride.Location = new System.Drawing.Point(64, 75);
+            this.txtPriceOveride.Location = new System.Drawing.Point(68, 12);
             this.txtPriceOveride.Name = "txtPriceOveride";
             this.txtPriceOveride.Size = new System.Drawing.Size(125, 20);
             this.txtPriceOveride.TabIndex = 0;
@@ -43,7 +43,7 @@
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
-            this.lblPrice.Location = new System.Drawing.Point(12, 78);
+            this.lblPrice.Location = new System.Drawing.Point(12, 15);
             this.lblPrice.Name = "lblPrice";
             this.lblPrice.Size = new System.Drawing.Size(55, 13);
             this.lblPrice.TabIndex = 1;
@@ -53,7 +53,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(201, 116);
+            this.ClientSize = new System.Drawing.Size(205, 42);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.txtPriceOveride);
             this.Name = "PriceOverideForm";

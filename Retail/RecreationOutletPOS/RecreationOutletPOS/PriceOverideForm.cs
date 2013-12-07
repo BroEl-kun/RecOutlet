@@ -22,6 +22,7 @@ namespace RecreationOutletPOS
         /// </summary>
         SalesForm salesForm;
         int selectedItem;
+        bool confirmed = false;
         
         public PriceOverideForm(SalesForm inForm, int selectedItem)
         {
@@ -39,6 +40,16 @@ namespace RecreationOutletPOS
             this.selectedItem = selectedItem;
 
             InitializeComponent();
+        }
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 12/7/2013
+        ///
+        /// Added to determine if the PIN number in PinNumberForm is confirmed.
+        /// </summary>
+        public void Confirmed(bool inConfirmed)
+        {
+            confirmed = inConfirmed;
         }
         //------------------------------------
 
@@ -58,14 +69,22 @@ namespace RecreationOutletPOS
 
                     else
                     {
-                        Double.TryParse(txtPriceOveride.Text, out inPrice);
-                        if (salesForm != null)
+                        PinNumberForm pinForm = new PinNumberForm(this);
+                        pinForm.ShowDialog();
+
+                        if (confirmed)
                         {
-                            salesForm.overideItemPrice(inPrice, selectedItem);
-                        }
-                        else if (combined != null)
-                        {
-                            combined.overideItemPrice(inPrice, selectedItem);
+
+                            Double.TryParse(txtPriceOveride.Text, out inPrice);
+                            if (salesForm != null)
+                            {
+                                salesForm.overideItemPrice(inPrice, selectedItem);
+                            }
+                            else if (combined != null)
+                            {
+                                combined.overideItemPrice(inPrice, selectedItem);
+                            }
+
                         }
                     }
                 }
