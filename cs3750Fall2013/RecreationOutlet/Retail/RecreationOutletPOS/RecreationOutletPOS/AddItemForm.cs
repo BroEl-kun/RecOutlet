@@ -18,7 +18,7 @@ namespace RecreationOutletPOS
         SalesForm salesForm;
         ReturnsForm returnsForm;
         int listView;
-
+        
         private string searchTerm = "";
 
         /// <summary>
@@ -55,6 +55,7 @@ namespace RecreationOutletPOS
         {
             this.combined = inForm;
             this.listView = list;
+
             InitializeComponent();
         }
         //------------------------------------
@@ -79,7 +80,7 @@ namespace RecreationOutletPOS
 
             try
             {
-                ds = dt.showData(searchTerm);
+                ds = dt.showData(searchTerm, 0);
 
                 lvData.Items.Clear();
 
@@ -101,32 +102,7 @@ namespace RecreationOutletPOS
 
         private void tbItemSearch_TextChanged(object sender, EventArgs e)
         {
-            searchTerm = tbItemSearch.Text;
-
-            DataSet ds = new DataSet();
-
-            ManualItemAddition dt = new ManualItemAddition();
-
-            try
-            {
-                ds = dt.showData(searchTerm);
-
-                lvData.Items.Clear();
-
-                if (ds.Tables["Results"].Rows.Count != 0)
-                {
-                    foreach (DataRow row in ds.Tables["Results"].Rows)
-                    {
-                        ListViewItem li = new ListViewItem(row["RecRPC"].ToString());
-                        li.SubItems.Add(row["Name"].ToString());
-                        li.SubItems.Add(row["SellPrice"].ToString());
-                        lvData.Items.Add(li);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-            }
+            refreshResults();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -194,10 +170,104 @@ namespace RecreationOutletPOS
 
         private void btnMiscCamp_Click(object sender, EventArgs e)
         {
-
+            
         }
 
-        
 
+
+
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 12/05/2013
+        ///
+        /// Retrieves the selected departments by cycling through
+        /// the buttons and seeing which ones are active.
+        /// It returns the department ID for the selected button.
+        /// </summary>
+        private int retrieveDepartments()
+        {
+            int selectedDepartment = 0;
+
+            if (rbtnAsIs.Checked)
+                selectedDepartment = 0;
+
+            if (rbtnEmergency.Checked)
+                selectedDepartment = 9;
+
+            if (rbtnFootwear.Checked)
+                selectedDepartment = 7;
+
+            if (rbtnWaterSports.Checked)
+                selectedDepartment = 14;
+
+            if (rbtnSnowHardgoods.Checked)
+                selectedDepartment = 10;
+
+            if (rbtnWinterClothing.Checked)
+                selectedDepartment = 5;
+
+            if (rbtnOutdoorSports.Checked)
+                selectedDepartment = 40;
+
+            if (rbtnClimbing.Checked)
+                selectedDepartment = 2;
+
+            if (rbtnFood.Checked)
+                selectedDepartment = 90;
+
+            if (rbtnFurniture.Checked)
+                selectedDepartment = 15;
+
+            if (rbtnPacks.Checked)
+                selectedDepartment = 8;
+
+            if (rbtnStoves.Checked)
+                selectedDepartment = 12;
+
+            if (rbtnOuterwear.Checked)
+                selectedDepartment = 11;
+
+            if (rbtnImpulseMerchandise.Checked)
+                selectedDepartment = 82;
+
+
+            return selectedDepartment;
+        }
+
+        private void rbtnDepartment_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshResults();
+        }
+
+
+        private void refreshResults()
+        {
+            searchTerm = tbItemSearch.Text;
+
+            DataSet ds = new DataSet();
+
+            ManualItemAddition dt = new ManualItemAddition();
+
+            try
+            {
+                ds = dt.showData(searchTerm, retrieveDepartments());
+
+                lvData.Items.Clear();
+
+                if (ds.Tables["Results"].Rows.Count != 0)
+                {
+                    foreach (DataRow row in ds.Tables["Results"].Rows)
+                    {
+                        ListViewItem li = new ListViewItem(row["RecRPC"].ToString());
+                        li.SubItems.Add(row["Name"].ToString());
+                        li.SubItems.Add(row["SellPrice"].ToString());
+                        lvData.Items.Add(li);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+        }
     }
 }
