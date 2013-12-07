@@ -178,7 +178,7 @@ h2 {
 
 .successful-insert {
     font-weight:bold;
-    color:green;
+    color:#01c701;
 }
 /*Errors and Validation
 ----------------------------------------------------------*/
@@ -247,7 +247,7 @@ input[type="checkbox"].input-validation-error {
     background-color: blue;
 }
 #SuccessMessage {
-    color: #329932;
+    color: #01c701;
     font-weight: bold;
     font-size: 1.1em;
 }
