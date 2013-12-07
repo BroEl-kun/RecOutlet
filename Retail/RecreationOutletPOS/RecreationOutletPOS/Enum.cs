@@ -151,15 +151,17 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/21/2013
+        /// Last Updated: 12/7/2013
         /// 
-        /// Represents the ListView columns NAMES used in the POS
+        /// Represents the ListView row identifiers (Each row in a list view has an ID for its
+        /// sub collection of items)
         /// </summary>
-        public sealed class ListViewColumn
+        public sealed class ListViewRowID
         {
             private readonly String columnName;
 
-            public static readonly ListViewColumn ITEM_ID = new ListViewColumn("ItemID");
+            public static readonly ListViewRowID ITEM_ID = new ListViewRowID("ItemID");
+            public static readonly ListViewRowID TRANS_ID = new ListViewRowID("TransactionID");
 
             /// <summary>
             /// Programmer: Michael Vuong
@@ -168,7 +170,7 @@ namespace RecreationOutletPOS
             /// Constructor
             /// </summary>
             /// <param name="columnName"></param>
-            public ListViewColumn(String columnName)
+            public ListViewRowID(String columnName)
             {
                 this.columnName = columnName;
             }
@@ -202,7 +204,7 @@ namespace RecreationOutletPOS
             private readonly String resultSet;
 
             public static readonly SqlResultSet ITEM_RESULTSET = new SqlResultSet("ITEM_ResultSet");
-            public static readonly SqlResultSet TRANS_RESULTSET = new SqlResultSet("Transactions_ResultSet");
+            public static readonly SqlResultSet TRANS_RESULTSET = new SqlResultSet("Transaction_ResultSet");
             public static readonly SqlResultSet COMMISSION_RESULTSET = new SqlResultSet("Commissions_ResultSet");
 
             /// <summary>
@@ -308,37 +310,6 @@ namespace RecreationOutletPOS
 
             /// <summary>
             /// Programmer: Michael Vuong
-            /// Last Updated: 12/7/2013
-            /// 
-            /// Creats a list of Item table columns enums in the form of a List for
-            /// the list view in the ShowReportForm 
-            /// </summary>
-            /// <returns>the Item table columns enums in the form of a List</returns>
-            public static List<ItemTableColumn> getReportColumns()
-            {
-                List<ItemTableColumn> reportColumns = new List<ItemTableColumn>();
-
-                try
-                {
-                    reportColumns.Add(ItemTableColumn.REC_RPC);
-                    reportColumns.Add(ItemTableColumn.ITEM_UPC);
-                    reportColumns.Add(ItemTableColumn.NAME);
-                    reportColumns.Add(ItemTableColumn.SELL_PRICE);
-                    reportColumns.Add(ItemTableColumn.DEPARTMENT_ID);
-                    reportColumns.Add(ItemTableColumn.CATEGORY_ID);
-                }
-
-                catch (Exception ex)
-                {
-
-                }
-
-                return reportColumns;
-            }
-
-
-            /// <summary>
-            /// Programmer: Michael Vuong
             /// Last Updated: 11/14/2013
             /// 
             /// Overridden to return the string class property
@@ -382,6 +353,40 @@ namespace RecreationOutletPOS
             {
                 this.tableColumn = tableColumn;
             }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 12/7/2013
+            /// 
+            /// Creats a list of store transaction table columns enums in the form of a List
+            /// </summary>
+            /// <returns>the store transaction table columns enums in the form of a List</returns>
+            public static List<StoreTransColumn> getReportColumns()
+            {
+                List<StoreTransColumn> reportColumns = new List<StoreTransColumn>();
+
+                try
+                {
+                    reportColumns.Add(StoreTransColumn.TRANS_ID);
+                    reportColumns.Add(StoreTransColumn.STORE_ID);
+                    reportColumns.Add(StoreTransColumn.EMPLOYEE_ID);
+                    reportColumns.Add(StoreTransColumn.TRANS_DATE);
+                    reportColumns.Add(StoreTransColumn.TERMINAL_ID);
+                    reportColumns.Add(StoreTransColumn.TRANS_TOTAL);
+                    reportColumns.Add(StoreTransColumn.TRANS_TAX);
+                    reportColumns.Add(StoreTransColumn.MANAGER_ID);
+                    reportColumns.Add(StoreTransColumn.PAYMENT_TYPE);
+                    reportColumns.Add(StoreTransColumn.PREV_TRANS_ID);
+                }
+
+                catch (Exception ex)
+                {
+
+                }
+
+                return reportColumns;
+            }
+
 
             /// <summary>
             /// Programmer: Michael Vuong

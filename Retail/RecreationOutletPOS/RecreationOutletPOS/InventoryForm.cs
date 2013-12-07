@@ -11,7 +11,7 @@ using System.Windows.Forms;
 // Aliases for the Enum's inner classes
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
 using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
-using ListViewColumn = RecreationOutletPOS.Enum.ListViewColumn;
+using ListViewColumn = RecreationOutletPOS.Enum.ListViewRowID;
 
 namespace RecreationOutletPOS
 {

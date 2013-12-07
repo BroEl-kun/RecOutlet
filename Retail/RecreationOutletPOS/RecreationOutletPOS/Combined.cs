@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using TransKey = RecreationOutletPOS.Enum.TransKey;
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
 using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
-using ListViewColumn = RecreationOutletPOS.Enum.ListViewColumn;
+using ListViewColumn = RecreationOutletPOS.Enum.ListViewRowID;
 using ReportType = RecreationOutletPOS.Enum.ReportType;
 
 namespace RecreationOutletPOS
@@ -909,7 +909,7 @@ namespace RecreationOutletPOS
                 // If the date period dates are valid
                 else if (HelperMethods.isValidDate(fromDateFilter) && HelperMethods.isValidDate(toDateFilter))
                 {
-                    reportForm = new ShowReportForm(callingButton.Text);
+                    reportForm = new ShowReportForm(callingButton.Text, fromDateFilter, toDateFilter);
                     reportForm.Show();
                 }
 
@@ -964,6 +964,13 @@ namespace RecreationOutletPOS
             {
 
             }
+        }
+
+        // TEST - DELETE LATER
+        private void btnTestDates_Click(object sender, EventArgs e)
+        {
+            txtFromDateFilter.Text = "10/14/2013";
+            txtToDateFilter.Text = "10/15/2013";
         }
 
         #endregion

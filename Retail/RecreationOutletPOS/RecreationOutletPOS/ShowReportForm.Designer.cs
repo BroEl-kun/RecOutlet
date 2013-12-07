@@ -41,12 +41,31 @@
             this.lblSearchBy = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
+            this.TransactionID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TransTotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TransTax = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TransactionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EmployeeID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.StoreID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TerminalID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.PaymentType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ManagerID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvReportResults
             // 
+            this.lvReportResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.TransactionID,
+            this.TransTotal,
+            this.TransTax,
+            this.PaymentType,
+            this.TransactionDate,
+            this.EmployeeID,
+            this.ManagerID,
+            this.StoreID,
+            this.TerminalID});
             this.lvReportResults.Location = new System.Drawing.Point(12, 153);
             this.lvReportResults.Name = "lvReportResults";
             this.lvReportResults.Size = new System.Drawing.Size(733, 265);
@@ -93,9 +112,9 @@
             this.lblLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLabel2.Location = new System.Drawing.Point(17, 67);
             this.lblLabel2.Name = "lblLabel2";
-            this.lblLabel2.Size = new System.Drawing.Size(55, 17);
+            this.lblLabel2.Size = new System.Drawing.Size(81, 17);
             this.lblLabel2.TabIndex = 53;
-            this.lblLabel2.Text = "Label 2";
+            this.lblLabel2.Text = "Total Count";
             // 
             // lblLabel1
             // 
@@ -103,9 +122,9 @@
             this.lblLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLabel1.Location = new System.Drawing.Point(17, 40);
             this.lblLabel1.Name = "lblLabel1";
-            this.lblLabel1.Size = new System.Drawing.Size(55, 17);
+            this.lblLabel1.Size = new System.Drawing.Size(89, 17);
             this.lblLabel1.TabIndex = 52;
-            this.lblLabel1.Text = "Label 1";
+            this.lblLabel1.Text = "Money Made";
             // 
             // groupBox2
             // 
@@ -174,8 +193,50 @@
             // 
             this.txtSearchValue.Location = new System.Drawing.Point(77, 27);
             this.txtSearchValue.Name = "txtSearchValue";
-            this.txtSearchValue.Size = new System.Drawing.Size(327, 20);
+            this.txtSearchValue.Size = new System.Drawing.Size(340, 20);
             this.txtSearchValue.TabIndex = 50;
+            // 
+            // TransactionID
+            // 
+            this.TransactionID.Text = "TransactionID";
+            // 
+            // TransTotal
+            // 
+            this.TransTotal.Text = "TransTotal";
+            // 
+            // TransTax
+            // 
+            this.TransTax.Text = "TransTax";
+            // 
+            // TransactionDate
+            // 
+            this.TransactionDate.DisplayIndex = 3;
+            this.TransactionDate.Text = "TransactionDate";
+            // 
+            // EmployeeID
+            // 
+            this.EmployeeID.DisplayIndex = 4;
+            this.EmployeeID.Text = "EmployeeID";
+            // 
+            // StoreID
+            // 
+            this.StoreID.DisplayIndex = 5;
+            this.StoreID.Text = "StoreID";
+            // 
+            // TerminalID
+            // 
+            this.TerminalID.DisplayIndex = 6;
+            this.TerminalID.Text = "TerminalID";
+            // 
+            // PaymentType
+            // 
+            this.PaymentType.DisplayIndex = 7;
+            this.PaymentType.Text = "PaymentType";
+            // 
+            // ManagerID
+            // 
+            this.ManagerID.DisplayIndex = 8;
+            this.ManagerID.Text = "ManagerID";
             // 
             // ShowReportForm
             // 
@@ -210,5 +271,14 @@
         private System.Windows.Forms.Label lblLabel1;
         private System.Windows.Forms.Label lblInventoryFrom;
         private System.Windows.Forms.ComboBox cmbInventoryFrom;
+        private System.Windows.Forms.ColumnHeader TransactionID;
+        private System.Windows.Forms.ColumnHeader TransTotal;
+        private System.Windows.Forms.ColumnHeader TransTax;
+        private System.Windows.Forms.ColumnHeader PaymentType;
+        private System.Windows.Forms.ColumnHeader TransactionDate;
+        private System.Windows.Forms.ColumnHeader EmployeeID;
+        private System.Windows.Forms.ColumnHeader ManagerID;
+        private System.Windows.Forms.ColumnHeader StoreID;
+        private System.Windows.Forms.ColumnHeader TerminalID;
     }
 }

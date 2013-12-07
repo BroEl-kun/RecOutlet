@@ -30,7 +30,7 @@ namespace RecreationOutletPOS
         {
             string sql = "SELECT TransactionID, StoreID, EmployeeID, TransactionDate, TransTotal " +
                          "TransTax, ManagerID, PaymentType " +
-                         "FROM STORE_TRANSACTION WHERE TransactionDate BETWEEN @beginDate AND @endDate;";
+                         "FROM STORE_TRANSACTION WHERE TransactionDate BETWEEN '10/14/2013' AND '10/15/2013';";
 
             SqlConnection conn = new SqlConnection(connStr);
             SqlCommand cmd;
@@ -46,11 +46,13 @@ namespace RecreationOutletPOS
 
                 conn.Open();
 
-                beginDate += "00:00:00";
-                endDate += "23:59:00";
+                //beginDate += " 00:00:00 AM";
+                //endDate += " 23:59:00 AM";
 
-                cmd.Parameters.AddWithValue("@beginDate", "\'" + beginDate + "\'");
-                cmd.Parameters.AddWithValue("@endDate", "\'" + endDate + "\'");
+                //cmd.Parameters.AddWithValue("@beginDate", beginDate);
+                //cmd.Parameters.AddWithValue("@endDate", endDate);
+
+                int x = cmd.ExecuteNonQuery();
 
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds.Tables[0]);
