@@ -109,6 +109,13 @@
     <Compile Include="SalesForm.Designer.cs">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowReportForm.Designer.cs">
+      <DependentUpon>ShowReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SqlHandler.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionList.cs" />
     <EmbeddedResource Include="AddItemForm.resx">
@@ -146,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SalesForm.resx">
       <DependentUpon>SalesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowReportForm.resx">
+      <DependentUpon>ShowReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

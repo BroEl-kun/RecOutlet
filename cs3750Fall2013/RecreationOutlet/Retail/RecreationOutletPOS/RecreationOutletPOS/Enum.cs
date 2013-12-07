@@ -202,6 +202,8 @@ namespace RecreationOutletPOS
             private readonly String resultSet;
 
             public static readonly SqlResultSet ITEM_RESULTSET = new SqlResultSet("ITEM_ResultSet");
+            public static readonly SqlResultSet TRANS_RESULTSET = new SqlResultSet("Transactions_ResultSet");
+            public static readonly SqlResultSet COMMISSION_RESULTSET = new SqlResultSet("Commissions_ResultSet");
 
             /// <summary>
             /// Programmer: Michael Vuong
