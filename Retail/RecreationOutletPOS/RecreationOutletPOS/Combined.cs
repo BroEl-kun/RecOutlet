@@ -16,6 +16,7 @@ using TransKey = RecreationOutletPOS.Enum.TransKey;
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
 using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
 using ListViewColumn = RecreationOutletPOS.Enum.ListViewColumn;
+using ReportType = RecreationOutletPOS.Enum.ReportType;
 
 namespace RecreationOutletPOS
 {
@@ -34,7 +35,12 @@ namespace RecreationOutletPOS
         bool modifierKeyHandled = false;
 
 
-
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 12/7/2013 (By Michael Vuong)
+        /// 
+        /// Constructor
+        /// </summary>
         public Combined()
         {
             InitializeComponent();
@@ -52,23 +58,26 @@ namespace RecreationOutletPOS
             cmbSearchBy.SelectedIndex = 2;
         }
 
+
+        #region Form Events and Hotkeys
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 12/7/2013 (By Michael Vuong)
+        /// 
+        /// Initializes parts of the combined form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Combined_Load(Object sender, EventArgs e)
         {
-            //Salesform constructor
+            // Salesform 
             summarySubTotal.Text = "$0.00";
             summaryTax.Text = "$0.00";
             summaryTotal.Text = "$0.00";
 
             updateListView();
-
-            //Inventoryform
-            
         }
-
-
-
-        #region Form Events and Hotkeys
-
 
         /// <summary>
         /// Programmer: Jaed Norberg
@@ -124,29 +133,58 @@ namespace RecreationOutletPOS
         #endregion
 
 
-
         #region *** Tab Handling ***
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: ?
+        /// 
+        /// Toggles to the Sales tab
+        /// </summary>
         private void btnSales_MouseClick(object sender, MouseEventArgs e)
         {
             setTab(btnSales, grpSales);
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: ?
+        /// 
+        /// Toggles to the Returns tab
+        /// </summary>
         private void btnReturns_MouseClick(object sender, MouseEventArgs e)
         {
             setTab(btnReturns, grpReturns);
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: ?
+        /// 
+        /// Toggles to the Inventory tab
+        /// </summary>
         private void btnInventory_MouseClick(object sender, MouseEventArgs e)
         {
             setTab(btnInventory, grpInventory);
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: ?
+        /// 
+        /// Toggles to the Reports tab
+        /// </summary>
         private void btnReports_MouseClick(object sender, MouseEventArgs e)
         {
             setTab(btnReports, grpReports);
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: ?
+        /// 
+        /// Sets a tab based on the button pressed
+        /// </summary>
         private void setTab(Button b, GroupBox g)
         {
             //enableButtons
@@ -831,7 +869,7 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 12/4/2013
+        /// Last Updated: 12/7/2013
         /// 
         /// A single mouse click event that will be used for ALL reports
         /// </summary>
@@ -841,33 +879,39 @@ namespace RecreationOutletPOS
 
             try
             {
+                // Check that there are dates entered in both date period textboxes
                 if (string.IsNullOrWhiteSpace(fromDateFilter) || string.IsNullOrWhiteSpace(toDateFilter))
                 {
-                    MessageBox.Show("One or more dates not specified", "Invalid Date(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("One or more dates not specified", "Invalid Date(s)", 
+                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                //else if (HelperMethods.validateDate(fromDateFilter) && HelperMethods.validateDate(toDateFilter))
-                //{
-                //    switch (callingButton.Text)
-                //    {
-                //        case "Transactions Report":
-                //            showTransactionReports();
-                //            break;
-                //    }
-                //}
+                // If the date period dates are valid
+                else if (HelperMethods.isValidDate(fromDateFilter) && HelperMethods.isValidDate(toDateFilter))
+                {
+                    switch (callingButton.Text)
+                    {
+                        case "Transactions Report":
+                            showTransactionReports();
+                            break;
+                    }
+                }
 
-                //else
-                //{
-                //    MessageBox.Show("One or more invalid dates entered", "Invalid Date(s)", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                //}
+                else
+                {
+                    MessageBox.Show("One or more invalid dates entered", "Invalid Date(s)", 
+                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
 
             catch (Exception ex)
             {
 
-            }
-        
+            }      
         }
+
+
+        #region Show Reports Methods
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -908,5 +952,32 @@ namespace RecreationOutletPOS
         }
 
         #endregion 
+
+        #region Button Text Setter Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Sets the button texts to the ReportType Enum strings (To ensure consistency with the ReportType strings
+        /// for later comparison to check the button text and determine which type of report to generate)
+        /// </summary>
+        private void setReportButtonText()
+        {
+            try
+            {
+                btnTransactionReport.Text = ReportType.TRANSACTIONS.ToString();
+                btnCommissionReport.Text = ReportType.COMMISSIONS.ToString();
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #endregion
+
+        #endregion
     }
 }

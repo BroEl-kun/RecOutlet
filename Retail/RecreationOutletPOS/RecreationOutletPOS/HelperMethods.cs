@@ -28,19 +28,19 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 12/4/2013
+        /// Last Updated: 12/7/2013
         /// 
         /// Validates a given date to ensure it is in the format of MM/DD/YYYY
         /// </summary>
         /// <param name="date">The date to validate</param>
-        public static bool validateDate(string date)
+        public static bool isValidDate(string date)
         {
             Match dateMatch;
 
-            bool validMonth = false;
-            bool validDay = false;
-            bool validYear = false;
-            bool isValidDate = false;
+            bool isValidMonth = false;
+            bool isValidDay = false;
+            bool isValidYear = false;
+            bool validDate = false;
 
             string[] splitDate;
 
@@ -63,7 +63,20 @@ namespace RecreationOutletPOS
                     int.TryParse(splitDate[1], out day);
                     int.TryParse(splitDate[2], out year);
 
+                    // Validate each part of the date
 
+                    if (month > 0 && month <= 12)
+                        isValidMonth = true;
+
+                    if (day > 0 && day <= 31)
+                        isValidDay = true;
+
+                    if (year > 0)
+                        isValidYear = true;
+
+                    // If all parts of the date are valid, the given date is valid
+                    if (isValidMonth && isValidDay && isValidYear)
+                        validDate = true;
                 }
             }
 
@@ -72,7 +85,7 @@ namespace RecreationOutletPOS
                 
             }
 
-            return isValidDate;
+            return validDate;
         }
     }
 }
