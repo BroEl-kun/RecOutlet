@@ -11,6 +11,7 @@ namespace RecOutletWarehouse.Models.PurchaseOrder {
         //this is a string because we can't guarantee the client will enter as an int
         public string PurchaseOrderId { get; set; }
         
+        [Required]
         public string Vendor { get; set; } //string to accept either an ID or a Name
 
         public int CreatedBy { get; set; }
@@ -22,6 +23,7 @@ namespace RecOutletWarehouse.Models.PurchaseOrder {
         public DateTime EstShipDate { get; set; }
 
         [DataType(DataType.Currency)]
+        
         public decimal FreightCost { get; set; }
 
         public string Terms { get; set; }

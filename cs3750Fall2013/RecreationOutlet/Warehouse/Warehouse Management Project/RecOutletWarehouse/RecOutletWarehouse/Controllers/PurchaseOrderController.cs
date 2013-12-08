@@ -91,9 +91,6 @@ namespace RecOutletWarehouse.Controllers
                 return View(POVM);
             }
             else {
-            
-
-
                 db.CreateNewPurchaseOrder(convertedPO,
                     vendorId, POVM.PO.CreatedBy,
                     POVM.PO.OrderDate, POVM.PO.EstShipDate,
@@ -181,8 +178,6 @@ namespace RecOutletWarehouse.Controllers
 
             return View();
         }
-
-
 
         //PURCHASE ORDER UTILITY METHODS FOLLOW
 

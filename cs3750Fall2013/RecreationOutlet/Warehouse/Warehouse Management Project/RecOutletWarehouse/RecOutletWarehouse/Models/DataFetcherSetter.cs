@@ -67,7 +67,7 @@ namespace RecOutletWarehouse.Models
                     command.Parameters.AddWithValue("@POCreateBy", 1); //TODO: Work in a validated user
                     command.Parameters.AddWithValue("@POOrderDate", POOrderDate);
                     command.Parameters.AddWithValue("@POEstShipDate", POEstShipDate);
-                    command.Parameters.AddWithValue("@POFreightCost", POFreightCost);
+                    command.Parameters.AddWithValue("@POFreightCost", CheckForDbNull(POFreightCost));
                     command.Parameters.AddWithValue("@POTerms", CheckForDbNull(POTerms));
                     command.Parameters.AddWithValue("@POComments", CheckForDbNull(POComments));
                     //TODO: Associate the EmployeeID
