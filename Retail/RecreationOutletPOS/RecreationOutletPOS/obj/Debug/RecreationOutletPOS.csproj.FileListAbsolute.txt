@@ -1,13 +1,3 @@
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe.config
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.pdb
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.SalesForm.resources
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Properties.Resources.resources
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csproj.GenerateResource.Cache
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
-c:\users\averageasian101\documents\visual studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.InventoryForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.AddItemForm.resources
 C:\Users\Nate Maurer\Desktop\New folder\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe.config
 C:\Users\Nate Maurer\Desktop\New folder\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
 C:\Users\Nate Maurer\Desktop\New folder\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
@@ -22,14 +12,25 @@ C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\Recreatio
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Properties.Resources.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.SalesForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csproj.GenerateResource.Cache
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.ReturnsForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.CheckOutForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.CheckOutForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.ReturnsForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DiscountForm.resources
 C:\Users\Jaed\Desktop\3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DiscountForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DeleteItem.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe.config
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.exe
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\bin\Debug\RecreationOutletPOS.pdb
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.AddItemForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.CheckOutForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Combined.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DeleteItem.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.DiscountForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.InventoryForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PriceOverideForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.Properties.Resources.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.ReturnsForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.SalesForm.resources
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.ShowReportForm.resources
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csproj.GenerateResource.Cache
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
+C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PinNumberForm.resources

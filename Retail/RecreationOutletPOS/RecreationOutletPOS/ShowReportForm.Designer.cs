@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lvReportResults = new System.Windows.Forms.ListView();
+            this.lsvReportResults = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblValue2 = new System.Windows.Forms.Label();
             this.lblValue1 = new System.Windows.Forms.Label();
@@ -41,37 +41,18 @@
             this.lblSearchBy = new System.Windows.Forms.Label();
             this.lblSearch = new System.Windows.Forms.Label();
             this.txtSearchValue = new System.Windows.Forms.TextBox();
-            this.TransactionID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TransTotal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TransTax = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TransactionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.EmployeeID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.StoreID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.TerminalID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.PaymentType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.ManagerID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lvReportResults
+            // lsvReportResults
             // 
-            this.lvReportResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.TransactionID,
-            this.TransTotal,
-            this.TransTax,
-            this.PaymentType,
-            this.TransactionDate,
-            this.EmployeeID,
-            this.ManagerID,
-            this.StoreID,
-            this.TerminalID});
-            this.lvReportResults.Location = new System.Drawing.Point(12, 153);
-            this.lvReportResults.Name = "lvReportResults";
-            this.lvReportResults.Size = new System.Drawing.Size(733, 265);
-            this.lvReportResults.TabIndex = 0;
-            this.lvReportResults.UseCompatibleStateImageBehavior = false;
-            this.lvReportResults.View = System.Windows.Forms.View.Details;
+            this.lsvReportResults.Location = new System.Drawing.Point(12, 153);
+            this.lsvReportResults.Name = "lsvReportResults";
+            this.lsvReportResults.Size = new System.Drawing.Size(733, 265);
+            this.lsvReportResults.TabIndex = 0;
+            this.lsvReportResults.UseCompatibleStateImageBehavior = false;
+            this.lsvReportResults.View = System.Windows.Forms.View.Details;
             // 
             // groupBox1
             // 
@@ -196,48 +177,6 @@
             this.txtSearchValue.Size = new System.Drawing.Size(340, 20);
             this.txtSearchValue.TabIndex = 50;
             // 
-            // TransactionID
-            // 
-            this.TransactionID.Text = "TransactionID";
-            // 
-            // TransTotal
-            // 
-            this.TransTotal.Text = "TransTotal";
-            // 
-            // TransTax
-            // 
-            this.TransTax.Text = "TransTax";
-            // 
-            // TransactionDate
-            // 
-            this.TransactionDate.DisplayIndex = 3;
-            this.TransactionDate.Text = "TransactionDate";
-            // 
-            // EmployeeID
-            // 
-            this.EmployeeID.DisplayIndex = 4;
-            this.EmployeeID.Text = "EmployeeID";
-            // 
-            // StoreID
-            // 
-            this.StoreID.DisplayIndex = 5;
-            this.StoreID.Text = "StoreID";
-            // 
-            // TerminalID
-            // 
-            this.TerminalID.DisplayIndex = 6;
-            this.TerminalID.Text = "TerminalID";
-            // 
-            // PaymentType
-            // 
-            this.PaymentType.DisplayIndex = 7;
-            this.PaymentType.Text = "PaymentType";
-            // 
-            // ManagerID
-            // 
-            this.ManagerID.DisplayIndex = 8;
-            this.ManagerID.Text = "ManagerID";
-            // 
             // ShowReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,7 +184,7 @@
             this.ClientSize = new System.Drawing.Size(757, 426);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lvReportResults);
+            this.Controls.Add(this.lsvReportResults);
             this.Name = "ShowReportForm";
             this.Text = "ShowReportForm";
             this.groupBox1.ResumeLayout(false);
@@ -258,7 +197,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView lvReportResults;
+        private System.Windows.Forms.ListView lsvReportResults;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label lblSearch;
@@ -271,14 +210,5 @@
         private System.Windows.Forms.Label lblLabel1;
         private System.Windows.Forms.Label lblInventoryFrom;
         private System.Windows.Forms.ComboBox cmbInventoryFrom;
-        private System.Windows.Forms.ColumnHeader TransactionID;
-        private System.Windows.Forms.ColumnHeader TransTotal;
-        private System.Windows.Forms.ColumnHeader TransTax;
-        private System.Windows.Forms.ColumnHeader PaymentType;
-        private System.Windows.Forms.ColumnHeader TransactionDate;
-        private System.Windows.Forms.ColumnHeader EmployeeID;
-        private System.Windows.Forms.ColumnHeader ManagerID;
-        private System.Windows.Forms.ColumnHeader StoreID;
-        private System.Windows.Forms.ColumnHeader TerminalID;
     }
 }

@@ -18,6 +18,7 @@ namespace RecreationOutletPOS
 {
     public partial class ShowReportForm : Form
     {
+        public string reportType;
         public string fromDateFilter;
         public string toDateFilter;
 
@@ -34,8 +35,17 @@ namespace RecreationOutletPOS
         {
             InitializeComponent();
 
+            reportType = callingButtonText;
             fromDateFilter = begDate;
             toDateFilter = endDate;
+
+            // Initializes the drop down boxes
+            setInventoryFromValues();
+            setSearchByValues();
+
+            // Sets the default value for the drop down boxes
+            cmbInventoryFrom.SelectedIndex = 0;
+            cmbSearchBy.SelectedIndex = 2;
 
             determineReportType(callingButtonText);
         }
@@ -69,6 +79,105 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Populates the Show Report Form's list view with a given DataSet object
+        /// </summary>
+        /// <param name="ds"></param>
+        private void addListViewData(DataSet ds)
+        {
+            try
+            {
+                lsvReportResults.Items.Clear();
+
+                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
+                    {
+                        ListViewItem li = new ListViewItem(row[ListViewRowID.TRANS_ID.ToString()].ToString());
+
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_TAX.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.PAYMENT_TYPE.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TRANS_DATE.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.EMPLOYEE_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.MANAGER_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.STORE_ID.ToString()].ToString());
+                        li.SubItems.Add(row[StoreTransColumn.TERMINAL_ID.ToString()].ToString());
+
+                        lsvReportResults.Items.Add(li);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #region Dropdown Populating Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/21/2013
+        /// 
+        /// Populates the Search By dropdown box 
+        /// </summary>
+        private void setSearchByValues()
+        {
+            List<StoreTransColumn> searchByValues = StoreTransColumn.getReportColumns();
+
+            try
+            {
+                foreach (StoreTransColumn columnEnum in searchByValues)
+                {
+                    cmbSearchBy.Items.Add(columnEnum.ToString());
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/21/2013
+        /// 
+        /// NOTE- hardcoded store names for now, this should be changed later when its
+        /// possible to retrieve store names and their inventory
+        /// 
+        /// Populates the Inventory From dropdown box
+        /// </summary>
+        private void setInventoryFromValues()
+        {
+            List<string> inventoryLocations = new List<string>();
+
+            try
+            {
+                inventoryLocations.Add("<This Store>");
+                inventoryLocations.Add("Store 1");
+                inventoryLocations.Add("Store 2");
+                inventoryLocations.Add("Warehouse");
+
+                foreach (string location in inventoryLocations)
+                {
+                    cmbInventoryFrom.Items.Add(location);
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #endregion
+
         #region Reporting Methods
 
         /// <summary>
@@ -84,6 +193,8 @@ namespace RecreationOutletPOS
             
             try
             {
+                setTransReportColumns();
+                
                 ds = SqlHandler.getTransactionReport(fromDateFilter, toDateFilter);
                 addListViewData(ds);
             }
@@ -116,65 +227,27 @@ namespace RecreationOutletPOS
 
         #endregion 
 
-        #region ListView Populating Methods
+        #region ListView Column Setting Methods
 
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/7/2013
         /// 
-        /// Populates the Show Report Form's list view with a given DataSet object
+        /// Adds the STORE_TRANSACTION related table columns to the list view
         /// </summary>
-        /// <param name="ds"></param>
-        private void addListViewData(DataSet ds)
+        private void setTransReportColumns()
         {
+            List<StoreTransColumn> reportColumns = new List<StoreTransColumn>();
+            HorizontalAlignment align = HorizontalAlignment.Left;
+
             try
             {
-                lvReportResults.Items.Clear();
+                reportColumns = StoreTransColumn.getReportColumns();
 
-                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count > 0)
+                foreach (StoreTransColumn column in reportColumns)
                 {
-                    foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
-                    {
-                        ListViewItem li = new ListViewItem(row[ListViewRowID.TRANS_ID.ToString()].ToString());
-
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_TAX.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.PAYMENT_TYPE.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_DATE.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.EMPLOYEE_ID.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.MANAGER_ID.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.STORE_ID.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.TERMINAL_ID.ToString()].ToString());
-
-                        lvReportResults.Items.Add(li);
-                    }
+                    lsvReportResults.Columns.Add(column.ToString(), 130, align);
                 }
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        #endregion
-
-        #region ListView Column Populating Methods
-
-        private void populateListViewColumns()
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void addTransReportColumns()
-        {
-            
-            
-            try
-            {
 
             }
 
