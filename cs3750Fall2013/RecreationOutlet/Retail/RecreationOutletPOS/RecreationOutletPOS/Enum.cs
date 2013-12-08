@@ -368,11 +368,13 @@ namespace RecreationOutletPOS
                 try
                 {
                     reportColumns.Add(StoreTransColumn.TRANS_ID);
+                    reportColumns.Add(StoreTransColumn.TRANS_TOTAL);
+                    
                     reportColumns.Add(StoreTransColumn.STORE_ID);
                     reportColumns.Add(StoreTransColumn.EMPLOYEE_ID);
                     reportColumns.Add(StoreTransColumn.TRANS_DATE);
                     reportColumns.Add(StoreTransColumn.TERMINAL_ID);
-                    reportColumns.Add(StoreTransColumn.TRANS_TOTAL);
+                    
                     reportColumns.Add(StoreTransColumn.TRANS_TAX);
                     reportColumns.Add(StoreTransColumn.MANAGER_ID);
                     reportColumns.Add(StoreTransColumn.PAYMENT_TYPE);

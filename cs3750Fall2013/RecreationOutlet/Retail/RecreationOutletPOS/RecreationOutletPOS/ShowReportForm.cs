@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+// Aliases for the Enum's inner classes
 using StoreTransColumn = RecreationOutletPOS.Enum.StoreTransColumn;
 using ReportType = RecreationOutletPOS.Enum.ReportType;
 using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
@@ -27,6 +28,8 @@ namespace RecreationOutletPOS
         /// Constructor
         /// </summary>
         /// <param name="callingButtonText">Used to determine which report to generate</param>
+        /// <param name="begDate">The earliest date to show reports from</param>
+        /// <param name="endDate">The latest date to show reports from</param>
         public ShowReportForm(string callingButtonText, string begDate, string endDate)
         {
             InitializeComponent();
@@ -37,8 +40,6 @@ namespace RecreationOutletPOS
             determineReportType(callingButtonText);
         }
 
-        #region Reporting Methods
-
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/7/2013
@@ -46,10 +47,7 @@ namespace RecreationOutletPOS
         /// Determines which report type to show based on what report button the
         /// user selected
         /// </summary>
-        /// <param name="buttonText">
-        /// The text of the calling button used to determine 
-        /// which report to show
-        /// </param>
+        /// <param name="buttonText">Used to determine which report to show</param>
         private void determineReportType(string callingButtonText)
         {
             try
@@ -71,6 +69,8 @@ namespace RecreationOutletPOS
             }
         }
 
+        #region Reporting Methods
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/4/2013
@@ -85,7 +85,7 @@ namespace RecreationOutletPOS
             try
             {
                 ds = SqlHandler.getTransactionReport(fromDateFilter, toDateFilter);
-                populateListView(ds);
+                addListViewData(ds);
             }
 
             catch (Exception ex)
@@ -118,19 +118,25 @@ namespace RecreationOutletPOS
 
         #region ListView Populating Methods
 
-        private void populateListView(DataSet ds)
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Populates the Show Report Form's list view with a given DataSet object
+        /// </summary>
+        /// <param name="ds"></param>
+        private void addListViewData(DataSet ds)
         {
             try
             {
                 lvReportResults.Items.Clear();
 
-                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count != 0)
+                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count > 0)
                 {
                     foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
                     {
                         ListViewItem li = new ListViewItem(row[ListViewRowID.TRANS_ID.ToString()].ToString());
 
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_ID.ToString()].ToString());
                         li.SubItems.Add(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString());
                         li.SubItems.Add(row[StoreTransColumn.TRANS_TAX.ToString()].ToString());
                         li.SubItems.Add(row[StoreTransColumn.PAYMENT_TYPE.ToString()].ToString());
@@ -143,6 +149,33 @@ namespace RecreationOutletPOS
                         lvReportResults.Items.Add(li);
                     }
                 }
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #endregion
+
+        #region ListView Column Populating Methods
+
+        private void populateListViewColumns()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void addTransReportColumns()
+        {
+            
+            
+            try
+            {
+
             }
 
             catch (Exception ex)
