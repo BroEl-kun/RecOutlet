@@ -6,12 +6,12 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
-        <li>@Html.ActionLink("Browse/Search POs","SearchPO")</li>
         <li class="active">@Html.ActionLink("Create New PO","CreateNewPO")</li>
+        <li>@Html.ActionLink("Browse/Search POs","SearchPO")</li>
     </ul>  
 }
 
-<h2>Create a new Purchase Order</h2>
+<h2>Create a New Purchase Order</h2>
 @using (Html.BeginForm()) {
     <table>
         <tr>
