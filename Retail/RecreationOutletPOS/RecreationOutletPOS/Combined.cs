@@ -83,8 +83,15 @@ namespace RecreationOutletPOS
         /// Last Updated: 12/4/2013 
         /// 
         /// Intercepts key combinations before executing the KeyPress event.
+        /// This is generally where keyboard shortcuts requiring a modifier
+        /// key are stored.
         private void Combined_KeyDown(object sender, KeyEventArgs e)
         {
+            // make a list of ignored keys, usually keys that include
+            // important keyboard combinations like cut, copy, and paste
+            Keys[] ignoredKeys = {Keys.Z, Keys.X, Keys.C, Keys.V};
+
+            // control key is held
             if (e.Control)
             {
                 // ctrl + number keys switch between tabs)
@@ -97,14 +104,68 @@ namespace RecreationOutletPOS
                 if (e.KeyCode == Keys.D4)
                     setTab(btnReports, grpReports);
 
+                // ctrl + F brings up the manual item addition (AKA item search)
                 if (e.KeyCode == Keys.F)
                 {
                     AddItemForm addItemForm = new AddItemForm(this, 1);
                     addItemForm.ShowDialog();
                 }
 
+                // ctrl + D brings up the discount form
+                if (e.KeyCode == Keys.D)
+                {
+                    if (lsvCheckOutItems.SelectedItems.Count > 0)
+                    {
+                        ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                        DiscountForm discountForm = new DiscountForm(this, lvi.Index);
+                        discountForm.ShowDialog();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Please select an item to add a discount for.", "Discount",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+
+                // ctrl + O brings up the price override form
+                if (e.KeyCode == Keys.O)
+                {
+                    if (lsvCheckOutItems.SelectedItems.Count > 0)
+                    {
+                        ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                        PriceOverideForm priceOverideForm = new PriceOverideForm(this, lvi.Index);
+                        priceOverideForm.ShowDialog();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Please select an item to change a price for.", "Change Price",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+
+
+                // check ctrl + shift modifier
+                if (e.Shift)
+                {
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        prepareCheckout();
+                    }
+                }
+
+
 
                 modifierKeyHandled = true;
+
+
+                // if the keycode matches any other important shortcuts, don't handle it
+                for (int i = 0; i < ignoredKeys.Length; i++)
+                {
+                    if (e.KeyCode == ignoredKeys[i])
+                        modifierKeyHandled = false;
+                }
             }
         }
 
@@ -355,39 +416,6 @@ namespace RecreationOutletPOS
             tList.clearData();
             updateListView();
         }
-        #endregion
-
-        #region Button Click Handling
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 10/11/2013 
-        /// 
-        /// Brings up a MODAL dialog to manually add an item from a select category list
-        /// </summary>
-        /// <param name="sender">the form component that called this method</param>
-        /// <param name="e">Associated events tied to the sender?</param>
-        private void btnAddItem_Click(object sender, EventArgs e)
-        {
-            AddItemForm addItemForm = new AddItemForm(this, 1);
-            addItemForm.ShowDialog();
-        }
-
-        private void btnDeleteItem_Click(object sender, EventArgs e)
-        {
-            if (lsvCheckOutItems.SelectedItems.Count > 0)
-            {
-                int currentItem = lsvCheckOutItems.SelectedIndices[0];
-
-                DeleteItem voidForm = new DeleteItem(this, currentItem);
-                voidForm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("Select an item to void.", "Item Void",
-                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
-        }
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -395,7 +423,7 @@ namespace RecreationOutletPOS
         /// 
         /// Processes the checkout, adds a transaction to the db and updates the inventory count
         /// </summary>
-        private void btnCheckOut_Click(object sender, EventArgs e)
+        private void prepareCheckout()
         {
             Dictionary<TransKey, string> transaction = new Dictionary<TransKey, string>();
 
@@ -457,6 +485,44 @@ namespace RecreationOutletPOS
                     MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+        #endregion
+
+        #region Button Click Handling
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 10/11/2013 
+        /// 
+        /// Brings up a MODAL dialog to manually add an item from a select category list
+        /// </summary>
+        /// <param name="sender">the form component that called this method</param>
+        /// <param name="e">Associated events tied to the sender?</param>
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            AddItemForm addItemForm = new AddItemForm(this, 1);
+            addItemForm.ShowDialog();
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (lsvCheckOutItems.SelectedItems.Count > 0)
+            {
+                int currentItem = lsvCheckOutItems.SelectedIndices[0];
+
+                DeleteItem voidForm = new DeleteItem(this, currentItem);
+                voidForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Select an item to void.", "Item Void",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void btnCheckOut_Click(object sender, EventArgs e)
+        {
+            prepareCheckout();
+        }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -497,7 +563,6 @@ namespace RecreationOutletPOS
                 MessageBox.Show("Please select an item to add a discount for.", "Discount",
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-
         }
 
         /// <summary>
