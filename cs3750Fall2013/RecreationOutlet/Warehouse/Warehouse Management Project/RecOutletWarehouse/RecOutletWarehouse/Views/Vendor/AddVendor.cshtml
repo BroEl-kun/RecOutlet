@@ -27,38 +27,38 @@
              <table>
 
         <tr>
-            <td>Vendor Name<strong class="required">*</strong></td>
+            <td>&nbsp Vendor Name:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.VendorName, new { @id = "VendorName" })
                 @Html.ValidationMessageFor(newVendor => newVendor.VendorName)
             </td>
 
-            <td>Website</td>
+            <td>&nbsp Website: </td>
             <td colspan="5">
                 @Html.TextBoxFor(newVendor => newVendor.Website, new { @class = "VendorWebSite" })
                 @Html.ValidationMessageFor(newVendor => newVendor.Website)
             </td>
 
             </tr><tr>
-             <td>Address<strong class="required">*</strong></td>
+             <td>&nbsp Address:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.Address)
                 @Html.ValidationMessageFor(newVendor => newVendor.Address)
             </td>
 
-            <td>City<strong class="required">*</strong></td>
+            <td>&nbsp City:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.City)
                 @Html.ValidationMessageFor(newVendor => newVendor.City)
             </td>
 
-            <td>State<strong class="required">*</strong></td>
+            <td>&nbsp State:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.State, new { @class = "VendorState" })
                 @Html.ValidationMessageFor(newVendor => newVendor.State)
             </td>
 
-             <td>Zip<strong class="required">*</strong></td>
+             <td>&nbsp Zip:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.Zip, new { @class = "VendorZip" })
                 @Html.ValidationMessageFor(newVendor => newVendor.Zip)
@@ -75,13 +75,13 @@
         <legend>Contact Information</legend>
              <table>
                  <tr>
-                  <td>Name</td>
+                  <td>&nbsp Name:</td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.ContactName)
                 @Html.ValidationMessageFor(newVendor => newVendor.ContactName)
             </td>
 
-            <td>Phone Number<strong class="required">*</strong></td>
+            <td>&nbsp Phone Number:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.ContactPhone, new { @class = "VendorPhone" })
                 @Html.ValidationMessageFor(newVendor => newVendor.ContactPhone)
@@ -89,13 +89,13 @@
             </tr>
 
             <tr>
-            <td>Fax Number</td>
+            <td>&nbsp Fax Number:</td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.ContactFax, new { @class = "VendorPhone" })
                 @Html.ValidationMessageFor(newVendor => newVendor.ContactFax)
             </td>
     
-            <td>Alternate Phone Number</td>
+            <td>&nbsp Alternate Phone Number:</td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.AltPhone, new { @class = "VendorPhone" })
                 @Html.ValidationMessageFor(newVendor => newVendor.AltPhone)
