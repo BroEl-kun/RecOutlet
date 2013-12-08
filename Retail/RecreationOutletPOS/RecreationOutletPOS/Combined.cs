@@ -87,116 +87,123 @@ namespace RecreationOutletPOS
         /// key are stored.
         private void Combined_KeyDown(object sender, KeyEventArgs e)
         {
-            // make a list of ignored keys, usually keys that include
-            // important keyboard combinations like cut, copy, and paste
-            Keys[] ignoredKeys = {Keys.Z, Keys.X, Keys.C, Keys.V};
-
-            // control key is held
+            // HANDLING ON ALL FORMS
             if (e.Control)
             {
                 // ctrl + number keys switch between tabs)
-                if (e.KeyCode == Keys.D1)
+                if (e.KeyCode == Keys.D1 && !grpSales.Visible)
                     setTab(btnSales, grpSales);
-                if (e.KeyCode == Keys.D2)
+                if (e.KeyCode == Keys.D2 && !grpReturns.Visible)
                     setTab(btnReturns, grpReturns);
-                if (e.KeyCode == Keys.D3)
+                if (e.KeyCode == Keys.D3 && !grpInventory.Visible)
                     setTab(btnInventory, grpInventory);
-                if (e.KeyCode == Keys.D4)
+                if (e.KeyCode == Keys.D4 && !grpReports.Visible)
                     setTab(btnReports, grpReports);
+            }
 
-                // ctrl + F brings up the manual item addition (AKA item search)
-                if (e.KeyCode == Keys.F)
+
+            // SALES EVENT HANDLING
+            if (grpSales.Visible)
+            {
+                // make a list of ignored keys, usually keys that include
+                // important keyboard combinations like cut, copy, and paste
+                Keys[] ignoredKeys = {Keys.Z, Keys.X, Keys.C, Keys.V};
+
+                // control key is held
+                if (e.Control)
                 {
-                    AddItemForm addItemForm = new AddItemForm(this, 1);
-                    addItemForm.ShowDialog();
-                }
-
-                // ctrl + D brings up the discount form
-                if (e.KeyCode == Keys.D)
-                {
-                    if (lsvCheckOutItems.SelectedItems.Count > 0)
+                    // ctrl + F brings up the manual item addition (AKA item search)
+                    if (e.KeyCode == Keys.F)
                     {
-                        ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
-                        DiscountForm discountForm = new DiscountForm(this, lvi.Index);
-                        discountForm.ShowDialog();
+                        AddItemForm addItemForm = new AddItemForm(this, 1);
+                        addItemForm.ShowDialog();
                     }
 
-                    else
+                    // ctrl + D brings up the discount form
+                    if (e.KeyCode == Keys.D)
                     {
-                        MessageBox.Show("Please select an item to add a discount for.", "Discount",
-                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                }
-
-                // ctrl + O brings up the price override form
-                if (e.KeyCode == Keys.O)
-                {
-                    if (lsvCheckOutItems.SelectedItems.Count > 0)
-                    {
-                        ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
-                        PriceOverideForm priceOverideForm = new PriceOverideForm(this, lvi.Index);
-                        priceOverideForm.ShowDialog();
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("Please select an item to change a price for.", "Change Price",
-                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                }
-
-                // ctrl + delete brings up a dialog to delete multiple items
-                if (e.KeyCode == Keys.Delete && !e.Shift)
-                {
-                    if (lsvCheckOutItems.SelectedItems.Count > 0)
-                    {
-                        int currentItem = lsvCheckOutItems.SelectedIndices[0];
-
-                        DeleteItem voidForm = new DeleteItem(this, currentItem);
-                        voidForm.ShowDialog();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Select an item to void.", "Item Void",
-                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                }
-
-
-                // check ctrl + shift modifier
-                if (e.Shift)
-                {
-                    // Shift + ctrl + enter triggers checkout
-                    if (e.KeyCode == Keys.Enter)
-                    {
-                        prepareCheckout();
-                    }
-
-                    // Shift + ctrl + delete triggers void transaction
-                    if (e.KeyCode == Keys.Delete)
-                    {
-                        if (lsvCheckOutItems.Items.Count > 0)
+                        if (lsvCheckOutItems.SelectedItems.Count > 0)
                         {
-                            DialogResult result = MessageBox.Show("Are you sure you want to clear the transaction?", "Transaction Clear",
-                                    MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-                            if (result == DialogResult.Yes)
-                            {
-                                tbItemQuantity.Text = "1";
-                                voidTransaction();
-                            }
+                            ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                            DiscountForm discountForm = new DiscountForm(this, lvi.Index);
+                            discountForm.ShowDialog();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Please select an item to add a discount for.", "Discount",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                    }
+
+                    // ctrl + O brings up the price override form
+                    if (e.KeyCode == Keys.O)
+                    {
+                        if (lsvCheckOutItems.SelectedItems.Count > 0)
+                        {
+                            ListViewItem lvi = lsvCheckOutItems.SelectedItems[0];
+                            PriceOverideForm priceOverideForm = new PriceOverideForm(this, lvi.Index);
+                            priceOverideForm.ShowDialog();
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Please select an item to change a price for.", "Change Price",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                    }
+
+                    // ctrl + delete brings up a dialog to delete multiple items
+                    if (e.KeyCode == Keys.Delete && !e.Shift)
+                    {
+                        if (lsvCheckOutItems.SelectedItems.Count > 0)
+                        {
+                            int currentItem = lsvCheckOutItems.SelectedIndices[0];
+
+                            DeleteItem voidForm = new DeleteItem(this, currentItem);
+                            voidForm.ShowDialog();
                         }
                         else
                         {
-                            MessageBox.Show("There is nothing to clear.", "Transaction Clear",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("Select an item to void.", "Item Void",
+                                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                     }
+
+                    // check ctrl + shift modifier
+                    if (e.Shift)
+                    {
+                        // Shift + ctrl + enter triggers checkout
+                        if (e.KeyCode == Keys.Enter)
+                        {
+                            prepareCheckout();
+                        }
+
+                        // Shift + ctrl + delete triggers void transaction
+                        if (e.KeyCode == Keys.Delete)
+                        {
+                            if (lsvCheckOutItems.Items.Count > 0)
+                            {
+                                DialogResult result = MessageBox.Show("Are you sure you want to clear the transaction?", "Transaction Clear",
+                                        MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                if (result == DialogResult.Yes)
+                                {
+                                    tbItemQuantity.Text = "1";
+                                    voidTransaction();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("There is nothing to clear.", "Transaction Clear",
+                                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            }
+                        }
+                    }
+
+
+
+                    modifierKeyHandled = true;
                 }
-
-
-
-                modifierKeyHandled = true;
-
 
                 // if the keycode matches any other important shortcuts, don't handle it
                 for (int i = 0; i < ignoredKeys.Length; i++)
@@ -206,6 +213,7 @@ namespace RecreationOutletPOS
                 }
             }
         }
+
 
         /// <summary>
         /// Programmer: Jaed Norberg
