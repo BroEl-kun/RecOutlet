@@ -22,6 +22,13 @@ namespace RecreationOutletPOS
         public string fromDateFilter;
         public string toDateFilter;
 
+        public int transactionCount;
+        public double highestTransaction;
+        public double lowestTransaction;
+
+        public Decimal transactionTotalSum;
+        public Decimal averageTransaction;
+
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/7/2013
@@ -45,7 +52,7 @@ namespace RecreationOutletPOS
 
             // Sets the default value for the drop down boxes
             cmbInventoryFrom.SelectedIndex = 0;
-            cmbSearchBy.SelectedIndex = 2;
+            cmbSearchBy.SelectedIndex = 0;
 
             determineReportType(callingButtonText);
         }
@@ -88,27 +95,26 @@ namespace RecreationOutletPOS
         /// <param name="ds"></param>
         private void addListViewData(DataSet ds)
         {
+            double rowTotal = 0.0;
+            
             try
             {
                 lsvReportResults.Items.Clear();
 
-                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count > 0)
+                foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
                 {
-                    foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
-                    {
-                        ListViewItem li = new ListViewItem(row[ListViewRowID.TRANS_ID.ToString()].ToString());
+                    ListViewItem li = new ListViewItem(row[ListViewRowID.TRANS_ID.ToString()].ToString());
 
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_TAX.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.PAYMENT_TYPE.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.TRANS_DATE.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.EMPLOYEE_ID.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.MANAGER_ID.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.STORE_ID.ToString()].ToString());
-                        li.SubItems.Add(row[StoreTransColumn.TERMINAL_ID.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.TRANS_TAX.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.TRANS_DATE.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.PAYMENT_TYPE.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.EMPLOYEE_ID.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.MANAGER_ID.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.STORE_ID.ToString()].ToString());
+                    li.SubItems.Add(row[StoreTransColumn.TERMINAL_ID.ToString()].ToString());
 
-                        lsvReportResults.Items.Add(li);
-                    }
+                    lsvReportResults.Items.Add(li);
                 }
             }
 
@@ -117,6 +123,176 @@ namespace RecreationOutletPOS
 
             }
         }
+
+
+        #region Reporting Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/4/2013
+        /// 
+        /// Shows a list of all transactions within the date range specified in the
+        /// From and To Date textboxes
+        /// </summary>
+        private void showTransactionReports()
+        {
+            DataSet ds;
+            
+            try
+            {
+                setTransReportColumns();
+                
+                ds = SqlHandler.getTransactionReport(fromDateFilter, toDateFilter);
+
+                transactionCount = ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count;
+
+                if (ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count > 0)
+                {
+                    addListViewData(ds);
+                    calculateTransactionTotalAndAverage(ds);
+                    calculateHighAndLow(ds);
+                }
+
+                lblLabel1.Text = "Transactions:";
+                lblLabel2.Text = "Transaction Sum:";
+                lblLabel3.Text = "Average Transaction:";
+                lblLabel4.Text = "Highest Transaction:";
+                lblLabel5.Text = "Lowest Transaction:";
+                
+                lblValue1.Text = transactionCount.ToString();
+                lblValue2.Text = transactionTotalSum.ToString();
+                lblValue3.Text = averageTransaction.ToString();
+                lblValue4.Text = highestTransaction.ToString();
+                lblValue5.Text = lowestTransaction.ToString();
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/4/2013
+        /// 
+        /// Shows a list of all commissions within the date range specified in the
+        /// From and To Date textboxes
+        ///< /summary>
+        private void showCommissionReports()
+        {
+            try
+            {
+               
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #endregion 
+
+        #region Report Stats Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Calculates the sum of all the retrieved Transactions and the average
+        /// </summary>
+        /// <param name="ds">Dataset containing the transactions to sum up</param>
+        private void calculateTransactionTotalAndAverage(DataSet ds)
+        {
+            double rowTotal = 0.0;
+            Decimal convertedRowTotal;
+            
+            try
+            {
+                foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
+                {
+                    double.TryParse(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString(), out rowTotal);
+                    convertedRowTotal = new Decimal(rowTotal);
+
+                    transactionTotalSum += convertedRowTotal;
+                }
+
+                averageTransaction = transactionTotalSum / ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows.Count;
+            }
+
+            catch (Exception)
+            {
+               
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Sets the highest and lowest transaction of all the retrieved Transactions
+        /// <param name="ds">Dataset containing the transactions to find the high and low of</param>
+        /// </summary>
+        private void calculateHighAndLow(DataSet ds)
+        {
+            List<double> totals = new List<double>();
+            double rowTotal = 0.0;
+
+            try 
+	        {	        
+		        foreach (DataRow row in ds.Tables[SqlResultSet.TRANS_RESULTSET.ToString()].Rows)
+                {
+                    double.TryParse(row[StoreTransColumn.TRANS_TOTAL.ToString()].ToString(), out rowTotal);
+                    
+                    totals.Add(rowTotal);
+                }
+
+                totals.Sort();
+
+                highestTransaction = totals[totals.Count - 1];
+                lowestTransaction = totals[0];
+	        }
+
+	        catch (Exception)
+	        {
+		
+	        }
+        }
+
+        #endregion
+
+        #region ListView Column Setting Methods
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 12/7/2013
+        /// 
+        /// Adds the STORE_TRANSACTION related table columns to the list view
+        /// </summary>
+        private void setTransReportColumns()
+        {
+            List<StoreTransColumn> reportColumns = new List<StoreTransColumn>();
+            HorizontalAlignment align = HorizontalAlignment.Left;
+
+            try
+            {
+                reportColumns = StoreTransColumn.getReportColumns();
+
+                foreach (StoreTransColumn column in reportColumns)
+                {
+                    lsvReportResults.Columns.Add(column.ToString(), 130, align);
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        #endregion
 
         #region Dropdown Populating Methods
 
@@ -178,85 +354,5 @@ namespace RecreationOutletPOS
 
         #endregion
 
-        #region Reporting Methods
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/4/2013
-        /// 
-        /// Shows a list of all transactions within the date range specified in the
-        /// From and To Date textboxes
-        /// </summary>
-        private void showTransactionReports()
-        {
-            DataSet ds;
-            
-            try
-            {
-                setTransReportColumns();
-                
-                ds = SqlHandler.getTransactionReport(fromDateFilter, toDateFilter);
-                addListViewData(ds);
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/4/2013
-        /// 
-        /// Shows a list of all commissions within the date range specified in the
-        /// From and To Date textboxes
-        ///< /summary>
-        private void showCommissionReports()
-        {
-            try
-            {
-               
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        #endregion 
-
-        #region ListView Column Setting Methods
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/7/2013
-        /// 
-        /// Adds the STORE_TRANSACTION related table columns to the list view
-        /// </summary>
-        private void setTransReportColumns()
-        {
-            List<StoreTransColumn> reportColumns = new List<StoreTransColumn>();
-            HorizontalAlignment align = HorizontalAlignment.Left;
-
-            try
-            {
-                reportColumns = StoreTransColumn.getReportColumns();
-
-                foreach (StoreTransColumn column in reportColumns)
-                {
-                    lsvReportResults.Columns.Add(column.ToString(), 130, align);
-                }
-
-            }
-
-            catch (Exception ex)
-            {
-
-            }
-        }
-
-        #endregion
     }
 }

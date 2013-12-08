@@ -959,13 +959,6 @@ namespace RecreationOutletPOS
             }
         }
 
-        // TEST - DELETE LATER
-        private void btnTestDates_Click(object sender, EventArgs e)
-        {
-            txtFromDateFilter.Text = "10/14/2013";
-            txtToDateFilter.Text = "10/15/2013";
-        }
-
         #endregion
 
         #region Button Text Setter Methods
