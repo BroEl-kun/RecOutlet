@@ -71,8 +71,8 @@ namespace RecreationOutletPOS
 
                     else
                     {
-                        //PinNumberForm pinForm = new PinNumberForm(this);
-                        //pinForm.ShowDialog();
+                        PinNumberForm pinForm = new PinNumberForm(this);
+                        pinForm.ShowDialog();
 
                         if (confirmed)
                         {
