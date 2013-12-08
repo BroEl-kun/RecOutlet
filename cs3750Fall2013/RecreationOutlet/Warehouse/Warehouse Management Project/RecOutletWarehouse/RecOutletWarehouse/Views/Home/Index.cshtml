@@ -1,21 +1,21 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Recreation Outlet";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Inventory Management</h2>
    
 <table class="button-columns center-element center-text">
     <tr>
         <td><input type="button" value="Purchase Order Management" class="main-menu-button"
-                onclick="location.href='@Url.Action("Index","PurchaseOrder")'" />
+                onclick="location.href='@Url.Action("CreateNewPO","PurchaseOrder")'" />
         </td>
-        <td><input type="button" value="Merchandise Transfers" class="main-menu-button"
+        <td><input type="button" value="Merchandise Transfers" disabled="disabled" class="main-menu-button"
                 onclick="location.href='@Url.Action("Index","MerchTransfer")'" />
         </td>
     </tr>
     <tr>
-        <td><input type="button" value="Invoice Management" class="main-menu-button"
+        <td><input type="button" value="Invoice Management" disabled="disabled" class="main-menu-button"
                 onclick="location.href='@Url.Action("Index","Invoice")'" />
         </td>
         <td><input type="button" value="Store Reports" class="main-menu-button"
