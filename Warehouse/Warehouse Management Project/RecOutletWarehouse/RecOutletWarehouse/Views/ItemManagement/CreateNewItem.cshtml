@@ -51,6 +51,10 @@
                     </div>    
                 </td>
             </tr>
+            <tr>
+                <td colspan="2"><a href="JavaScript:newPopup('@Url.Action("AddVendor", "Vendor")');">Add a new Vendor</a></td>
+                <td colspan="2"><a href="JavaScript:newPopup('@Url.Action("CreateNewPL", "Vendor")');">Add a new Product Line</a></td>
+            </tr>
         </table>
 
     </fieldset>
@@ -111,6 +115,9 @@
                         @Html.ValidationMessageFor(model => model.Subcategory)
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="6"><a href="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")');">Add a new Department, Category, and/or Subcategory</a></td>
             </tr>
         </table>
 
@@ -355,6 +362,14 @@
         minLength: 1
     });
 </script> 
+
+<script type="text/javascript">
+    // Popup window code
+    function newPopup(url) {
+        popupWindow = window.open(
+            url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    }
+</script>
 
 <!--Validation scripts-->
 @section Scripts {

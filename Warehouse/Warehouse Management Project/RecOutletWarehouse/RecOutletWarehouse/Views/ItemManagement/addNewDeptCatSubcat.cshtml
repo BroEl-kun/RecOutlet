@@ -1,0 +1,99 @@
+﻿@model RecOutletWarehouse.Controllers.ItemManagementController.ItemDeptCatSubcatViewModel
+
+@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<head>
+    <title>Add a new Department, Category, or Subcategory</title>
+    <script>
+        $(function () {
+            $("#tabs").tabs();
+        });
+    </script>
+</head>
+
+<body>
+    <h2>What would you like to add?</h2>
+    <div id="tabs">
+        <ul class ="nav clearfix">
+            <li><a href="#tabs-1">New Department</a></li>
+            <li><a href="#tabs-2">New Category</a></li>                          
+            <li><a href="#tabs-3">New Subcategory</a></li>
+        </ul>
+    
+        <div id="tabs-1">
+            @using (Html.BeginForm()) {
+                <table>
+                    <tr>
+                        <td>
+                            Department Number:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.department.DepartmentID)
+                            @Html.ValidationMessageFor(model => model.department.DepartmentID)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Department Name:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.department.DepartmentName)
+                            @Html.ValidationMessageFor(model => model.department.DepartmentName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button name="submitButton" value ="Department">Create Department</button>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+
+        <div id="tabs-2">
+            @using (Html.BeginForm()) {
+                <table>
+                    <tr>
+                        <td>
+                            Category Name: 
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.category.CategoryName)
+                            @Html.ValidationMessageFor(model => model.category.CategoryName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button name="submitButton" value ="Category">Create Category</button>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+
+        <div id="tabs-3">
+            @using (Html.BeginForm()) {
+                <table>
+                    <tr>
+                        <td>
+                            Subcategory Name:
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.subcat.SubcategoryName)
+                            @Html.ValidationMessageFor(model => model.subcat.SubcategoryName)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button name="submitButton" value ="Subcategory">Create Subcategory</button>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div> <!--.tabs-->
+
+    <a href="JavaScript:window.close()">Close Window</a>
+
+</body>

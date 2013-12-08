@@ -15,6 +15,12 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /ItemMangement/
 
+        public class ItemDeptCatSubcatViewModel {
+            public Department department { get; set; }
+            public Category category { get; set; }
+            public SubCategory subcat { get; set; }
+        }
+
         public ActionResult CreateNewItem()
         {
             //DataFetcherSetter db = new DataFetcherSetter();
@@ -125,5 +131,48 @@ namespace RecOutletWarehouse.Controllers
             return View();
         }
 
+        public ActionResult addNewDeptCatSubcat() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult addNewDeptCatSubcat(ItemDeptCatSubcatViewModel model, string submitButton) {
+            if (submitButton == "Department") {
+                //TODO: check for duplicates
+                if (!ModelState.IsValid) {
+                    return View(model);
+                }
+
+                //TODO: insert into the database
+
+                return View(new ItemDeptCatSubcatViewModel());
+            }
+
+            if (submitButton == "Category") {
+                //TODO: check for duplicates
+                if (!ModelState.IsValid) {
+                    return View(model);
+                }
+
+                //TODO: insert into the database
+
+                return View(new ItemDeptCatSubcatViewModel());
+            }
+
+            if (submitButton == "Subcategory") {
+                //TODO: check for duplicates
+                if (!ModelState.IsValid) {
+                    return View(model);
+                }
+
+                //TODO: insert into the database
+
+                return View(new ItemDeptCatSubcatViewModel());
+            }
+
+            else
+                return View();
+        }
     }
 }
