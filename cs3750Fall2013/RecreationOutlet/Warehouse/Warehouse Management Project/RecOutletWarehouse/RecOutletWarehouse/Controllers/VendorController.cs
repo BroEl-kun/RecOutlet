@@ -27,7 +27,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddVendor(Vendor vendor)
+        public ActionResult AddVendor(Vendor vendor, string labelRedirect = "")
         {
             if (!ModelState.IsValid)
             {
@@ -45,12 +45,19 @@ namespace RecOutletWarehouse.Controllers
 
                 //TODO: change this to the actual view i need to return like Success! or something.
                 ViewBag.Success = "Vendor successfully created.";
+                if (labelRedirect == "Add Vendor, Create Product Line")
+                {
+                    return RedirectToAction("CreateNewPL", new { id = vendor.VendorId });
+                }
                 return View();
             }
         }
 
-        public ActionResult CreateNewPL() {
+     
 
+        public ActionResult CreateNewPL(long? id)
+        {
+            ViewBag.VendorId = id.ToString();
             return View();
         }
 
