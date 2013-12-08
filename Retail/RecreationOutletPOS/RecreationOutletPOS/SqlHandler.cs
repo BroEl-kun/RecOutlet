@@ -23,14 +23,14 @@ namespace RecreationOutletPOS
         /// 
         /// Gets all the transaction reports that occurred within the given dates
         /// </summary>
-        /// <param name="beginDate">The beginning date period to retrieve transactions from</param>
+        /// <param name="begDate">The beginning date period to retrieve transactions from</param>
         /// <param name="endDate">The end date period to retrieve transactions from</param>
         /// <returns>A dataset containing all relevant transactins between the given dates</returns>
-        public static DataSet getTransactionReport(string beginDate, string endDate)
+        public static DataSet getTransactionReport(string begDate, string endDate)
         {
-            string sql = "SELECT TransactionID, StoreID, EmployeeID, TransactionDate, TransTotal " +
-                         "TransTax, ManagerID, PaymentType " +
-                         "FROM STORE_TRANSACTION WHERE TransactionDate BETWEEN '10/14/2013' AND '10/15/2013';";
+            string sql = "SELECT TransactionID, TransTotal, TransTax, PaymentType, " +
+                                "TransactionDate, EmployeeID, ManagerID, StoreID, TerminalID " +
+                         "FROM STORE_TRANSACTION WHERE TransactionDate BETWEEN @begDate AND @endDate;";
 
             SqlConnection conn = new SqlConnection(connStr);
             SqlCommand cmd;
@@ -46,16 +46,17 @@ namespace RecreationOutletPOS
 
                 conn.Open();
 
-                //beginDate += " 00:00:00 AM";
-                //endDate += " 23:59:00 AM";
+                // Adding the timestamp intervals to get the most accurate results
+                begDate += " 12:00:00 AM";
+                endDate += " 11:59:59 PM";
 
-                //cmd.Parameters.AddWithValue("@beginDate", beginDate);
-                //cmd.Parameters.AddWithValue("@endDate", endDate);
-
-                int x = cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@begDate", begDate);
+                cmd.Parameters.AddWithValue("@endDate", endDate);
 
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds.Tables[0]);
+
+                //int c = ds.Tables[0].Rows.Count;
             }
 
             catch (Exception ex)
