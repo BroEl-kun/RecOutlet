@@ -39,7 +39,7 @@
             this.btnOK.Location = new System.Drawing.Point(16, 56);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 0;
+            this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -49,7 +49,7 @@
             this.btnCancel.Location = new System.Drawing.Point(192, 56);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -68,7 +68,7 @@
             this.tbQuantity.Location = new System.Drawing.Point(16, 30);
             this.tbQuantity.Name = "tbQuantity";
             this.tbQuantity.Size = new System.Drawing.Size(251, 20);
-            this.tbQuantity.TabIndex = 3;
+            this.tbQuantity.TabIndex = 1;
             this.tbQuantity.Text = "1";
             this.tbQuantity.TextChanged += new System.EventHandler(this.tbQuantity_TextChanged);
             this.tbQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantity_KeyPress);
