@@ -164,7 +164,7 @@
             this.lsvCheckOutItems.MultiSelect = false;
             this.lsvCheckOutItems.Name = "lsvCheckOutItems";
             this.lsvCheckOutItems.Size = new System.Drawing.Size(754, 306);
-            this.lsvCheckOutItems.TabIndex = 39;
+            this.lsvCheckOutItems.TabIndex = 3;
             this.lsvCheckOutItems.UseCompatibleStateImageBehavior = false;
             this.lsvCheckOutItems.View = System.Windows.Forms.View.Details;
             // 
@@ -291,7 +291,7 @@
             this.btnPrice.Location = new System.Drawing.Point(7, 213);
             this.btnPrice.Name = "btnPrice";
             this.btnPrice.Size = new System.Drawing.Size(137, 50);
-            this.btnPrice.TabIndex = 49;
+            this.btnPrice.TabIndex = 6;
             this.btnPrice.Text = "Price Override";
             this.btnPrice.UseVisualStyleBackColor = true;
             this.btnPrice.Click += new System.EventHandler(this.btnPrice_Click);
@@ -301,7 +301,7 @@
             this.tbItemQuantity.Location = new System.Drawing.Point(76, 39);
             this.tbItemQuantity.Name = "tbItemQuantity";
             this.tbItemQuantity.Size = new System.Drawing.Size(68, 20);
-            this.tbItemQuantity.TabIndex = 46;
+            this.tbItemQuantity.TabIndex = 2;
             this.tbItemQuantity.Text = "1";
             this.tbItemQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbItemQuantity_KeyPress);
             // 
@@ -311,7 +311,7 @@
             this.btnAddItem.Location = new System.Drawing.Point(7, 78);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(137, 50);
-            this.btnAddItem.TabIndex = 41;
+            this.btnAddItem.TabIndex = 4;
             this.btnAddItem.Text = "Manual Item Add";
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
@@ -321,7 +321,7 @@
             this.tbScanner.Location = new System.Drawing.Point(10, 13);
             this.tbScanner.Name = "tbScanner";
             this.tbScanner.Size = new System.Drawing.Size(136, 20);
-            this.tbScanner.TabIndex = 45;
+            this.tbScanner.TabIndex = 1;
             this.tbScanner.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbScanner_KeyPress);
             // 
             // btnDiscount
@@ -330,7 +330,7 @@
             this.btnDiscount.Location = new System.Drawing.Point(7, 157);
             this.btnDiscount.Name = "btnDiscount";
             this.btnDiscount.Size = new System.Drawing.Size(137, 50);
-            this.btnDiscount.TabIndex = 48;
+            this.btnDiscount.TabIndex = 5;
             this.btnDiscount.Text = "Discount Override";
             this.btnDiscount.UseVisualStyleBackColor = true;
             this.btnDiscount.Click += new System.EventHandler(this.btnDiscount_Click);
@@ -341,7 +341,7 @@
             this.btnCheckOut.Location = new System.Drawing.Point(771, 385);
             this.btnCheckOut.Name = "btnCheckOut";
             this.btnCheckOut.Size = new System.Drawing.Size(137, 49);
-            this.btnCheckOut.TabIndex = 43;
+            this.btnCheckOut.TabIndex = 8;
             this.btnCheckOut.Text = "Check Out";
             this.btnCheckOut.UseVisualStyleBackColor = true;
             this.btnCheckOut.Click += new System.EventHandler(this.btnCheckOut_Click);
@@ -352,7 +352,7 @@
             this.btnDeleteItem.Location = new System.Drawing.Point(7, 269);
             this.btnDeleteItem.Name = "btnDeleteItem";
             this.btnDeleteItem.Size = new System.Drawing.Size(137, 50);
-            this.btnDeleteItem.TabIndex = 44;
+            this.btnDeleteItem.TabIndex = 7;
             this.btnDeleteItem.Text = "Void Item";
             this.btnDeleteItem.UseVisualStyleBackColor = true;
             this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
@@ -363,7 +363,7 @@
             this.btnClear.Location = new System.Drawing.Point(771, 327);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(137, 37);
-            this.btnClear.TabIndex = 42;
+            this.btnClear.TabIndex = 9;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -511,7 +511,7 @@
             this.btnReports.Location = new System.Drawing.Point(405, 9);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(125, 59);
-            this.btnReports.TabIndex = 37;
+            this.btnReports.TabIndex = 13;
             this.btnReports.Text = "Reports";
             this.btnReports.UseVisualStyleBackColor = true;
             this.btnReports.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnReports_MouseClick);
@@ -523,7 +523,7 @@
             this.btnInventory.Location = new System.Drawing.Point(274, 9);
             this.btnInventory.Name = "btnInventory";
             this.btnInventory.Size = new System.Drawing.Size(125, 59);
-            this.btnInventory.TabIndex = 36;
+            this.btnInventory.TabIndex = 12;
             this.btnInventory.Text = "Inventory";
             this.btnInventory.UseVisualStyleBackColor = true;
             this.btnInventory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnInventory_MouseClick);
@@ -535,7 +535,7 @@
             this.btnReturns.Location = new System.Drawing.Point(143, 9);
             this.btnReturns.Name = "btnReturns";
             this.btnReturns.Size = new System.Drawing.Size(125, 59);
-            this.btnReturns.TabIndex = 35;
+            this.btnReturns.TabIndex = 11;
             this.btnReturns.Text = "Returns";
             this.btnReturns.UseVisualStyleBackColor = true;
             this.btnReturns.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnReturns_MouseClick);
@@ -550,7 +550,7 @@
             this.btnSales.Location = new System.Drawing.Point(12, 9);
             this.btnSales.Name = "btnSales";
             this.btnSales.Size = new System.Drawing.Size(125, 59);
-            this.btnSales.TabIndex = 34;
+            this.btnSales.TabIndex = 10;
             this.btnSales.Text = "Sales";
             this.btnSales.UseVisualStyleBackColor = false;
             this.btnSales.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnSales_MouseClick);
@@ -563,7 +563,7 @@
             this.btnSettings.Location = new System.Drawing.Point(822, 9);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(87, 59);
-            this.btnSettings.TabIndex = 38;
+            this.btnSettings.TabIndex = 14;
             this.btnSettings.Text = "Settings";
             this.btnSettings.UseVisualStyleBackColor = true;
             // 
@@ -977,9 +977,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
+            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReports);
             this.Controls.Add(this.grpInventory);
-            this.Controls.Add(this.grpSales);
             this.Controls.Add(this.grpReturns);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);

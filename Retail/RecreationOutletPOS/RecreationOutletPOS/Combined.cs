@@ -145,13 +145,51 @@ namespace RecreationOutletPOS
                     }
                 }
 
+                // ctrl + delete brings up a dialog to delete multiple items
+                if (e.KeyCode == Keys.Delete && !e.Shift)
+                {
+                    if (lsvCheckOutItems.SelectedItems.Count > 0)
+                    {
+                        int currentItem = lsvCheckOutItems.SelectedIndices[0];
+
+                        DeleteItem voidForm = new DeleteItem(this, currentItem);
+                        voidForm.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Select an item to void.", "Item Void",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+
 
                 // check ctrl + shift modifier
                 if (e.Shift)
                 {
+                    // Shift + ctrl + enter triggers checkout
                     if (e.KeyCode == Keys.Enter)
                     {
                         prepareCheckout();
+                    }
+
+                    // Shift + ctrl + delete triggers void transaction
+                    if (e.KeyCode == Keys.Delete)
+                    {
+                        if (lsvCheckOutItems.Items.Count > 0)
+                        {
+                            DialogResult result = MessageBox.Show("Are you sure you want to clear the transaction?", "Transaction Clear",
+                                    MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                            if (result == DialogResult.Yes)
+                            {
+                                tbItemQuantity.Text = "1";
+                                voidTransaction();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("There is nothing to clear.", "Transaction Clear",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
                     }
                 }
 

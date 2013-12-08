@@ -34,7 +34,9 @@ namespace RecreationOutletPOS
         }
         //-------------------------------------
 
-        private void btnOK_Click(object sender, EventArgs e)
+
+
+        private void validateDeletion()
         {
             int amount = 0;
             bool failFlag = false;
@@ -72,6 +74,13 @@ namespace RecreationOutletPOS
             }
         }
 
+
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            validateDeletion();
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -81,6 +90,15 @@ namespace RecreationOutletPOS
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+
+            if (e.KeyChar == 13)
+            {
+                validateDeletion();
+            }
+            if (e.KeyChar == 27)
+            {
+                this.Close();
+            }
         }
 
         private void tbQuantity_TextChanged(object sender, EventArgs e)
