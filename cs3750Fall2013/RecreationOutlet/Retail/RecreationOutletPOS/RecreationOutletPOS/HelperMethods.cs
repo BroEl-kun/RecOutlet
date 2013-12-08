@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+
+// Aliases for the Enum's inner classes
+using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
 
 namespace RecreationOutletPOS
 {
@@ -25,6 +29,8 @@ namespace RecreationOutletPOS
 
             return str;
         }
+
+        #region Validation Methods
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -87,5 +93,7 @@ namespace RecreationOutletPOS
 
             return validDate;
         }
+
+        #endregion
     }
 }

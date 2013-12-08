@@ -359,10 +359,6 @@ namespace RecreationOutletPOS
 
         #region Button Click Handling
 
-        //----------------------------------------------------------
-        // Button Click Handling
-        //----------------------------------------------------------
-
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 10/11/2013 
@@ -525,13 +521,10 @@ namespace RecreationOutletPOS
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+
         #endregion
 
         #region Key Press Handling
-
-        //----------------------------------------------------------
-        // Key Press Handling
-        //----------------------------------------------------------
 
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -593,7 +586,6 @@ namespace RecreationOutletPOS
             }
         }
 
-
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
@@ -604,6 +596,7 @@ namespace RecreationOutletPOS
                 tbScanner.Focus();
             }
         }
+        
         #endregion
 
         #endregion 
