@@ -170,7 +170,7 @@
             // 
             // ID
             // 
-            this.ID.Text = "ID";
+            this.ID.Text = "RecRPC";
             this.ID.Width = 74;
             // 
             // Item
@@ -364,7 +364,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(137, 37);
             this.btnClear.TabIndex = 9;
-            this.btnClear.Text = "Clear";
+            this.btnClear.Text = "Void Transaction";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 

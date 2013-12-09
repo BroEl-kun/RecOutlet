@@ -150,7 +150,7 @@
             // btnConfirmCheckOut
             // 
             this.btnConfirmCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirmCheckOut.Location = new System.Drawing.Point(27, 293);
+            this.btnConfirmCheckOut.Location = new System.Drawing.Point(256, 289);
             this.btnConfirmCheckOut.Name = "btnConfirmCheckOut";
             this.btnConfirmCheckOut.Size = new System.Drawing.Size(166, 57);
             this.btnConfirmCheckOut.TabIndex = 3;
@@ -161,7 +161,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(242, 293);
+            this.btnCancel.Location = new System.Drawing.Point(12, 289);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(166, 57);
             this.btnCancel.TabIndex = 4;
@@ -186,7 +186,7 @@
             // 
             this.radCredit.AutoSize = true;
             this.radCredit.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radCredit.Location = new System.Drawing.Point(328, 237);
+            this.radCredit.Location = new System.Drawing.Point(328, 241);
             this.radCredit.Name = "radCredit";
             this.radCredit.Size = new System.Drawing.Size(87, 29);
             this.radCredit.TabIndex = 6;
@@ -197,7 +197,7 @@
             // 
             // ccField
             // 
-            this.ccField.Location = new System.Drawing.Point(12, 258);
+            this.ccField.Location = new System.Drawing.Point(12, 245);
             this.ccField.Name = "ccField";
             this.ccField.Size = new System.Drawing.Size(100, 20);
             this.ccField.TabIndex = 7;
@@ -210,7 +210,7 @@
             this.lblSwipe.BackColor = System.Drawing.SystemColors.Control;
             this.lblSwipe.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSwipe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblSwipe.Location = new System.Drawing.Point(118, 253);
+            this.lblSwipe.Location = new System.Drawing.Point(118, 241);
             this.lblSwipe.Name = "lblSwipe";
             this.lblSwipe.Size = new System.Drawing.Size(184, 25);
             this.lblSwipe.TabIndex = 8;
@@ -255,7 +255,6 @@
             this.Controls.Add(this.cmbCommissionTo);
             this.Name = "CheckOutForm";
             this.Text = "CheckOutForm";
-            this.Load += new System.EventHandler(this.CheckOutForm_Load);
             this.pnlCheckoutSummary.ResumeLayout(false);
             this.pnlCheckoutSummary.PerformLayout();
             this.ResumeLayout(false);

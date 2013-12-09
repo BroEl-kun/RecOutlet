@@ -17,20 +17,28 @@ namespace RecreationOutletPOS
 {
     public partial class CheckOutForm : Form
     {
+        #region Class Properties
+
+        //Constructor for combined form -Aaron
+        private Combined combined;
+        private SalesForm parent;
+
         public Dictionary<TransKey, string> transaction;
         public TransactionList transItems;
-        private int radChecked = 0;
+
         private String PAN;     //Primary Account Number
         private String lName;
         private String fName;
         private String ccNum;
         private String ccEnd;   //Last 4 of CC Number
 
-        private SalesForm parent;
+        private int radChecked = 0;
+
+        #endregion
 
         /// <summary>
         /// Programmer: Michael Vuong
-        /// Last Updated: 11/20/2013
+        /// Last Updated: 12/9/2013
         /// 
         /// Constructor
         /// </summary>
@@ -42,10 +50,10 @@ namespace RecreationOutletPOS
             this.transaction = transaction;
             this.transItems = transItems;
 
+            cmbCommissionTo.SelectedIndex = 0;
             ccField.Width = 0;
 
             txtCashTender.Visible = false;
-
             lblSwipe.Visible = false;
             lblTenderPrompt.Visible = false;
 
@@ -54,8 +62,15 @@ namespace RecreationOutletPOS
             this.parent = parent;
         }
 
-        //Constructor for combined form -Aaron
-        Combined combined;
+        /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: ?
+        /// 
+        /// Constructor for Combined form
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="transaction"></param>
+        /// <param name="transItems"></param>
         public CheckOutForm(Combined parent, Dictionary<TransKey, string> transaction, TransactionList transItems)
         {
             InitializeComponent();
@@ -70,12 +85,13 @@ namespace RecreationOutletPOS
             lblSwipe.Visible = false;
             lblTenderPrompt.Visible = false;
 
+            cmbCommissionTo.SelectedIndex = 0;
+
             setCheckoutInfo(transaction);
 
             this.combined = parent;
         }
-        //------------------------------------
-
+  
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 10/27/2013
@@ -98,106 +114,7 @@ namespace RecreationOutletPOS
             }
         }
 
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 11/20/2013
-        /// 
-        /// Confirms the checkout and inserts a new transaction record into the database
-        /// </summary>
-        private void btnConfirmCheckOut_Click(object sender, EventArgs e)
-        {
-            bool isValidTransaction = false;
-
-            try
-            {
-                if (radChecked == 1)
-                {
-                    isValidTransaction = isValidTender();
-
-                    // NOTE- Search for alternative method later, this is bad!
-                    // These ifs are in the case an error is made in the cash tendering
-                    if (transaction.ContainsKey(TransKey.PAYMENT_TYPE))
-                    {
-                        transaction.Remove(TransKey.PAYMENT_TYPE);
-                    }
-
-                    if (transaction.ContainsKey(TransKey.TENDERED))
-                    {
-                        transaction.Remove(TransKey.TENDERED);
-                    }
-
-                    transaction.Add(TransKey.PAYMENT_TYPE, PaymentType.CASH.ToString());
-                    transaction.Add(TransKey.TENDERED, txtCashTender.Text);
-                }
-
-                else
-                {
-                    //Card Checkout
-                    if (PAN == null)
-                    {
-                        MessageBox.Show("Please Swipe Card");
-                        return;
-                    }
-
-                    isValidTransaction = true;
-
-                    // NOTE- Search for alternative method later, this is bad!
-                    // These ifs are in the case an error is made in the cash tendering
-                    if (transaction.ContainsKey(TransKey.PAYMENT_TYPE))
-                    {
-                        transaction.Remove(TransKey.PAYMENT_TYPE);
-                    }
-
-                    if (transaction.ContainsKey(TransKey.TENDERED))
-                    {
-                        transaction.Remove(TransKey.TENDERED);
-                    }
-
-                    if (transaction.ContainsKey(TransKey.CARD_NUMBER))
-                    {
-                        transaction.Remove(TransKey.CARD_NUMBER);
-                    }
-
-                    transaction.Add(TransKey.PAYMENT_TYPE, PaymentType.CREDIT.ToString());
-                    transaction.Add(TransKey.TENDERED, transaction[TransKey.TRANS_TOTAL]);
-                    transaction.Add(TransKey.CARD_NUMBER, ccEnd);
-                }
-                
-                DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-
-                if (result == DialogResult.Yes)
-                {
-                    if (isValidTransaction)
-                    {
-                        Transaction newTransaction = new Transaction(transaction);
-
-                        ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
-
-                        //receiptGenerator.printReceiptToFile();
-                        receiptGenerator.printToPrinter();
-
-                        MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
-                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                        this.Close();
-                        //parent.voidTransaction();
-                        combined.voidTransaction();
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("The entered cash tender is invalid or is less than the total", 
-                                        "Item Void", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                }
-            }
-
-            catch (Exception ex)
-            {
-                string x = ex.Message;
-            }
-        }
+        #region Payment Parsing Methods
 
         /// <summary>
         /// Programmer: Michael Vuong
@@ -215,7 +132,7 @@ namespace RecreationOutletPOS
 
             Decimal cashTender;
             Decimal transTotal;
-            Decimal difference; 
+            Decimal difference;
 
             try
             {
@@ -302,6 +219,139 @@ namespace RecreationOutletPOS
 
         /// <summary>
         /// Programmer: Aaron Sorensen
+        /// Last Updated: 12/3/2013
+        /// 
+        /// Keeps valid input in cash field
+        /// </summary>
+        private void checkCash(object sender, KeyEventArgs e)
+        {
+            double Num;
+            bool isNum = double.TryParse(txtCashTender.Text, out Num);
+
+            //Number not entered
+            if (!isNum)
+            {
+                txtCashTender.Text = "";
+
+                /*char last = txtCashTender.Text[txtCashTender.Text.Length - 1];
+                if (last == '?')
+                {
+                    txtCashTender.Text = "";
+                }
+                else
+                {
+                    txtCashTender.Text = txtCashTender.Text.Substring(0, txtCashTender.Text.Length - 1);
+                }*/
+            }
+        }
+
+        #endregion
+
+        #region Event Handling
+
+        /// <summary>
+        /// Programmer: Michael Vuong
+        /// Last Updated: 11/20/2013
+        /// 
+        /// Confirms the checkout and inserts a new transaction record into the database
+        /// </summary>
+        private void btnConfirmCheckOut_Click(object sender, EventArgs e)
+        {
+            bool isValidTransaction = false;
+
+            try
+            {
+                if (radChecked == 1)
+                {
+                    isValidTransaction = isValidTender();
+
+                    // NOTE- Search for alternative method later, this is bad!
+                    // These ifs are in the case an error is made in the cash tendering
+                    if (transaction.ContainsKey(TransKey.PAYMENT_TYPE))
+                    {
+                        transaction.Remove(TransKey.PAYMENT_TYPE);
+                    }
+
+                    if (transaction.ContainsKey(TransKey.TENDERED))
+                    {
+                        transaction.Remove(TransKey.TENDERED);
+                    }
+
+                    transaction.Add(TransKey.PAYMENT_TYPE, PaymentType.CASH.ToString());
+                    transaction.Add(TransKey.TENDERED, txtCashTender.Text);
+                }
+
+                else
+                {
+                    //Card Checkout
+                    if (PAN == null)
+                    {
+                        MessageBox.Show("Please Swipe Card");
+                        return;
+                    }
+
+                    isValidTransaction = true;
+
+                    // NOTE- Search for alternative method later, this is bad!
+                    // These ifs are in the case an error is made in the cash tendering
+                    if (transaction.ContainsKey(TransKey.PAYMENT_TYPE))
+                    {
+                        transaction.Remove(TransKey.PAYMENT_TYPE);
+                    }
+
+                    if (transaction.ContainsKey(TransKey.TENDERED))
+                    {
+                        transaction.Remove(TransKey.TENDERED);
+                    }
+
+                    if (transaction.ContainsKey(TransKey.CARD_NUMBER))
+                    {
+                        transaction.Remove(TransKey.CARD_NUMBER);
+                    }
+
+                    transaction.Add(TransKey.PAYMENT_TYPE, PaymentType.CREDIT.ToString());
+                    transaction.Add(TransKey.TENDERED, transaction[TransKey.TRANS_TOTAL]);
+                    transaction.Add(TransKey.CARD_NUMBER, ccEnd);
+                }
+
+                DialogResult result = MessageBox.Show("Confirm transaction?", "Transaction",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+
+                if (result == DialogResult.Yes)
+                {
+                    if (isValidTransaction)
+                    {
+                        Transaction newTransaction = new Transaction(transaction);
+
+                        ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
+
+                        //receiptGenerator.printReceiptToFile();
+                        receiptGenerator.printToPrinter();
+
+                        MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
+                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                        this.Close();
+                        //parent.voidTransaction();
+                        combined.voidTransaction();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("The entered cash tender is invalid or is less than the total",
+                                        "Item Void", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                string x = ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// Programmer: Aaron Sorensen
         /// Last Updated: 11/20/2013 (By Michael Vuong)
         /// 
         /// Controls radio buttons
@@ -351,37 +401,6 @@ namespace RecreationOutletPOS
 
         }
 
-        private void CheckOutForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// Programmer: Aaron Sorensen
-        /// Last Updated: 12/3/2013
-        /// 
-        /// Keeps valid input in cash field
-        /// </summary>
-        private void checkCash(object sender, KeyEventArgs e)
-        {
-            double Num;
-            bool isNum = double.TryParse(txtCashTender.Text, out Num);
-            
-            //Number not entered
-            if (!isNum)
-            {
-                txtCashTender.Text = "";
-                
-                /*char last = txtCashTender.Text[txtCashTender.Text.Length - 1];
-                if (last == '?')
-                {
-                    txtCashTender.Text = "";
-                }
-                else
-                {
-                    txtCashTender.Text = txtCashTender.Text.Substring(0, txtCashTender.Text.Length - 1);
-                }*/
-            }
-        }
+        #endregion
     }
 }
