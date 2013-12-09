@@ -34,4 +34,3 @@ C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletP
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.exe
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.pdb
 C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.PinNumberForm.resources
-C:\Users\AverageAsian101\Documents\Visual Studio 2012\Projects\RecreationOutletPOS\RecreationOutletPOS\obj\Debug\RecreationOutletPOS.csprojResolveAssemblyReference.cache

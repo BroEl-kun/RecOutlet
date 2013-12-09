@@ -20,6 +20,8 @@ namespace RecreationOutletPOS
 {
     public partial class Combined : Form
     {
+        #region Class Properties
+
         TransactionList tList = new TransactionList();  //list for sales
         TransactionList tList2 = new TransactionList(); //list for returns
 
@@ -31,8 +33,8 @@ namespace RecreationOutletPOS
 
         // keyboard event handling
         bool modifierKeyHandled = false;
-            
 
+        #endregion
 
         /// <summary>
         /// Programmer: Aaron Sorensen
@@ -329,9 +331,7 @@ namespace RecreationOutletPOS
         #region --- Sales Forms Content ---
 
         #region Functions
-        //----------------------------------------------------------
-        // Functions
-        //----------------------------------------------------------
+
         /// <summary>
         /// Programmer: Aaron Sorensen
         /// Last Updated: 10/12/2013 
@@ -513,10 +513,6 @@ namespace RecreationOutletPOS
 
                     CheckOutForm checkOutForm = new CheckOutForm(this, transaction, tList);
                     checkOutForm.ShowDialog();
-
-                    //tList.clearData();
-
-                    //updateListView();
                 }
 
                 catch (Exception ex)
@@ -531,6 +527,7 @@ namespace RecreationOutletPOS
                     MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
+        
         #endregion
 
         #region Button Click Handling
@@ -574,7 +571,7 @@ namespace RecreationOutletPOS
         {
             if (lsvCheckOutItems.Items.Count > 0)
             {
-                DialogResult result = MessageBox.Show("Are you sure you want to clear the transaction?", "Transaction Clear",
+                DialogResult result = MessageBox.Show("Are you sure you want to void this transaction?", "Transaction Void",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
                 if (result == DialogResult.Yes)
                 {
@@ -584,7 +581,7 @@ namespace RecreationOutletPOS
             }
             else
             {
-                MessageBox.Show("There is nothing to clear.", "Transaction Clear",
+                MessageBox.Show("There are no items to void", "Transaction Void",
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
