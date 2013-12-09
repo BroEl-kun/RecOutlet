@@ -10,6 +10,23 @@
             $("#tabs").tabs();
         });
     </script>
+
+    @if (ViewBag.activeTab == "Category") {
+        <script>
+            $(document).ready(function () {
+                $("#tabs").tabs({ active: 1 });
+            });
+        </script>
+    }
+
+    @if (ViewBag.activeTab == "Subcategory") {
+        <script>
+            $(document).ready(function () {
+                $("#tabs").tabs({ active: 2 });
+            });
+        </script>
+    }
+
 </head>
 
 <body>
@@ -22,6 +39,9 @@
         </ul>
     
         <div id="tabs-1">
+            @if (ViewBag.deptSuccess != null) {
+                <p class="successful-insert">@ViewBag.deptSuccess</p>
+            }
             @using (Html.BeginForm()) {
                 <table>
                     <tr>
@@ -43,7 +63,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <button name="submitButton" value ="Department">Create Department</button>
                         </td>
                     </tr>
@@ -52,6 +72,9 @@
         </div>
 
         <div id="tabs-2">
+            @if (ViewBag.catSuccess != null) {
+                <p class="successful-insert">@ViewBag.catSuccess</p>
+            }
             @using (Html.BeginForm()) {
                 <table>
                     <tr>
@@ -64,7 +87,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <button name="submitButton" value ="Category">Create Category</button>
                         </td>
                     </tr>
@@ -73,6 +96,9 @@
         </div>
 
         <div id="tabs-3">
+            @if (ViewBag.subcatSuccess != null) {
+                <p class="successful-insert">@ViewBag.subcatSuccess</p>
+            }
             @using (Html.BeginForm()) {
                 <table>
                     <tr>
@@ -85,7 +111,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <button name="submitButton" value ="Subcategory">Create Subcategory</button>
                         </td>
                     </tr>
