@@ -52,8 +52,8 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><a href="JavaScript:newPopup('@Url.Action("AddVendor", "Vendor")');">Add a new Vendor</a></td>
-                <td colspan="2"><a href="JavaScript:newPopup('@Url.Action("CreateNewPL", "Vendor")');">Add a new Product Line</a></td>
+                <td colspan="2"><input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("AddVendor", "Vendor")');" value="Add a new Vendor" /></td>
+                <td colspan="2"><input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("CreateNewPL", "Vendor")');" value="Add a new Product Line" /></td>
             </tr>
         </table>
 
@@ -88,7 +88,7 @@
                 <td colspan="6">
                     <div class="editor-field">
                         Type a description for the item<strong class="required">*</strong><br />
-                        @Html.TextAreaFor(model => model.ItemDescription)
+                        @Html.TextAreaFor(model => model.ItemDescription, new { rows = 5, cols = 30 })
                         @Html.ValidationMessageFor(model => model.ItemDescription)
                     </div>
                 </td>
@@ -117,7 +117,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="6"><a href="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")');">Add a new Department, Category, and/or Subcategory</a></td>
+                <td colspan="6"><input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")');" class="button" value="Add a new Department, Category, and/or Subcategory" /></td>
             </tr>
         </table>
 

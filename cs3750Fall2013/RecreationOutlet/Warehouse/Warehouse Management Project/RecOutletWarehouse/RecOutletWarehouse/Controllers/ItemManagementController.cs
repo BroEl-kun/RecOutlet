@@ -138,35 +138,39 @@ namespace RecOutletWarehouse.Controllers
 
         [HttpPost]
         public ActionResult addNewDeptCatSubcat(ItemDeptCatSubcatViewModel model, string submitButton) {
+            DataFetcherSetter db = new DataFetcherSetter();
             if (submitButton == "Department") {
+                ViewBag.activeTab = "Department";
                 //TODO: check for duplicates
                 if (!ModelState.IsValid) {
                     return View(model);
                 }
-
-                //TODO: insert into the database
+                db.AddDepartment(model.department);
+                ViewBag.deptSuccess = "Department \"" + model.department.DepartmentName + "\" successfully added.";
 
                 return View(new ItemDeptCatSubcatViewModel());
             }
 
             if (submitButton == "Category") {
+                ViewBag.activeTab = "Category";
                 //TODO: check for duplicates
                 if (!ModelState.IsValid) {
                     return View(model);
                 }
-
-                //TODO: insert into the database
+                db.AddCategory(model.category);
+                ViewBag.catSuccess = "Category \"" + model.category.CategoryName + "\" successfully added.";
 
                 return View(new ItemDeptCatSubcatViewModel());
             }
 
             if (submitButton == "Subcategory") {
+                ViewBag.activeTab = "Subcategory";
                 //TODO: check for duplicates
                 if (!ModelState.IsValid) {
                     return View(model);
                 }
-
-                //TODO: insert into the database
+                db.AddSubcategory(model.subcat);
+                ViewBag.subcatSuccess = "Subcategory \"" + model.subcat.SubcategoryName + "\" successfully added.";
 
                 return View(new ItemDeptCatSubcatViewModel());
             }

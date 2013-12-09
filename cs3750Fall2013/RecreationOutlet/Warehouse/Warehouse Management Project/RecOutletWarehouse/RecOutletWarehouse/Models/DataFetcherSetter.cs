@@ -1165,6 +1165,62 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        public void AddDepartment(Department dept) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "INSERT INTO ITEM_DEPARTMENT(DepartmentID, DepartmentName) "
+                                        + "VALUES (@DeptID, @DeptName)";
+
+                    command.Parameters.AddWithValue("@DeptID", dept.DepartmentID);
+                    command.Parameters.AddWithValue("@DeptName", dept.DepartmentName);
+
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+                }
+            }
+        }
+
+        public void AddCategory(Category category) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "INSERT INTO ITEM_CATEGORY(CategoryName) "
+                                        + "VALUES (@CategoryName)";
+
+                    command.Parameters.AddWithValue("@CategoryName", category.CategoryName);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+                }
+            }
+        }
+
+        public void AddSubcategory(SubCategory subcat) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    command.Connection = thisConnection;
+                    command.CommandText = "INSERT INTO ITEM_SUBCATEGORY(SubcategoryName) "
+                                        + "VALUES (@SubName)";
+
+                    command.Parameters.AddWithValue("@SubName", subcat.SubcategoryName);
+
+                    command.ExecuteNonQuery();
+
+                    command.Parameters.Clear();
+                }
+            }
+        }
+
         /**********************************************
          * ITEM DFS methods end
          **********************************************/
