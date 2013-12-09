@@ -171,7 +171,7 @@
             // ID
             // 
             this.ID.Text = "RecRPC";
-            this.ID.Width = 74;
+            this.ID.Width = 126;
             // 
             // Item
             // 
@@ -312,7 +312,7 @@
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(137, 50);
             this.btnAddItem.TabIndex = 4;
-            this.btnAddItem.Text = "Manual Item Add";
+            this.btnAddItem.Text = "Item Search";
             this.btnAddItem.UseVisualStyleBackColor = true;
             this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
