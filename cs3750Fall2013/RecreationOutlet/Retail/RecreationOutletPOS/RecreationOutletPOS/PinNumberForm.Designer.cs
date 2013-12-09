@@ -34,9 +34,10 @@
             // 
             // tbPinNumber
             // 
-            this.tbPinNumber.Location = new System.Drawing.Point(60, 8);
+            this.tbPinNumber.Location = new System.Drawing.Point(60, 12);
             this.tbPinNumber.Name = "tbPinNumber";
-            this.tbPinNumber.Size = new System.Drawing.Size(125, 20);
+            this.tbPinNumber.PasswordChar = '*';
+            this.tbPinNumber.Size = new System.Drawing.Size(93, 20);
             this.tbPinNumber.TabIndex = 0;
             this.tbPinNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPinNumber_KeyPress);
             // 
