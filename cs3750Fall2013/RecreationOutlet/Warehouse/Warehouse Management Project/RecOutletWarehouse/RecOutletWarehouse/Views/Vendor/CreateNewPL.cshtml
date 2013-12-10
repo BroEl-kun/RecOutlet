@@ -78,8 +78,8 @@
                 <td colspan="2">Rep Name: @Html.TextBoxFor(newPL => newPL.rep.SalesRepName, new { @class="newrepinput" })</td>
             </tr>
             <tr>
-                <td>Rep phone number: @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone, new { @class="newrepinput" })</td>
-                <td>Rep Email address: @Html.TextBoxFor(newPL => newPL.rep.SalesRepEmail, new { @class="newrepinput" })</td>
+                <td>Rep phone number: @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone, new { @class="newrepinput", @id="PhoneNumber" })</td>
+                <td>Rep Email address: @Html.TextBoxFor(newPL => newPL.rep.SalesRepEmail, new { @class="newrepinput", @id="PhoneNumber"})</td>
             </tr>
         </table>
     </fieldset>
