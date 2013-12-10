@@ -50,7 +50,7 @@
         <legend>Product line information</legend>
         <ul class="no-list">
             <li>
-                Vendor: @Html.TextBoxFor(newPL => newPL.productLine.Vendor, new { @Value = ViewBag.VendorId, @id="vendor" })
+                Vendor: @Html.TextBoxFor(newPL => newPL.productLine.Vendor, new { @Value = ViewBag.VendorName, @id="vendor" })
             </li>
             <li>
                 Product Line Name: @Html.TextBoxFor(newPL => newPL.productLine.ProductLineName)
