@@ -27,7 +27,7 @@ namespace RecreationOutletPOS
         // Attempts to add an item with the specified values, with ID being the key. If
         // it finds a match, it will increase the quantity. If not, it will add a new
         // item to the list.
-        public void addItem(int id, string name, double price, int quantity, double discount)
+        public void addItem(long id, string name, double price, int quantity, double discount)
         {
             TransactionItem newItem;
 
@@ -161,7 +161,7 @@ namespace RecreationOutletPOS
     /// </summary>
     public class TransactionItem
     {
-        int id;
+        long id;
         string name;
         double price;
         int quantity;
@@ -179,7 +179,7 @@ namespace RecreationOutletPOS
             this.total = (price - discount);
         }
 
-        public TransactionItem(int id, string name, double price, int quantity, double discount)
+        public TransactionItem(long id, string name, double price, int quantity, double discount)
         {
             this.id = id;
             this.name = name;
@@ -199,7 +199,7 @@ namespace RecreationOutletPOS
         //----------------------------------------
         // Getters
         //----------------------------------------
-        public int getID()
+        public long getID()
         {
             return id;
         }

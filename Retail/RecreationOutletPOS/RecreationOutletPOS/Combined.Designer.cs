@@ -176,7 +176,7 @@
             // Item
             // 
             this.Item.Text = "Item";
-            this.Item.Width = 322;
+            this.Item.Width = 270;
             // 
             // Price
             // 

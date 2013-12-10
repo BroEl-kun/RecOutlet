@@ -115,11 +115,13 @@ namespace RecreationOutletPOS
             if (lvData.SelectedItems.Count > 0)
             {
                 ListViewItem lvi = lvData.SelectedItems[0];
-                int id = 0, quantity = 1;
+                long id = 0;
+                int quantity = 1;
 
                 try
                 {
-                    int.TryParse(lvi.SubItems[0].Text, out id);
+                    long.TryParse(lvi.SubItems[0].Text, out id);
+
                     if (tbItemQuantity.Text != "")
                         int.TryParse(tbItemQuantity.Text, out quantity);
                 }
@@ -134,12 +136,12 @@ namespace RecreationOutletPOS
                 // Last Updated: 10/27/2013
                 if (salesForm != null)
                 {
-                    salesForm.addItem(id, name, price, quantity, 0.00, price);
+                    //salesForm.addItem(id, name, price, quantity, 0.00, price);
                 }
 
                 else if (returnsForm != null)
                 {
-                    returnsForm.addItem(id, name, price, quantity, 0.00, price);
+                    //returnsForm.addItem(id, name, price, quantity, 0.00, price);
                 }
 
                 else if (combined != null)

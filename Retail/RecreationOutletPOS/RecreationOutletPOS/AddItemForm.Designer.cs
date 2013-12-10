@@ -313,17 +313,18 @@
             // 
             // ID
             // 
-            this.ID.Text = "ID";
+            this.ID.Text = "RecRPC";
+            this.ID.Width = 103;
             // 
             // Item
             // 
             this.Item.Text = "Item";
-            this.Item.Width = 420;
+            this.Item.Width = 397;
             // 
             // Price
             // 
             this.Price.Text = "Price";
-            this.Price.Width = 128;
+            this.Price.Width = 105;
             // 
             // lblQty
             // 
