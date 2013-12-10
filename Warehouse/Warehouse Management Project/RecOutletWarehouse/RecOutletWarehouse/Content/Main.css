@@ -231,6 +231,17 @@ input[type="checkbox"].input-validation-error {
     width: 350px;
 }
 
+.ItemAge {
+    width: 25px;
+}
+
+.ItemPrice {
+    width: 50px;
+}
+
+.ItemLegId {
+    width: 75px;
+}
 /* Styles to test new editor and display templates.
 ----------------------------------------------------------*/
 .loud-1 {
