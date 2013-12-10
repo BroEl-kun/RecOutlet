@@ -242,6 +242,13 @@ input[type="checkbox"].input-validation-error {
 .ItemLegId {
     width: 75px;
 }
+
+.LabelRPC {
+    width: 100px;
+}
+.LabelPrintCount {
+    width: 35px;
+}
 /* Styles to test new editor and display templates.
 ----------------------------------------------------------*/
 .loud-1 {
