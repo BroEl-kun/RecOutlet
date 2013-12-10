@@ -1,7 +1,7 @@
 ﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
 @{
-    //ViewBag.Title = "Create Receiving Log";
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Create Receiving Log";
+    //ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
@@ -71,6 +71,7 @@
         //document.getElementById("orig").submit();
         //document.getElementsByName("origForm").submit();
         //alert("submit?");
+        //document.getElementById("poSub").
     }
 </script>
 
@@ -101,7 +102,7 @@
     {
         <input type="text" placeholder="" id="po" name="po" />          
         //<input type="text" id="po" />
-        <input type="submit" value="Begin RL" class="button"/>
+        <input type="submit" value="Begin RL" class="button" id="poSub"/>
     }
 
     <br />
@@ -163,7 +164,7 @@
                 </td>
                 <td>
                     Receive Date: 
-                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date, id = "recDate" })
+                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("dd/MM/yyyy"), id = "recDate" })
                     @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
                     @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
                 </td>
@@ -230,7 +231,7 @@
                 <th>Est Ship Date:</th>
                 <th>Order Date:</th>
                 <th>Vendor:</th>
-                <th>Created By:</th>
+                @*<th>Created By:</th>*@
                 <th>Comments:</th>
             </tr>
         </thead>
@@ -245,7 +246,7 @@
                 <td>@objPO.EstShipDate</td>
                 <td>@objPO.OrderDate</td>
                 <td>@objPO.Vendor</td>
-                <td>@objPO.CreatedBy</td>
+                @*<td>@objPO.CreatedBy</td>*@
                 <td>@objPO.Comments</td>
             </tr>
 
