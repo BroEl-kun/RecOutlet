@@ -61,4 +61,13 @@ namespace RecOutletWarehouse.Controllers {
             return db.SearchRepsByName(query);
         }
     }
+
+    public class ItemApiController : ApiController {
+
+        [HttpGet]
+        public IEnumerable<Item> GetItems(string query = "") {
+            DataFetcherSetter db = new DataFetcherSetter();
+            return db.SearchItemsByName(query);
+        }
+    }
 }

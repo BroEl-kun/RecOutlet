@@ -891,6 +891,37 @@ namespace RecOutletWarehouse.Models
             }
         }
 
+        public List<Item> SearchItemsByName(string itemName) {
+            using (SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["TitanConnection"].ConnectionString)) {
+                thisConnection.Open();
+
+                using (SqlCommand command = new SqlCommand()) {
+                    List<Item> items = new List<Item>();
+                    command.Connection = thisConnection;
+                    command.CommandText = "SELECT RecRPC, Name, VendorItemID, Description, SellPrice "
+                                        + "FROM ITEM "
+                                        + "WHERE Name LIKE @itemName ";
+                    command.Parameters.AddWithValue("@itemName", "%" + itemName + "%");
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read()) {
+                        items.Add(new Item {
+                            RecRPC = Convert.ToInt64(reader["RecRPC"]),
+                            ItemName = reader["Name"].ToString(),
+                            VendorItemID = Convert.ToInt32(reader["VendorItemID"]),
+                            ItemDescription = reader["Description"].ToString(),
+                            SellPrice = Convert.ToDecimal(reader["SellPrice"])
+                        });
+                    }
+
+                    reader.Dispose();
+                    command.Parameters.Clear();
+
+                    return items;
+                }
+            }
+        }
+
         /***********************************************
          * Ajax autocomplete DFS methods end
          ***********************************************/
