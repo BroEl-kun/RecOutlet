@@ -136,15 +136,20 @@ namespace RecOutletWarehouse.Controllers
             POtoInt = POtoInt.Replace("-", string.Empty);
 
             int convertedPO = Convert.ToInt32(POtoInt);
+            decimal totalCost = POVM.PO.FreightCost;
 
             //TODO: Move the character replacement logic to a
             //tools class and enhance its functionality
 
             foreach (var item in POVM.LineItems) {
-                if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0) //do not attempt to add empty list items
+                if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0){ //do not attempt to add empty list items
                     db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
                     item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
+                    totalCost += (item.WholesaleCost * item.QtyOrdered);
+                    }
             }
+
+            ViewBag.POTotal = String.Format("P.O. Total Cost: ${0:C}", totalCost.ToString());
 
             return View("POSummary", POVM);
 
