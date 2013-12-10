@@ -26,8 +26,12 @@
             <td>
                 @Html.TextBoxFor(model => model.PO.Vendor, new { @id = "vendor" })
                 @Html.ValidationMessageFor(model => model.PO.Vendor)
-                <br />
-                <a href="JavaScript:newPopup('@Url.Action("AddVendor", "Vendor")');">Add a new Vendor</a>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("AddVendor", "Vendor")');" value="Add a new Vendor" />
             </td>
         </tr>
         <tr>
