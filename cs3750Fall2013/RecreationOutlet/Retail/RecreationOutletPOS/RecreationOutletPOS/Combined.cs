@@ -342,7 +342,7 @@ namespace RecreationOutletPOS
         ///     - Converted listview operations into class operations
         ///         (all previous operations were moved to the updateListView function)
         /// </summary>
-        public void addItem(int id, String item, double price, int quantity, double discount, double total)
+        public void addItem(long id, String item, double price, int quantity, double discount, double total)
         {
             tList.addItem(id, item, price, quantity, discount);
             updateListView();
@@ -727,7 +727,7 @@ namespace RecreationOutletPOS
         ///     - Converted listview operations into class operations
         ///         (all previous operations were moved to the updateListView function)
         /// </summary>
-        public void addItem2(int id, String item, double price, int quantity, double discount, double total)
+        public void addItem2(long id, String item, double price, int quantity, double discount, double total)
         {
             tList2.addItem(id, item, price, quantity, discount);
             updateListView2();
