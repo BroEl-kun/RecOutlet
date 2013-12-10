@@ -170,13 +170,6 @@ namespace RecreationOutletPOS
                 e.Handled = true;
         }
 
-        private void btnMiscCamp_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-
-
 
         /// <summary>
         /// Programmer: Jaed Norberg
