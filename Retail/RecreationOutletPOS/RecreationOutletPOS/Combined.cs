@@ -666,11 +666,11 @@ namespace RecreationOutletPOS
                     {
                         foreach (DataRow row in ds.Tables["Results"].Rows)
                         {
-                            int id;
+                            long id;
                             string name;
                             double price;
 
-                            int.TryParse(row["RecRPC"].ToString(), out id);
+                            long.TryParse(row["RecRPC"].ToString(), out id);
                             name = (row["Name"].ToString());
                             double.TryParse(row["SellPrice"].ToString(), out price);
 
