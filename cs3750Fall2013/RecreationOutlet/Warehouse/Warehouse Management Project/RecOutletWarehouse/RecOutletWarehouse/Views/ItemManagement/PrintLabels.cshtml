@@ -27,9 +27,9 @@
         <table>
             <tr>
                 <td>Item RPC: </td>
-                <td>@Html.TextBoxFor(item => item.RPC, new { @Value = ViewBag.RPC })</td>
-                <td>Item UPC: </td>
-                <td>@Html.TextBoxFor(item => item.UPC)</td>
+                <td>@Html.TextBoxFor(item => item.RPC, new {@class = "LabelRPC",  @Value = ViewBag.RPC })</td>
+                <td>&nbsp Item UPC: </td>
+                <td>@Html.TextBoxFor(item => item.UPC, new { @class = "LabelRPC" })</td>
             </tr>
         </table>
         <hr />
@@ -41,8 +41,8 @@
             </tr>
         </table>
 
-        <p>Type of labels to print: @Html.RadioButtonFor(model => model.LabelType, "RPC") RPC @Html.RadioButtonFor(model => model.LabelType, "UPC") UPC</p>
-        <p>Number of labels to print: @Html.EditorFor(model => model.LabelQty) @Html.ValidationMessageFor(model => model.LabelQty)</p>
+        <p>Type of labels to print: @Html.RadioButtonFor(model => model.LabelType, "RPC", new { Checked = "checked"}) RPC @Html.RadioButtonFor(model => model.LabelType, "UPC") UPC</p>
+        <p>Number of labels to print: @Html.TextBoxFor(model => model.LabelQty, new { @class = "LabelPrintCount" }) @Html.ValidationMessageFor(model => model.LabelQty)</p>
 
         <input type="submit" value="Print Labels" onclick="submit()" class="button"/>
     
