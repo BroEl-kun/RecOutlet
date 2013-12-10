@@ -56,11 +56,11 @@ namespace RecOutletWarehouse.Controllers
 
      
 
-        public ActionResult CreateNewPL(short id)
+        public ActionResult CreateNewPL(short? id)
         {
             DataFetcherSetter db = new DataFetcherSetter();
 
-            ViewBag.VendorName = db.GetVendorNameForVendorId(id);
+          
             return View();
         }
 
