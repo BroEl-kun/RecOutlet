@@ -20,7 +20,9 @@
 </ul>
 }
 
-@using (Html.BeginForm()) {
+
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
@@ -28,21 +30,21 @@
         <legend>Vendor Information</legend>
         <table>
             <tr>
-                <td>Vendor Name<strong class="required">*</strong></td>
+                <td>Vendor Name:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Vendor, new { @id = "vendor" })
                         @Html.ValidationMessageFor(model => model.Vendor)
                     </div>
                 </td>
-                <td>Product Line<strong class="required">*</strong></td>
+                <td>&nbsp Product Line:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.ProductLine, new { @id = "productLine" })
                         @Html.ValidationMessageFor(model => model.ProductLine)
                     </div>
                 </td>
-                <td>Vendor's Item #<strong class="required">*</strong></td>
+                <td>&nbsp Vendor's Item #:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.EditorFor(model => model.VendorItemID)
@@ -62,24 +64,24 @@
         <legend>Item Information</legend>
         <table>
             <tr>
-                <td>Item UPC</td>
+                <td>Item UPC:</td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.UPC)
                         @Html.ValidationMessageFor(model => model.UPC)
                     </div>
                 </td>
-                <td>Item Name<strong class="required">*</strong></td>
+                <td>&nbsp Item Name:<strong class="required">*</strong></td>
                 <td >
                     <div class="editor-field">
                         @Html.EditorFor(model => model.ItemName)
                         @Html.ValidationMessageFor(model => model.ItemName)
                     </div>
                 </td>
-                 <td>Legacy Item ID:</td>
+                 <td>&nbsp Legacy Item ID:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.Legacy)
+                        @Html.TextBoxFor(model => model.Legacy, new { @class = "ItemLegId" })
                         @Html.ValidationMessageFor(model => model.Legacy)
                     </div>
                 </td>
@@ -87,28 +89,28 @@
             <tr>
                 <td colspan="6">
                     <div class="editor-field">
-                        Type a description for the item<strong class="required">*</strong><br />
+                        Type a description for the item:<strong class="required">*</strong><br />
                         @Html.TextAreaFor(model => model.ItemDescription, new { rows = 5, cols = 30 })
                         @Html.ValidationMessageFor(model => model.ItemDescription)
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>Department<strong class="required">*</strong></td>
+                <td>Department:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Department, new { @id = "dept" })
                         @Html.ValidationMessageFor(model => model.Department)
                     </div>
                 </td>
-                <td>Category<strong class="required">*</strong></td>
+                <td>&nbsp Category:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Category, new { @id = "cat" })
                         @Html.ValidationMessageFor(model => model.Category)
                     </div>
                 </td>
-                <td>Sub-category<strong class="required">*</strong></td>
+                <td>&nbsp Sub-category:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
                         @Html.TextBoxFor(model => model.Subcategory, new { @id = "subcat" })
@@ -128,33 +130,33 @@
 
         <table>
             <tr>
-                <td>MSRP</td>
+                <td>MSRP:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.MSRP)
+                        @Html.TextBoxFor(model => model.MSRP, new { @class = "ItemPrice" })
                         @Html.ValidationMessageFor(model => model.MSRP)
                     </div>
                 </td>
-                <td>Regular Selling Price<strong class="required">*</strong></td>
+                <td>&nbsp Regular Selling Price:<strong class="required">*</strong></td>
                 <td>
                     <div class="editor-field">
-                        @Html.EditorFor(model => model.SellPrice)
+                        @Html.TextBoxFor(model => model.SellPrice, new { @class = "ItemPrice" })
                         @Html.ValidationMessageFor(model => model.SellPrice)
                     </div>
                 </td>
-                <td>Restricted Age</td>
+                <td>&nbsp Restricted Age:</td>
                 <td>
                     <div class="editor-field">
-                        @Html.TextBoxFor(model => model.restrictedAge)
+                        @Html.TextBoxFor(model => model.restrictedAge, new { @class = "ItemAge" })
                         @Html.ValidationMessageFor(model => model.restrictedAge)
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>Seasonal Code<strong class="required">*</strong></td>
+                <td colspan="2">Seasonal Code<strong class="required">*</strong></td>
                 <td colspan="5">
                     <div class="editor-field">
-                        @Html.RadioButtonFor(model => model.SeasonCode, "All") All                      
+                        @Html.RadioButtonFor(model => model.SeasonCode, "All", new { Checked = "checked"}) All                      
                         @Html.RadioButtonFor(model => model.SeasonCode, "Fall") Fall
                         @Html.RadioButtonFor(model => model.SeasonCode, "Winter") Winter 
                         @Html.RadioButtonFor(model => model.SeasonCode, "Spring") Spring
@@ -190,6 +192,7 @@
         </p>
 
 }
+
 
 <!--"What's this?" Tooltip-->
 <script>
@@ -227,7 +230,7 @@
 
 <!--Autocomplete scripts follow-->
 <script type="text/javascript">
-    var url = '@Url.RouteUrl("DefaultApi", 
+    var url = '@Url.RouteUrl("DefaultApi",
     new { httproute = "", controller = "VendorApi" })';
     $('#vendor').autocomplete({
         autoFocus: true,
@@ -254,7 +257,7 @@
         minLength: 1
     });
 
-    var url2 = '@Url.RouteUrl("DefaultApi", 
+    var url2 = '@Url.RouteUrl("DefaultApi",
     new { httproute = "", controller = "ProductLineApi" })';
     $('#productLine').autocomplete({
         autoFocus: true,
@@ -281,7 +284,7 @@
         minLength: 1
     });
 
-    var url3 = '@Url.RouteUrl("DefaultApi", 
+    var url3 = '@Url.RouteUrl("DefaultApi",
     new { httproute = "", controller = "DepartmentApi" })';
     $('#dept').autocomplete({
         autoFocus: true,
@@ -308,7 +311,7 @@
         minLength: 1
     });
 
-    var url4 = '@Url.RouteUrl("DefaultApi", 
+    var url4 = '@Url.RouteUrl("DefaultApi",
     new { httproute = "", controller = "CategoryApi" })';
     $('#cat').autocomplete({
         autoFocus: true,
@@ -335,7 +338,7 @@
         minLength: 1
     });
 
-    var url5 = '@Url.RouteUrl("DefaultApi", 
+    var url5 = '@Url.RouteUrl("DefaultApi",
     new { httproute = "", controller = "SubcategoryApi" })';
     $('#subcat').autocomplete({
         autoFocus: true,
