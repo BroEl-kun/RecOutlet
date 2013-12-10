@@ -42,6 +42,7 @@ namespace RecOutletWarehouse.Controllers
                     vendor.ContactPhone, vendor.ContactFax,
                     vendor.AltPhone, vendor.Address,
                     vendor.Website);
+                vendor.VendorId = db.GetVendorIdForVendorName(vendor.VendorName);
 
                 //TODO: change this to the actual view i need to return like Success! or something.
                 ViewBag.Success = "Vendor successfully created.";
@@ -55,9 +56,11 @@ namespace RecOutletWarehouse.Controllers
 
      
 
-        public ActionResult CreateNewPL(long? id)
+        public ActionResult CreateNewPL(short id)
         {
-            ViewBag.VendorId = id.ToString();
+            DataFetcherSetter db = new DataFetcherSetter();
+
+            ViewBag.VendorName = db.GetVendorNameForVendorId(id);
             return View();
         }
 
