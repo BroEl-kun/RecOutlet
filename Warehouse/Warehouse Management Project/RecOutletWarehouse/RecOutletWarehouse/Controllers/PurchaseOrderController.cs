@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Models.PurchaseOrder;
 using RecOutletWarehouse.Models.VendorManagement;
+using RecOutletWarehouse.Models.ItemManagement;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -23,7 +24,8 @@ namespace RecOutletWarehouse.Controllers
         public class PurchaseOrderCreationViewModel {
             public PurchaseOrder PO { get; set; }
             public List<PurchaseOrderLineItem> LineItems { get; set; }
-
+            public List<string> ItemNames { get; set; }
+            public List<int> VendorIds { get; set; }
         }
 
         //
@@ -110,6 +112,7 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>The AddPOLineItem View, supplemented with general PO information</returns>
         public ActionResult AddPOLineItem(int id = 0) {
             DataFetcherSetter db = new DataFetcherSetter();
+           // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
             PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
             POVM.PO = db.RetrievePObyPOID(id);
 
@@ -128,21 +131,22 @@ namespace RecOutletWarehouse.Controllers
         public ActionResult AddPOLineItem(PurchaseOrderCreationViewModel POVM, string id) {
             DataFetcherSetter db = new DataFetcherSetter();
 
-            //TODO: Move the character replacement logic to a
-            //tools class and enhance its functionality
+            POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
             string POtoInt = id;
             POtoInt = POtoInt.Replace("-", string.Empty);
 
             int convertedPO = Convert.ToInt32(POtoInt);
 
+            //TODO: Move the character replacement logic to a
+            //tools class and enhance its functionality
+
             foreach (var item in POVM.LineItems) {
-                if(item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0
-                    && item.QtyTypeId != 0) //do not attempt to add empty list items
-                        db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
-                        item.QtyOrdered, item.QtyTypeId);
+                if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0) //do not attempt to add empty list items
+                    db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
+                    item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
             }
 
-            return RedirectToAction("POSummary", new { id = convertedPO });
+            return View("POSummary", POVM);
 
         }
 
@@ -155,12 +159,12 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>HTTPGet: The base View of POSummary, which has PO information and a list 
         /// of POLineItems</returns>
         /// GET: PurchaseOrder/POSummary
-        public ActionResult POSummary(int id = 0) {
-            PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
+        public ActionResult POSummary(PurchaseOrderCreationViewModel POVM) {
+            //PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
             DataFetcherSetter db = new DataFetcherSetter();
             
-            POVM.PO = db.RetrievePObyPOID(id);
-            POVM.LineItems = db.ListLineItemsForPO(id);
+            //POVM.PO = db.RetrievePObyPOID(id);
+            //POVM.LineItems = db.ListLineItemsForPO(id);
 
             return View(POVM);
         }

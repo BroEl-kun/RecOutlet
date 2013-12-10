@@ -22,7 +22,7 @@
             <td>@Html.DisplayFor(model => model.PO.EstShipDate)</td>
         </tr>
     </table>
-    <p>TODO: right-align PO#, Vendor, etc.</p>
+    @*<p>TODO: right-align PO#, Vendor, etc.</p>*@
 </fieldset>
 
 <fieldset>
@@ -30,27 +30,29 @@
     <table>
         <tr class="table-header">
             <td>RPC #</td>
-            <td>Description</td>
+            <td>Item Name</td>
             <td>Wholesale Cost</td>
             <td>Qty to order</td>
-            <td>Qty type</td>
-            <td>TODO: CRUD options for each line</td>
+            <td>Vendor's Item #</td>
+            @*<td>TODO: CRUD options for each line</td>*@
         </tr>
         @for (int i = 0; i < Model.LineItems.Count(); i++) {
-            <tr>
-                <td>@Html.DisplayFor(model => model.LineItems[i].RecRPC)</td>
-                <td>TODO: Add Item Description</td>
-                <td>@Html.DisplayFor(model => model.LineItems[i].WholesaleCost)</td>
-                <td>@Html.DisplayFor(model => model.LineItems[i].QtyOrdered)</td>
-                <td>@Html.DisplayFor(model => model.LineItems[i].QtyTypeId)</td>
-            </tr>
+            if(Model.LineItems[i].RecRPC != 0){
+                <tr>
+                    <td>@Html.DisplayFor(model => model.LineItems[i].RecRPC)</td>
+                    <td>@Html.DisplayFor(model => model.ItemNames[i])</td>
+                    <td>@Html.DisplayFor(model => model.LineItems[i].WholesaleCost)</td>
+                    <td>@Html.DisplayFor(model => model.LineItems[i].QtyOrdered)</td>
+                    <td>@Html.DisplayFor(model => model.VendorIds[i])</td>
+                </tr>
+            }
         }
     </table>
 
-    <input type="button" value ="Print PO" class="button"/>
-    <input type="button" value="Add More Items to this PO" class="button"/>
-    <input type="button" value="Duplicate this PO" class="button"/>
-    <input type="button" value="Return to Main Menu"
-        onclick="location.href='@Url.Action("Index","Home")'" class="button"/>
-
 </fieldset>
+<br />
+<input type="button" value ="Print PO" class="button"/>
+<input type="button" value="Add More Items to this PO" class="button"/>
+<input type="button" value="Duplicate this PO" class="button"/>
+<input type="button" value="Return to Main Menu"
+    onclick="location.href='@Url.Action("Index","Home")'" class="button"/>
