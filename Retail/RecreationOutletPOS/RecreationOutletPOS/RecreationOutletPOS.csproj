@@ -86,7 +86,7 @@
       <DependentUpon>InventoryForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InventorySearch.cs" />
-    <Compile Include="ManualItemAddition.cs" />
+    <Compile Include="ItemSearch.cs" />
     <Compile Include="PinNumberForm.cs">
       <SubType>Form</SubType>
     </Compile>
