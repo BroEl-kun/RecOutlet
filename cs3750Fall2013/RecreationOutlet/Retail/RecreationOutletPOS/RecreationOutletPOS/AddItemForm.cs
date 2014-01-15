@@ -76,7 +76,7 @@ namespace RecreationOutletPOS
 
 
             DataSet ds;
-            ManualItemAddition dt = new ManualItemAddition();
+            ItemSearch dt = new ItemSearch();
 
             try
             {
@@ -241,7 +241,7 @@ namespace RecreationOutletPOS
 
             DataSet ds = new DataSet();
 
-            ManualItemAddition dt = new ManualItemAddition();
+            ItemSearch dt = new ItemSearch();
 
             try
             {

@@ -404,7 +404,7 @@ namespace RecreationOutletPOS
             if (e.KeyChar == 13)
             {
                 DataSet ds;
-                ManualItemAddition dt = new ManualItemAddition();
+                ItemSearch dt = new ItemSearch();
 
                 int quantity = 1;
 
@@ -416,7 +416,7 @@ namespace RecreationOutletPOS
                     //newText = newText.Trim('D');
 
                     string ID = newText;
-                    ds = dt.retrieveItem(ID);
+                    ds = dt.retrieveItem(0, ID);
 
                     if (tbItemQuantity.Text != "")
                         int.TryParse(tbItemQuantity.Text, out quantity);

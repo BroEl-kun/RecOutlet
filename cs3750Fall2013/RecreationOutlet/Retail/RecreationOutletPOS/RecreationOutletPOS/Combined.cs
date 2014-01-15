@@ -642,9 +642,10 @@ namespace RecreationOutletPOS
             if (e.KeyChar == 13)
             {
                 DataSet ds;
-                ManualItemAddition dt = new ManualItemAddition();
+                ItemSearch dt = new ItemSearch();
 
                 int quantity = 1;
+                int characterLength = 0;
 
                 try
                 {
@@ -654,7 +655,32 @@ namespace RecreationOutletPOS
                     newText = newText.Trim('D');
 
                     string ID = newText;
-                    ds = dt.retrieveItem(ID);
+                    characterLength = ID.Length;
+
+                    string mode = "";
+
+                    if (characterLength == 13)
+                    {
+                        mode = "RecRPC";
+                        ds = dt.retrieveItem(0, ID);
+                    }
+                    else if (characterLength == 12)
+                    {
+                        mode = "ItemUPC";
+                        ds = dt.retrieveItem(1, ID);
+                    }
+                    else if (characterLength == 6)
+                    {
+                        mode = "ItemUPC";
+                        ds = dt.retrieveItem(2, ID);
+                    }
+                    else
+                    {
+                        mode = "ItemUPC";
+                        ds = dt.retrieveItem(2, ID);
+                        //ds = null;
+                        // error
+                    }
 
                     if (tbItemQuantity.Text != "")
                         int.TryParse(tbItemQuantity.Text, out quantity);
@@ -670,7 +696,7 @@ namespace RecreationOutletPOS
                             string name;
                             double price;
 
-                            long.TryParse(row["RecRPC"].ToString(), out id);
+                            long.TryParse(row[mode].ToString(), out id);
                             name = (row["Name"].ToString());
                             double.TryParse(row["SellPrice"].ToString(), out price);
 

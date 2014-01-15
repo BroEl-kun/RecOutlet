@@ -170,7 +170,7 @@
             // 
             // ID
             // 
-            this.ID.Text = "RecRPC";
+            this.ID.Text = "Item ID";
             this.ID.Width = 126;
             // 
             // Item
