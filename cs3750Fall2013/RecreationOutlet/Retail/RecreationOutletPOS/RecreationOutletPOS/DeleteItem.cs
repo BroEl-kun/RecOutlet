@@ -12,16 +12,7 @@ namespace RecreationOutletPOS
 {
     public partial class DeleteItem : Form
     {
-        private SalesForm parent;
         private int item;
-
-        public DeleteItem(SalesForm parent, int item)
-        {
-            InitializeComponent();
-
-            this.parent = parent;
-            this.item = item;
-        }
 
         //Constructor for combined form -Aaron
         Combined combined;
@@ -62,11 +53,7 @@ namespace RecreationOutletPOS
 
             if (!failFlag)
             {
-                if (parent != null)
-                {
-                    parent.voidItem(item, amount);
-                }
-                else if (combined != null)
+                if (combined != null)
                 {
                     combined.voidItem(item, amount);
                 }

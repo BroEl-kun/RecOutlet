@@ -21,7 +21,6 @@ namespace RecreationOutletPOS
 
         //Constructor for combined form -Aaron
         private Combined combined;
-        private SalesForm parent;
 
         public Dictionary<TransKey, string> transaction;
         public TransactionList transItems;
@@ -35,32 +34,6 @@ namespace RecreationOutletPOS
         private int radChecked = 0;
 
         #endregion
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 12/9/2013
-        /// 
-        /// Constructor
-        /// </summary>
-        /// <param name="transaction">The new transaction details to display</param>
-        public CheckOutForm(SalesForm parent, Dictionary<TransKey, string> transaction, TransactionList transItems)
-        {
-            InitializeComponent();
-
-            this.transaction = transaction;
-            this.transItems = transItems;
-
-            cmbCommissionTo.SelectedIndex = 0;
-            ccField.Width = 0;
-
-            txtCashTender.Visible = false;
-            lblSwipe.Visible = false;
-            lblTenderPrompt.Visible = false;
-
-            setCheckoutInfo(transaction);
-
-            this.parent = parent;
-        }
 
         /// <summary>
         /// Programmer: Aaron Sorensen

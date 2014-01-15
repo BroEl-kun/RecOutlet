@@ -15,39 +15,9 @@ namespace RecreationOutletPOS
 {
     public partial class AddItemForm : Form
     {
-        SalesForm salesForm;
-        ReturnsForm returnsForm;
         int listView;
         
         private string searchTerm = "";
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 10/23/2013
-        ///
-        /// Constructor for the SalesForm calling this
-        /// </summary>
-        /// <param name="inForm">The form that called this form</param>
-        public AddItemForm(SalesForm inForm)
-        {
-            this.salesForm = inForm;
-
-            InitializeComponent();
-        }
-
-        /// <summary>
-        /// Programmer: Michael Vuong
-        /// Last Updated: 10/23/2013
-        ///
-        /// Constructor for the ReturnForm calling this
-        /// </summary>
-        /// <param name="inForm">The form that called this form</param>
-        public AddItemForm(ReturnsForm inForm)
-        {
-            this.returnsForm = inForm;
-
-            InitializeComponent();
-        }
 
         //Constuctor for combined form -Aaron
         Combined combined;
@@ -134,17 +104,7 @@ namespace RecreationOutletPOS
                 // Determine which form called this form
                 // Programmer: Michael Vuong
                 // Last Updated: 10/27/2013
-                if (salesForm != null)
-                {
-                    //salesForm.addItem(id, name, price, quantity, 0.00, price);
-                }
-
-                else if (returnsForm != null)
-                {
-                    //returnsForm.addItem(id, name, price, quantity, 0.00, price);
-                }
-
-                else if (combined != null)
+                if (combined != null)
                 {
                     //Check which group called this form
                     if (listView == 1)
