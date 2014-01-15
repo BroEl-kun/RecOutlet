@@ -20,17 +20,9 @@ namespace RecreationOutletPOS
         ///
         /// Constructor for the SalesForm calling this
         /// </summary>
-        SalesForm salesForm;
         int selectedItem;
         bool confirmed = false;
         
-        public PriceOverideForm(SalesForm inForm, int selectedItem)
-        {
-             this.salesForm = inForm;
-             this.selectedItem = selectedItem;
-
-             InitializeComponent();
-        }
 
         //Constructor for combined form -Aaron
         Combined combined;
@@ -78,11 +70,7 @@ namespace RecreationOutletPOS
                         {
 
                             Double.TryParse(txtPriceOveride.Text, out inPrice);
-                            if (salesForm != null)
-                            {
-                                salesForm.overideItemPrice(inPrice, selectedItem);
-                            }
-                            else if (combined != null)
+                            if (combined != null)
                             {
                                 combined.overideItemPrice(inPrice, selectedItem);
                             }

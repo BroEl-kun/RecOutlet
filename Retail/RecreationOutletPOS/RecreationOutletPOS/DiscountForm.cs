@@ -21,16 +21,7 @@ namespace RecreationOutletPOS
         /// Constructor for the SalesForm calling this
         /// </summary>
         /// 
-        SalesForm salesForm;
         int selectedItem;
-
-        public DiscountForm(SalesForm inForm, int selectedItem)
-        {
-            this.salesForm = inForm;
-            this.selectedItem = selectedItem;
-
-            InitializeComponent();
-        }
 
         //Constructor for combined form -Aaron
         Combined combined;
@@ -65,11 +56,7 @@ namespace RecreationOutletPOS
                     else
                     {
                         Double.TryParse(tbDiscountPrice.Text, out inPrice);
-                        if (salesForm != null)
-                        {
-                            salesForm.discountItem(0, inPrice, selectedItem);
-                        }
-                        else if (combined != null)
+                        if (combined != null)
                         {
                             combined.discountItem(0, inPrice, selectedItem);
                         }
@@ -104,11 +91,7 @@ namespace RecreationOutletPOS
                     else
                    {
                         Double.TryParse(tbDiscountPerc.Text, out inPercent);
-                        if (salesForm != null)
-                        {
-                            salesForm.discountItem(1, inPercent, selectedItem);
-                        }
-                        else if (combined != null)
+                        if (combined != null)
                         {
                             combined.discountItem(1, inPercent, selectedItem);
                         }
@@ -120,11 +103,7 @@ namespace RecreationOutletPOS
                     //MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //For now, keep this here for functionality sake
                 }
 
-                if (salesForm != null)
-                {
-                    salesForm.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
-                }
-                else if (combined != null)
+               if (combined != null)
                 {
                     combined.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
                 }
