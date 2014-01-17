@@ -117,6 +117,11 @@
             this.txtToDateFilter = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnTodayOnly = new System.Windows.Forms.Button();
+            this.txtUser = new System.Windows.Forms.TextBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.lblLogged = new System.Windows.Forms.Label();
+            this.lblUser = new System.Windows.Forms.Label();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.grpReturns.SuspendLayout();
@@ -972,20 +977,68 @@
             this.btnTodayOnly.UseVisualStyleBackColor = true;
             this.btnTodayOnly.Click += new System.EventHandler(this.btnTodayOnly_Click);
             // 
+            // txtUser
+            // 
+            this.txtUser.Location = new System.Drawing.Point(557, 12);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(111, 20);
+            this.txtUser.TabIndex = 43;
+            // 
+            // txtPass
+            // 
+            this.txtPass.Location = new System.Drawing.Point(557, 38);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.Size = new System.Drawing.Size(111, 20);
+            this.txtPass.TabIndex = 44;
+            this.txtPass.UseSystemPasswordChar = true;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(708, 10);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.TabIndex = 45;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.MouseClick += new System.Windows.Forms.MouseEventHandler(this.btnLogin_MouseClick);
+            // 
+            // lblLogged
+            // 
+            this.lblLogged.AutoSize = true;
+            this.lblLogged.Location = new System.Drawing.Point(560, 16);
+            this.lblLogged.Name = "lblLogged";
+            this.lblLogged.Size = new System.Drawing.Size(73, 13);
+            this.lblLogged.TabIndex = 46;
+            this.lblLogged.Text = "Logged In As:";
+            // 
+            // lblUser
+            // 
+            this.lblUser.AutoSize = true;
+            this.lblUser.Location = new System.Drawing.Point(560, 41);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(35, 13);
+            this.lblUser.TabIndex = 47;
+            this.lblUser.Text = "label4";
+            // 
             // Combined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.grpSales);
-            this.Controls.Add(this.grpReports);
-            this.Controls.Add(this.grpInventory);
-            this.Controls.Add(this.grpReturns);
+            this.Controls.Add(this.txtUser);
+            this.Controls.Add(this.lblLogged);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.txtPass);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnReturns);
             this.Controls.Add(this.btnSales);
             this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.grpSales);
+            this.Controls.Add(this.grpReports);
+            this.Controls.Add(this.grpInventory);
+            this.Controls.Add(this.grpReturns);
+            this.Controls.Add(this.lblUser);
             this.Name = "Combined";
             this.Text = "RecreationOutletPOS";
             this.Load += new System.EventHandler(this.Combined_Load);
@@ -1006,6 +1059,7 @@
             this.grpDatePeriod.ResumeLayout(false);
             this.grpDatePeriod.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1100,5 +1154,10 @@
         private System.Windows.Forms.TextBox txtToDateFilter;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnTodayOnly;
+        private System.Windows.Forms.TextBox txtUser;
+        private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Label lblLogged;
+        private System.Windows.Forms.Label lblUser;
     }
 }
