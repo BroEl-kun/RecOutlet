@@ -60,6 +60,8 @@ namespace RecreationOutletPOS
                         {
                             combined.discountItem(0, inPrice, selectedItem);
                         }
+
+                        this.Close();
                     }
                 }
                 catch (Exception ex)
@@ -67,7 +69,6 @@ namespace RecreationOutletPOS
                     
                 }
 
-                this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
             {
@@ -95,20 +96,20 @@ namespace RecreationOutletPOS
                         {
                             combined.discountItem(1, inPercent, selectedItem);
                         }
+
+                        this.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                   // MessageBox.Show("Invalid value entered into percentage field. Please enter a percentage value.", "Discount",
-                    //MessageBoxButtons.OK, MessageBoxIcon.Asterisk); //For now, keep this here for functionality sake
+                   
                 }
 
                if (combined != null)
                 {
-                    combined.discountItem(1, inPercent, selectedItem); //For now, keep this here for functionality sake
+                    combined.discountItem(1, inPercent, selectedItem);
                 }
 
-                this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
             {
