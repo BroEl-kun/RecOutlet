@@ -322,6 +322,75 @@ namespace RecreationOutletPOS
         }
 
         /// <summary>
+        /// Programmer: Aaron Sorensen
+        /// Last Updated: 01/16/2014
+        /// 
+        /// Represents the the Employee table's and contains enums for each column
+        /// </summary>
+        public sealed class EmployeeTableColumn
+        {
+            private readonly String tableColumnName;
+
+            public static readonly EmployeeTableColumn EMPLOYEE_ID = new EmployeeTableColumn("EmployeeId");
+            public static readonly EmployeeTableColumn NAME = new EmployeeTableColumn("Name");
+            public static readonly EmployeeTableColumn POSITION = new EmployeeTableColumn("Position");
+            public static readonly EmployeeTableColumn USERNAME = new EmployeeTableColumn("Username");
+            public static readonly EmployeeTableColumn PIN = new EmployeeTableColumn("PIN");
+
+            /// <summary>
+            /// Programmer: Aaron Sorensen
+            /// Last Updated: 01/16/2014
+            /// 
+            /// Constructor
+            /// </summary>
+            /// <param name="tableColumnName">The ITEM column name</param>
+            public EmployeeTableColumn(String tableColumnName)
+            {
+                this.tableColumnName = tableColumnName;
+            }
+
+            /// <summary>
+            /// Programmer: Aaron Sorensen
+            /// Last Updated: 01/16/2014
+            /// 
+            /// Creats a list of Item table columns enums in the form of a List
+            /// </summary>
+            /// <returns>the Item table columns enums in the form of a List</returns>
+            public static List<EmployeeTableColumn> getEmployeeTableColumns()
+            {
+                List<EmployeeTableColumn> EmployeeTableColumns = new List<EmployeeTableColumn>();
+
+                try
+                {
+                    EmployeeTableColumns.Add(EmployeeTableColumn.EMPLOYEE_ID);
+                    EmployeeTableColumns.Add(EmployeeTableColumn.NAME);
+                    EmployeeTableColumns.Add(EmployeeTableColumn.POSITION);
+                    EmployeeTableColumns.Add(EmployeeTableColumn.USERNAME);
+                    EmployeeTableColumns.Add(EmployeeTableColumn.PIN);
+                }
+
+                catch (Exception ex)
+                {
+
+                }
+
+                return EmployeeTableColumns;
+            }
+
+            /// <summary>
+            /// Programmer: Michael Vuong
+            /// Last Updated: 11/14/2013
+            /// 
+            /// Overridden to return the string class property
+            /// </summary>
+            /// <returns>The string value for the enum object calling this</returns>
+            public override String ToString()
+            {
+                return tableColumnName;
+            }
+        }
+
+        /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 12/7/2013
         /// 
