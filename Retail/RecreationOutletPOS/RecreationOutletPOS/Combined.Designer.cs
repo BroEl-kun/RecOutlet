@@ -122,6 +122,7 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblLogged = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
+            this.btnAddUnknownItem = new System.Windows.Forms.Button();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.grpReturns.SuspendLayout();
@@ -135,6 +136,7 @@
             // 
             // grpSales
             // 
+            this.grpSales.Controls.Add(this.btnAddUnknownItem);
             this.grpSales.Controls.Add(this.lsvCheckOutItems);
             this.grpSales.Controls.Add(this.pnlSummary);
             this.grpSales.Controls.Add(this.lblQuantity);
@@ -293,9 +295,9 @@
             // btnPrice
             // 
             this.btnPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPrice.Location = new System.Drawing.Point(7, 213);
+            this.btnPrice.Location = new System.Drawing.Point(7, 237);
             this.btnPrice.Name = "btnPrice";
-            this.btnPrice.Size = new System.Drawing.Size(137, 50);
+            this.btnPrice.Size = new System.Drawing.Size(137, 38);
             this.btnPrice.TabIndex = 6;
             this.btnPrice.Text = "Price Override";
             this.btnPrice.UseVisualStyleBackColor = true;
@@ -313,9 +315,9 @@
             // btnAddItem
             // 
             this.btnAddItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(7, 78);
+            this.btnAddItem.Location = new System.Drawing.Point(9, 70);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(137, 50);
+            this.btnAddItem.Size = new System.Drawing.Size(137, 38);
             this.btnAddItem.TabIndex = 4;
             this.btnAddItem.Text = "Item Search";
             this.btnAddItem.UseVisualStyleBackColor = true;
@@ -332,9 +334,9 @@
             // btnDiscount
             // 
             this.btnDiscount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDiscount.Location = new System.Drawing.Point(7, 157);
+            this.btnDiscount.Location = new System.Drawing.Point(7, 193);
             this.btnDiscount.Name = "btnDiscount";
-            this.btnDiscount.Size = new System.Drawing.Size(137, 50);
+            this.btnDiscount.Size = new System.Drawing.Size(137, 38);
             this.btnDiscount.TabIndex = 5;
             this.btnDiscount.Text = "Discount Override";
             this.btnDiscount.UseVisualStyleBackColor = true;
@@ -354,9 +356,9 @@
             // btnDeleteItem
             // 
             this.btnDeleteItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteItem.Location = new System.Drawing.Point(7, 269);
+            this.btnDeleteItem.Location = new System.Drawing.Point(7, 281);
             this.btnDeleteItem.Name = "btnDeleteItem";
-            this.btnDeleteItem.Size = new System.Drawing.Size(137, 50);
+            this.btnDeleteItem.Size = new System.Drawing.Size(137, 38);
             this.btnDeleteItem.TabIndex = 7;
             this.btnDeleteItem.Text = "Void Item";
             this.btnDeleteItem.UseVisualStyleBackColor = true;
@@ -1020,6 +1022,16 @@
             this.lblUser.TabIndex = 47;
             this.lblUser.Text = "label4";
             // 
+            // btnAddUnknownItem
+            // 
+            this.btnAddUnknownItem.Location = new System.Drawing.Point(9, 111);
+            this.btnAddUnknownItem.Name = "btnAddUnknownItem";
+            this.btnAddUnknownItem.Size = new System.Drawing.Size(137, 38);
+            this.btnAddUnknownItem.TabIndex = 48;
+            this.btnAddUnknownItem.Text = "Add Item";
+            this.btnAddUnknownItem.UseVisualStyleBackColor = true;
+            this.btnAddUnknownItem.Click += new System.EventHandler(this.btnAddUnknownItem_Click);
+            // 
             // Combined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1159,5 +1171,6 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblLogged;
         private System.Windows.Forms.Label lblUser;
+        private System.Windows.Forms.Button btnAddUnknownItem;
     }
 }
