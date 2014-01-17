@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Forms;
 // Aliases for the Enum's inner classes
 using TransKey = RecreationOutletPOS.Enum.TransKey;
 using ItemTableColumn = RecreationOutletPOS.Enum.ItemTableColumn;
+using EmployeeTableColumn = RecreationOutletPOS.Enum.EmployeeTableColumn;
 using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
 using ListViewColumn = RecreationOutletPOS.Enum.ListViewRowID;
 using ReportType = RecreationOutletPOS.Enum.ReportType;
@@ -30,6 +32,9 @@ namespace RecreationOutletPOS
 
         public string fromDateFilter;
         public string toDateFilter;
+
+        public string empName;
+        public string empPosition;
 
         // keyboard event handling
         bool modifierKeyHandled = false;
@@ -1121,5 +1126,68 @@ namespace RecreationOutletPOS
         #endregion
 
         #endregion
+
+        #region --- Employee Login ---
+
+        private void btnLogin_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (btnLogin.Text != "Logout")
+            {
+                //User Login
+                string user = txtUser.Text.ToLower();
+                string pass = txtPass.Text;
+
+                DataSet ds = new DataSet();
+
+                EmployeeLogin dt = new EmployeeLogin();
+
+                try
+                {
+                    ds = dt.searchInventoryFor("Username", user);
+
+                    if (ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows.Count != 0)
+                    {
+                        foreach (DataRow row in ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows)
+                        {
+                            if (row[EmployeeTableColumn.PIN.ToString()].ToString() == pass && row[EmployeeTableColumn.USERNAME.ToString()].ToString().ToLower() == user)
+                            {
+                                login(row[EmployeeTableColumn.NAME.ToString()].ToString(), row[EmployeeTableColumn.POSITION.ToString()].ToString().ToLower());
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            else
+            {
+                logout();
+            }
+        }
+
+        private void login(string name, string position)
+        {
+            btnLogin.Text = "Logout";
+            lblUser.Text = name;
+            txtPass.Hide();
+            txtUser.Hide();
+
+            empName = name;
+            empPosition = position;
+        }
+
+        private void logout()
+        {
+            btnLogin.Text = "Login";
+            lblUser.Text = "";
+            txtPass.Show();
+            txtUser.Show();
+            txtPass.Clear();
+            txtUser.Clear();
+        }
+
+        #endregion
+
     }
 }
