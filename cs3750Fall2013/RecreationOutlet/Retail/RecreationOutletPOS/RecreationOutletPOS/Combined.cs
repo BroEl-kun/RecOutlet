@@ -551,6 +551,18 @@ namespace RecreationOutletPOS
             addItemForm.ShowDialog();
         }
 
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 1/16/2014
+        /// 
+        /// Opens up the form to add and item not in the database.
+        /// </summary>
+        private void btnAddUnknownItem_Click(object sender, EventArgs e)
+        {
+            AddUnknownItemForm addItemForm = new AddUnknownItemForm(this, 1);
+            addItemForm.ShowDialog();
+        }
+
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
             if (lsvCheckOutItems.SelectedItems.Count > 0)
