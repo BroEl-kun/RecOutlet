@@ -77,6 +77,7 @@
     <Compile Include="DiscountForm.Designer.cs">
       <DependentUpon>DiscountForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeLogin.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="HelperMethods.cs" />
     <Compile Include="InventorySearch.cs" />
