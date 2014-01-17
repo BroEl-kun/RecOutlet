@@ -76,17 +76,15 @@ namespace RecreationOutletPOS
                             }
 
                         }
+
+                        this.Close();
                     }
                 }
                 catch (Exception ex)
                 {
-                   // MessageBox.Show("Invalid value entered into currency field. Please enter a currency value.", "Price Override",
-                     //   MessageBoxButtons.OK, MessageBoxIcon.Asterisk);  //kept here for now for functionality sake
+                  
                 }
 
-
-                //salesForm.overideItemPrice(inPrice, selectedItem);  //kept here for now for functionality sake
-                this.Close();
             }
             if (e.KeyChar == (char)Keys.Escape)
             {
