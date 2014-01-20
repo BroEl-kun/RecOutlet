@@ -1,5 +1,5 @@
 --Constraints
-USE [RecreationOutlet_Test1]
+USE [RecreationOutlet]
 GO
 
 /****** Object:  Index [PK_BACKORDER]    Script Date: 1/14/2014 7:18:08 PM ******/
@@ -415,3 +415,7 @@ ALTER TABLE [dbo].[VENDOR] ADD  CONSTRAINT [PK_VENDOR] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 GO
 
+
+-- *********************************************************************
+USE Master
+GO

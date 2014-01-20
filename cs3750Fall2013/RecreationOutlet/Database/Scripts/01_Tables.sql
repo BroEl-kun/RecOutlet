@@ -1,6 +1,6 @@
 --Tables
 
-USE [RecreationOutlet_Test1]
+USE [RecreationOutlet]
 GO
 
 /****** Object:  Table [dbo].[BACKORDER]    Script Date: 1/14/2014 7:10:16 PM ******/
@@ -401,3 +401,7 @@ CREATE TABLE [dbo].[VENDOR](
 
 GO
 
+
+-- *********************************************************************
+USE Master
+GO
