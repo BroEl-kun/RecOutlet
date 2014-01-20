@@ -5,16 +5,24 @@
 --
 --	Revision History:
 --        01/19/2014: Frank Eddy - Create initial version
--- 
+--
 -- *********************************************************************
--- STEP 1: Create Database and Specify File Location and Size Parameters
--- *********************************************************************
+
 USE Master
 GO
+
+-- *********************************************************************
+-- STEP 1: Drop Database if it exists
+-- *********************************************************************
 
 IF EXISTS (SELECT * FROM sysdatabases WHERE name='RecreationOutlet')
 DROP DATABASE RecreationOutlet
 GO
+
+
+-- *********************************************************************
+-- STEP 2: Create Database and Specify File Location and Size Parameters
+-- *********************************************************************
 
 CREATE DATABASE RecreationOutlet
 ON PRIMARY
