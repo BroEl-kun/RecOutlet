@@ -1,3 +1,15 @@
+-- *********************************************************************
+--	         Project: Recreation Outlet 
+--
+--       Description: This DDL creates primary and foreign keys
+--
+--	Revision History:
+--        01/16/2014: Chris Parkins - Created initial version
+--        01/19/2014: Frank Eddy - Added script header and renamed
+--                    database to RecreationOutlet
+--
+-- *********************************************************************
+
 --Constraints
 USE [RecreationOutlet]
 GO
