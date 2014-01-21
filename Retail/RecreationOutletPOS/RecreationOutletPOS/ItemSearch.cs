@@ -14,7 +14,7 @@ namespace RecreationOutletPOS
     /// Programmer: Jaed Norberg
     /// Last Updated: 11/03/2013
     /// 
-    /// This class controls database interactions in the manual item addition form.    
+    /// This class controls database interactions in the item search form.    
     /// </summary>
     class ItemSearch
     {
