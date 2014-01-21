@@ -306,6 +306,7 @@
             this.lvData.MinimumSize = new System.Drawing.Size(64, 4);
             this.lvData.MultiSelect = false;
             this.lvData.Name = "lvData";
+            this.lvData.ShowItemToolTips = true;
             this.lvData.Size = new System.Drawing.Size(609, 205);
             this.lvData.TabIndex = 20;
             this.lvData.UseCompatibleStateImageBehavior = false;
@@ -314,17 +315,18 @@
             // ID
             // 
             this.ID.Text = "RecRPC";
-            this.ID.Width = 103;
+            this.ID.Width = 96;
             // 
             // Item
             // 
             this.Item.Text = "Item";
-            this.Item.Width = 397;
+            this.Item.Width = 360;
             // 
             // Price
             // 
             this.Price.Text = "Price";
-            this.Price.Width = 105;
+            this.Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Price.Width = 96;
             // 
             // lblQty
             // 

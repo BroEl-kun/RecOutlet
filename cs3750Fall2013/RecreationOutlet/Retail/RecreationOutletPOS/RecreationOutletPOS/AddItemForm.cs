@@ -58,9 +58,12 @@ namespace RecreationOutletPOS
                 {
                     foreach (DataRow row in ds.Tables["Results"].Rows)
                     {
+                        Decimal newPrice = Convert.ToDecimal(row["SellPrice"]);
+                        newPrice = Decimal.Round(newPrice, 2, MidpointRounding.AwayFromZero);
+
                         ListViewItem li = new ListViewItem(row["RecRPC"].ToString());
                         li.SubItems.Add(row["Name"].ToString());
-                        li.SubItems.Add(row["SellPrice"].ToString());
+                        li.SubItems.Add(newPrice.ToString());
                         lvData.Items.Add(li);
                     }
                 }
@@ -119,7 +122,7 @@ namespace RecreationOutletPOS
             }
             else
             {
-                MessageBox.Show("Please select an item to add.", "Manual Item Addition",
+                MessageBox.Show("Please select an item to add.", "Item Search",
                 MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
@@ -213,9 +216,12 @@ namespace RecreationOutletPOS
                 {
                     foreach (DataRow row in ds.Tables["Results"].Rows)
                     {
+                        Decimal newPrice = Convert.ToDecimal(row["SellPrice"]);
+                        newPrice = Decimal.Round(newPrice, 2, MidpointRounding.AwayFromZero);
+
                         ListViewItem li = new ListViewItem(row["RecRPC"].ToString());
                         li.SubItems.Add(row["Name"].ToString());
-                        li.SubItems.Add(row["SellPrice"].ToString());
+                        li.SubItems.Add(newPrice.ToString ());
                         lvData.Items.Add(li);
                     }
                 }
