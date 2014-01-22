@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.grpSales = new System.Windows.Forms.GroupBox();
+            this.btnAddUnknownItem = new System.Windows.Forms.Button();
             this.lsvCheckOutItems = new System.Windows.Forms.ListView();
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -117,12 +118,9 @@
             this.txtToDateFilter = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnTodayOnly = new System.Windows.Forms.Button();
-            this.txtUser = new System.Windows.Forms.TextBox();
-            this.txtPass = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lblLogged = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
-            this.btnAddUnknownItem = new System.Windows.Forms.Button();
             this.grpSales.SuspendLayout();
             this.pnlSummary.SuspendLayout();
             this.grpReturns.SuspendLayout();
@@ -154,6 +152,16 @@
             this.grpSales.TabIndex = 0;
             this.grpSales.TabStop = false;
             this.grpSales.Visible = false;
+            // 
+            // btnAddUnknownItem
+            // 
+            this.btnAddUnknownItem.Location = new System.Drawing.Point(9, 111);
+            this.btnAddUnknownItem.Name = "btnAddUnknownItem";
+            this.btnAddUnknownItem.Size = new System.Drawing.Size(137, 38);
+            this.btnAddUnknownItem.TabIndex = 48;
+            this.btnAddUnknownItem.Text = "Add Item";
+            this.btnAddUnknownItem.UseVisualStyleBackColor = true;
+            this.btnAddUnknownItem.Click += new System.EventHandler(this.btnAddUnknownItem_Click);
             // 
             // lsvCheckOutItems
             // 
@@ -979,21 +987,6 @@
             this.btnTodayOnly.UseVisualStyleBackColor = true;
             this.btnTodayOnly.Click += new System.EventHandler(this.btnTodayOnly_Click);
             // 
-            // txtUser
-            // 
-            this.txtUser.Location = new System.Drawing.Point(557, 12);
-            this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(111, 20);
-            this.txtUser.TabIndex = 43;
-            // 
-            // txtPass
-            // 
-            this.txtPass.Location = new System.Drawing.Point(557, 38);
-            this.txtPass.Name = "txtPass";
-            this.txtPass.Size = new System.Drawing.Size(111, 20);
-            this.txtPass.TabIndex = 44;
-            this.txtPass.UseSystemPasswordChar = true;
-            // 
             // btnLogin
             // 
             this.btnLogin.Location = new System.Drawing.Point(708, 10);
@@ -1009,9 +1002,9 @@
             this.lblLogged.AutoSize = true;
             this.lblLogged.Location = new System.Drawing.Point(560, 16);
             this.lblLogged.Name = "lblLogged";
-            this.lblLogged.Size = new System.Drawing.Size(73, 13);
+            this.lblLogged.Size = new System.Drawing.Size(70, 13);
             this.lblLogged.TabIndex = 46;
-            this.lblLogged.Text = "Logged In As:";
+            this.lblLogged.Text = "Not logged in";
             // 
             // lblUser
             // 
@@ -1022,25 +1015,13 @@
             this.lblUser.TabIndex = 47;
             this.lblUser.Text = "label4";
             // 
-            // btnAddUnknownItem
-            // 
-            this.btnAddUnknownItem.Location = new System.Drawing.Point(9, 111);
-            this.btnAddUnknownItem.Name = "btnAddUnknownItem";
-            this.btnAddUnknownItem.Size = new System.Drawing.Size(137, 38);
-            this.btnAddUnknownItem.TabIndex = 48;
-            this.btnAddUnknownItem.Text = "Add Item";
-            this.btnAddUnknownItem.UseVisualStyleBackColor = true;
-            this.btnAddUnknownItem.Click += new System.EventHandler(this.btnAddUnknownItem_Click);
-            // 
             // Combined
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(921, 520);
-            this.Controls.Add(this.txtUser);
             this.Controls.Add(this.lblLogged);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.txtPass);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnInventory);
             this.Controls.Add(this.btnReturns);
@@ -1166,8 +1147,6 @@
         private System.Windows.Forms.TextBox txtToDateFilter;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnTodayOnly;
-        private System.Windows.Forms.TextBox txtUser;
-        private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Label lblLogged;
         private System.Windows.Forms.Label lblUser;

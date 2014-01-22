@@ -83,6 +83,7 @@ namespace RecreationOutletPOS
             summaryTotal.Text = "$0.00";
 
             updateListView();
+            lblUser.Hide();
         }
 
         /// <summary>
@@ -1145,32 +1146,8 @@ namespace RecreationOutletPOS
         {
             if (btnLogin.Text != "Logout")
             {
-                //User Login
-                string user = txtUser.Text.ToLower();
-                string pass = txtPass.Text;
-
-                DataSet ds = new DataSet();
-
-                EmployeeLogin dt = new EmployeeLogin();
-
-                try
-                {
-                    ds = dt.searchInventoryFor("Username", user);
-
-                    if (ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows.Count != 0)
-                    {
-                        foreach (DataRow row in ds.Tables[SqlResultSet.ITEM_RESULTSET.ToString()].Rows)
-                        {
-                            if (row[EmployeeTableColumn.PIN.ToString()].ToString() == pass && row[EmployeeTableColumn.USERNAME.ToString()].ToString().ToLower() == user)
-                            {
-                                login(row[EmployeeTableColumn.NAME.ToString()].ToString(), row[EmployeeTableColumn.POSITION.ToString()].ToString().ToLower());
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                }
+                Login login = new Login(this);
+                login.ShowDialog();
             }
             else
             {
@@ -1178,25 +1155,24 @@ namespace RecreationOutletPOS
             }
         }
 
-        private void login(string name, string position)
+       public void login(string name, string position)
         {
             btnLogin.Text = "Logout";
             lblUser.Text = name;
-            txtPass.Hide();
-            txtUser.Hide();
+            lblUser.Show();
+            lblLogged.Text = "Logged in as:";
 
             empName = name;
             empPosition = position;
         }
 
-        private void logout()
+        public void logout()
         {
             btnLogin.Text = "Login";
-            lblUser.Text = "";
-            txtPass.Show();
-            txtUser.Show();
-            txtPass.Clear();
-            txtUser.Clear();
+            lblUser.Hide();
+            lblLogged.Text = "Not logged in";
+            empName = null;
+            empPosition = null;
         }
 
         #endregion
