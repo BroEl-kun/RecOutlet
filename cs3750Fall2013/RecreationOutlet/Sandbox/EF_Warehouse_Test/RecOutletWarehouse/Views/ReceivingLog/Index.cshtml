@@ -1,0 +1,265 @@
+﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
+@{
+    ViewBag.Title = "Create Receiving Log";
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@*submitForms = function(){*@
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- Data Table Stuffs? -->
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+<style>
+    #feedback { font-size: 1.4em; }
+    #selectable .ui-selecting { background: #FECA40; }
+    #selectable .ui-selected { background: #F39814; color: white; }
+    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
+</style>
+@*<script type ="text/javascript">*@
+<script>
+    $(function () {
+        $("#selectable").selectable({ selected: function (event, ui) { } })
+    });
+
+    $(document).ready(function () {
+        $("#potable").dataTable();
+    });
+
+    $(function () {
+        $("#selectable").on("selectableselected", function (event, ui) {
+            //$("#po").val($("#selectable").index(event.currentTarget).text());
+            //$("#po").val(event.currentTarget.innerText);
+            $("#po").val($("#selectable").text());
+            //$("#po").text("hello")
+            //$("po").html("hello");
+            //alert("hello");
+            //var poText = $("po").text();
+            //var poText = $("#po").val();
+            //alert(poText);
+        })
+    });
+
+    //$(function () {
+    //    $("#po").val(
+    //});
+
+    $(function () {
+        $("#recDate").datepicker();
+    });
+</script>
+<script type="text/javascript">
+    //function fillPOwithID()
+    //{
+    //    document.getElementById("po").value();
+    //}
+
+    function fillPOwithID(ID) {
+        //alert(ID);
+        document.getElementById("po").value = ID;
+        //document.forms["orig"].submit();
+        //document.forms["origForm"].submit();
+        //document.orig.submit();
+        //document.origForm.submit();
+        //document.getElementById("orig").submit();
+        //document.getElementsByName("origForm").submit();
+        //alert("submit?");
+        //document.getElementById("poSub").
+    }
+</script>
+
+<h2>Create Receiving Log</h2>
+<div class="center-element center-text">
+    <table class="button-columns">
+        <tr>
+            @*<td><input type="button" value="Create New Receiving Log" class="main-menu-button"
+                onclick="location.href='@Url.Action("CreateNewRL","ReceivingLog")'" /></td>
+            <td><input type="button" value="Search for Receiving Log" class="main-menu-button"
+                onclick="location.href='@Url.Action("Search","ReceivingLog")'" /></td>*@
+
+            @*<select name="FavWebSite" size="5">
+                <option value="SM">http://www.scriptingmaster.com</option>
+                <option value="Google">http://www.google.com</option>
+                <option value="MSN">http://www.msn.com</option>
+                <option value="yahoo">http://www.yahoo.com</option>
+                <option value="microsoft">http://www.microsoft.com</option>
+            </select>*@
+
+            
+
+        </tr>
+    </table>
+
+    PO ID:
+    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "origForm", id = "orig" }))
+    {
+        <input type="text" placeholder="" id="po" name="po" />          
+        //<input type="text" id="po" />
+        <input type="submit" value="Begin RL" class="button" id="poSub"/>
+    }
+
+    <br />
+
+
+@if (Model != null)
+{
+    //ReceivingLogCreationViewModel
+    //var count = 1;
+    var count = 0;
+
+    //using (Html.BeginForm("MarkedReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    //using (Html.BeginForm("CreateReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    using (Html.BeginForm("CreateReceived", "ReceivingLog", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    //using (Html.BeginForm("CreateReceived", "ReceivingLogController", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    //CreateReceived
+    //using(Html.BeginForm())
+    {
+            <table id="RLtable">
+
+                <tr>
+                    <td colspan="6">
+                        Current PO:
+                        @ViewBag.CurrentPO
+                    </td>
+                </tr>
+            
+            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)
+            {
+            
+            <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
+                @*<td>
+                    PO Line Item:
+                    @objPO.POLineItem
+                    @Html.HiddenFor(model => model.RL[count].POLineItemID, new { @Value = @objPO.POLineItem })
+                </td>*@
+                @*<td>
+                    Purchase Order: @objPO.POID
+                    //{ViewBag.POID = @objPO.POID;}
+                    @Html.Hidden("POID", @objPO.POID)
+                </td>*@
+                <td>
+                    Item RPC: @objPO.RecRPC
+                </td>
+                <td>
+                    Qty Ordered: @objPO.QtyOrdered
+                </td>
+                <td>
+                    Qty Type ID: 
+                    @*@objPO.QtyTypeId*@
+                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeId })
+                    @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
+                    <select>
+                        <option selected>1 - Each</option>
+                        <option>2 - Case</option>
+                        <option>3 - Pallet</option>
+                    </select>
+                    
+                </td>
+                <td>
+                    Receive Date: 
+                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("dd/MM/yyyy"), id = "recDate" })
+                    @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
+                    @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
+                </td>
+                <td>
+                    Qty Received: 
+                    @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })
+                    @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
+                </td>
+                <td>
+                    Notes: 
+                    @Html.TextAreaFor(model => model.RL[count].ReceivingNotes)
+                </td>
+                @*<td><input type="submit" value="Record Received" /></td>*@
+            </tr>
+            
+           @*RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item = objItem;*@
+            
+                count++;
+
+            }
+
+            </table>
+    
+            @*Html.Hidden("count", count)*@
+            <input type="submit" value="Record Received" class="button" />
+    
+    }
+
+        @*}*@
+
+    @*</table>*@
+
+        @*<input type="button" value="Record Received" onclick="submitForms(1)" />*@
+ 
+    //}
+    //}
+
+
+}
+
+@if (ViewBag.NonReceivedPOs != null)
+{
+
+    
+   @* <ol id="selectable">
+            
+            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)
+            {
+            
+            <li class="ui-widget-content">
+                PO Line Item:
+                @objPO.PurchaseOrderId
+            </li>
+
+            }
+
+        </ol>
+    *@
+    
+    <table id="potable">
+        <thead>
+            <tr>
+                <th>PO ID:</th>
+                <th>Est Ship Date:</th>
+                <th>Order Date:</th>
+                <th>Vendor:</th>
+                @*<th>Created By:</th>*@
+                <th>Comments:</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)
+            {
+            
+            <tr>
+                <td><a href="javascript:fillPOwithID(@objPO.PurchaseOrderId)">@objPO.PurchaseOrderId</a></td>
+                <td>@objPO.EstShipDate</td>
+                <td>@objPO.OrderDate</td>
+                <td>@objPO.Vendor</td>
+                @*<td>@objPO.CreatedBy</td>*@
+                <td>@objPO.Comments</td>
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+    
+}
+
+<br />
+
+    
+
+</div>
