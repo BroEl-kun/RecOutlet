@@ -1,0 +1,31 @@
+﻿@model RecOutletWarehouse.Controllers.ItemManagementController.ItemDeptCatSubcatCollectionViewModel
+@{
+    ViewBag.Title = "ViewItemDeptCatSubCat";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>ViewItemDeptCatSubCat</h2>
+
+<h3>Departments</h3>
+<ul>
+    @foreach (var item in Model.department)
+    {
+        <li>@item.DepartmentName</li>
+    }
+</ul>
+<hr />
+<h3>Categories</h3>
+<ul>
+    @foreach (var item in Model.category)
+    {
+        <li>@item.CategoryName</li>
+    }
+</ul>
+<hr />
+<h3>SubCategories</h3>
+<ul>
+    @foreach (var item in Model.subcat)
+    {
+        <li>@item.SubcategoryName</li>
+    }
+</ul>
