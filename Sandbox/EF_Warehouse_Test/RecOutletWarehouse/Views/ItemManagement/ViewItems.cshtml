@@ -1,0 +1,17 @@
+﻿@model IEnumerable<RecOutletWarehouse.Models.ItemManagement.Item>
+@{
+    ViewBag.Title = "ViewItems";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>View All Items</h2>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.RecRPC</td>
+            <td>@item.ItemName</td>
+        </tr>
+    }
+</table>
