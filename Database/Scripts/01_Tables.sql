@@ -7,6 +7,8 @@
 --        01/16/2014: Chris Parkins - Created initial version
 --        01/19/2014: Frank Eddy - Added script header and renamed
 --                    database to RecreationOutlet
+--		  01/25/2014: Chris Parkins - Removed columns from Shipping_Log,
+--					  Backorder, Receiving_Log
 --
 -- *********************************************************************
 
@@ -24,7 +26,7 @@ GO
 
 CREATE TABLE [dbo].[BACKORDER](
 	[BackorderID] [int] NOT NULL,
-	[POLineItemID] [int] NOT NULL,
+	--[POLineItemID] [int] NOT NULL,
 	[ReceivingID] [int] NOT NULL,
 	[BackorderQty] [smallint] NOT NULL
 ) ON [PRIMARY]
@@ -294,7 +296,7 @@ GO
 CREATE TABLE [dbo].[RECEIVING_LOG](
 	[ReceivingID] [int] IDENTITY(1,1) NOT NULL,
 	[POLineItemID] [int] NULL,
-	[BackorderID] [int] NULL,
+	--[BackorderID] [int] NULL,
 	[QtyTypeID] [tinyint] NULL,
 	[ReceiveDate] [smalldatetime] NOT NULL,
 	[ReceivingNotes] [nvarchar](max) NULL,
@@ -340,9 +342,9 @@ GO
 
 CREATE TABLE [dbo].[SHIPPING_LOG](
 	[ShippingID] [int] NOT NULL,
-	[ID] [bigint] NOT NULL,
-	[OrderType] [nchar](1) NOT NULL,
-	[BackorderID] [int] NULL,
+	--[ID] [bigint] NOT NULL,
+	--[OrderType] [nchar](1) NOT NULL,
+	--[BackorderID] [int] NULL,
 	[ShippingNotes] [nvarchar](max) NULL,
 	[ShippingFrieghtCost] [smallmoney] NOT NULL,
 	[Attention] [nvarchar](50) NOT NULL,
