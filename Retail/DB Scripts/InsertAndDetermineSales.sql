@@ -1,0 +1,5 @@
+﻿INSERT INTO SALE_PRICING VALUES(1, '1358000001032', 1.00, GETDATE(), GETDATE(), '');
+
+SELECT it.RecRPC, it.Name, it.SellPrice, ISNULL(sp.SalePrice, 0)
+FROM ITEM it INNER JOIN SALE_PRICING sp ON it.RecRPC = sp.RecRPC 
+WHERE it.RecRPC = '4022000001001' AND sp.RecRPC is not null;
