@@ -9,7 +9,8 @@ GO
 
 INSERT INTO QTY_TYPE ([QtyTypeID],[QtyTypeDescription]) VALUES
 (1,'Each'),
-(2,'Case')
+(2,'Case'),
+(3,'Pallet')
 
 GO
 
