@@ -390,7 +390,7 @@ CREATE TABLE [dbo].[TRANSACTION_LINE_ITEM](
 	[TransactionLineItemID] [int] IDENTITY(1,1) NOT NULL,
 	[TransactionID] [int] NOT NULL,
 	[StoreID] [tinyint] NOT NULL,
-	[RecID] [int] NOT NULL,
+	[RecRPC] [bigint] NOT NULL,
 	[Quantity] [smallint] NOT NULL,
 	[SaleEach] [money] NOT NULL,
 	[CommissionEmployeeID] [smallint] NOT NULL,
