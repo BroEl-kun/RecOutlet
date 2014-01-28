@@ -9,6 +9,8 @@
 --                    database to RecreationOutlet
 --		  01/25/2014: Chris Parkins - Removed columns from Shipping_Log,
 --					  Backorder, Receiving_Log
+--		  01/25/2014: Chris Parkins - Altered keys, now functions
+--					  according to V1 ERDs
 --
 -- *********************************************************************
 
@@ -68,7 +70,7 @@ GO
 
 CREATE TABLE [dbo].[INVENTORY](
 	[StoreID] [tinyint] NOT NULL,
-	[RecID] [int] NOT NULL,
+	[RecRPC] [bigint] NOT NULL,
 	[QtyOnHand] [smallint] NOT NULL,
 	[QtyThreshold] [smallint] NOT NULL
 ) ON [PRIMARY]
@@ -79,7 +81,7 @@ GO
 
 CREATE TABLE [dbo].[INVOICE](
 	[InvoiceID] [bigint] NOT NULL,
-	[CustomerID] [nvarchar](max) NOT NULL,
+	[CustomerID] [int] NOT NULL,
 	[ShippingID] [int] NOT NULL,
 	[Attention] [nvarchar](max) NOT NULL,
 	[PaymentDue] [smalldatetime] NOT NULL,
@@ -87,7 +89,7 @@ CREATE TABLE [dbo].[INVOICE](
 	[DatePaid] [smalldatetime] NOT NULL,
 	[AmountPaid] [smallmoney] NOT NULL,
 	[InvoiceNotes] [nvarchar](50) NULL,
-	[InvoiceCreatedBy] [nvarchar](50) NOT NULL,
+	[InvoiceCreatedBy] [smallint] NOT NULL,
 	[InvoiceCreatedDate] [smalldatetime] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
@@ -111,7 +113,7 @@ GO
 CREATE TABLE [dbo].[INVOICE_LINEITEM](
 	[InvoiceLineItemID] [int] NOT NULL,
 	[InvoiceID] [bigint] NOT NULL,
-	[RecRPC] [int] NOT NULL,
+	[RecRPC] [bigint] NOT NULL,
 	[InvoicePrice] [smallmoney] NOT NULL,
 	[InvoiceItemQuantity] [smallint] NOT NULL
 ) ON [PRIMARY]
@@ -194,7 +196,7 @@ GO
 
 CREATE TABLE [dbo].[MERCHANDISE_TRANSFER](
 	[TransferID] [bigint] NOT NULL,
-	[RecRPC] [int] NOT NULL,
+	[RecRPC] [bigint] NOT NULL,
 	[ToLocationID] [tinyint] NOT NULL,
 	[FromLocationID] [tinyint] NOT NULL,
 	[TansferDate] [date] NOT NULL,
@@ -384,9 +386,9 @@ CREATE TABLE [dbo].[TAX_RATE](
 
 GO
 
-/****** Object:  Table [dbo].[TRANSACTION_LINE_ITEM]    Script Date: 1/17/2014 7:22:23 PM ******/
+/****** Object:  Table [dbo].[TRANSACTION_LINEITEM]    Script Date: 1/17/2014 7:22:23 PM ******/
 
-CREATE TABLE [dbo].[TRANSACTION_LINE_ITEM](
+CREATE TABLE [dbo].[TRANSACTION_LINEITEM](
 	[TransactionLineItemID] [int] IDENTITY(1,1) NOT NULL,
 	[TransactionID] [int] NOT NULL,
 	[StoreID] [tinyint] NOT NULL,
