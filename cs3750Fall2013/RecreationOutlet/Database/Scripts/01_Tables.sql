@@ -9,7 +9,7 @@
 --                    database to RecreationOutlet
 --		  01/25/2014: Chris Parkins - Removed columns from Shipping_Log,
 --					  Backorder, Receiving_Log
---		  01/25/2014: Chris Parkins - Altered keys, now functions
+--		  01/27/2014: Chris Parkins - Altered keys, now functions
 --					  according to V1 ERDs
 --
 -- *********************************************************************
