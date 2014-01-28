@@ -370,7 +370,7 @@ CREATE TABLE [dbo].[STORE_TRANSACTION](
 	[TransTotal] [money] NOT NULL,
 	[TransTax] [money] NOT NULL,
 	[ManagerID] [int] NULL,
-	[PaymentType] [nvarchar](50) NOT NULL,
+	[PaymentID] [smallint] NOT NULL,
 	[PreviousTransactionID] [int] NOT NULL
 ) ON [PRIMARY]
 
