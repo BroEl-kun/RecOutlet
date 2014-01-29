@@ -43,6 +43,12 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0-alpha1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0-alpha1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Neodynamic.SDK.ThermalLabel">
       <HintPath>..\packages\Neodynamic.SDK.ThermalLabel.5.0.3513.1022\lib\Neodynamic.SDK.ThermalLabel.dll</HintPath>
@@ -53,7 +59,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -129,12 +134,75 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BACKORDER.cs" />
     <Compile Include="Models\DataFetcherSetter.cs" />
+    <Compile Include="Models\EMPLOYEE.cs" />
+    <Compile Include="Models\EVENT_TYPE.cs" />
+    <Compile Include="Models\EXCEPTION.cs" />
+    <Compile Include="Models\INVENTORY.cs" />
+    <Compile Include="Models\INVOICE.cs" />
+    <Compile Include="Models\INVOICE_CUSTOMER.cs" />
+    <Compile Include="Models\INVOICE_LINEITEM.cs" />
+    <Compile Include="Models\ITEM.cs" />
     <Compile Include="Models\ItemManagement\Category.cs" />
     <Compile Include="Models\ItemManagement\Department.cs" />
     <Compile Include="Models\ItemManagement\Item.cs" />
     <Compile Include="Models\ItemManagement\ItemManagementModel.cs" />
     <Compile Include="Models\ItemManagement\LabelPrinting.cs" />
+    <Compile Include="Models\ITEM_CATEGORY.cs" />
+    <Compile Include="Models\ITEM_DEPARTMENT.cs" />
+    <Compile Include="Models\ITEM_IMAGE.cs" />
+    <Compile Include="Models\ITEM_SUBCATEGORY.cs" />
+    <Compile Include="Models\LOCATION.cs" />
+    <Compile Include="Models\Mapping\BACKORDERMap.cs" />
+    <Compile Include="Models\Mapping\EMPLOYEEMap.cs" />
+    <Compile Include="Models\Mapping\EVENT_TYPEMap.cs" />
+    <Compile Include="Models\Mapping\EXCEPTIONMap.cs" />
+    <Compile Include="Models\Mapping\INVENTORYMap.cs" />
+    <Compile Include="Models\Mapping\INVOICEMap.cs" />
+    <Compile Include="Models\Mapping\INVOICE_CUSTOMERMap.cs" />
+    <Compile Include="Models\Mapping\INVOICE_LINEITEMMap.cs" />
+    <Compile Include="Models\Mapping\ITEMMap.cs" />
+    <Compile Include="Models\Mapping\ITEM_CATEGORYMap.cs" />
+    <Compile Include="Models\Mapping\ITEM_DEPARTMENTMap.cs" />
+    <Compile Include="Models\Mapping\ITEM_IMAGEMap.cs" />
+    <Compile Include="Models\Mapping\ITEM_SUBCATEGORYMap.cs" />
+    <Compile Include="Models\Mapping\LOCATIONMap.cs" />
+    <Compile Include="Models\Mapping\MERCHANDISE_TRANSFERMap.cs" />
+    <Compile Include="Models\Mapping\OVERRIDE_CODEMap.cs" />
+    <Compile Include="Models\Mapping\PAYMENTMap.cs" />
+    <Compile Include="Models\Mapping\PAYMENT_TYPEMap.cs" />
+    <Compile Include="Models\Mapping\PO_LINEITEMMap.cs" />
+    <Compile Include="Models\Mapping\PRODUCT_LINEMap.cs" />
+    <Compile Include="Models\Mapping\PURCHASE_ORDERMap.cs" />
+    <Compile Include="Models\Mapping\QTY_TYPEMap.cs" />
+    <Compile Include="Models\Mapping\RECEIVING_LOGMap.cs" />
+    <Compile Include="Models\Mapping\REFUND_CODEMap.cs" />
+    <Compile Include="Models\Mapping\SALES_REPMap.cs" />
+    <Compile Include="Models\Mapping\SALE_PRICINGMap.cs" />
+    <Compile Include="Models\Mapping\SHIPPING_LOGMap.cs" />
+    <Compile Include="Models\Mapping\STORE_TRANSACTIONMap.cs" />
+    <Compile Include="Models\Mapping\TAX_RATEMap.cs" />
+    <Compile Include="Models\Mapping\TRANSACTION_LINEITEMMap.cs" />
+    <Compile Include="Models\Mapping\VENDORMap.cs" />
+    <Compile Include="Models\MERCHANDISE_TRANSFER.cs" />
+    <Compile Include="Models\OVERRIDE_CODE.cs" />
+    <Compile Include="Models\PAYMENT.cs" />
+    <Compile Include="Models\PAYMENT_TYPE.cs" />
+    <Compile Include="Models\PO_LINEITEM.cs" />
+    <Compile Include="Models\PRODUCT_LINE.cs" />
+    <Compile Include="Models\PURCHASE_ORDER.cs" />
+    <Compile Include="Models\QTY_TYPE.cs" />
+    <Compile Include="Models\RECEIVING_LOG.cs" />
+    <Compile Include="Models\RecreationOutletContext.cs" />
+    <Compile Include="Models\REFUND_CODE.cs" />
+    <Compile Include="Models\SALES_REP.cs" />
+    <Compile Include="Models\SALE_PRICING.cs" />
+    <Compile Include="Models\SHIPPING_LOG.cs" />
+    <Compile Include="Models\STORE_TRANSACTION.cs" />
+    <Compile Include="Models\TAX_RATE.cs" />
+    <Compile Include="Models\TRANSACTION_LINEITEM.cs" />
+    <Compile Include="Models\VENDOR.cs" />
     <Compile Include="Models\VendorManagement\ProductLine.cs" />
     <Compile Include="Models\ItemManagement\SubCategory.cs" />
     <Compile Include="Models\PurchaseOrder\PurchaseOrder.cs" />
