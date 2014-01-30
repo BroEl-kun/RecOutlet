@@ -11,6 +11,8 @@
 --					  Backorder, Receiving_Log
 --		  01/27/2014: Chris Parkins - Altered keys, now functions
 --					  according to V1 ERDs
+--		  01/30/2014: Chris Parkins - Payment and Store Transaction column
+--					  changes
 --
 -- *********************************************************************
 
@@ -228,7 +230,8 @@ GO
 CREATE TABLE [dbo].[PAYMENT](
 	[PaymentID] [smallint] IDENTITY(1,1) NOT NULL,
 	[PaymentTypeID] [tinyint] NOT NULL,
-	[StoreID] [tinyint] NOT NULL,
+	[TransactionID] [int] NOT NULL,
+	--[StoreID] [tinyint] NOT NULL,
 	[PaymentAmount] [smallmoney] NOT NULL
 ) ON [PRIMARY]
 
@@ -370,7 +373,7 @@ CREATE TABLE [dbo].[STORE_TRANSACTION](
 	[TransTotal] [money] NOT NULL,
 	[TransTax] [money] NOT NULL,
 	[ManagerID] [int] NULL,
-	[PaymentID] [smallint] NOT NULL,
+	--[PaymentID] [smallint] NOT NULL,
 	[PreviousTransactionID] [int] NOT NULL
 ) ON [PRIMARY]
 
