@@ -12,7 +12,7 @@
 --		  01/27/2014: Chris Parkins - Altered keys, now functions
 --					  according to V1 ERDs
 --		  01/30/2014: Chris Parkins - Payment and Store Transaction column
---					  changes
+--					  changes (And TransLineItems)
 --
 -- *********************************************************************
 
@@ -394,7 +394,7 @@ GO
 CREATE TABLE [dbo].[TRANSACTION_LINEITEM](
 	[TransactionLineItemID] [int] IDENTITY(1,1) NOT NULL,
 	[TransactionID] [int] NOT NULL,
-	[StoreID] [tinyint] NOT NULL,
+	--[StoreID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[Quantity] [smallint] NOT NULL,
 	[SaleEach] [money] NOT NULL,

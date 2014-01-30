@@ -13,7 +13,7 @@
 --		  01/27/2014: Chris Parkins - Altered keys, now functions
 --					  according to V1 ERDs.
 --		  01/30/2014: Chris Parkins - Payment and Store Transactions
---					  keys and relationships altered.
+--					  keys and relationships altered. (And TransLineItem)
 --
 -- *********************************************************************
 
@@ -812,8 +812,15 @@ GO
 
 /****** Object:  Index [PK_TRANSACTION_LINE_ITEM]    Script Date: 1/17/2014 7:22:31 PM ******/
 
-ALTER TABLE [dbo].[TRANSACTION_LINEITEM]  WITH CHECK ADD  CONSTRAINT [FK_TRANSACTION_LINEITEM_STORE_TRANSACTION] FOREIGN KEY([TransactionID], [StoreID])
-REFERENCES [dbo].[STORE_TRANSACTION] ([TransactionID], [StoreID])
+--ALTER TABLE [dbo].[TRANSACTION_LINEITEM]  WITH CHECK ADD  CONSTRAINT [FK_TRANSACTION_LINEITEM_STORE_TRANSACTION] FOREIGN KEY([TransactionID], [StoreID])
+--REFERENCES [dbo].[STORE_TRANSACTION] ([TransactionID], [StoreID])
+--GO
+
+--ALTER TABLE [dbo].[TRANSACTION_LINEITEM] CHECK CONSTRAINT [FK_TRANSACTION_LINEITEM_STORE_TRANSACTION]
+--GO
+
+ALTER TABLE [dbo].[TRANSACTION_LINEITEM]  WITH CHECK ADD  CONSTRAINT [FK_TRANSACTION_LINEITEM_STORE_TRANSACTION] FOREIGN KEY([TransactionID])
+REFERENCES [dbo].[STORE_TRANSACTION] ([TransactionID])
 GO
 
 ALTER TABLE [dbo].[TRANSACTION_LINEITEM] CHECK CONSTRAINT [FK_TRANSACTION_LINEITEM_STORE_TRANSACTION]
