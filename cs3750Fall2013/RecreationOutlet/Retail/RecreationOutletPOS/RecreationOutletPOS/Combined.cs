@@ -700,7 +700,7 @@ namespace RecreationOutletPOS
                         // error
                     }
 
-                    if (tbItemQuantity.Text != "" && tbItemQuantity.Text != "0")
+                    if (tbItemQuantity.Text != "")
                         int.TryParse(tbItemQuantity.Text, out quantity);
 
                     if (quantity < 1)
@@ -741,6 +741,9 @@ namespace RecreationOutletPOS
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+
+            if (e.KeyChar == 48)
                 e.Handled = true;
 
             if (e.KeyChar == 13)
