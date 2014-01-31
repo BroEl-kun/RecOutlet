@@ -700,7 +700,7 @@ namespace RecreationOutletPOS
                         // error
                     }
 
-                    if (tbItemQuantity.Text != "")
+                    if (tbItemQuantity.Text != "" && tbItemQuantity.Text != "0")
                         int.TryParse(tbItemQuantity.Text, out quantity);
 
                     if (quantity < 1)
