@@ -669,7 +669,7 @@ namespace RecreationOutletPOS
                 {
                     if (tbItemQuantity.Text == "0")
                     {
-                        MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                        MessageBox.Show("Please enter a non-zero value into the quantity field.", "Quantity",
                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
 
