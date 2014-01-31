@@ -667,65 +667,75 @@ namespace RecreationOutletPOS
 
                 try
                 {
-                    // Barcodes using a CODABAR standard will have extra delimiting characters
-                    string newText = tbScanner.Text;
-                    newText = newText.Trim('A');
-                    newText = newText.Trim('D');
-
-                    string ID = newText;
-                    characterLength = ID.Length;
-
-                    string mode = "";
-
-                    if (characterLength == 13)
+                    if (tbItemQuantity.Text == "0")
                     {
-                        mode = "RecRPC";
-                        ds = dt.retrieveItem(0, ID);
+                        MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                        MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else if (characterLength == 12)
-                    {
-                        mode = "ItemUPC";
-                        ds = dt.retrieveItem(1, ID);
-                    }
-                    else if (characterLength == 6)
-                    {
-                        mode = "ItemUPC";
-                        ds = dt.retrieveItem(2, ID);
-                    }
+
                     else
                     {
-                        mode = "ItemUPC";
-                        ds = dt.retrieveItem(2, ID);
-                        //ds = null;
-                        // error
-                    }
 
-                    if (tbItemQuantity.Text != "")
-                        int.TryParse(tbItemQuantity.Text, out quantity);
+                        // Barcodes using a CODABAR standard will have extra delimiting characters
+                        string newText = tbScanner.Text;
+                        newText = newText.Trim('A');
+                        newText = newText.Trim('D');
 
-                    if (quantity < 1)
-                        quantity = 1;
+                        string ID = newText;
+                        characterLength = ID.Length;
 
-                    if (ds.Tables["Results"].Rows.Count != 0)
-                    {
-                        foreach (DataRow row in ds.Tables["Results"].Rows)
+                        string mode = "";
+
+                        if (characterLength == 13)
                         {
-                            long id;
-                            string name;
-                            double price;
-
-                            long.TryParse(row[mode].ToString(), out id);
-                            name = (row["Name"].ToString());
-                            double.TryParse(row["SellPrice"].ToString(), out price);
-
-                            addItem(id, name, price, quantity, 0.00, price);
-                            tbItemQuantity.Text = "1";
+                            mode = "RecRPC";
+                            ds = dt.retrieveItem(0, ID);
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("The request didn't return anything.", "Item Scan",
-                            MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        else if (characterLength == 12)
+                        {
+                            mode = "ItemUPC";
+                            ds = dt.retrieveItem(1, ID);
+                        }
+                        else if (characterLength == 6)
+                        {
+                            mode = "ItemUPC";
+                            ds = dt.retrieveItem(2, ID);
+                        }
+                        else
+                        {
+                            mode = "ItemUPC";
+                            ds = dt.retrieveItem(2, ID);
+                            //ds = null;
+                            // error
+                        }
+
+                        if (tbItemQuantity.Text != "")
+                            int.TryParse(tbItemQuantity.Text, out quantity);
+
+                        if (quantity < 1)
+                            quantity = 1;
+
+                        if (ds.Tables["Results"].Rows.Count != 0)
+                        {
+                            foreach (DataRow row in ds.Tables["Results"].Rows)
+                            {
+                                long id;
+                                string name;
+                                double price;
+
+                                long.TryParse(row[mode].ToString(), out id);
+                                name = (row["Name"].ToString());
+                                double.TryParse(row["SellPrice"].ToString(), out price);
+
+                                addItem(id, name, price, quantity, 0.00, price);
+                                tbItemQuantity.Text = "1";
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("The request didn't return anything.", "Item Scan",
+                                MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -741,9 +751,6 @@ namespace RecreationOutletPOS
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-                e.Handled = true;
-
-            if (e.KeyChar == 48)
                 e.Handled = true;
 
             if (e.KeyChar == 13)
