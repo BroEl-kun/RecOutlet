@@ -49,7 +49,7 @@ namespace RecreationOutletPOS
 
                     else
                     {
-                        if (tbQuantity.Text != "" && tbQuantity.Text != "0")
+                        if (tbQuantity.Text != "")
                             int.TryParse(tbQuantity.Text, out quantity);
                         
                         Double.TryParse(tbAddItemPrice.Text, out inPrice);
@@ -85,6 +85,9 @@ namespace RecreationOutletPOS
         private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
                if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                   e.Handled = true;
+
+               if (e.KeyChar == 48)
                    e.Handled = true;
 
                if (e.KeyChar == (char)Keys.Return)
