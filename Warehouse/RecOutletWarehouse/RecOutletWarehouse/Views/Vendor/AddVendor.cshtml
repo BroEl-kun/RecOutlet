@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.VendorManagement.Vendor
+﻿@model RecOutletWarehouse.Models.VENDOR
 
 @{
     ViewBag.Title = "Add New Vendor";
@@ -46,7 +46,7 @@
                 @Html.ValidationMessageFor(newVendor => newVendor.Address)
             </td>
 
-            <td>&nbsp City:<strong class="required">*</strong></td>
+@*            <td>&nbsp City:<strong class="required">*</strong></td>
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.City)
                 @Html.ValidationMessageFor(newVendor => newVendor.City)
@@ -62,7 +62,7 @@
             <td>
                 @Html.TextBoxFor(newVendor => newVendor.Zip, new { @class = "VendorZip" })
                 @Html.ValidationMessageFor(newVendor => newVendor.Zip)
-            </td>
+            </td>*@
 
             </tr>
             
