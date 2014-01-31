@@ -49,7 +49,7 @@ namespace RecreationOutletPOS
 
                     else if (tbQuantity.Text == "0")
                     {
-                        MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                        MessageBox.Show("Please enter a non-zero value into the quantity field.", "Quantity",
                       MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
 
@@ -111,7 +111,7 @@ namespace RecreationOutletPOS
 
                        else if (tbQuantity.Text == "0")
                        {
-                           MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                           MessageBox.Show("Please enter a non-zero value into the quantity field.", "Quantity",
                          MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                        }
 
@@ -170,7 +170,7 @@ namespace RecreationOutletPOS
 
                     else if (tbQuantity.Text == "0")
                     {
-                        MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                        MessageBox.Show("Please enter a non-zero value into the quantity field.", "Quantity",
                       MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
 
