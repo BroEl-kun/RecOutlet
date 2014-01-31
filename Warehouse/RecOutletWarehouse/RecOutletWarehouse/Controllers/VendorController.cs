@@ -32,6 +32,22 @@ namespace RecOutletWarehouse.Controllers
             return View();
         }
 
+        /// <summary>
+        /// The POST method for AddVendor, the function for adding vendors to the database.
+        /// </summary>
+        /// <param name="vendor">The Entity Framework VENDOR model</param>
+        /// <param name="labelRedirect">
+        /// A parameter indicating whether the user wants to add product lines to the vendor following creation
+        /// </param>
+        /// <returns>The AddVendor View</returns>
+        /// Changelog:
+        ///     Version 1.0 (M.S.)
+        ///         - Initial creation
+        ///     Version 1.1: 11-14-13 (T.M.)
+        ///         - Validations and database interaction (via DataFetcherSetter) implemented
+        ///     Version 1.5: 1-31-14 (T.M.)
+        ///         - Entity Framework implemented; DataFetcherSetter no longer referenced
+        ///         - Code refactored for EF implementation
         [HttpPost]
         public ActionResult AddVendor(VENDOR vendor, string labelRedirect = "")
         {
@@ -65,7 +81,17 @@ namespace RecOutletWarehouse.Controllers
         }
 
      
-
+        /// <summary>
+        /// GET method for CreateNewPL
+        /// </summary>
+        /// <param name="id">Optional ID parameter that is passed when the user is redirected from vendor creation.</param>
+        /// <returns>The CreateNewPL View; clear if id is not supplied, and with VendorName filled if id is supplied.</returns>
+        /// Changelog:
+        ///     Version 1.0 (T.M.)
+        ///         - Initial creation
+        ///     Version 1.5 (T.M.)
+        ///         - Entity Framework implemented; DataFetcherSetter no longer referenced
+        ///         - Code refactored for EF implementation
         public ActionResult CreateNewPL(short? id = 0)
         {
             if (id != 0)
@@ -76,11 +102,29 @@ namespace RecOutletWarehouse.Controllers
             return View();
         }
 
-     
-
+        /// <summary>
+        /// POST for CreateNewPL. Adds new product lines, associates them with vendors, and either creates a new sales rep
+        /// for the product line or associates an existing sales rep with the product line.
+        /// </summary>
+        /// <param name="pl">The ViewModel containing information about the product line and sales rep.</param>
+        /// <param name="existingrep">A parameter passed from the CreateNewPL View indicating whether the user wanted to
+        /// create a new rep or assign an existing rep.</param>
+        /// <returns>The CreateNewPL view.</returns>
+        /// Changelog:
+        ///     Version 1.0: 10-25-13 (T.M.)
+        ///         - Initial creation
+        ///     Version 1.1: 11-16-13 (T.M.)
+        ///         - Validations added
+        ///         - View form enhancements
+        ///         - DataFetcherSetter methods added; existing methods enhanced
+        ///         - jQuery enhancement for the View
+        ///     Version 1.5: 1-31-14 (T.M.)
+        ///         - Entity Framework implemented; DataFetcherSetter no longer referenced
+        ///         - Code refactored for EF implementation
+        ///         - Validations removed; will need to be re-implemented
+        ///         - View form enhancements
         [HttpPost]
-        public ActionResult CreateNewPL(ProductLineSalesRepViewModel pl) {
-            int insertSuccessCode;
+        public ActionResult CreateNewPL(ProductLineSalesRepViewModel pl, string existingrep) {
 
             if (pl.productLine.SALES_REP.SalesRepName == null && (pl.rep.SalesRepName == null && pl.rep.SalesRepPhone == null)) {
                 ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
@@ -91,10 +135,8 @@ namespace RecOutletWarehouse.Controllers
                 return View(pl);
             }
 
-            //if the user chose to create a new rep...
-            if (pl.productLine.SALES_REP.SalesRepName == null) {
-                pl.productLine.SALES_REP.SalesRepName = pl.rep.SalesRepName; //TODO: See if there's a better way to do this
-
+            // if the user chose to create a new rep...
+            if (existingrep == "No") {
                 db.SALES_REP.Add(pl.rep);
                 db.SaveChanges();
 
@@ -103,37 +145,25 @@ namespace RecOutletWarehouse.Controllers
                 //if (insertSuccessCode != 0) { //TODO: Check for exceptions
                 //}
                 //else {
-                ViewBag.RepSuccess = "Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.RepID == pl.rep.RepID); // A new rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on new rep's ID
+                ViewBag.RepSuccess = "New Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                 //}
             }
-            string tempProductLine = pl.productLine.ProductLineName;
-            string tempVendorName = pl.productLine.VENDOR.VendorName;
+            else {
+                pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.SalesRepName == pl.productLine.SALES_REP.SalesRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
+                ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+            }
 
             // The following two lines are deprecated by EF
             //pl.productLine = dfs.convertPLNameFieldsToIDs(pl.productLine);
             //insertSuccessCode = dfs.AddNewProductLine(pl.productLine);
 
+            pl.productLine.VENDOR = db.VENDORs.Single(v => v.VendorName == pl.productLine.VENDOR.VendorName); //Establish VENDOR FK relationship
             db.PRODUCT_LINE.Add(pl.productLine);
 
-            try {
-                db.SaveChanges();
-            }
-            catch (DbEntityValidationException e) {
-                foreach (var eve in e.EntityValidationErrors) {
-                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                    foreach (var ve in eve.ValidationErrors) {
-                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                            ve.PropertyName, ve.ErrorMessage);
-                    }
-                }
-                throw;
-            }
+            db.SaveChanges();
 
-            //if (insertSuccessCode == 0) {
-                ViewBag.ProductLineSuccess = "Product Line " + tempProductLine + " successfully created and assigned to vendor " + tempVendorName + ".";
-                //return View();
-            //}
+            ViewBag.ProductLineSuccess = "Product Line " + pl.productLine.ProductLineName + " successfully created and assigned to vendor " + pl.productLine.VENDOR.VendorName + ".";
 
             return View();
         }
