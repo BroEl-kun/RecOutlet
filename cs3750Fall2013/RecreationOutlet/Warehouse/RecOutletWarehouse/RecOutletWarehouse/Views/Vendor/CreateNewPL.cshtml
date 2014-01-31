@@ -50,7 +50,7 @@
         <legend>Product line information</legend>
         <ul class="no-list">
             <li>
-                Vendor: @Html.TextBoxFor(newPL => newPL.productLine.Vendor, new { @Value = ViewBag.VendorName, @id="vendor" })
+                Vendor: @Html.TextBoxFor(newPL => newPL.productLine.VENDOR.VendorName, new { @Value = ViewBag.VendorName, @id="vendor" })
             </li>
             <li>
                 &nbsp Product Line Name: @Html.TextBoxFor(newPL => newPL.productLine.ProductLineName)
@@ -60,14 +60,14 @@
     
     <p>
         This is a representative we've used before: <input type="radio" name="existingrep" checked value="Yes"/>Yes <input type="radio" name="existingrep" value="No"/>No
-        <br />@Html.ValidationMessageFor(newPL => newPL.rep.SalesRepID)
+        <br />@Html.ValidationMessageFor(newPL => newPL.rep.RepID)
     </p>
 
     <fieldset class="existrep">
         <legend>Find an existing rep</legend>
         <ul class="no-list">
             
-            <li>Rep Name: @Html.TextBoxFor(newPL => newPL.productLine.SalesRep, new { @class = "searchrep" })</li>
+            <li>Rep Name: @Html.TextBoxFor(newPL => newPL.productLine.SALES_REP.SalesRepName, new { @class = "searchrep" })</li>
         </ul>
     </fieldset>
     
