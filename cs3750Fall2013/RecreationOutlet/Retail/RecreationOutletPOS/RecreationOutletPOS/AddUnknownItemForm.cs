@@ -49,7 +49,7 @@ namespace RecreationOutletPOS
 
                     else
                     {
-                        if (tbQuantity.Text != "")
+                        if (tbQuantity.Text != "" && tbQuantity.Text != "0")
                             int.TryParse(tbQuantity.Text, out quantity);
                         
                         Double.TryParse(tbAddItemPrice.Text, out inPrice);
@@ -105,7 +105,7 @@ namespace RecreationOutletPOS
 
                        else
                        {
-                           if (tbQuantity.Text != "")
+                           if (tbQuantity.Text != "" && tbQuantity.Text != "0")
                                int.TryParse(tbQuantity.Text, out quantity);
 
                            Double.TryParse(tbAddItemPrice.Text, out inPrice);
@@ -158,7 +158,7 @@ namespace RecreationOutletPOS
 
                     else
                     {
-                        if (tbQuantity.Text != "")
+                        if (tbQuantity.Text != "" && tbQuantity.Text != "0")
                             int.TryParse(tbQuantity.Text, out quantity);
 
                         Double.TryParse(tbAddItemPrice.Text, out inPrice);

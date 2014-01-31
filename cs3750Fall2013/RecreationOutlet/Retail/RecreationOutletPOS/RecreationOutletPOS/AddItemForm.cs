@@ -95,7 +95,7 @@ namespace RecreationOutletPOS
                 {
                     long.TryParse(lvi.SubItems[0].Text, out id);
 
-                    if (tbItemQuantity.Text != "")
+                    if (tbItemQuantity.Text != "" && tbItemQuantity.Text != "0")
                         int.TryParse(tbItemQuantity.Text, out quantity);
                 }
                 catch (Exception ex) { }
@@ -127,10 +127,13 @@ namespace RecreationOutletPOS
             }
         }
 
+        int zero = 0;
+
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+
         }
 
 
