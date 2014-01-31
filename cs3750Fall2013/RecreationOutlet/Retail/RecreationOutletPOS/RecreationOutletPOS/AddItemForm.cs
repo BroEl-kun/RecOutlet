@@ -84,42 +84,52 @@ namespace RecreationOutletPOS
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
-        {
+        {   
             if (lvData.SelectedItems.Count > 0)
             {
-                ListViewItem lvi = lvData.SelectedItems[0];
-                long id = 0;
-                int quantity = 1;
-
-                try
+                if (tbItemQuantity.Text == "0")
                 {
-                    long.TryParse(lvi.SubItems[0].Text, out id);
-
-                    if (tbItemQuantity.Text != "")
-                        int.TryParse(tbItemQuantity.Text, out quantity);
+                    MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                    MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-                catch (Exception ex) { }
 
-                string name = lvi.SubItems[1].Text;
-                double price = Convert.ToDouble(lvi.SubItems[2].Text.Replace("$",""));
-                this.Close();
+                else{
+                
+                    ListViewItem lvi = lvData.SelectedItems[0];
+                    long id = 0;
+                    int quantity = 1;
 
-                // Determine which form called this form
-                // Programmer: Michael Vuong
-                // Last Updated: 10/27/2013
-                if (combined != null)
-                {
-                    //Check which group called this form
-                    if (listView == 1)
+                    try
                     {
-                        combined.addItem(id, name, price, quantity, 0.00, price);
+                        long.TryParse(lvi.SubItems[0].Text, out id);
+
+                        if (tbItemQuantity.Text != "")
+                            int.TryParse(tbItemQuantity.Text, out quantity);
                     }
-                    else if (listView == 2)
+                    catch (Exception ex) { }
+
+                    string name = lvi.SubItems[1].Text;
+                    double price = Convert.ToDouble(lvi.SubItems[2].Text.Replace("$",""));
+                    this.Close();
+
+                    // Determine which form called this form
+                    // Programmer: Michael Vuong
+                    // Last Updated: 10/27/2013
+                    if (combined != null)
                     {
-                        combined.addItem2(id, name, price, quantity, 0.00, price);
+                        //Check which group called this form
+                        if (listView == 1)
+                        {
+                            combined.addItem(id, name, price, quantity, 0.00, price);
+                        }
+                        else if (listView == 2)
+                        {
+                            combined.addItem2(id, name, price, quantity, 0.00, price);
+                        }
                     }
                 }
             }
+
             else
             {
                 MessageBox.Show("Please select an item to add.", "Item Search",
@@ -130,9 +140,6 @@ namespace RecreationOutletPOS
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
-                e.Handled = true;
-
-            if (e.KeyChar == 48)
                 e.Handled = true;
 
         }

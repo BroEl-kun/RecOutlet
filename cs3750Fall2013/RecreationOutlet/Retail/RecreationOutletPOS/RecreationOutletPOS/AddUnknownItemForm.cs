@@ -47,6 +47,12 @@ namespace RecreationOutletPOS
                       MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
 
+                    else if (tbQuantity.Text == "0")
+                    {
+                        MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                      MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+
                     else
                     {
                         if (tbQuantity.Text != "")
@@ -87,9 +93,6 @@ namespace RecreationOutletPOS
                if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                    e.Handled = true;
 
-               if (e.KeyChar == 48)
-                   e.Handled = true;
-
                if (e.KeyChar == (char)Keys.Return)
                {
                    long id = 0;
@@ -106,9 +109,15 @@ namespace RecreationOutletPOS
                          MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                        }
 
+                       else if (tbQuantity.Text == "0")
+                       {
+                           MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                         MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                       }
+
                        else
                        {
-                           if (tbQuantity.Text != "" && tbQuantity.Text != "0")
+                           if (tbQuantity.Text != "")
                                int.TryParse(tbQuantity.Text, out quantity);
 
                            Double.TryParse(tbAddItemPrice.Text, out inPrice);
@@ -159,9 +168,15 @@ namespace RecreationOutletPOS
                       MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
 
+                    else if (tbQuantity.Text == "0")
+                    {
+                        MessageBox.Show("Please enter a non-zero value.", "Quantity",
+                      MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+
                     else
                     {
-                        if (tbQuantity.Text != "" && tbQuantity.Text != "0")
+                        if (tbQuantity.Text != "")
                             int.TryParse(tbQuantity.Text, out quantity);
 
                         Double.TryParse(tbAddItemPrice.Text, out inPrice);
