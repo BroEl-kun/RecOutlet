@@ -13,6 +13,7 @@
 --					  according to V1 ERDs
 --		  01/30/2014: Chris Parkins - Payment and Store Transaction column
 --					  changes (And TransLineItems)
+--		  02/01/2014: Chris Parkins - Transaction Line Item table edits
 --
 -- *********************************************************************
 
@@ -397,10 +398,14 @@ CREATE TABLE [dbo].[TRANSACTION_LINEITEM](
 	--[StoreID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[Quantity] [smallint] NOT NULL,
-	[SaleEach] [money] NOT NULL,
+	--[SaleEach] [money] NOT NULL,
+	[UnitPrice] [money] NOT NULL,
+	[UnitCost] [money] NOT NULL,
 	[CommissionEmployeeID] [smallint] NOT NULL,
-	[OverrideCode] [int] NULL,
-	[RefundCode] [int] NULL
+	--[OverrideCode] [int] NULL,
+	--[RefundCode] [int] NULL
+	[ItemTaxTotal] [money] NOT NULL,
+	[ItemTotal] [money] NOT NULL,
 ) ON [PRIMARY]
 
 GO
