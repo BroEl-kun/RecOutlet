@@ -12,6 +12,8 @@ namespace RecOutletWarehouse.Controllers
 {
     public class PurchaseOrderController : Controller
     {
+        RecreationOutletContext entityDb = new RecreationOutletContext();
+
         //ViewModel: PurchaseOrderAndLineItem
         //A ViewModel allows you to access data from different models 
         //(often database tables) in a single view
@@ -21,7 +23,8 @@ namespace RecOutletWarehouse.Controllers
         /// the PurchaseOrder and POLineItem models within a single form
         /// </summary>
         /// <author>Tyler M.</author>
-        public class PurchaseOrderCreationViewModel {
+        public class PurchaseOrderCreationViewModel
+        {
             public PurchaseOrder PO { get; set; }
             public List<PurchaseOrderLineItem> LineItems { get; set; }
             public List<string> ItemNames { get; set; }
@@ -38,7 +41,8 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateNewPO() {
+        public ActionResult CreateNewPO()
+        {
             DataFetcherSetter db = new DataFetcherSetter();
             int nextPO = db.getLastPONumForDate(DateTime.Now.Date); 
 
@@ -54,7 +58,8 @@ namespace RecOutletWarehouse.Controllers
         /// <param name="POVM">The ViewModel to store PO information</param>
         /// <returns>A redirect to AddPOLineItem</returns>
         [HttpPost]
-        public ActionResult CreateNewPO(PurchaseOrderCreationViewModel POVM) {
+        public ActionResult CreateNewPO(PurchaseOrderCreationViewModel POVM)
+        {
             DataFetcherSetter db = new DataFetcherSetter();
 
             ViewBag.PO = POVM.PO.PurchaseOrderId;
@@ -110,7 +115,8 @@ namespace RecOutletWarehouse.Controllers
         /// <author>Tyler M.</author>
         /// <param name="id">The PO ID for which information is displayed and entered</param>
         /// <returns>The AddPOLineItem View, supplemented with general PO information</returns>
-        public ActionResult AddPOLineItem(int id = 0) {
+        public ActionResult AddPOLineItem(int id = 0)
+        {
             DataFetcherSetter db = new DataFetcherSetter();
            // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
             PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
