@@ -254,6 +254,22 @@ input[type="checkbox"].input-validation-error {
     width: 100px;
 }
 
+.error-box {
+    color: white;
+    background-color: #011C26;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    width: 350px;
+    /*border: outset 5px white;
+    border-radius: 7px;*/
+}
+
+.error-text {
+    margin: 25px;
+}
+
 /* Styles to test new editor and display templates.
 ----------------------------------------------------------*/
 .loud-1 {
