@@ -36,19 +36,32 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult Index()
         {
-            
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         [HttpGet]
         public ActionResult CreateNewPO()
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            int nextPO = db.getLastPONumForDate(DateTime.Now.Date); 
+            try
+            {
+                DataFetcherSetter db = new DataFetcherSetter();
+                int nextPO = db.getLastPONumForDate(DateTime.Now.Date);
 
-            ViewBag.PO = createPOForForm(nextPO);
+                ViewBag.PO = createPOForForm(nextPO);
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
@@ -60,51 +73,65 @@ namespace RecOutletWarehouse.Controllers
         [HttpPost]
         public ActionResult CreateNewPO(PurchaseOrderCreationViewModel POVM)
         {
-            DataFetcherSetter db = new DataFetcherSetter();
+            try
+            {
+                DataFetcherSetter db = new DataFetcherSetter();
 
-            ViewBag.PO = POVM.PO.PurchaseOrderId;
+                ViewBag.PO = POVM.PO.PurchaseOrderId;
 
-            //TODO: Move the character replacement logic to a
-            //tools class and enhance its functionality
-            string POtoInt = POVM.PO.PurchaseOrderId;
-            POtoInt = POtoInt.Replace("-", string.Empty);
+                //TODO: Move the character replacement logic to a
+                //tools class and enhance its functionality
+                string POtoInt = POVM.PO.PurchaseOrderId;
+                POtoInt = POtoInt.Replace("-", string.Empty);
 
-            int convertedPO = Convert.ToInt32(POtoInt);    
+                int convertedPO = Convert.ToInt32(POtoInt);
 
-            //find the vendor ID for the provided vendor name
-            short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.Vendor));
-            
-            //CUSTOM VALIDATION FOLLOWS
-            if (db.RetrievePObyPOID(Convert.ToInt64(convertedPO)).PurchaseOrderId != null){
-                ModelState.AddModelError("PO.PurchaseOrderId", "That PO Number already exists.");
+                //find the vendor ID for the provided vendor name
+                short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.Vendor));
+
+                //CUSTOM VALIDATION FOLLOWS
+                if (db.RetrievePObyPOID(Convert.ToInt64(convertedPO)).PurchaseOrderId != null)
+                {
+                    ModelState.AddModelError("PO.PurchaseOrderId", "That PO Number already exists.");
+                }
+                if (vendorId == 0)
+                {
+                    ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
+                }
+                else if (vendorId == -1)
+                {
+                    ModelState.AddModelError("PO.Vendor", "Please be more specific. TODO: better error message");
+                }
+
+                if (POVM.PO.OrderDate < DateTime.Now.Date)
+                {
+                    ModelState.AddModelError("PO.OrderDate", "That date has passed");
+                }
+                if (POVM.PO.EstShipDate < POVM.PO.OrderDate)
+                {
+                    ModelState.AddModelError("PO.EstShipDate", "The estimated ship date cannot occur before the order date");
+                }
+
+                //CUSTOM VALIDATION ENDS
+
+                if (!ModelState.IsValid)
+                {
+                    return View(POVM);
+                }
+                else
+                {
+                    db.CreateNewPurchaseOrder(convertedPO,
+                        vendorId, POVM.PO.CreatedBy,
+                        POVM.PO.OrderDate, POVM.PO.EstShipDate,
+                        POVM.PO.FreightCost, POVM.PO.Terms,
+                        POVM.PO.Comments); //TODO: Associate the employeeID with this
+
+                    return RedirectToAction("AddPOLineItem", new { id = convertedPO });
+                }
             }
-            if (vendorId == 0) {
-                ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
-            }
-            else if (vendorId == -1) {
-                ModelState.AddModelError("PO.Vendor", "Please be more specific. TODO: better error message");
-            }
-
-            if (POVM.PO.OrderDate < DateTime.Now.Date) {
-                ModelState.AddModelError("PO.OrderDate", "That date has passed");
-            }
-            if (POVM.PO.EstShipDate < POVM.PO.OrderDate) {
-                ModelState.AddModelError("PO.EstShipDate", "The estimated ship date cannot occur before the order date");
-            }
-
-            //CUSTOM VALIDATION ENDS
-
-            if (!ModelState.IsValid) {
-                return View(POVM);
-            }
-            else {
-                db.CreateNewPurchaseOrder(convertedPO,
-                    vendorId, POVM.PO.CreatedBy,
-                    POVM.PO.OrderDate, POVM.PO.EstShipDate,
-                    POVM.PO.FreightCost, POVM.PO.Terms,
-                    POVM.PO.Comments); //TODO: Associate the employeeID with this
-
-                return RedirectToAction("AddPOLineItem", new { id = convertedPO });
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
             }
         }
 
@@ -117,12 +144,19 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>The AddPOLineItem View, supplemented with general PO information</returns>
         public ActionResult AddPOLineItem(int id = 0)
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-           // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
-            PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
-            POVM.PO = db.RetrievePObyPOID(id);
+            try
+            {
+                DataFetcherSetter db = new DataFetcherSetter();
+                // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
+                PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
+                POVM.PO = db.RetrievePObyPOID(id);
 
-            return View(POVM);
+                return View(POVM);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
@@ -134,31 +168,40 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>A redirect to POSummary</returns>
         /// POST: PurchaseOrder/AddPOLineItem
         [HttpPost]
-        public ActionResult AddPOLineItem(PurchaseOrderCreationViewModel POVM, string id) {
-            DataFetcherSetter db = new DataFetcherSetter();
+        public ActionResult AddPOLineItem(PurchaseOrderCreationViewModel POVM, string id)
+        {
+            try
+            {
+                DataFetcherSetter db = new DataFetcherSetter();
 
-            POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
-            string POtoInt = id;
-            POtoInt = POtoInt.Replace("-", string.Empty);
+                POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
+                string POtoInt = id;
+                POtoInt = POtoInt.Replace("-", string.Empty);
 
-            int convertedPO = Convert.ToInt32(POtoInt);
-            decimal totalCost = POVM.PO.FreightCost;
+                int convertedPO = Convert.ToInt32(POtoInt);
+                decimal totalCost = POVM.PO.FreightCost;
 
-            //TODO: Move the character replacement logic to a
-            //tools class and enhance its functionality
+                //TODO: Move the character replacement logic to a
+                //tools class and enhance its functionality
 
-            foreach (var item in POVM.LineItems) {
-                if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0){ //do not attempt to add empty list items
-                    db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
-                    item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
-                    totalCost += (item.WholesaleCost * item.QtyOrdered);
+                foreach (var item in POVM.LineItems)
+                {
+                    if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0)
+                    { //do not attempt to add empty list items
+                        db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
+                        item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
+                        totalCost += (item.WholesaleCost * item.QtyOrdered);
                     }
+                }
+
+                ViewBag.POTotal = String.Format("P.O. Total Cost: ${0:C}", totalCost.ToString());
+
+                return View("POSummary", POVM);
             }
-
-            ViewBag.POTotal = String.Format("P.O. Total Cost: ${0:C}", totalCost.ToString());
-
-            return View("POSummary", POVM);
-
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
@@ -170,51 +213,73 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>HTTPGet: The base View of POSummary, which has PO information and a list 
         /// of POLineItems</returns>
         /// GET: PurchaseOrder/POSummary
-        public ActionResult POSummary(PurchaseOrderCreationViewModel POVM) {
-            //PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
-            DataFetcherSetter db = new DataFetcherSetter();
-            
-            //POVM.PO = db.RetrievePObyPOID(id);
-            //POVM.LineItems = db.ListLineItemsForPO(id);
+        public ActionResult POSummary(PurchaseOrderCreationViewModel POVM)
+        {
+            try
+            {
+                //PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
+                DataFetcherSetter db = new DataFetcherSetter();
 
-            return View(POVM);
+                //POVM.PO = db.RetrievePObyPOID(id);
+                //POVM.LineItems = db.ListLineItemsForPO(id);
+
+                return View(POVM);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
-        public ActionResult SearchPO() {
-            DataFetcherSetter db = new DataFetcherSetter();
+        public ActionResult SearchPO() 
+        {
+            try
+            {
+                DataFetcherSetter db = new DataFetcherSetter();
 
-
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         [HttpPost]
-        public ActionResult SearchPO(string queryType, string query) {
-
-
-            return View();
+        public ActionResult SearchPO(string queryType, string query)
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         //PURCHASE ORDER UTILITY METHODS FOLLOW
 
-        public static string createPOForForm(int PO) {
+        public static string createPOForForm(int PO)
+        {
             string POforForm;
 
-            if (PO != 0) {
+            if (PO != 0)
+            {
                 //format for displaying in the form
                 PO++; //increment the last number of the PO
                 POforForm = PO.ToString();
                 POforForm = POforForm.Insert(2, "-");
                 POforForm = POforForm.Insert(5, "-");
                 POforForm = POforForm.Insert(10, "-");
-
             }
-            else {
+            else
+            {
                 POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
                 POforForm = POforForm + "-01";
             }
 
             return POforForm;
         }
-
     }
 }
