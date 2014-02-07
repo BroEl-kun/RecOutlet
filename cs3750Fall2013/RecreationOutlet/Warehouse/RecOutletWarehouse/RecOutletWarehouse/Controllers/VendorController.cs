@@ -14,8 +14,9 @@ namespace RecOutletWarehouse.Controllers
     {
         private RecreationOutletContext db = new RecreationOutletContext();
         private DataFetcherSetter dfs = new DataFetcherSetter();
-        
-        public class ProductLineSalesRepViewModel {
+
+        public class ProductLineSalesRepViewModel
+        {
             public PRODUCT_LINE productLine { get; set; }
             public SALES_REP rep { get; set; }
         }
@@ -24,12 +25,26 @@ namespace RecOutletWarehouse.Controllers
         // GET: /Vendor/
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         public ActionResult AddVendor()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
@@ -51,36 +66,43 @@ namespace RecOutletWarehouse.Controllers
         [HttpPost]
         public ActionResult AddVendor(VENDOR vendor, string labelRedirect = "")
         {
-            if (!ModelState.IsValid)
+            try
             {
-                //TODO: replace this view with the correct submit view.
-                return View(vendor);
-            }
-            else
-            {
-                //EF deprecates the following function call
-                //dfs.AddNewVendor(vendor.VendorName, vendor.ContactName,
-                //    vendor.ContactPhone, vendor.ContactFax,
-                //    vendor.AltPhone, vendor.Address,
-                //    vendor.Website);
-
-                db.VENDORs.Add(vendor);
-                db.SaveChanges();
-
-                //EF deprecates the following line
-                //vendor.VendorId = dfs.GetVendorIdForVendorName(vendor.VendorName);
-
-                //TODO: change this to the actual view i need to return like Success! or something.
-                ViewBag.Success = "Vendor successfully created.";
-                if (labelRedirect == "Add Vendor, Create Product Line")
+                if (!ModelState.IsValid)
                 {
-                    return RedirectToAction("CreateNewPL", new { id = vendor.VendorID });
+                    //TODO: replace this view with the correct submit view.
+                    return View(vendor);
                 }
-                return View();
+                else
+                {
+                    //EF deprecates the following function call
+                    //dfs.AddNewVendor(vendor.VendorName, vendor.ContactName,
+                    //    vendor.ContactPhone, vendor.ContactFax,
+                    //    vendor.AltPhone, vendor.Address,
+                    //    vendor.Website);
+
+                    db.VENDORs.Add(vendor);
+                    db.SaveChanges();
+
+                    //EF deprecates the following line
+                    //vendor.VendorId = dfs.GetVendorIdForVendorName(vendor.VendorName);
+
+                    //TODO: change this to the actual view i need to return like Success! or something.
+                    ViewBag.Success = "Vendor successfully created.";
+                    if (labelRedirect == "Add Vendor, Create Product Line")
+                    {
+                        return RedirectToAction("CreateNewPL", new { id = vendor.VendorID });
+                    }
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
             }
         }
 
-     
+
         /// <summary>
         /// GET method for CreateNewPL
         /// </summary>
@@ -94,12 +116,19 @@ namespace RecOutletWarehouse.Controllers
         ///         - Code refactored for EF implementation
         public ActionResult CreateNewPL(short? id = 0)
         {
-            if (id != 0)
-                //{ ViewBag.VendorName = dfs.GetVendorNameForVendorId((Int16)id); }
+            try
+            {
+                if (id != 0)
+                    //{ ViewBag.VendorName = dfs.GetVendorNameForVendorId((Int16)id); }
 
-                // EF version of deprecated DFS method follows
-                ViewBag.VendorName = db.VENDORs.Find(id).VendorName;
-            return View();
+                    // EF version of deprecated DFS method follows
+                    ViewBag.VendorName = db.VENDORs.Find(id).VendorName;
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
@@ -124,50 +153,61 @@ namespace RecOutletWarehouse.Controllers
         ///         - Validations removed; will need to be re-implemented
         ///         - View form enhancements
         [HttpPost]
-        public ActionResult CreateNewPL(ProductLineSalesRepViewModel pl, string existingrep) {
+        public ActionResult CreateNewPL(ProductLineSalesRepViewModel pl, string existingrep)
+        {
+            try
+            {
+                if (pl.productLine.SALES_REP.SalesRepName == null && (pl.rep.SalesRepName == null && pl.rep.SalesRepPhone == null))
+                {
+                    ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
+                }
 
-            if (pl.productLine.SALES_REP.SalesRepName == null && (pl.rep.SalesRepName == null && pl.rep.SalesRepPhone == null)) {
-                ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
-            }
+                if (!ModelState.IsValid)
+                {
 
-            if (!ModelState.IsValid) {
+                    return View(pl);
+                }
 
-                return View(pl);
-            }
+                // if the user chose to create a new rep...
+                if (existingrep == "No")
+                {
+                    db.SALES_REP.Add(pl.rep);
+                    db.SaveChanges();
 
-            // if the user chose to create a new rep...
-            if (existingrep == "No") {
-                db.SALES_REP.Add(pl.rep);
+                    // TODO: Check for duplications and only set success message when db is successfully updated
+                    //insertSuccessCode = dfs.AddNewSalesRep(pl.rep);
+                    //if (insertSuccessCode != 0) { //TODO: Check for exceptions
+                    //}
+                    //else {
+                    pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.RepID == pl.rep.RepID); // A new rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on new rep's ID
+                    ViewBag.RepSuccess = "New Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                    //}
+                }
+                else
+                {
+                    pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.SalesRepName == pl.productLine.SALES_REP.SalesRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
+                    ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                }
+
+                // The following two lines are deprecated by EF
+                //pl.productLine = dfs.convertPLNameFieldsToIDs(pl.productLine);
+                //insertSuccessCode = dfs.AddNewProductLine(pl.productLine);
+
+                pl.productLine.VENDOR = db.VENDORs.Single(v => v.VendorName == pl.productLine.VENDOR.VendorName); //Establish VENDOR FK relationship
+                db.PRODUCT_LINE.Add(pl.productLine);
+
                 db.SaveChanges();
 
-                // TODO: Check for duplications and only set success message when db is successfully updated
-                //insertSuccessCode = dfs.AddNewSalesRep(pl.rep);
-                //if (insertSuccessCode != 0) { //TODO: Check for exceptions
-                //}
-                //else {
-                pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.RepID == pl.rep.RepID); // A new rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on new rep's ID
-                ViewBag.RepSuccess = "New Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
-                //}
+                ViewBag.ProductLineSuccess = "Product Line " + pl.productLine.ProductLineName + " successfully created and assigned to vendor " + pl.productLine.VENDOR.VendorName + ".";
+
+                return View();
+
             }
-            else {
-                pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.SalesRepName == pl.productLine.SALES_REP.SalesRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
-                ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
             }
-
-            // The following two lines are deprecated by EF
-            //pl.productLine = dfs.convertPLNameFieldsToIDs(pl.productLine);
-            //insertSuccessCode = dfs.AddNewProductLine(pl.productLine);
-
-            pl.productLine.VENDOR = db.VENDORs.Single(v => v.VendorName == pl.productLine.VENDOR.VendorName); //Establish VENDOR FK relationship
-            db.PRODUCT_LINE.Add(pl.productLine);
-
-            db.SaveChanges();
-
-            ViewBag.ProductLineSuccess = "Product Line " + pl.productLine.ProductLineName + " successfully created and assigned to vendor " + pl.productLine.VENDOR.VendorName + ".";
-
-            return View();
         }
-
     }
 }
 
