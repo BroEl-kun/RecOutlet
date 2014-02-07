@@ -13,8 +13,19 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }
