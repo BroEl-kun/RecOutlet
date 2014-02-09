@@ -14,6 +14,7 @@
 --		  01/30/2014: Chris Parkins - Payment and Store Transaction column
 --					  changes (And TransLineItems)
 --		  02/01/2014: Chris Parkins - Transaction Line Item table edits
+--		  02/09/2014: Chris Parkins - Phase 2 Warehouse changes
 --
 -- *********************************************************************
 
@@ -22,20 +23,21 @@
 USE [RecreationOutlet]
 GO
 
-/****** Object:  Table [dbo].[BACKORDER]    Script Date: 1/14/2014 7:10:16 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[BACKORDER](
-	[BackorderID] [int] NOT NULL,
-	--[POLineItemID] [int] NOT NULL,
-	[ReceivingID] [int] NOT NULL,
-	[BackorderQty] [smallint] NOT NULL
-) ON [PRIMARY]
-GO
+/****** Object:  Table [dbo].[BACKORDER]    Script Date: 1/14/2014 7:10:16 PM ******/
+
+--CREATE TABLE [dbo].[BACKORDER](
+--	[BackorderID] [int] NOT NULL,
+--	--[POLineItemID] [int] NOT NULL,
+--	[ReceivingID] [int] NOT NULL,
+--	[BackorderQty] [smallint] NOT NULL
+--) ON [PRIMARY]
+--GO
 
 /****** Object:  Table [dbo].[EMPLOYEE]    Script Date: 1/14/2014 7:19:46 PM ******/
 
@@ -59,7 +61,7 @@ GO
 /****** Object:  Table [dbo].[EXCEPTIONS]    Script Date: 1/14/2014 7:22:10 PM ******/
 
 CREATE TABLE [dbo].[EXCEPTIONS](
-	[ExceptionsID] [int] NOT NULL,
+	[ExceptionsID] [int] NOT NULL, --Need IDENTITY(1,1)?
 	[ManagerID] [int] NULL,
 	[TransactionLineItemID] [int] NOT NULL,
 	[PreviousTransactionLineItemID] [int] NOT NULL,
@@ -72,8 +74,10 @@ GO
 /****** Object:  Table [dbo].[INVENTORY]    Script Date: 1/14/2014 7:23:44 PM ******/
 
 CREATE TABLE [dbo].[INVENTORY](
-	[StoreID] [tinyint] NOT NULL,
+	[InventoryID] [bigint] IDENTITY(1,1) NOT NULL,
+	[LocationID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
+	[QtyTypeID] [tinyint] NOT NULL,
 	[QtyOnHand] [smallint] NOT NULL,
 	[QtyThreshold] [smallint] NOT NULL
 ) ON [PRIMARY]
@@ -83,18 +87,19 @@ GO
 /****** Object:  Table [dbo].[INVOICE]    Script Date: 1/14/2014 7:25:50 PM ******/
 
 CREATE TABLE [dbo].[INVOICE](
-	[InvoiceID] [bigint] NOT NULL,
+	[InvoiceID] [bigint] NOT NULL, --Need IDENTITY(1,1)?
 	[CustomerID] [int] NOT NULL,
-	[ShippingID] [int] NOT NULL,
-	[Attention] [nvarchar](max) NOT NULL,
-	[PaymentDue] [smalldatetime] NOT NULL,
-	[SalesTaxDue] [smallmoney] NOT NULL,
-	[DatePaid] [smalldatetime] NOT NULL,
-	[AmountPaid] [smallmoney] NOT NULL,
-	[InvoiceNotes] [nvarchar](50) NULL,
+	--[ShippingID] [int] NOT NULL,	
 	[InvoiceCreatedBy] [smallint] NOT NULL,
-	[InvoiceCreatedDate] [smalldatetime] NOT NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	[InvoiceCreatedDate] [smalldatetime] NOT NULL,
+	[Attention] [nvarchar](50) NULL,
+	--[PaymentDue] [smalldatetime] NOT NULL,
+	[TotalSalesTax] [smallmoney] NOT NULL,
+	[TotalAmount] [smallmoney] NOT NULL,
+	[TotalAmountPaid] [smallmoney] NOT NULL,
+	[LastPaymentReceived] [smalldatetime] NULL,
+	[InvoiceNotes] [nvarchar](100) NULL
+) ON [PRIMARY] -- TEXTIMAGE_ON [PRIMARY]	--So would it be more efficient to actually use nvarchar(max) at least once then use the TEXTIMAGE_ON?
 
 GO
 
@@ -102,12 +107,14 @@ GO
 
 CREATE TABLE [dbo].[INVOICE_CUSTOMER](
 	[CustomerID] [int] NOT NULL,
-	[CustomerName] [nvarchar](max) NOT NULL,
-	[CustomerPhoneNumber] [int] NULL,
+	[CustomerName] [nvarchar](100) NOT NULL,
 	[TaxExemptID] [int] NULL,
 	[CustomerPaymentTerms] [nvarchar](50) NULL,
-	[CustomerAddress] [nvarchar](max) NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	[CustomerAddress] [nvarchar](50) NULL,
+	[CustomerState] [nvarchar](2) NULL,
+	[CustomerZip] [nvarchar](10) NULL,
+	[CustomerPhone] [nvarchar](12) NULL
+) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
 
 GO
 
@@ -117,8 +124,10 @@ CREATE TABLE [dbo].[INVOICE_LINEITEM](
 	[InvoiceLineItemID] [int] NOT NULL,
 	[InvoiceID] [bigint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
-	[InvoicePrice] [smallmoney] NOT NULL,
-	[InvoiceItemQuantity] [smallint] NOT NULL
+	[QtyTypeID] [tinyint] NOT NULL,
+	[ItemQty] [tinyint] NOT NULL,
+	[UnitPrice] [smallmoney] NOT NULL,
+	[UnitCost] [smallmoney] NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -127,21 +136,24 @@ GO
 
 CREATE TABLE [dbo].[ITEM](
 	[RecRPC] [bigint] NOT NULL,
+	[CategoryID] [tinyint] NOT NULL,
+	--[CategoryID] [smallint] NOT NULL,
+	[DepartmentID] [tinyint] NOT NULL,
+	--[DepartmentID] [smallint] NOT NULL,
+	--[SubcategoryID] [tinyint] NOT NULL,
+	[SubcategoryID] [smallint] NOT NULL,
+	[ProductLineID] [int] NOT NULL,
+	[TaxRateID] [tinyint] NOT NULL,
+	[LegacyID] [smallint] NULL,
 	[ItemUPC] [bigint] NULL,
 	[Name] [nvarchar](30) NOT NULL,
 	[Description] [nvarchar](max) NOT NULL,
 	[VendorItemID] [int] NOT NULL,
-	[ProductLineID] [int] NOT NULL,
 	[SeasonCode] [nvarchar](50) NULL,
 	[ItemID] [int] NOT NULL,
-	[CategoryID] [tinyint] NOT NULL,
-	[DepartmentID] [tinyint] NOT NULL,
-	[SubcategoryID] [tinyint] NOT NULL,
 	[MSRP] [money] NULL,
 	[SellPrice] [money] NOT NULL,
-	[TaxRateID] [tinyint] NOT NULL,
 	[RestrictedAge] [tinyint] NULL,
-	[LegacyID] [smallint] NULL,
 	[ItemCreatedBy] [smallint] NOT NULL,
 	[ItemCreatedDate] [date] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
@@ -152,7 +164,8 @@ GO
 
 CREATE TABLE [dbo].[ITEM_CATEGORY](
 	[CategoryID] [tinyint] IDENTITY(1,1) NOT NULL,
-	[CategoryName] [nvarchar](50) NOT NULL
+	[CategoryName] [nvarchar](50) NOT NULL,
+	[CategoryDescription] [nvarchar](max) NULL
 ) ON [PRIMARY]
 
 GO
@@ -160,8 +173,9 @@ GO
 /****** Object:  Table [dbo].[ITEM_DEPARTMENT]    Script Date: 1/14/2014 7:32:32 PM ******/
 
 CREATE TABLE [dbo].[ITEM_DEPARTMENT](
-	[DepartmentID] [tinyint] NOT NULL,
-	[DepartmentName] [nvarchar](50) NOT NULL
+	[DepartmentID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[DepartmentName] [nvarchar](50) NOT NULL,
+	[DepartmentDescription] [nvarchar](max) NULL
 ) ON [PRIMARY]
 
 GO
@@ -169,9 +183,10 @@ GO
 /****** Object:  Table [dbo].[ITEM_IMAGE]    Script Date: 1/15/2014 8:28:20 PM ******/
 
 CREATE TABLE [dbo].[ITEM_IMAGE](
-	[ItemImageID] [int] NOT NULL,
+	[ItemImageID] [int] IDENTITY(1,1) NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
-	[ItemPath] [nvarchar](256) NOT NULL
+	[ItemImagePath] [nvarchar](256) NOT NULL,
+	[ItemImageDescription] [nvarchar](max) NULL
 ) ON [PRIMARY]
 
 GO
@@ -179,7 +194,8 @@ GO
 /****** Object:  Table [dbo].[ITEM_SUBCATEGORY]    Script Date: 1/15/2014 8:30:35 PM ******/
 
 CREATE TABLE [dbo].[ITEM_SUBCATEGORY](
-	[SubcategoryID] [tinyint] IDENTITY(1,1) NOT NULL,
+	--[SubcategoryID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[SubcategoryID] [smallint] IDENTITY(1,1) NOT NULL,
 	[SubcategoryName] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 
@@ -188,7 +204,7 @@ GO
 /****** Object:  Table [dbo].[LOCATION]    Script Date: 1/15/2014 8:31:35 PM ******/
 
 CREATE TABLE [dbo].[LOCATION](
-	[StoreID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[LocationID] [tinyint] IDENTITY(1,1) NOT NULL,
 	[StoreName] [nvarchar](50) NOT NULL,
 	[ManagerId] [smallint] NOT NULL
 ) ON [PRIMARY]
@@ -198,7 +214,7 @@ GO
 /****** Object:  Table [dbo].[MERCHANDISE_TRANSFER]    Script Date: 1/15/2014 8:32:50 PM ******/
 
 CREATE TABLE [dbo].[MERCHANDISE_TRANSFER](
-	[TransferID] [bigint] NOT NULL,
+	[TransferID] [bigint] IDENTITY(1,1) NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[ToLocationID] [tinyint] NOT NULL,
 	[FromLocationID] [tinyint] NOT NULL,
@@ -232,7 +248,7 @@ CREATE TABLE [dbo].[PAYMENT](
 	[PaymentID] [smallint] IDENTITY(1,1) NOT NULL,
 	[PaymentTypeID] [tinyint] NOT NULL,
 	[TransactionID] [int] NOT NULL,
-	--[StoreID] [tinyint] NOT NULL,
+	--[LocationID] [tinyint] NOT NULL,
 	[PaymentAmount] [smallmoney] NOT NULL
 ) ON [PRIMARY]
 
@@ -253,9 +269,9 @@ CREATE TABLE [dbo].[PO_LINEITEM](
 	[POLineItemID] [int] IDENTITY(1,1) NOT NULL,
 	[POID] [bigint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
+	[QtyTypeID] [tinyint] NOT NULL,
 	[WholesaleCost] [smallmoney] NOT NULL,
-	[QtyOrdered] [smallint] NOT NULL,
-	[QtyTypeID] [tinyint] NOT NULL
+	[QtyOrdered] [smallint] NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -264,9 +280,9 @@ GO
 
 CREATE TABLE [dbo].[PRODUCT_LINE](
 	[ProductLineID] [int] IDENTITY(1,1) NOT NULL,
-	[ProductLineName] [nvarchar](50) NOT NULL,
 	[VendorID] [smallint] NOT NULL,
-	[RepID] [smallint] NOT NULL
+	[RepID] [smallint] NOT NULL,
+	[ProductLineName] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -283,7 +299,8 @@ CREATE TABLE [dbo].[PURCHASE_ORDER](
 	[POFreightCost] [nvarchar](50) NULL,
 	[POTerms] [nvarchar](50) NULL,
 	[POComments] [nvarchar](50) NULL,
-	[ShippingID] [int] NULL
+	[ShippingID] [int] NULL,
+	[POCancelIfNotReceivedBy] [smalldatetime] NULL
 ) ON [PRIMARY]
 
 GO
@@ -301,7 +318,7 @@ GO
 
 CREATE TABLE [dbo].[RECEIVING_LOG](
 	[ReceivingID] [int] IDENTITY(1,1) NOT NULL,
-	[POLineItemID] [int] NULL,
+	[POLineItemID] [int] NULL,		--They can receive items without first ordering them. Ex. samples
 	--[BackorderID] [int] NULL,
 	[QtyTypeID] [tinyint] NULL,
 	[ReceiveDate] [smalldatetime] NOT NULL,
@@ -337,10 +354,10 @@ GO
 
 CREATE TABLE [dbo].[SALES_REP](
 	[RepID] [smallint] IDENTITY(1,1) NOT NULL,
-	[SalesRepName] [nvarchar](max) NOT NULL,
+	[SalesRepName] [nvarchar](100) NOT NULL,
 	[SalesRepPhone] [nvarchar](15) NOT NULL,
-	[SalesRepEmail] [nvarchar](max) NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	[SalesRepEmail] [nvarchar](50) NULL
+) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
 
 GO
 
@@ -348,6 +365,7 @@ GO
 
 CREATE TABLE [dbo].[SHIPPING_LOG](
 	[ShippingID] [int] NOT NULL,
+	[InvoiceID] [bigint] NOT NULL,
 	--[ID] [bigint] NOT NULL,
 	--[OrderType] [nchar](1) NOT NULL,
 	--[BackorderID] [int] NULL,
@@ -367,7 +385,7 @@ GO
 
 CREATE TABLE [dbo].[STORE_TRANSACTION](
 	[TransactionID] [int] IDENTITY(1,1) NOT NULL,
-	[StoreID] [tinyint] NOT NULL,
+	[LocationID] [tinyint] NOT NULL,
 	[EmployeeID] [smallint] NOT NULL,
 	[TransactionDate] [datetime] NOT NULL,
 	[TerminalID] [nvarchar](50) NOT NULL,
@@ -395,7 +413,7 @@ GO
 CREATE TABLE [dbo].[TRANSACTION_LINEITEM](
 	[TransactionLineItemID] [int] IDENTITY(1,1) NOT NULL,
 	[TransactionID] [int] NOT NULL,
-	--[StoreID] [tinyint] NOT NULL,
+	--[LocationID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[Quantity] [smallint] NOT NULL,
 	--[SaleEach] [money] NOT NULL,
@@ -414,14 +432,16 @@ GO
 
 CREATE TABLE [dbo].[VENDOR](
 	[VendorID] [smallint] IDENTITY(1,1) NOT NULL,
-	[VendorName] [nvarchar](max) NOT NULL,
-	[ContactName] [nvarchar](max) NULL,
-	[ContactPhone] [nvarchar](50) NOT NULL,
-	[ContactFax] [nvarchar](50) NULL,
-	[AltPhone] [nvarchar](50) NULL,
-	[Address] [nvarchar](max) NOT NULL,
-	[Website] [nvarchar](max) NULL
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+	[VendorName] [nvarchar](100) NOT NULL,
+	[ContactName] [nvarchar](100) NULL,
+	[ContactPhone] [nvarchar](12) NOT NULL,
+	[ContactFax] [nvarchar](12) NULL,
+	[AltPhone] [nvarchar](12) NULL,
+	[VendorAddress] [nvarchar](50) NULL,
+	[VendorState] [nvarchar](2) NULL,
+	[VendorZip] [nvarchar](10) NULL,
+	[VendorWebsite] [nvarchar](100) NULL
+) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
 
 GO
 
