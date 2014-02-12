@@ -5,12 +5,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Neodynamic.SDK.Printing;
+using System.IO;
 
 namespace RecOutletWarehouse.Utilities {
     public class WarehouseUtilities {
 
         //TODO: Investigate alternate approaches that would prevent this class's methods
         //from being static
+
+        /// <summary>
+        /// Adds an exception's error text to an error log file.
+        /// </summary>
+        /// <param name="ex">The exception to log.</param>
+        /// Changelog
+        /// Version 1.0 (T.M.) 
+        ///     - Initial creation
+        public static void LogError(Exception ex) {
+            var writepath = "~/Logs/ERRORLOG.txt";
+            StreamWriter errorFile = new StreamWriter(HttpContext.Current.Server.MapPath(writepath), true);
+            string strTimeStamp = DateTime.Now.ToString("dd MMM yyyy HH:mm");
+            errorFile.WriteLine("Error at " + strTimeStamp);
+            errorFile.WriteLine("------------------------");
+            errorFile.WriteLine("Error Text: " + ex);
+            errorFile.WriteLine("------------------------ X -------------------------");
+            errorFile.WriteLine();
+            errorFile.Close();
+        }
 
         public static long GenerateRPC(RecOutletWarehouse.Models.ItemManagement.Item item) {
             DataFetcherSetter db = new DataFetcherSetter();

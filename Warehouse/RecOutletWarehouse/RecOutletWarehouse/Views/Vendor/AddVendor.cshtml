@@ -35,15 +35,25 @@
 
             <td>&nbsp Website: </td>
             <td colspan="5">
-                @Html.TextBoxFor(newVendor => newVendor.Website, new { @class = "VendorWebSite" })
-                @Html.ValidationMessageFor(newVendor => newVendor.Website)
+                @Html.TextBoxFor(newVendor => newVendor.VendorWebsite, new { @class = "VendorWebSite" })
+                @Html.ValidationMessageFor(newVendor => newVendor.VendorWebsite)
             </td>
 
             </tr><tr>
-             <td>&nbsp Address:<strong class="required">*</strong></td>
+            <td>&nbsp Address:<strong class="required">*</strong></td>
             <td>
-                @Html.TextBoxFor(newVendor => newVendor.Address)
-                @Html.ValidationMessageFor(newVendor => newVendor.Address)
+                @Html.TextBoxFor(newVendor => newVendor.VendorAddress)
+                @Html.ValidationMessageFor(newVendor => newVendor.VendorAddress)
+            </td>
+            <td>&nbsp State:<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.VendorState)
+                @Html.ValidationMessageFor(newVendor => newVendor.VendorState)
+            </td>
+            <td>&nbsp Zip:<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.VendorZip)
+                @Html.ValidationMessageFor(newVendor => newVendor.VendorZip)
             </td>
 
 @*            <td>&nbsp City:<strong class="required">*</strong></td>
@@ -51,18 +61,7 @@
                 @Html.TextBoxFor(newVendor => newVendor.City)
                 @Html.ValidationMessageFor(newVendor => newVendor.City)
             </td>
-
-            <td>&nbsp State:<strong class="required">*</strong></td>
-            <td>
-                @Html.TextBoxFor(newVendor => newVendor.State, new { @class = "VendorState" })
-                @Html.ValidationMessageFor(newVendor => newVendor.State)
-            </td>
-
-             <td>&nbsp Zip:<strong class="required">*</strong></td>
-            <td>
-                @Html.TextBoxFor(newVendor => newVendor.Zip, new { @class = "VendorZip" })
-                @Html.ValidationMessageFor(newVendor => newVendor.Zip)
-            </td>*@
+*@
 
             </tr>
             

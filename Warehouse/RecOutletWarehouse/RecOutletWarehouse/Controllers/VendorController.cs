@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using RecOutletWarehouse.Models.VendorManagement;
 using RecOutletWarehouse.Models;
+using RecOutletWarehouse.Utilities;
 using System.Data.Entity.Validation;
 
 namespace RecOutletWarehouse.Controllers
@@ -43,6 +44,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -98,6 +100,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -127,6 +130,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -205,14 +209,20 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
 
 
         public ActionResult BrowseVendors() {
-
-            return View(db.VENDORs.ToList());
+            try {
+                return View(db.VENDORs.ToList());
+            }
+            catch (Exception ex) {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }
