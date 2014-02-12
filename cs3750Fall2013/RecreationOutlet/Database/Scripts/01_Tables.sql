@@ -15,6 +15,7 @@
 --					  changes (And TransLineItems)
 --		  02/01/2014: Chris Parkins - Transaction Line Item table edits
 --		  02/09/2014: Chris Parkins - Phase 2 Warehouse changes
+--		  02/11/2014: Chris Parkins - Added Tax table changes
 --
 -- *********************************************************************
 
@@ -143,7 +144,8 @@ CREATE TABLE [dbo].[ITEM](
 	--[SubcategoryID] [tinyint] NOT NULL,
 	[SubcategoryID] [smallint] NOT NULL,
 	[ProductLineID] [int] NOT NULL,
-	[TaxRateID] [tinyint] NOT NULL,
+	--[TaxRateID] [tinyint] NOT NULL,
+	[TaxTypeID] [tinyint] NOT NULL,
 	[LegacyID] [smallint] NULL,
 	[ItemUPC] [bigint] NULL,
 	[Name] [nvarchar](30) NOT NULL,
@@ -205,8 +207,13 @@ GO
 
 CREATE TABLE [dbo].[LOCATION](
 	[LocationID] [tinyint] IDENTITY(1,1) NOT NULL,
+	[ManagerId] [smallint] NOT NULL,
 	[StoreName] [nvarchar](50) NOT NULL,
-	[ManagerId] [smallint] NOT NULL
+	[Address] [nvarchar](50) NULL,
+	[City] [nvarchar](50) NULL,
+	[State] [char](2) NULL,
+	[Zip] [nvarchar](10) NULL,
+	[Phone] [nvarchar](12) NULL
 ) ON [PRIMARY]
 
 GO
@@ -402,8 +409,22 @@ GO
 
 CREATE TABLE [dbo].[TAX_RATE](
 	[TaxRateID] [tinyint] IDENTITY(1,1) NOT NULL,
-	[TaxRateType] [nvarchar](50) NOT NULL,
-	[TaxRate] [decimal](5, 3) NOT NULL
+	[TaxTypeID] [tinyint] NOT NULL,
+	[LocationID] [tinyint] NULL,
+	[TaxRate] [decimal] NOT NULL, --Is this the correct data type?
+	[StartDate] [smalldatetime] NOT NULL,
+	[EndDate] [smalldatetime] NULL
+) ON [PRIMARY]
+
+GO
+
+/****** Object:  Table [dbo].[TAX_TYPE]    Script Date: 1/15/2014 8:44:22 PM ******/
+
+CREATE TABLE [dbo].[TAX_TYPE](
+	[TaxTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
+	--[TaxRateType] [nvarchar](50) NOT NULL,
+	--[TaxRate] [decimal](5, 3) NOT NULL
+	[TaxTypeName] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 
 GO
