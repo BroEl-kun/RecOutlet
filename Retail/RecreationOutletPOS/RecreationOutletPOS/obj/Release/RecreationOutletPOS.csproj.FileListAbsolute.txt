@@ -1,0 +1,17 @@
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Release\RecreationOutletPOS.exe.config
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Release\RecreationOutletPOS.exe
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\bin\Release\RecreationOutletPOS.pdb
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.csprojResolveAssemblyReference.cache
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.AddItemForm.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.CheckOutForm.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.DeleteItem.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.DiscountForm.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.PriceOverideForm.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.Properties.Resources.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.csproj.GenerateResource.Cache
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.exe
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.pdb
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.Combined.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.PinNumberForm.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.ShowReportForm.resources
+C:\Users\Jaed\Documents\CS 3750\RecreationOutlet\Retail\RecreationOutletPOS\RecreationOutletPOS\obj\Release\RecreationOutletPOS.AddUnknownItemForm.resources
