@@ -17,21 +17,21 @@ namespace RecOutletWarehouse.Models
         }
 
         public long RecRPC { get; set; }
+        public byte CategoryID { get; set; }
+        public byte DepartmentID { get; set; }
+        public short SubcategoryID { get; set; }
+        public int ProductLineID { get; set; }
+        public byte TaxTypeID { get; set; }
+        public Nullable<short> LegacyID { get; set; }
         public Nullable<long> ItemUPC { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public int VendorItemID { get; set; }
-        public int ProductLineID { get; set; }
         public string SeasonCode { get; set; }
         public int ItemID { get; set; }
-        public byte CategoryID { get; set; }
-        public byte DepartmentID { get; set; }
-        public byte SubcategoryID { get; set; }
         public Nullable<decimal> MSRP { get; set; }
         public decimal SellPrice { get; set; }
-        public byte TaxRateID { get; set; }
         public Nullable<byte> RestrictedAge { get; set; }
-        public Nullable<short> LegacyID { get; set; }
         public short ItemCreatedBy { get; set; }
         public System.DateTime ItemCreatedDate { get; set; }
         public virtual ICollection<INVENTORY> INVENTORies { get; set; }
@@ -41,7 +41,7 @@ namespace RecOutletWarehouse.Models
         public virtual ITEM_DEPARTMENT ITEM_DEPARTMENT { get; set; }
         public virtual ITEM_SUBCATEGORY ITEM_SUBCATEGORY { get; set; }
         public virtual PRODUCT_LINE PRODUCT_LINE { get; set; }
-        public virtual TAX_RATE TAX_RATE { get; set; }
+        public virtual TAX_TYPE TAX_TYPE { get; set; }
         public virtual ICollection<MERCHANDISE_TRANSFER> MERCHANDISE_TRANSFER { get; set; }
         public virtual ICollection<PO_LINEITEM> PO_LINEITEM { get; set; }
         public virtual ICollection<SALE_PRICING> SALE_PRICING { get; set; }

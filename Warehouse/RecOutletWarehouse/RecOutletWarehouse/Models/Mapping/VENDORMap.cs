@@ -12,20 +12,33 @@ namespace RecOutletWarehouse.Models.Mapping
 
             // Properties
             this.Property(t => t.VendorName)
-                .IsRequired();
+                .IsRequired()
+                .HasMaxLength(100);
+
+            this.Property(t => t.ContactName)
+                .HasMaxLength(100);
 
             this.Property(t => t.ContactPhone)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(12);
 
             this.Property(t => t.ContactFax)
-                .HasMaxLength(50);
+                .HasMaxLength(12);
 
             this.Property(t => t.AltPhone)
+                .HasMaxLength(12);
+
+            this.Property(t => t.VendorAddress)
                 .HasMaxLength(50);
 
-            this.Property(t => t.Address)
-                .IsRequired();
+            this.Property(t => t.VendorState)
+                .HasMaxLength(2);
+
+            this.Property(t => t.VendorZip)
+                .HasMaxLength(10);
+
+            this.Property(t => t.VendorWebsite)
+                .HasMaxLength(100);
 
             // Table & Column Mappings
             this.ToTable("VENDOR");
@@ -35,8 +48,10 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.ContactPhone).HasColumnName("ContactPhone");
             this.Property(t => t.ContactFax).HasColumnName("ContactFax");
             this.Property(t => t.AltPhone).HasColumnName("AltPhone");
-            this.Property(t => t.Address).HasColumnName("Address");
-            this.Property(t => t.Website).HasColumnName("Website");
+            this.Property(t => t.VendorAddress).HasColumnName("VendorAddress");
+            this.Property(t => t.VendorState).HasColumnName("VendorState");
+            this.Property(t => t.VendorZip).HasColumnName("VendorZip");
+            this.Property(t => t.VendorWebsite).HasColumnName("VendorWebsite");
         }
     }
 }

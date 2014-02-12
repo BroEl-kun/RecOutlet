@@ -16,7 +16,6 @@ namespace RecOutletWarehouse.Models
         {
         }
 
-        public DbSet<BACKORDER> BACKORDERs { get; set; }
         public DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
         public DbSet<EVENT_TYPE> EVENT_TYPE { get; set; }
         public DbSet<EXCEPTION> EXCEPTIONS { get; set; }
@@ -45,12 +44,12 @@ namespace RecOutletWarehouse.Models
         public DbSet<SHIPPING_LOG> SHIPPING_LOG { get; set; }
         public DbSet<STORE_TRANSACTION> STORE_TRANSACTION { get; set; }
         public DbSet<TAX_RATE> TAX_RATE { get; set; }
+        public DbSet<TAX_TYPE> TAX_TYPE { get; set; }
         public DbSet<TRANSACTION_LINEITEM> TRANSACTION_LINEITEM { get; set; }
         public DbSet<VENDOR> VENDORs { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new BACKORDERMap());
             modelBuilder.Configurations.Add(new EMPLOYEEMap());
             modelBuilder.Configurations.Add(new EVENT_TYPEMap());
             modelBuilder.Configurations.Add(new EXCEPTIONMap());
@@ -79,6 +78,7 @@ namespace RecOutletWarehouse.Models
             modelBuilder.Configurations.Add(new SHIPPING_LOGMap());
             modelBuilder.Configurations.Add(new STORE_TRANSACTIONMap());
             modelBuilder.Configurations.Add(new TAX_RATEMap());
+            modelBuilder.Configurations.Add(new TAX_TYPEMap());
             modelBuilder.Configurations.Add(new TRANSACTION_LINEITEMMap());
             modelBuilder.Configurations.Add(new VENDORMap());
         }

@@ -11,15 +11,23 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasKey(t => t.TaxRateID);
 
             // Properties
-            this.Property(t => t.TaxRateType)
-                .IsRequired()
-                .HasMaxLength(50);
-
             // Table & Column Mappings
             this.ToTable("TAX_RATE");
             this.Property(t => t.TaxRateID).HasColumnName("TaxRateID");
-            this.Property(t => t.TaxRateType).HasColumnName("TaxRateType");
+            this.Property(t => t.TaxTypeID).HasColumnName("TaxTypeID");
+            this.Property(t => t.LocationID).HasColumnName("LocationID");
             this.Property(t => t.TaxRate).HasColumnName("TaxRate");
+            this.Property(t => t.StartDate).HasColumnName("StartDate");
+            this.Property(t => t.EndDate).HasColumnName("EndDate");
+
+            // Relationships
+            this.HasOptional(t => t.LOCATION)
+                .WithMany(t => t.TAX_RATE)
+                .HasForeignKey(d => d.LocationID);
+            this.HasRequired(t => t.TAX_TYPE)
+                .WithMany(t => t.TAX_RATE)
+                .HasForeignKey(d => d.TaxTypeID);
+
         }
     }
 }

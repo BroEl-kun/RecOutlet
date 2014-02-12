@@ -35,6 +35,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.POTerms).HasColumnName("POTerms");
             this.Property(t => t.POComments).HasColumnName("POComments");
             this.Property(t => t.ShippingID).HasColumnName("ShippingID");
+            this.Property(t => t.POCancelIfNotReceivedBy).HasColumnName("POCancelIfNotReceivedBy");
 
             // Relationships
             this.HasRequired(t => t.EMPLOYEE)

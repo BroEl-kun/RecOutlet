@@ -20,6 +20,7 @@ namespace RecOutletWarehouse.Models
         public string POTerms { get; set; }
         public string POComments { get; set; }
         public Nullable<int> ShippingID { get; set; }
+        public Nullable<System.DateTime> POCancelIfNotReceivedBy { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual ICollection<PO_LINEITEM> PO_LINEITEM { get; set; }
         public virtual VENDOR VENDOR { get; set; }

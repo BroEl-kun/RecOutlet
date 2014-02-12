@@ -8,16 +8,15 @@ namespace RecOutletWarehouse.Models.Mapping
         public INVENTORYMap()
         {
             // Primary Key
-            this.HasKey(t => new { t.StoreID, t.RecRPC });
+            this.HasKey(t => t.InventoryID);
 
             // Properties
-            this.Property(t => t.RecRPC)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             // Table & Column Mappings
             this.ToTable("INVENTORY");
-            this.Property(t => t.StoreID).HasColumnName("StoreID");
+            this.Property(t => t.InventoryID).HasColumnName("InventoryID");
+            this.Property(t => t.LocationID).HasColumnName("LocationID");
             this.Property(t => t.RecRPC).HasColumnName("RecRPC");
+            this.Property(t => t.QtyTypeID).HasColumnName("QtyTypeID");
             this.Property(t => t.QtyOnHand).HasColumnName("QtyOnHand");
             this.Property(t => t.QtyThreshold).HasColumnName("QtyThreshold");
 
@@ -27,7 +26,10 @@ namespace RecOutletWarehouse.Models.Mapping
                 .HasForeignKey(d => d.RecRPC);
             this.HasRequired(t => t.LOCATION)
                 .WithMany(t => t.INVENTORies)
-                .HasForeignKey(d => d.StoreID);
+                .HasForeignKey(d => d.LocationID);
+            this.HasRequired(t => t.QTY_TYPE)
+                .WithMany(t => t.INVENTORies)
+                .HasForeignKey(d => d.QtyTypeID);
 
         }
     }

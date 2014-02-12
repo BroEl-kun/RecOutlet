@@ -12,6 +12,7 @@ namespace RecOutletWarehouse.Models
 
         public byte DepartmentID { get; set; }
         public string DepartmentName { get; set; }
+        public string DepartmentDescription { get; set; }
         public virtual ICollection<ITEM> ITEMs { get; set; }
     }
 }

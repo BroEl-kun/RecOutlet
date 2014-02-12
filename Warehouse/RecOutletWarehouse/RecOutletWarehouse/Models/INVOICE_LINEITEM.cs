@@ -8,9 +8,12 @@ namespace RecOutletWarehouse.Models
         public int InvoiceLineItemID { get; set; }
         public long InvoiceID { get; set; }
         public long RecRPC { get; set; }
-        public decimal InvoicePrice { get; set; }
-        public short InvoiceItemQuantity { get; set; }
+        public byte QtyTypeID { get; set; }
+        public byte ItemQty { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal UnitCost { get; set; }
         public virtual INVOICE INVOICE { get; set; }
         public virtual ITEM ITEM { get; set; }
+        public virtual QTY_TYPE QTY_TYPE { get; set; }
     }
 }

@@ -11,9 +11,9 @@ namespace RecOutletWarehouse.Models
         }
 
         public int ProductLineID { get; set; }
-        public string ProductLineName { get; set; }
         public short VendorID { get; set; }
         public short RepID { get; set; }
+        public string ProductLineName { get; set; }
         public virtual ICollection<ITEM> ITEMs { get; set; }
         public virtual SALES_REP SALES_REP { get; set; }
         public virtual VENDOR VENDOR { get; set; }

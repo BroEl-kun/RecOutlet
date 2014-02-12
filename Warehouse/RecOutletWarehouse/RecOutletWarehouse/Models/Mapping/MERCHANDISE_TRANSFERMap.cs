@@ -11,9 +11,6 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasKey(t => t.TransferID);
 
             // Properties
-            this.Property(t => t.TransferID)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             // Table & Column Mappings
             this.ToTable("MERCHANDISE_TRANSFER");
             this.Property(t => t.TransferID).HasColumnName("TransferID");

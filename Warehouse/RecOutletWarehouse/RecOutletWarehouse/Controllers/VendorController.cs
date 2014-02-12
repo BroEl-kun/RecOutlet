@@ -208,6 +208,12 @@ namespace RecOutletWarehouse.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+
+
+        public ActionResult BrowseVendors() {
+
+            return View(db.VENDORs.ToList());
+        }
     }
 }
 
