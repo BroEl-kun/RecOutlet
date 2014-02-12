@@ -134,7 +134,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BACKORDER.cs" />
     <Compile Include="Models\DataFetcherSetter.cs" />
     <Compile Include="Models\EMPLOYEE.cs" />
     <Compile Include="Models\EVENT_TYPE.cs" />
@@ -154,7 +153,6 @@
     <Compile Include="Models\ITEM_IMAGE.cs" />
     <Compile Include="Models\ITEM_SUBCATEGORY.cs" />
     <Compile Include="Models\LOCATION.cs" />
-    <Compile Include="Models\Mapping\BACKORDERMap.cs" />
     <Compile Include="Models\Mapping\EMPLOYEEMap.cs" />
     <Compile Include="Models\Mapping\EVENT_TYPEMap.cs" />
     <Compile Include="Models\Mapping\EXCEPTIONMap.cs" />
@@ -183,6 +181,7 @@
     <Compile Include="Models\Mapping\SHIPPING_LOGMap.cs" />
     <Compile Include="Models\Mapping\STORE_TRANSACTIONMap.cs" />
     <Compile Include="Models\Mapping\TAX_RATEMap.cs" />
+    <Compile Include="Models\Mapping\TAX_TYPEMap.cs" />
     <Compile Include="Models\Mapping\TRANSACTION_LINEITEMMap.cs" />
     <Compile Include="Models\Mapping\VENDORMap.cs" />
     <Compile Include="Models\MERCHANDISE_TRANSFER.cs" />
@@ -201,6 +200,7 @@
     <Compile Include="Models\SHIPPING_LOG.cs" />
     <Compile Include="Models\STORE_TRANSACTION.cs" />
     <Compile Include="Models\TAX_RATE.cs" />
+    <Compile Include="Models\TAX_TYPE.cs" />
     <Compile Include="Models\TRANSACTION_LINEITEM.cs" />
     <Compile Include="Models\VENDOR.cs" />
     <Compile Include="Models\VendorManagement\ProductLine.cs" />
@@ -315,6 +315,7 @@
     <Content Include="Views\ReceivingLog\Index.cshtml" />
     <Content Include="Views\Shared\Popups\AddVendorPop.cshtml" />
     <Content Include="Views\ItemManagement\addNewDeptCatSubcat.cshtml" />
+    <Content Include="Views\Vendor\BrowseVendors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,21 +27,21 @@ namespace RecOutletWarehouse.Models.Mapping
             // Table & Column Mappings
             this.ToTable("ITEM");
             this.Property(t => t.RecRPC).HasColumnName("RecRPC");
+            this.Property(t => t.CategoryID).HasColumnName("CategoryID");
+            this.Property(t => t.DepartmentID).HasColumnName("DepartmentID");
+            this.Property(t => t.SubcategoryID).HasColumnName("SubcategoryID");
+            this.Property(t => t.ProductLineID).HasColumnName("ProductLineID");
+            this.Property(t => t.TaxTypeID).HasColumnName("TaxTypeID");
+            this.Property(t => t.LegacyID).HasColumnName("LegacyID");
             this.Property(t => t.ItemUPC).HasColumnName("ItemUPC");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.VendorItemID).HasColumnName("VendorItemID");
-            this.Property(t => t.ProductLineID).HasColumnName("ProductLineID");
             this.Property(t => t.SeasonCode).HasColumnName("SeasonCode");
             this.Property(t => t.ItemID).HasColumnName("ItemID");
-            this.Property(t => t.CategoryID).HasColumnName("CategoryID");
-            this.Property(t => t.DepartmentID).HasColumnName("DepartmentID");
-            this.Property(t => t.SubcategoryID).HasColumnName("SubcategoryID");
             this.Property(t => t.MSRP).HasColumnName("MSRP");
             this.Property(t => t.SellPrice).HasColumnName("SellPrice");
-            this.Property(t => t.TaxRateID).HasColumnName("TaxRateID");
             this.Property(t => t.RestrictedAge).HasColumnName("RestrictedAge");
-            this.Property(t => t.LegacyID).HasColumnName("LegacyID");
             this.Property(t => t.ItemCreatedBy).HasColumnName("ItemCreatedBy");
             this.Property(t => t.ItemCreatedDate).HasColumnName("ItemCreatedDate");
 
@@ -58,9 +58,9 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasRequired(t => t.PRODUCT_LINE)
                 .WithMany(t => t.ITEMs)
                 .HasForeignKey(d => d.ProductLineID);
-            this.HasRequired(t => t.TAX_RATE)
+            this.HasRequired(t => t.TAX_TYPE)
                 .WithMany(t => t.ITEMs)
-                .HasForeignKey(d => d.TaxRateID);
+                .HasForeignKey(d => d.TaxTypeID);
 
         }
     }

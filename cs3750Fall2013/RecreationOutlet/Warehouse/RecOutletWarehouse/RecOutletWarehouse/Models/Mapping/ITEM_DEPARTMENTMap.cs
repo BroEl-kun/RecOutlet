@@ -19,6 +19,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.ToTable("ITEM_DEPARTMENT");
             this.Property(t => t.DepartmentID).HasColumnName("DepartmentID");
             this.Property(t => t.DepartmentName).HasColumnName("DepartmentName");
+            this.Property(t => t.DepartmentDescription).HasColumnName("DepartmentDescription");
         }
     }
 }

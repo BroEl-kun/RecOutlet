@@ -17,8 +17,10 @@ namespace RecOutletWarehouse.Models
         public string ContactPhone { get; set; }
         public string ContactFax { get; set; }
         public string AltPhone { get; set; }
-        public string Address { get; set; }
-        public string Website { get; set; }
+        public string VendorAddress { get; set; }
+        public string VendorState { get; set; }
+        public string VendorZip { get; set; }
+        public string VendorWebsite { get; set; }
         public virtual ICollection<PRODUCT_LINE> PRODUCT_LINE { get; set; }
         public virtual ICollection<PURCHASE_ORDER> PURCHASE_ORDER { get; set; }
     }

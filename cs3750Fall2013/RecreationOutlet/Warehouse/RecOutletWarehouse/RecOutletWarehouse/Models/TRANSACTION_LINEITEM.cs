@@ -12,13 +12,13 @@ namespace RecOutletWarehouse.Models
 
         public int TransactionLineItemID { get; set; }
         public int TransactionID { get; set; }
-        public byte StoreID { get; set; }
         public long RecRPC { get; set; }
         public short Quantity { get; set; }
-        public decimal SaleEach { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal UnitCost { get; set; }
         public short CommissionEmployeeID { get; set; }
-        public Nullable<int> OverrideCode { get; set; }
-        public Nullable<int> RefundCode { get; set; }
+        public decimal ItemTaxTotal { get; set; }
+        public decimal ItemTotal { get; set; }
         public virtual ICollection<EXCEPTION> EXCEPTIONS { get; set; }
         public virtual ITEM ITEM { get; set; }
         public virtual STORE_TRANSACTION STORE_TRANSACTION { get; set; }

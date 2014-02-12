@@ -5,12 +5,8 @@ namespace RecOutletWarehouse.Models
 {
     public partial class SHIPPING_LOG
     {
-        public SHIPPING_LOG()
-        {
-            this.INVOICEs = new List<INVOICE>();
-        }
-
         public int ShippingID { get; set; }
+        public long InvoiceID { get; set; }
         public string ShippingNotes { get; set; }
         public decimal ShippingFrieghtCost { get; set; }
         public string Attention { get; set; }
@@ -19,6 +15,6 @@ namespace RecOutletWarehouse.Models
         public string ShipSource { get; set; }
         public string TrackingNum { get; set; }
         public string FreightProvider { get; set; }
-        public virtual ICollection<INVOICE> INVOICEs { get; set; }
+        public virtual INVOICE INVOICE { get; set; }
     }
 }

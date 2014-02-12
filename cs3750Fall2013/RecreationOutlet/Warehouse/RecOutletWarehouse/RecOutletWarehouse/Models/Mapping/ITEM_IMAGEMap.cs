@@ -11,10 +11,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasKey(t => t.ItemImageID);
 
             // Properties
-            this.Property(t => t.ItemImageID)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-            this.Property(t => t.ItemPath)
+            this.Property(t => t.ItemImagePath)
                 .IsRequired()
                 .HasMaxLength(256);
 
@@ -22,7 +19,8 @@ namespace RecOutletWarehouse.Models.Mapping
             this.ToTable("ITEM_IMAGE");
             this.Property(t => t.ItemImageID).HasColumnName("ItemImageID");
             this.Property(t => t.RecRPC).HasColumnName("RecRPC");
-            this.Property(t => t.ItemPath).HasColumnName("ItemPath");
+            this.Property(t => t.ItemImagePath).HasColumnName("ItemImagePath");
+            this.Property(t => t.ItemImageDescription).HasColumnName("ItemImageDescription");
 
             // Relationships
             this.HasRequired(t => t.ITEM)

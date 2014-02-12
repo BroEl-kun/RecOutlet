@@ -12,6 +12,7 @@ namespace RecOutletWarehouse.Models
 
         public byte CategoryID { get; set; }
         public string CategoryName { get; set; }
+        public string CategoryDescription { get; set; }
         public virtual ICollection<ITEM> ITEMs { get; set; }
     }
 }

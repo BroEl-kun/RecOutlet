@@ -10,7 +10,7 @@ namespace RecOutletWarehouse.Models
             this.ITEMs = new List<ITEM>();
         }
 
-        public byte SubcategoryID { get; set; }
+        public short SubcategoryID { get; set; }
         public string SubcategoryName { get; set; }
         public virtual ICollection<ITEM> ITEMs { get; set; }
     }

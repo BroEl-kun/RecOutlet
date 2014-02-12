@@ -15,24 +15,23 @@ namespace RecOutletWarehouse.Models.Mapping
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             this.Property(t => t.Attention)
-                .IsRequired();
+                .HasMaxLength(50);
 
             this.Property(t => t.InvoiceNotes)
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             // Table & Column Mappings
             this.ToTable("INVOICE");
             this.Property(t => t.InvoiceID).HasColumnName("InvoiceID");
             this.Property(t => t.CustomerID).HasColumnName("CustomerID");
-            this.Property(t => t.ShippingID).HasColumnName("ShippingID");
-            this.Property(t => t.Attention).HasColumnName("Attention");
-            this.Property(t => t.PaymentDue).HasColumnName("PaymentDue");
-            this.Property(t => t.SalesTaxDue).HasColumnName("SalesTaxDue");
-            this.Property(t => t.DatePaid).HasColumnName("DatePaid");
-            this.Property(t => t.AmountPaid).HasColumnName("AmountPaid");
-            this.Property(t => t.InvoiceNotes).HasColumnName("InvoiceNotes");
             this.Property(t => t.InvoiceCreatedBy).HasColumnName("InvoiceCreatedBy");
             this.Property(t => t.InvoiceCreatedDate).HasColumnName("InvoiceCreatedDate");
+            this.Property(t => t.Attention).HasColumnName("Attention");
+            this.Property(t => t.TotalSalesTax).HasColumnName("TotalSalesTax");
+            this.Property(t => t.TotalAmount).HasColumnName("TotalAmount");
+            this.Property(t => t.TotalAmountPaid).HasColumnName("TotalAmountPaid");
+            this.Property(t => t.LastPaymentReceived).HasColumnName("LastPaymentReceived");
+            this.Property(t => t.InvoiceNotes).HasColumnName("InvoiceNotes");
 
             // Relationships
             this.HasRequired(t => t.EMPLOYEE)
@@ -41,9 +40,6 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasRequired(t => t.INVOICE_CUSTOMER)
                 .WithMany(t => t.INVOICEs)
                 .HasForeignKey(d => d.CustomerID);
-            this.HasRequired(t => t.SHIPPING_LOG)
-                .WithMany(t => t.INVOICEs)
-                .HasForeignKey(d => d.ShippingID);
 
         }
     }

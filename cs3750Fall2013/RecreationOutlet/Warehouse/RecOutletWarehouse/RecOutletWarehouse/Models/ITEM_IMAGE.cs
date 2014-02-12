@@ -7,7 +7,8 @@ namespace RecOutletWarehouse.Models
     {
         public int ItemImageID { get; set; }
         public long RecRPC { get; set; }
-        public string ItemPath { get; set; }
+        public string ItemImagePath { get; set; }
+        public string ItemImageDescription { get; set; }
         public virtual ITEM ITEM { get; set; }
     }
 }

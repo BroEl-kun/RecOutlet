@@ -16,9 +16,9 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.POLineItemID).HasColumnName("POLineItemID");
             this.Property(t => t.POID).HasColumnName("POID");
             this.Property(t => t.RecRPC).HasColumnName("RecRPC");
+            this.Property(t => t.QtyTypeID).HasColumnName("QtyTypeID");
             this.Property(t => t.WholesaleCost).HasColumnName("WholesaleCost");
             this.Property(t => t.QtyOrdered).HasColumnName("QtyOrdered");
-            this.Property(t => t.QtyTypeID).HasColumnName("QtyTypeID");
 
             // Relationships
             this.HasRequired(t => t.ITEM)

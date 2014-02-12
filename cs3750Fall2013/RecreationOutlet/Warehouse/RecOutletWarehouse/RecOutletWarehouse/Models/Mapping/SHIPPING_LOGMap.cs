@@ -30,6 +30,7 @@ namespace RecOutletWarehouse.Models.Mapping
             // Table & Column Mappings
             this.ToTable("SHIPPING_LOG");
             this.Property(t => t.ShippingID).HasColumnName("ShippingID");
+            this.Property(t => t.InvoiceID).HasColumnName("InvoiceID");
             this.Property(t => t.ShippingNotes).HasColumnName("ShippingNotes");
             this.Property(t => t.ShippingFrieghtCost).HasColumnName("ShippingFrieghtCost");
             this.Property(t => t.Attention).HasColumnName("Attention");
@@ -38,6 +39,12 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.ShipSource).HasColumnName("ShipSource");
             this.Property(t => t.TrackingNum).HasColumnName("TrackingNum");
             this.Property(t => t.FreightProvider).HasColumnName("FreightProvider");
+
+            // Relationships
+            this.HasRequired(t => t.INVOICE)
+                .WithMany(t => t.SHIPPING_LOG)
+                .HasForeignKey(d => d.InvoiceID);
+
         }
     }
 }

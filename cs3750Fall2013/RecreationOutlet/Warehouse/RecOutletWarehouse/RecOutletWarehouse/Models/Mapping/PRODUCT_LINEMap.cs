@@ -18,9 +18,9 @@ namespace RecOutletWarehouse.Models.Mapping
             // Table & Column Mappings
             this.ToTable("PRODUCT_LINE");
             this.Property(t => t.ProductLineID).HasColumnName("ProductLineID");
-            this.Property(t => t.ProductLineName).HasColumnName("ProductLineName");
             this.Property(t => t.VendorID).HasColumnName("VendorID");
             this.Property(t => t.RepID).HasColumnName("RepID");
+            this.Property(t => t.ProductLineName).HasColumnName("ProductLineName");
 
             // Relationships
             this.HasRequired(t => t.SALES_REP)
