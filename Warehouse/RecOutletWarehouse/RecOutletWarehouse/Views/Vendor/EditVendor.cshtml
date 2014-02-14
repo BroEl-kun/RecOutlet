@@ -12,12 +12,12 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>VENDOR</legend>
+        <legend>Vendor Information</legend>
 
         @Html.HiddenFor(model => model.VendorID)
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.VendorName)
+            Vendor Name
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.VendorName)
@@ -25,7 +25,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ContactName)
+            Contact Person
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ContactName)
@@ -33,7 +33,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ContactPhone)
+            Contact Person's Phone
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ContactPhone)
@@ -41,7 +41,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ContactFax)
+            Contact Person's Fax
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ContactFax)
@@ -49,7 +49,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AltPhone)
+            Alternate Vendor Phone
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.AltPhone)
@@ -57,7 +57,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.VendorAddress)
+            Vendor's Street Address
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.VendorAddress)
@@ -65,7 +65,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.VendorState)
+            Vendor's State (if applicable)
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.VendorState)
@@ -73,7 +73,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.VendorZip)
+            Vendor's Postal/ZIP Code
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.VendorZip)
@@ -81,7 +81,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.VendorWebsite)
+            Vendor's Website
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.VendorWebsite)

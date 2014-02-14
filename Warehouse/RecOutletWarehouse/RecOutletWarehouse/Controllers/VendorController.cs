@@ -218,7 +218,7 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult BrowseVendors() {
             try {
-                return View(db.VENDORs.ToList());
+                return View(db.VENDORs.OrderBy(v => v.VendorName).ToList());
             }
             catch (Exception ex) {
                 WarehouseUtilities.LogError(ex);
