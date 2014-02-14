@@ -319,6 +319,9 @@
     <Content Include="Views\Shared\Popups\AddVendorPop.cshtml" />
     <Content Include="Views\ItemManagement\addNewDeptCatSubcat.cshtml" />
     <Content Include="Views\Vendor\BrowseVendors.cshtml" />
+    <Content Include="Views\Vendor\VendorDetail.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Vendor\EditVendor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

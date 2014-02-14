@@ -40,7 +40,7 @@ namespace RecOutletWarehouse.Models
         public DbSet<RECEIVING_LOG> RECEIVING_LOG { get; set; }
         public DbSet<REFUND_CODE> REFUND_CODE { get; set; }
         public DbSet<SALE_PRICING> SALE_PRICING { get; set; }
-        public DbSet<SALES_REP> SALES_REP { get; set; }
+        public DbSet<SALES_REP> SALES_REPs { get; set; }
         public DbSet<SHIPPING_LOG> SHIPPING_LOG { get; set; }
         public DbSet<STORE_TRANSACTION> STORE_TRANSACTION { get; set; }
         public DbSet<TAX_RATE> TAX_RATE { get; set; }

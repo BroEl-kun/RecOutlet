@@ -8,6 +8,7 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
+        <li>@Html.ActionLink("Browse Vendors", "BrowseVendors")</li>
         <li>@Html.ActionLink("Add a Vendor", "AddVendor")</li>
         <li class="active">@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
         <li>@Html.ActionLink("Manage Sales Reps","ManageReps")</li>
@@ -101,7 +102,7 @@
                         return {
                             label: item.VendorName
                         }
-                    }));
+                    }).slice(0,10));
                 }
             })
         },
