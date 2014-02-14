@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RecOutletWarehouse.Models.VendorManagement;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Utilities;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 
 namespace RecOutletWarehouse.Controllers
@@ -175,7 +176,7 @@ namespace RecOutletWarehouse.Controllers
                 // if the user chose to create a new rep...
                 if (existingrep == "No")
                 {
-                    db.SALES_REP.Add(pl.rep);
+                    db.SALES_REPs.Add(pl.rep);
                     db.SaveChanges();
 
                     // TODO: Check for duplications and only set success message when db is successfully updated
@@ -183,13 +184,13 @@ namespace RecOutletWarehouse.Controllers
                     //if (insertSuccessCode != 0) { //TODO: Check for exceptions
                     //}
                     //else {
-                    pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.RepID == pl.rep.RepID); // A new rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on new rep's ID
+                    pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.RepID == pl.rep.RepID); // A new rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on new rep's ID
                     ViewBag.RepSuccess = "New Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                     //}
                 }
                 else
                 {
-                    pl.productLine.SALES_REP = db.SALES_REP.Single(sr => sr.SalesRepName == pl.productLine.SALES_REP.SalesRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
+                    pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.SalesRepName == pl.productLine.SALES_REP.SalesRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
                     ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                 }
 
@@ -223,6 +224,55 @@ namespace RecOutletWarehouse.Controllers
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        /// <summary>
+        /// GET method for Vendor Details
+        /// </summary>
+        /// <param name="id">The VendorID of the Vendor we want the details for.</param>
+        /// <returns></returns>
+        public ActionResult VendorDetail(int id = 0) {
+            try {
+                VENDOR vendor = db.VENDORs.Find(id);
+                if (vendor == null) {
+                    return HttpNotFound();
+                }
+
+                return View(vendor);
+            }
+            catch (Exception ex) {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        /// <summary>
+        /// GET Method for editing a vendor
+        /// </summary>
+        /// <param name="id">The VendorID of the vendor to edit</param>
+        /// <returns>The EditVendor View, prefilled with the vendor information.</returns>
+        public ActionResult EditVendor(int id = 0) {
+            VENDOR vendor = db.VENDORs.Find(id);
+            if (vendor == null) {
+                return HttpNotFound();
+            }
+            return View(vendor);
+        }
+
+        /// <summary>
+        /// POST method for editing a vendor
+        /// </summary>
+        /// <param name="vendor">The vendor object that is modified</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditVendor(VENDOR vendor) {
+            if (ModelState.IsValid) {
+                db.Entry(vendor).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("BrowseVendors");
+            }
+
+            return View(vendor);
         }
     }
 }

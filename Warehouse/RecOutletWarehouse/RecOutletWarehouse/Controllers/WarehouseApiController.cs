@@ -13,11 +13,12 @@ namespace RecOutletWarehouse.Controllers
     public class VendorApiController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Vendor> GetVendors(string query = "")
+        public IEnumerable<VENDOR> GetVendors(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            List<Vendor> vendors = db.SearchVendorByName(query);
-            return vendors;
+            using (var db = new RecreationOutletContext()) {
+                return String.IsNullOrEmpty(query) ? db.VENDORs.ToList() :
+                db.VENDORs.Where(p => p.VendorName.Contains(query)).ToList();
+            }
         }
     }
 
@@ -65,10 +66,12 @@ namespace RecOutletWarehouse.Controllers
     public class SalesRepApiController : ApiController
     {
         [HttpGet]
-        public IEnumerable<SalesRep> GetSalesReps(string query = "")
+        public IEnumerable<SALES_REP> GetSalesReps(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            return db.SearchRepsByName(query);
+            using (var db = new RecreationOutletContext()) {
+                return String.IsNullOrEmpty(query) ? db.SALES_REPs.ToList() :
+                db.SALES_REPs.Where(p => p.SalesRepName.Contains(query)).ToList();
+            }
         }
     }
 

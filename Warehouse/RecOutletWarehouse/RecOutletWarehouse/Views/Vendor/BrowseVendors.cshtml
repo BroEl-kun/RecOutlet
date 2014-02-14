@@ -5,41 +5,36 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>BrowseVendors</h2>
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Browse Vendors", "BrowseVendors")</li>
+        <li>@Html.ActionLink("Add a Vendor", "AddVendor")</li>
+        <li>@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
+        <li>@Html.ActionLink("Manage Sales Reps","ManageReps")</li>
+    </ul>  
+}
 
-<p>
+<h2>Vendors</h2>
+<h3>
     @Html.ActionLink("Create New", "AddVendor")
-</p>
+</h3>
+<h3>Search</h3>
+<h3>Rolodex</h3>
+
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.VendorName)
+            Vendor Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactName)
+            Contact
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactPhone)
+            Contact's Phone
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactFax)
+            Vendor Website
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AltPhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorState)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorZip)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VendorWebsite)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -54,27 +49,11 @@
             @Html.DisplayFor(modelItem => item.ContactPhone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ContactFax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AltPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VendorZip)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.VendorWebsite)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VendorID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VendorID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VendorID })
+            @Html.ActionLink("Edit", "EditVendor", new { id=item.VendorID }) |
+            @Html.ActionLink("Details", "VendorDetail", new { id=item.VendorID })
         </td>
     </tr>
 }

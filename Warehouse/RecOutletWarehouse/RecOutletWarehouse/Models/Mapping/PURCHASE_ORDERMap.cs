@@ -41,9 +41,9 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasRequired(t => t.EMPLOYEE)
                 .WithMany(t => t.PURCHASE_ORDER)
                 .HasForeignKey(d => d.POCreatedBy);
-            this.HasRequired(t => t.VENDOR)
-                .WithMany(t => t.PURCHASE_ORDER)
-                .HasForeignKey(d => d.VendorID);
+            //this.HasRequired(t => t.VENDOR)
+            //    .WithMany(t => t.PURCHASE_ORDER)
+            //    .HasForeignKey(d => d.VendorID);
 
         }
     }
