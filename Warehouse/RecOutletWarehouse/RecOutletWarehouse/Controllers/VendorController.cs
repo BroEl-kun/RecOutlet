@@ -24,15 +24,6 @@ namespace RecOutletWarehouse.Controllers
             public SALES_REP rep { get; set; }
         }
 
-        public class PagingInfo {
-            public int TotalItems { get; set; }
-            public int ItemsPerPage { get; set; }
-            public int CurrentPage { get; set; }
-            public int TotalPages {
-                get { return (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage); }
-            }
-        }
-
         public class BrowseVendorViewModel {
             public IEnumerable<VENDOR> Vendors { get; set; }
             public PagingInfo PagingInfo { get; set; }
@@ -232,17 +223,31 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-
+        /// <summary>
+        /// This method renders a browsing and searching View for the list of VENDORs.
+        /// It can take a number of parameters to filter this list.
+        /// </summary>
+        /// <param name="venNameSearch">If provided, this filters the list to items that contain it.</param>
+        /// <param name="firstLetter">If provided, this filters the list to items that start with it.</param>
+        /// <param name="page">Navigates to a specific page; works in tandem with filtering variables.</param>
+        /// <returns>The View containing the list.</returns>
         public ActionResult BrowseVendors(string venNameSearch, string firstLetter, int page = 1) {
             try {
+                // Declare model
                 BrowseVendorViewModel model;
+
+                // Create master list
                 var vendors = from v in db.VENDORs
                               select v;
 
-                if (!String.IsNullOrEmpty(firstLetter)) {
+                // Filter master list to only those members that start with a certain letter
+                // First letter is defined by rolodex selection in View
+                // For now, we want it to only filter if there is no search query
+                if (!String.IsNullOrEmpty(firstLetter) && String.IsNullOrEmpty(venNameSearch)) {
                     vendors = vendors.Where(v => v.VendorName.ToUpper().StartsWith(firstLetter));
                 }
 
+                // IF the user doesn't provide a search query...
                 if (String.IsNullOrEmpty(venNameSearch)) {
                     model = new BrowseVendorViewModel {
                         Vendors = vendors
@@ -252,25 +257,28 @@ namespace RecOutletWarehouse.Controllers
                         PagingInfo = new PagingInfo {
                             CurrentPage = page,
                             ItemsPerPage = BrowsePageSize,
-                            TotalItems = vendors.Count()
+                            TotalItems = vendors.Count() // Get the count of the FILTERED list
                         },
-                        startLetter = firstLetter
+                        startLetter = firstLetter // The starting letter needs to be passed to the View
+                                                  // so the View can pass it back to the Controller.
+                                                  // If not included, pagination will not work correctly.
                     };
                 }
+                // ELSE (the user did provide a search query)
                 else {
                     model = new BrowseVendorViewModel {
                         Vendors = vendors
-                                  .Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper()))
-                                  .OrderBy(v => v.VendorName)
+                                  .Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())) // Further filter the list to items that contain the search
+                                  .OrderBy(v => v.VendorName) // This is likely unnecessary (vendors is already sorted), but I'm leaving it here for now
                                   .Skip((page - 1) * BrowsePageSize)
                                   .Take(BrowsePageSize),
                         PagingInfo = new PagingInfo {
                             CurrentPage = page,
                             ItemsPerPage = BrowsePageSize,
-                            TotalItems = vendors.Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())).Count()
+                            TotalItems = vendors.Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())).Count() // Again, we want the count to take our filters into account
                         },
                         search = venNameSearch
-                        //startLetter = firstLetter // leaving out -- it gives results the user might not expect
+                        //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
                     };
                 }
                 return View(model);
