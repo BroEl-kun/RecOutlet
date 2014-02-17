@@ -292,3 +292,44 @@ input[type="checkbox"].input-validation-error {
 }
 
 /*End test styles*/
+
+/*Begin Pager styles*/
+div.pager {
+    text-align:right;
+    border-top: 2px solid silver;
+    padding: .5em 0 0 0;
+    margin-top: 1em;
+}
+
+div.pager a{
+    font-size: 1.1em;
+    color: #624118;
+    text-decoration:none;
+    padding: 0 .4em 0 .4em;
+}
+
+div.pager a:hover{
+    background-color:silver;
+}
+
+div.pager a.selected{
+    background-color: #353535;
+    color:white;
+}
+
+/* End pager styles*/
+
+/* Start  rolodex styles */
+div.roloLinks{
+    border-top:none;
+    border-bottom: 2px solid silver;
+}
+/* End rolodex styles */
+
+/* Start search styles */
+.searchTotal{
+    font-size:.9em;
+    font-style:italic;
+    color:silver;
+
+}
