@@ -16,11 +16,28 @@ namespace RecOutletWarehouse.Controllers
     {
         private RecreationOutletContext db = new RecreationOutletContext();
         private DataFetcherSetter dfs = new DataFetcherSetter();
+        public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
 
         public class ProductLineSalesRepViewModel
         {
             public PRODUCT_LINE productLine { get; set; }
             public SALES_REP rep { get; set; }
+        }
+
+        public class PagingInfo {
+            public int TotalItems { get; set; }
+            public int ItemsPerPage { get; set; }
+            public int CurrentPage { get; set; }
+            public int TotalPages {
+                get { return (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage); }
+            }
+        }
+
+        public class BrowseVendorViewModel {
+            public IEnumerable<VENDOR> Vendors { get; set; }
+            public PagingInfo PagingInfo { get; set; }
+            public string search { get; set; }
+            public string startLetter { get; set; }
         }
 
         //
@@ -216,9 +233,47 @@ namespace RecOutletWarehouse.Controllers
         }
 
 
-        public ActionResult BrowseVendors() {
+        public ActionResult BrowseVendors(string venNameSearch, string firstLetter, int page = 1) {
             try {
-                return View(db.VENDORs.OrderBy(v => v.VendorName).ToList());
+                BrowseVendorViewModel model;
+                var vendors = from v in db.VENDORs
+                              select v;
+
+                if (!String.IsNullOrEmpty(firstLetter)) {
+                    vendors = vendors.Where(v => v.VendorName.ToUpper().StartsWith(firstLetter));
+                }
+
+                if (String.IsNullOrEmpty(venNameSearch)) {
+                    model = new BrowseVendorViewModel {
+                        Vendors = vendors
+                                  .OrderBy(v => v.VendorName)
+                                  .Skip((page - 1) * BrowsePageSize)
+                                  .Take(BrowsePageSize),
+                        PagingInfo = new PagingInfo {
+                            CurrentPage = page,
+                            ItemsPerPage = BrowsePageSize,
+                            TotalItems = vendors.Count()
+                        },
+                        startLetter = firstLetter
+                    };
+                }
+                else {
+                    model = new BrowseVendorViewModel {
+                        Vendors = vendors
+                                  .Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper()))
+                                  .OrderBy(v => v.VendorName)
+                                  .Skip((page - 1) * BrowsePageSize)
+                                  .Take(BrowsePageSize),
+                        PagingInfo = new PagingInfo {
+                            CurrentPage = page,
+                            ItemsPerPage = BrowsePageSize,
+                            TotalItems = vendors.Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())).Count()
+                        },
+                        search = venNameSearch
+                        //startLetter = firstLetter // leaving out -- it gives results the user might not expect
+                    };
+                }
+                return View(model);
             }
             catch (Exception ex) {
                 WarehouseUtilities.LogError(ex);
