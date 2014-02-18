@@ -1,8 +1,8 @@
 USE [RecreationOutlet]
 GO
 
---set IDENTITY_INSERT ITEM_DEPARTMENT ON
---GO
+set IDENTITY_INSERT ITEM_DEPARTMENT ON
+GO
 
 DELETE FROM ITEM_DEPARTMENT
 GO
@@ -29,8 +29,8 @@ INSERT INTO ITEM_DEPARTMENT (DepartmentID,DepartmentName) VALUES
 
 GO
 
---set IDENTITY_INSERT ITEM_DEPARTMENT OFF
---GO
+set IDENTITY_INSERT ITEM_DEPARTMENT OFF
+GO
 
 -- *********************************************************************
 USE Master

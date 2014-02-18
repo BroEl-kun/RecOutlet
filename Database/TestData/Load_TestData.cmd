@@ -103,8 +103,6 @@ IF NOT %ERRORLEVEL% EQU 0 GOTO ERRORMSG
 
 sqlcmd %dbServer% -i %dbScriptsPath%\Receiving_Log.sql >> %outputLogFile%
 IF NOT %ERRORLEVEL% EQU 0 GOTO ERRORMSG
-sqlcmd %dbServer% -i %dbScriptsPath%\Backorder.sql >> %outputLogFile%
-IF NOT %ERRORLEVEL% EQU 0 GOTO ERRORMSG
 sqlcmd %dbServer% -i %dbScriptsPath%\Refund_Code.sql >> %outputLogFile%
 IF NOT %ERRORLEVEL% EQU 0 GOTO ERRORMSG
 

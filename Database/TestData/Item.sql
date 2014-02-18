@@ -8,9 +8,7 @@ GO
 DELETE FROM ITEM
 GO
 
-
-
-INSERT INTO ITEM ([RecRPC],[ItemUPC],[Name],[Description],[VendorItemID],[ProductLineID],[SeasonCode],[ItemID],[CategoryID],[DepartmentID],[SubcategoryID],[MSRP],[SellPrice],[TaxRateID],[RestrictedAge],[LegacyID],[ItemCreatedBy],[ItemCreatedDate]) VALUES
+INSERT INTO ITEM ([RecRPC],[ItemUPC],[Name],[Description],[VendorItemID],[ProductLineID],[SeasonCode],[ItemID],[CategoryID],[DepartmentID],[SubcategoryID],[MSRP],[SellPrice],[TaxTypeID],[RestrictedAge],[LegacyID],[ItemCreatedBy],[ItemCreatedDate]) VALUES
 (458000001031,0,'Nuvi 3597LMTHD','Garmin Vehicle GPS with HD screen, Lifetime Maps, Lifetime Traffic',322134,35,'All',1,58,4,31,329.99,299.99,1,0,NULL,1,'12/10/2013'),
 (458000002031,0,'Nuvi 2457 LMT','Garmin GPS with lifetime maps, Lifetime traffic.',322253,34,'All',2,58,4,31,159.99,149.99,1,0,NULL,1,'12/10/2013'),
 (459000001031,0,'echoMap','Top pick color GPS',80000,36,'Summer',1,59,4,31,1000,800,1,0,NULL,1,'12/10/2013'),
@@ -27,7 +25,6 @@ INSERT INTO ITEM ([RecRPC],[ItemUPC],[Name],[Description],[VendorItemID],[Produc
 (4022000002002,0,'Rogue Pack(Blue)','70 oz. Rogue Pack',90756,25,'Summer',2,8,40,2,82,75,1,0,NULL,1,'12/10/2013'),
 (4057000001003,0,'Groove Bottle(Green)','0.6L bottle',53674,25,'All',1,57,40,3,20,20,1,0,NULL,1,'12/10/2013'),
 (4057000002008,0,'Stainless Steel Groove Bottle','0.6L bottle stainless steel',61457,25,'All',2,57,40,8,43,39,1,0,NULL,1,'12/10/2013')
-
 
 GO
 
