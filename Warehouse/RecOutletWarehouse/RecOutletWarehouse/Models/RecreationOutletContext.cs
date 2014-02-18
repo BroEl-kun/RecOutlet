@@ -81,6 +81,13 @@ namespace RecOutletWarehouse.Models
             modelBuilder.Configurations.Add(new TAX_TYPEMap());
             modelBuilder.Configurations.Add(new TRANSACTION_LINEITEMMap());
             modelBuilder.Configurations.Add(new VENDORMap());
+
+            var po = modelBuilder.Entity<PURCHASE_ORDER>();
+            po.Property(x => x.POOrderDate).HasColumnType("smalldatetime");
+            po.Property(x => x.POEstimatedShipDate).HasColumnType("smalldatetime");
+            po.Property(x => x.POCreatedDate).HasColumnType("smalldatetime");
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

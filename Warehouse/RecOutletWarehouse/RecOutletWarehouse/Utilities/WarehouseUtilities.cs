@@ -7,8 +7,10 @@ using System.Web;
 using Neodynamic.SDK.Printing;
 using System.IO;
 
-namespace RecOutletWarehouse.Utilities {
-    public class WarehouseUtilities {
+namespace RecOutletWarehouse.Utilities
+{
+    public class WarehouseUtilities
+    {
 
         //TODO: Investigate alternate approaches that would prevent this class's methods
         //from being static
@@ -96,5 +98,21 @@ namespace RecOutletWarehouse.Utilities {
             }
         }
 
+        public static int getPODateCount()
+        {
+            RecreationOutletContext entityDb = new RecreationOutletContext();
+
+            List<PURCHASE_ORDER> poList = entityDb.PURCHASE_ORDER.ToList();
+
+            for (int i = 0; i < poList.Count; i++)
+            {
+                if (poList[i].POOrderDate != DateTime.Now.Date)
+                {
+                    poList.Remove(poList[i]);
+                }
+            }
+                
+            return poList.Count;
+        }
     }
 }

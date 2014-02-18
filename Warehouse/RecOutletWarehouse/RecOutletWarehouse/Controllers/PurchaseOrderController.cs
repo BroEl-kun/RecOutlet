@@ -7,6 +7,7 @@ using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Models.PurchaseOrder;
 using RecOutletWarehouse.Models.VendorManagement;
 using RecOutletWarehouse.Models.ItemManagement;
+using RecOutletWarehouse.Utilities;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -25,10 +26,11 @@ namespace RecOutletWarehouse.Controllers
         /// <author>Tyler M.</author>
         public class PurchaseOrderCreationViewModel
         {
-            public PurchaseOrder PO { get; set; }
+            public PURCHASE_ORDER PO { get; set; }
             public List<PurchaseOrderLineItem> LineItems { get; set; }
             public List<string> ItemNames { get; set; }
             public List<int> VendorIds { get; set; }
+            public String tempPOID { get; set; }
         }
 
         //
@@ -51,8 +53,11 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
-                int nextPO = db.getLastPONumForDate(DateTime.Now.Date);
+
+                //DataFetcherSetter db = new DataFetcherSetter();
+                //int nextPO = db.getLastPONumForDate(DateTime.Now.Date);
+
+                int nextPO = Utilities.WarehouseUtilities.getPODateCount();
 
                 ViewBag.PO = createPOForForm(nextPO);
 
@@ -77,42 +82,52 @@ namespace RecOutletWarehouse.Controllers
             {
                 DataFetcherSetter db = new DataFetcherSetter();
 
-                ViewBag.PO = POVM.PO.PurchaseOrderId;
+                ViewBag.PO = POVM.PO.POID;
 
                 //TODO: Move the character replacement logic to a
                 //tools class and enhance its functionality
-                string POtoInt = POVM.PO.PurchaseOrderId;
+                string POtoInt = POVM.tempPOID;
                 POtoInt = POtoInt.Replace("-", string.Empty);
 
                 int convertedPO = Convert.ToInt32(POtoInt);
 
+                POVM.PO.POID = convertedPO;
+
                 //find the vendor ID for the provided vendor name
-                short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.Vendor));
+                short vendorId = Convert.ToInt16(db.GetVendorIdForVendorName(POVM.PO.VENDOR.VendorName));
+
+                POVM.PO.VENDOR = entityDb.VENDORs.Single(x => x.VendorName == POVM.PO.VENDOR.VendorName);
 
                 //CUSTOM VALIDATION FOLLOWS
-                if (db.RetrievePObyPOID(Convert.ToInt64(convertedPO)).PurchaseOrderId != null)
-                {
-                    ModelState.AddModelError("PO.PurchaseOrderId", "That PO Number already exists.");
-                }
-                if (vendorId == 0)
-                {
-                    ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
-                }
-                else if (vendorId == -1)
-                {
-                    ModelState.AddModelError("PO.Vendor", "Please be more specific. TODO: better error message");
-                }
+                //if (db.RetrievePObyPOID(Convert.ToInt64(convertedPO)).PurchaseOrderId != null)
+                //{
+                //    ModelState.AddModelError("PO.PurchaseOrderId", "That PO Number already exists.");
+                //}
+                //if (vendorId == 0)
+                //{
+                //    ModelState.AddModelError("PO.Vendor", "That Vendor isn't in the database. Please add vendor information.");
+                //}
+                //else if (vendorId == -1)
+                //{
+                //    ModelState.AddModelError("PO.Vendor", "Please be more specific. TODO: better error message");
+                //}
 
-                if (POVM.PO.OrderDate < DateTime.Now.Date)
-                {
-                    ModelState.AddModelError("PO.OrderDate", "That date has passed");
-                }
-                if (POVM.PO.EstShipDate < POVM.PO.OrderDate)
-                {
-                    ModelState.AddModelError("PO.EstShipDate", "The estimated ship date cannot occur before the order date");
-                }
+                //if (POVM.PO.OrderDate < DateTime.Now.Date)
+                //{
+                //    ModelState.AddModelError("PO.OrderDate", "That date has passed");
+                //}
+                //if (POVM.PO.EstShipDate < POVM.PO.OrderDate)
+                //{
+                //    ModelState.AddModelError("PO.EstShipDate", "The estimated ship date cannot occur before the order date");
+                //}
 
                 //CUSTOM VALIDATION ENDS
+
+                //Test section for converting Datetime to smalldatetime
+                //-------------------------------------------------------
+                
+
+                //-------------------------------------------------------
 
                 if (!ModelState.IsValid)
                 {
@@ -120,11 +135,14 @@ namespace RecOutletWarehouse.Controllers
                 }
                 else
                 {
-                    db.CreateNewPurchaseOrder(convertedPO,
-                        vendorId, POVM.PO.CreatedBy,
-                        POVM.PO.OrderDate, POVM.PO.EstShipDate,
-                        POVM.PO.FreightCost, POVM.PO.Terms,
-                        POVM.PO.Comments); //TODO: Associate the employeeID with this
+                    //db.CreateNewPurchaseOrder(convertedPO,
+                    //    vendorId, POVM.PO.CreatedBy,
+                    //    POVM.PO.OrderDate, POVM.PO.EstShipDate,
+                    //    POVM.PO.FreightCost, POVM.PO.Terms,
+                    //    POVM.PO.Comments); //TODO: Associate the employeeID with this
+
+                    entityDb.PURCHASE_ORDER.Add(POVM.PO);
+                    entityDb.SaveChanges();
 
                     return RedirectToAction("AddPOLineItem", new { id = convertedPO });
                 }
@@ -149,7 +167,7 @@ namespace RecOutletWarehouse.Controllers
                 DataFetcherSetter db = new DataFetcherSetter();
                 // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
                 PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
-                POVM.PO = db.RetrievePObyPOID(id);
+                //POVM.PO = db.RetrievePObyPOID(id);
 
                 return View(POVM);
             }
@@ -174,12 +192,12 @@ namespace RecOutletWarehouse.Controllers
             {
                 DataFetcherSetter db = new DataFetcherSetter();
 
-                POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
+                //POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
                 string POtoInt = id;
                 POtoInt = POtoInt.Replace("-", string.Empty);
 
                 int convertedPO = Convert.ToInt32(POtoInt);
-                decimal totalCost = POVM.PO.FreightCost;
+                decimal totalCost = Convert.ToDecimal(POVM.PO.POFreightCost);
 
                 //TODO: Move the character replacement logic to a
                 //tools class and enhance its functionality
