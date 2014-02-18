@@ -17,15 +17,15 @@
         <tr>
             <td>Purchase Order ID&nbsp;<strong class="required">*</strong></td>
             <td>
-                @Html.TextBoxFor(model => model.PO.PurchaseOrderId, new { @Value = ViewBag.PO })
-                @Html.ValidationMessageFor(model => model.PO.PurchaseOrderId)
+                @Html.TextBoxFor(model => model.tempPOID, new { @Value = ViewBag.PO })
+                @Html.ValidationMessageFor(model => model.tempPOID)
             </td>
         </tr>
         <tr>
             <td>Vendor&nbsp;<strong class="required">*</strong></td>
             <td>
-                @Html.TextBoxFor(model => model.PO.Vendor, new { @id = "vendor" })
-                @Html.ValidationMessageFor(model => model.PO.Vendor)
+                @Html.TextBoxFor(model => model.PO.VENDOR.VendorName, new { @id = "vendor" })
+                @Html.ValidationMessageFor(model => model.PO.VENDOR.VendorName)
             </td>
         </tr>
         <tr>
@@ -37,36 +37,36 @@
         <tr>
             <td>PO Order Date&nbsp;<strong class="required">*</strong></td>
             <td>
-                @Html.TextBox("PO.OrderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
-                @Html.ValidationMessageFor(model => model.PO.OrderDate)
+                @Html.TextBox("PO.POOrderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+                @Html.ValidationMessageFor(model => model.PO.POOrderDate)
             </td>
         </tr>
         <tr>
             <td>PO Estimated Ship Date&nbsp;<strong class="required">*</strong></td>
             <td>
-                @Html.TextBox("PO.EstShipDate", DateTime.Now.AddDays(10).ToString("yyyy-MM-dd"), new{ type="date" })
-                @Html.ValidationMessageFor(model => model.PO.EstShipDate)
+                @Html.TextBox("PO.POEstimatedShipDate", DateTime.Now.AddDays(10).ToString("yyyy-MM-dd"), new{ type="date" })
+                @Html.ValidationMessageFor(model => model.PO.POEstimatedShipDate)
             </td>
         </tr>
         <tr>
             <td>PO Estimated Freight Cost:</td>
             <td>
-                @Html.TextBoxFor(model => model.PO.FreightCost)
-                @Html.ValidationMessageFor(model => model.PO.FreightCost)
+                @Html.TextBoxFor(model => model.PO.POFreightCost)
+                @Html.ValidationMessageFor(model => model.PO.POFreightCost)
             </td>
         </tr>
         <tr>
             <td>PO Terms:</td>
             <td>
-                @Html.TextBoxFor(model => model.PO.Terms)
-                @Html.ValidationMessageFor(model => model.PO.Terms)
+                @Html.TextBoxFor(model => model.PO.POTerms)
+                @Html.ValidationMessageFor(model => model.PO.POTerms)
             </td>
         </tr>
         <tr>
             <td>Order Comments:</td>
             <td>
-                @Html.TextAreaFor(model => model.PO.Comments)
-                @Html.ValidationMessageFor(model => model.PO.Comments)
+                @Html.TextAreaFor(model => model.PO.POComments)
+                @Html.ValidationMessageFor(model => model.PO.POComments)
             </td>
         </tr>
     </table>
