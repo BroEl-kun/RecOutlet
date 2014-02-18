@@ -1,13 +1,13 @@
 USE [RecreationOutlet]
 GO
 
-set IDENTITY_INSERT TRANSACTION_LINE_ITEM ON
+set IDENTITY_INSERT TRANSACTION_LINEITEM ON
 GO
 
-DELETE FROM TRANSACTION_LINE_ITEM
+DELETE FROM TRANSACTION_LINEITEM
 GO
 
-INSERT INTO TRANSACTION_LINE_ITEM ([TransactionLineItemID],[TransactionID],[StoreID],[RecID],[Quantity],[SaleEach],[CommissionEmployeeID],[OverrideCode],[RefundCode]) VALUES
+INSERT INTO TRANSACTION_LINEITEM ([TransactionLineItemID],[TransactionID],[StoreID],[RecRPC],[Quantity],[SaleEach],[CommissionEmployeeID],[OverrideCode],[RefundCode]) VALUES
 (1322,1,1,459000001031,1,5.99,2,0,0),
 (1323,2,1,1358000001032,1,10.99,2,0,0),
 (1324,3,1,4022000001001,1,4,4,0,0),
@@ -26,7 +26,7 @@ INSERT INTO TRANSACTION_LINE_ITEM ([TransactionLineItemID],[TransactionID],[Stor
 
 GO
 
-set IDENTITY_INSERT TRANSACTION_LINE_ITEM OFF
+set IDENTITY_INSERT TRANSACTION_LINEITEM OFF
 GO
 
 -- *********************************************************************

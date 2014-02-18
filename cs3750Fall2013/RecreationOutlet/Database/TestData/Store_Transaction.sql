@@ -7,7 +7,7 @@ GO
 DELETE FROM STORE_TRANSACTION
 GO
 
-INSERT INTO STORE_TRANSACTION ([TransactionID],[StoreID],[EmployeeID],[TransactionDate],[TerminalID],[TransTotal],[TransTax],[ManagerID],[PaymentType],[PreviousTransactionID]) VALUES
+INSERT INTO STORE_TRANSACTION ([TransactionID],[LocationID],[EmployeeID],[TransactionDate],[TerminalID],[TransTotal],[TransTax],[ManagerID],[PaymentType],[PreviousTransactionID]) VALUES
 (1,1,123,41598.9982291667,'Reg 001',10.65,0.65,999,'Cash',0),
 (2,1,123,41598.9988541667,'Reg 001',10.65,0.65,999,'Cash',0),
 (3,1,123,41599.0008333333,'Reg 001',10.65,0.65,999,'Cash',0),
