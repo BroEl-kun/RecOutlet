@@ -1,0 +1,104 @@
+﻿@model RecOutletWarehouse.Models.VENDOR
+
+@{
+    ViewBag.Title = "EditVendor";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>EditVendor</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Vendor Information</legend>
+
+        @Html.HiddenFor(model => model.VendorID)
+
+        <div class="editor-label">
+            Vendor Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorName)
+            @Html.ValidationMessageFor(model => model.VendorName)
+        </div>
+
+        <div class="editor-label">
+            Contact Person
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ContactName)
+            @Html.ValidationMessageFor(model => model.ContactName)
+        </div>
+
+        <div class="editor-label">
+            Contact Person's Phone
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ContactPhone)
+            @Html.ValidationMessageFor(model => model.ContactPhone)
+        </div>
+
+        <div class="editor-label">
+            Contact Person's Fax
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ContactFax)
+            @Html.ValidationMessageFor(model => model.ContactFax)
+        </div>
+
+        <div class="editor-label">
+            Alternate Vendor Phone
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AltPhone)
+            @Html.ValidationMessageFor(model => model.AltPhone)
+        </div>
+
+        <div class="editor-label">
+            Vendor's Street Address
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorAddress)
+            @Html.ValidationMessageFor(model => model.VendorAddress)
+        </div>
+
+        <div class="editor-label">
+            Vendor's State (if applicable)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorState)
+            @Html.ValidationMessageFor(model => model.VendorState)
+        </div>
+
+        <div class="editor-label">
+            Vendor's Postal/ZIP Code
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorZip)
+            @Html.ValidationMessageFor(model => model.VendorZip)
+        </div>
+
+        <div class="editor-label">
+            Vendor's Website
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VendorWebsite)
+            @Html.ValidationMessageFor(model => model.VendorWebsite)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "BrowseVendors")
+</div>
+@*
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+*@

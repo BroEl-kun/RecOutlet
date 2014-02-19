@@ -1,0 +1,54 @@
+Error at 12 Feb 2014 15:46
+------------------------
+Error Text: System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RecOutletWarehouse.Controllers.VendorController.AddVendor(VENDOR vendor, String labelRedirect) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 87
+------------------------ X -------------------------
+
+Error at 12 Feb 2014 15:52
+------------------------
+Error Text: System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RecOutletWarehouse.Controllers.VendorController.AddVendor(VENDOR vendor, String labelRedirect) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 87
+------------------------ X -------------------------
+
+Error at 13 Feb 2014 22:34
+------------------------
+Error Text: System.NullReferenceException: Object reference not set to an instance of an object.
+   at RecOutletWarehouse.Controllers.VendorController.CreateNewPL(ProductLineSalesRepViewModel pl, String existingrep) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 169
+------------------------ X -------------------------
+
+Error at 13 Feb 2014 22:35
+------------------------
+Error Text: System.NullReferenceException: Object reference not set to an instance of an object.
+   at RecOutletWarehouse.Controllers.VendorController.CreateNewPL(ProductLineSalesRepViewModel pl, String existingrep) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 169
+------------------------ X -------------------------
+
+Error at 13 Feb 2014 22:37
+------------------------
+Error Text: System.NullReferenceException: Object reference not set to an instance of an object.
+   at RecOutletWarehouse.Controllers.VendorController.CreateNewPL(ProductLineSalesRepViewModel pl, String existingrep) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 169
+------------------------ X -------------------------
+
+Error at 13 Feb 2014 22:38
+------------------------
+Error Text: System.NullReferenceException: Object reference not set to an instance of an object.
+   at RecOutletWarehouse.Controllers.VendorController.CreateNewPL(ProductLineSalesRepViewModel pl, String existingrep) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 169
+------------------------ X -------------------------
+
+Error at 13 Feb 2014 22:39
+------------------------
+Error Text: System.NullReferenceException: Object reference not set to an instance of an object.
+   at RecOutletWarehouse.Controllers.VendorController.CreateNewPL(ProductLineSalesRepViewModel pl, String existingrep) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 169
+------------------------ X -------------------------
+
+Error at 13 Feb 2014 22:40
+------------------------
+Error Text: System.NullReferenceException: Object reference not set to an instance of an object.
+   at RecOutletWarehouse.Controllers.VendorController.CreateNewPL(ProductLineSalesRepViewModel pl, String existingrep) in c:\Users\stuff_000\Desktop\RO Warehouse\RecOutletWarehouse\Controllers\VendorController.cs:line 169
+------------------------ X -------------------------
+
