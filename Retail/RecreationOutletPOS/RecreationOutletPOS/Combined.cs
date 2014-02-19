@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using log4net;
 
 // Aliases for the Enum's inner classes
 using TransKey = RecreationOutletPOS.Enum.TransKey;
@@ -18,10 +19,17 @@ using SqlResultSet = RecreationOutletPOS.Enum.SqlResultSet;
 using ListViewColumn = RecreationOutletPOS.Enum.ListViewRowID;
 using ReportType = RecreationOutletPOS.Enum.ReportType;
 
+
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
+
+
 namespace RecreationOutletPOS
 {
     public partial class Combined : Form
     {
+        private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        //private static readonly ILog log = LogManager.GetLogger(typeof(Combined));
+
         #region Class Properties
 
         TransactionList tList = new TransactionList();  //list for sales
@@ -52,6 +60,8 @@ namespace RecreationOutletPOS
             InitializeComponent();
             setTab(btnSales, grpSales);
 
+            log4net.Config.XmlConfigurator.Configure();
+
             this.KeyPreview = true;
 
             //Inventory form
@@ -63,6 +73,8 @@ namespace RecreationOutletPOS
             cmbInventoryFrom.SelectedIndex = 0;
             cmbSearchBy.SelectedIndex = 2;
         }
+
+       
 
 
         #region Form Events and Hotkeys
@@ -384,6 +396,7 @@ namespace RecreationOutletPOS
             }
             catch (Exception ex)
             {
+                log.Debug("Exception caught in " + ex.TargetSite + " with message: " + ex.Message);
             }
         }
 
