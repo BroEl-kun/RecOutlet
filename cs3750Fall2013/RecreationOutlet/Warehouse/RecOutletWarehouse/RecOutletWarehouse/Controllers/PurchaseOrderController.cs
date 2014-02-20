@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,7 +28,7 @@ namespace RecOutletWarehouse.Controllers
         public class PurchaseOrderCreationViewModel
         {
             public PURCHASE_ORDER PO { get; set; }
-            public List<PurchaseOrderLineItem> LineItems { get; set; }
+            public List<PO_LINEITEM> LineItems { get; set; }
             public List<string> ItemNames { get; set; }
             public List<int> VendorIds { get; set; }
             public String tempPOID { get; set; }
@@ -123,11 +124,7 @@ namespace RecOutletWarehouse.Controllers
 
                 //CUSTOM VALIDATION ENDS
 
-                //Test section for converting Datetime to smalldatetime
-                //-------------------------------------------------------
-                
-
-                //-------------------------------------------------------
+                POVM.PO.EMPLOYEE = entityDb.EMPLOYEEs.SingleOrDefault(x => x.EmployeeId == 1);
 
                 if (!ModelState.IsValid)
                 {
@@ -164,10 +161,9 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
                 // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
                 PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
-                //POVM.PO = db.RetrievePObyPOID(id);
+                POVM.PO = entityDb.PURCHASE_ORDER.Find(id);
 
                 return View(POVM);
             }
@@ -176,6 +172,13 @@ namespace RecOutletWarehouse.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+
+        //vendor
+        //sales rep
+        //product line
+        //tax type
+        //department, category, subcategory
+        //then... item!
 
         /// <summary>
         /// Commits the POLineItems to the database with the provided POID
@@ -206,9 +209,10 @@ namespace RecOutletWarehouse.Controllers
                 {
                     if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0)
                     { //do not attempt to add empty list items
-                        db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
-                        item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
-                        totalCost += (item.WholesaleCost * item.QtyOrdered);
+                      //db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
+                      //item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
+                      //totalCost += (item.WholesaleCost * item.QtyOrdered);
+                        entityDb.PO_LINEITEM.Add(item);
                     }
                 }
 
@@ -253,9 +257,23 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
+                List<PURCHASE_ORDER> po = entityDb.PURCHASE_ORDER.ToList();
 
-                return View();
+                return View(po);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        public ActionResult EditPO(byte id)
+        {
+            try
+            {
+                PURCHASE_ORDER po = entityDb.PURCHASE_ORDER.Find(id);
+
+                return View(po);
             }
             catch (Exception ex)
             {

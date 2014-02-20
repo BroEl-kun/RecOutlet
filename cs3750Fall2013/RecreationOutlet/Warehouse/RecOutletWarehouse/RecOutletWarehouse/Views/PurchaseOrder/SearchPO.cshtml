@@ -1,5 +1,4 @@
-﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderCreationViewModel
-
+﻿@model IEnumerable<RecOutletWarehouse.Models.PURCHASE_ORDER>
 @{
     ViewBag.Title = "Browse Purchase Orders";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -11,3 +10,27 @@
     </ul>  
 }
 <h2>Browse / Search Purchase Orders</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Order Date</th>
+            <th>Estimated Ship Date</th>
+            <th>Freight Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.POID</td>
+                <td>@item.POOrderDate</td>
+                <td>@item.POEstimatedShipDate</td>
+                <td>@item.POFreightCost</td>
+                <td>@Html.ActionLink("Edit", "EditPO", @item.POID)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

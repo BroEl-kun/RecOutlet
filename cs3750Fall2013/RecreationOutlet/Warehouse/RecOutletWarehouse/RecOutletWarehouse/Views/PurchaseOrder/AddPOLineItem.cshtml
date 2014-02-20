@@ -21,20 +21,20 @@
     <table>
         <tr>
             <td>PO #:</td>
-            <td>@Html.DisplayFor(model => model.PO.PurchaseOrderId)</td>
+            <td>@Html.DisplayFor(model => model.PO.POID)</td>
             <td>Vendor:</td>
-            <td>@Html.DisplayFor(model => model.PO.Vendor, new { id = "vendor" })</td>
+            <td>@Html.DisplayFor(model => model.PO.VENDOR.VendorName, new { id = "vendor" })</td>
         </tr>
         <tr>
             <td>PO ordered on:</td>
-            <td>@Html.DisplayFor(model => model.PO.OrderDate)</td>
+            <td>@Html.DisplayFor(model => model.PO.POOrderDate)</td>
             <td>PO estimated ship date: </td>
-            <td>@Html.DisplayFor(model => model.PO.EstShipDate)</td>
+            <td>@Html.DisplayFor(model => model.PO.POEstimatedShipDate)</td>
         </tr>
     </table>
 </fieldset>
 <h3>Add new items to this purchase order</h3>
-@using (@Html.BeginForm("AddPOLineItem", "PurchaseOrder", new { id = Model.PO.PurchaseOrderId }, FormMethod.Post)) {
+@using (@Html.BeginForm("AddPOLineItem", "PurchaseOrder", new { id = Model.PO.POID }, FormMethod.Post)) {
     <table>
         <tr class="table-header">
             <td>Item Name</td>
