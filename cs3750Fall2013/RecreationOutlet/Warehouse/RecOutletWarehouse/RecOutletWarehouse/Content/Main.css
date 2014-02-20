@@ -218,11 +218,8 @@ input[type="checkbox"].input-validation-error {
     color: red;
 }
 
-.VendorState {
-    width: 25px;
-}
-.VendorZip {
-    width: 50px;
+input.zip {
+    width: 100px;
 }
 .VendorPhone {
     width: 100px;
@@ -252,6 +249,10 @@ input[type="checkbox"].input-validation-error {
 
 #PhoneNumber {
     width: 100px;
+}
+
+input.state{
+    width:30px;
 }
 
 .error-box {

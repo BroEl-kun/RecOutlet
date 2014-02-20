@@ -8,6 +8,7 @@ using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Utilities;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -22,6 +23,11 @@ namespace RecOutletWarehouse.Controllers
         {
             public PRODUCT_LINE productLine { get; set; }
             public SALES_REP rep { get; set; }
+
+            [Required(ErrorMessage="Please select the vendor of this product line.")]
+            public string vendorName { get; set; }
+            public string existingRepName { get; set; }
+            public string newRepName { get; set; }
         }
 
         public class BrowseVendorViewModel {
@@ -170,7 +176,9 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                if (pl.productLine.SALES_REP.SalesRepName == null && (pl.rep.SalesRepName == null && pl.rep.SalesRepPhone == null))
+                ViewBag.VendorName = pl.vendorName; // Sustains vendor name field when validation fails & when product line is successfully created
+                pl.productLine.VENDOR = db.VENDORs.SingleOrDefault(v => v.VendorName == pl.vendorName);
+                if (pl.existingRepName== null && (pl.newRepName == null && pl.rep.SalesRepPhone == null))
                 {
                     ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
                 }
@@ -184,6 +192,7 @@ namespace RecOutletWarehouse.Controllers
                 // if the user chose to create a new rep...
                 if (existingrep == "No")
                 {
+                    pl.rep.SalesRepName = pl.newRepName;
                     db.SALES_REPs.Add(pl.rep);
                     db.SaveChanges();
 
@@ -198,7 +207,7 @@ namespace RecOutletWarehouse.Controllers
                 }
                 else
                 {
-                    pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.SalesRepName == pl.productLine.SALES_REP.SalesRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
+                    pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.SalesRepName == pl.existingRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
                     ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                 }
 
@@ -213,7 +222,7 @@ namespace RecOutletWarehouse.Controllers
 
                 ViewBag.ProductLineSuccess = "Product Line " + pl.productLine.ProductLineName + " successfully created and assigned to vendor " + pl.productLine.VENDOR.VendorName + ".";
 
-                return View();
+                return View(); //clear all fields on success
 
             }
             catch (Exception ex)

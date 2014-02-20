@@ -23,12 +23,12 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.ProductLineName).HasColumnName("ProductLineName");
 
             // Relationships
-            //this.HasRequired(t => t.SALES_REP)
-            //    .WithMany(t => t.PRODUCT_LINE)
-            //    .HasForeignKey(d => d.RepID);
-            //this.HasRequired(t => t.VENDOR)
-            //    .WithMany(t => t.PRODUCT_LINE)
-            //    .HasForeignKey(d => d.VendorID);
+            this.HasRequired(t => t.SALES_REP)
+                .WithMany(t => t.PRODUCT_LINE)
+                .HasForeignKey(d => d.RepID);
+            this.HasRequired(t => t.VENDOR)
+                .WithMany(t => t.PRODUCT_LINE)
+                .HasForeignKey(d => d.VendorID);
 
         }
     }
