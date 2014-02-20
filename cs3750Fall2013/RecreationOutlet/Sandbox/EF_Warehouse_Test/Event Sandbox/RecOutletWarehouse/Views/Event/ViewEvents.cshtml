@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RecOutletWarehouse.Models.EVENT_TYPE>
+
+@{
+    ViewBag.Title = "View Events";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>View Events</h2>
+
+<input type="button" value="Create" onclick="location.href='@Url.Action("CreateEvent","Event")'" />
+
+<table>
+    <tr>
+        <th>
+            Type
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventTypeCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditEvent", new { id = item.EventTypeCode }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
