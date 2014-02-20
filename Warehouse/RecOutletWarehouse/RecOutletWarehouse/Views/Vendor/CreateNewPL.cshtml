@@ -51,16 +51,18 @@
         <legend>Product line information</legend>
         <ul class="no-list">
             <li>
-                Vendor: @Html.TextBoxFor(newPL => newPL.productLine.VENDOR.VendorName, new { @Value = ViewBag.VendorName, @id="vendor" })
+                Vendor<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.vendorName, new { @Value = ViewBag.VendorName, @id="vendor" })
+                @Html.ValidationMessageFor(newPL => newPL.vendorName)
             </li>
             <li>
-                &nbsp Product Line Name: @Html.TextBoxFor(newPL => newPL.productLine.ProductLineName)
+                &nbsp Product Line Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.productLine.ProductLineName)
+                @Html.ValidationMessageFor(newPL => newPL.productLine.ProductLineName)
             </li>
         </ul>
     </fieldset>
     
     <p>
-        This is a representative we've used before: <input type="radio" name="existingrep" checked value="Yes"/>Yes <input type="radio" name="existingrep" value="No"/>No
+        Product line's sales rep is in our database already: <input type="radio" name="existingrep" checked value="Yes"/>Yes <input type="radio" name="existingrep" value="No"/>No
         <br />@Html.ValidationMessageFor(newPL => newPL.rep.RepID)
     </p>
 
@@ -68,7 +70,7 @@
         <legend>Find an existing rep</legend>
         <ul class="no-list">
             
-            <li>Rep Name: @Html.TextBoxFor(newPL => newPL.productLine.SALES_REP.SalesRepName, new { @class = "searchrep" })</li>
+            <li>Rep Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.existingRepName, new { @class = "searchrep" })</li>
         </ul>
     </fieldset>
     
@@ -76,11 +78,11 @@
         <legend>New sales representative information</legend>
         <table>
             <tr>
-                <td colspan="2">Rep Name: @Html.TextBoxFor(newPL => newPL.rep.SalesRepName, new { @class="newrepinput" })</td>
+                <td colspan="2">Rep Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.newRepName, new { @class="newrepinput" })</td>
             </tr>
             <tr>
-                <td>Rep phone number: @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone, new { @class="newrepinput", @id="PhoneNumber" })</td>
-                <td>&nbsp Rep Email address: @Html.TextBoxFor(newPL => newPL.rep.SalesRepEmail, new { @class="newrepinput", @id="PhoneNumber"})</td>
+                <td>Rep phone number<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone, new { @class="newrepinput", @id="PhoneNumber" })</td>
+                <td>&nbsp Rep Email address @Html.TextBoxFor(newPL => newPL.rep.SalesRepEmail, new { @class="newrepinput", @id="PhoneNumber"})</td>
             </tr>
         </table>
     </fieldset>
