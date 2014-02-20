@@ -14,7 +14,7 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /Event/
 
-        public ActionResult Index()
+        public ActionResult ViewEvents()
         {
             var eventTypes = from et in db.EVENT_TYPE
                              select et;
@@ -37,7 +37,26 @@ namespace RecOutletWarehouse.Controllers
             if (ModelState.IsValid) {
                 db.Entry(et).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("ViewEvents");
+            }
+
+            return View(et);
+        }
+
+        public ActionResult CreateEvent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateEvent(EVENT_TYPE et)
+        {
+
+            if (ModelState.IsValid)
+            {
+                db.EVENT_TYPE.Add(et);
+                db.SaveChanges();
+                return RedirectToAction("ViewEvents");
             }
 
             return View(et);
