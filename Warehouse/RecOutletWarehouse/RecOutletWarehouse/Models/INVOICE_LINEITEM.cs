@@ -9,7 +9,7 @@ namespace RecOutletWarehouse.Models
         public long InvoiceID { get; set; }
         public long RecRPC { get; set; }
         public byte QtyTypeID { get; set; }
-        public byte ItemQty { get; set; }
+        public int ItemQty { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal UnitCost { get; set; }
         public virtual INVOICE INVOICE { get; set; }

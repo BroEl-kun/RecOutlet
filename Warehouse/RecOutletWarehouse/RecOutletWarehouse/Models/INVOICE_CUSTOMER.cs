@@ -15,8 +15,11 @@ namespace RecOutletWarehouse.Models
         public Nullable<int> TaxExemptID { get; set; }
         public string CustomerPaymentTerms { get; set; }
         public string CustomerAddress { get; set; }
+        public string CustomerAddress2 { get; set; }
+        public string CustomerCity { get; set; }
         public string CustomerState { get; set; }
         public string CustomerZip { get; set; }
+        public string CustomerCountry { get; set; }
         public string CustomerPhone { get; set; }
         public virtual ICollection<INVOICE> INVOICEs { get; set; }
     }

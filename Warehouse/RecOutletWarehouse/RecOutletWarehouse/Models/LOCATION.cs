@@ -16,9 +16,11 @@ namespace RecOutletWarehouse.Models
         public short ManagerId { get; set; }
         public string StoreName { get; set; }
         public string Address { get; set; }
+        public string Address2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+        public string Country { get; set; }
         public string Phone { get; set; }
         public virtual EMPLOYEE EMPLOYEE { get; set; }
         public virtual ICollection<INVENTORY> INVENTORies { get; set; }

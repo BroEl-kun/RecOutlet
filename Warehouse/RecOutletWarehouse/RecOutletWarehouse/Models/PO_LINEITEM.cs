@@ -15,7 +15,7 @@ namespace RecOutletWarehouse.Models
         public long RecRPC { get; set; }
         public byte QtyTypeID { get; set; }
         public decimal WholesaleCost { get; set; }
-        public short QtyOrdered { get; set; }
+        public int QtyOrdered { get; set; }
         public virtual ITEM ITEM { get; set; }
         public virtual PURCHASE_ORDER PURCHASE_ORDER { get; set; }
         public virtual QTY_TYPE QTY_TYPE { get; set; }
