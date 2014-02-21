@@ -237,7 +237,7 @@ CREATE TABLE [dbo].[MERCHANDISE_TRANSFER](
 	[TansferComments] [nvarchar](max) NULL,
 	[TransferCreatedBy] [smallint] NOT NULL,
 	[TransferCreatedDate] [date] NOT NULL,
-	[Quantity] [smallint] NOT NULL,
+	[Quantity] [int] NOT NULL,
 	[QtyTypeID] [tinyint] NOT NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
@@ -445,7 +445,7 @@ CREATE TABLE [dbo].[TRANSACTION_LINEITEM](
 	[TransactionID] [int] NOT NULL,
 	--[LocationID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
-	[Quantity] [smallint] NOT NULL,
+	[Quantity] [int] NOT NULL,
 	--[SaleEach] [money] NOT NULL,
 	[UnitPrice] [money] NOT NULL,
 	[UnitCost] [money] NOT NULL,
