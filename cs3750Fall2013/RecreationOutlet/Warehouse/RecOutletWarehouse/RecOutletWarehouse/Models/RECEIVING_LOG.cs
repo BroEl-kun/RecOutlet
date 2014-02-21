@@ -10,7 +10,7 @@ namespace RecOutletWarehouse.Models
         public Nullable<byte> QtyTypeID { get; set; }
         public System.DateTime ReceiveDate { get; set; }
         public string ReceivingNotes { get; set; }
-        public Nullable<short> ReceivedQty { get; set; }
+        public Nullable<int> ReceivedQty { get; set; }
         public virtual PO_LINEITEM PO_LINEITEM { get; set; }
     }
 }

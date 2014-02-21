@@ -27,11 +27,17 @@ namespace RecOutletWarehouse.Models
         public string AltPhone { get; set; }
         
         public string VendorAddress { get; set; }
+
+        public string VendorAddress2 { get; set; }
+
+        public string VendorCity { get; set; }
         
         [MaxLength(2,ErrorMessage="Enter the two-letter state code.")]
         public string VendorState { get; set; }
         
         public string VendorZip { get; set; }
+
+        public string VendorCountry { get; set; }
         
         public string VendorWebsite { get; set; }
 
