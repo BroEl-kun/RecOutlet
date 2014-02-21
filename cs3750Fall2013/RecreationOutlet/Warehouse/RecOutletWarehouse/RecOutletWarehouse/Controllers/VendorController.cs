@@ -273,7 +273,7 @@ namespace RecOutletWarehouse.Controllers
                                                   // If not included, pagination will not work correctly.
                     };
                 }
-                // ELSE (the user did provide a search query)
+                // ELSE (the user did provide a vendor name search query)
                 else {
                     model = new BrowseVendorViewModel {
                         Vendors = vendors

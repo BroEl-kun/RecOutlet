@@ -1,76 +1,82 @@
-﻿@model RecOutletWarehouse.Models.VENDOR
+﻿@using RecOutletWarehouse.HtmlHelpers;
+@model RecOutletWarehouse.Models.VENDOR
 
 @{
     ViewBag.Title = "VendorDetail";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>VendorDetail</h2>
+<h2>@Html.DisplayNameFor(model => model.VendorName) - Details</h2>
 
 <fieldset>
     <legend>Vendor Information</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VendorName)
-    </div>
+    <fieldset>
+        <legend>Contact Information</legend>
+
+        @if (Model.ContactName.IsEmpty()) {
+            <div class="notspecified">There is no specific contact person for this vendor.</div>
+
+        }
+        else{
+            <div class="display-label">
+                 Contact Person
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.ContactName)
+            </div>
+        }
+        <div class="display-label">
+                Vendor / Contact Person's Phone
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ContactPhone)
+        </div>
+
+        @if(!Model.ContactFax.IsEmpty()){
+            <div class="display-label">
+                 Vendor / Contact Person's Fax
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.ContactFax)
+            </div>
+        }
+
+        @if(!Model.AltPhone.IsEmpty()){
+            <div class="display-label">
+                 Vendor's Alternate Phone
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.AltPhone)
+            </div>
+        }
+
+    </fieldset>
+
+    <fieldset>
+        <legend>Address of @Html.DisplayFor(model => model.VendorName)</legend>
     <div class="display-field">
         @Html.DisplayFor(model => model.VendorName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ContactName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ContactName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ContactPhone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ContactPhone)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ContactFax)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ContactFax)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AltPhone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AltPhone)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VendorAddress)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.VendorAddress)
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VendorState)
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorAddress2)
     </div>
     <div class="display-field">
+        @Html.DisplayFor(model => model.VendorCity)
         @Html.DisplayFor(model => model.VendorState)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VendorZip)
-    </div>
-    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorCountry)
         @Html.DisplayFor(model => model.VendorZip)
     </div>
+    </fieldset>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.VendorWebsite)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.VendorWebsite)
+        @Html.SimpleExternalLink(Model.VendorWebsite, Model.VendorWebsite, true)
     </div>
 </fieldset>
 <p>

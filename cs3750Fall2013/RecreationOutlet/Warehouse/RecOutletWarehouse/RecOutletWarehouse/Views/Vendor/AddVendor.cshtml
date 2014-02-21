@@ -40,30 +40,40 @@
                 @Html.ValidationMessageFor(newVendor => newVendor.VendorWebsite)
             </td>
 
-            </tr><tr>
-            <td>&nbsp Address:</td>
-            <td>
-                @Html.TextBoxFor(newVendor => newVendor.VendorAddress)
-                @Html.ValidationMessageFor(newVendor => newVendor.VendorAddress)
-            </td>
-            <td>&nbsp State:</td>
-            <td>
-                @Html.TextBoxFor(newVendor => newVendor.VendorState, new { @class = "state" })
-                @Html.ValidationMessageFor(newVendor => newVendor.VendorState)
-            </td>
-            <td>&nbsp Zip/Postal Code:</td>
-            <td>
-                @Html.TextBoxFor(newVendor => newVendor.VendorZip, new { @class = "zip" })
-                @Html.ValidationMessageFor(newVendor => newVendor.VendorZip)
-            </td>
-
-@*            <td>&nbsp City:<strong class="required">*</strong></td>
-            <td>
-                @Html.TextBoxFor(newVendor => newVendor.City)
-                @Html.ValidationMessageFor(newVendor => newVendor.City)
-            </td>
-*@
-
+            </tr>
+            <tr>
+                <td>&nbsp Address:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorAddress)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorAddress)
+                </td>
+                <td>&nbsp Address Line 2:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorAddress2)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorAddress2)
+                </td>
+                </tr>
+            <tr>
+                <td>&nbsp City:<strong class="required">*</strong></td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorCity)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorCity)
+                </td>
+                <td>&nbsp State:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorState, new { @class = "state" })
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorState)
+                </td>
+                <td>&nbsp Zip/Postal Code:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorZip, new { @class = "zip" })
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorZip)
+                </td>
+                <td>&nbsp Country:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorCountry)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorCountry)
+                </td>
             </tr>
 
        </table>
