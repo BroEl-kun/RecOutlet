@@ -13,7 +13,7 @@ namespace RecOutletWarehouse.Models
         public int TransactionLineItemID { get; set; }
         public int TransactionID { get; set; }
         public long RecRPC { get; set; }
-        public short Quantity { get; set; }
+        public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal UnitCost { get; set; }
         public short CommissionEmployeeID { get; set; }
