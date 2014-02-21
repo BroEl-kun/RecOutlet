@@ -21,6 +21,12 @@ namespace RecOutletWarehouse.Controllers
             public SubCategory subcat { get; set; }
         }
 
+        public class ItemCategoryViewModel
+        {
+            public Category category { get; set; }
+            public SubCategory subcat { get; set; }
+        }
+
         public ActionResult CreateNewItem()
         {
             try
