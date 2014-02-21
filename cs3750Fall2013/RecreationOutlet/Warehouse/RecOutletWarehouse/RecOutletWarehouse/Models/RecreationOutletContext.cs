@@ -1,6 +1,8 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using RecOutletWarehouse.Models.Mapping;
+using System.Data.SqlTypes;
+using System;
 
 namespace RecOutletWarehouse.Models
 {
@@ -14,6 +16,45 @@ namespace RecOutletWarehouse.Models
         public RecreationOutletContext()
             : base("Name=RecreationOutletContext")
         {
+        }
+
+        /// <summary>
+        /// This is overridden so we can update the dates and convert them
+        /// from DateTimes to SmallDateTimes
+        /// </summary>
+        /// <returns></returns>
+        //public override int SaveChanges()
+        //{
+        //    UpdateDates();
+        //    return base.SaveChanges();
+        //}
+
+        /// <summary>
+        /// This method is to convert all DateTimes to SmallDateTimes
+        /// before posting data to the database.
+        /// </summary>
+        private void UpdateDates()
+        {
+            foreach (var change in ChangeTracker.Entries<PURCHASE_ORDER>())
+            {
+                var values = change.CurrentValues;
+                foreach (var name in values.PropertyNames)
+                {
+                    var value = values[name];
+                    if (value is DateTime)
+                    {
+                        var date = (DateTime)value;
+                        if (date < SqlDateTime.MinValue.Value)
+                        {
+                            values[name] = SqlDateTime.MinValue.Value;
+                        }
+                        else if (date > SqlDateTime.MaxValue.Value)
+                        {
+                            values[name] = SqlDateTime.MaxValue.Value;
+                        }
+                    }
+                }
+            }
         }
 
         public DbSet<EMPLOYEE> EMPLOYEEs { get; set; }
