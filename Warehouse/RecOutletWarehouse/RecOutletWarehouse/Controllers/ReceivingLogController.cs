@@ -13,7 +13,7 @@ namespace RecOutletWarehouse.Controllers
 
         public class ReceivingLogCreationViewModel
         {
-            public List<RecOutletWarehouse.Models.ReceivingLog> RL { get; set; }
+            public List<RecOutletWarehouse.Models.RECEIVING_LOG> RL { get; set; }
             public List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> LineItems { get; set; }
         }
 
@@ -87,7 +87,7 @@ namespace RecOutletWarehouse.Controllers
 
         [HttpPost]
         //public ActionResult Create(ReceivingLog RL)
-        public ActionResult CreateNewRL(ReceivingLog RL)
+        public ActionResult CreateNewRL(RECEIVING_LOG RL)
         //public ActionResult Index(ReceivingLog RL)
         {
             //try
@@ -112,10 +112,10 @@ namespace RecOutletWarehouse.Controllers
                 {
                     DataFetcherSetter db = new DataFetcherSetter();
 
-                    db.NewReceivingLog(//RL.ReceivingID,
-                        RL.POLineItemID, RL.BackorderID,
-                        RL.QtyTypeID, RL.ReceiveDate,
-                        RL.ReceivingNotes, RL.ReceivedQty);
+                    //db.NewReceivingLog(//RL.ReceivingID,
+                    //    RL.POLineItemID, RL.BackorderID,
+                    //    RL.QtyTypeID, RL.ReceiveDate,
+                    //    RL.ReceivingNotes, RL.ReceivedQty);
 
                     //return View("CreateNewRL");
                     return View("Index");
@@ -244,61 +244,61 @@ namespace RecOutletWarehouse.Controllers
 
                 List<int> tracker = new List<int>();
 
-                foreach (ReceivingLog RLog in objItem.RL)
-                {
-                    ReceivingLog NewRL = new ReceivingLog();
+                //foreach (ReceivingLog RLog in objItem.RL)
+                //{
+                //    ReceivingLog NewRL = new ReceivingLog();
 
-                    NewRL.POLineItemID = RLog.POLineItemID;
-                    NewRL.QtyTypeID = Convert.ToInt16(RLog.QtyTypeID.ToString());
+                //    NewRL.POLineItemID = RLog.POLineItemID;
+                //    NewRL.QtyTypeID = Convert.ToInt16(RLog.QtyTypeID.ToString());
 
-                    if (RLog.ReceiveDate.ToString() != "")
-                    {
-                        if (RLog.ReceiveDate > DateTime.Now.Date)
-                        {
-                            //ModelState.AddModelError("RL.ReceiveDate", "Cannot enter a future date.");
-                            //ModelState.AddModelError(objItem.RL[objItem.RL.IndexOf(RLog)].ReceiveDate, "Cannot enter a future date.");
-                        }
-                        else
-                        {
-                            NewRL.ReceiveDate = RLog.ReceiveDate;
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("RL.ReceiveDate", "Please enter a date");
-                    }
+                //    if (RLog.ReceiveDate.ToString() != "")
+                //    {
+                //        if (RLog.ReceiveDate > DateTime.Now.Date)
+                //        {
+                //            //ModelState.AddModelError("RL.ReceiveDate", "Cannot enter a future date.");
+                //            //ModelState.AddModelError(objItem.RL[objItem.RL.IndexOf(RLog)].ReceiveDate, "Cannot enter a future date.");
+                //        }
+                //        else
+                //        {
+                //            NewRL.ReceiveDate = RLog.ReceiveDate;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("RL.ReceiveDate", "Please enter a date");
+                //    }
 
-                    if (RLog.ReceivedQty.ToString() != "")
-                    {
-                        if (RLog.ReceivedQty < 0)
-                        {
-                            ModelState.AddModelError("RL.ReceivedQty", "Cannot enter a negative amount.");
-                        }
-                        else
-                        {
-                            NewRL.ReceivedQty = Convert.ToInt16(RLog.ReceivedQty.ToString());
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("RL.ReceivedQty", "Please enter an amount.");
-                    }
+                //    if (RLog.ReceivedQty.ToString() != "")
+                //    {
+                //        if (RLog.ReceivedQty < 0)
+                //        {
+                //            ModelState.AddModelError("RL.ReceivedQty", "Cannot enter a negative amount.");
+                //        }
+                //        else
+                //        {
+                //            NewRL.ReceivedQty = Convert.ToInt16(RLog.ReceivedQty.ToString());
+                //        }
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("RL.ReceivedQty", "Please enter an amount.");
+                //    }
 
-                    NewRL.ReceivingNotes = RLog.ReceivingNotes + "";
+                //    NewRL.ReceivingNotes = RLog.ReceivingNotes + "";
 
-                    if (ModelState.IsValid)
-                    {
-                        db.NewReceivingLog(NewRL.POLineItemID,
-                            NewRL.QtyTypeID, NewRL.ReceiveDate,
-                            NewRL.ReceivingNotes, NewRL.ReceivedQty);
+                //    if (ModelState.IsValid)
+                //    {
+                //        db.NewReceivingLog(NewRL.POLineItemID,
+                //            NewRL.QtyTypeID, NewRL.ReceiveDate,
+                //            NewRL.ReceivingNotes, NewRL.ReceivedQty);
 
-                        //objItem.LineItems.RemoveAt(objItem.RL.IndexOf(RLog));
-                        //int tester = objItem.RL.IndexOf(RLog);
-                        //objItem.RL.Remove(RLog);
-                        tracker.Add(objItem.RL.IndexOf(RLog));
-                    }
+                //        //objItem.LineItems.RemoveAt(objItem.RL.IndexOf(RLog));
+                //        //int tester = objItem.RL.IndexOf(RLog);
+                //        //objItem.RL.Remove(RLog);
+                //        tracker.Add(objItem.RL.IndexOf(RLog));
+                //    }
 
-                }
+                //}
 
                 for (int j = tracker.Count - 1; j >= 0; j--)
                 //for (int j = 0; j < tracker.Count; j++)
@@ -353,7 +353,7 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                List<RecOutletWarehouse.Models.ReceivingLog> Errored = new List<RecOutletWarehouse.Models.ReceivingLog>();
+                List<RecOutletWarehouse.Models.RECEIVING_LOG> Errored = new List<RecOutletWarehouse.Models.RECEIVING_LOG>();
                 //FormCollection EForms = new FormCollection();
 
                 //create local copy of objItem, if it has value pass it instead
@@ -385,7 +385,7 @@ namespace RecOutletWarehouse.Controllers
                     //Console.Out.WriteLine("attempting form " + i);
                     //String test2 = form["count"].ToString();
 
-                    ReceivingLog RL = new ReceivingLog();
+                    RECEIVING_LOG RL = new RECEIVING_LOG();
 
                     //NewReceivingLog(RL.ReceivingID,
                     //    RL.POLineItemID, RL.BackorderID,
@@ -410,7 +410,7 @@ namespace RecOutletWarehouse.Controllers
                     //RL.QtyTypeID = objItem.QtyTypeId;
                     //RL.QtyTypeID = Convert.ToInt16(form.GetValue("QtyTypeID").ToString());
 
-                    RL.QtyTypeID = Convert.ToInt16(form["QtyTypeID" + i].ToString());
+                    //RL.QtyTypeID = Convert.ToInt16(form["QtyTypeID" + i].ToString());
 
                     //RL.QtyTypeID = itemName.QtyTypeId;
                     //RL.ReceiveDate = Convert.ToDateTime(ReceivedDate);
@@ -478,10 +478,10 @@ namespace RecOutletWarehouse.Controllers
                         //    RL.ReceivingNotes, RL.ReceivedQty);
 
                         //Will need to handle backorder stuff
-                        db.NewReceivingLog(//RL.ReceivingID,
-                            RL.POLineItemID,
-                            RL.QtyTypeID, RL.ReceiveDate,
-                            RL.ReceivingNotes, RL.ReceivedQty);
+                        //db.NewReceivingLog(//RL.ReceivingID,
+                        //    RL.POLineItemID,
+                        //    RL.QtyTypeID, RL.ReceiveDate,
+                        //    RL.ReceivingNotes, RL.ReceivedQty);
 
                         //EForms.Add("POID", form["POID"].ToString());
                         //EForms.Add("RecRPC" + EForms.Count, form["RecRPC" + i].ToString());

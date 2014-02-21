@@ -9,6 +9,7 @@ using RecOutletWarehouse.Models.PurchaseOrder;
 using RecOutletWarehouse.Models.VendorManagement;
 using RecOutletWarehouse.Models.ItemManagement;
 using RecOutletWarehouse.Utilities;
+using System.Data.Entity;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -125,13 +126,12 @@ namespace RecOutletWarehouse.Controllers
                 //CUSTOM VALIDATION ENDS
 
                 POVM.PO.EMPLOYEE = entityDb.EMPLOYEEs.SingleOrDefault(x => x.EmployeeId == 1);
-
-                if (!ModelState.IsValid)
-                {
-                    return View(POVM);
-                }
-                else
-                {
+                //if (!ModelState.IsValid)
+                //{
+                //    return View(POVM);
+                //}
+                //else
+                //{
                     //db.CreateNewPurchaseOrder(convertedPO,
                     //    vendorId, POVM.PO.CreatedBy,
                     //    POVM.PO.OrderDate, POVM.PO.EstShipDate,
@@ -142,7 +142,7 @@ namespace RecOutletWarehouse.Controllers
                     entityDb.SaveChanges();
 
                     return RedirectToAction("AddPOLineItem", new { id = convertedPO });
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -267,13 +267,29 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        public ActionResult EditPO(byte id)
+        public ActionResult EditPO(int id)
         {
             try
             {
+                //byte newId = Convert.ToByte(id);
                 PURCHASE_ORDER po = entityDb.PURCHASE_ORDER.Find(id);
 
                 return View(po);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditPO(PURCHASE_ORDER po)
+        {
+            try
+            {
+                entityDb.Entry(po).State = EntityState.Modified;
+                entityDb.SaveChanges();
+                return RedirectToAction("SearchPO");
             }
             catch (Exception ex)
             {
@@ -304,10 +320,12 @@ namespace RecOutletWarehouse.Controllers
             {
                 //format for displaying in the form
                 PO++; //increment the last number of the PO
-                POforForm = PO.ToString();
-                POforForm = POforForm.Insert(2, "-");
-                POforForm = POforForm.Insert(5, "-");
-                POforForm = POforForm.Insert(10, "-");
+                //POforForm = PO.ToString();
+                //POforForm = POforForm.Insert(2, "-");
+                //POforForm = POforForm.Insert(5, "-");
+                //POforForm = POforForm.Insert(10, "-");
+                POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
+                POforForm = POforForm + "-" + PO.ToString();
             }
             else
             {

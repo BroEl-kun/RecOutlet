@@ -104,15 +104,17 @@ namespace RecOutletWarehouse.Utilities
 
             List<PURCHASE_ORDER> poList = entityDb.PURCHASE_ORDER.ToList();
 
+            int count = 0;
+
             for (int i = 0; i < poList.Count; i++)
             {
-                if (poList[i].POOrderDate != DateTime.Now.Date)
+                if (poList[i].POOrderDate == DateTime.Now.Date)
                 {
-                    poList.Remove(poList[i]);
+                    count++;
                 }
             }
                 
-            return poList.Count;
+            return count;
         }
     }
 }

@@ -1,0 +1,34 @@
+﻿@model RecOutletWarehouse.Models.PURCHASE_ORDER
+@{
+    ViewBag.Title = "EditPO";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>EditPO</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post))
+{
+    <fieldset>
+        <legend>Edit PO @Model.POID</legend>
+        <ul>
+            <li>
+                <label>Estimated Shipping Date</label>
+                @Html.TextBoxFor(x => x.POEstimatedShipDate)
+            </li>
+            <li>
+                <label>Vendor</label>
+                @Html.TextBoxFor(x => x.VENDOR.VendorName)
+            </li>
+            <li>
+                <label>Freight Cost</label>
+                @Html.TextBoxFor(x => x.POFreightCost)
+            </li>
+            <li>
+                <label>Comments</label>
+                @Html.TextBoxFor(x => x.POComments)
+            </li>
+        </ul>
+        <button type="submit" value="Save">Save</button>
+        @Html.ActionLink("Back", "SearchPO")
+    </fieldset>
+}
