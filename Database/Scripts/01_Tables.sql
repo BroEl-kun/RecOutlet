@@ -16,6 +16,9 @@
 --		  02/01/2014: Chris Parkins - Transaction Line Item table edits
 --		  02/09/2014: Chris Parkins - Phase 2 Warehouse changes
 --		  02/11/2014: Chris Parkins - Added Tax table changes
+--		  02/20/2014: Chris Parkins - All Phone lengths changed to 15,
+--					  Addresses have address line 2, city, country,
+--					  and item quantities bumped to full ints.
 --
 -- *********************************************************************
 
@@ -36,7 +39,7 @@ GO
 --	[BackorderID] [int] NOT NULL,
 --	--[POLineItemID] [int] NOT NULL,
 --	[ReceivingID] [int] NOT NULL,
---	[BackorderQty] [smallint] NOT NULL
+--	[BackorderQty] [int] NOT NULL
 --) ON [PRIMARY]
 --GO
 
@@ -79,8 +82,8 @@ CREATE TABLE [dbo].[INVENTORY](
 	[LocationID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[QtyTypeID] [tinyint] NOT NULL,
-	[QtyOnHand] [smallint] NOT NULL,
-	[QtyThreshold] [smallint] NOT NULL
+	[QtyOnHand] [int] NOT NULL,
+	[QtyThreshold] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -112,9 +115,12 @@ CREATE TABLE [dbo].[INVOICE_CUSTOMER](
 	[TaxExemptID] [int] NULL,
 	[CustomerPaymentTerms] [nvarchar](50) NULL,
 	[CustomerAddress] [nvarchar](50) NULL,
+	[CustomerAddress2] [nvarchar](50) NULL,
+	[CustomerCity] [nvarchar](25) NULL,
 	[CustomerState] [nvarchar](2) NULL,
 	[CustomerZip] [nvarchar](10) NULL,
-	[CustomerPhone] [nvarchar](12) NULL
+	[CustomerCountry] [nvarchar](50) NULL,
+	[CustomerPhone] [nvarchar](15) NULL
 ) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
 
 GO
@@ -126,7 +132,7 @@ CREATE TABLE [dbo].[INVOICE_LINEITEM](
 	[InvoiceID] [bigint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[QtyTypeID] [tinyint] NOT NULL,
-	[ItemQty] [tinyint] NOT NULL,
+	[ItemQty] [int] NOT NULL,
 	[UnitPrice] [smallmoney] NOT NULL,
 	[UnitCost] [smallmoney] NOT NULL
 ) ON [PRIMARY]
@@ -210,10 +216,12 @@ CREATE TABLE [dbo].[LOCATION](
 	[ManagerId] [smallint] NOT NULL,
 	[StoreName] [nvarchar](50) NOT NULL,
 	[Address] [nvarchar](50) NULL,
+	[Address2] [nvarchar](50) NULL,
 	[City] [nvarchar](50) NULL,
 	[State] [char](2) NULL,
 	[Zip] [nvarchar](10) NULL,
-	[Phone] [nvarchar](12) NULL
+	[Country] [nvarchar](50) NULL,
+	[Phone] [nvarchar](15) NULL
 ) ON [PRIMARY]
 
 GO
@@ -278,7 +286,7 @@ CREATE TABLE [dbo].[PO_LINEITEM](
 	[RecRPC] [bigint] NOT NULL,
 	[QtyTypeID] [tinyint] NOT NULL,
 	[WholesaleCost] [smallmoney] NOT NULL,
-	[QtyOrdered] [smallint] NOT NULL
+	[QtyOrdered] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
@@ -330,7 +338,7 @@ CREATE TABLE [dbo].[RECEIVING_LOG](
 	[QtyTypeID] [tinyint] NULL,
 	[ReceiveDate] [smalldatetime] NOT NULL,
 	[ReceivingNotes] [nvarchar](max) NULL,
-	[ReceivedQty] [smallint] NULL
+	[ReceivedQty] [int] NULL
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
@@ -377,6 +385,7 @@ CREATE TABLE [dbo].[SHIPPING_LOG](
 	--[OrderType] [nchar](1) NOT NULL,
 	--[BackorderID] [int] NULL,
 	[ShippingNotes] [nvarchar](max) NULL,
+	[ShippingWeight] [int] NULL,
 	[ShippingFrieghtCost] [smallmoney] NOT NULL,
 	[Attention] [nvarchar](50) NOT NULL,
 	[EstimatedShipDate] [smalldatetime] NULL,
@@ -455,12 +464,15 @@ CREATE TABLE [dbo].[VENDOR](
 	[VendorID] [smallint] IDENTITY(1,1) NOT NULL,
 	[VendorName] [nvarchar](100) NOT NULL,
 	[ContactName] [nvarchar](100) NULL,
-	[ContactPhone] [nvarchar](12) NOT NULL,
-	[ContactFax] [nvarchar](12) NULL,
-	[AltPhone] [nvarchar](12) NULL,
+	[ContactPhone] [nvarchar](15) NOT NULL,
+	[ContactFax] [nvarchar](15) NULL,
+	[AltPhone] [nvarchar](15) NULL,
 	[VendorAddress] [nvarchar](50) NULL,
+	[VendorAddress2] [nvarchar](50) NULL,
+	[VendorCity] [nvarchar](25) NULL,
 	[VendorState] [nvarchar](2) NULL,
 	[VendorZip] [nvarchar](10) NULL,
+	[VendorCountry] [nvarchar](50) NULL,
 	[VendorWebsite] [nvarchar](100) NULL
 ) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
 
