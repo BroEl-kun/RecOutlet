@@ -133,8 +133,9 @@
                         @ViewBag.CurrentPO
                     </td>
                 </tr>
-            
+
             @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)
+            @*foreach (RecOutletWarehouse.Models.PO_LINEITEM objPO in Model.LineItems)*@
             {
             
             <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
@@ -157,7 +158,7 @@
                 <td>
                     Qty Type ID: 
                     @*@objPO.QtyTypeId*@
-                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeId })
+                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeID })
                     @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
                     <select>
                         <option selected>1 - Each</option>
