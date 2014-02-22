@@ -1,0 +1,74 @@
+﻿@model RecOutletWarehouse.Controllers.VendorController.ProductLineSalesRepViewModel
+
+@{
+    ViewBag.Title = "EditProductLine";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>EditProductLine</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ProductLineSalesRepViewModel</legend>
+
+        <div class="editor-label">
+            Product Line Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.productLine.ProductLineName)
+            @Html.ValidationMessageFor(model => model.productLine.ProductLineName)
+        </div>
+
+        <div class="editor-label">
+            Vendor
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.vendorName)
+            @Html.ValidationMessageFor(model => model.vendorName)
+        </div>
+
+        <fieldset>
+            <legend>Change Product Line's Sales Rep</legend>
+            <div>
+                Product line's sales rep is in our database already: <input type="radio" name="existingrep" checked value="Yes"/>Yes <input type="radio" name="existingrep" value="No"/>No
+                <br />@Html.ValidationMessageFor(newPL => newPL.rep.RepID)
+            </div>
+
+            <div class="existrep">
+                <div>Find an existing rep</div>
+                <ul class="no-list">
+            
+                    <li>Rep Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.existingRepName, new { @class = "searchrep" })</li>
+                </ul>
+            </div>
+    
+            <div class="newrep">
+                <div>New sales representative information</div>
+                <table>
+                    <tr>
+                        <td colspan="2">Rep Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.newRepName, new { @class="newrepinput" })</td>
+                    </tr>
+                    <tr>
+                        <td>Rep phone number<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone, new { @class="newrepinput", @id="PhoneNumber" })</td>
+                        <td>&nbsp Rep Email address @Html.TextBoxFor(newPL => newPL.rep.SalesRepEmail, new { @class="newrepinput", @id="PhoneNumber"})</td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

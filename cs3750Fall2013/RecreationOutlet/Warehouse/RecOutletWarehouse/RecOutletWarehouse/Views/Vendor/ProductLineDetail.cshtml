@@ -1,0 +1,44 @@
+﻿@model RecOutletWarehouse.Models.PRODUCT_LINE
+
+@{
+    ViewBag.Title = "ProductLineDetail";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>ProductLineDetail</h2>
+
+<fieldset>
+    <legend>PRODUCT_LINE</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductLineID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductLineID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VendorID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.RepID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RepID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ProductLineName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProductLineName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductLineID }) |
+    @Html.ActionLink("Back to List", "BrowseVendors")
+</p>
