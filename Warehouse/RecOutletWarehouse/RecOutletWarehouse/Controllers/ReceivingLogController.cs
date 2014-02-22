@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Utilities;
 
 namespace RecOutletWarehouse.Controllers
@@ -15,8 +14,10 @@ namespace RecOutletWarehouse.Controllers
 
         public class ReceivingLogCreationViewModel
         {
-            public List<RecOutletWarehouse.Models.RECEIVING_LOG> RL { get; set; }
-            public List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> LineItems { get; set; }
+            //public List<RecOutletWarehouse.Models.RECEIVING_LOG> RL { get; set; }
+            public List<RECEIVING_LOG> RL { get; set; }
+            //public List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> LineItems { get; set; }
+            public List<PO_LINEITEM> LineItems { get; set; }
         }
 
         //
@@ -28,10 +29,24 @@ namespace RecOutletWarehouse.Controllers
             {
                 DataFetcherSetter dbfs = new DataFetcherSetter();
 
-                List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder> objItem = new List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder>();
+                //List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder> objItem = new List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder>();
+                List<PURCHASE_ORDER> objItem = new List<PURCHASE_ORDER>();
 
                 //Why does the LineItem portion come back null?
-                objItem = dbfs.GetNonReceivedPOs();
+                //objItem = dbfs.GetNonReceivedPOs();
+
+                //from s in db.Services
+                //join sa in db.ServiceAssignments on s.Id equals sa.ServiceId
+                //where sa.LocationId == 1
+                //select s
+
+                var cte = (from P in db.PURCHASE_ORDER
+                          join PL in db.PO_LINEITEM on P.POID equals PL.POID
+                          join RL in db.RECEIVING_LOG on PL.POLineItemID equals RL.POLineItemID
+                          where PL.QtyOrdered == RL.ReceivedQty
+                          select P).ToList();
+                //.Where(e => !hasFacilities.Any(m => m.FacilityId == e.FacilityId))
+                objItem = db.PURCHASE_ORDER.Where(x => !cte.Any(m => m.POID == x.POID)).Take(50).ToList();
 
                 ViewBag.NonReceivedPOs = objItem;
 
@@ -70,10 +85,19 @@ namespace RecOutletWarehouse.Controllers
             {
                 DataFetcherSetter dbfs = new DataFetcherSetter();
 
-                List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder> objItem = new List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder>();
+                //List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder> objItem = new List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder>();
+                List<PURCHASE_ORDER> objItem = new List<PURCHASE_ORDER>();
 
                 //Why does the LineItem portion come back null?
-                objItem = dbfs.GetNonReceivedPOs();
+                //objItem = dbfs.GetNonReceivedPOs();
+
+                var cte = (from P in db.PURCHASE_ORDER
+                           join PL in db.PO_LINEITEM on P.POID equals PL.POID
+                           join RL in db.RECEIVING_LOG on PL.POLineItemID equals RL.POLineItemID
+                           where PL.QtyOrdered == RL.ReceivedQty
+                           select P).ToList();
+                //.Where(e => !hasFacilities.Any(m => m.FacilityId == e.FacilityId))
+                objItem = db.PURCHASE_ORDER.Where(x => !cte.Any(m => m.POID == x.POID)).Take(50).ToList();
 
                 ViewBag.NonReceivedPOs = objItem;
 
@@ -226,14 +250,15 @@ namespace RecOutletWarehouse.Controllers
                 ViewBag.CurrentPO = po;
 
                 //1108201301
-                DataFetcherSetter db = new DataFetcherSetter();
+                DataFetcherSetter dbfs = new DataFetcherSetter();
 
                 //List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> objItem;
                 ReceivingLogCreationViewModel objItem = new ReceivingLogCreationViewModel();
 
                 //objItem = ListLineItemsForPO(int.Parse(po));
                 //objItem = db.ListLineItemsForPO(int.Parse(po));
-                objItem.LineItems = db.ListLineItemsForPO(int.Parse(po));
+                //objItem.LineItems = dbfs.ListLineItemsForPO(int.Parse(po));
+                objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(po)).ToList();
 
                 // return new PurchaseOrderController().POSummary(int.Parse(po));
                 return View("Index", objItem);
@@ -254,7 +279,8 @@ namespace RecOutletWarehouse.Controllers
                 DataFetcherSetter dbfs = new DataFetcherSetter();
 
                 //Why does the LineItem portion come back null?
-                objItem.LineItems = dbfs.ListLineItemsForPO(int.Parse(POID));
+                //objItem.LineItems = dbfs.ListLineItemsForPO(int.Parse(POID));
+                objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(POID)).ToList();
 
                 List<int> tracker = new List<int>();
 
@@ -379,10 +405,12 @@ namespace RecOutletWarehouse.Controllers
                 //List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> tester = objItem; //keeps returning null
                 DataFetcherSetter dbfs = new DataFetcherSetter();
 
-                List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> objItem;
+                //List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> objItem;
+                List<PO_LINEITEM> objItem;
 
                 //objItem = ListLineItemsForPO(int.Parse(po));
-                objItem = dbfs.ListLineItemsForPO(int.Parse(form["POID" + 1].ToString()));
+                //objItem = dbfs.ListLineItemsForPO(int.Parse(form["POID" + 1].ToString()));
+                objItem = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(form["POID" + 1].ToString())).ToList();
 
                 //int tester = ModelState.Count;  //0
 
