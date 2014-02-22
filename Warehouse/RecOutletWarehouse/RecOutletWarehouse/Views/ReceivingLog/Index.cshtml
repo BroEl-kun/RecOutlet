@@ -134,8 +134,8 @@
                     </td>
                 </tr>
 
-            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)
-            @*foreach (RecOutletWarehouse.Models.PO_LINEITEM objPO in Model.LineItems)*@
+            @*foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)*@
+            @foreach (RecOutletWarehouse.Models.PO_LINEITEM objPO in Model.LineItems)
             {
             
             <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
@@ -242,17 +242,17 @@
         </thead>
 
         <tbody>
-
-            @foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)
+            @*foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrder objPO in ViewBag.NonReceivedPOs)*@
+            @foreach (RecOutletWarehouse.Models.PURCHASE_ORDER objPO in ViewBag.NonReceivedPOs)
             {
             
             <tr>
-                <td><a href="javascript:fillPOwithID(@objPO.PurchaseOrderId)">@objPO.PurchaseOrderId</a></td>
-                <td>@objPO.EstShipDate</td>
-                <td>@objPO.OrderDate</td>
-                <td>@objPO.Vendor</td>
+                <td><a href="javascript:fillPOwithID(@objPO.POID)">@objPO.POID</a></td>
+                <td>@objPO.POEstimatedShipDate</td>
+                <td>@objPO.POOrderDate</td>
+                <td>@objPO.VendorID</td>
                 @*<td>@objPO.CreatedBy</td>*@
-                <td>@objPO.Comments</td>
+                <td>@objPO.POComments</td>
             </tr>
 
             }
