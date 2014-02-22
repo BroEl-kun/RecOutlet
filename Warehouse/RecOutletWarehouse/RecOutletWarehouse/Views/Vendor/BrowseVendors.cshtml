@@ -16,6 +16,9 @@
 }
 
 <h2>Vendors</h2>
+<div>
+    Product lines are shown in <span class="bold-italics">bold italics</span>.
+</div>
 <h3>
     @Html.ActionLink("Create New", "AddVendor")
 </h3>
@@ -72,6 +75,17 @@
             @Html.ActionLink("Details", "VendorDetail", new { id=v.VendorID })
         </td>
     </tr>
+    foreach (var pl in v.PRODUCT_LINE) {
+        <tr >
+            <td class="vendorproductline">
+                @Html.DisplayFor(modelItem => pl.ProductLineName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
+                @Html.ActionLink("Details", "ProductLineDetail", new { id=pl.ProductLineID })
+            </td>
+        </tr>
+    }
 }
 </table>
 <div class="searchTotal">@Model.PagingInfo.TotalItems vendors match current sorting criteria</div>

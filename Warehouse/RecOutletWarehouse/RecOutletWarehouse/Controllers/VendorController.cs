@@ -347,6 +347,34 @@ namespace RecOutletWarehouse.Controllers
 
             return View(vendor);
         }
+
+        public ActionResult ProductLineDetail(int id = 0) {
+            PRODUCT_LINE pl = db.PRODUCT_LINE.Find(id);
+            if (pl == null) {
+                return HttpNotFound();
+            }
+            return View(pl);
+        }
+
+        public ActionResult EditProductLine(int id = 0) {
+            ProductLineSalesRepViewModel model = new ProductLineSalesRepViewModel();
+            model.productLine = db.PRODUCT_LINE.Find(id);
+            if (model.productLine == null) {
+                return HttpNotFound();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditProductLine(ProductLineSalesRepViewModel pl) {
+            if (ModelState.IsValid) {
+                db.Entry(pl).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("BrowseVendors");
+            }
+
+            return View(pl);
+        }
     }
 }
 

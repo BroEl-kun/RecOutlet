@@ -325,6 +325,8 @@
     <Content Include="Views\Vendor\VendorDetail.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Vendor\EditVendor.cshtml" />
+    <Content Include="Views\Vendor\ProductLineDetail.cshtml" />
+    <Content Include="Views\Vendor\EditProductLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

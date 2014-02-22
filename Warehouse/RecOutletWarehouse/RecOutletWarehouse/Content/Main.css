@@ -185,7 +185,21 @@ h2 {
     font-style:italic;
 }
 
-/*Errors and Validation
+.bold-italics{
+    font-style:italic;
+    font-weight:bold;
+}
+
+/* Vendor / Product Line Specific
+----------------------------------------------------------*/
+.vendorproductline{
+    font-style:italic;
+    font-weight:bold;
+    padding-left:20px;
+}
+
+
+/* Errors and Validation
 ----------------------------------------------------------*/
 .error {
     color: #e80c4d;
