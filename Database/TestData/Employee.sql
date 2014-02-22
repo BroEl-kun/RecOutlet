@@ -16,7 +16,8 @@ INSERT INTO EMPLOYEE ([EmployeeID],[Name],[Position],[Username],[PIN]) VALUES
 (6,'Bobby Lara','Sales Assistant','bobbylara','3835'),
 (7,'Bryan Torres','Stock Assistant','bryantorres','1248'),
 (8,'Lisa Collins','Assistant Manager','lisacollins','9667'),
-(9,'Erin Dickenson','Manager','erindickenson','4871')
+(9,'Erin Dickenson','Manager','erindickenson','4871'),
+(10, 'Recreation', 'Owner', 'recreation', '1234')
 
 GO
 
