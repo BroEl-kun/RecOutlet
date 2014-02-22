@@ -1,0 +1,32 @@
+﻿@model RecOutletWarehouse.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "Registration";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Registration</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Create user failed, check your fields.");
+    <div>
+        <fieldset>
+            <legend>Create new user</legend>
+            <div class="editor-label">
+                @Html.LabelFor(u=>u.Username)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(u=>u.Username)
+                @Html.ValidationMessageFor(u=>u.Username)
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(u=>u.PIN)
+            </div>
+            <div class="editor-field">
+                @Html.PasswordFor(u=>u.PIN)
+                @Html.ValidationMessageFor(u=>u.PIN)
+            </div>
+            <input type ="submit" value="Create User" class="button"/>
+        </fieldset>
+    </div>
+}

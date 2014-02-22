@@ -1,0 +1,79 @@
+﻿@model RecOutletWarehouse.Models.VENDOR
+
+@{
+    ViewBag.Title = "VendorDetail";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>VendorDetail</h2>
+
+<fieldset>
+    <legend>Vendor Information</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VendorName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactPhone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactPhone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ContactFax)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactFax)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AltPhone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AltPhone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VendorAddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorAddress)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VendorState)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorState)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VendorZip)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorZip)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VendorWebsite)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VendorWebsite)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.VendorID }) |
+    @Html.ActionLink("Back to List", "BrowseVendors")
+</p>

@@ -1,0 +1,58 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Main.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <title>@ViewBag.Title</title>
+
+    <!--Scripts (why can't I have these at the bottom???)-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", false)
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="title-wrapper">
+                <a href="@Url.Action("Index", "Home")" id = "logo-link"><img src="@Url.Content("~/Content/RecOutletlogo.png")", alt="Home" /></a>                
+            </div>
+            <div class="log-in">
+                @if (Request.IsAuthenticated)
+                {
+                    <strong>@Html.Encode(User.Identity.Name)</strong>
+                    <span>  |  </span>
+                    @Html.ActionLink("Log Out", "LogOut", "Employee")
+                }
+                else 
+                {
+                    @Html.ActionLink("Register", "Registration", "Employee")
+                    <span>  |  </span>
+                    @Html.ActionLink("Log In", "LogIn", "Employee")
+                    @*<input type="button" class="button" onclick="@Html.Action("Registration", "Employee")" value="Register" />
+                    <span>  |  </span>
+                    <input type="button" class="button" onclick="@Html.Action("LogIn", "Employee")" value="Log In" />   *@              
+                }
+            </div>
+        </header>
+        <div id="body">
+            <section class="tab-subheader" >
+                @RenderSection("tabnavigation", false)
+            </section>
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="center-text">
+                    <p>&copy; @DateTime.Now.Year - Recreation Outlet</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+</body>
+
+</html>
