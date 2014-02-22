@@ -262,7 +262,18 @@ namespace RecOutletWarehouse.Controllers
                 //objItem = ListLineItemsForPO(int.Parse(po));
                 //objItem = db.ListLineItemsForPO(int.Parse(po));
                 //objItem.LineItems = dbfs.ListLineItemsForPO(int.Parse(po));
-                objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(po)).ToList();
+                //objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(po)).ToList();
+
+                //var cte = (from P in db.PO_LINEITEM
+                //           where P.POID == 1121201301
+                //           select P.QtyOrdered).ToList();
+
+                //context.SomeTable.Where(c => c.ParentId == null)
+                // .Where(c => c.Name.Contains("F"))
+                // .Select(c => c.Name);
+
+                long test = Convert.ToInt64(po);
+                objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == test).ToList();
 
                 // return new PurchaseOrderController().POSummary(int.Parse(po));
                 return View("Index", objItem);
@@ -284,7 +295,11 @@ namespace RecOutletWarehouse.Controllers
 
                 //Why does the LineItem portion come back null?
                 //objItem.LineItems = dbfs.ListLineItemsForPO(int.Parse(POID));
-                objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(POID)).ToList();
+                //objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == Convert.ToInt64(POID)).ToList();
+
+                long test = Convert.ToInt64(POID);
+                //long test = Convert.ToInt64(ViewBag.CurrentPO);
+                objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == test).ToList();
 
                 List<int> tracker = new List<int>();
 
