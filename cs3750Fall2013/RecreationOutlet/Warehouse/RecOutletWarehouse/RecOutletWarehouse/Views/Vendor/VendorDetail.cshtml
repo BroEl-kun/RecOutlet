@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>@Html.DisplayNameFor(model => model.VendorName) - Details</h2>
+<h2>@Html.DisplayFor(model => model.VendorName) - Details</h2>
 
 <fieldset>
     <legend>Vendor Information</legend>
@@ -73,7 +73,7 @@
     </fieldset>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.VendorWebsite)
+         Corporate Website (link opens in a new tab)
     </div>
     <div class="display-field">
         @Html.SimpleExternalLink(Model.VendorWebsite, Model.VendorWebsite, true)
