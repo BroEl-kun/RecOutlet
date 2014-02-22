@@ -16,6 +16,7 @@ namespace RecOutletWarehouse.Controllers
     public class PurchaseOrderController : Controller
     {
         RecreationOutletContext entityDb = new RecreationOutletContext();
+        public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
 
         //ViewModel: PurchaseOrderAndLineItem
         //A ViewModel allows you to access data from different models 
@@ -33,6 +34,13 @@ namespace RecOutletWarehouse.Controllers
             public List<string> ItemNames { get; set; }
             public List<int> VendorIds { get; set; }
             public String tempPOID { get; set; }
+        }
+
+        public class PurchaseOrderSearchViewModel
+        {
+            public List<PURCHASE_ORDER> POs { get; set; }
+            public PagingInfo PagingInfo { get; set; }
+            public string search { get; set; }
         }
 
         //
@@ -253,13 +261,101 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        public ActionResult SearchPO() 
+        //[HttpGet]
+        //public ActionResult SearchPO(int page = 1) 
+        //{
+        //    try
+        //    {
+        //        //Master List of PO's
+        //        var poMList = from v in entityDb.PURCHASE_ORDER
+        //                      select v;
+
+        //        PurchaseOrderSearchViewModel model;
+
+        //        // IF the user doesn't provide a search query...
+                
+        //            model = new PurchaseOrderSearchViewModel
+        //            {
+        //                POs = poMList
+        //                          .OrderBy(v => v.POOrderDate)
+        //                          .Skip((page - 1) * BrowsePageSize)
+        //                          .Take(BrowsePageSize).ToList(),
+        //                PagingInfo = new PagingInfo
+        //                {
+        //                    CurrentPage = page,
+        //                    ItemsPerPage = BrowsePageSize,
+        //                    TotalItems = poMList.Count() // Get the count of the FILTERED list
+        //                },
+        //                //startLetter = firstLetter // The starting letter needs to be passed to the View
+        //                // so the View can pass it back to the Controller.
+        //                // If not included, pagination will not work correctly.
+        //            };
+               
+
+        //        //List<PURCHASE_ORDER> po = entityDb.PURCHASE_ORDER.ToList();
+
+        //        return View(model);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return RedirectToAction("Error", "Home");
+        //    }
+        //}
+
+        public ActionResult SearchPO(DateTime? orderDate, int page = 1)
         {
             try
             {
-                List<PURCHASE_ORDER> po = entityDb.PURCHASE_ORDER.ToList();
+                //Master List of PO's
+                var poMList = from v in entityDb.PURCHASE_ORDER
+                              select v;
 
-                return View(po);
+                PurchaseOrderSearchViewModel model;
+
+                // IF the user doesn't provide a search query...
+                if (String.IsNullOrEmpty(orderDate.ToString()))
+                {
+                    model = new PurchaseOrderSearchViewModel
+                    {
+                        POs = poMList
+                                  .OrderBy(v => v.POOrderDate)
+                                  .Skip((page - 1) * BrowsePageSize)
+                                  .Take(BrowsePageSize).ToList(),
+                        PagingInfo = new PagingInfo
+                        {
+                            CurrentPage = page,
+                            ItemsPerPage = BrowsePageSize,
+                            TotalItems = poMList.Count() // Get the count of the FILTERED list
+                        },
+                        //startLetter = firstLetter // The starting letter needs to be passed to the View
+                        // so the View can pass it back to the Controller.
+                        // If not included, pagination will not work correctly.
+                    };
+                }
+                // ELSE (the user did provide a vendor name search query)
+                else
+                {
+                    model = new PurchaseOrderSearchViewModel
+                    {
+                        POs = poMList
+                                  .Where(ve => ve.POOrderDate == orderDate) // Further filter the list to items that contain the search
+                                  .OrderBy(v => v.POOrderDate) // This is likely unnecessary (vendors is already sorted), but I'm leaving it here for now
+                                  .Skip((page - 1) * BrowsePageSize)
+                                  .Take(BrowsePageSize).ToList(),
+                        PagingInfo = new PagingInfo
+                        {
+                            CurrentPage = page,
+                            ItemsPerPage = BrowsePageSize,
+                            TotalItems = poMList.Where(ve => ve.POOrderDate == orderDate).Count() // Again, we want the count to take our filters into account
+                        },
+                        search = orderDate.ToString()
+                        //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
+                    };
+                }
+
+                //List<PURCHASE_ORDER> po = entityDb.PURCHASE_ORDER.ToList();
+
+                return View(model);
             }
             catch (Exception ex)
             {
@@ -272,7 +368,8 @@ namespace RecOutletWarehouse.Controllers
             try
             {
                 //byte newId = Convert.ToByte(id);
-                PURCHASE_ORDER po = entityDb.PURCHASE_ORDER.Find(id);
+                //PURCHASE_ORDER po = entityDb.PURCHASE_ORDER.Find(id);
+                PURCHASE_ORDER po = entityDb.PURCHASE_ORDER.SingleOrDefault(x => x.POID == id);
 
                 return View(po);
             }
@@ -297,24 +394,30 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult SearchPO(string queryType, string query)
-        {
-            try
-            {
-                return View();
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Error", "Home");
-            }
-        }
+        //[HttpPost]
+        //public ActionResult SearchPO(string queryType, string query)
+        //{
+        //    try
+        //    {
+        //        return View();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return RedirectToAction("Error", "Home");
+        //    }
+        //}
 
         //PURCHASE ORDER UTILITY METHODS FOLLOW
 
         public static string createPOForForm(int PO)
         {
             string POforForm;
+            bool lessThan10 = false;
+
+            if (PO < 10)
+            {
+                lessThan10 = true;
+            }
 
             if (PO != 0)
             {
@@ -325,7 +428,14 @@ namespace RecOutletWarehouse.Controllers
                 //POforForm = POforForm.Insert(5, "-");
                 //POforForm = POforForm.Insert(10, "-");
                 POforForm = DateTime.Now.Date.ToString("MM-dd-yyyy");
-                POforForm = POforForm + "-" + PO.ToString();
+                if (lessThan10)
+                {
+                    POforForm = POforForm + "-0" + PO.ToString();
+                }
+                else
+                {
+                    POforForm = POforForm + "-" + PO.ToString();
+                }
             }
             else
             {
