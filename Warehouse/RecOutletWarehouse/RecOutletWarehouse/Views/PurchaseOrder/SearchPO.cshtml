@@ -1,75 +1,8 @@
-﻿@model IEnumerable<RecOutletWarehouse.Models.PURCHASE_ORDER>
+﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderSearchViewModel
 @{
     ViewBag.Title = "Browse Purchase Orders";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
-<!-- Data Table Stuffs? -->
-<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
-<style>
-    #feedback { font-size: 1.4em; }
-    #selectable .ui-selecting { background: #FECA40; }
-    #selectable .ui-selected { background: #F39814; color: white; }
-    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-    #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
-</style>
-@*<script type ="text/javascript">*@
-<script>
-    $(function () {
-        $("#selectable").selectable({ selected: function (event, ui) { } })
-    });
-
-    $(document).ready(function () {
-        $("#potable").dataTable();
-    });
-
-    $(function () {
-        $("#selectable").on("selectableselected", function (event, ui) {
-            //$("#po").val($("#selectable").index(event.currentTarget).text());
-            //$("#po").val(event.currentTarget.innerText);
-            $("#po").val($("#selectable").text());
-            //$("#po").text("hello")
-            //$("po").html("hello");
-            //alert("hello");
-            //var poText = $("po").text();
-            //var poText = $("#po").val();
-            //alert(poText);
-        })
-    });
-
-    //$(function () {
-    //    $("#po").val(
-    //});
-
-    $(function () {
-        $("#recDate").datepicker();
-    });
-</script>
-<script type="text/javascript">
-    //function fillPOwithID()
-    //{
-    //    document.getElementById("po").value();
-    //}
-
-    function fillPOwithID(ID) {
-        //alert(ID);
-        document.getElementById("po").value = ID;
-        //document.forms["orig"].submit();
-        //document.forms["origForm"].submit();
-        //document.orig.submit();
-        //document.origForm.submit();
-        //document.getElementById("orig").submit();
-        //document.getElementsByName("origForm").submit();
-        //alert("submit?");
-        //document.getElementById("poSub").
-    }
-</script>
 @section tabnavigation{
     <ul class="nav clearfix">
         <li>@Html.ActionLink("Create New PO","CreateNewPO")</li>
@@ -77,8 +10,22 @@
     </ul>  
 }
 <h2>Browse / Search Purchase Orders</h2>
+<h3>Search</h3>
+@using (Html.BeginForm())
+{
+    <div class="search">
+        PO's Order Date: @Html.TextBox("orderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+        <input type="submit" value="Search" />
+    </div>
+}
 <div class="center-element center-text">
-    <table id="potable">
+    @*@if (!Model.Any())
+    {
+        <h3>Sorry, no items found.</h3>
+    }
+    else
+    {
+    *@<table id="potable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -88,14 +35,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.POs)
             {
                 <tr>
-                    <td>@item.POID</td>
-                    <td>@item.POOrderDate</td>
-                    <td>@item.POEstimatedShipDate</td>
-                    <td>@item.POFreightCost</td>
-                    <td>@Html.ActionLink("Edit", "EditPO", new { id=item.POID })</td>
+                    <td>@Html.DisplayFor(x => item.POID)</td>
+                    <td>@Html.DisplayFor(x => item.POOrderDate)</td>
+                    <td>@Html.DisplayFor(x => item.POEstimatedShipDate)</td>
+                    <td>@Html.DisplayFor(x => item.POFreightCost)</td>
+                    <td>@Html.ActionLink("View/Edit", "EditPO", new { id=item.POID })</td>
                 </tr>
             }
         </tbody>

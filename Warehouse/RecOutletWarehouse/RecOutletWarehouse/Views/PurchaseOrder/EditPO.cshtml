@@ -9,25 +9,48 @@
 @using (Html.BeginForm(null, null, FormMethod.Post))
 {
     <fieldset>
-        <legend>Edit PO @Model.POID</legend>
+        <legend>Edit PO @Html.DisplayFor(x => x.POID)</legend>
         <ul>
             <li>
+                <label>Order Date</label>
+                <br />
+                @Html.TextBoxFor(x => x.POOrderDate)
+            </li>
+            <li>
                 <label>Estimated Shipping Date</label>
+                <br />
                 @Html.TextBoxFor(x => x.POEstimatedShipDate)
             </li>
             <li>
                 <label>Vendor</label>
+                <br />
                 @Html.TextBoxFor(x => x.VENDOR.VendorName)
             </li>
             <li>
                 <label>Freight Cost</label>
+                <br />
                 @Html.TextBoxFor(x => x.POFreightCost)
             </li>
             <li>
                 <label>Comments</label>
+                <br />
                 @Html.TextBoxFor(x => x.POComments)
             </li>
+            <li>
+                <label>PO Terms</label>
+                <br />
+                @Html.TextBoxFor(x => x.POTerms)
+            </li>
         </ul>
+        @Html.HiddenFor(x => x.POID)
+        @Html.HiddenFor(x => x.VendorID)
+        @Html.HiddenFor(x => x.VENDOR)
+        @Html.HiddenFor(x => x.POCreatedBy)
+        @Html.HiddenFor(x => x.POCreatedDate)
+        @Html.HiddenFor(x => x.ShippingID)
+        @Html.HiddenFor(x => x.POCancelIfNotReceivedBy)
+        @Html.HiddenFor(x => x.EMPLOYEE)
+        @Html.HiddenFor(x => x.PO_LINEITEM)
         <button type="submit" value="Save">Save</button>
         @Html.ActionLink("Back", "SearchPO")
     </fieldset>
