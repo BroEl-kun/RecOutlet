@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecOutletWarehouse.Models;
+using RecOutletWarehouse.Utilities;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -37,6 +38,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -52,6 +54,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -78,6 +81,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -124,6 +128,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -139,6 +144,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -155,9 +161,10 @@ namespace RecOutletWarehouse.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 //return View();
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -173,6 +180,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -189,9 +197,10 @@ namespace RecOutletWarehouse.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 //return View();
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -228,6 +237,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -319,6 +329,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -510,6 +521,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }

@@ -54,6 +54,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -75,6 +76,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -154,6 +156,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -180,13 +183,6 @@ namespace RecOutletWarehouse.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
-        //vendor
-        //sales rep
-        //product line
-        //tax type
-        //department, category, subcategory
-        //then... item!
 
         /// <summary>
         /// Commits the POLineItems to the database with the provided POID
@@ -230,6 +226,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -257,50 +254,10 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
-
-        //[HttpGet]
-        //public ActionResult SearchPO(int page = 1) 
-        //{
-        //    try
-        //    {
-        //        //Master List of PO's
-        //        var poMList = from v in entityDb.PURCHASE_ORDER
-        //                      select v;
-
-        //        PurchaseOrderSearchViewModel model;
-
-        //        // IF the user doesn't provide a search query...
-                
-        //            model = new PurchaseOrderSearchViewModel
-        //            {
-        //                POs = poMList
-        //                          .OrderBy(v => v.POOrderDate)
-        //                          .Skip((page - 1) * BrowsePageSize)
-        //                          .Take(BrowsePageSize).ToList(),
-        //                PagingInfo = new PagingInfo
-        //                {
-        //                    CurrentPage = page,
-        //                    ItemsPerPage = BrowsePageSize,
-        //                    TotalItems = poMList.Count() // Get the count of the FILTERED list
-        //                },
-        //                //startLetter = firstLetter // The starting letter needs to be passed to the View
-        //                // so the View can pass it back to the Controller.
-        //                // If not included, pagination will not work correctly.
-        //            };
-               
-
-        //        //List<PURCHASE_ORDER> po = entityDb.PURCHASE_ORDER.ToList();
-
-        //        return View(model);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-        //}
 
         public ActionResult SearchPO(DateTime? orderDate, int page = 1)
         {
@@ -359,6 +316,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -375,6 +333,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
@@ -390,22 +349,10 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
-
-        //[HttpPost]
-        //public ActionResult SearchPO(string queryType, string query)
-        //{
-        //    try
-        //    {
-        //        return View();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return RedirectToAction("Error", "Home");
-        //    }
-        //}
 
         //PURCHASE ORDER UTILITY METHODS FOLLOW
 

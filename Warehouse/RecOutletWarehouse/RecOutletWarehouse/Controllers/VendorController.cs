@@ -47,6 +47,7 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
