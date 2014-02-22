@@ -98,7 +98,8 @@
     </table>
 
     PO ID:
-    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "origForm", id = "orig" }))
+    @*using (Html.BeginForm("findPO", "ReceivingLog", new { name = "origForm", id = "orig" }))*@
+    @using (Html.BeginForm("findPO", "RECEIVING_LOG", new { name = "origForm", id = "orig" }))
     {
         <input type="text" placeholder="" id="po" name="po" />          
         //<input type="text" id="po" />
@@ -116,7 +117,10 @@
 
     //using (Html.BeginForm("MarkedReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
     //using (Html.BeginForm("CreateReceived", "ReceivingLog"))//, FormMethod.Post)) //, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
-    using (Html.BeginForm("CreateReceived", "ReceivingLog", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    
+    //using (Html.BeginForm("CreateReceived", "ReceivingLog", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    using (Html.BeginForm("CreateReceived", "RECEIVING_LOG", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
+    
     //using (Html.BeginForm("CreateReceived", "ReceivingLogController", FormMethod.Post))//, new { name = count + "", id = count + "", onsubmit = "return false;"}) )
     //CreateReceived
     //using(Html.BeginForm())
