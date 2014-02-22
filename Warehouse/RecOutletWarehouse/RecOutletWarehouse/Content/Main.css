@@ -190,6 +190,41 @@ h2 {
     font-weight:bold;
 }
 
+.field-cluster-header{
+    font-size:1.2em;
+}
+
+.col-left{
+    float:left;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+.col-right{
+    float: left;
+    border-left: 1px solid #011C26;
+    padding-left: 10px;
+    left: -1px;
+    position:relative;
+}
+
+.clear-both{
+    clear:both;
+}
+
+.form-footer{
+    border-top:3px solid #011C26;
+    padding-top:10px;
+}
+
+.vertical-divider{
+     border-left:1px solid #38546d; 
+     border-right:1px solid #16222c; 
+     position:relative;
+     float:right;
+     left: -1px;
+}
+
 /* Vendor / Product Line Specific
 ----------------------------------------------------------*/
 .vendorproductline{
