@@ -46,7 +46,9 @@ namespace RecOutletWarehouse.Controllers
                           where PL.QtyOrdered == RL.ReceivedQty
                           select P).ToList();
                 //.Where(e => !hasFacilities.Any(m => m.FacilityId == e.FacilityId))
-                objItem = db.PURCHASE_ORDER.Where(x => !cte.Any(m => m.POID == x.POID)).Take(50).ToList();
+                //objItem = db.PURCHASE_ORDER.Where(x => !cte.Any(m => m.POID == x.POID)).Take(50).ToList();
+                //COMPLETE THIS QUERY
+                objItem = db.PURCHASE_ORDER.Take(50).ToList();
 
                 ViewBag.NonReceivedPOs = objItem;
 
@@ -97,7 +99,9 @@ namespace RecOutletWarehouse.Controllers
                            where PL.QtyOrdered == RL.ReceivedQty
                            select P).ToList();
                 //.Where(e => !hasFacilities.Any(m => m.FacilityId == e.FacilityId))
-                objItem = db.PURCHASE_ORDER.Where(x => !cte.Any(m => m.POID == x.POID)).Take(50).ToList();
+                //objItem = db.PURCHASE_ORDER.Where(x => !cte.Any(m => m.POID == x.POID)).Take(50).ToList();
+                //COMPLETE THIS QUERY
+                objItem = db.PURCHASE_ORDER.Take(50).ToList();
 
                 ViewBag.NonReceivedPOs = objItem;
 
