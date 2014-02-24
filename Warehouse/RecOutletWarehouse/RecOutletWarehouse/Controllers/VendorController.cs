@@ -359,6 +359,7 @@ namespace RecOutletWarehouse.Controllers
         public ActionResult EditProductLine(int id = 0) {
             ProductLineSalesRepViewModel model = new ProductLineSalesRepViewModel();
             model.productLine = db.PRODUCT_LINE.Find(id);
+            model.vendorName = model.productLine.VENDOR.VendorName; //ViewModel needs to be set based on PL information
             if (model.productLine == null) {
                 return HttpNotFound();
             }
@@ -366,14 +367,37 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProductLine(ProductLineSalesRepViewModel pl) {
-            if (ModelState.IsValid) {
-                db.Entry(pl).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("BrowseVendors");
-            }
+        public ActionResult EditProductLine(ProductLineSalesRepViewModel pl, string changerep) {
+            try {
+                if (ModelState.IsValid) {
+                    db.Entry(pl.productLine).State = EntityState.Modified; // Signal to EF that any of pl.productLine's entities could change
+                    switch (changerep) {
+                        case "no":
+                            pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.RepID == pl.productLine.SALES_REP.RepID);
+                            break;
+                        case "existing":
+                            pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.SalesRepName == pl.existingRepName);
+                            break;
+                        case "new":
+                            //add the sales rep
+                            pl.rep.SalesRepName = pl.newRepName;
+                            db.SALES_REPs.Add(pl.rep);
+                            db.SaveChanges();
+                            pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.RepID == pl.rep.RepID);
+                            break;
+                    }
+                    
+                    pl.productLine.VENDOR = db.VENDORs.Single(ven => ven.VendorName == pl.vendorName);
 
-            return View(pl);
+                    db.SaveChanges();
+                    return RedirectToAction("BrowseVendors");
+                }
+                return View(pl);
+            }
+            catch (Exception ex) {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }
