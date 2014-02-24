@@ -225,6 +225,20 @@ h2 {
      left: -1px;
 }
 
+/* CRUD page styles */
+.detail-field-header{
+    display:inline;
+    font-size:1.4em;
+    border-bottom: 1px solid #011C26;
+    padding-bottom: 1px;
+}
+
+.detail-field-value{
+    padding-left:30px;
+    margin-top:3px;
+    font-size:1.1em;
+}
+
 /* Vendor / Product Line Specific
 ----------------------------------------------------------*/
 .vendorproductline{

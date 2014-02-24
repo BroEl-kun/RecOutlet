@@ -5,40 +5,35 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>ProductLineDetail</h2>
+<h2>@Html.DisplayFor(model => model.ProductLineName) - Details</h2>
 
 <fieldset>
-    <legend>PRODUCT_LINE</legend>
+    <legend>Product Line Information</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ProductLineID)
+    <div class="detail-field-header">
+         Product Line Name (ID)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ProductLineID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VendorID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VendorID)
+    <div class="detail-field-value">
+        @Html.DisplayFor(model => model.ProductLineName) (@Html.DisplayFor(model => model.ProductLineID))
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.RepID)
+    <div class="detail-field-header">
+         Vendor Name (ID)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.RepID)
+    <div class="detail-field-value">
+        @Html.DisplayFor(model => model.VENDOR.VendorName) (@Html.DisplayFor(model => model.VendorID))
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ProductLineName)
+    <div class="detail-field-header">
+         Sales Rep Name (ID)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ProductLineName)
+    <div class="detail-field-value">
+        @Html.DisplayFor(model => model.SALES_REP.SalesRepName) (@Html.DisplayFor(model => model.RepID))
     </div>
+
 </fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProductLineID }) |
-    @Html.ActionLink("Back to List", "BrowseVendors")
+    <input type="button" value="Back to List"  class="button"
+                onclick="location.href='@Url.Action("BrowseVendors","Vendor")'" />
 </p>
