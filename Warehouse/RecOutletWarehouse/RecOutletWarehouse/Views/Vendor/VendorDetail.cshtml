@@ -11,72 +11,72 @@
 <fieldset>
     <legend>Vendor Information</legend>
 
-    <fieldset>
-        <legend>Contact Information</legend>
-
         @if (Model.ContactName.IsEmpty()) {
             <div class="notspecified">There is no specific contact person for this vendor.</div>
 
         }
         else{
-            <div class="display-label">
+            <div class="detail-field-header">
                  Contact Person
             </div>
-            <div class="display-field">
+            <div class="detail-field-value">
                 @Html.DisplayFor(model => model.ContactName)
             </div>
         }
-        <div class="display-label">
+        <div class="detail-field-header">
                 Vendor / Contact Person's Phone
         </div>
-        <div class="display-field">
+        <div class="detail-field-value">
             @Html.DisplayFor(model => model.ContactPhone)
         </div>
 
         @if(!Model.ContactFax.IsEmpty()){
-            <div class="display-label">
+            <div class="detail-field-header">
                  Vendor / Contact Person's Fax
             </div>
-            <div class="display-field">
+            <div class="detail-field-value">
                 @Html.DisplayFor(model => model.ContactFax)
             </div>
         }
 
         @if(!Model.AltPhone.IsEmpty()){
-            <div class="display-label">
+            <div class="detail-field-header">
                  Vendor's Alternate Phone
             </div>
-            <div class="display-field">
+            <div class="detail-field-value">
                 @Html.DisplayFor(model => model.AltPhone)
             </div>
         }
 
-    </fieldset>
+    
+    <div class="detail-field-header">
+        Address
+    </div>
 
-    <fieldset>
-        <legend>Address of @Html.DisplayFor(model => model.VendorName)</legend>
-    <div class="display-field">
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.VendorName)
     </div>
-    <div class="display-field">
+
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.VendorAddress)
     </div>
-    <div class="display-field">
+
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.VendorAddress2)
     </div>
-    <div class="display-field">
+
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.VendorCity)
         @Html.DisplayFor(model => model.VendorState)
         @Html.DisplayFor(model => model.VendorCountry)
         @Html.DisplayFor(model => model.VendorZip)
     </div>
-    </fieldset>
 
-    <div class="display-label">
-         Corporate Website (link opens in a new tab)
+    <div class="detail-field-header">
+         Corporate Website
     </div>
-    <div class="display-field">
-        @Html.SimpleExternalLink(Model.VendorWebsite, Model.VendorWebsite, true)
+    <div class="detail-field-value">
+        @Html.SimpleExternalLink(Model.VendorWebsite, Model.VendorWebsite, true) (link opens in a new tab)
     </div>
 </fieldset>
 <p>
