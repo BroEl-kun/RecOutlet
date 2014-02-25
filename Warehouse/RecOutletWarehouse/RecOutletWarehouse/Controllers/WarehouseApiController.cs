@@ -63,14 +63,14 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
-    public class SalesRepApiController : ApiController
-    {
+    public class SalesRepApiController : ApiController {
         [HttpGet]
-        public IEnumerable<SALES_REP> GetSalesReps(string query = "")
-        {
+        public IEnumerable<SALES_REP> GetSalesReps(string query = "") {
             using (var db = new RecreationOutletContext()) {
                 return String.IsNullOrEmpty(query) ? db.SALES_REPs.ToList() :
-                db.SALES_REPs.Where(p => p.SalesRepName.Contains(query)).ToList();
+                db.SALES_REPs.Where(p => p.SalesRepFirstName.Contains(query) ||
+                    p.SalesRepLastName.Contains(query))
+                .ToList();
             }
         }
     }

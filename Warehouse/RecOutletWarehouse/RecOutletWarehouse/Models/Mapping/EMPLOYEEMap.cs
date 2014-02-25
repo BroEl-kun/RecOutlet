@@ -15,11 +15,11 @@ namespace RecOutletWarehouse.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.Name)
+            this.Property(t => t.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.LastPosition)
+            this.Property(t => t.Position)
                 .IsRequired()
                 .HasMaxLength(50);
 

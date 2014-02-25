@@ -16,7 +16,7 @@
             var $this = $(this);
             if ($this.val() == "existing") {
                 $('.existrep').show();
-                $('.searchrep').val('@Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepName)');
+                $('#searchrep').val('@Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepFirstName) @Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepLastName)');
                 $('.newrep').hide();
                 $('.newrepinput').val('');
             } else if ($this.val() == "new") {
@@ -26,7 +26,7 @@
             }
             else {
                 $('.existrep').hide();
-                $('.searchrep').val('@Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepName)');
+                $('#searchrep').val('@Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepFirstName) @Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepLastName)');
                 $('.newrep').hide();
                 $('.newrep').val('');
             }
@@ -74,15 +74,18 @@
             <div>Find an existing rep</div>
             <ul class="no-list">
             
-                <li>Rep Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.existingRepName, new { @class = "searchrep" })</li>
+                <li>Rep Name<strong class="required">*</strong> <input type="text" id="searchrep" /></li>
             </ul>
+            @Html.HiddenFor(model => model.existingRepFirst, new { @id = "existFirst" }) 
+            @Html.HiddenFor(model => model.existingRepLast, new { @id = "existLast" })
         </div>
     
         <div class="newrep">
             <div>New sales representative information</div>
             <table>
                 <tr>
-                    <td colspan="2">Rep Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.newRepName, new { @class="newrepinput" })</td>
+                    <td>First Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.newRepFirst, new { @class="newrepinput" })</td>
+                    <td>Last Name<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.newRepLast, new { @class="newrepinput" })</td>
                 </tr>
                 <tr>
                     <td>Rep phone number<strong class="required">*</strong> @Html.TextBoxFor(newPL => newPL.rep.SalesRepPhone, new { @class="newrepinput", @id="PhoneNumber" })</td>
@@ -102,13 +105,11 @@
 </div>
 
 <script>
-    var url = '@Url.RouteUrl("DefaultApi", 
-    new { httproute = "", controller = "VendorApi" })';
     $('#vendor').autocomplete({
         autoFocus: true,
         source: function (request, response) {
             $.ajax({
-                url: url,
+                url: '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "VendorApi" })',
                 data: { query: request.term },
                 dataType: 'json',
                 type: 'GET',
@@ -123,35 +124,34 @@
         },
         select: function (event, ui) {
             $('#vendor').val(ui.item.label);
-            $('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
     });
 
-    var url2 = '@Url.RouteUrl("DefaultApi", 
-    new { httproute = "", controller = "SalesRepApi" })';
-    $('.searchrep').autocomplete({
+    $('#searchrep').autocomplete({
         autoFocus: true,
         source: function (request, response) {
             $.ajax({
-                url: url2,
+                url: '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "SalesRepApi" })',
                 data: { query: request.term },
                 dataType: 'json',
                 type: 'GET',
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.SalesRepName,
-                            value: item.SalesRepName
+                            label: item.SalesRepFirstName + " " + item.SalesRepLastName,
+                            first: item.SalesRepFirstName,
+                            last: item.SalesRepLastName
                         }
                     }).slice(0,10));
                 }
             })
         },
         select: function (event, ui) {
-            $('.searchrep').val(ui.item.label);
-            $('#Id').val(ui.item.value);
+            $('#searchrep').val(ui.item.label);
+            $('#existFirst').val(ui.item.first);
+            $('#existLast').val(ui.item.last);
             return false;
         },
         minLength: 1

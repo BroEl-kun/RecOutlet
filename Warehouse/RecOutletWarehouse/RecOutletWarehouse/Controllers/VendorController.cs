@@ -19,15 +19,20 @@ namespace RecOutletWarehouse.Controllers
         private DataFetcherSetter dfs = new DataFetcherSetter();
         public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
 
+        /// <summary>
+        /// The ViewModel used in Product Line CRUD functions
+        /// </summary>
         public class ProductLineSalesRepViewModel
         {
             public PRODUCT_LINE productLine { get; set; }
             public SALES_REP rep { get; set; }
 
             [Required(ErrorMessage="Please select the vendor of this product line.")]
-            public string vendorName { get; set; }
-            public string existingRepName { get; set; }
-            public string newRepName { get; set; }
+            public string vendorName { get; set; } // Ajax helper variable; also used to look up vendors for db interaction
+            public string existingRepFirst { get; set; } // Ajax helper variable
+            public string existingRepLast { get; set; } // Ajax helper variable
+            public string newRepFirst { get; set; }
+            public string newRepLast { get; set; }
         }
 
         public class BrowseVendorViewModel {
@@ -179,7 +184,7 @@ namespace RecOutletWarehouse.Controllers
             {
                 ViewBag.VendorName = pl.vendorName; // Sustains vendor name field when validation fails & when product line is successfully created
                 pl.productLine.VENDOR = db.VENDORs.SingleOrDefault(v => v.VendorName == pl.vendorName);
-                if (pl.existingRepName== null && (pl.newRepName == null && pl.rep.SalesRepPhone == null))
+                if (pl.existingRepFirst== null && pl.existingRepLast == null && (pl.newRepFirst == null && pl.newRepLast == null && pl.rep.SalesRepPhone == null))
                 {
                     ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
                 }
@@ -193,7 +198,8 @@ namespace RecOutletWarehouse.Controllers
                 // if the user chose to create a new rep...
                 if (existingrep == "No")
                 {
-                    pl.rep.SalesRepName = pl.newRepName;
+                    pl.rep.SalesRepFirstName = pl.newRepFirst;
+                    pl.rep.SalesRepLastName = pl.newRepLast;
                     db.SALES_REPs.Add(pl.rep);
                     db.SaveChanges();
 
@@ -203,13 +209,13 @@ namespace RecOutletWarehouse.Controllers
                     //}
                     //else {
                     pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.RepID == pl.rep.RepID); // A new rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on new rep's ID
-                    ViewBag.RepSuccess = "New Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                    ViewBag.RepSuccess = "New Sales Rep " + pl.rep.SalesRepFirstName + " " + pl.rep.SalesRepLastName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                     //}
                 }
                 else
                 {
-                    pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.SalesRepName == pl.existingRepName); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
-                    ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                    pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.SalesRepFirstName == pl.existingRepFirst && sr.SalesRepLastName == pl.existingRepLast); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
+                    ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepFirstName + " " + pl.rep.SalesRepLastName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                 }
 
                 // The following two lines are deprecated by EF
@@ -366,6 +372,14 @@ namespace RecOutletWarehouse.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// POST: Submits changes (requested by the user) to a certain Product Line to the database
+        /// </summary>
+        /// <param name="pl">An instance of the ProductLineSalesRepViewModel ViewModel class</param>
+        /// <param name="changerep">
+        /// A switch variable, set by radio buttons in the View, that 
+        /// indicates whether the user chose to change the sales rep</param>
+        /// <returns>A redirect back to the BrowseVendors View</returns>
         [HttpPost]
         public ActionResult EditProductLine(ProductLineSalesRepViewModel pl, string changerep) {
             try {
@@ -376,17 +390,18 @@ namespace RecOutletWarehouse.Controllers
                             pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.RepID == pl.productLine.SALES_REP.RepID);
                             break;
                         case "existing":
-                            pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.SalesRepName == pl.existingRepName);
+                            pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.SalesRepFirstName == pl.existingRepFirst && rep.SalesRepLastName == pl.existingRepLast);
                             break;
                         case "new":
                             //add the sales rep
-                            pl.rep.SalesRepName = pl.newRepName;
+                            pl.rep.SalesRepFirstName = pl.newRepFirst;
+                            pl.rep.SalesRepLastName = pl.newRepLast;
                             db.SALES_REPs.Add(pl.rep);
                             db.SaveChanges();
                             pl.productLine.SALES_REP = db.SALES_REPs.Single(rep => rep.RepID == pl.rep.RepID);
                             break;
                     }
-                    
+
                     pl.productLine.VENDOR = db.VENDORs.Single(ven => ven.VendorName == pl.vendorName);
 
                     db.SaveChanges();
@@ -401,4 +416,3 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 }
-
