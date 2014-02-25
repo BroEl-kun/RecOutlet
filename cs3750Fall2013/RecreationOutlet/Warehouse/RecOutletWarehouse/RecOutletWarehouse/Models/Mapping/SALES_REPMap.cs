@@ -13,12 +13,12 @@ namespace RecOutletWarehouse.Models.Mapping
             // Properties
             this.Property(t => t.SalesRepFirstName)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(50);
 
             // Properties
             this.Property(t => t.SalesRepLastName)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(50);
 
             this.Property(t => t.SalesRepPhone)
                 .IsRequired()
