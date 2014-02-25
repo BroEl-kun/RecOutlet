@@ -11,7 +11,8 @@ namespace RecOutletWarehouse.Models
         }
 
         public short RepID { get; set; }
-        public string SalesRepName { get; set; }
+        public string SalesRepFirstName { get; set; }
+        public string SalesRepLastName { get; set; }
         public string SalesRepPhone { get; set; }
         public string SalesRepEmail { get; set; }
 
