@@ -47,7 +47,8 @@ GO
 
 CREATE TABLE [dbo].[EMPLOYEE](
 	[EmployeeId] [smallint] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](50) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NOT NULL,
 	[Position] [nvarchar](50) NOT NULL,
 	[Username] [nvarchar](50) NOT NULL,
 	[PIN] [nchar](4) NOT NULL
@@ -369,7 +370,8 @@ GO
 
 CREATE TABLE [dbo].[SALES_REP](
 	[RepID] [smallint] IDENTITY(1,1) NOT NULL,
-	[SalesRepName] [nvarchar](100) NOT NULL,
+	[SalesRepFirstName] [nvarchar](50) NOT NULL,
+	[SalesRepLastName] [nvarchar](50) NOT NULL,
 	[SalesRepPhone] [nvarchar](15) NOT NULL,
 	[SalesRepEmail] [nvarchar](50) NULL
 ) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
