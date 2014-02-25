@@ -28,12 +28,12 @@
          Sales Rep Name (ID)
     </div>
     <div class="detail-field-value">
-        @Html.DisplayFor(model => model.SALES_REP.SalesRepName) (@Html.DisplayFor(model => model.RepID))
+        @Html.DisplayFor(model => model.SALES_REP.SalesRepFirstName) @Html.DisplayFor(model => model.SALES_REP.SalesRepLastName) (@Html.DisplayFor(model => model.SALES_REP.RepID))
     </div>
 
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductLineID }) |
+    @Html.ActionLink("Edit", "EditProductLine", new { id = Model.ProductLineID }) |
     <input type="button" value="Back to List"  class="button"
                 onclick="location.href='@Url.Action("BrowseVendors","Vendor")'" />
 </p>
