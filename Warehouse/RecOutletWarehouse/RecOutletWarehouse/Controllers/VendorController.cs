@@ -42,6 +42,13 @@ namespace RecOutletWarehouse.Controllers
             public string startLetter { get; set; }
         }
 
+        public class BrowseRepsViewModel {
+            public IEnumerable<SALES_REP> Reps { get; set; }
+            public PagingInfo PagingInfo { get; set; }
+            public string search { get; set; }
+            public string lastNameStartLetter { get; set; }
+        }
+
         //
         // GET: /Vendor/
         public ActionResult Index()
@@ -413,6 +420,56 @@ namespace RecOutletWarehouse.Controllers
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        public ActionResult BrowseSalesReps(string repNameSearch, string lastNameBeginsWith, int page = 1) {
+
+            BrowseRepsViewModel model;
+            var reps = from v in db.SALES_REPs
+                       select v;
+
+            // Filter master list to only those members that start with a certain letter
+            // First letter is defined by rolodex selection in View
+            if (!String.IsNullOrEmpty(lastNameBeginsWith) && String.IsNullOrEmpty(repNameSearch)) {
+                reps = reps.Where(sr => sr.SalesRepLastName.ToUpper().StartsWith(lastNameBeginsWith));
+            }
+
+            // IF the user doesn't provide a search query...
+            if (String.IsNullOrEmpty(repNameSearch)) {
+                model = new BrowseRepsViewModel {
+                    Reps = reps
+                              .OrderBy(sr => sr.SalesRepLastName)
+                              .Skip((page - 1) * BrowsePageSize)
+                              .Take(BrowsePageSize),
+                    PagingInfo = new PagingInfo {
+                        CurrentPage = page,
+                        ItemsPerPage = BrowsePageSize,
+                        TotalItems = reps.Count() // Get the count of the FILTERED list
+                    },
+                    lastNameStartLetter = lastNameBeginsWith // The starting letter needs to be passed to the View
+                    // so the View can pass it back to the Controller.
+                    // If not included, pagination will not work correctly.
+                };
+            }
+            // ELSE (the user did provide a search query)
+            else {
+                model = new BrowseRepsViewModel {
+                    Reps = reps
+                              .Where(sr => sr.SalesRepLastName.ToUpper().Contains(repNameSearch.ToUpper()) || sr.SalesRepFirstName.ToUpper().Contains(repNameSearch.ToUpper()))
+                              .OrderBy(v => v.SalesRepLastName) // possibly unnecessary
+                              .Skip((page - 1) * BrowsePageSize)
+                              .Take(BrowsePageSize),
+                    PagingInfo = new PagingInfo {
+                        CurrentPage = page,
+                        ItemsPerPage = BrowsePageSize,
+                        TotalItems = reps.Where(sr => sr.SalesRepLastName.ToUpper().Contains(repNameSearch.ToUpper()) || sr.SalesRepFirstName.ToUpper().Contains(repNameSearch.ToUpper())).Count()
+                    },
+                    search = repNameSearch
+                    //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
+                };
+            }
+            return View(model);
+
         }
     }
 }
