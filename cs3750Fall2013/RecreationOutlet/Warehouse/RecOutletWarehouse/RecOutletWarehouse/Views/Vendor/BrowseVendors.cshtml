@@ -8,16 +8,16 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
-        <li class="active">@Html.ActionLink("Browse Vendors", "BrowseVendors")</li>
+        <li class="active">@Html.ActionLink("Manage Vendors", "BrowseVendors")</li>
         <li>@Html.ActionLink("Add a Vendor", "AddVendor")</li>
         <li>@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
-        <li>@Html.ActionLink("Manage Sales Reps","ManageReps")</li>
+        <li>@Html.ActionLink("Manage Sales Reps","BrowseSalesReps")</li>
     </ul>  
 }
 
-<h2>Vendors</h2>
+<h2>Browse and Manage Vendors</h2>
 <div>
-    Product lines are shown in <span class="bold-italics">bold italics</span>.
+    A vendor's product lines are shown in <span class="bold-italics">bold italics</span> underneath the vendor's name.
 </div>
 <h3>
     @Html.ActionLink("Create New", "AddVendor")
