@@ -47,7 +47,8 @@ namespace RecOutletWarehouse.Controllers
 
                     var sysUser = db.EMPLOYEEs.Create();
 
-                    sysUser.Name = "Bob Smith";
+                    sysUser.FirstName = "Bob";
+                    sysUser.LastName = "Smith";
                     sysUser.Position = "Manager";
                     sysUser.Username = user.Username;
                     sysUser.PIN = user.PIN;
@@ -56,6 +57,8 @@ namespace RecOutletWarehouse.Controllers
 
                     db.EMPLOYEEs.Add(sysUser);
                     db.SaveChanges();
+
+                    ViewBag.UserName = user.Username;
 
                     return RedirectToAction("Index", "Home");
                 }

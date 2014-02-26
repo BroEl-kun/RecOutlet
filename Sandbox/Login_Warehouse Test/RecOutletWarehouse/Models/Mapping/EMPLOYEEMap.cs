@@ -11,7 +11,11 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasKey(t => t.EmployeeId);
 
             // Properties
-            this.Property(t => t.Name)
+            this.Property(t => t.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            this.Property(t => t.LastName)
                 .IsRequired()
                 .HasMaxLength(50);
 
@@ -31,7 +35,8 @@ namespace RecOutletWarehouse.Models.Mapping
             // Table & Column Mappings
             this.ToTable("EMPLOYEE");
             this.Property(t => t.EmployeeId).HasColumnName("EmployeeId");
-            this.Property(t => t.Name).HasColumnName("Name");
+            this.Property(t => t.FirstName).HasColumnName("FirstName");
+            this.Property(t => t.LastName).HasColumnName("LastName");
             this.Property(t => t.Position).HasColumnName("Position");
             this.Property(t => t.Username).HasColumnName("Username");
             this.Property(t => t.PIN).HasColumnName("PIN");
