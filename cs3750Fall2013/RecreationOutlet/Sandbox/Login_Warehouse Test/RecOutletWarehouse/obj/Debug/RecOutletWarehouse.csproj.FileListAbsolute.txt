@@ -69,3 +69,42 @@ C:\Users\NITTAYA\Desktop\Recreation Outlet\Sandbox\Login_Warehouse Test\RecOutle
 C:\Users\NITTAYA\Desktop\Recreation Outlet\Sandbox\Login_Warehouse Test\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
 C:\Users\NITTAYA\Desktop\Recreation Outlet\Sandbox\Login_Warehouse Test\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
 C:\Users\NITTAYA\Desktop\Recreation Outlet\Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\SimpleCrypto.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\RecOutletWarehouse.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\RecOutletWarehouse.pdb
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\Antlr3.Runtime.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\EntityFramework.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\EntityFramework.SqlServer.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\log4net.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\Neodynamic.SDK.ThermalLabel.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\Newtonsoft.Json.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\SimpleCrypto.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Net.Http.Formatting.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Helpers.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Http.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Http.WebHost.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Mvc.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Optimization.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Razor.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.WebPages.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.WebPages.Razor.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\WebGrease.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\Antlr3.Runtime.pdb
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\EntityFramework.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\EntityFramework.SqlServer.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\log4net.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\Newtonsoft.Json.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Optimization.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Net.Http.Formatting.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Helpers.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Http.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Http.WebHost.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Mvc.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.Razor.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.WebPages.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\bin\System.Web.WebPages.Razor.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\Login_Warehouse Test\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
