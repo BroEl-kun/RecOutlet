@@ -1,0 +1,60 @@
+﻿@using RecOutletWarehouse.HtmlHelpers;
+@model RecOutletWarehouse.Controllers.VendorController.BrowseRepsViewModel
+
+@{
+    ViewBag.Title = "BrowseSalesReps";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Manage Vendors", "BrowseVendors")</li>
+        <li>@Html.ActionLink("Add a Vendor", "AddVendor")</li>
+        <li>@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
+        <li class="active">@Html.ActionLink("Manage Sales Reps","BrowseSalesReps")</li>
+    </ul>  
+}
+
+<h2>Browse and Manage Sales Representatives</h2>
+<div>
+    The product lines a sales representative is responsible for are shown in <span class="bold-italics">bold italics</span> underneath the rep's name.
+</div>
+<h3>
+    @Html.ActionLink("Create New", "AddRep")
+</h3>
+<h3>Search</h3>
+@using (Html.BeginForm())
+{
+    <div class="search">
+        Rep's name (first or last) contains: @Html.TextBox("repNameSearch")
+        <input type="submit" value="Search" />
+    </div>
+}
+<!-- IMPORTANT: To use the following syntax, make sure you have an appropriate
+     "using" statement at the beginning of the file -->
+<div class="roloLinks pager">
+    @Html.RolodexLinks("lastNameBeginsWith", x => Url.Action("BrowseSalesReps"))
+</div>
+<table>
+    @foreach (var sr in Model.Reps) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => sr.SalesRepFirstName) @Html.DisplayFor(modelItem => sr.SalesRepLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sr.SalesRepPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => sr.SalesRepEmail)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditRep", new { id=sr.RepID }) |
+                @Html.ActionLink("Details", "RepDetail", new { id=sr.RepID })
+            </td>
+        </tr>
+    }
+</table>
+<div class="searchTotal">@Model.PagingInfo.TotalItems sales reps match current sorting criteria</div>
+<div class="pager">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseSalesReps", new {page = x, repNameSearch = Model.search, lastNameBeginsWith = Model.lastNameStartLetter}))
+</div>

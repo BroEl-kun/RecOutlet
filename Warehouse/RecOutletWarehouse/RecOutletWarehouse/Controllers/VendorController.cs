@@ -49,6 +49,11 @@ namespace RecOutletWarehouse.Controllers
             public string lastNameStartLetter { get; set; }
         }
 
+        //public class AddRepViewModel {
+        //    public SALES_REP Rep { get; set; }
+        //    public PRODUCT_LINE ProductLine { get; set; }
+        //}
+
         //
         // GET: /Vendor/
         public ActionResult Index()
@@ -470,6 +475,64 @@ namespace RecOutletWarehouse.Controllers
             }
             return View(model);
 
+        }
+
+        public ActionResult EditRep(int id = 0) {
+            SALES_REP rep = new SALES_REP();
+            rep = db.SALES_REPs.Find(id);
+
+            if (rep == null) {
+                return HttpNotFound();
+            }
+            return View(rep);
+        }
+
+        [HttpPost]
+        public ActionResult EditRep(SALES_REP rep) {
+            if (ModelState.IsValid) {
+                db.Entry(rep).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("BrowseSalesReps");
+            }
+
+            return View(rep);
+        }
+
+        public ActionResult AddRep() {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddRep(SALES_REP rep, string productLineName) {
+            
+            if (!ModelState.IsValid)
+                return View(rep);
+
+            if (!String.IsNullOrEmpty(productLineName)) {
+                PRODUCT_LINE pl = db.PRODUCT_LINE.SingleOrDefault(p => p.ProductLineName == productLineName);
+                if (pl != null){
+                    db.Entry(pl).State = EntityState.Modified;
+                    pl.SALES_REP = rep;
+                }
+                else{
+                    ViewBag.ProductLineDNE = string.Format("The product line \"{0}\" does not exist. Enter an existing product "
+                        + "line or leave the field empty and use the \"Add Sales Rep, Create Product Line\" button "
+                        + "to assign this sales rep to a new product line.",productLineName);
+                    return View(rep);
+                }
+            }            
+
+            db.SALES_REPs.Add(rep);
+            db.SaveChanges();
+
+            return View();
+        }
+
+        public ActionResult RepDetail(int id = 0) {
+            SALES_REP rep = db.SALES_REPs.Find(id);
+
+            return View(rep);
         }
     }
 }

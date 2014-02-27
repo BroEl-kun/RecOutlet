@@ -328,6 +328,9 @@
     <Content Include="Views\Vendor\ProductLineDetail.cshtml" />
     <Content Include="Views\Vendor\EditProductLine.cshtml" />
     <Content Include="Views\Vendor\BrowseSalesReps.cshtml" />
+    <Content Include="Views\Vendor\EditRep.cshtml" />
+    <Content Include="Views\Vendor\AddRep.cshtml" />
+    <Content Include="Views\Vendor\RepDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

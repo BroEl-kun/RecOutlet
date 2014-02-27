@@ -1,0 +1,70 @@
+﻿@model RecOutletWarehouse.Models.SALES_REP
+
+@{
+    ViewBag.Title = "AddRep";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>AddRep</h2>
+<div class="field-validation-error">
+    @ViewBag.ProductLineDNE
+</div>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>SALES_REP</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SalesRepFirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepFirstName)
+            @Html.ValidationMessageFor(model => model.SalesRepFirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SalesRepLastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepLastName)
+            @Html.ValidationMessageFor(model => model.SalesRepLastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SalesRepPhone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepPhone)
+            @Html.ValidationMessageFor(model => model.SalesRepPhone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SalesRepEmail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepEmail)
+            @Html.ValidationMessageFor(model => model.SalesRepEmail)
+        </div>
+
+        <div>
+            If this rep is to be assigned to an existing product line, enter its name below
+        </div>
+        <div>
+            @Html.TextBox("productLineName")
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "BrowseSalesReps")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
