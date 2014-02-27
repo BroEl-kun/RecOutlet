@@ -121,7 +121,7 @@ namespace RecOutletWarehouse.Controllers
                     ViewBag.Success = "Vendor successfully created.";
                     if (labelRedirect == "Add Vendor, Create Product Line")
                     {
-                        return RedirectToAction("CreateNewPL", new { id = vendor.VendorID });
+                        return RedirectToAction("CreateNewPL", new { vendorId = vendor.VendorID });
                     }
                     return View();
                 }
@@ -145,15 +145,15 @@ namespace RecOutletWarehouse.Controllers
         ///     Version 1.5 (T.M.)
         ///         - Entity Framework implemented; DataFetcherSetter no longer referenced
         ///         - Code refactored for EF implementation
-        public ActionResult CreateNewPL(short? id = 0)
+        public ActionResult CreateNewPL(short? vendorId = 0)
         {
             try
             {
-                if (id != 0)
+                if (vendorId != 0)
                     //{ ViewBag.VendorName = dfs.GetVendorNameForVendorId((Int16)id); }
 
                     // EF version of deprecated DFS method follows
-                    ViewBag.VendorName = db.VENDORs.Find(id).VendorName;
+                    ViewBag.VendorName = db.VENDORs.Find(vendorId).VendorName;
                 return View();
             }
             catch (Exception ex)

@@ -15,6 +15,12 @@
     </ul>  
 }
 
+<script>
+    $(function () {
+        $(".actionMenu").menu();
+    });
+</script>
+
 <h2>Browse and Manage Vendors</h2>
 <div>
     A vendor's product lines are shown in <span class="bold-italics">bold italics</span> underneath the vendor's name.
@@ -71,8 +77,17 @@
             @Html.DisplayFor(modelItem => v.VendorWebsite)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditVendor", new { id=v.VendorID }) |
-            @Html.ActionLink("Details", "VendorDetail", new { id=v.VendorID })
+            <ul class="actionMenu">
+                <li>
+                    Actions
+                    <ul>
+                        <li>@Html.ActionLink("Edit Vendor Information", "EditVendor", new { id=v.VendorID })</li>
+                        <li>@Html.ActionLink("View Vendor Details", "VendorDetail", new { id=v.VendorID })</li>
+                        <li>@Html.ActionLink("Add Product Line to this Vendor", "CreateNewPL", new { vendorId = v.VendorID })</li>
+                        <li>@Html.ActionLink("P.O. to this Vendor", "CreateNewPO", "PurchaseOrder", new { vendorName = v.VendorName }, new { })</li>
+                    </ul>
+                </li>
+            </ul>
         </td>
     </tr>
     foreach (var pl in v.PRODUCT_LINE) {
@@ -81,6 +96,7 @@
                 @Html.DisplayFor(modelItem => pl.ProductLineName)
             </td>
             <td>
+                
                 @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
                 @Html.ActionLink("Details", "ProductLineDetail", new { id=pl.ProductLineID })
             </td>
