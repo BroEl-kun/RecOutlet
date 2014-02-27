@@ -1,0 +1,50 @@
+﻿@model RecOutletWarehouse.Models.SALES_REP
+
+@{
+    ViewBag.Title = "RepDetail";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>RepDetail</h2>
+
+<fieldset>
+    <legend>SALES_REP</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SalesRepFirstName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SalesRepFirstName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SalesRepLastName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SalesRepLastName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SalesRepPhone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SalesRepPhone)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SalesRepEmail)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SalesRepEmail)
+    </div>
+    <div>
+    This is the sales rep for the following product lines:
+        @foreach (var item in Model.PRODUCT_LINE) {
+            <div>@Html.DisplayFor(modelItem => item.ProductLineName) (Vendor: @Html.DisplayFor(modelItem => item.VENDOR.VendorName))</div>
+        }
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "BrowseSalesReps")
+</p>

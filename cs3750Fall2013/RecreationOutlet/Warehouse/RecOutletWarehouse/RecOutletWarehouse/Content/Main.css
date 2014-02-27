@@ -251,12 +251,12 @@ h2 {
 /* Errors and Validation
 ----------------------------------------------------------*/
 .error {
-    color: #e80c4d;
+    color: #ca0000;
 }
 
 /* styles for validation helpers */
 .field-validation-error {
-    color: #e80c4d;
+    color: #ca0000;
     font-weight: bold;
 }
 
@@ -265,7 +265,7 @@ h2 {
 }
 
 input.input-validation-error {
-    border: 1px solid #e80c4d;
+    border: 1px solid #ca0000;
 }
 
 input[type="checkbox"].input-validation-error {
@@ -273,7 +273,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 .validation-summary-errors {
-    color: #e80c4d;
+    color: #ca0000;
     font-weight: bold;
     font-size: 1.1em;
 }
@@ -283,7 +283,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 .required {
-    color: red;
+    color: #ca0000;
 }
 
 input.zip {
