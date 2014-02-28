@@ -84,4 +84,14 @@ namespace RecOutletWarehouse.Controllers
             return db.SearchItemsByName(query);
         }
     }
+
+    public class EventTypeApiController : ApiController{
+        [HttpGet]
+        public IEnumerable<EVENT_TYPE> GetEventType(string query = "") {
+            using (var db = new RecreationOutletContext()) {
+                return String.IsNullOrEmpty(query) ? db.EVENT_TYPE.ToList() :
+                db.EVENT_TYPE.Where(p => p.EventDescription.Contains(query)).ToList();
+            }
+        }
+    }
 }
