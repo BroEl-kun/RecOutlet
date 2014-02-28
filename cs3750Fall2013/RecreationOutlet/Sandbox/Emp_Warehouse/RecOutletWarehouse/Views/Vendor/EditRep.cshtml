@@ -1,0 +1,69 @@
+﻿@model RecOutletWarehouse.Models.SALES_REP
+
+@{
+    ViewBag.Title = "EditRep";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.SalesRepFirstName) @Html.DisplayFor(model => model.SalesRepLastName) - Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Representative Information</legend>
+        @Html.HiddenFor(model => model.RepID)
+
+        <div class="editor-label">
+            First Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepFirstName)
+            @Html.ValidationMessageFor(model => model.SalesRepFirstName)
+        </div>
+
+        <div class="editor-label">
+            Last Name
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepLastName)
+            @Html.ValidationMessageFor(model => model.SalesRepLastName)
+        </div>
+
+        <div class="editor-label">
+            Phone Number
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepPhone)
+            @Html.ValidationMessageFor(model => model.SalesRepPhone)
+        </div>
+
+        <div class="editor-label">
+            E-mail Address
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SalesRepEmail)
+            @Html.ValidationMessageFor(model => model.SalesRepEmail)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+<div>
+    This is the sales rep for the following product lines:
+    @foreach (var item in Model.PRODUCT_LINE) {
+        <div>@Html.DisplayFor(modelItem => item.ProductLineName) (Vendor: @Html.DisplayFor(modelItem => item.VENDOR.VendorName))</div>
+    }
+    @Html.ActionLink("Assign rep to another product line", "AssignRep")
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "BrowseSalesReps")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
