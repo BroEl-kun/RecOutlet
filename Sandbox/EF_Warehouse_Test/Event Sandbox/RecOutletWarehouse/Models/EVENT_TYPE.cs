@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,6 +15,8 @@ namespace RecOutletWarehouse.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte EventTypeCode { get; set; }
         public string EventDescription { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<SALE_PRICING> SALE_PRICING { get; set; }
     }
 }
