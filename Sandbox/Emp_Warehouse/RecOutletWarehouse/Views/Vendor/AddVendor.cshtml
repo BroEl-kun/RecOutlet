@@ -1,0 +1,145 @@
+﻿@model RecOutletWarehouse.Models.VENDOR
+
+@{
+    ViewBag.Title = "Add New Vendor";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Manage Vendors", "BrowseVendors")</li>
+        <li class="active">@Html.ActionLink("Add a Vendor", "AddVendor")</li>
+        <li>@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
+        <li>@Html.ActionLink("Manage Sales Reps","BrowseSalesReps")</li>
+    </ul>  
+}
+
+<h2>Add New Vendor</h2>
+
+@if (ViewBag.Success != null) {
+    <ul>
+        <li class="successful-insert">@ViewBag.Success</li>
+    </ul>
+}
+
+@using (Html.BeginForm()) {
+    <fieldset>
+        <legend>Vendor</legend>
+             <table>
+
+        <tr>
+            <td>&nbsp Vendor Name:<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.VendorName, new { @id = "VendorName" })
+                @Html.ValidationMessageFor(newVendor => newVendor.VendorName)
+            </td>
+
+            <td>&nbsp Website: </td>
+            <td colspan="5">
+                @Html.TextBoxFor(newVendor => newVendor.VendorWebsite, new { @class = "VendorWebSite" })
+                @Html.ValidationMessageFor(newVendor => newVendor.VendorWebsite)
+            </td>
+
+            </tr>
+            <tr>
+                <td>&nbsp Address:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorAddress)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorAddress)
+                </td>
+                <td>&nbsp Address Line 2:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorAddress2)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorAddress2)
+                </td>
+                </tr>
+            <tr>
+                <td>&nbsp City:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorCity)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorCity)
+                </td>
+                <td>&nbsp State:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorState, new { @class = "state" })
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorState)
+                </td>
+                <td>&nbsp Zip/Postal Code:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorZip, new { @class = "zip" })
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorZip)
+                </td>
+                <td>&nbsp Country:</td>
+                <td>
+                    @Html.TextBoxFor(newVendor => newVendor.VendorCountry)
+                    @Html.ValidationMessageFor(newVendor => newVendor.VendorCountry)
+                </td>
+            </tr>
+
+       </table>
+        </fieldset>
+    
+       <fieldset>
+        <legend>Contact Information</legend>
+             <table>
+                 <tr>
+                  <td>&nbsp Name:</td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.ContactName)
+                @Html.ValidationMessageFor(newVendor => newVendor.ContactName)
+            </td>
+
+            <td>&nbsp Phone Number:<strong class="required">*</strong></td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.ContactPhone, new { @class = "VendorPhone" })
+                @Html.ValidationMessageFor(newVendor => newVendor.ContactPhone)
+            </td>
+            </tr>
+
+            <tr>
+            <td>&nbsp Fax Number:</td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.ContactFax, new { @class = "VendorPhone" })
+                @Html.ValidationMessageFor(newVendor => newVendor.ContactFax)
+            </td>
+    
+            <td>&nbsp Alternate Phone Number:</td>
+            <td>
+                @Html.TextBoxFor(newVendor => newVendor.AltPhone, new { @class = "VendorPhone" })
+                @Html.ValidationMessageFor(newVendor => newVendor.AltPhone)
+            </td>
+   
+           </tr>
+      </table>
+        </fieldset>
+    <input type="submit" value="Add New Vendor" onclick="submit()" class="button"/>
+    <input type="submit" value="Add Vendor, Create Product Line"  name="labelRedirect" onclick="submit()" class="button" />
+    <input type="button" value="Cancel" onclick="prompt()" class="button" />
+    
+}
+
+<script type ="text/javascript">
+    $(function () {
+        $("#VendorName").focus();
+    });
+
+    //window.onbeforeunload = function () {
+    //    return "Changes to new vendor will not be saved.";
+    //};
+
+    function prompt() {
+        var p = confirm("Changes to vendor have not been saved! Continue?");
+
+        if (p == true) {
+            window.location = "@Url.Action("BrowseVendors", "Vendor")"
+            }
+        }
+
+    function submit() {
+        var s = confirm("New vendor has been created!");
+
+        if (s == true) {
+            window.location = "@Url.Action("BrowseVendors", "Vendor")"
+            }
+        }
+</script>
