@@ -333,3 +333,18 @@ div.roloLinks{
     color:silver;
 
 }
+
+.right{
+
+    text-align: right;
+
+}
+.center{
+
+    text-align: center
+
+}
+
+#priceTable{
+    border-spacing: 12px;
+}

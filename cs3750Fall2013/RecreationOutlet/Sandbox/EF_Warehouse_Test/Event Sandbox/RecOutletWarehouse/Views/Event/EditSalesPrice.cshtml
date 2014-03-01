@@ -5,14 +5,17 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>EditSalesPrice</h2>
+<h2>Edit Sale Pricing Information</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm(FormMethod.Post)) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
+    
+    @Html.HiddenFor(model => model.OldEvent)
+    @Html.HiddenFor(model => model.OldRPC)
+    
     <fieldset>
-        <legend>SALE_PRICING</legend>
+        <legend>Sale Pricing Information</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Event)
@@ -24,7 +27,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.RecRPC)
+            RPC
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => model.saleprice.RecRPC)
@@ -32,7 +35,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.SalePrice)
+            Sale Price
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => model.saleprice.SalePrice)
@@ -40,7 +43,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.BeginDate)
+            Beginning Effective Date
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => model.saleprice.BeginDate)
@@ -48,7 +51,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.EndDate)
+            Ending Effective Date
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(model => model.saleprice.EndDate)
@@ -56,10 +59,10 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.Comments)
+            Comments
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.saleprice.Comments)
+            @Html.TextAreaFor(model => model.saleprice.Comments)
             @Html.ValidationMessageFor(model => model.saleprice.Comments)
         </div>
 
