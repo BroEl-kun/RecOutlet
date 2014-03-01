@@ -110,6 +110,8 @@ namespace RecOutletWarehouse.Controllers
 
                 POVM.PO.VENDOR = entityDb.VENDORs.Single(x => x.VendorName == POVM.PO.VENDOR.VendorName);
 
+                POVM.PO.POCreatedDate = DateTime.Now;
+
                 //CUSTOM VALIDATION FOLLOWS
                 //if (db.RetrievePObyPOID(Convert.ToInt64(convertedPO)).PurchaseOrderId != null)
                 //{
