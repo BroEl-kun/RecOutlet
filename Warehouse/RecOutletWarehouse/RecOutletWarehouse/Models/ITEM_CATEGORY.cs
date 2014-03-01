@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RecOutletWarehouse.Models
 {
@@ -10,6 +12,7 @@ namespace RecOutletWarehouse.Models
             this.ITEMs = new List<ITEM>();
         }
 
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public byte CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
