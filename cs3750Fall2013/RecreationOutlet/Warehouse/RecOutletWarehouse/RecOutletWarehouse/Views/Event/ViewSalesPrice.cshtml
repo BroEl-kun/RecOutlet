@@ -1,0 +1,77 @@
+﻿@model IEnumerable<RecOutletWarehouse.Models.SALE_PRICING>
+
+@{
+    ViewBag.Title = "ViewSalesPrice";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("View Events", "ViewEvents")</li>
+        <li class="active">@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
+        
+    </ul>  
+}
+
+<h2>View Sale Pricing Information</h2>
+
+<p>
+    @Html.ActionLink("Create", "CreateSalesPrice")
+</p>
+<table id="priceTable">
+    <tr>
+        <th>
+           Event Description
+        </th>
+        <th>
+            Item Name
+        </th>
+        <th>
+            RPC
+        </th>
+        <th>
+            Original Selling Price
+        </th>
+        <th>
+            Sale Price
+        </th>
+        <th>
+            Effective Dates
+        </th>
+        <th>
+            Comments
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EVENT_TYPE.EventDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITEM.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecRPC)
+        </td>
+        <td class="right">
+            @Html.DisplayFor(modelItem => item.ITEM.SellPrice)
+        </td>
+        <td class="right">
+            @Html.DisplayFor(modelItem => item.SalePrice)
+        </td>
+        <td class="center">
+            @Html.DisplayFor(modelItem => item.BeginDate) -
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditSalesPrice", new { etc = item.EventTypeCode, rpc = item.RecRPC })
+        </td>
+    </tr>
+}
+
+</table>

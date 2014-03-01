@@ -63,6 +63,21 @@ td {
     /*border: 1px solid black;*/
 }
 
+.right{
+
+    text-align: right;
+
+}
+.center{
+
+    text-align: center
+
+}
+
+#priceTable{
+    border-spacing: 12px;
+}
+
 h2 {
     font-family: 'Helvetica';
     font-weight: bold;

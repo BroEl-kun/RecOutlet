@@ -1,0 +1,103 @@
+﻿@model RecOutletWarehouse.Controllers.EventController.AddSalePriceViewModel
+
+@{
+    ViewBag.Title = "CreateSalesPrice";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Create Sale Pricing Information</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Sale Pricing Information</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Event)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Event, new { @id = "EventName" })
+            @Html.ValidationMessageFor(model => model.Event)
+        </div>
+
+        <div class="editor-label">
+            RPC
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.saleprice.RecRPC)
+            @Html.ValidationMessageFor(model => model.saleprice.RecRPC)
+        </div>
+
+        <div class="editor-label">
+            Sale Price
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.saleprice.SalePrice)
+            @Html.ValidationMessageFor(model => model.saleprice.SalePrice)
+        </div>
+
+        <div class="editor-label">
+            Beginning Effective Date
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("saleprice.BeginDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+            @Html.ValidationMessageFor(model => model.saleprice.BeginDate)
+        </div>
+
+        <div class="editor-label">
+            Ending Effective Date
+        </div>
+        <div class="editor-field">
+            @Html.TextBox("saleprice.EndDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+            @Html.ValidationMessageFor(model => model.saleprice.EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.saleprice.Comments)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.saleprice.Comments)
+            @Html.ValidationMessageFor(model => model.saleprice.Comments)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ViewSalesPrice")
+</div>
+
+<script>
+    $('#EventName').autocomplete({
+        autoFocus: true,
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "EventTypeApi" })',
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.EventDescription
+                        }
+                    }).slice(0,10));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#EventName').val(ui.item.label);
+            //$('#Id').val(ui.item.label);
+            return false;
+        },
+        minLength: 1
+    });
+</script>
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

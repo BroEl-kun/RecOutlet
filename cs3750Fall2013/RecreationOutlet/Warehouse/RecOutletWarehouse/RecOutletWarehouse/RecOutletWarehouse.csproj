@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemManagementController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
@@ -331,6 +332,13 @@
     <Content Include="Views\Vendor\EditRep.cshtml" />
     <Content Include="Views\Vendor\AddRep.cshtml" />
     <Content Include="Views\Vendor\RepDetail.cshtml" />
+    <Content Include="Views\Event\CreateEvent.cshtml" />
+    <Content Include="Views\Event\CreateSalesPrice.cshtml" />
+    <Content Include="Views\Event\EditEvent.cshtml" />
+    <Content Include="Views\Event\EditSalesPrice.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Event\ViewEvents.cshtml" />
+    <Content Include="Views\Event\ViewSalesPrice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

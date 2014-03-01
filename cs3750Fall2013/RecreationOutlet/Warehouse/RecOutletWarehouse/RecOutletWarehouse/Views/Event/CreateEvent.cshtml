@@ -1,0 +1,45 @@
+﻿@model RecOutletWarehouse.Models.EVENT_TYPE
+
+@{
+    ViewBag.Title = "Create Event";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Create Event</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Event Information</legend>
+
+        <div class="editor-label">
+            Description
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EventDescription)
+            @Html.ValidationMessageFor(model => model.EventDescription)
+        </div>
+
+        <input type="submit" value="Create New Event" onclick="submit()" class="button"/>
+
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ViewEvents")
+</div>
+
+<script type ="text/javascript">
+
+
+
+    function submit() {
+        var s = confirm("New Event has been created!");
+
+        if (s == true) {
+            window.location = "@Url.Action("Index", "Home")"
+            }
+        }
+</script>
