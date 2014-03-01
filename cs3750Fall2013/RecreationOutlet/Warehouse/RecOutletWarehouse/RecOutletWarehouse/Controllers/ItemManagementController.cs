@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,8 @@ namespace RecOutletWarehouse.Controllers
 {
     public class ItemManagementController : Controller
     {
+
+        RecreationOutletContext entityDb = new RecreationOutletContext();
         //
         // GET: /ItemMangement/
 
@@ -19,6 +22,21 @@ namespace RecOutletWarehouse.Controllers
             public Department department { get; set; }
             public Category category { get; set; }
             public SubCategory subcat { get; set; }
+        }
+
+        //New view model that incorporates the Entity Framework models
+        public class newItemDeptCatSubcatViewModel
+        {
+            public ITEM_DEPARTMENT department { get; set; }
+            public ITEM_CATEGORY category { get; set; }
+            public ITEM_SUBCATEGORY subcat { get; set; }
+        }
+
+        public class allItemDeptCatSubcatViewModel
+        {
+            public List<ITEM_DEPARTMENT> departments { get; set; }
+            public List<ITEM_CATEGORY> categorys { get; set; }
+            public List<ITEM_SUBCATEGORY> subcats { get; set; }
         }
 
         public ActionResult CreateNewItem()
@@ -196,7 +214,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult addNewDeptCatSubcat(ItemDeptCatSubcatViewModel model, string submitButton)
+        public ActionResult addNewDeptCatSubcat(newItemDeptCatSubcatViewModel model, string submitButton)
         {
             try
             {
@@ -209,10 +227,13 @@ namespace RecOutletWarehouse.Controllers
                     {
                         return View(model);
                     }
-                    db.AddDepartment(model.department);
+                    //db.AddDepartment(model.department);
+                    entityDb.ITEM_DEPARTMENT.Add(model.department);
+                    entityDb.SaveChanges();
+
                     ViewBag.deptSuccess = "Department \"" + model.department.DepartmentName + "\" successfully added.";
 
-                    return View(new ItemDeptCatSubcatViewModel());
+                    return View(new newItemDeptCatSubcatViewModel());
                 }
 
                 if (submitButton == "Category")
@@ -223,10 +244,13 @@ namespace RecOutletWarehouse.Controllers
                     {
                         return View(model);
                     }
-                    db.AddCategory(model.category);
+                    //db.AddCategory(model.category);
+                    entityDb.ITEM_CATEGORY.Add(model.category);
+                    entityDb.SaveChanges();
+
                     ViewBag.catSuccess = "Category \"" + model.category.CategoryName + "\" successfully added.";
 
-                    return View(new ItemDeptCatSubcatViewModel());
+                    return View(new newItemDeptCatSubcatViewModel());
                 }
 
                 if (submitButton == "Subcategory")
@@ -237,14 +261,94 @@ namespace RecOutletWarehouse.Controllers
                     {
                         return View(model);
                     }
-                    db.AddSubcategory(model.subcat);
+                    //db.AddSubcategory(model.subcat);
+
+                    entityDb.ITEM_SUBCATEGORY.Add(model.subcat);
+                    entityDb.SaveChanges();
+
                     ViewBag.subcatSuccess = "Subcategory \"" + model.subcat.SubcategoryName + "\" successfully added.";
 
-                    return View(new ItemDeptCatSubcatViewModel());
+                    return View(new newItemDeptCatSubcatViewModel());
                 }
 
                 else
                     return View();
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        public ActionResult ItemCharacteristics()
+        {
+            try
+            {
+                allItemDeptCatSubcatViewModel model = new allItemDeptCatSubcatViewModel();
+
+                model.categorys = entityDb.ITEM_CATEGORY.ToList();
+                model.departments = entityDb.ITEM_DEPARTMENT.ToList();
+                model.subcats = entityDb.ITEM_SUBCATEGORY.ToList();
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        public ActionResult EditItemCharacteristics(int id, string editButton)
+        {
+            try
+            {
+                newItemDeptCatSubcatViewModel model = new newItemDeptCatSubcatViewModel();
+                ViewBag.editButton = editButton;
+
+                if (editButton == "category")
+                {
+                    model.category = entityDb.ITEM_CATEGORY.SingleOrDefault(x => x.CategoryID == id);
+                }
+                else if (editButton == "subcategory")
+                {
+                    model.subcat = entityDb.ITEM_SUBCATEGORY.SingleOrDefault(x => x.SubcategoryID == id);
+                }
+                else if (editButton == "department")
+                {
+                    model.department = entityDb.ITEM_DEPARTMENT.SingleOrDefault(x => x.DepartmentID == id);
+                }
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditItemCharacteristics(newItemDeptCatSubcatViewModel model, String editButton)
+        {
+            try
+            {
+                if (editButton == "category")
+                {
+                    entityDb.Entry(model.category).State = EntityState.Modified;
+                    entityDb.SaveChanges();
+                }
+                else if (editButton == "subcategory")
+                {
+
+                }
+                else if (editButton == "department")
+                {
+
+                }
+
+                return View();
             }
             catch (Exception ex)
             {
