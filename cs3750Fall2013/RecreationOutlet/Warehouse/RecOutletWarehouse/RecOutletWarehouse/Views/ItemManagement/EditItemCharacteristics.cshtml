@@ -1,0 +1,61 @@
+﻿@model RecOutletWarehouse.Controllers.ItemManagementController.newItemDeptCatSubcatViewModel
+@{
+    ViewBag.Title = "EditItemCharacteristics";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Edit Item Characteristics</h2>
+
+@if (ViewBag.editButton == "category")
+{
+    using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Edit Category</legend>
+            <label>Category ID: </label>
+            @Html.DisplayFor(x => x.category.CategoryID)
+            <br />
+            <label>Category Name</label>
+            <br />
+            @Html.EditorFor(x => x.category.CategoryName)
+            <label>Category Description</label>
+            @Html.EditorFor(x => x.category.CategoryDescription)
+            <button name="editButton" type="submit" value="category" class="button">Save</button>
+            @Html.HiddenFor(x => x.category.CategoryID)
+        </fieldset>
+    }
+}
+else if (ViewBag.editButton == "subcategory")
+{
+    using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Edit Subcategory</legend>
+            <label>Subcategory ID</label>
+            <br />
+            @Html.DisplayFor(x => x.subcat.SubcategoryID)
+            <label>Subcategory Name</label>
+            <br />
+            @Html.EditorFor(x => x.subcat.SubcategoryName)
+            <button name="editButton" type="submit" value="subcategory" class="button">Save</button>
+        </fieldset>
+    }
+}
+else if (ViewBag.editButton == "department")
+{
+    using (Html.BeginForm())
+    {
+        <fieldset>
+            <legend>Edit Department</legend>
+            <label>Department ID</label>
+            <br />
+            @Html.DisplayFor(x => x.department.DepartmentID)
+            <label>Department Name</label>
+            <br />
+            @Html.EditorFor(x => x.department.DepartmentName)
+            <label>Department Description</label>
+            @Html.EditorFor(x => x.department.DepartmentDescription)
+            <button name="editButton" type="submit" value="department" class="button">Save</button>
+        </fieldset>
+    }
+}

@@ -1,0 +1,64 @@
+﻿@using System.Web.Optimization;
+@model RecOutletWarehouse.Controllers.ItemManagementController.allItemDeptCatSubcatViewModel
+@{
+    ViewBag.Title = "ItemCharacteristics";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Item Characteristics</h2>
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Create New Item","CreateNewItem")</li>
+        <li>@Html.ActionLink("Print Item Labels","PrintLabels")</li>
+        <li class="active">@Html.ActionLink("Item Characteristics","ItemCharacteristics")</li>
+    </ul> 
+}
+
+<div class="item-char-container">
+    <div class="item-char-outter">
+        <h3 class="item-char">Categories</h3>
+        <div class="item-char">
+            @foreach (var item in Model.categorys)
+            {
+                <div class="item-char-row">
+                    <div class="item-char-list1"><p class="item-char">@item.CategoryID</p></div>
+                    <div class="item-char-list2"><p class="item-char">@item.CategoryName</p></div>
+                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
+                                                                        new {id = item.CategoryID, editButton = "category"})'" /></div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="item-char-outter">
+        <h3 class="item-char">Subcategories</h3>
+        <div class="item-char">
+            @foreach (var item in Model.subcats)
+            {
+                <div class="item-char-row">
+                    <div class="item-char-list1"><p class="item-char">@item.SubcategoryID</p></div>
+                    <div class="item-char-list2"><p class="item-char">@item.SubcategoryName</p></div>
+                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
+                                                                        new {id = item.SubcategoryID, editButton = "subcategory"})'" /></div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="item-char-outter">
+        <h3 class="item-char">Departments</h3>
+        <div class="item-char">
+            @foreach (var item in Model.departments)
+            {
+                <div class="item-char-row">
+                    <div class="item-char-list1"><p class="item-char">@item.DepartmentID</p></div>
+                    <div class="item-char-list2"><p class="item-char">@item.DepartmentName</p></div>
+                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
+                                                                        new {id = item.DepartmentID, editButton = "department"})'" /></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
