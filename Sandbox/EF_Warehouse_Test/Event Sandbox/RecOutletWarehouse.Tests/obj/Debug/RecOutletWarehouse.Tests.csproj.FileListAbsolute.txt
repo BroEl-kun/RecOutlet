@@ -59,3 +59,30 @@ C:\Users\stuff_000\Desktop\Recreation Outlet - EF Sandbox\RecOutletWarehouse.Tes
 C:\Users\stuff_000\Desktop\Recreation Outlet - EF Sandbox\RecOutletWarehouse.Tests\obj\Debug\RecOutletWarehouse.Tests.csprojResolveAssemblyReference.cache
 C:\Users\stuff_000\Desktop\Recreation Outlet - EF Sandbox\RecOutletWarehouse.Tests\obj\Debug\RecOutletWarehouse.Tests.dll
 C:\Users\stuff_000\Desktop\Recreation Outlet - EF Sandbox\RecOutletWarehouse.Tests\obj\Debug\RecOutletWarehouse.Tests.pdb
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\RecOutletWarehouse.Tests.dll.config
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\RecOutletWarehouse.Tests.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\RecOutletWarehouse.Tests.pdb
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Helpers.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Http.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Mvc.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Razor.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.WebPages.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Helpers.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Http.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Mvc.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.Razor.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.WebPages.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\bin\Debug\System.Web.WebPages.Razor.xml
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\obj\Debug\RecOutletWarehouse.Tests.csprojResolveAssemblyReference.cache
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\obj\Debug\RecOutletWarehouse.Tests.dll
+C:\Users\stuff_000\Desktop\Recreation Outlet Sandbox\EF_Warehouse_Test\Event Sandbox\RecOutletWarehouse.Tests\obj\Debug\RecOutletWarehouse.Tests.pdb

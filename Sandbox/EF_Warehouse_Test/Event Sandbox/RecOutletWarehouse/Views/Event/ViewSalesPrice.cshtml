@@ -5,12 +5,20 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>ViewSalesPrice</h2>
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("View Events", "ViewEvents")</li>
+        <li class="active">@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
+        
+    </ul>  
+}
+
+<h2>View Sale Pricing Information</h2>
 
 <p>
     @Html.ActionLink("Create", "CreateSalesPrice")
 </p>
-<table>
+<table id="priceTable">
     <tr>
         <th>
            Event Description
@@ -47,13 +55,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.RecRPC)
         </td>
-        <td>
+        <td class="right">
             @Html.DisplayFor(modelItem => item.ITEM.SellPrice)
         </td>
-        <td>
+        <td class="right">
             @Html.DisplayFor(modelItem => item.SalePrice)
         </td>
-        <td>
+        <td class="center">
             @Html.DisplayFor(modelItem => item.BeginDate) -
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>

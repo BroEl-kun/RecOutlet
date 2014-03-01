@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>CreateSalesPrice</h2>
+<h2>Create Sale Pricing Information</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>SALE_PRICING</legend>
+        <legend>Sale Pricing Information</legend>
 
         <div class="editor-label">
             @Html.LabelFor(model => model.Event)
@@ -23,7 +23,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.RecRPC)
+            RPC
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.saleprice.RecRPC)
@@ -31,7 +31,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.SalePrice)
+            Sale Price
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.saleprice.SalePrice)
@@ -39,7 +39,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.BeginDate)
+            Beginning Effective Date
         </div>
         <div class="editor-field">
             @Html.TextBox("saleprice.BeginDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
@@ -47,7 +47,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.saleprice.EndDate)
+            Ending Effective Date
         </div>
         <div class="editor-field">
             @Html.TextBox("saleprice.EndDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
