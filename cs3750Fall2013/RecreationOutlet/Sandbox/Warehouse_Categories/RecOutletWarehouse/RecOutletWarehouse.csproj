@@ -325,6 +325,7 @@
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Vendor\EditVendor.cshtml" />
     <Content Include="Views\ItemManagement\BrowseEditCategory.cshtml" />
+    <Content Include="Views\ItemManagement\EditCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
