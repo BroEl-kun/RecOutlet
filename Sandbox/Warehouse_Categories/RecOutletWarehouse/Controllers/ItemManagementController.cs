@@ -15,6 +15,9 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /ItemMangement/
 
+        private RecreationOutletContext db = new RecreationOutletContext();
+        private DataFetcherSetter dfs = new DataFetcherSetter();
+
         public class ItemDeptCatSubcatViewModel {
             public Department department { get; set; }
             public Category category { get; set; }
@@ -23,8 +26,13 @@ namespace RecOutletWarehouse.Controllers
 
         public class ItemCategoryViewModel
         {
-            public Category category { get; set; }
-            public SubCategory subcat { get; set; }
+            //public Category category { get; set; }
+            //public SubCategory subcat { get; set; }
+
+            public IEnumerable<ITEM_CATEGORY> Categories { get; set; }
+            public PagingInfo PagingInfo { get; set; }
+            public string search { get; set; }
+            public string startLetter { get; set; }
         }
 
         public ActionResult CreateNewItem()
@@ -249,6 +257,62 @@ namespace RecOutletWarehouse.Controllers
             }
             catch (Exception ex)
             {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+
+        public ActionResult BrowseEditCategory(long? id)
+        {
+            try
+            {
+                ItemCategoryViewModel model = new ItemCategoryViewModel();
+
+                model.Categories = db.ITEM_CATEGORY.ToList();
+
+                ViewBag.RPC = id.ToString();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BrowseEditCategory()
+        {
+            try
+            {
+                //RecreationOutletContext db = new RecreationOutletContext();
+                //DataFetcherSetter dfs = new DataFetcherSetter();
+
+                // Declare model
+                ItemCategoryViewModel model;
+
+                // Create master list
+                var categories = from c in db.ITEM_CATEGORY
+                                 select c;
+
+                model = new ItemCategoryViewModel
+                {
+                    Categories = categories
+                              .OrderBy(c => c.CategoryID)
+                              .Skip((1 - 1) * 100)
+                              .Take(100),
+                    PagingInfo = new PagingInfo
+                    {
+                        CurrentPage = 0,
+                        ItemsPerPage = 100,
+                        TotalItems = categories.Count() // Get the count of the FILTERED list
+                    },
+                    //startLetter = ""
+                };
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
         }
