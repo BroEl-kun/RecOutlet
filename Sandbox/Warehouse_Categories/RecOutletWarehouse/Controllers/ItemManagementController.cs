@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Models.ItemManagement;
 using RecOutletWarehouse.Utilities;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 
 namespace RecOutletWarehouse.Controllers
@@ -315,6 +317,30 @@ namespace RecOutletWarehouse.Controllers
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+
+        public ActionResult EditCategory(int id = 0)
+        {
+            ITEM_CATEGORY category = db.ITEM_CATEGORY.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult EditCategory(ITEM_CATEGORY category)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("BrowseEditCategory");
+            }
+
+            return View(category);
         }
     }
 }
