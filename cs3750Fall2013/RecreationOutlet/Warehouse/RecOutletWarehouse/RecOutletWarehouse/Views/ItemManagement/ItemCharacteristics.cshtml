@@ -18,6 +18,7 @@
 <div class="item-char-container">
     <div class="item-char-outter">
         <h3 class="item-char">Categories</h3>
+        <hr />
         <div class="item-char">
             @foreach (var item in Model.categorys)
             {
@@ -25,14 +26,15 @@
                     <div class="item-char-list1"><p class="item-char">@item.CategoryID</p></div>
                     <div class="item-char-list2"><p class="item-char">@item.CategoryName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
-                                                                        new {id = item.CategoryID, editButton = "category"})'" /></div>
+                                                            onclick="JavaScript:newPopup('@Url.Action("EditItemCharacteristics", "ItemManagement", 
+                                                                        new {id = item.CategoryID, editButton = "category"})');" /></div>
                 </div>
             }
         </div>
     </div>
     <div class="item-char-outter">
         <h3 class="item-char">Subcategories</h3>
+        <hr />
         <div class="item-char">
             @foreach (var item in Model.subcats)
             {
@@ -40,14 +42,15 @@
                     <div class="item-char-list1"><p class="item-char">@item.SubcategoryID</p></div>
                     <div class="item-char-list2"><p class="item-char">@item.SubcategoryName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
-                                                                        new {id = item.SubcategoryID, editButton = "subcategory"})'" /></div>
+                                                            onclick="JavaScript:newPopup('@Url.Action("EditItemCharacteristics", "ItemManagement", 
+                                                                        new {id = item.SubcategoryID, editButton = "subcategory"})');" /></div>
                 </div>
             }
         </div>
     </div>
     <div class="item-char-outter">
         <h3 class="item-char">Departments</h3>
+        <hr />
         <div class="item-char">
             @foreach (var item in Model.departments)
             {
@@ -55,10 +58,20 @@
                     <div class="item-char-list1"><p class="item-char">@item.DepartmentID</p></div>
                     <div class="item-char-list2"><p class="item-char">@item.DepartmentName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
-                                                                        new {id = item.DepartmentID, editButton = "department"})'" /></div>
+                                                            onclick="JavaScript:newPopup('@Url.Action("EditItemCharacteristics", "ItemManagement",
+                                                                        new {id = item.DepartmentID, editButton = "department"})');" /></div>
                 </div>
             }
         </div>
     </div>
 </div>
+<center>
+<input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")    ');" class="button" value="Add a new Department, Category, and/or Subcategory" />
+</center>
+<script type="text/javascript">
+    // Popup window code
+    function newPopup(url) {
+        popupWindow = window.open(
+            url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    }
+</script>

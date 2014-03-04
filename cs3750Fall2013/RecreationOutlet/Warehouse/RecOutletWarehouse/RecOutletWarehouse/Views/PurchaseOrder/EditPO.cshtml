@@ -14,12 +14,12 @@
             <li>
                 <label>Order Date</label>
                 <br />
-                @Html.TextBoxFor(x => x.POOrderDate)
+                @Html.TextBoxFor(x => x.POOrderDate, new { type = "date" })
             </li>
             <li>
                 <label>Estimated Shipping Date</label>
                 <br />
-                @Html.TextBoxFor(x => x.POEstimatedShipDate)
+                @Html.TextBoxFor(x => x.POEstimatedShipDate, new { type = "date" })
             </li>
             <li>
                 <label>Vendor</label>
