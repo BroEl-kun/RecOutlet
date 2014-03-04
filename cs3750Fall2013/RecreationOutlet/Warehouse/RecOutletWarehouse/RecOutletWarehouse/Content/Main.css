@@ -459,7 +459,7 @@ div.item-char
 
 div.item-char-outter
 {
-    height: 350px;
+    height: 370px;
     float: left;
     width: 30%;
     display: block;
@@ -508,4 +508,23 @@ h3.item-char
 p.item-char
 {
     line-height: 0px;
+}
+
+/*Styles for PO Table*/
+div.potable-area
+{
+    background-color:beige;
+    border-radius:7px;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.potable 
+{
+    width: 100%;
+}
+
+table.potable tbody tr:nth-child(odd)
+{
+   background-color: white;
 }
