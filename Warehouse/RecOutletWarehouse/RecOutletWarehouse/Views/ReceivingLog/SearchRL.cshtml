@@ -1,0 +1,105 @@
+﻿@using RecOutletWarehouse.HtmlHelpers;
+@model RecOutletWarehouse.Controllers.ReceivingLogController.BrowseReceivingLogViewModel
+
+@{
+    ViewBag.Title = "SearchRL";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Create Receiving Log", "Index")</li>
+        <li class="active">@Html.ActionLink("Browse Receiving Logs", "SearchRL")</li>
+    </ul>  
+}
+
+<script>
+    $(function () {
+        $(".actionMenu").menu();
+    });
+</script>
+
+<h2>Browse and View Receiving Logs</h2>
+
+@*<h3>
+    @Html.ActionLink("Create New", "AddVendor")
+</h3>*@
+<h3>Search</h3>
+@*@using (Html.BeginForm())
+{
+    <div class="search">
+        Vendor's name contains: @Html.TextBox("venNameSearch")
+        <input type="submit" value="Search" />
+    </div>
+}*@
+
+<!-- IMPORTANT: To use the following syntax, make sure you have an appropriate
+     "using" statement at the beginning of the file -->
+@*<div class="roloLinks pager">
+    @Html.RolodexLinks(x => Url.Action("SearchRL"))
+</div>*@
+
+
+<table>
+    <tr>
+        <th>
+            Receiving Log ID
+        </th>
+        <th>
+            Purchase Order Line Item ID
+        </th>
+        <th>
+            Received Date
+        </th>
+        <th>
+            Quantity Type
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Notes
+        </th>
+    </tr>
+
+@foreach (var v in Model.RLs) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => v.ReceivingID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.POLineItemID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.ReceiveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.QtyTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.ReceivedQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.ReceivingNotes)
+        </td>
+        <td>
+            @*<ul class="actionMenu">
+                <li>
+                    Actions
+                    <ul>
+                        <li>@Html.ActionLink("Edit Vendor Information", "EditVendor", new { id=v.VendorID })</li>
+                        <li>@Html.ActionLink("View Vendor Details", "VendorDetail", new { id=v.VendorID })</li>
+                        <li>@Html.ActionLink("Add Product Line to this Vendor", "CreateNewPL", new { vendorId = v.VendorID })</li>
+                        <li>@Html.ActionLink("P.O. to this Vendor", "CreateNewPO", "PurchaseOrder", new { vendorName = v.VendorName }, new { })</li>
+                    </ul>
+                </li>
+            </ul>*@
+        </td>
+    </tr>
+}
+</table>
+
+@*<div class="searchTotal">@Model.PagingInfo.TotalItems vendors match current sorting criteria</div>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseVendors", new {page = x, venNameSearch = Model.search, firstLetter = Model.startLetter}))
+</div>*@
