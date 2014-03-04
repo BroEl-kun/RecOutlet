@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RecOutletWarehouse.Models.PO_LINEITEM>
+@* Partial View Listing the Purchase Order Line Items *@
+
+@if (Model.ToList().Count == 0 ) {
+<div>No items have been added to this purchase order yet. Use the item listing below to add items.</div>
+}
+else{
+<table >
+    <tr class="leftjust">
+        <th>Item Name</th>
+        <th>Vendor Item #</th>
+        <th>Qty Ordered</th>
+        <th>Cost Each</th>
+        <th>Cost All</th>
+    </tr>
+
+
+    @foreach (var item in Model) {
+        <tr>
+                @using (Ajax.BeginForm("removeItemFromLineItems", new AjaxOptions { UpdateTargetId = "currentLines" })) {
+                    
+                    <td>@Html.DisplayFor(modelItem => item.ITEM.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ITEM.VendorItemID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.QtyOrdered)</td>
+                    <td>$@Html.DisplayFor(modelItem => item.WholesaleCost)</td>
+                    <td>@(String.Format("{0:$0.00}", item.WholesaleCost * item.QtyOrdered))</td>
+                    <td>
+                        <input type="hidden" name="lineItemID" value="@item.POLineItemID" />
+                        <input type="submit" value="Remove Item" class="button" />
+                    </td>
+                }
+            
+        </tr>
+    }
+    <tr class="sumrow">
+        <td colspan ="3"></td>
+        <td>TOTAL</td>
+        <td colspan="2">
+            @ViewBag.TotalPOCost
+        </td>
+    </tr>
+</table>
+}
