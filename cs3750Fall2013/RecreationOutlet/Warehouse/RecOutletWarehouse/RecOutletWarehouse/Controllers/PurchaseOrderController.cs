@@ -29,11 +29,22 @@ namespace RecOutletWarehouse.Controllers
         /// <author>Tyler M.</author>
         public class PurchaseOrderCreationViewModel
         {
+            public PurchaseOrderCreationViewModel() {
+                VendorItems = new List<VendorItemsViewModel>();
+            }
             public PURCHASE_ORDER PO { get; set; }
-            public List<PO_LINEITEM> LineItems { get; set; }
+            public List<PO_LINEITEM> AddedLineItems { get; set; }
+            public List<VendorItemsViewModel> VendorItems { get; set; }
+            //public  ItemToAdd { get; set; }
             public List<string> ItemNames { get; set; }
             public List<int> VendorIds { get; set; }
             public String tempPOID { get; set; }
+        }
+
+        public class VendorItemsViewModel {
+            public ITEM VendorItem { get; set; }
+            public short QtyToOrder { get; set; }
+            public decimal ItemCostEach { get; set; }
         }
 
         public class PurchaseOrderSearchViewModel
@@ -42,6 +53,11 @@ namespace RecOutletWarehouse.Controllers
             public PagingInfo PagingInfo { get; set; }
             public string search { get; set; }
         }
+
+        //public class PO_LineItemList {
+        //    public PURCHASE_ORDER PO { get; set; }
+        //    public List<PO_LINEITEM> LineItems { get; set; }
+        //}
 
         //
         // GET: /PurchaseOrder/
@@ -177,6 +193,18 @@ namespace RecOutletWarehouse.Controllers
                 // List<Item> items = db.SearchItemsByName("AS Laptop 17 B3250");
                 PurchaseOrderCreationViewModel POVM = new PurchaseOrderCreationViewModel();
                 POVM.PO = entityDb.PURCHASE_ORDER.Find(id);
+                POVM.AddedLineItems = entityDb.PO_LINEITEM.Where(p => p.PURCHASE_ORDER.POID == POVM.PO.POID).ToList();
+                List<VendorItemsViewModel> VIVMList = new List<VendorItemsViewModel>();
+                List<ITEM> items = entityDb.ITEMs.Where(i => i.PRODUCT_LINE.VendorID == POVM.PO.VENDOR.VendorID).ToList();
+                foreach (var item in items) {
+                    VIVMList.Add(new VendorItemsViewModel{
+                        VendorItem = item
+                    });
+                }
+
+                ViewBag.TotalPOCost = String.Format("{0:$0.00}", POVM.AddedLineItems.Sum(x => x.WholesaleCost * x.QtyOrdered));
+
+                POVM.VendorItems = VIVMList;
 
                 return View(POVM);
             }
@@ -196,42 +224,81 @@ namespace RecOutletWarehouse.Controllers
         /// <returns>A redirect to POSummary</returns>
         /// POST: PurchaseOrder/AddPOLineItem
         [HttpPost]
-        public ActionResult AddPOLineItem(PurchaseOrderCreationViewModel POVM, string id)
+        public ActionResult AddPOLineItem(PurchaseOrderCreationViewModel POVM)
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
+                return View();
+                //DataFetcherSetter db = new DataFetcherSetter();
 
-                //POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
-                string POtoInt = id;
-                POtoInt = POtoInt.Replace("-", string.Empty);
+                ////POVM.PO = db.RetrievePObyPOID(Convert.ToInt64(id));
+                //string POtoInt = id;
+                //POtoInt = POtoInt.Replace("-", string.Empty);
 
-                int convertedPO = Convert.ToInt32(POtoInt);
-                decimal totalCost = Convert.ToDecimal(POVM.PO.POFreightCost);
+                //int convertedPO = Convert.ToInt32(POtoInt);
+                //decimal totalCost = Convert.ToDecimal(POVM.PO.POFreightCost);
 
-                //TODO: Move the character replacement logic to a
-                //tools class and enhance its functionality
+                ////TODO: Move the character replacement logic to a
+                ////tools class and enhance its functionality
 
-                foreach (var item in POVM.LineItems)
-                {
-                    if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0)
-                    { //do not attempt to add empty list items
-                      //db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
-                      //item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
-                      //totalCost += (item.WholesaleCost * item.QtyOrdered);
-                        entityDb.PO_LINEITEM.Add(item);
-                    }
-                }
+                //foreach (var item in POVM.LineItems)
+                //{
+                //    if (item.RecRPC != 0 && item.WholesaleCost != 0 && item.QtyOrdered != 0)
+                //    { //do not attempt to add empty list items
+                //      //db.NewPOLineItemForPO(convertedPO, item.RecRPC, item.WholesaleCost,
+                //      //item.QtyOrdered, 1); //TODO: figure out how "Qty Type" fits in here
+                //      //totalCost += (item.WholesaleCost * item.QtyOrdered);
+                //        entityDb.PO_LINEITEM.Add(item);
+                //    }
+                //}
 
-                ViewBag.POTotal = String.Format("P.O. Total Cost: ${0:C}", totalCost.ToString());
+                //ViewBag.POTotal = String.Format("P.O. Total Cost: ${0:C}", totalCost.ToString());
 
-                return View("POSummary", POVM);
+                //return View("POSummary", POVM);
             }
             catch (Exception ex)
             {
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        public ActionResult addItemToLineItems(decimal cost = 0, short qty = 0, int num = 0, long rpc = 0, long poid = 0 ){
+            // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
+            ITEM item = entityDb.ITEMs.Single(i => i.RecRPC == rpc);
+            PURCHASE_ORDER PO = entityDb.PURCHASE_ORDER.Single(p => p.POID == poid);
+            entityDb.PO_LINEITEM.Add(new PO_LINEITEM {
+                PURCHASE_ORDER = PO,
+                ITEM = item,
+                QtyOrdered = qty,
+                WholesaleCost = cost,
+                QtyTypeID = 1 // Need to re-evaluate the purpose of QtyType - esp. does it need to be here? 
+            });
+            if (!ModelState.IsValid) {
+                return PartialView("POLineItemListPart");
+            }
+
+            entityDb.SaveChanges();
+            List<PO_LINEITEM> listToReturn = entityDb.PO_LINEITEM.Where(li => li.POID == PO.POID).ToList();
+
+            ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
+
+            return PartialView("POLineItemListPart", listToReturn);
+        }
+
+        public ActionResult removeItemFromLineItems(int lineItemID = 0) {
+            // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
+            PO_LINEITEM lineItem = entityDb.PO_LINEITEM.Single(poli => poli.POLineItemID == lineItemID);
+            long POID = lineItem.POID;
+
+            entityDb.PO_LINEITEM.Remove(lineItem);
+
+            entityDb.SaveChanges();
+            List<PO_LINEITEM> listToReturn = entityDb.PO_LINEITEM.Where(li => li.POID == POID).ToList();
+
+            ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
+
+            return PartialView("POLineItemListPart", listToReturn);
         }
 
         /// <summary>

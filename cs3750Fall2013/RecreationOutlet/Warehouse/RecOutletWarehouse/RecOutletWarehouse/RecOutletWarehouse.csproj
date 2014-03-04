@@ -339,6 +339,8 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\ViewEvents.cshtml" />
     <Content Include="Views\Event\ViewSalesPrice.cshtml" />
+    <Content Include="Views\PurchaseOrder\POLineItemListPart.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\VendorItemsViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

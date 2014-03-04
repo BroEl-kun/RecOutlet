@@ -1,0 +1,8 @@
+﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.VendorItemsViewModel
+
+
+<td>@Html.DisplayFor(model => Model.VendorItem.Name)</td>
+<td>@Html.DisplayFor(model => Model.VendorItem.VendorItemID)</td>
+<td><input type="text" name="qty" class="qty10000" /></td>
+<td><input type="text" name="cost" class="money10000" /></td>
+<td><input type="hidden" name="rpc" value="@Model.VendorItem.RecRPC" /></td>

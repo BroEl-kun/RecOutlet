@@ -53,12 +53,22 @@ header {
 }
 
 table {
-
+    width:95%;
 }
 
 tr {
     /*border: 1px solid black;*/
 }
+
+tr.leftjust th {
+    text-align:left;
+}
+
+tr.sumrow td{
+    font-size:1.1em;
+    font-weight:bold;
+}
+
 td {
     /*border: 1px solid black;*/
 }
@@ -128,6 +138,14 @@ h2 {
 
 .tab-subheader {
     background-color: #978166;
+}
+
+input.money10000{
+    width:75px;
+}
+
+input.qty10000{
+    width:50px;
 }
 
 .clearfix:after {
