@@ -15,13 +15,19 @@ namespace RecOutletWarehouse.Models
         public short VendorID { get; set; }
         public short POCreatedBy { get; set; }
 
-        //[Range(typeof(DateTime), "1/1/1900", "6/6/2079")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+               ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> POOrderDate { get; set; }
 
-        //[Range(typeof(DateTime), "1/1/1900", "6/6/2079")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+               ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> POEstimatedShipDate { get; set; }
 
-        //[Range(typeof(DateTime), "1/1/1900", "6/6/2079")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+               ApplyFormatInEditMode = true)]
         public System.DateTime POCreatedDate { get; set; }
 
         public string POFreightCost { get; set; }
