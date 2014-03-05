@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RecOutletWarehouse.Models;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
+using RecOutletWarehouse.Utilities;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -119,15 +120,24 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateSalesPrice(AddSalePriceViewModel sp) {
-
-            if (ModelState.IsValid) {
-                sp.saleprice.EVENT_TYPE = db.EVENT_TYPE.Single(et => et.EventDescription == sp.Event);
-                db.SALE_PRICING.Add(sp.saleprice);
-                db.SaveChanges();
+        public ActionResult CreateSalesPrice(AddSalePriceViewModel sp)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    sp.saleprice.EVENT_TYPE = db.EVENT_TYPE.Single(et => et.EventDescription == sp.Event);
+                    db.SALE_PRICING.Add(sp.saleprice);
+                    db.SaveChanges();
+                    return RedirectToAction("ViewSalesPrice");
+                }
                 return View();
             }
-            return View();
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
     }
 }
