@@ -26,8 +26,8 @@
                     <div class="item-char-list1"><p class="item-char">@item.CategoryID</p></div>
                     <div class="item-char-list2"><p class="item-char">@item.CategoryName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="JavaScript:newPopup('@Url.Action("EditItemCharacteristics", "ItemManagement", 
-                                                                        new {id = item.CategoryID, editButton = "category"})');" /></div>
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
+                                                                        new {id = item.CategoryID, editButton = "category"})'" /></div>
                 </div>
             }
         </div>
@@ -42,8 +42,8 @@
                     <div class="item-char-list1"><p class="item-char">@item.SubcategoryID</p></div>
                     <div class="item-char-list2"><p class="item-char">@item.SubcategoryName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="JavaScript:newPopup('@Url.Action("EditItemCharacteristics", "ItemManagement", 
-                                                                        new {id = item.SubcategoryID, editButton = "subcategory"})');" /></div>
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
+                                                                        new {id = item.SubcategoryID, editButton = "subcategory"})'" /></div>
                 </div>
             }
         </div>
@@ -58,8 +58,8 @@
                     <div class="item-char-list1"><p class="item-char">@item.DepartmentID</p></div>
                     <div class="item-char-list2"><p class="item-char">@item.DepartmentName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="JavaScript:newPopup('@Url.Action("EditItemCharacteristics", "ItemManagement",
-                                                                        new {id = item.DepartmentID, editButton = "department"})');" /></div>
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
+                                                                        new {id = item.DepartmentID, editButton = "department"})'" /></div>
                 </div>
             }
         </div>

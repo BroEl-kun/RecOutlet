@@ -38,6 +38,7 @@ else if (ViewBag.editButton == "subcategory")
             <br />
             @Html.EditorFor(x => x.subcat.SubcategoryName)
             <button name="editButton" type="submit" value="subcategory" class="button">Save</button>
+            @Html.HiddenFor(x => x.subcat.SubcategoryID)
         </fieldset>
     }
 }
@@ -56,6 +57,7 @@ else if (ViewBag.editButton == "department")
             <label>Department Description</label>
             @Html.EditorFor(x => x.department.DepartmentDescription)
             <button name="editButton" type="submit" value="department" class="button">Save</button>
+            @Html.HiddenFor(x => x.department.DepartmentID)
         </fieldset>
     }
 }
