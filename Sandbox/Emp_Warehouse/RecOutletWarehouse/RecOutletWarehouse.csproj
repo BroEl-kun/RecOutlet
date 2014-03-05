@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemManagementController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
@@ -321,7 +322,6 @@
     <Content Include="Views\ReceivingLog\Index.cshtml" />
     <Content Include="Views\Shared\Popups\AddVendorPop.cshtml" />
     <Content Include="Views\ItemManagement\addNewDeptCatSubcat.cshtml" />
-    <Content Include="Views\Vendor\BrowseVendors.cshtml" />
     <Content Include="Views\Vendor\VendorDetail.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Vendor\EditVendor.cshtml" />
@@ -331,6 +331,10 @@
     <Content Include="Views\Vendor\EditRep.cshtml" />
     <Content Include="Views\Vendor\AddRep.cshtml" />
     <Content Include="Views\Vendor\RepDetail.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Vendor\BrowseVendors.cshtml" />
+    <Content Include="Views\Employee\BrowseEmployee.cshtml" />
+    <Content Include="Views\Employee\EditEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

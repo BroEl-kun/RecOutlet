@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace RecOutletWarehouse.Models
 {
@@ -14,10 +17,18 @@ namespace RecOutletWarehouse.Models
         }
 
         public short EmployeeId { get; set; }
+
+        [Required(ErrorMessage = "Please provide a First Name.")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "Please provide a Last Name.")]
         public string LastName { get; set; }
+        [Required(ErrorMessage = "Please provide a Position.")]
         public string Position { get; set; }
+        [Required(ErrorMessage = "Please provide a Username.")]
         public string Username { get; set; }
+        [Required(ErrorMessage = "Please provide a Pin.")]
+        [MaxLength(4,ErrorMessage="Enter a 4 Digit Pin.")]
+        [MinLength(4,ErrorMessage="Enter a 4 Digit Pin")]
         public string PIN { get; set; }
         public virtual ICollection<INVOICE> INVOICEs { get; set; }
         public virtual ICollection<LOCATION> LOCATIONs { get; set; }
