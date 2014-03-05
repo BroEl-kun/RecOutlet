@@ -546,3 +546,34 @@ table.potable tbody tr:nth-child(odd)
 {
    background-color: white;
 }
+
+/*Styles for Editng PO*/
+div.line-item-area
+{
+    background-color:beige;
+    border-radius:7px;
+    height: 350px;
+    overflow-y: scroll;
+}
+
+div.edit-po-container
+{
+    width: 100%;
+    height: 350px;
+}
+
+div.edit-po
+{
+    float: left;
+    width: 33%;
+    display: block;
+    height: 500px;
+}
+
+div.display-line-items
+{
+    float: left;
+    width: 55%;
+    display: block;
+    margin-left: 6%;
+}
