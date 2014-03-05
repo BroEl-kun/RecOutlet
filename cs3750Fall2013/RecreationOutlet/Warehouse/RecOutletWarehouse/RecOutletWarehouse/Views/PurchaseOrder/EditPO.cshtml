@@ -11,38 +11,38 @@
     {
         <fieldset>
             <legend>Edit PO @Html.DisplayFor(x => x.POID)</legend>
-            <ul>
-                <li>
-                    <label>Order Date</label>
-                    <br />
-                    @Html.TextBoxFor(x => x.POOrderDate, new { type = "date" })
-                </li>
-                <li>
-                    <label>Estimated Shipping Date</label>
-                    <br />
-                    @Html.TextBoxFor(x => x.POEstimatedShipDate, new { type = "date" })
-                </li>
-                @*<li>
-                    <label>Vendor</label>
-                    <br />
-                    @Html.TextBoxFor(x => x.VENDOR.VendorName)
-                </li>*@
-                <li>
-                    <label>Freight Cost</label>
-                    <br />
-                    @Html.TextBoxFor(x => x.POFreightCost)
-                </li>
-                <li>
-                    <label>Comments</label>
-                    <br />
-                    @Html.TextBoxFor(x => x.POComments)
-                </li>
-                <li>
-                    <label>PO Terms</label>
-                    <br />
-                    @Html.TextBoxFor(x => x.POTerms)
-                </li>
-            </ul>
+            <div class="editor-label">
+                <label>Order Date</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(x => x.POOrderDate, new { id = "order-date", @class = "datepicker", 
+                        @Value = String.Format("{0:MM/dd/yyyy}", Model.POOrderDate) })
+            </div>
+            <div class="editor-label">
+                <label>Estimated Shipping Date</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(x => x.POEstimatedShipDate, new { id = "shipping-date", @class = "datepicker", 
+                        @Value = String.Format("{0:MM/dd/yyyy}", Model.POEstimatedShipDate) })
+            </div>
+            <div class="editor-label">
+                <label>Freight Cost</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(x => x.POFreightCost)
+            </div>
+            <div class="editor-label">
+                <label>Comments</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(x => x.POComments)
+            </div>
+            <div class="editor-label">
+                <label>PO Terms</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(x => x.POTerms)
+            </div>
             @Html.HiddenFor(x => x.POID)
             @Html.HiddenFor(x => x.VendorID)
             @Html.HiddenFor(x => x.VENDOR)
@@ -57,29 +57,43 @@
         </fieldset>
     }
     </div>
-    <div class="center-element center-text display-line-items line-item-area">
-        <table class="potable" id="potable">
-            <thead>
-                <tr>
-                    <th>Vendor ID</th>
-                    <th>Item Name</th>
-                    <th>Qty</th>
-                    <th>Item Cost</th>
-                    <th>Total Cost</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.PO_LINEITEM)
-                {
+    <div class="display-line-items">
+        <div class="center-text line-item-area">
+            <table class="potable" id="potable">
+                <thead>
                     <tr>
-                        <td>@item.ITEM.VendorItemID</td>
-                        <td>@item.ITEM.Name</td>
-                        <td>@item.QtyOrdered</td>
-                        <td>@String.Format("{0:$0.00}", item.WholesaleCost)</td>
-                        <td>@(String.Format("{0:$0.00}", item.QtyOrdered * item.WholesaleCost))</td>
+                        <th>Vendor ID</th>
+                        <th>Item Name</th>
+                        <th>Qty</th>
+                        <th>Item Cost</th>
+                        <th>Total Cost</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PO_LINEITEM)
+                    {
+                        <tr>
+                            <td>@item.ITEM.VendorItemID</td>
+                            <td>@item.ITEM.Name</td>
+                            <td>@item.QtyOrdered</td>
+                            <td>@String.Format("{0:$0.00}", item.WholesaleCost)</td>
+                            <td>@(String.Format("{0:$0.00}", item.QtyOrdered * item.WholesaleCost))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="edit-line-items">
+            <center>
+                <input type="button" value="Edit Line Items" class="button"
+                            onclick="location.href='@Url.Action("AddPOLineItem", "PurchaseOrder", 
+                                        new {id = Model.POID})'" />
+            </center>
+        </div>
     </div>
 </div>
+<script>
+    $('.datepicker').each(function () {
+        $(this).datepicker();
+    });
+</script>

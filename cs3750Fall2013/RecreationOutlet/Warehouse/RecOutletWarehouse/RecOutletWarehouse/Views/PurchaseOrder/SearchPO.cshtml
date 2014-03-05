@@ -14,7 +14,7 @@
 @using (Html.BeginForm())
 {
     <div class="search">
-        PO's Order Date: @Html.TextBox("orderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+        PO's Order Date: @Html.TextBox("orderDate", DateTime.Now.ToString("MM/dd/yyyy"), new { @class = "datepicker" })
         <input type="submit" value="Search" />
     </div>
 }
@@ -48,4 +48,9 @@
         </tbody>
     </table>
 </div>
+<script>
+    $('.datepicker').each(function () {
+        $(this).datepicker();
+    });
+</script>
 

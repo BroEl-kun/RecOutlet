@@ -12,14 +12,22 @@
     {
         <fieldset>
             <legend>Edit Category</legend>
-            <label>Category ID: </label>
-            @Html.DisplayFor(x => x.category.CategoryID)
-            <br />
-            <label>Category Name</label>
-            <br />
-            @Html.EditorFor(x => x.category.CategoryName)
-            <label>Category Description</label>
-            @Html.EditorFor(x => x.category.CategoryDescription)
+            <div class="editor-label">
+                <label>Category ID: @Html.DisplayFor(x => x.category.CategoryID)</label>
+            </div>
+            <hr />
+            <div class="editor-label">
+                <label>Category Name</label>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(x => x.category.CategoryName)
+            </div>
+            <div class="editor-label">
+                <label>Category Description</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(x => x.category.CategoryDescription)
+            </div>
             <button name="editButton" type="submit" value="category" class="button">Save</button>
             @Html.HiddenFor(x => x.category.CategoryID)
         </fieldset>
@@ -31,12 +39,14 @@ else if (ViewBag.editButton == "subcategory")
     {
         <fieldset>
             <legend>Edit Subcategory</legend>
-            <label>Subcategory ID</label>
-            <br />
-            @Html.DisplayFor(x => x.subcat.SubcategoryID)
-            <label>Subcategory Name</label>
-            <br />
-            @Html.EditorFor(x => x.subcat.SubcategoryName)
+            <label>Subcategory ID: @Html.DisplayFor(x => x.subcat.SubcategoryID)</label>
+            <hr />
+            <div class="editor-label">
+                <label>Subcategory Name</label>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(x => x.subcat.SubcategoryName)
+            </div>
             <button name="editButton" type="submit" value="subcategory" class="button">Save</button>
             @Html.HiddenFor(x => x.subcat.SubcategoryID)
         </fieldset>
@@ -48,14 +58,20 @@ else if (ViewBag.editButton == "department")
     {
         <fieldset>
             <legend>Edit Department</legend>
-            <label>Department ID</label>
+            <label>Department ID: @Html.DisplayFor(x => x.department.DepartmentID)</label>
             <br />
-            @Html.DisplayFor(x => x.department.DepartmentID)
-            <label>Department Name</label>
-            <br />
-            @Html.EditorFor(x => x.department.DepartmentName)
-            <label>Department Description</label>
-            @Html.EditorFor(x => x.department.DepartmentDescription)
+            <div class="editor-label">
+                <label>Department Name</label>
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(x => x.department.DepartmentName)
+            </div>
+            <div class="editor-label">
+                <label>Department Description</label>
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(x => x.department.DepartmentDescription)
+            </div>
             <button name="editButton" type="submit" value="department" class="button">Save</button>
             @Html.HiddenFor(x => x.department.DepartmentID)
         </fieldset>
