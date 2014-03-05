@@ -341,14 +341,16 @@ namespace RecOutletWarehouse.Controllers
                 }
                 else if (editButton == "subcategory")
                 {
-
+                    entityDb.Entry(model.subcat).State = EntityState.Modified;
+                    entityDb.SaveChanges();
                 }
                 else if (editButton == "department")
                 {
-
+                    entityDb.Entry(model.department).State = EntityState.Modified;
+                    entityDb.SaveChanges();
                 }
 
-                return View();
+                return RedirectToAction("ItemCharacteristics", "ItemManagement");
             }
             catch (Exception ex)
             {
