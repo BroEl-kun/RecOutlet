@@ -11,22 +11,28 @@ namespace RecOutletWarehouse.Models
             this.PO_LINEITEM = new List<PO_LINEITEM>();
         }
 
+        [Required]
         public long POID { get; set; }
+
+        [Required]
         public short VendorID { get; set; }
+
+        [Required]
         public short POCreatedBy { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}",
                ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> POOrderDate { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}",
                ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> POEstimatedShipDate { get; set; }
 
+        [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}",
                ApplyFormatInEditMode = true)]
         public System.DateTime POCreatedDate { get; set; }
 
