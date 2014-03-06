@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <ul class="nav clearfix">
+         <li>@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
+        <li class="active">@Html.ActionLink("View Events", "ViewEvents")</li>
+    </ul>  
+}
+
 <h2>Edit Event</h2>
 
 @using (Html.BeginForm()) {
