@@ -5,6 +5,13 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <ul class="nav clearfix">
+         <li>@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
+        <li class="active">@Html.ActionLink("View Events", "ViewEvents")</li>
+    </ul>  
+}
+
 <h2>Create Event</h2>
 
 @using (Html.BeginForm()) {
@@ -22,7 +29,9 @@
             @Html.ValidationMessageFor(model => model.EventDescription)
         </div>
 
-        <input type="submit" value="Create New Event" onclick="submit()" class="button"/>
+       <p>
+            <input type="submit" value="Create" />
+        </p> 
 
     </fieldset>
 }
@@ -31,15 +40,3 @@
     @Html.ActionLink("Back to List", "ViewEvents")
 </div>
 
-<script type ="text/javascript">
-
-
-
-    function submit() {
-        var s = confirm("New Event has been created!");
-
-        if (s == true) {
-            window.location = "@Url.Action("Index", "Home")"
-            }
-        }
-</script>
