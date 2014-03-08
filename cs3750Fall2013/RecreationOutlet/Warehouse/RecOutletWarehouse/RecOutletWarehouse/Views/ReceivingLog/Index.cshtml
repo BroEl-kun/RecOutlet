@@ -1,8 +1,16 @@
 ﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
+
 @{
     ViewBag.Title = "Create Receiving Log";
     //ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Create Receiving Log", "Index")</li>
+        <li>@Html.ActionLink("Browse Receiving Logs", "BrowseReceivingLogs")</li>
+    </ul>  
 }
 
 @*submitForms = function(){*@
@@ -64,14 +72,15 @@
     function fillPOwithID(ID) {
         //alert(ID);
         document.getElementById("po").value = ID;
-        //document.forms["orig"].submit();
+        document.forms["orig"].submit();
         //document.forms["origForm"].submit();
         //document.orig.submit();
         //document.origForm.submit();
         //document.getElementById("orig").submit();
         //document.getElementsByName("origForm").submit();
+        //document.getElementById("po").submit();
         //alert("submit?");
-        //document.getElementById("poSub").
+        //document.getElementById("poSub").submit();
     }
 </script>
 
@@ -97,18 +106,20 @@
         </tr>
     </table>
 
-    PO ID:
+    @*PO ID:*@
     
     @*using (Html.BeginForm("findPO", "RECEIVING_LOG", new { name = "origForm", id = "orig" }))*@
     @*using (Html.BeginForm("findPO", "ReceivingLogController", new { name = "origForm", id = "orig" }))*@
-    @using (Html.BeginForm("findPO", "ReceivingLog", new { name = "origForm", id = "orig" }))
+    @*@using (Html.BeginForm("findPO", "ReceivingLog", new { name = "origForm", id = "orig" }))*@
+    
+    @*@using (Html.BeginForm("findPO", "ReceivingLog", FormMethod.Post, new { name = "origForm", id = "orig" }))
     {
         <input type="text" placeholder="" id="po" name="po" />          
         //<input type="text" id="po" />
         <input type="submit" value="Begin RL" class="button" id="poSub"/>
     }
 
-    <br />
+    <br />*@
 
 
 @if (Model != null)
@@ -127,7 +138,8 @@
     //CreateReceived
     //using(Html.BeginForm())
     {
-            <table id="RLtable">
+        <div class="center-element center-text potable-area">
+            <table class="potable" id="RLtable">
 
                 <tr>
                     <td colspan="6">
@@ -135,6 +147,16 @@
                         @ViewBag.CurrentPO
                     </td>
                 </tr>
+
+              <tr>
+                <th>Item RPC:</th>
+                <th>Qty Ordered:</th>
+                <th>Qty Type ID:</th>
+                <th>Receive Date:</th>
+                <th>Qty Received:</th>
+                <th>Notes:</th>
+                @*<th></th>*@
+              </tr>
 
             @*foreach (RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem objPO in Model.LineItems)*@
             @foreach (RecOutletWarehouse.Models.PO_LINEITEM objPO in Model.LineItems)
@@ -153,14 +175,20 @@
                     //{ViewBag.POID = @objPO.POID;}
                     @Html.Hidden("POID", @objPO.POID)
                 </td>*@
+
+                @Html.Hidden("POID", @objPO.POID)
+                @Html.HiddenFor(model => model.RL[count].POLineItemID, new { @Value = @objPO.POLineItemID })
+                
                 <td>
-                    Item RPC: @objPO.RecRPC
+                    @*Item RPC: *@
+                    @objPO.RecRPC
                 </td>
                 <td>
-                    Qty Ordered: @objPO.QtyOrdered
+                    @*Qty Ordered: *@
+                    @objPO.QtyOrdered
                 </td>
                 <td>
-                    Qty Type ID: 
+                    @*Qty Type ID: *@
                     @*@objPO.QtyTypeId*@
                     @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeID })
                     @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
@@ -172,18 +200,18 @@
                     
                 </td>
                 <td>
-                    Receive Date: 
-                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("dd/MM/yyyy"), id = "recDate" })
+                    @*Receive Date:*@ 
+                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("MM/dd/yyyy"), id = "recDate" })
                     @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
                     @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
                 </td>
                 <td>
-                    Qty Received: 
+                    @*Qty Received:*@ 
                     @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })
                     @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
                 </td>
                 <td>
-                    Notes: 
+                    @*Notes:*@ 
                     @Html.TextAreaFor(model => model.RL[count].ReceivingNotes)
                 </td>
                 @*<td><input type="submit" value="Record Received" /></td>*@
@@ -196,7 +224,10 @@
             }
 
             </table>
+
+        </div>
     
+        <br />
             @*Html.Hidden("count", count)*@
             <input type="submit" value="Record Received" class="button" />
     
@@ -216,7 +247,16 @@
 
 @if (ViewBag.NonReceivedPOs != null)
 {
+    //PO ID:
+    //@
+    using (Html.BeginForm("findPO", "ReceivingLog", FormMethod.Post, new { name = "origForm", id = "orig" }))
+    {
+        <input type="text" placeholder="Search by PO ID" id="po" name="po" />          
+        //<input type="text" id="po" />
+        <input type="submit" value="Begin RL" class="button" id="poSub"/>
+    }
 
+    <br />
     
    @* <ol id="selectable">
             

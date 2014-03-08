@@ -1,0 +1,111 @@
+﻿@*model RecOutletWarehouse.Models.RECEIVING_LOG*@
+@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
+
+@{
+    ViewBag.Title = "EditRL";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<style>
+.potable {
+    height: 50px;
+}
+</style>
+
+<h2 class="center-element center-text">EditRL</h2>
+
+<br />
+
+<div class="center-element center-text">
+   
+
+                  @using (Html.BeginForm("EditRL", "ReceivingLog", FormMethod.Post))
+    {
+        //<fieldset>
+            <div class="potable-area">
+
+            <table class="potable" id="RLtable">
+
+                <tr>
+                    <td colspan="6">
+                        Current RL:
+                        @ViewBag.editRL.ReceivingID
+                    </td>
+                </tr>
+
+              <tr>
+                  <th></th>
+                  <th></th>
+                <th>Item RPC:</th>
+               @* <th>Qty Ordered:</th>*@
+                <th>Qty Type ID:</th>
+                <th>Receive Date:</th>
+                <th>Qty Received:</th>
+                <th>Notes:</th>
+                @*<th></th>*@
+              </tr>
+
+            <tr>   
+
+                <td>    
+                @Html.HiddenFor(model => model.RL[0].ReceivingID, new { @Value = @ViewBag.editRL.ReceivingID })
+                </td>
+                <td>
+                    @Html.HiddenFor(model => model.RL[0].PO_LINEITEM, new { @Value = @ViewBag.editRL.PO_LINEITEM })
+                </td>
+
+                <td>
+                    @*Item RPC: *@
+                    @ViewBag.editRL.POLineItemID
+                </td>
+
+                @*<td>
+                    @ViewBag.editRL.ReceivedQty
+                </td>*@
+                <td>
+                    @*Qty Type ID: *@
+                    @*@objPO.QtyTypeId*@
+                    @Html.HiddenFor(model => model.RL[0].QtyTypeID, new { @Value = @ViewBag.editRL.QtyTypeID })
+                    @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
+                    <select>
+                        <option selected>1 - Each</option>
+                        <option>2 - Case</option>
+                        <option>3 - Pallet</option>
+                    </select>
+                    
+                </td>
+                <td>
+                    @*Receive Date:*@ 
+                    @Html.TextBoxFor(model => model.RL[0].ReceiveDate, new { type = "date", @Value = @ViewBag.editRL.ReceiveDate})
+                    @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
+                    @Html.ValidationMessageFor(model => model.RL[0].ReceiveDate)
+                </td>
+                <td>
+                    @*Qty Received:*@ 
+                    @Html.TextBoxFor(model => model.RL[0].ReceivedQty, new { @Value = @ViewBag.editRL.ReceivedQty })
+                    @Html.ValidationMessageFor(model => model.RL[0].ReceivedQty)
+                </td>
+                <td>
+                    @*Notes:*@ 
+                    @Html.TextAreaFor(model => model.RL[0].ReceivingNotes, new { @Value = @ViewBag.editRL.ReceivingNotes })
+                </td>
+                @*<td><input type="submit" value="Record Received" /></td>*@
+            </tr>
+            
+           @*RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item = objItem;*@
+
+
+            </table>
+        </div>
+           // </fieldset>
+                  
+       
+
+        <br />
+            @*Html.Hidden("count", count)*@
+            <input type="submit" value="Update Log" class="button" />
+}
+         
+    </div>
+       
+    
