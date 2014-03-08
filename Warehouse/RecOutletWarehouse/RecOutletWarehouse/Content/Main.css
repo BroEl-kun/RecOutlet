@@ -117,6 +117,21 @@ h2 {
         font-weight: 500;
     }
 
+.button-cancel {
+    border: hidden;
+    color: #F2F2F2;
+    background-color: rgb(194, 52, 17);
+    min-width:100px;
+    min-height:30px;
+    white-space:normal;
+    margin-right:20px;
+}
+    .button-cancel:hover {
+        color:#262626;
+        background-color:#E8A720;
+        font-weight: 500;
+    }
+
 .main-menu-button {
     text-decoration:none;
     border: hidden;
@@ -533,8 +548,8 @@ div.potable-area
 {
     background-color:beige;
     border-radius:7px;
-    height: 500px;
-    overflow-y: scroll;
+    /*height: 500px;*/
+    /*overflow-y: scroll;*/
 }
 
 .potable 
