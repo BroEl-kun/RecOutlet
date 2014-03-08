@@ -1,0 +1,116 @@
+﻿@*@using RecOutletWarehouse.HtmlHelpers;*@
+@model RecOutletWarehouse.Controllers.ReceivingLogController.BrowseReceivingLogViewModel
+
+@{
+    ViewBag.Title = "SearchRL";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Create Receiving Log", "Index")</li>
+        <li class="active">@Html.ActionLink("Browse Receiving Logs", "")</li>
+    </ul>  
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
+<script>
+@*<script type="text/javascript">*@
+    @*$(function () {
+        $(".actionMenu").menu();
+    });*@
+
+    //$(function () {
+    //    $("#accordion").accordion();
+    //});
+    //$('#togButton').click(function (id) {
+    //$(function() {
+    //    function togRow (id) {
+    //        var effect = blind;
+    //        var options = {};
+    //        $('a\\'+id).toggle(effect, options, 400);
+    //    }
+    //});
+
+    //function togglez(ID) {
+    //    document.getElementById("a\\"+ID).
+    //}
+</script>
+
+<h2>Browse and View Receiving Logs</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="search">
+        PO's Order Date: @Html.TextBox("receiveDate", DateTime.Now.ToString("MM/dd/yyyy"), new { @class = "datepicker" })
+        <input type="submit" value="Search" />
+    </div>
+}
+<hr />
+<div class="center-element center-text potable-area">
+    <table class="potable" id="potable">
+        <thead>
+            <tr>
+                <th>Receiving Log ID</th>
+                <th>PO Line Item ID</th>
+                <th>Received Date</th>
+                <th>Quantity Type</th>
+                <th>Received Quantity</th>
+                <th>Receiving Log Notes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.RLs)
+            {
+                @*<div id="accordion">
+                    <h3>*@
+                 <tr>
+                     
+                    <td>@Html.DisplayFor(x => item.ReceivingID)</td>
+                    <td>@Html.DisplayFor(x => item.POLineItemID)</td>
+                    <td>@Html.DisplayFor(x => item.ReceiveDate, "ShortDateTime")</td>
+                    <td>@Html.DisplayFor(x => item.QtyTypeID)</td>
+                    <td>@Html.DisplayFor(x => item.ReceivedQty)</td>
+                    <td>@Html.DisplayFor(x => item.ReceivingNotes)</td>
+                    <td><input type="button" class="button" 
+                        onclick="JavaScript:newPopup('@Url.Action("EditRL", "ReceivingLog",
+                        new { id = item.ReceivingID })');" 
+                        value="Edit" /></td>
+                     
+                </tr>
+                @*</h3>
+                    <p>*@
+               @* <tr id="a\@item.ReceivingID">
+                    <td>hi</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>*@
+                @* </p>
+                </div>*@
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    $('.datepicker').each(function () {
+        $(this).datepicker();
+    });
+</script>
+<script type="text/javascript">
+    function newPopup(url) {
+        popupWindow = window.open(
+            url, 'popUpWindow', 'height=700,width=1000,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    }
+</script>
+
