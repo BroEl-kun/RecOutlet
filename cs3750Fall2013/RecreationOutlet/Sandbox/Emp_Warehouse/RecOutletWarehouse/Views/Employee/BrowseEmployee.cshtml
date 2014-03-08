@@ -1,0 +1,46 @@
+﻿@using RecOutletWarehouse.HtmlHelpers;
+
+@model RecOutletWarehouse.Controllers.EmployeeController.BrowseEmployeeViewModel
+
+@{
+    ViewBag.Title = "BrowseEmployee";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>BrowseEmployee</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="search">
+        Employee's name contains: @Html.TextBox("empNameSearch")
+        <input type="submit" value="Search" />
+    </div>
+}
+
+<div class="roloLinks pager">
+    @Html.RolodexLinks( x => Url.Action("BrowseEmployee"))
+</div>
+<table>
+@foreach (var e in Model.Employee) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => e.FirstName)
+            @Html.DisplayFor(modelItem => e.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => e.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => e.Username)
+        </td>
+        <td>
+         @Html.ActionLink("Edit", "EditEmployee", new { id=e.EmployeeId })
+        </td>
+   </tr>
+}
+    </table>
+
+<div class="searchTotal">@Model.PagingInfo.TotalItems empolyees match current sorting criteria</div>
+<div class="pager">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseEmployee", new {page = x, empNameSearch = Model.search, lastNameBeginsWith = Model.startLetter}))
+</div>
