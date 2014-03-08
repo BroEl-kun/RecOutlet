@@ -1,4 +1,5 @@
-﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderSearchViewModel
+﻿@using RecOutletWarehouse.HtmlHelpers;
+@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderSearchViewModel
 @{
     ViewBag.Title = "Browse Purchase Orders";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
@@ -47,6 +48,10 @@
             }
         </tbody>
     </table>
+</div>
+<div class="searchTotal">@Model.PagingInfo.TotalItems Purchase Orders match current sorting criteria</div>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("SearchPO", new { page = x }))
 </div>
 <script>
     $('.datepicker').each(function () {

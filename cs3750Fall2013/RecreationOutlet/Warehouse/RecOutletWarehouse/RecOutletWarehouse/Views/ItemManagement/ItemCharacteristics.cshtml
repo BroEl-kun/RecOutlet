@@ -68,3 +68,11 @@
 <center>
 <input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")    ');" class="button" value="Add a new Department, Category, and/or Subcategory" />
 </center>
+
+<script type="text/javascript">
+    // Popup window code
+    function newPopup(url) {
+        popupWindow = window.open(
+            url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+    }
+</script>

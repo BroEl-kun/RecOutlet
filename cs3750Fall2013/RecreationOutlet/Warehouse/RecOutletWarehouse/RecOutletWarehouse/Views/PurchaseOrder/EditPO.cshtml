@@ -52,8 +52,10 @@
             @Html.HiddenFor(x => x.POCancelIfNotReceivedBy)
             @Html.HiddenFor(x => x.EMPLOYEE)
             @Html.HiddenFor(x => x.PO_LINEITEM)
-            <button type="submit" value="Save">Save</button>
-            @Html.ActionLink("Back", "SearchPO")
+            <input type="submit" value="Save" class="button" />
+            <input type="button" value="Cancel" class="button-cancel" 
+                onclick="location.href='@Url.Action("SearchPO", "PurchaseOrder", 
+                                        new {id = Model.POID})'"/>
         </fieldset>
     }
     </div>
