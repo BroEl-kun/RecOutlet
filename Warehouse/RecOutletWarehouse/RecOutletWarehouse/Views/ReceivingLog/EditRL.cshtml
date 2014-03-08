@@ -57,6 +57,7 @@
                 <td>
                     @*Item RPC: *@
                     @ViewBag.editRL.POLineItemID
+                    @Html.HiddenFor(model => model.RL[0].POLineItemID, new { @Value = @ViewBag.editRL.POLineItemID })
                 </td>
 
                 @*<td>
