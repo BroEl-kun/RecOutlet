@@ -5,46 +5,56 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>RepDetail</h2>
+<h2>@Html.DisplayFor(model => model.SalesRepFirstName) @Html.DisplayFor(model => model.SalesRepLastName) - Details</h2>
 
 <fieldset>
-    <legend>SALES_REP</legend>
+    <legend>Sales Representative Invormation</legend>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SalesRepFirstName)
+    <div class="detail-field-header">
+         First Name
     </div>
-    <div class="display-field">
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.SalesRepFirstName)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SalesRepLastName)
+    <div class="detail-field-header">
+         Last Name
     </div>
-    <div class="display-field">
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.SalesRepLastName)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SalesRepPhone)
+    <div class="detail-field-header">
+         Phone Number
     </div>
-    <div class="display-field">
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.SalesRepPhone)
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SalesRepEmail)
+    <div class="detail-field-header">
+         E-Mail Address
     </div>
-    <div class="display-field">
+    <div class="detail-field-value">
         @Html.DisplayFor(model => model.SalesRepEmail)
     </div>
-    <div>
-    This is the sales rep for the following product lines:
-        @foreach (var item in Model.PRODUCT_LINE) {
-            <div>@Html.DisplayFor(modelItem => item.ProductLineName) (Vendor: @Html.DisplayFor(modelItem => item.VENDOR.VendorName))</div>
-        }
+    <div class="detail-field-header">
+         Associated Product Lines
     </div>
+    @if (Model.PRODUCT_LINE.Count == 0) {
+        <div class="notspecified detail-field-value">This rep is not currently associated with any product lines.</div>
+    }
+    else{
+    <div class="detail-field-value">
+        This is the sales rep for the following product lines:
+            <ul class="no-bullet no-top-bottom-margin">
+            @foreach (var item in Model.PRODUCT_LINE) {
+                <li class="vendorproductline">@Html.DisplayFor(modelItem => item.ProductLineName) (Vendor: @Html.DisplayFor(modelItem => item.VENDOR.VendorName))</li>
+            }
+            </ul>
+        </div>
+    }
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "EditRep", new {  id=Model.RepID }) |
     @Html.ActionLink("Back to List", "BrowseSalesReps")
 </p>

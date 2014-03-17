@@ -53,9 +53,21 @@
     </fieldset>
 }
 <div>
-    This is the sales rep for the following product lines:
-    @foreach (var item in Model.PRODUCT_LINE) {
-        <div>@Html.DisplayFor(modelItem => item.ProductLineName) (Vendor: @Html.DisplayFor(modelItem => item.VENDOR.VendorName))</div>
+    <div class="detail-field-header">
+         Associated Product Lines
+    </div>
+    @if (Model.PRODUCT_LINE.Count == 0) {
+        <div class="notspecified detail-field-value">This rep is not currently associated with any product lines.</div>
+    }
+    else{
+    <div class="detail-field-value">
+        This is the sales rep for the following product lines:
+            <ul class="no-bullet no-top-bottom-margin">
+            @foreach (var item in Model.PRODUCT_LINE) {
+                <li class="vendorproductline">@Html.DisplayFor(modelItem => item.ProductLineName) (Vendor: @Html.DisplayFor(modelItem => item.VENDOR.VendorName))</li>
+            }
+            </ul>
+        </div>
     }
     @Html.ActionLink("Assign rep to another product line", "AssignRep")
 </div>

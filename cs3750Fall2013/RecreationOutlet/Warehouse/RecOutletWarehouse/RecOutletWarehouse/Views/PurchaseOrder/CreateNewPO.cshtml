@@ -24,7 +24,7 @@
         <tr>
             <td>Vendor&nbsp;<strong class="required">*</strong></td>
             <td>
-                @Html.TextBoxFor(model => model.PO.VENDOR.VendorName, new { @id = "vendor" })
+                @Html.TextBoxFor(model => model.PO.VENDOR.VendorName, new { @id = "vendor", @Value = ViewBag.VendorName })
                 @Html.ValidationMessageFor(model => model.PO.VENDOR.VendorName)
             </td>
         </tr>
