@@ -35,17 +35,31 @@
 <div class="roloLinks pager">
     @Html.RolodexLinks("lastNameBeginsWith", x => Url.Action("BrowseSalesReps"))
 </div>
-<table>
+<div class=" potable-area">
+<table class="potable">
+    <tr class="leftjust">
+        <th>Sales Rep Name</th>
+        <th>Phone</th>
+        <th>E-mail Address</th>
+        <th>Actions</th>
+    </tr>
     @foreach (var sr in Model.Reps) {
         <tr>
             <td>
+
                 @Html.DisplayFor(modelItem => sr.SalesRepFirstName) @Html.DisplayFor(modelItem => sr.SalesRepLastName)
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => sr.SalesRepPhone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => sr.SalesRepEmail)
+                @if(sr.SalesRepEmail != null){
+                    @Html.DisplayFor(modelItem => sr.SalesRepEmail)
+                }
+                else{
+                    <span class="notspecified">No e-mail address on record.</span>
+                }
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditRep", new { id=sr.RepID }) |
@@ -54,6 +68,7 @@
         </tr>
     }
 </table>
+</div>
 <div class="searchTotal">@Model.PagingInfo.TotalItems sales reps match current sorting criteria</div>
 <div class="pager">
         @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseSalesReps", new {page = x, repNameSearch = Model.search, lastNameBeginsWith = Model.lastNameStartLetter}))

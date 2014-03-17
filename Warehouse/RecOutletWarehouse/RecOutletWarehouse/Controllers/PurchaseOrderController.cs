@@ -76,7 +76,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreateNewPO()
+        public ActionResult CreateNewPO(int vendorId = 0)
         {
             try
             {
@@ -87,6 +87,9 @@ namespace RecOutletWarehouse.Controllers
                 int nextPO = Utilities.WarehouseUtilities.getPODateCount();
 
                 ViewBag.PO = createPOForForm(nextPO);
+                if(vendorId != 0){
+                    ViewBag.VendorName = entityDb.VENDORs.SingleOrDefault(v => v.VendorID == vendorId).VendorName;
+                }
 
                 return View();
             }

@@ -42,9 +42,9 @@
     @Html.RolodexLinks(x => Url.Action("BrowseVendors"))
 </div>
 
-
-<table>
-    <tr>
+<div class=" potable-area">
+<table class="potable">
+    <tr class="leftjust">
         <th>
             Vendor Name
         </th>
@@ -54,11 +54,8 @@
         <th>
             Contact's Phone
         </th>
-        <th>
+        <th colspan="2">
             Vendor Website
-        </th>
-        <th>
-            Actions
         </th>
     </tr>
 
@@ -84,7 +81,7 @@
                         <li>@Html.ActionLink("Edit Vendor Information", "EditVendor", new { id=v.VendorID })</li>
                         <li>@Html.ActionLink("View Vendor Details", "VendorDetail", new { id=v.VendorID })</li>
                         <li>@Html.ActionLink("Add Product Line to this Vendor", "CreateNewPL", new { vendorId = v.VendorID })</li>
-                        <li>@Html.ActionLink("P.O. to this Vendor", "CreateNewPO", "PurchaseOrder", new { vendorName = v.VendorName }, new { })</li>
+                        <li>@Html.ActionLink("P.O. to this Vendor", "CreateNewPO", "PurchaseOrder", new { vendorId = v.VendorID }, new { })</li>
                     </ul>
                 </li>
             </ul>
@@ -95,8 +92,7 @@
             <td class="vendorproductline">
                 @Html.DisplayFor(modelItem => pl.ProductLineName)
             </td>
-            <td>
-                
+            <td colspan="4">
                 @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
                 @Html.ActionLink("Details", "ProductLineDetail", new { id=pl.ProductLineID })
             </td>
@@ -104,6 +100,7 @@
     }
 }
 </table>
+</div>
 <div class="searchTotal">@Model.PagingInfo.TotalItems vendors match current sorting criteria</div>
 <div class="pager">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseVendors", new {page = x, venNameSearch = Model.search, firstLetter = Model.startLetter}))

@@ -216,13 +216,18 @@ input.qty10000{
 	        border-bottom: 0;
         }
 
-
+.no-bullet,
 .no-list {
     list-style: none;
 }
     .no-list li {
         display: inline;
     }
+
+.no-top-bottom-margin{
+    margin-top:0px;
+    margin-bottom:0px;
+}
 
 .successful-insert {
     font-weight:bold;
@@ -415,7 +420,7 @@ div.pager {
     text-align:right;
     border-top: 2px solid silver;
     padding: .5em 0 0 0;
-    margin-top: 1em;
+    margin-top: .1em;
 }
 
 div.pager a{
@@ -440,6 +445,7 @@ div.pager a.selected{
 div.roloLinks{
     border-top:none;
     border-bottom: 2px solid silver;
+    margin-bottom: .2em;
 }
 /* End rolodex styles */
 
@@ -448,7 +454,6 @@ div.roloLinks{
     font-size:.9em;
     font-style:italic;
     color:silver;
-
 }
 
 /* jQueryUI Overrides */
@@ -463,6 +468,7 @@ ul.actionMenu.ui-widget-content li.ui-menu-item a
     background:#262626;
     color:#ffffff;
     border: 1px solid #aaaaaa;
+    text-align:center;
 
 }
 
