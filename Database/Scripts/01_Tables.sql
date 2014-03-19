@@ -53,7 +53,7 @@ CREATE TABLE [dbo].[EMPLOYEE](
 	[Position] [nvarchar](50) NOT NULL,
 	[Username] [nvarchar](50) NOT NULL,
 	--[PIN] [nchar](4) NOT NULL
-	[Password] [nvarchar](max) NOT NULL,
+	[Password] [nvarchar](50) NOT NULL,
 	[PasswordSalt] [nvarchar](16) NOT NULL
 ) ON [PRIMARY]
 GO
