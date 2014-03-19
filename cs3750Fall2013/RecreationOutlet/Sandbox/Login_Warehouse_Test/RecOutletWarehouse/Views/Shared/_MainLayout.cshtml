@@ -1,0 +1,50 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Main.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <title>@ViewBag.Title</title>
+
+    <!--Scripts (why can't I have these at the bottom???)-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @RenderSection("scripts", false)
+
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <div class="title-wrapper">
+                <a href="@Url.Action("Index", "Home")" id = "logo-link"><img src="@Url.Content("~/Content/RecOutletlogo.png")", alt="Home" /></a>
+            </div>
+            <div style="width:auto; text-align:right; padding-right:10px;">
+                @if (Request.IsAuthenticated)
+                {
+                    <a href="@Url.Action("ChangePIN", "LogIn")" style="color:black;"><strong>@Html.Encode(User.Identity.Name)</strong></a>
+                    <span>  |  </span>
+                    @Html.ActionLink("Log Out", "LogOut", "LogIn")
+                }
+            </div>
+        </header>
+        <div id="body">
+            <section class="tab-subheader" >
+                @RenderSection("tabnavigation", false)
+            </section>
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="center-text">
+                    <p>&copy; @DateTime.Now.Year - Recreation Outlet</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+</body>
+
+</html>

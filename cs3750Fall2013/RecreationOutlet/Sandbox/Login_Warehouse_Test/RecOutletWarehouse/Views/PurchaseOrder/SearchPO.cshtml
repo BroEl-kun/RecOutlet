@@ -1,0 +1,51 @@
+﻿@model RecOutletWarehouse.Controllers.PurchaseOrderController.PurchaseOrderSearchViewModel
+@{
+    ViewBag.Title = "Browse Purchase Orders";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Create New PO","CreateNewPO")</li>
+        <li class="active">@Html.ActionLink("Browse/Search POs","SearchPO")</li>
+    </ul>  
+}
+<h2>Browse / Search Purchase Orders</h2>
+<h3>Search</h3>
+@using (Html.BeginForm())
+{
+    <div class="search">
+        PO's Order Date: @Html.TextBox("orderDate", DateTime.Now.ToString("yyyy-MM-dd"), new { type = "date" })
+        <input type="submit" value="Search" />
+    </div>
+}
+<div class="center-element center-text">
+    @*@if (!Model.Any())
+    {
+        <h3>Sorry, no items found.</h3>
+    }
+    else
+    {
+    *@<table id="potable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Order Date</th>
+                <th>Estimated Ship Date</th>
+                <th>Freight Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.POs)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => item.POID)</td>
+                    <td>@Html.DisplayFor(x => item.POOrderDate)</td>
+                    <td>@Html.DisplayFor(x => item.POEstimatedShipDate)</td>
+                    <td>@Html.DisplayFor(x => item.POFreightCost)</td>
+                    <td>@Html.ActionLink("View/Edit", "EditPO", new { id=item.POID })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
