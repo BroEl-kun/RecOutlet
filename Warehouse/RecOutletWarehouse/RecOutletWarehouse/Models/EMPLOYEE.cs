@@ -18,7 +18,9 @@ namespace RecOutletWarehouse.Models
         public string LastName { get; set; }
         public string Position { get; set; }
         public string Username { get; set; }
-        public string PIN { get; set; }
+        //public string PIN { get; set; }
+        public string Password { get; set; }
+        public string PasswordSalt { get; set; }
         public virtual ICollection<INVOICE> INVOICEs { get; set; }
         public virtual ICollection<LOCATION> LOCATIONs { get; set; }
         public virtual ICollection<PURCHASE_ORDER> PURCHASE_ORDER { get; set; }
