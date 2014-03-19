@@ -19,6 +19,7 @@
 --		  02/20/2014: Chris Parkins - All Phone lengths changed to 15,
 --					  Addresses have address line 2, city, country,
 --					  and item quantities bumped to full ints.
+--		  03/18/2014: Chris Parkins - Employee table now has passwords (encrypted)
 --
 -- *********************************************************************
 
@@ -51,7 +52,9 @@ CREATE TABLE [dbo].[EMPLOYEE](
 	[LastName] [nvarchar](50) NOT NULL,
 	[Position] [nvarchar](50) NOT NULL,
 	[Username] [nvarchar](50) NOT NULL,
-	[PIN] [nchar](4) NOT NULL
+	--[PIN] [nchar](4) NOT NULL
+	[Password] [nvarchar](max) NOT NULL,
+	[PasswordSalt] [nvarchar](16) NOT NULL
 ) ON [PRIMARY]
 GO
 
