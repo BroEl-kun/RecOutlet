@@ -27,10 +27,20 @@ namespace RecOutletWarehouse.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(50);
 
-            this.Property(t => t.PIN)
+            //this.Property(t => t.PIN)
+            //    .IsRequired()
+            //    .IsFixedLength()
+            //    .HasMaxLength(4);
+
+            this.Property(t => t.Password)
                 .IsRequired()
                 .IsFixedLength()
-                .HasMaxLength(4);
+                .HasMaxLength(50);
+
+            this.Property(t => t.PasswordSalt)
+                .IsRequired()
+                .IsFixedLength()
+                .HasMaxLength(16);
 
             // Table & Column Mappings
             this.ToTable("EMPLOYEE");
@@ -39,7 +49,9 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.LastName).HasColumnName("LastName");
             this.Property(t => t.Position).HasColumnName("Position");
             this.Property(t => t.Username).HasColumnName("Username");
-            this.Property(t => t.PIN).HasColumnName("PIN");
+            //this.Property(t => t.PIN).HasColumnName("PIN");
+            this.Property(t => t.Password).HasColumnName("Password");
+            this.Property(t => t.PasswordSalt).HasColumnName("PasswordSalt");
         }
     }
 }
