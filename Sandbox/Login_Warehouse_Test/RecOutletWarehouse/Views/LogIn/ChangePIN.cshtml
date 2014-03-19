@@ -1,0 +1,25 @@
+﻿@model RecOutletWarehouse.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "ChangePIN";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <h2>Change PIN</h2>
+    <div>User: <strong>@Html.Encode(User.Identity.Name)</strong></div>
+    <br> 
+    <div>Current PIN</div>
+        <div>@Html.PasswordFor(u=>u.PIN)</div>
+        <div>@Html.ValidationMessageFor(u=>u.PIN, "Incorrect PIN")</div>
+    <div>New PIN</div>
+        @*<div>@Html.EditorFor(u => u.PIN)</div> 
+    *@<input type="text" />
+    <div>Confirm PIN</div>
+        <div><input type="text" /></div>
+ 
+    <input type ="submit" value="Change PIN" class="button" style="-moz-border-radius: 10px; -webkit-border-radius: 10px;"/>
+        
+}

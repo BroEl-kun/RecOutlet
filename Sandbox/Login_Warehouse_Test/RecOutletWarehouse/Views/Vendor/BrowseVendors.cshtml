@@ -1,0 +1,94 @@
+﻿@using RecOutletWarehouse.HtmlHelpers;
+@model RecOutletWarehouse.Controllers.VendorController.BrowseVendorViewModel
+
+@{
+    ViewBag.Title = "BrowseVendors";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Browse Vendors", "BrowseVendors")</li>
+        <li>@Html.ActionLink("Add a Vendor", "AddVendor")</li>
+        <li>@Html.ActionLink("Add a Product Line","CreateNewPL")</li>
+        <li>@Html.ActionLink("Manage Sales Reps","ManageReps")</li>
+    </ul>  
+}
+
+<h2>Vendors</h2>
+<div>
+    Product lines are shown in <span class="bold-italics">bold italics</span>.
+</div>
+<h3>
+    @Html.ActionLink("Create New", "AddVendor")
+</h3>
+<h3>Search</h3>
+@using (Html.BeginForm())
+{
+    <div class="search">
+        Vendor's name contains: @Html.TextBox("venNameSearch")
+        <input type="submit" value="Search" />
+    </div>
+}
+<!-- IMPORTANT: To use the following syntax, make sure you have an appropriate
+     "using" statement at the beginning of the file -->
+<div class="roloLinks pager">
+    @Html.RolodexLinks(x => Url.Action("BrowseVendors"))
+</div>
+
+
+<table>
+    <tr>
+        <th>
+            Vendor Name
+        </th>
+        <th>
+            Contact
+        </th>
+        <th>
+            Contact's Phone
+        </th>
+        <th>
+            Vendor Website
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+
+@foreach (var v in Model.Vendors) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => v.VendorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.ContactName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.ContactPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => v.VendorWebsite)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditVendor", new { id=v.VendorID }) |
+            @Html.ActionLink("Details", "VendorDetail", new { id=v.VendorID })
+        </td>
+    </tr>
+    foreach (var pl in v.PRODUCT_LINE) {
+        <tr >
+            <td class="vendorproductline">
+                @Html.DisplayFor(modelItem => pl.ProductLineName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
+                @Html.ActionLink("Details", "ProductLineDetail", new { id=pl.ProductLineID })
+            </td>
+        </tr>
+    }
+}
+</table>
+<div class="searchTotal">@Model.PagingInfo.TotalItems vendors match current sorting criteria</div>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseVendors", new {page = x, venNameSearch = Model.search, firstLetter = Model.startLetter}))
+</div>
