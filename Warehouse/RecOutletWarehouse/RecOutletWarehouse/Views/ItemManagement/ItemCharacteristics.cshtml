@@ -9,48 +9,25 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
-        <li>@Html.ActionLink("Create New Item","CreateNewItem")</li>
-        <li>@Html.ActionLink("Print Item Labels","PrintLabels")</li>
-        <li class="active">@Html.ActionLink("Item Characteristics","ItemCharacteristics")</li>
+        <li>@Html.ActionLink("Create New Item", "CreateNewItem")</li>
+        <li>@Html.ActionLink("Print Item Labels", "PrintLabels")</li>
+        <li class="active">@Html.ActionLink("Item Characteristics", "ItemCharacteristics")</li>
     </ul> 
 }
 
 <div class="item-char-container">
     <div class="item-char-outter">
-        <h3 class="item-char">Categories</h3>
+        <h3 class="item-char">Departments (@Model.departments.Count)</h3>
         <hr />
-        <div class="item-char">
-            @foreach (var item in Model.categorys)
+        <div class="search-box">
+            @using (Html.BeginForm())
             {
-                <div class="item-char-row">
-                    <div class="item-char-list1"><p class="item-char">@item.CategoryID</p></div>
-                    <div class="item-char-list2"><p class="item-char">@item.CategoryName</p></div>
-                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
-                                                                        new {id = item.CategoryID, editButton = "category"})'" /></div>
-                </div>
+                @Html.HiddenFor(x => x.dept.DepartmentID, new { id = "dept_id" })
+                @Html.TextBoxFor(x => x.dept.DepartmentName, new { id = "dept", @class = "item-char-search", placeholder = "Search for a Department..." })
+                <input type="hidden" name="editButton" value="department" />
+                <input type="submit" value="Search" class="button-search" />
             }
         </div>
-    </div>
-    <div class="item-char-outter">
-        <h3 class="item-char">Subcategories</h3>
-        <hr />
-        <div class="item-char">
-            @foreach (var item in Model.subcats)
-            {
-                <div class="item-char-row">
-                    <div class="item-char-list1"><p class="item-char">@item.SubcategoryID</p></div>
-                    <div class="item-char-list2"><p class="item-char">@item.SubcategoryName</p></div>
-                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
-                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement", 
-                                                                        new {id = item.SubcategoryID, editButton = "subcategory"})'" /></div>
-                </div>
-            }
-        </div>
-    </div>
-    <div class="item-char-outter">
-        <h3 class="item-char">Departments</h3>
-        <hr />
         <div class="item-char">
             @foreach (var item in Model.departments)
             {
@@ -59,7 +36,57 @@
                     <div class="item-char-list2"><p class="item-char">@item.DepartmentName</p></div>
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
                                                             onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
-                                                                        new {id = item.DepartmentID, editButton = "department"})'" /></div>
+                                                                        new { id = item.DepartmentID, editButton = "department" })'" /></div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="item-char-outter">
+        <h3 class="item-char">Categories (@Model.categorys.Count)</h3>
+        <hr />
+        <div class="search-box">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(x => x.cat.CategoryID, new { id = "cat_id" })
+            @Html.TextBoxFor(x => x.cat.CategoryName, new { id = "cat", @class = "item-char-search", placeholder = "Search for a Category..." })
+            <input type="hidden" name="editButton" value="category" />
+            <input type="submit" value="Search" class="button-search" />
+        }
+        </div>
+        <div class="item-char">
+            @foreach (var item in Model.categorys)
+            {
+                <div class="item-char-row">
+                    <div class="item-char-list1"><p class="item-char">@item.CategoryID</p></div>
+                    <div class="item-char-list2"><p class="item-char">@item.CategoryName</p></div>
+                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
+                                                                        new { id = item.CategoryID, editButton = "category" })'" /></div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="item-char-outter">
+        <h3 class="item-char">Subcategories (@Model.subcats.Count)</h3>
+        <hr />
+        <div class="search-box">
+        @using (Html.BeginForm())
+        {
+            @Html.HiddenFor(x => x.subcat.SubcategoryID, new { id = "sub_id" })
+            @Html.TextBoxFor(x => x.subcat.SubcategoryName, new { id = "sub", @class = "item-char-search", placeholder = "Search for a Subcategory..." })
+            <input type="hidden" name="editButton" value="subcategory" />
+            <input type="submit" value="Search" class="button-search" />
+        }
+        </div>
+        <div class="item-char">
+            @foreach (var item in Model.subcats)
+            {
+                <div class="item-char-row">
+                    <div class="item-char-list1"><p class="item-char">@item.SubcategoryID</p></div>
+                    <div class="item-char-list2"><p class="item-char">@item.SubcategoryName</p></div>
+                    <div class="item-char-list3"><input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
+                                                                        new { id = item.SubcategoryID, editButton = "subcategory" })'" /></div>
                 </div>
             }
         </div>
@@ -75,4 +102,87 @@
         popupWindow = window.open(
             url, 'popUpWindow', 'height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
     }
+</script>
+
+<script type="text/javascript">
+    var url = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "CategoryApi" })';
+    $('#cat').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.CategoryName,
+                            value: item.CategoryID
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#cat').val(ui.item.label);
+            $('#cat_id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
+
+    var url1 = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "SubcategoryApi" })';
+    $('#sub').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url1,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.SubcategoryName,
+                            value: item.SubcategoryID
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#sub').val(ui.item.label);
+            $('#sub_id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
+
+    var url2 = '@Url.RouteUrl("DefaultApi",
+        new { httproute = "", controller = "DepartmentApi" })';
+    $('#dept').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: url2,
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.DepartmentName,
+                            value: item.DepartmentID
+                        }
+                    }));
+                }
+            })
+        },
+        select: function (event, ui) {
+            $('#dept').val(ui.item.label);
+            $('#dept_id').val(ui.item.value);
+            return false;
+        },
+        minLength: 1
+    });
 </script>
