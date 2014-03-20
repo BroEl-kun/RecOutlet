@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -12,6 +13,8 @@ namespace RecOutletWarehouse.Models
 
         public short SubcategoryID { get; set; }
         public string SubcategoryName { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<ITEM> ITEMs { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,8 @@ namespace RecOutletWarehouse.Models
         public byte CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string CategoryDescription { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<ITEM> ITEMs { get; set; }
     }
 }
