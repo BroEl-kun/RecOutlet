@@ -37,6 +37,9 @@ namespace RecOutletWarehouse.Controllers
             public List<ITEM_DEPARTMENT> departments { get; set; }
             public List<ITEM_CATEGORY> categorys { get; set; }
             public List<ITEM_SUBCATEGORY> subcats { get; set; }
+            public ITEM_CATEGORY cat { get; set; }
+            public ITEM_SUBCATEGORY subcat { get; set; }
+            public ITEM_DEPARTMENT dept { get; set; }
         }
 
         public ActionResult CreateNewItem()
@@ -292,6 +295,40 @@ namespace RecOutletWarehouse.Controllers
                 model.subcats = entityDb.ITEM_SUBCATEGORY.ToList();
 
                 return View(model);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult ItemCharacteristics(allItemDeptCatSubcatViewModel idcsvm, string editButton)
+        {
+            try
+            {
+                //newItemDeptCatSubcatViewModel model = new newItemDeptCatSubcatViewModel();
+                //ViewBag.editButton = editButton;
+
+                int newID = 0;
+                string newEditButton = editButton;
+
+                if (editButton == "category")
+                {
+                    newID = idcsvm.cat.CategoryID;
+                }
+                else if (editButton == "subcategory")
+                {
+                    newID = idcsvm.subcat.SubcategoryID;
+                }
+                else if (editButton == "department")
+                {
+                    newID = idcsvm.dept.DepartmentID;
+                }
+
+                return RedirectToAction("EditItemCharacteristics", new { id = newID, editButton = newEditButton});
+
             }
             catch (Exception ex)
             {
