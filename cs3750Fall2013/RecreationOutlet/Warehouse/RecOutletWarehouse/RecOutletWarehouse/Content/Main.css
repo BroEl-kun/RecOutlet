@@ -117,6 +117,21 @@ h2 {
         font-weight: 500;
     }
 
+.button-search {
+    border: hidden;
+    color:#262626;
+    background-color:#E8A720;
+    min-width:100px;
+    min-height:30px;
+    white-space:normal;
+    margin-right:20px;
+}
+    .button-search:hover {
+        color: #F2F2F2;
+        background-color:#262626;
+        font-weight: 500;
+    }
+
 .button-cancel {
     border: hidden;
     color: #F2F2F2;
@@ -498,11 +513,11 @@ div.item-char
 
 div.item-char-outter
 {
-    height: 370px;
+    height: 400px;
     float: left;
     width: 30%;
     display: block;
-    margin-left: 3%;
+    margin-left: 2.3%;
 }
 
 div.item-char-container
@@ -513,6 +528,13 @@ div.item-char-container
 
 div.item-char-row
 {
+    width: 100%;
+    height: 30px;
+}
+
+div.item-char-row-odd
+{
+    background-color: white;
     width: 100%;
     height: 30px;
 }
@@ -537,6 +559,16 @@ div.item-char-list3
     float: left;
     width: 32%;
     display: block;
+}
+
+div.search-box
+{
+    margin-bottom: 10px;
+}
+
+input.item-char-search 
+{
+    width: 60%;
 }
 
 h3.item-char
