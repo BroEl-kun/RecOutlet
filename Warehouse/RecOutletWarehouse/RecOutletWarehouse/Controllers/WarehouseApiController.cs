@@ -35,31 +35,58 @@ namespace RecOutletWarehouse.Controllers
 
     public class DepartmentApiController : ApiController
     {
+        //[HttpGet]
+        //public IEnumerable<Department> GetDepartments(string query = "")
+        //{
+        //    DataFetcherSetter db = new DataFetcherSetter();
+        //    return db.SearchDepartmentsByName(query);
+        //}
         [HttpGet]
-        public IEnumerable<Department> GetDepartments(string query = "")
+        public IEnumerable<ITEM_DEPARTMENT> GetDepartments(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            return db.SearchDepartmentsByName(query);
+            using (var db = new RecreationOutletContext())
+            {
+                return String.IsNullOrEmpty(query) ? db.ITEM_DEPARTMENT.ToList() :
+                db.ITEM_DEPARTMENT.Where(p => p.DepartmentName.Contains(query)).ToList();
+            }
         }
     }
 
     public class CategoryApiController : ApiController
     {
+        //[HttpGet]
+        //public IEnumerable<Category> GetCategories(string query = "")
+        //{
+        //    DataFetcherSetter db = new DataFetcherSetter();
+        //    return db.SearchCategoriesByName(query);
+        //}
         [HttpGet]
-        public IEnumerable<Category> GetCategories(string query = "")
+        public IEnumerable<ITEM_CATEGORY> GetCategories(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            return db.SearchCategoriesByName(query);
+            using (var db = new RecreationOutletContext())
+            {
+                return String.IsNullOrEmpty(query) ? db.ITEM_CATEGORY.ToList() :
+                db.ITEM_CATEGORY.Where(x => x.CategoryName.Contains(query)).ToList();
+            }
         }
     }
 
     public class SubcategoryApiController : ApiController
     {
+        //[HttpGet]
+        //public IEnumerable<SubCategory> GetSubcategories(string query = "")
+        //{
+        //    DataFetcherSetter db = new DataFetcherSetter();
+        //    return db.SearchSubcategoriesByName(query);
+        //}
         [HttpGet]
-        public IEnumerable<SubCategory> GetSubcategories(string query = "")
+        public IEnumerable<ITEM_SUBCATEGORY> GetSubcategories(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            return db.SearchSubcategoriesByName(query);
+            using (var db = new RecreationOutletContext())
+            {
+                return String.IsNullOrEmpty(query) ? db.ITEM_SUBCATEGORY.ToList() :
+                db.ITEM_SUBCATEGORY.Where(x => x.SubcategoryName.Contains(query)).ToList();
+            }
         }
     }
 
@@ -91,6 +118,19 @@ namespace RecOutletWarehouse.Controllers
             using (var db = new RecreationOutletContext()) {
                 return String.IsNullOrEmpty(query) ? db.EVENT_TYPE.ToList() :
                 db.EVENT_TYPE.Where(p => p.EventDescription.Contains(query)).ToList();
+            }
+        }
+    }
+
+    public class SearchCategoryApiController : ApiController
+    {
+        [HttpGet]
+        public IEnumerable<ITEM_CATEGORY> GetCategories(string query = "")
+        {
+            using (var db = new RecreationOutletContext())
+            {
+                return String.IsNullOrEmpty(query) ? db.ITEM_CATEGORY.ToList() :
+                db.ITEM_CATEGORY.Where(x => x.CategoryName.Contains(query)).ToList();
             }
         }
     }
