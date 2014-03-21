@@ -19,13 +19,13 @@
     <div class="item-char-outter">
         <h3 class="item-char">Departments (@Model.departments.Count)</h3>
         <hr />
-        <div class="search-box">
+        <div class="search-box dept-search">
             @using (Html.BeginForm())
             {
                 @Html.HiddenFor(x => x.dept.DepartmentID, new { id = "dept_id" })
                 @Html.TextBoxFor(x => x.dept.DepartmentName, new { id = "dept", @class = "item-char-search", placeholder = "Search for a Department..." })
                 <input type="hidden" name="editButton" value="department" />
-                <input type="submit" value="Search" class="button-search" />
+                <input type="submit" value="Search" class="button-search " id="" />
             }
         </div>
         <div class="item-char">
@@ -37,6 +37,7 @@
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
                                                             onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
                                                                         new { id = item.DepartmentID, editButton = "department" })'" /></div>
+                    @*<div class="item-char-list3"><input type="button" value="Edit" class="button dept-dialog-button" id="@(item.DepartmentID)" /></div>*@
                 </div>
             }
         </div>
@@ -62,6 +63,7 @@
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
                                                             onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
                                                                         new { id = item.CategoryID, editButton = "category" })'" /></div>
+                    @*<div class="item-char-list3"><input type="button" value="Edit" class="button cat-dialog-button" id="@(item.CategoryID)" /></div>*@
                 </div>
             }
         </div>
@@ -87,6 +89,7 @@
                     <div class="item-char-list3"><input type="button" value="Edit" class="button"
                                                             onclick="location.href='@Url.Action("EditItemCharacteristics", "ItemManagement",
                                                                         new { id = item.SubcategoryID, editButton = "subcategory" })'" /></div>
+                    @*<div class="item-char-list3"><input type="button" value="Edit" class="button sub-dialog-button" id="@(item.SubcategoryID)" /></div>*@
                 </div>
             }
         </div>
@@ -96,6 +99,52 @@
 <input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")    ');" class="button" value="Add a new Department, Category, and/or Subcategory" />
 </center>
 
+@*@foreach (var item in Model.departments)
+{
+    <div id="dept-dialog-form@(item.DepartmentID)">
+        @using (Html.BeginForm())
+        {
+            @Html.
+        }
+        <h2>Department ID: @(item.DepartmentID)</h2>
+        <p>Department Name: @(item.DepartmentName)</p>
+        <p>Department Comments: @(item.DepartmentDescription)</p>
+    </div>
+}*@
+
+@for (int i = 0; i < Model.departments.Count; i++)
+{
+    <div id="dept-dialog-form@(Model.departments[i].DepartmentID)">
+        @using (Html.BeginForm())
+        {
+            <h2>Department ID: @Model.departments[i].DepartmentID</h2>
+            <hr />
+            @Html.Label("Department Name")
+            @Html.EditorFor(x => x.departments[i].DepartmentName)
+            @Html.Label("Department Description")
+            @Html.TextAreaFor(x => x.departments[i].DepartmentDescription)
+            <input type="submit" class="button" />
+        }
+    </div>
+}
+
+@foreach (var item in Model.categorys)
+{
+    <div id="cat-dialog-form@(item.CategoryID)">
+        <h2>Category ID: @(item.CategoryID)</h2>
+        <p>Category Name: @(item.CategoryName)</p>
+        <p>Category Comments: @(item.CategoryDescription)</p>
+    </div>
+}
+
+@foreach (var item in Model.subcats)
+{
+    <div id="sub-dialog-form@(item.SubcategoryID)">
+        <h2>Subdepartment ID: @(item.SubcategoryID)</h2>
+        <p>Subdepartment Name: @(item.SubcategoryName)</p>
+    </div>
+}
+
 <script type="text/javascript">
     // Popup window code
     function newPopup(url) {
@@ -104,6 +153,7 @@
     }
 </script>
 
+@*The following script is for the autocomplete search feature*@
 <script type="text/javascript">
     var url = '@Url.RouteUrl("DefaultApi",
         new { httproute = "", controller = "CategoryApi" })';
@@ -184,5 +234,77 @@
             return false;
         },
         minLength: 1
+    });
+</script>
+
+<!-- JQuery Dialog scripts for Departments -->
+<script>
+    $(function() {
+        $( "div[id*='dept-dialog-form']" ).dialog({
+            autoOpen: false,
+            height: 400,
+            width: 450,
+            modal: true,
+            buttons: {
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                },
+                Submit: function() {
+                    $ (this ).dialog( "save" );
+            }
+            }
+        });
+ 
+        $( ".dept-dialog-button" )
+          .button()
+          .click(function() {
+              $( "#dept-dialog-form" + this.id ).dialog( "open" );
+          });
+    });
+</script>
+
+<!-- JQuery Dialog scripts for Categories -->
+<script>
+    $(function() {
+        $( "div[id*='cat-dialog-form']" ).dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+ 
+        $( ".cat-dialog-button" )
+          .button()
+          .click(function() {
+              $( "#cat-dialog-form" + this.id ).dialog( "open" );
+          });
+    });
+</script>
+
+<!-- JQuery Dialog scripts for Subcategories -->
+<script>
+    $(function() {
+        $( "div[id*='sub-dialog-form']" ).dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+ 
+        $( ".sub-dialog-button" )
+          .button()
+          .click(function() {
+              $( "#sub-dialog-form" + this.id ).dialog( "open" );
+          });
     });
 </script>
