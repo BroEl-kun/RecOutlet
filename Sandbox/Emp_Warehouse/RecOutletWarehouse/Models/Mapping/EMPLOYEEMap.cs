@@ -34,6 +34,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.PasswordSalt)
                 .IsRequired()
                 .HasMaxLength(16);
+
             // Table & Column Mappings
             this.ToTable("EMPLOYEE");
             this.Property(t => t.EmployeeId).HasColumnName("EmployeeId");

@@ -155,8 +155,7 @@ namespace RecOutletWarehouse.Controllers
                      var crypto = new SimpleCrypto.PBKDF2();
 
                      var encrpPass = crypto.Compute(emp.Password);
-
-                    // db.Entry(emp).State = EntityState.Modified;
+                    
                      emp.Password = encrpPass;
                      emp.PasswordSalt = crypto.Salt;
 
