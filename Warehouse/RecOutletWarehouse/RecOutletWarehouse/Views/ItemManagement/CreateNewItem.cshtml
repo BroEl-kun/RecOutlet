@@ -122,6 +122,19 @@
             <tr>
                 <td colspan="6"><input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")');" class="button" value="Add a new Department, Category, and/or Subcategory" /></td>
             </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="editor-field">
+                        @Html.Hidden("dept-id", new { @class = "rpc-preview", @value = "-1" })
+                        @Html.Hidden("cat-id", new { @class = "rpc-preview", @value = "-1" })
+                        @Html.Hidden("sub-id", new { @class = "rpc-preview", @value = "-1" })
+                            <input type="button" class="button" id="rpc-button" value="Generate RPC" />
+                    </div>
+                </td>
+                <td colspan="4">
+                    <p>Item RPC Preview: <span id="rpc-preview"></span></p>
+                </td>
+            </tr>
         </table>
 
     </fieldset>
@@ -194,6 +207,71 @@
 
 }
 
+<script>
+    $(function() {
+        $('#rpc-button')
+            .click(function() {
+
+                var array = @Html.Raw(Json.Encode(@ViewBag.array));
+                var myBool = 0;
+
+                var val1 = $('#dept-id').attr( 'value' );
+                var val2 = $('#cat-id').attr( 'value' );
+                var val3 = $('#sub-id').attr( 'value' );
+                var val4 = "";
+                var val5 = "";
+                var val6 = "000001";
+
+                if( val1 > -1 && val2 > -1 && val3 > -1)
+                {
+                    if(val2 < 10)
+                    {
+                        val4 = "0";
+                    }
+
+                    if(val3 < 10)
+                    {
+                        val5 = "00";
+                    }
+                    else if(val3 < 100)
+                    {
+                        val5 = "0";
+                    }
+                    
+                    $('#rpc-preview').text( val1 + val4 + val2 + val6 + val5 + val3 );
+                }
+                else
+                {
+                    $('#rpc-preview').text( "Please enter a department, category and subcategory." );
+                }
+          })
+    });
+</script>
+
+@*<script>
+    $(function() {
+        $( "div[id*='dept-dialog-form']" ).dialog({
+            autoOpen: false,
+            height: 400,
+            width: 450,
+            modal: true,
+            buttons: {
+                Cancel: function() {
+                    $( this ).dialog( "close" );
+                },
+                Submit: function() {
+                    $ (this ).dialog( "save" );
+                }
+            }
+        });
+ 
+        $( ".dept-dialog-button" )
+          .button()
+          .click(function() {
+              $( "#dept-dialog-form" + this.id ).dialog( "open" );
+          });
+    });
+</script>*@
 
 <!--"What's this?" Tooltip-->
 <script>
@@ -298,7 +376,8 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.DepartmentName
+                            label: item.DepartmentName,
+                            value: item.DepartmentID
                         }
                     }));
                 }
@@ -307,6 +386,7 @@
         select: function (event, ui) {
             $('#dept').val(ui.item.label);
             $('#Id').val(ui.item.label);
+            $('#dept-id').val(ui.item.value);
             return false;
         },
         minLength: 1
@@ -325,7 +405,8 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.CategoryName
+                            label: item.CategoryName,
+                            value: item.CategoryID
                         }
                     }));
                 }
@@ -334,6 +415,7 @@
         select: function (event, ui) {
             $('#cat').val(ui.item.label);
             $('#Id').val(ui.item.label);
+            $('#cat-id').val(ui.item.value);
             return false;
         },
         minLength: 1
@@ -352,7 +434,8 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.SubcategoryName
+                            label: item.SubcategoryName,
+                            value: item.SubcategoryID
                         }
                     }));
                 }
@@ -361,6 +444,7 @@
         select: function (event, ui) {
             $('#subcat').val(ui.item.label);
             $('#Id').val(ui.item.label);
+            $('#sub-id').val(ui.item.value);
             return false;
         },
         minLength: 1

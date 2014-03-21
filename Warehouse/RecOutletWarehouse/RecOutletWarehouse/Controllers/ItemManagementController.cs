@@ -49,6 +49,8 @@ namespace RecOutletWarehouse.Controllers
                 //DataFetcherSetter db = new DataFetcherSetter();
                 //List<SubCategory> testList = db.SearchSubcategoriesByName("a");
 
+                ViewBag.Array = entityDb.ITEMs.Select(x => x.RecRPC).ToList();
+
                 return View();
             }
             catch (Exception ex)
