@@ -19,14 +19,16 @@
     <div class="item-char-outter">
         <h3 class="item-char">Departments (@Model.departments.Count)</h3>
         <hr />
-        <div class="search-box dept-search">
-            @using (Html.BeginForm())
+        <div class="search-box">
+            @*@using (Html.BeginForm())
             {
                 @Html.HiddenFor(x => x.dept.DepartmentID, new { id = "dept_id" })
                 @Html.TextBoxFor(x => x.dept.DepartmentName, new { id = "dept", @class = "item-char-search", placeholder = "Search for a Department..." })
                 <input type="hidden" name="editButton" value="department" />
-                <input type="submit" value="Search" class="button-search " id="" />
-            }
+                <input type="button" value="Search" class="button-search dept-search-button" id="" />
+            }*@
+            <input id = "dept" class = "item-char-search" placeholder = "Search for a Department..." />
+            <input type="button" value="Search" class="button-search dept-search-button" />
         </div>
         <div class="item-char">
             @foreach (var item in Model.departments)
@@ -46,13 +48,15 @@
         <h3 class="item-char">Categories (@Model.categorys.Count)</h3>
         <hr />
         <div class="search-box">
-        @using (Html.BeginForm())
+        @*@using (Html.BeginForm())
         {
             @Html.HiddenFor(x => x.cat.CategoryID, new { id = "cat_id" })
             @Html.TextBoxFor(x => x.cat.CategoryName, new { id = "cat", @class = "item-char-search", placeholder = "Search for a Category..." })
             <input type="hidden" name="editButton" value="category" />
             <input type="submit" value="Search" class="button-search" />
-        }
+        }*@
+            <input id = "cat" class = "item-char-search" placeholder = "Search for a Category..." />
+            <input type="submit" value="Search" class="button-search cat-search-button" />
         </div>
         <div class="item-char">
             @foreach (var item in Model.categorys)
@@ -72,13 +76,15 @@
         <h3 class="item-char">Subcategories (@Model.subcats.Count)</h3>
         <hr />
         <div class="search-box">
-        @using (Html.BeginForm())
+        @*@using (Html.BeginForm())
         {
             @Html.HiddenFor(x => x.subcat.SubcategoryID, new { id = "sub_id" })
             @Html.TextBoxFor(x => x.subcat.SubcategoryName, new { id = "sub", @class = "item-char-search", placeholder = "Search for a Subcategory..." })
             <input type="hidden" name="editButton" value="subcategory" />
             <input type="submit" value="Search" class="button-search" />
-        }
+        }*@
+            <input id = "sub" class = "item-char-search" placeholder = "Search for a Subcategory..." />
+            <input type="submit" value="Search" class="button-search sub-search-button" />
         </div>
         <div class="item-char">
             @foreach (var item in Model.subcats)
@@ -96,21 +102,9 @@
     </div>
 </div>
 <center>
-<input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")    ');" class="button" value="Add a new Department, Category, and/or Subcategory" />
+    <input type="button" onclick="JavaScript:newPopup('@Url.Action("addNewDeptCatSubcat", "ItemManagement")');" 
+        class="button" value="Add a new Department, Category, and/or Subcategory" />
 </center>
-
-@*@foreach (var item in Model.departments)
-{
-    <div id="dept-dialog-form@(item.DepartmentID)">
-        @using (Html.BeginForm())
-        {
-            @Html.
-        }
-        <h2>Department ID: @(item.DepartmentID)</h2>
-        <p>Department Name: @(item.DepartmentName)</p>
-        <p>Department Comments: @(item.DepartmentDescription)</p>
-    </div>
-}*@
 
 @for (int i = 0; i < Model.departments.Count; i++)
 {
@@ -193,23 +187,6 @@
     </div>
 }
 
-@*@foreach (var item in Model.categorys)
-{
-    <div id="cat-dialog-form@(item.CategoryID)">
-        <h2>Category ID: @(item.CategoryID)</h2>
-        <p>Category Name: @(item.CategoryName)</p>
-        <p>Category Comments: @(item.CategoryDescription)</p>
-    </div>
-}*@
-
-@*@foreach (var item in Model.subcats)
-{
-    <div id="sub-dialog-form@(item.SubcategoryID)">
-        <h2>Subdepartment ID: @(item.SubcategoryID)</h2>
-        <p>Subdepartment Name: @(item.SubcategoryName)</p>
-    </div>
-}*@
-
 <script type="text/javascript">
     // Popup window code
     function newPopup(url) {
@@ -240,8 +217,13 @@
             })
         },
         select: function (event, ui) {
+            var id = ui.item.value;
+
             $('#cat').val(ui.item.label);
             $('#cat_id').val(ui.item.value);
+
+            $('.cat-search-button').attr("id", (ui.item.value))
+
             return false;
         },
         minLength: 1
@@ -267,8 +249,13 @@
             })
         },
         select: function (event, ui) {
+            var id = ui.item.value;
+
             $('#sub').val(ui.item.label);
             $('#sub_id').val(ui.item.value);
+
+            $('.sub-search-button').attr("id", (ui.item.value))
+
             return false;
         },
         minLength: 1
@@ -294,8 +281,13 @@
             })
         },
         select: function (event, ui) {
+            var id = ui.item.value;
+
             $('#dept').val(ui.item.label);
             $('#dept_id').val(ui.item.value);
+
+            $('.dept-search-button').attr("id", (ui.item.value))
+
             return false;
         },
         minLength: 1
@@ -313,6 +305,11 @@
         });
  
         $( ".dept-dialog-button" )
+          .click(function() {
+              $( "#dept-dialog-form" + this.id ).dialog( "open" );
+          });
+
+        $( ".dept-search-button" )
           .click(function() {
               $( "#dept-dialog-form" + this.id ).dialog( "open" );
           });
@@ -339,6 +336,11 @@
               $( "#cat-dialog-form" + this.id ).dialog( "open" );
           });
 
+        $( ".cat-search-button" )
+          .click(function() {
+              $( "#cat-dialog-form" + this.id ).dialog( "open" );
+          });
+
         $( ".cat-dialog-close" )
           .click(function() {
               $( "#cat-dialog-form" + this.id ).dialog( "close" );
@@ -357,6 +359,11 @@
         });
  
         $( ".sub-dialog-button" )
+          .click(function() {
+              $( "#sub-dialog-form" + this.id ).dialog( "open" );
+          });
+
+        $( ".sub-search-button" )
           .click(function() {
               $( "#sub-dialog-form" + this.id ).dialog( "open" );
           });
