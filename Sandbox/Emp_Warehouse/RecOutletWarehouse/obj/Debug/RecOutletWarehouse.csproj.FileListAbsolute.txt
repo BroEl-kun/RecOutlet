@@ -74,3 +74,42 @@ C:\Users\Mats Lappytop\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutle
 C:\Users\Mats Lappytop\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
 C:\Users\Mats Lappytop\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
 C:\Users\Mats Lappytop\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\RecOutletWarehouse.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\RecOutletWarehouse.pdb
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\Antlr3.Runtime.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\EntityFramework.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\EntityFramework.SqlServer.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\log4net.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\Neodynamic.SDK.ThermalLabel.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\Newtonsoft.Json.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Net.Http.Formatting.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Helpers.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Http.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Http.WebHost.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Mvc.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Optimization.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Razor.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.WebPages.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.WebPages.Razor.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\WebGrease.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\Antlr3.Runtime.pdb
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\EntityFramework.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\EntityFramework.SqlServer.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\log4net.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\Newtonsoft.Json.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Optimization.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Net.Http.Formatting.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Helpers.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Http.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Http.WebHost.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Mvc.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.Razor.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.WebPages.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\System.Web.WebPages.Razor.xml
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.csprojResolveAssemblyReference.cache
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.dll
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\obj\Debug\RecOutletWarehouse.pdb
+C:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\bin\SimpleCrypto.dll
