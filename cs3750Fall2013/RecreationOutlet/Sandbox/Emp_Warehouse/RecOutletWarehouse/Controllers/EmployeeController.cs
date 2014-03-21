@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Utilities;
 using System.Data.Entity;
@@ -98,13 +99,23 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult EditEmployee(int id = 0)
         {
-            EMPLOYEE emp = new EMPLOYEE();
-            emp = db.EMPLOYEEs.Find(id);
+            try
+            {
 
-            if (emp == null) {
-                return HttpNotFound();
+                EMPLOYEE emp = new EMPLOYEE();
+                emp = db.EMPLOYEEs.Find(id);
+
+                if (emp == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(emp);
             }
-            return View(emp);
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
          [HttpPost]
@@ -129,6 +140,46 @@ namespace RecOutletWarehouse.Controllers
 
             
         }
+
+         public ActionResult CreateEmployee(EMPLOYEE emp)
+         {
+           //  try
+         //    {
+
+               
+
+                 if (ModelState.IsValid)
+                 {
+
+
+                     var crypto = new SimpleCrypto.PBKDF2();
+
+                     var encrpPass = crypto.Compute(emp.Password);
+
+                    // db.Entry(emp).State = EntityState.Modified;
+                     emp.Password = encrpPass;
+                     emp.PasswordSalt = crypto.Salt;
+
+
+                     db.EMPLOYEEs.Add(emp);
+                     db.SaveChanges();
+
+                     return View();
+
+                 }
+                 else
+                 {
+                     return View(emp);
+                 }
+
+                
+      //       }
+      //      catch (Exception ex)
+      //      {
+      //          WarehouseUtilities.LogError(ex);
+      //          return RedirectToAction("Error", "Home");
+      //      }
+         }
 
 
     }
