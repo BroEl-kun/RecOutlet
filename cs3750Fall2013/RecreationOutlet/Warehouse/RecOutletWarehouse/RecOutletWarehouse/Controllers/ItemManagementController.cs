@@ -397,5 +397,41 @@ namespace RecOutletWarehouse.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
+
+        [HttpPost]
+        public ActionResult UpdateItemCharacteristics(allItemDeptCatSubcatViewModel model, String editButton)
+        {
+            try
+            {
+                if (editButton == "category")
+                {
+                    ITEM_CATEGORY cat = model.categorys[0];
+
+                    entityDb.Entry(cat).State = EntityState.Modified;
+                    entityDb.SaveChanges();
+                }
+                else if (editButton == "subcategory")
+                {
+                    ITEM_SUBCATEGORY sub = model.subcats[0];
+
+                    entityDb.Entry(sub).State = EntityState.Modified;
+                    entityDb.SaveChanges();
+                }
+                else if (editButton == "department")
+                {
+                    ITEM_DEPARTMENT dept = model.departments[0];
+
+                    entityDb.Entry(dept).State = EntityState.Modified;
+                    entityDb.SaveChanges();
+                }
+
+                return RedirectToAction("ItemCharacteristics", "ItemManagement");
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
     }
 }
