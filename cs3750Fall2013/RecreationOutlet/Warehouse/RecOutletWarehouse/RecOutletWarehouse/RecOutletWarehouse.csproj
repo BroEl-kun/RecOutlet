@@ -130,6 +130,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceManagementController.cs" />
     <Compile Include="Controllers\ItemManagementController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\ReceivingLogController.cs" />
@@ -146,6 +147,8 @@
     <Compile Include="Models\EXCEPTION.cs" />
     <Compile Include="Models\INVENTORY.cs" />
     <Compile Include="Models\INVOICE.cs" />
+    <Compile Include="Models\InvoiceManagement\Customer.cs" />
+    <Compile Include="Models\InvoiceManagement\Invoice.cs" />
     <Compile Include="Models\INVOICE_CUSTOMER.cs" />
     <Compile Include="Models\INVOICE_LINEITEM.cs" />
     <Compile Include="Models\ITEM.cs" />
@@ -341,6 +344,7 @@
     <Content Include="Views\Event\ViewSalesPrice.cshtml" />
     <Content Include="Views\PurchaseOrder\POLineItemListPart.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VendorItemsViewModel.cshtml" />
+    <Content Include="Views\InvoiceManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
