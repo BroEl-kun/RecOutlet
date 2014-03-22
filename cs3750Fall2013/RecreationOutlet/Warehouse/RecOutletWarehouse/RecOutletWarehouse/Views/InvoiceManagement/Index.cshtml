@@ -1,0 +1,38 @@
+﻿@using System.Web.Optimization;
+@model RecOutletWarehouse.Models.InvoiceManagement.Invoice
+
+@{
+    ViewBag.Title = "InvoiceManagement";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Browse Invoices","Index")</li>
+        <li>@Html.ActionLink("Create New Invoice","Index")</li>
+        <li>@Html.ActionLink("Add Customer","Index")</li>
+    </ul>  
+}
+
+<h2>Browse Invoices</h2>
+@if (ViewBag.InvoiceSuccessfulInsert != null)
+{
+<ul>
+    <li class="successful-insert">@ViewBag.InvoiceSuccessfulInsert</li>
+</ul>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>???</legend>
+        <div class=" potable-area">
+
+        </div>
+
+    </fieldset>
+}
