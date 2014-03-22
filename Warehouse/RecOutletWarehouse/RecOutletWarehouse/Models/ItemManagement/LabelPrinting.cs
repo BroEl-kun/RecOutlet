@@ -5,7 +5,7 @@ using System.Web;
 
 namespace RecOutletWarehouse.Models.ItemManagement {
     public class LabelPrinting {
-        public string RPC { get; set; }
+        public long RPC { get; set; }
         public string UPC { get; set; }
         public string ItemName { get; set; }
         public short LabelQty { get; set; }

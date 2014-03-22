@@ -11,7 +11,7 @@ namespace RecOutletWarehouse.Utilities
 {
     public class WarehouseUtilities
     {
-
+        RecreationOutletContext db = new RecreationOutletContext();
         //TODO: Investigate alternate approaches that would prevent this class's methods
         //from being static
 
@@ -59,7 +59,7 @@ namespace RecOutletWarehouse.Utilities
             return zebraPrinter;
         }
 
-        public static void PrintRPCLabel(RecOutletWarehouse.Models.ItemManagement.Item item, int qty) {
+        public static void PrintRPCLabel(ITEM item, int qty) {
             //TODO: Exception handling (what happens if the printer is not connected?)
             ThermalLabel RPCLabel = new ThermalLabel(UnitType.Inch, 2, 2);
             RPCLabel.GapLength = 0.2;
@@ -76,7 +76,7 @@ namespace RecOutletWarehouse.Utilities
             RPCItem.Font.Size = 6; //must be less than 8 or digits will be left off RPC # at the bottom of label
 
             //Add descriptive text
-            TextItem itemName = new TextItem(0.15, 1.2, 2, 1, item.ItemName);
+            TextItem itemName = new TextItem(0.15, 1.2, 2, 1, item.Name);
             itemName.Font.Name = Neodynamic.SDK.Printing.Font.NativePrinterFontB;
             itemName.Font.Unit = FontUnit.Point;
             itemName.Font.Size = 6;

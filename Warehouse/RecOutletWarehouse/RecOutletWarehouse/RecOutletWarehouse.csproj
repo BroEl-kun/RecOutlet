@@ -43,6 +43,10 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="ceTe.DynamicPDF.40, Version=7.0.3.40, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DynamicPDF v7.0.3\ceTe.DynamicPDF.40.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0-alpha1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -53,6 +57,7 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Neodynamic.SDK.ThermalLabel">
       <HintPath>..\packages\Neodynamic.SDK.ThermalLabel.5.0.3513.1022\lib\Neodynamic.SDK.ThermalLabel.dll</HintPath>
     </Reference>
@@ -222,6 +227,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\PagingInfo.cs" />
     <Compile Include="Utilities\WarehouseUtilities.cs" />
+    <Compile Include="WebForms\POReport.aspx.cs">
+      <DependentUpon>POReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\POReport.aspx.designer.cs">
+      <DependentUpon>POReport.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -291,6 +303,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\customScripts.js" />
+    <Content Include="WebForms\POReport.aspx" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
@@ -344,6 +358,8 @@
     <Content Include="Views\Event\ViewSalesPrice.cshtml" />
     <Content Include="Views\PurchaseOrder\POLineItemListPart.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\VendorItemsViewModel.cshtml" />
+    <Content Include="Views\PurchaseOrder\PODocumentView.cshtml" />
+    <Content Include="WebForms\POReport.aspx.dplx" />
     <Content Include="Views\InvoiceManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

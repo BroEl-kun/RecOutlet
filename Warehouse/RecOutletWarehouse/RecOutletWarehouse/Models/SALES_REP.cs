@@ -19,9 +19,11 @@ namespace RecOutletWarehouse.Models
         [Required(ErrorMessage = "Please provide the rep's last name.")]
         public string SalesRepLastName { get; set; }
 
-        [Required(ErrorMessage = "Please provide the rep's e-mail address.")]
+        [Required(ErrorMessage = "Please provide the rep's phone number.")]
+        [MaxLength(15,ErrorMessage= "The phone number you entered is too long.")]
         public string SalesRepPhone { get; set; }
-
+        
+        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Please enter a valid e-mail address")]
         public string SalesRepEmail { get; set; }
 
         [JsonIgnore]
