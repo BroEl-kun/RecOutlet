@@ -101,9 +101,12 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
+                var crypto = new SimpleCrypto.PBKDF2();
 
                 EMPLOYEE emp = new EMPLOYEE();
                 emp = db.EMPLOYEEs.Find(id);
+
+               
 
                 if (emp == null)
                 {
@@ -129,8 +132,8 @@ namespace RecOutletWarehouse.Controllers
 
                     var encrpPass = crypto.Compute(emp.Password);
 
-                    emp.Password = "1234";//encrpPass;
-                    emp.PasswordSalt = "1234";// crypto.Salt;
+                    emp.Password = encrpPass;
+                    emp.PasswordSalt = crypto.Salt;
 
                     db.Entry(emp).State = EntityState.Modified;
                     db.SaveChanges();
@@ -178,8 +181,8 @@ namespace RecOutletWarehouse.Controllers
 
                      var encrpPass = crypto.Compute(emp.Password);
 
-                     emp.Password = "1234";//encrpPass;
-                     emp.PasswordSalt = "1234";// crypto.Salt;
+                     emp.Password = encrpPass;
+                     emp.PasswordSalt = crypto.Salt;
 
 
                      db.EMPLOYEEs.Add(emp);
