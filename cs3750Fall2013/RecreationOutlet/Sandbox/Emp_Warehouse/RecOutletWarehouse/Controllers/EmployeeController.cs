@@ -125,6 +125,13 @@ namespace RecOutletWarehouse.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var crypto = new SimpleCrypto.PBKDF2();
+
+                    var encrpPass = crypto.Compute(emp.Password);
+
+                    emp.Password = "1234";//encrpPass;
+                    emp.PasswordSalt = "1234";// crypto.Salt;
+
                     db.Entry(emp).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("BrowseEmployee");
@@ -141,27 +148,44 @@ namespace RecOutletWarehouse.Controllers
             
         }
 
+         public ActionResult CreateEmployee()
+         {
+              try
+            {
+             return View();
+            }
+              catch (Exception ex)
+              {
+                  WarehouseUtilities.LogError(ex);
+                  return RedirectToAction("Error", "Home");
+              }
+         }
+        
+            [HttpPost]
          public ActionResult CreateEmployee(EMPLOYEE emp)
          {
-           //  try
-         //    {
+             try
+             {
 
                
 
                  if (ModelState.IsValid)
                  {
+                    
 
 
                      var crypto = new SimpleCrypto.PBKDF2();
 
                      var encrpPass = crypto.Compute(emp.Password);
-                    
-                     emp.Password = encrpPass;
-                     emp.PasswordSalt = crypto.Salt;
+
+                     emp.Password = "1234";//encrpPass;
+                     emp.PasswordSalt = "1234";// crypto.Salt;
 
 
                      db.EMPLOYEEs.Add(emp);
                      db.SaveChanges();
+
+                     ViewBag.Success = "Employee successfully created.";
 
                      return View();
 
@@ -172,12 +196,12 @@ namespace RecOutletWarehouse.Controllers
                  }
 
                 
-      //       }
-      //      catch (Exception ex)
-      //      {
-      //          WarehouseUtilities.LogError(ex);
-      //          return RedirectToAction("Error", "Home");
-      //      }
+             }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
          }
 
 
