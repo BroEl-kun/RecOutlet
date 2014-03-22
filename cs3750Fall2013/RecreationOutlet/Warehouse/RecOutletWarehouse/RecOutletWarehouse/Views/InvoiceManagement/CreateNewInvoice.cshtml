@@ -14,7 +14,7 @@
     </ul>  
 }
 
-<h2>Browse Invoices</h2>
+<h2>Invoice Creation</h2>
 @if (ViewBag.InvoiceSuccessfulInsert != null)
 {
 <ul>
@@ -137,5 +137,7 @@
     </fieldset>
     
     <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Verify Order" />
-    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Discard" />
+    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Save Changes" />
+    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Revert Changes" />
+    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Discard Invoice" />
 }

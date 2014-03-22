@@ -29,6 +29,48 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
+        <legend>Filters</legend>
+            <table>
+                <tr>
+                    <td>From Date:</td>
+                    <td>To Date:</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(inv => inv.InvoiceID, new { @id = "InvoiceID" })
+                        @Html.ValidationMessageFor(inv => inv.InvoiceID)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(inv => inv.InvoiceID, new { @id = "InvoiceID" })
+                        @Html.ValidationMessageFor(inv => inv.InvoiceID)
+                    </td>
+                    <td>
+                        <input type="button" class="button" onclick="" value="Today" />
+                        <input type="button" class="button" onclick="" value="This Week" />
+                        <input type="button" class="button" onclick="" value="This Month" />
+                        <input type="button" class="button" onclick="" value="This Year" />
+                        <input type="button" class="button" onclick="" value="Clear" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Customer Name</td>
+                    <td>Invoice ID</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(inv => inv.InvoiceID, new { @id = "InvoiceID" })
+                        @Html.ValidationMessageFor(inv => inv.InvoiceID)
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(inv => inv.InvoiceID, new { @id = "InvoiceID" })
+                        @Html.ValidationMessageFor(inv => inv.InvoiceID)
+                    </td>
+                </tr>
+            </table>
+        <p><input type="submit" value="Filter" onclick="submit()" class="button"/></p>
+    </fieldset>
+    
+    <fieldset>
         <legend>Invoices</legend>
         <div class=" potable-area">
             <p>There are no invoices to browse.</p>
