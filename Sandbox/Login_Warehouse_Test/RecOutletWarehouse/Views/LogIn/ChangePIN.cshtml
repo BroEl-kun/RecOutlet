@@ -12,8 +12,8 @@
     <div>User: <strong>@Html.Encode(User.Identity.Name)</strong></div>
     <br> 
     <div>Current PIN</div>
-        <div>@Html.PasswordFor(u=>u.PIN)</div>
-        <div>@Html.ValidationMessageFor(u=>u.PIN, "Incorrect PIN")</div>
+        <div>@Html.PasswordFor(u=>u.Password)</div>
+        <div>@Html.ValidationMessageFor(u=>u.Password, "Incorrect PIN")</div>
     <div>New PIN</div>
         @*<div>@Html.EditorFor(u => u.PIN)</div> 
     *@<input type="text" />
