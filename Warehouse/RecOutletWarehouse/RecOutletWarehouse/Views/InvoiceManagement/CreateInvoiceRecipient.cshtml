@@ -1,0 +1,93 @@
+﻿@model RecOutletWarehouse.Models.InvoiceManagement.Customer
+
+@{
+    ViewBag.Title = "CreateInvoiceRecipient";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Browse Invoices","Index")</li>
+        <li>@Html.ActionLink("Create New Invoice","CreateNewInvoice")</li>
+        <li class="active">@Html.ActionLink("Add Customer","CreateInvoiceRecipient")</li>
+    </ul>  
+}
+
+<h2>Add New Recipient</h2>
+
+@if (ViewBag.Success != null) {
+    <ul>
+        <li class="successful-insert">@ViewBag.Success</li>
+    </ul>
+}
+
+@using (Html.BeginForm()) {
+    <fieldset>
+        <legend>Recipient</legend>
+             <table>
+                <tr>
+                    <td>&nbsp Recipient Name:<strong class="required">*</strong></td>
+                    <td>
+                        @Html.TextBoxFor(newRec => newRec.CustomerName, new { @id = "CustomerName" })
+                        @Html.ValidationMessageFor(newRec => newRec.CustomerName)
+                    </td>
+                </tr>
+                <tr>
+                        <td>&nbsp Address:</td>
+                        <td>
+                            @Html.TextBoxFor(newRec => newRec.CustomerAddress, new { @id = "CustomerAddress" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerAddress)
+                        </td>
+                        <td>&nbsp Address Line 2:</td>
+                        <td>
+                            @Html.TextBoxFor(newRec => newRec.CustomerAddress, new { @id = "CustomerAddress" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerAddress)
+                        </td>
+                </tr>
+            </table>
+        </fieldset>
+    
+       <fieldset>
+        <legend>Contact Information</legend>
+             <table>
+                 <tr>
+                    <td>&nbsp E-mail:</td>
+                    <td>
+                        @Html.TextBoxFor(newRec => newRec.CustomerID, new { @id = "CustomerID" })
+                        @Html.ValidationMessageFor(newRec => newRec.CustomerID)
+                    </td>
+
+                    <td>&nbsp Phone Number:<strong class="required">*</strong></td>
+                    <td>
+                        @Html.TextBoxFor(newRec => newRec.CustomerPhone, new { @id = "CustomerPhone" })
+                        @Html.ValidationMessageFor(newRec => newRec.CustomerPhone)
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    <input type="submit" value="Add New Recipient" onclick="submit()" class="button"/>
+    <input type="button" value="Cancel" onclick="prompt()" class="button" />
+    
+}
+
+<script type ="text/javascript">
+    $(function () {
+        $("#RecipientName").focus();
+    });
+
+    function prompt() {
+        var p = confirm("Changes to recipient have not been saved! Continue?");
+
+        if (p == true) {
+            window.location = "@Url.Action("CreateNewInvoice", "InvoiceManagement")"
+            }
+        }
+
+    function submit() {
+        var s = confirm("Recipient has been created!");
+
+        if (s == true) {
+            window.location = "@Url.Action("CreateNewInvoice", "InvoiceManagement")"
+            }
+        }
+</script>

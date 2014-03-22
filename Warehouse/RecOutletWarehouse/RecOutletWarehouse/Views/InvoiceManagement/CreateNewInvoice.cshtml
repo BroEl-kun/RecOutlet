@@ -1,0 +1,141 @@
+﻿@using System.Web.Optimization;
+@model RecOutletWarehouse.Models.InvoiceManagement.Invoice
+
+@{
+    ViewBag.Title = "InvoiceManagement";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Browse Invoices","Index")</li>
+        <li class="active">@Html.ActionLink("Create New Invoice","CreateNewInvoice")</li>
+        <li>@Html.ActionLink("Add Customer","CreateInvoiceRecipient")</li>
+    </ul>  
+}
+
+<h2>Browse Invoices</h2>
+@if (ViewBag.InvoiceSuccessfulInsert != null)
+{
+<ul>
+    <li class="successful-insert">@ViewBag.InvoiceSuccessfulInsert</li>
+</ul>
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <!-- TO DO: Pull data from INVOICE_CUSTOMER table -->
+    
+    <fieldset>
+        <legend>Recipient</legend>
+        <table>
+            <tr>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CustomerID, new { @id = "customerID" })
+                        @Html.ValidationMessageFor(model => model.CustomerID)
+                    </div>
+                    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("CreateInvoiceRecipient", "InvoiceManagement")');" value="Add a new recipient" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    
+    <!-- TO DO: Allow most fields to autocomplete - autocompleting should pull data into other fields if possible, needs connection to ITEM table -->
+    <!-- TO DO: Change model references away from CustomerID (was used only as a placeholder before we set up a viewmodel) -->
+    
+    <fieldset>
+        <legend>Add Item</legend>
+        <table>
+            <tr>
+                <td>
+                    RPC<br />
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CustomerID, new { @id = "customerID" })
+                        @Html.ValidationMessageFor(model => model.CustomerID)
+                    </div>
+                </td>
+                <td>
+                    Item Name<br />
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CustomerID, new { @id = "customerID" })
+                        @Html.ValidationMessageFor(model => model.CustomerID)
+                    </div>
+                </td>
+                <td>
+                    Quantity<br />
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CustomerID, new { @id = "customerID" })
+                        @Html.ValidationMessageFor(model => model.CustomerID)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Price Per Item<br />
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.CustomerID, new { @id = "customerID" })
+                        @Html.ValidationMessageFor(model => model.CustomerID)
+                    </div>
+                </td>
+                <td>
+                    Total Price<br />
+                    $0.00
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Add to transaction" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    
+    <!-- TO DO: Make this a looping table entry like the BrowseVendors page, only with temporary data added by the above function -->
+    
+    <fieldset>
+        <legend>Transaction</legend>
+        <div class=" potable-area">
+            <table>
+                <tr>
+                    <td><b>Item</b></td>
+                    <td><b>Quantity</b></td>
+                    <td><b>Price</b></td>
+                    <td><b>Actions</b></td>
+                </tr>
+                <tr>
+                    <td>Blue Sleeping Bag</td>
+                    <td>50</td>
+                    <td>$900.00</td>
+                    <td>Edit | Remove</td>
+                </tr>
+                <tr>
+                    <td>Black Hiking Boots</td>
+                    <td>120</td>
+                    <td>$3600.00</td>
+                    <td>Edit | Remove</td>
+                </tr>
+                <tr>
+                    <td>Snicker's Candy Bars</td>
+                    <td>560</td>
+                    <td>$560.00</td>
+                    <td>Edit | Remove</td>
+                </tr>
+            </table>
+            <p></p>
+            <table>
+                <tr>
+                    <td><b>Total</b></td>
+                    <td><b>$5,060.00</b></td>
+                </tr>
+            </table>
+            </div>
+    </fieldset>
+    
+    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Verify Order" />
+    <input type="button" class="button" onclick="JavaScript:newPopup('@Url.Action("???", "InvoiceManagement")    ');" value="Discard" />
+}
