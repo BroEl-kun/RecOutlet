@@ -9,8 +9,8 @@
 @section tabnavigation{
     <ul class="nav clearfix">
         <li class="active">@Html.ActionLink("Browse Invoices","Index")</li>
-        <li>@Html.ActionLink("Create New Invoice","Index")</li>
-        <li>@Html.ActionLink("Add Customer","Index")</li>
+        <li>@Html.ActionLink("Create New Invoice","CreateNewInvoice")</li>
+        <li>@Html.ActionLink("Add Customer","CreateInvoiceRecipient")</li>
     </ul>  
 }
 
@@ -29,9 +29,9 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>???</legend>
+        <legend>Invoices</legend>
         <div class=" potable-area">
-
+            <p>There are no invoices to browse.</p>
         </div>
 
     </fieldset>
