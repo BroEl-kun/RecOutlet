@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using RecOutletWarehouse.Models;
 using System.Data.Entity;
+using RecOutletWarehouse.Utilities;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -39,7 +40,7 @@ namespace RecOutletWarehouse.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsValid(employee.Username, employee.PIN))
+                if (IsValid(employee.Username, employee.Password))
                 {
                     FormsAuthentication.SetAuthCookie(employee.Username, false);
                     return RedirectToAction("Index", "Home");
@@ -72,7 +73,7 @@ namespace RecOutletWarehouse.Controllers
 
             if (ModelState.IsValid)
             {
-                if (IsValid(employee.Username, employee.PIN))
+                if (IsValid(employee.Username, employee.Password))
                 {
                     //var encrpPIN = crypto.Compute(newPIN);
                     var user = new EMPLOYEE()
@@ -82,13 +83,13 @@ namespace RecOutletWarehouse.Controllers
                         LastName = employee.LastName,
                         Username = employee.Username,
                         Position = employee.Position,
-                        PIN = employee.PIN
+                        //PIN = employee.PIN
                         //PIN = encrpPIN,
                         //PINSalt = crypto.Salt
                     };
 
                     entityDb.EMPLOYEEs.Attach(user);
-                    entityDb.Entry(user).Property(x => x.PIN).IsModified = true;
+                    entityDb.Entry(user).Property(x => x.Password).IsModified = true;
                     entityDb.SaveChanges();
 
                     return RedirectToAction("Index", "Home");
@@ -108,19 +109,19 @@ namespace RecOutletWarehouse.Controllers
 
         private bool IsValid(string username, string password)
         {
-            //var crypto = new SimpleCrypto.PBKDF2();
+            var crypto = new SimpleCrypto.PBKDF2();
 
-            bool isValid = false;            
-            var user = entityDb.EMPLOYEEs.FirstOrDefault(u => u.Username == username);                
+            bool isValid = false;
+           
+            var user = entityDb.EMPLOYEEs.FirstOrDefault(u => u.Username == username);
 
             if (user != null)
             {
-                //if (user.PIN == crypto.Compute(password, user.PasswordSalt))
-                if (user.PIN == password)
+                if (user.Password == crypto.Compute(password, user.PasswordSalt))                    
                     isValid = true;
             }
 
-            return isValid;
+            return isValid;                
         }
     }
 }

@@ -17,12 +17,12 @@
             @Html.ValidationMessageFor(u=>u.Username)
         </div>
 
-        <div>@Html.LabelFor(u=>u.PIN)</div>
+        <div>@Html.LabelFor(u=>u.Password)</div>
         <div>
-            @Html.PasswordFor(u=>u.PIN, new { style ="width:300px"})
+            @Html.PasswordFor(u=>u.Password, new { style ="width:300px"})
         </div>
         <div>
-            @Html.ValidationMessageFor(u=>u.PIN, "Incorrect PIN")
+            @Html.ValidationMessageFor(u=>u.Password, "Incorrect PIN")
         </div>
         <div style="text-align:end;">
             <input type ="submit" value="Log In" class="button" style="-moz-border-radius: 10px; -webkit-border-radius: 10px;"/>

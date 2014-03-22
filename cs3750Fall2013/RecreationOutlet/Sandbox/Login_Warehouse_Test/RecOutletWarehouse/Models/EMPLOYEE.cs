@@ -25,9 +25,9 @@ namespace RecOutletWarehouse.Models
         public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(4, MinimumLength = 4)]
         [Display(Name = "PIN: ")]
-        public string PIN { get; set; }
+        public string Password { get; set; }
+        public string PasswordSalt { get; set; }
         public virtual ICollection<INVOICE> INVOICEs { get; set; }
         public virtual ICollection<LOCATION> LOCATIONs { get; set; }
         public virtual ICollection<PURCHASE_ORDER> PURCHASE_ORDER { get; set; }
