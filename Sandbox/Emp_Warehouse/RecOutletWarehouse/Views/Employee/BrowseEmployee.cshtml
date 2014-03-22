@@ -7,13 +7,20 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li class="active">@Html.ActionLink("Manage Employees", "BrowseEmployee")</li>
+        <li>@Html.ActionLink("Add a Employee", "CreateEmployee")</li>
+    </ul>  
+}
+
 <h2>Browse Employee</h2>
 
 @using (Html.BeginForm())
 {
     <div class="search">
-        Employee's name contains: @Html.TextBox("empNameSearch")
-        <input type="submit" value="Search" />
+        Employee's name contains: @Html.TextBox("empNameSearch" )
+        <input type="submit" value="Search" class="button" />
     </div>
 }
 
@@ -21,17 +28,30 @@
     @Html.RolodexLinks( x => Url.Action("BrowseEmployee"))
 </div>
 <table>
+     <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Posistion
+        </th>
+        <th>
+            Username
+        </th>
+       
+    </tr>
+
 @foreach (var e in Model.Employee) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => e.FirstName)
-            @Html.DisplayFor(modelItem => e.LastName)
+            @Html.DisplayFor(modelItem => e.LastName)&emsp;
         </td>
         <td>
-            @Html.DisplayFor(modelItem => e.Position)
+            @Html.DisplayFor(modelItem => e.Position)&emsp;
         </td>
         <td>
-            @Html.DisplayFor(modelItem => e.Username)
+            @Html.DisplayFor(modelItem => e.Username)&emsp;
         </td>
         <td>
          @Html.ActionLink("Edit", "EditEmployee", new { id=e.EmployeeId })

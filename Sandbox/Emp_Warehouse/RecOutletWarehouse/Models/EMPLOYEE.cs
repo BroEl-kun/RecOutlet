@@ -26,9 +26,7 @@ namespace RecOutletWarehouse.Models
         public string Position { get; set; }
         [Required(ErrorMessage = "Please provide a Username.")]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Please provide a Pin.")]
-        [MaxLength(4,ErrorMessage="Enter a 4 Digit Pin.")]
-        [MinLength(4,ErrorMessage="Enter a 4 Digit Pin")]
+        [Required(ErrorMessage = "Please provide a Password.")]
         public string Password { get; set; }
         public string PasswordSalt{ get; set; }
         public virtual ICollection<INVOICE> INVOICEs { get; set; }

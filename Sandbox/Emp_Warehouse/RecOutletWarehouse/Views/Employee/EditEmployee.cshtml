@@ -57,14 +57,21 @@
 
         <p>
             <input type="submit" value="Save" class="button"/>
+            <input type="button" value="Cancel" onclick="prompt()" class="button" />
         </p>
     </fieldset>
 }
+<script type ="text/javascript">
 
-<div>
-    @Html.ActionLink("Back to List", "BrowseEmployee")
-</div>
-@*
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+
+    function prompt() {
+        var p = confirm("Employee changes have not been saved! Continue?");
+
+        if (p == true) {
+            window.location = "@Url.Action("BrowseEmployee", "Employee")"
+        }
+    }
+
+</script>
+
+

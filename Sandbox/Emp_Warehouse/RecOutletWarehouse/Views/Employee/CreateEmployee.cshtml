@@ -5,11 +5,23 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>CreateEmployee</h2>
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Manage Employees", "BrowseEmployee")</li>
+        <li class="active">@Html.ActionLink("Add a Employee", "CreateEmployee")</li>
+    </ul>  
+}
+
+<h2>Create Employee</h2>
+
+@if (ViewBag.Success != null) {
+    <ul>
+        <li class="successful-insert">@ViewBag.Success</li>
+    </ul>
+}
 
 @using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+
 
     <fieldset>
         <legend>EMPLOYEE</legend>
@@ -18,7 +30,7 @@
             @Html.LabelFor(model => model.FirstName)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
+            @Html.TextBoxFor(model => model.FirstName)
             @Html.ValidationMessageFor(model => model.FirstName)
         </div>
 
@@ -50,17 +62,26 @@
             @Html.LabelFor(model => model.Password)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Password)
+            @Html.TextBoxFor(model => model.Password, new { @type="password" })
             @Html.ValidationMessageFor(model => model.Password)
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" class="button" />
+            <input type="button" value="Cancel" onclick="prompt()" class="button" />
         </p>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script type ="text/javascript">
 
+   
+ function prompt() {
+        var p = confirm("the new Employee have not been saved! Continue?");
+
+        if (p == true) {
+            window.location = "@Url.Action("BrowseEmployee", "Employee")"
+            }
+        }
+
+</script>
