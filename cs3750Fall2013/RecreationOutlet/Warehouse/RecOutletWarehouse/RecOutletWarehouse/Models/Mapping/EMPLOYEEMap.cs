@@ -35,12 +35,12 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.Password)
                 .IsRequired()
                 .IsFixedLength()
-                .HasMaxLength(50);
+                .HasMaxLength(100);
 
             this.Property(t => t.PasswordSalt)
                 .IsRequired()
                 .IsFixedLength()
-                .HasMaxLength(16);
+                .HasMaxLength(60);
 
             // Table & Column Mappings
             this.ToTable("EMPLOYEE");
