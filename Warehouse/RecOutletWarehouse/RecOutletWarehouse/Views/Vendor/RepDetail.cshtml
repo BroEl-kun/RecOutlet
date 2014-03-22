@@ -34,9 +34,14 @@
     <div class="detail-field-header">
          E-Mail Address
     </div>
-    <div class="detail-field-value">
-        @Html.DisplayFor(model => model.SalesRepEmail)
-    </div>
+    @if (Model.SalesRepEmail == null) {
+        <div class="notspecified detail-field-value">There is no e-mail address on file for this rep.</div>
+    }
+    else{
+        <div class="detail-field-value">
+            @Html.DisplayFor(model => model.SalesRepEmail)
+        </div>
+    }
     <div class="detail-field-header">
          Associated Product Lines
     </div>

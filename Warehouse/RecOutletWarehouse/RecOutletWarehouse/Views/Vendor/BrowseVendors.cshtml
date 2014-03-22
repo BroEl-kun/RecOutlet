@@ -22,6 +22,11 @@
 </script>
 
 <h2>Browse and Manage Vendors</h2>
+
+@if (ViewBag.SuccessMessage != null) {
+    <div class="successful-insert">@ViewBag.SuccessMessage</div>
+}
+
 <div>
     A vendor's product lines are shown in <span class="bold-italics">bold italics</span> underneath the vendor's name.
 </div>

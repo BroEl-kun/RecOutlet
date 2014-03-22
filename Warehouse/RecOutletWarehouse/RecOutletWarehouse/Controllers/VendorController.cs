@@ -205,7 +205,6 @@ namespace RecOutletWarehouse.Controllers
 
                 if (!ModelState.IsValid)
                 {
-
                     return View(pl);
                 }
 
@@ -265,8 +264,13 @@ namespace RecOutletWarehouse.Controllers
         /// <param name="firstLetter">If provided, this filters the list to items that start with it.</param>
         /// <param name="page">Navigates to a specific page; works in tandem with filtering variables.</param>
         /// <returns>The View containing the list.</returns>
-        public ActionResult BrowseVendors(string venNameSearch, string firstLetter, int page = 1) {
+        public ActionResult BrowseVendors(string venNameSearch, string firstLetter, string successRedirectMessage, int page = 1) {
             try {
+                // Set redirect message (if there is one)
+                if (successRedirectMessage != null) {
+                    ViewBag.SuccessMessage = successRedirectMessage;
+                }
+
                 // Declare model
                 BrowseVendorViewModel model;
 
@@ -366,7 +370,10 @@ namespace RecOutletWarehouse.Controllers
             if (ModelState.IsValid) {
                 db.Entry(vendor).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("BrowseVendors");
+                return RedirectToAction("BrowseVendors", new {
+                    firstletter = vendor.VendorName.Substring(0, 1),
+                    successRedirectMessage = String.Format("Vendor \"{0}\" successfully modified.", vendor.VendorName)
+                });
             }
 
             return View(vendor);
@@ -401,6 +408,7 @@ namespace RecOutletWarehouse.Controllers
         [HttpPost]
         public ActionResult EditProductLine(ProductLineSalesRepViewModel pl, string changerep) {
             try {
+                //pl.productLine.SALES_REP = db.SALES_REPs.Single(x => x.RepID == pl.productLine.RepID);
                 if (ModelState.IsValid) {
                     db.Entry(pl.productLine).State = EntityState.Modified; // Signal to EF that any of pl.productLine's entities could change
                     switch (changerep) {
@@ -423,7 +431,11 @@ namespace RecOutletWarehouse.Controllers
                     pl.productLine.VENDOR = db.VENDORs.Single(ven => ven.VendorName == pl.vendorName);
 
                     db.SaveChanges();
-                    return RedirectToAction("BrowseVendors");
+
+                    
+                    return RedirectToAction("BrowseVendors", new {
+                                firstletter = pl.productLine.ProductLineName.Substring(0, 1),
+                                successRedirectMessage = String.Format("Product Line \"{0}\" successfully modified.", pl.productLine.ProductLineName) });
                 }
                 return View(pl);
             }
