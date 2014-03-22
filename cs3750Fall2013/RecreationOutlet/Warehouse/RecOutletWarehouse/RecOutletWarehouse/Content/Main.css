@@ -247,7 +247,8 @@ input.qty10000{
 
 .successful-insert {
     font-weight:bold;
-    color:#01c701;
+    font-size:1.2em;
+    color:#00ff02;
 }
 
 .notspecified{
