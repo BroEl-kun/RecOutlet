@@ -46,11 +46,18 @@
 <h2>Browse and View Receiving Logs</h2>
 
 @using (Html.BeginForm())
-{
+{    
+    //Need to search by date, rl id
     <div class="search">
-        PO's Order Date: @Html.TextBox("receiveDate", DateTime.Now.ToString("MM/dd/yyyy"), new { @class = "datepicker" })
+        By Received Date: @Html.TextBox("receiveDate", DateTime.Now.ToString("MM/dd/yyyy"), new { @class = "datepicker" })
+        By Log ID: @Html.TextBox("receivingLogID")
         <input type="submit" value="Search" />
-    </div>
+    </div>@*
+            
+    <div class="search">
+        By Log ID: @Html.TextBox("reaceivingLogID")
+        <input type="submit" value="Search" />
+    </div>*@
 }
 <hr />
 <div class="center-element center-text potable-area">
@@ -58,7 +65,9 @@
         <thead>
             <tr>
                 <th>Receiving Log ID</th>
-                <th>PO Line Item ID</th>
+                <th>PO ID</th>
+                <th>PO Created By</th>
+                <th>Item RPC</th>
                 <th>Received Date</th>
                 <th>Quantity Type</th>
                 <th>Received Quantity</th>
@@ -67,16 +76,26 @@
             </tr>
         </thead>
         <tbody>
+            
             @foreach (var item in Model.RLs)
             {
+                var index = Model.RLs.ToList().IndexOf(item);
+                var qty = Model.qtytype[index];
+                var rpc = Model.RPCs[index];
+                var createdby = Model.CreatorIDs[index];
+                var poids = Model.POIDs[index];
                 @*<div id="accordion">
                     <h3>*@
                  <tr>
                      
                     <td>@Html.DisplayFor(x => item.ReceivingID)</td>
-                    <td>@Html.DisplayFor(x => item.POLineItemID)</td>
+                    @*<td>@Html.DisplayFor(x => item.POLineItemID)</td>*@
+                     <td>@Html.DisplayFor(x => poids)</td>
+                     <td>@Html.DisplayFor(x => createdby)</td>
+                     <td>@Html.DisplayFor(x => rpc)</td>
                     <td>@Html.DisplayFor(x => item.ReceiveDate, "ShortDateTime")</td>
-                    <td>@Html.DisplayFor(x => item.QtyTypeID)</td>
+                    @*<td>@Html.DisplayFor(x => item.QtyTypeID)</td>*@
+                     <td>@Html.DisplayFor(x => qty)</td>
                     <td>@Html.DisplayFor(x => item.ReceivedQty)</td>
                     <td>@Html.DisplayFor(x => item.ReceivingNotes)</td>
                     <td><input type="button" class="button" 
