@@ -150,6 +150,7 @@
 
               <tr>
                 <th>Item RPC:</th>
+                  <th>Item Description:</th>
                 <th>Qty Ordered:</th>
                 <th>Qty Type ID:</th>
                 <th>Receive Date:</th>
@@ -162,6 +163,8 @@
             @foreach (RecOutletWarehouse.Models.PO_LINEITEM objPO in Model.LineItems)
             {
             
+                var desc = Model.ItemDescription[count];
+                
             <tr>    @*Modify tr attributes to have padding and hold the border. Remove border from td*@
                 
                 @*However, due to the fact these are commented out, null data is being put in*@
@@ -184,6 +187,9 @@
                     @objPO.RecRPC
                 </td>
                 <td>
+                    @Html.DisplayFor(x => desc)
+                </td>
+                <td>
                     @*Qty Ordered: *@
                     @objPO.QtyOrdered
                 </td>
@@ -192,21 +198,33 @@
                     @*@objPO.QtyTypeId*@
                     @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeID })
                     @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
-                    <select>
+                    @*NEED: a more dynamic method. IE get a list of the options from the db and use that for the select list. *@
+                    @Html.DropDownListFor(model => model.RL[count].QtyTypeID, new SelectList(
+                        new List<Object> {
+                            new { Value = 1, Text = "Each" },
+                            new { Value = 2, Text = "Case" },
+                            new { Value = 3, Text = "Pallet" }
+                        },
+                        "value",
+                        "text"
+                        ,1))
+                    
+                    @*<select>
                         <option selected>1 - Each</option>
                         <option>2 - Case</option>
                         <option>3 - Pallet</option>
-                    </select>
+                    </select>*@
                     
                 </td>
                 <td>
                     @*Receive Date:*@ 
-                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("MM/dd/yyyy"), id = "recDate" })
+                    @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("MM/dd/yyyy"), id = "recDate", @class = "datepicker" })
                     @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
                     @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
                 </td>
                 <td>
                     @*Qty Received:*@ 
+                    @*@Html.TextBoxFor(model => model.RL[count].ReceivedQty)*@ @*, new { @Value = @objPO.QtyOrdered })*@
                     @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })
                     @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
                 </td>
