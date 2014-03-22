@@ -8,6 +8,7 @@ using System.Configuration;
 using RecOutletWarehouse.Models.PurchaseOrder;
 using RecOutletWarehouse.Models.ItemManagement;
 using RecOutletWarehouse.Models.VendorManagement;
+using RecOutletWarehouse.Models.InvoiceManagement;
 
 namespace RecOutletWarehouse.Models
 {
@@ -1255,6 +1256,19 @@ namespace RecOutletWarehouse.Models
         /**********************************************
          * ITEM DFS methods end
          **********************************************/
+
+        /***********************************************
+         * DFS methods regarding the INVOICE table follow
+         ***********************************************/
+
+        /// <summary>
+        /// Adds a new invoice using the given instance.
+        /// </summary>
+        /// <author>Jaed N.</author>
+        public void AddNewInvoice(Invoice invoice)
+        {
+            // Do this later
+        }
 
         /**********************************************
          * DataFetcherSetter utility methods follow
