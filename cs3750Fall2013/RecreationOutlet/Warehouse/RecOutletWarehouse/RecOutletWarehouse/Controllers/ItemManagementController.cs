@@ -174,15 +174,16 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
-                Item tempItem = new Item();
+                //DataFetcherSetter db = new DataFetcherSetter();
+                ITEM tempItem = new ITEM();
                 if (!ModelState.IsValid)
                 {
                     return View(labelModel);
                 }
-                if (labelModel.RPC != "")
+                if (labelModel.RPC != 0)
                 {
-                    tempItem = db.GetItemForRPC(Convert.ToInt64(labelModel.RPC));
+                    //tempItem = db.GetItemForRPC(Convert.ToInt64(labelModel.RPC));
+                    tempItem = entityDb.ITEMs.Single(x => x.RecRPC == labelModel.RPC);
                 }
                 //TODO: add logic that will search for an item given a UPC or item info and NOT an RPC
 

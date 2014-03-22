@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2>AddRep</h2>
+<h2>Add a new sales representative</h2>
 <div class="field-validation-error">
     @ViewBag.ProductLineDNE
 </div>
@@ -15,10 +15,10 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>SALES_REP</legend>
+        <legend>Rep Information</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SalesRepFirstName)
+            Sales rep's first name:
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SalesRepFirstName)
@@ -26,7 +26,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SalesRepLastName)
+            Sales rep's last name:
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SalesRepLastName)
@@ -34,7 +34,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SalesRepPhone)
+            Sales rep's phone number:
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SalesRepPhone)
@@ -42,7 +42,7 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.SalesRepEmail)
+            Sales rep's e-mail address
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.SalesRepEmail)

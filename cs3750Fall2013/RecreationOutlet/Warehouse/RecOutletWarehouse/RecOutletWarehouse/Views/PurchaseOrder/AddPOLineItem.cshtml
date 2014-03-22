@@ -65,4 +65,5 @@
 <hr />
 <center>
 <input type="button" onclick="location.href='@Url.Action("SearchPO", "PurchaseOrder")'" class="button" value="Finish" />
+<input type="button" onclick="JavaScript:newPopup('@Url.Action("PODocumentView", new { id = @Model.PO.POID })')" class="button" value="Save / Print EXTERNAL Purchase Order" />
 </center>

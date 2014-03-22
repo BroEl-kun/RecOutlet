@@ -427,6 +427,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        public ActionResult PODocumentView(int id=0) {
+            Response.Redirect(@"~/WebForms/POReport.aspx?id=" + id.ToString());
+            return new EmptyResult();
+        }
+
         //PURCHASE ORDER UTILITY METHODS FOLLOW
 
         public static string createPOForForm(int PO)
