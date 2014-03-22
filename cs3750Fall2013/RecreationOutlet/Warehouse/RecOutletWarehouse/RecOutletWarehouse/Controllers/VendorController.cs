@@ -33,6 +33,8 @@ namespace RecOutletWarehouse.Controllers
             public string existingRepLast { get; set; } // Ajax helper variable
             public string newRepFirst { get; set; }
             public string newRepLast { get; set; }
+            public string newRepPhone { get; set; }
+            public string newRepEmail { get; set; }
         }
 
         public class BrowseVendorViewModel {
@@ -196,7 +198,7 @@ namespace RecOutletWarehouse.Controllers
             {
                 ViewBag.VendorName = pl.vendorName; // Sustains vendor name field when validation fails & when product line is successfully created
                 pl.productLine.VENDOR = db.VENDORs.SingleOrDefault(v => v.VendorName == pl.vendorName);
-                if (pl.existingRepFirst== null && pl.existingRepLast == null && (pl.newRepFirst == null && pl.newRepLast == null && pl.rep.SalesRepPhone == null))
+                if (pl.existingRepFirst== null && pl.existingRepLast == null && (pl.newRepFirst == null && pl.newRepLast == null && pl.newRepPhone == null && pl.newRepEmail == null))
                 {
                     ModelState.AddModelError("rep.SalesRepID", "Please specify a sales rep for this product.");
                 }
@@ -210,8 +212,12 @@ namespace RecOutletWarehouse.Controllers
                 // if the user chose to create a new rep...
                 if (existingrep == "No")
                 {
-                    pl.rep.SalesRepFirstName = pl.newRepFirst;
-                    pl.rep.SalesRepLastName = pl.newRepLast;
+                    pl.rep = new SALES_REP {
+                        SalesRepFirstName = pl.newRepFirst,
+                        SalesRepLastName = pl.newRepLast,
+                        SalesRepPhone = pl.newRepPhone,
+                        SalesRepEmail = pl.newRepEmail
+                    };
                     db.SALES_REPs.Add(pl.rep);
                     db.SaveChanges();
 
@@ -227,7 +233,7 @@ namespace RecOutletWarehouse.Controllers
                 else
                 {
                     pl.productLine.SALES_REP = db.SALES_REPs.Single(sr => sr.SalesRepFirstName == pl.existingRepFirst && sr.SalesRepLastName == pl.existingRepLast); // An existing rep establishes PRODUCT_LINE --> SALES_REP FK relationship based on a search by rep name
-                    ViewBag.RepSuccess = "Existing Sales Rep " + pl.rep.SalesRepFirstName + " " + pl.rep.SalesRepLastName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
+                    ViewBag.RepSuccess = "Existing Sales Rep " + pl.productLine.SALES_REP.SalesRepFirstName + " " + pl.productLine.SALES_REP.SalesRepLastName + " successfully assigned to " + pl.productLine.ProductLineName + ".";
                 }
 
                 // The following two lines are deprecated by EF
