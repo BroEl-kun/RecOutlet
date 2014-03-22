@@ -20,6 +20,7 @@ namespace RecOutletWarehouse.Controllers
         {
             //public List<RecOutletWarehouse.Models.RECEIVING_LOG> RL { get; set; }
             public List<RECEIVING_LOG> RL { get; set; }
+            public string[] ItemDescription { get; set; }
             //public List<RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem> LineItems { get; set; }
             public List<PO_LINEITEM> LineItems { get; set; }
         }
@@ -30,6 +31,10 @@ namespace RecOutletWarehouse.Controllers
             public PagingInfo PagingInfo { get; set; }
             public string search { get; set; }
             public string startLetter { get; set; }
+            public string[] qtytype { get; set; }
+            public long[] POIDs { get; set; }
+            public short[] CreatorIDs { get; set; }
+            public long[] RPCs { get; set; }
         }
 
         //
@@ -349,6 +354,27 @@ namespace RecOutletWarehouse.Controllers
 
                 long test = Convert.ToInt64(po);
                 objItem.LineItems = db.PO_LINEITEM.Where(x => x.POID == test).ToList();
+
+                //model.qtytype = new string[model.RLs.Count()];
+
+                //for (int i = 0; i < model.RLs.Count(); i++)
+                //{
+                //    byte temp = model.RLs.ElementAt(i).QtyTypeID.Value;
+                //    //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                //    //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ToList().ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                //    //model.qtytype[i] = db.QTY_TYPE.Select(v => v.QtyTypeDescription).Where(v => v.QtyTypeID == temp);
+                //    var temp2 = from qt in db.QTY_TYPE where qt.QtyTypeID == temp select qt.QtyTypeDescription;
+                //    model.qtytype[i] = temp2.First();
+                //}
+
+                objItem.ItemDescription = new string[objItem.LineItems.Count()];
+
+                for (int i = 0; i < objItem.LineItems.Count(); i++)
+                {
+                    long temp = objItem.LineItems.ElementAt(i).RecRPC;
+                    var temp2 = from it in db.ITEMs where it.RecRPC == temp select it.Description;
+                    objItem.ItemDescription[i] = temp2.First();
+                }
 
                 // return new PurchaseOrderController().POSummary(int.Parse(po));
                 return View("Index", objItem);
@@ -685,8 +711,59 @@ namespace RecOutletWarehouse.Controllers
         //    return View("Index");
         //}
 
+        //public ActionResult BrowseReceivingLogs(int page = 1)
+        ////public ActionResult BrowseReceivingLogs()
+        //{
+        //    try
+        //    {
+        //        // Declare model
+        //        BrowseReceivingLogViewModel model;
+
+        //        // Create master list
+        //        var logs = from v in db.RECEIVING_LOG
+        //                   select v;
+
+        //        // Filter master list to only those members that start with a certain letter
+        //        // First letter is defined by rolodex selection in View
+        //        // For now, we want it to only filter if there is no search query
+
+        //        //if (!String.IsNullOrEmpty(firstLetter) && String.IsNullOrEmpty(venNameSearch))
+        //        //{
+        //        //    logs = logs.Where(v => v.VendorName.ToUpper().StartsWith(firstLetter));
+        //        //}
+
+        //        // IF the user doesn't provide a search query...
+                
+        //        model = new BrowseReceivingLogViewModel
+        //        {
+        //            RLs = logs
+        //                        .OrderBy(v => v.ReceiveDate),
+        //            //.Skip((page - 1) * BrowsePageSize)
+        //            //.Take(BrowsePageSize),
+        //            PagingInfo = new PagingInfo
+        //            {
+        //                CurrentPage = page,
+        //                ItemsPerPage = BrowsePageSize,
+        //                TotalItems = logs.Count() // Get the count of the FILTERED list
+        //            },
+        //            //startLetter = firstLetter // The starting letter needs to be passed to the View
+        //            // so the View can pass it back to the Controller.
+        //            // If not included, pagination will not work correctly.
+        //        };
+               
+        //        return View(model);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        WarehouseUtilities.LogError(ex);
+        //        return RedirectToAction("Error", "Home");
+        //    }
+        //}
+
         //public ActionResult BrowseVendors(string venNameSearch, string firstLetter, int page = 1)
-        public ActionResult BrowseReceivingLogs(int page = 1)
+        //public ActionResult BrowseReceivingLogs(int page = 1)
+        //? means nullable. Can't do it to a string though...
+        public ActionResult BrowseReceivingLogs(DateTime? receiveDate, String receivingLogID, int page = 1)
         //public ActionResult BrowseReceivingLogs()
         {
             try
@@ -698,6 +775,7 @@ namespace RecOutletWarehouse.Controllers
                 var logs = from v in db.RECEIVING_LOG
                               select v;
 
+                //model.qtytype = new string[logs.Count()];
                 // Filter master list to only those members that start with a certain letter
                 // First letter is defined by rolodex selection in View
                 // For now, we want it to only filter if there is no search query
@@ -708,8 +786,10 @@ namespace RecOutletWarehouse.Controllers
                 //}
 
                 // IF the user doesn't provide a search query...
-                //if (String.IsNullOrEmpty(venNameSearch))
-                //{
+                //as first instantiation doesn't make receivingLogID an object
+                //if ( receivingLogID == null || (String.IsNullOrEmpty(receiveDate.ToString()) && String.IsNullOrEmpty(receivingLogID.ToString())))
+                if( receivingLogID == null && String.IsNullOrEmpty(receiveDate.ToString()) )
+                {
                     model = new BrowseReceivingLogViewModel
                     {
                         RLs = logs
@@ -725,28 +805,194 @@ namespace RecOutletWarehouse.Controllers
                         //startLetter = firstLetter // The starting letter needs to be passed to the View
                         // so the View can pass it back to the Controller.
                         // If not included, pagination will not work correctly.
+
+                        //qtytype[0] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(1).QtyTypeID).Select(v => v.QtyTypeDescription).ToString(),
+
                     };
-                //}
+
+                    //model.qtytype[0] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(1).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                    //model.qtytype = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.All().QtyTypeID).Select(v => v.QtyTypeDescription).ToList();
+                    model.qtytype = new string[model.RLs.Count()];
+
+                    for (int i = 0; i < model.RLs.Count(); i++)
+                    {
+                        byte temp = model.RLs.ElementAt(i).QtyTypeID.Value;
+                        //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                        //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ToList().ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                        //model.qtytype[i] = db.QTY_TYPE.Select(v => v.QtyTypeDescription).Where(v => v.QtyTypeID == temp);
+                        var temp2 = from qt in db.QTY_TYPE where qt.QtyTypeID == temp select qt.QtyTypeDescription;
+                        model.qtytype[i] = temp2.First();
+                    }
+
+                    //Better way to do this?
+                    model.CreatorIDs = new short[model.RLs.Count()];
+
+                    for (int i = 0; i < model.RLs.Count(); i++)
+                    {
+                        //short temp = model.RLs.ElementAt(i).PO_LINEITEM.PURCHASE_ORDER.POCreatedBy;
+                        int temppl = model.RLs.ElementAt(i).POLineItemID.Value;
+                        var temp2 = (from pl in db.PO_LINEITEM
+                                     join p in db.PURCHASE_ORDER on pl.POID equals p.POID
+                                     where pl.POLineItemID == temppl
+                                        select p.POCreatedBy).ToList();
+                        model.CreatorIDs[i] = temp2.First();
+                    }
+
+                    model.POIDs = new long[model.RLs.Count()];
+
+                    for (int i = 0; i < model.RLs.Count(); i++)
+                    {
+                        int temppl = model.RLs.ElementAt(i).POLineItemID.Value;
+                        var temp2 = (from pl in db.PO_LINEITEM
+                                     join p in db.PURCHASE_ORDER on pl.POID equals p.POID
+                                     where pl.POLineItemID == temppl
+                                     select p.POID).ToList();
+                        model.POIDs[i] = temp2.First();
+                    }
+
+                    model.RPCs = new long[model.RLs.Count()];
+
+                    for (int i = 0; i < model.RLs.Count(); i++)
+                    {
+                        //short temp = model.RLs.ElementAt(i).PO_LINEITEM.PURCHASE_ORDER.POCreatedBy;
+                        
+                        model.RPCs[i] = model.RLs.ElementAt(i).PO_LINEITEM.RecRPC;
+                    }
+
+                }
                 //// ELSE (the user did provide a vendor name search query)
-                //else
-                //{
-                //    model = new BrowseReceivingLogViewModel
-                //    {
-                //        Vendors = logs
-                //                  .Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())) // Further filter the list to items that contain the search
-                //                  .OrderBy(v => v.VendorName) // This is likely unnecessary (vendors is already sorted), but I'm leaving it here for now
-                //                  .Skip((page - 1) * BrowsePageSize)
-                //                  .Take(BrowsePageSize),
-                //        PagingInfo = new PagingInfo
-                //        {
-                //            CurrentPage = page,
-                //            ItemsPerPage = BrowsePageSize,
-                //            TotalItems = logs.Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())).Count() // Again, we want the count to take our filters into account
-                //        },
-                //        search = venNameSearch
-                //        //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
-                //    };
-                //}
+                else
+                {
+                    if (!String.IsNullOrEmpty(receivingLogID.ToString()))
+                    //if (receivingLogID != null)
+                    {
+                        int temp = Convert.ToInt32(receivingLogID);
+
+                        model = new BrowseReceivingLogViewModel
+                        {
+
+                            RLs = logs
+                                      //.Where(ve => ve.ReceivingID.Equals(receivingLogID)) // Further filter the list to items that contain the search
+                                      //.Where(ve => ve.ReceivingID == Convert.ToInt32(receivingLogID.ToString()))
+                                      .Where(ve => ve.ReceivingID == temp)
+                                      .ToList(),
+                            PagingInfo = new PagingInfo
+                            {
+                                CurrentPage = page,
+                                ItemsPerPage = BrowsePageSize,
+                                //TotalItems = logs.Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())).Count() // Again, we want the count to take our filters into account
+                                TotalItems = 1
+                            },
+                            search = receivingLogID
+                            //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
+
+                        };
+
+                        model.qtytype = new string[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                        }
+
+                        model.CreatorIDs = new short[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            //short temp = model.RLs.ElementAt(i).PO_LINEITEM.PURCHASE_ORDER.POCreatedBy;
+                            int temppl = model.RLs.ElementAt(i).POLineItemID.Value;
+                            var temp2 = (from pl in db.PO_LINEITEM
+                                         join p in db.PURCHASE_ORDER on pl.POID equals p.POID
+                                         where pl.POLineItemID == temppl
+                                         select p.POCreatedBy).ToList();
+                            model.CreatorIDs[i] = temp2.First();
+                        }
+
+                        model.POIDs = new long[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            int temppl = model.RLs.ElementAt(i).POLineItemID.Value;
+                            var temp2 = (from pl in db.PO_LINEITEM
+                                         join p in db.PURCHASE_ORDER on pl.POID equals p.POID
+                                         where pl.POLineItemID == temppl
+                                         select p.POID).ToList();
+                            model.POIDs[i] = temp2.First();
+                        }
+
+                        model.RPCs = new long[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            //short temp = model.RLs.ElementAt(i).PO_LINEITEM.PURCHASE_ORDER.POCreatedBy;
+
+                            model.RPCs[i] = model.RLs.ElementAt(i).PO_LINEITEM.RecRPC;
+                        }
+                    }
+                    else
+                    {
+                        model = new BrowseReceivingLogViewModel
+                        {
+
+                            RLs = logs
+                                      .Where(ve => ve.ReceiveDate == receiveDate) // Further filter the list to items that contain the search
+                                      .OrderBy(ve => ve.ReceivingID)
+                                      //.Skip((page - 1) * BrowsePageSize)
+                                      .ToList(),
+                            PagingInfo = new PagingInfo
+                            {
+                                CurrentPage = page,
+                                ItemsPerPage = BrowsePageSize,
+                                //TotalItems = logs.Where(ve => ve.VendorName.ToUpper().Contains(venNameSearch.ToUpper())).Count() // Again, we want the count to take our filters into account
+                                TotalItems = logs.Where(ve => ve.ReceiveDate == receiveDate).Count()
+                            },
+                            search = receiveDate.ToString()
+                            //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
+
+                        };
+
+                        model.qtytype = new string[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                        }
+
+                        model.CreatorIDs = new short[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            //short temp = model.RLs.ElementAt(i).PO_LINEITEM.PURCHASE_ORDER.POCreatedBy;
+                            int temppl = model.RLs.ElementAt(i).POLineItemID.Value;
+                            var temp2 = (from pl in db.PO_LINEITEM
+                                         join p in db.PURCHASE_ORDER on pl.POID equals p.POID
+                                         where pl.POLineItemID == temppl
+                                         select p.POCreatedBy).ToList();
+                            model.CreatorIDs[i] = temp2.First();
+                        }
+
+                        model.POIDs = new long[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            int temppl = model.RLs.ElementAt(i).POLineItemID.Value;
+                            var temp2 = (from pl in db.PO_LINEITEM
+                                         join p in db.PURCHASE_ORDER on pl.POID equals p.POID
+                                         where pl.POLineItemID == temppl
+                                         select p.POID).ToList();
+                            model.POIDs[i] = temp2.First();
+                        }
+
+                        model.RPCs = new long[model.RLs.Count()];
+
+                        for (int i = 0; i < model.RLs.Count(); i++)
+                        {
+                            //short temp = model.RLs.ElementAt(i).PO_LINEITEM.PURCHASE_ORDER.POCreatedBy;
+
+                            model.RPCs[i] = model.RLs.ElementAt(i).PO_LINEITEM.RecRPC;
+                        }
+                    }
+                }
                 return View(model);
             }
             catch (Exception ex)
