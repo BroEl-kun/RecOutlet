@@ -104,3 +104,12 @@ Error Text: System.Data.Entity.Validation.DbEntityValidationException: Validatio
    at RecOutletWarehouse.Controllers.EmployeeController.EditEmployee(EMPLOYEE emp) in c:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\Controllers\EmployeeController.cs:line 129
 ------------------------ X -------------------------
 
+Error at 21 Mar 2014 22:09
+------------------------
+Error Text: System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at RecOutletWarehouse.Controllers.EmployeeController.CreateEmployee(EMPLOYEE emp) in c:\Users\Mat\Documents\RecreationOutlet\Sandbox\Emp_Warehouse\RecOutletWarehouse\Controllers\EmployeeController.cs:line 186
+------------------------ X -------------------------
+
