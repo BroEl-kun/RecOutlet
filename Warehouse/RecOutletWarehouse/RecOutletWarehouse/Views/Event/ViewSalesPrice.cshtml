@@ -7,8 +7,8 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
-        <li class="active">@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
         <li>@Html.ActionLink("View Events", "ViewEvents")</li>
+        <li class="active">@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
     </ul>  
 }
 
@@ -19,9 +19,6 @@
 </p>
 <table id="priceTable">
     <tr>
-        <th>
-           Event Description
-        </th>
         <th>
             Item Name
         </th>
@@ -35,9 +32,6 @@
             Sale Price
         </th>
         <th>
-            Effective Dates
-        </th>
-        <th>
             Comments
         </th>
         <th></th>
@@ -45,9 +39,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EVENT_TYPE.EventDescription)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.ITEM.Name)
         </td>
@@ -59,10 +50,6 @@
         </td>
         <td class="right">
             @Html.DisplayFor(modelItem => item.SalePrice)
-        </td>
-        <td class="center">
-            @Html.DisplayFor(modelItem => item.BeginDate) -
-            @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Comments)
