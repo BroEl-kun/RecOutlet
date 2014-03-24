@@ -19,6 +19,13 @@
     $(function () {
         $(".actionMenu").menu();
     });
+
+    $(function () {
+        $(".vendorWithPL").accordion({
+            active:false, // start collapsed
+            collapsible: true // allow multiple items to be expanded
+        });
+    });
 </script>
 
 <h2>Browse and Manage Vendors</h2>
@@ -66,9 +73,28 @@
 
 @foreach (var v in Model.Vendors) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => v.VendorName)
+        @if(v.PRODUCT_LINE.Count > 0){
+        <td class="vendorWithPL">
+            <div>@Html.DisplayFor(modelItem => v.VendorName)</div>
+            <ul class="no-top-bottom-margin">
+                @foreach (var pl in v.PRODUCT_LINE) {
+                    <li class="vendorproductline no-list ">
+                        @Html.DisplayFor(modelItem => pl.ProductLineName)
+                    </li>
+@*                        <td colspan="4">
+                            @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
+                            @Html.ActionLink("Details", "ProductLineDetail", new { id=pl.ProductLineID })
+                        </td>*@
+
+                }
+            </ul>
         </td>
+        }
+        else{
+            <td class="vendorWoPL">
+                @Html.DisplayFor(modelItem => v.VendorName)
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => v.ContactName)
         </td>
@@ -92,17 +118,7 @@
             </ul>
         </td>
     </tr>
-    foreach (var pl in v.PRODUCT_LINE) {
-        <tr >
-            <td class="vendorproductline">
-                @Html.DisplayFor(modelItem => pl.ProductLineName)
-            </td>
-            <td colspan="4">
-                @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
-                @Html.ActionLink("Details", "ProductLineDetail", new { id=pl.ProductLineID })
-            </td>
-        </tr>
-    }
+
 }
 </table>
 </div>
