@@ -475,6 +475,19 @@ div.roloLinks{
 
 /* jQueryUI Overrides */
 
+/*** General Overrides ***/
+.ui-widget{
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-size: 1em;
+}
+
+.ui-state-default{
+    border: none;
+    background: none;
+    font-weight: normal;
+    color: black;
+}
+
 /*** jQuery Menu (with actionMenu class) ***/
 ul.actionMenu.ui-widget-content,
 ul.actionMenu.ui-widget-content li.ui-menu-item a
@@ -502,6 +515,23 @@ ul.actionMenu.ui-widget-content li.ui-menu-item a.ui-state-focus:hover{
     background:#262626;
     color:#ffffff;
 }*/
+
+/*** Accordion Overrides ***/
+
+.ui-accordion .ui-accordion-header {
+    display: block;
+    cursor: pointer;
+    position: relative;
+    margin-top: 0px;
+    padding: .1em 0em .1em 1.7em;
+    min-height: 0;
+}
+
+ul.ui-accordion-content.ui-widget-content {
+    border: none;
+    background: none;
+    color: #222222;
+}
 
 /*Item Characteristics Styles*/
 div.item-char
@@ -638,4 +668,8 @@ div.display-line-items
 div.edit-line-items
 {
     padding-top: 10px;
+}
+
+td.vendorWoPL{
+    padding-left: 1.7em;
 }
