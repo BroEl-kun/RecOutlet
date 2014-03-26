@@ -18,7 +18,7 @@ namespace RecOutletWarehouse.Controllers
             {
                 try
                 {
-                    return View();
+                    //return View();
                 }
                 catch (Exception ex)
                 {
@@ -39,7 +39,7 @@ namespace RecOutletWarehouse.Controllers
                 }
             }
 
-
+            return View();
         }
 
         public ActionResult Error()
