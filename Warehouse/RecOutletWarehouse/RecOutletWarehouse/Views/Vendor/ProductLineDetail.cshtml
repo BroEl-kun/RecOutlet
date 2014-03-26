@@ -1,10 +1,5 @@
 ﻿@model RecOutletWarehouse.Models.PRODUCT_LINE
 
-@{
-    ViewBag.Title = "ProductLineDetail";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
-}
-
 <h2>@Html.DisplayFor(model => model.ProductLineName) - Details</h2>
 
 <fieldset>
@@ -33,7 +28,5 @@
 
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "EditProductLine", new { id = Model.ProductLineID }) |
-    <input type="button" value="Back to List"  class="button"
-                onclick="location.href='@Url.Action("BrowseVendors","Vendor")'" />
+    @Html.ActionLink("Edit This Product Line", "EditProductLine", new { id = Model.ProductLineID })
 </p>

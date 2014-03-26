@@ -384,7 +384,7 @@ namespace RecOutletWarehouse.Controllers
             if (pl == null) {
                 return HttpNotFound();
             }
-            return View(pl);
+            return PartialView(pl);
         }
 
         public ActionResult EditProductLine(int id = 0) {

@@ -10,7 +10,7 @@ namespace RecOutletWarehouse.Models
         public long RecRPC { get; set; }
 
         [DataType(DataType.Currency)]
-        [DisplayFormat(DataFormatString="{0:n0}", ApplyFormatInEditMode=true)]
+        [DisplayFormat(DataFormatString="{0:C}", ApplyFormatInEditMode=true)]
         public decimal SalePrice { get; set; }
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> BeginDate { get; set; }

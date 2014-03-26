@@ -19,7 +19,16 @@ namespace RecOutletWarehouse.Controllers
             public string Event { get; set; }
             public long OldRPC { get; set; }
             public byte OldEvent { get; set; }
+        }
 
+        public class ItemEventViewModel {
+            //public EVENT_TYPE Event { get; set; }
+            public List<EVENT_TYPE> Events { get; set; }
+            //public string Event { get; set; }
+            public List<ITEM> Items { get; set; }
+            public List<SALE_PRICING> SalePrices { get; set; }
+            public string ItemToAdd { get; set; }
+            public decimal SalePriceOfItem { get; set; }
         }
 
         public RecreationOutletContext db = new RecreationOutletContext();
@@ -138,6 +147,18 @@ namespace RecOutletWarehouse.Controllers
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
+        }
+
+        public ActionResult AddItemsToEvent(byte id = 0) {
+            ItemEventViewModel ievm = new ItemEventViewModel {
+                SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == id).ToList()
+            };
+            return View(ievm);
+        }
+
+        [HttpPost]
+        public ActionResult AddItemsToEvent(ItemEventViewModel ievm) {
+            return View(ievm);
         }
     }
 }

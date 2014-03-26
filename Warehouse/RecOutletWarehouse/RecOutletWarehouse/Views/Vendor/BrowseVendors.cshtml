@@ -83,10 +83,10 @@
                             <li>
                                 Actions
                                 <ul>
-                                    <li>@Html.ActionLink("TODO", "EditVendor", new { id=v.VendorID })</li>
-                                    <li>@Html.ActionLink("TODO", "VendorDetail", new { id = v.VendorID }, new { @class="ListitemDetails" })</li>
-                                    <li>@Html.ActionLink("TODO", "CreateNewPL", new { vendorId = v.VendorID })</li>
-                                    <li>@Html.ActionLink("TODO", "CreateNewPO", "PurchaseOrder", new { vendorId = v.VendorID }, new { })</li>
+                                    <li>@Html.ActionLink("Edit Product Line Information", "EditProductLine", new { id=pl.ProductLineID })</li>
+                                    <li>@Html.ActionLink("View Product Line Details", "ProductLineDetail", new { id = pl.ProductLineID }, new { @class="ListitemDetails" })</li>
+                                    <li>@Html.ActionLink("Create New Item for Product Line", "CreateNewItem", "ItemManagement", new { vendorName = v.VendorName, productLineName = pl.ProductLineName }, new { })</li>
+                                    <li>@Html.ActionLink("View All Items in Product Line", "BrowseItems", "ItemManagement", new { prodLineSearch = pl.ProductLineName }, new { })</li>
                                 </ul>
                             </li>
                         </ul>
