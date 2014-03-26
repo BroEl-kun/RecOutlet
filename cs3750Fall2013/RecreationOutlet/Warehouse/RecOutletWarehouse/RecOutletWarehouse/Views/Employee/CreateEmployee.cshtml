@@ -1,0 +1,87 @@
+﻿@model RecOutletWarehouse.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "CreateEmployee";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("Manage Employees", "BrowseEmployee")</li>
+        <li class="active">@Html.ActionLink("Add an Employee", "CreateEmployee")</li>
+    </ul>  
+}
+
+<h2>Create Employee</h2>
+
+@if (ViewBag.Success != null) {
+    <ul>
+        <li class="successful-insert">@ViewBag.Success</li>
+    </ul>
+}
+
+@using (Html.BeginForm()) {
+
+
+    <fieldset>
+        <legend>EMPLOYEE</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Position)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Position)
+            @Html.ValidationMessageFor(model => model.Position)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Password, new { @type="password" })
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" class="button" />
+            <input type="button" value="Cancel" onclick="prompt()" class="button" />
+        </p>
+    </fieldset>
+}
+
+<script type ="text/javascript">
+
+   
+ function prompt() {
+        var p = confirm("the new Employee have not been saved! Continue?");
+
+        if (p == true) {
+            window.location = "@Url.Action("BrowseEmployee", "Employee")"
+            }
+        }
+
+</script>
