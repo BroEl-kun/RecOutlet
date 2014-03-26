@@ -113,8 +113,11 @@ namespace RecOutletWarehouse.Controllers
 
             bool isValid = false;
            
+           
             var user = entityDb.EMPLOYEEs.FirstOrDefault(u => u.Username == username);
-
+            
+            user.Password = user.Password.TrimEnd(' ');
+            user.PasswordSalt = user.PasswordSalt.TrimEnd(' ');
             if (user != null)
             {
                 if (user.Password == crypto.Compute(password, user.PasswordSalt))                    
