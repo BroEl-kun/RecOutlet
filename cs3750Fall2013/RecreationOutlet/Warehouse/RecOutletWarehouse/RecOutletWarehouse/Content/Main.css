@@ -493,8 +493,8 @@ ul.actionMenu.ui-widget-content,
 ul.actionMenu.ui-widget-content li.ui-menu-item a
 {
     /*list-style-image:url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);*/
-    padding-left:5px;
-    padding-right:5px;
+    padding-left:10px;
+    padding-right:10px;
     background:#262626;
     color:#ffffff;
     border: 1px solid #aaaaaa;
@@ -509,6 +509,7 @@ ul.actionMenu.ui-widget-content li.ui-menu-item a.ui-state-focus{
 ul.actionMenu.ui-widget-content li.ui-menu-item a.ui-state-focus:hover{
     background:#653f10;
 }
+
 /*{
     padding-left:5px;
     padding-right:5px;
@@ -672,4 +673,13 @@ div.edit-line-items
 
 td.vendorWoPL{
     padding-left: 1.7em;
+}
+
+.field-comment-smaller{
+    font-style:italic;
+    font-size:smaller;
+}
+
+.inline-action-button{
+    display:inline;
 }

@@ -1,5 +1,4 @@
-﻿@using RecOutletWarehouse.HtmlHelpers;
-@model RecOutletWarehouse.Controllers.VendorController.BrowseVendorViewModel
+﻿@model RecOutletWarehouse.Controllers.VendorController.BrowseVendorViewModel
 
 @{
     ViewBag.Title = "BrowseVendors";
@@ -78,8 +77,19 @@
             <div>@Html.DisplayFor(modelItem => v.VendorName)</div>
             <ul class="no-top-bottom-margin">
                 @foreach (var pl in v.PRODUCT_LINE) {
-                    <li class="vendorproductline no-list ">
-                        @Html.DisplayFor(modelItem => pl.ProductLineName)
+                    <li class=" no-list ">
+                        <div class="vendorproductline inline-action-button">@Html.DisplayFor(modelItem => pl.ProductLineName)</div>
+                        <ul class="actionMenu inline-action-button">
+                            <li>
+                                Actions
+                                <ul>
+                                    <li>@Html.ActionLink("TODO", "EditVendor", new { id=v.VendorID })</li>
+                                    <li>@Html.ActionLink("TODO", "VendorDetail", new { id = v.VendorID }, new { @class="ListitemDetails" })</li>
+                                    <li>@Html.ActionLink("TODO", "CreateNewPL", new { vendorId = v.VendorID })</li>
+                                    <li>@Html.ActionLink("TODO", "CreateNewPO", "PurchaseOrder", new { vendorId = v.VendorID }, new { })</li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
 @*                        <td colspan="4">
                             @Html.ActionLink("Edit", "EditProductLine", new { id=pl.ProductLineID }) |
@@ -110,7 +120,7 @@
                     Actions
                     <ul>
                         <li>@Html.ActionLink("Edit Vendor Information", "EditVendor", new { id=v.VendorID })</li>
-                        <li>@Html.ActionLink("View Vendor Details", "VendorDetail", new { id=v.VendorID })</li>
+                        <li>@Html.ActionLink("View Vendor Details", "VendorDetail", new { id = v.VendorID }, new { @class="ListitemDetails" })</li>
                         <li>@Html.ActionLink("Add Product Line to this Vendor", "CreateNewPL", new { vendorId = v.VendorID })</li>
                         <li>@Html.ActionLink("P.O. to this Vendor", "CreateNewPO", "PurchaseOrder", new { vendorId = v.VendorID }, new { })</li>
                     </ul>
@@ -126,3 +136,8 @@
 <div class="pager">
     @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseVendors", new {page = x, venNameSearch = Model.search, firstLetter = Model.startLetter}))
 </div>
+<div id="dialog"></div>
+
+@section eofscripts{
+    @Scripts.Render("~/Scripts/browsePageScripts.js")
+}

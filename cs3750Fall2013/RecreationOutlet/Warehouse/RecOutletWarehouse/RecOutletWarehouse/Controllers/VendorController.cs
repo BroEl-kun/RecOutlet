@@ -339,7 +339,7 @@ namespace RecOutletWarehouse.Controllers
                     return HttpNotFound();
                 }
 
-                return View(vendor);
+                return PartialView(vendor);
             }
             catch (Exception ex) {
                 WarehouseUtilities.LogError(ex);
