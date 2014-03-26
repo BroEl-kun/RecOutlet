@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/Main.css")" rel="stylesheet" type="text/css" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="content-wrapper" style="text-align:center; width:100%;"> <div class="title-wrapper"></div>
+        <div id="body" style="width:500px; display:inline-block;">
+            <br />
+            <img src="@Url.Content("~/Content/LoginRecOutletlogo.png")", alt="Home" />
+            @RenderBody()
+        </div>
+        <footer>
+            <div class="footer-wrapper">
+                <div class="center-text">
+                    <p>&copy; @DateTime.Now.Year - Recreation Outlet</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

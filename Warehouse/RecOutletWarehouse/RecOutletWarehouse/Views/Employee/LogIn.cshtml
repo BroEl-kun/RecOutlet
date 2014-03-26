@@ -1,0 +1,31 @@
+﻿@model RecOutletWarehouse.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Employee/_LoginLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login failed. Check your login details.");
+    <div style="text-align:center;">
+        <h1>Warehouse Managment Login</h1>
+    </div>
+    <div style="text-align:left; display:inline-block;">            
+        <div>@Html.LabelFor(u=>u.Username)</div>
+        <div>@Html.TextBoxFor(u=>u.Username, new { style ="width:300px"})
+            @Html.ValidationMessageFor(u=>u.Username)
+        </div>
+
+        <div>@Html.LabelFor(u=>u.Password)</div>
+        <div>
+            @Html.PasswordFor(u=>u.Password, new { style ="width:300px"})
+        </div>
+        <div>
+            @Html.ValidationMessageFor(u=>u.Password, "Incorrect PIN")
+        </div>
+        <div style="text-align:end;">
+            <input type ="submit" value="Log In" class="button"/>
+        </div>
+    </div>
+}
