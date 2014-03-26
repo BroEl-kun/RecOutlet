@@ -1,10 +1,4 @@
-﻿@using RecOutletWarehouse.HtmlHelpers;
-@model RecOutletWarehouse.Models.VENDOR
-
-@{
-    ViewBag.Title = "VendorDetail";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
-}
+﻿@model RecOutletWarehouse.Models.VENDOR
 
 <h2>@Html.DisplayFor(model => model.VendorName) - Details</h2>
 
@@ -48,7 +42,6 @@
             </div>
         }
 
-    
     <div class="detail-field-header">
         Address
     </div>
@@ -76,10 +69,10 @@
          Corporate Website
     </div>
     <div class="detail-field-value">
-        @Html.SimpleExternalLink(Model.VendorWebsite, Model.VendorWebsite, true) (link opens in a new tab)
+        @Html.SimpleExternalLink(Model.VendorWebsite, Model.VendorWebsite, true)
     </div>
+    <div class="field-comment-smaller detail-field-value">Link opens in a new tab</div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.VendorID }) |
-    @Html.ActionLink("Back to List", "BrowseVendors")
+    @Html.ActionLink("Edit", "EditVendor", new { id=Model.VendorID })
 </p>
