@@ -19,12 +19,16 @@ namespace RecOutletWarehouse.Models
         public short EmployeeId { get; set; }
 
         [Required(ErrorMessage = "Please provide a First Name.")]
+        [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Please provide a Last Name.")]
+        [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
         public string LastName { get; set; }
         [Required(ErrorMessage = "Please provide a Position.")]
+        [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
         public string Position { get; set; }
         [Required(ErrorMessage = "Please provide a Username.")]
+        [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
         public string Username { get; set; }
         [Required(ErrorMessage = "Please provide a Password.")]
         public string Password { get; set; }
