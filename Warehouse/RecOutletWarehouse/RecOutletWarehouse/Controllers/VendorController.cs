@@ -550,7 +550,7 @@ namespace RecOutletWarehouse.Controllers
         public ActionResult RepDetail(int id = 0) {
             SALES_REP rep = db.SALES_REPs.Find(id);
 
-            return View(rep);
+            return PartialView(rep);
         }
     }
 }

@@ -5,37 +5,38 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<h2></h2>
+<h2>Add Items to an Event</h2>
 
-<fieldset>
-    <legend>Add item to this event</legend>
-    <div>
-        Add to Event:
-    </div>
-    <div>
-
-    </div>
-    <div>
-        Item to add:
-    </div>
-    <div>
-        @Html.TextBoxFor(model => model.ItemToAdd)
-    </div>
-    <div>
-        Original price:
-    </div>
-    <div>
-
-    </div>
-    <div>
-        Sale Price:
-    </div>
-    <div>
-        @Html.TextBoxFor(model => model.SalePriceOfItem)
-    </div>
-
-</fieldset>
-
+@using(Html.BeginForm()){
+    <fieldset>
+        <legend>Information about the item</legend>
+        <div>
+            Add to Event:
+        </div>
+        <div>
+            @Html.DropDownList("EventToAddTo", Model.Events)
+        </div>
+        <div>
+            Item to add:
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.ItemName)
+        </div>
+        <div>
+            Original price:
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.OrigPriceOfItem)
+        </div>
+        <div>
+            Sale Price:
+        </div>
+        <div>
+            @Html.TextBoxFor(model => model.SalePriceOfItem)
+        </div>
+        <input type="submit" value="Submit" />
+    </fieldset>
+}
 <table>
     <tr>
         <th>

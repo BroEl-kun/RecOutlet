@@ -23,11 +23,13 @@ namespace RecOutletWarehouse.Controllers
 
         public class ItemEventViewModel {
             //public EVENT_TYPE Event { get; set; }
-            public List<EVENT_TYPE> Events { get; set; }
+            public IEnumerable<SelectListItem> Events { get; set; }
             //public string Event { get; set; }
             public List<ITEM> Items { get; set; }
             public List<SALE_PRICING> SalePrices { get; set; }
-            public string ItemToAdd { get; set; }
+            public byte EventToAddTo { get; set; }
+            public string ItemName { get; set; }
+            public decimal OrigPriceOfItem { get; set; }
             public decimal SalePriceOfItem { get; set; }
         }
 
@@ -151,6 +153,7 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult AddItemsToEvent(byte id = 0) {
             ItemEventViewModel ievm = new ItemEventViewModel {
+                Events = EventsToSelectListItems(db.EVENT_TYPE, id),
                 SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == id).ToList()
             };
             return View(ievm);
@@ -158,7 +161,22 @@ namespace RecOutletWarehouse.Controllers
 
         [HttpPost]
         public ActionResult AddItemsToEvent(ItemEventViewModel ievm) {
+            ievm.Events = EventsToSelectListItems(db.EVENT_TYPE, ievm.EventToAddTo);
+            ievm.SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == ievm.EventToAddTo).ToList();
             return View(ievm);
+        }
+
+
+        // Extension methods follow
+
+        public static IEnumerable<SelectListItem> EventsToSelectListItems(IEnumerable<EVENT_TYPE> events, int selectedId) {
+            return events.OrderBy(ev => ev.EventDescription)
+                         .Select(ev =>
+                             new SelectListItem {
+                                 Selected = (ev.EventTypeCode == selectedId),
+                                 Text = ev.EventDescription,
+                                 Value = ev.EventTypeCode.ToString()
+                             });
         }
     }
 }
