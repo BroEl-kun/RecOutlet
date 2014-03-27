@@ -1,10 +1,5 @@
 ﻿@model RecOutletWarehouse.Models.SALES_REP
 
-@{
-    ViewBag.Title = "RepDetail";
-    Layout = "~/Views/Shared/_MainLayout.cshtml";
-}
-
 <h2>@Html.DisplayFor(model => model.SalesRepFirstName) @Html.DisplayFor(model => model.SalesRepLastName) - Details</h2>
 
 <fieldset>
@@ -60,6 +55,5 @@
     }
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "EditRep", new {  id=Model.RepID }) |
-    @Html.ActionLink("Back to List", "BrowseSalesReps")
+    @Html.ActionLink("Edit", "EditRep", new {  id=Model.RepID })
 </p>

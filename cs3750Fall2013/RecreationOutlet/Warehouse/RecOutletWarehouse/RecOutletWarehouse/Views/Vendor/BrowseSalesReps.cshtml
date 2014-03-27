@@ -63,7 +63,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "EditRep", new { id=sr.RepID }) |
-                @Html.ActionLink("Details", "RepDetail", new { id=sr.RepID })
+                @Html.ActionLink("Details", "RepDetail", new { id = sr.RepID }, new { @class="ListitemDetails" })
             </td>
         </tr>
     }
@@ -73,3 +73,8 @@
 <div class="pager">
         @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseSalesReps", new {page = x, repNameSearch = Model.search, lastNameBeginsWith = Model.lastNameStartLetter}))
 </div>
+<div id="dialog"></div>
+
+@section eofscripts{
+    @Scripts.Render("~/Scripts/browsePageScripts.js")
+}
