@@ -112,7 +112,7 @@ namespace RecOutletWarehouse.Controllers
             var crypto = new SimpleCrypto.PBKDF2();
 
             bool isValid = false;
-           
+
            
             var user = entityDb.EMPLOYEEs.FirstOrDefault(u => u.Username == username);
             
@@ -120,11 +120,13 @@ namespace RecOutletWarehouse.Controllers
             user.PasswordSalt = user.PasswordSalt.TrimEnd(' ');
             if (user != null)
             {
-                if (user.Password == crypto.Compute(password, user.PasswordSalt))                    
+                if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                {
                     isValid = true;
+                }
             }
 
-            return isValid;                
+            return isValid;         
         }
     }
 }
