@@ -26,9 +26,10 @@
 
 <div class="roloLinks pager">
     @Html.RolodexLinks( x => Url.Action("BrowseEmployee"))
-</div>
-<table>
-     <tr>
+</div >
+<div class=" potable-area">
+<table class="potable">
+     <tr class="leftjust">
         <th>
             Name
         </th>
@@ -61,6 +62,7 @@
    </tr>
 }
     </table>
+    </div>
 
 <div class="searchTotal">@Model.PagingInfo.TotalItems empolyees match current sorting criteria</div>
 <div class="pager">
