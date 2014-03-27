@@ -54,7 +54,9 @@
             @Html.DisplayFor(modelItem => e.Username)&emsp;
         </td>
         <td>
-         @Html.ActionLink("Edit", "EditEmployee", new { id=e.EmployeeId })
+         <input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditEmployee", "Employee", 
+                                                                        new {id = e.EmployeeId})'" />
         </td>
    </tr>
 }
