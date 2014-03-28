@@ -406,23 +406,17 @@ namespace RecOutletWarehouse.Controllers
             {
                 if (editButton == "category")
                 {
-                    ITEM_CATEGORY cat = model.categorys[0];
-
-                    entityDb.Entry(cat).State = EntityState.Modified;
+                    entityDb.Entry(model.cat).State = EntityState.Modified;
                     entityDb.SaveChanges();
                 }
                 else if (editButton == "subcategory")
                 {
-                    ITEM_SUBCATEGORY sub = model.subcats[0];
-
-                    entityDb.Entry(sub).State = EntityState.Modified;
+                    entityDb.Entry(model.subcat).State = EntityState.Modified;
                     entityDb.SaveChanges();
                 }
                 else if (editButton == "department")
                 {
-                    ITEM_DEPARTMENT dept = model.departments[0];
-
-                    entityDb.Entry(dept).State = EntityState.Modified;
+                    entityDb.Entry(model.dept).State = EntityState.Modified;
                     entityDb.SaveChanges();
                 }
 

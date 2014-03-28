@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,7 @@ namespace RecOutletWarehouse.Controllers
     {
 
         RecreationOutletContext entityDb = new RecreationOutletContext();
+        public int BrowsePageSize = 25;
         //
         // GET: /Invoice/
 
@@ -26,42 +28,47 @@ namespace RecOutletWarehouse.Controllers
             public INVOICE_LINEITEM lineitem { get; set; }
         }
 
-        public ActionResult Index()
+        public class SearchInvoiceViewModel
         {
-            try
-            {
-                return View();
-            }
-            catch (Exception ex)
-            {
-                WarehouseUtilities.LogError(ex);
-                return RedirectToAction("Error", "Home");
-            }
+            public IEnumerable<INVOICE> invoices { get; set; }
+            public DateTime? fromDate { get; set; }
+            public DateTime? toDate { get; set; }
+            public PagingInfo PagingInfo { get; set; }
+            public String customerName { get; set; }
+            public long? invoiceID { get; set; }
         }
 
-        [HttpPost]
-        public ActionResult Index(Invoice invoice, string labelRedirect = "")
+        public ActionResult Index(SearchInvoiceViewModel model, string searchButton, int page = 1)
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
+                model.invoices = entityDb.INVOICEs.ToList();
 
-                invoice.InvoiceCreatedDate = DateTime.Now.Date;
-                invoice.InvoiceCreatedBy = 1; //TODO: Associate with logged-in user   
-                
-                //invoice.CustomerID
-               
-
-                if (ModelState.IsValid)
+                if (model.toDate != null)
                 {
-                    //db.AddNewInvoice(invoice);
-                    //ViewBag.ItemSuccessfulInsert = invoice.InvoiceID;
-
-                    return View(new Invoice());
+                    model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate <= model.toDate);
+                }
+                if (model.fromDate != null)
+                {
+                    model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate >= model.fromDate);
+                }
+                if (model.customerName != null)
+                {
+                    model.invoices = model.invoices.Where(x => x.INVOICE_CUSTOMER.CustomerName.Contains(model.customerName));
+                }
+                if (model.invoiceID != null)
+                {
+                    model.invoices = model.invoices.Where(x => x.InvoiceID == model.invoiceID);
                 }
 
-                //return View(invoice);
-                return View(new Invoice());
+                model.PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = BrowsePageSize,
+                    TotalItems = model.invoices.Count()
+                };
+
+                return View(model);
             }
             catch (Exception ex)
             {
@@ -69,7 +76,6 @@ namespace RecOutletWarehouse.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
 
         public ActionResult CreateNewInvoice()
         {
