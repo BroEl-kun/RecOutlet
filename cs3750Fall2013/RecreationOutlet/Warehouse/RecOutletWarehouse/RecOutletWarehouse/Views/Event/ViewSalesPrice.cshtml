@@ -14,11 +14,23 @@
 
 <h2>View Sale Pricing Information</h2>
 
-<p>
+<h3>
     @Html.ActionLink("Create", "CreateSalesPrice")
-</p>
-<table id="priceTable">
-    <tr>
+</h3>
+<h3>Search</h3>
+@using (Html.BeginForm())
+{
+    <div class="search">
+        Item name contains: @Html.TextBox("repNameSearch")
+        <input type="submit" value="Search" />
+    </div>
+}
+<div class="roloLinks pager">
+    @Html.RolodexLinks(x => Url.Action("VieSalesPrice"))
+</div>
+<div class=" potable-area">
+<table id="priceTable" class="potable">
+    <tr class="leftjust">
         <th>
             Item Name
         </th>
