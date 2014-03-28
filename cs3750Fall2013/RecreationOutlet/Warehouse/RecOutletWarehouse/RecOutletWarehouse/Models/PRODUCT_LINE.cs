@@ -16,6 +16,7 @@ namespace RecOutletWarehouse.Models
         public short RepID { get; set; }
 
         [Required(ErrorMessage="Please provide a name for this product line.")]
+        [MaxLength(50, ErrorMessage = "The name you entered is too long.")]
         public string ProductLineName { get; set; }
 
         public virtual ICollection<ITEM> ITEMs { get; set; }
