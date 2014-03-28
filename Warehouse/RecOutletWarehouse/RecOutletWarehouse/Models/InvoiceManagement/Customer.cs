@@ -23,5 +23,16 @@ namespace RecOutletWarehouse.Models.InvoiceManagement
 
         [Required(ErrorMessage = "Please supply the recipient's street address")]
         public string CustomerAddress { get; set; }
+
+        public string CustomerAddress2 { get; set; }
+
+        [Required(ErrorMessage = "Please supply the recipient's city")]
+        public string CustomerCity { get; set; }
+
+        [Required(ErrorMessage = "Please supply the recipient's state")]
+        public string CustomerState { get; set; }
+
+        [Required(ErrorMessage = "Please supply the recipient's ZIP code")]
+        public string CustomerZip { get; set; }
     }
 }
