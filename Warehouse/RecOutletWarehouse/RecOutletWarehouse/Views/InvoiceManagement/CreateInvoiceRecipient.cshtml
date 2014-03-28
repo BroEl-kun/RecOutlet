@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.InvoiceManagement.Customer
+﻿@model RecOutletWarehouse.Models.INVOICE_CUSTOMER
 
 @{
     ViewBag.Title = "CreateInvoiceRecipient";
@@ -33,15 +33,32 @@
                     </td>
                 </tr>
                 <tr>
-                        <td>&nbsp Address:</td>
+                        <td>&nbsp Address Line 1:<strong class="required">*</strong></td>
                         <td>
                             @Html.TextBoxFor(newRec => newRec.CustomerAddress, new { @id = "CustomerAddress" })
                             @Html.ValidationMessageFor(newRec => newRec.CustomerAddress)
                         </td>
                         <td>&nbsp Address Line 2:</td>
                         <td>
-                            @Html.TextBoxFor(newRec => newRec.CustomerAddress, new { @id = "CustomerAddress" })
-                            @Html.ValidationMessageFor(newRec => newRec.CustomerAddress)
+                            @Html.TextBoxFor(newRec => newRec.CustomerAddress2, new { @id = "CustomerAddress2" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerAddress2)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp City:<strong class="required">*</strong></td>
+                        <td>
+                            @Html.TextBoxFor(newRec => newRec.CustomerCity, new { @id = "CustomerCity" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerCity)
+                        </td>
+                        <td>&nbsp State:<strong class="required">*</strong></td>
+                        <td>
+                            @Html.TextBoxFor(newRec => newRec.CustomerState, new { @id = "CustomerState" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerState)
+                        </td>
+                        <td>&nbsp ZIP Code:<strong class="required">*</strong></td>
+                        <td>
+                            @Html.TextBoxFor(newRec => newRec.CustomerZip, new { @id = "CustomerZip" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerZip)
                         </td>
                 </tr>
             </table>
@@ -51,10 +68,9 @@
         <legend>Contact Information</legend>
              <table>
                  <tr>
-                    <td>&nbsp E-mail:</td>
+                    <td>&nbsp E-Mail:<strong class="required">*</strong></td>
                     <td>
-                        @Html.TextBoxFor(newRec => newRec.CustomerID, new { @id = "CustomerID" })
-                        @Html.ValidationMessageFor(newRec => newRec.CustomerID)
+                        TO DO: Add e-mail to INVOICE_CUSTOMER table!
                     </td>
 
                     <td>&nbsp Phone Number:<strong class="required">*</strong></td>
