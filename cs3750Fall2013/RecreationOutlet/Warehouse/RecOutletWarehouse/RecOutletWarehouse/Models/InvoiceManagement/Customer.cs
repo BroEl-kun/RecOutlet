@@ -11,15 +11,17 @@ namespace RecOutletWarehouse.Models.InvoiceManagement
 
         public byte CustomerID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please supply the recipient's name")]
         public string CustomerName { get; set; }
 
+        [Required(ErrorMessage = "Please enter the recipient's phone number")]
         public string CustomerPhone { get; set; }
 
         public string TaxExemptID { get; set; }
 
         public string CustomerPaymentTerms { get; set; }
 
+        [Required(ErrorMessage = "Please supply the recipient's street address")]
         public string CustomerAddress { get; set; }
     }
 }
