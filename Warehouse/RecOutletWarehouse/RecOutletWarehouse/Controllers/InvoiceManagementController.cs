@@ -14,7 +14,6 @@ namespace RecOutletWarehouse.Controllers
 {
     public class InvoiceManagementController : Controller
     {
-
         RecreationOutletContext entityDb = new RecreationOutletContext();
         public int BrowsePageSize = 25;
         //
@@ -95,20 +94,12 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
-
-                invoice.InvoiceCreatedDate = DateTime.Now.Date;
-                invoice.InvoiceCreatedBy = 1; //TODO: Associate with logged-in user   
-
-                //invoice.CustomerID
-
-
                 if (ModelState.IsValid)
                 {
                     //db.AddNewInvoice(invoice);
                     //ViewBag.ItemSuccessfulInsert = invoice.InvoiceID;
 
-                    return View(new Invoice());
+                    return View(invoice);
                 }
 
                 //return View(invoice);
@@ -136,21 +127,26 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateInvoiceRecipient(Customer customer, string labelRedirect = "")
+        public ActionResult CreateInvoiceRecipient(INVOICE_CUSTOMER customer, string labelRedirect = "")
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
-
-
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
-
-                    return View(new Customer());
+                    //TODO: replace this view with the correct submit view.
+                    return View(customer);
                 }
-
-                //return View(customer);
-                return View(new Customer());
+                else
+                {
+                    entityDb.INVOICE_CUSTOMER.Add(customer);
+                    entityDb.SaveChanges();
+                    ViewBag.Success = "Recipient successfully created.";
+                    if (labelRedirect == "Create Recipient, Create New Invoice")
+                    {
+                        return RedirectToAction("CreateNewInvoice", new { customerID = customer.CustomerID });
+                    }
+                    return View();
+                }
             }
             catch (Exception ex)
             {
