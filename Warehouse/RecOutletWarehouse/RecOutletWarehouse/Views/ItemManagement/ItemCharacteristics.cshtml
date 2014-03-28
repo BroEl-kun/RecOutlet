@@ -20,13 +20,6 @@
         <h3 class="item-char">Departments (@Model.departments.Count)</h3>
         <hr />
         <div class="search-box">
-            @*@using (Html.BeginForm())
-            {
-                @Html.HiddenFor(x => x.dept.DepartmentID, new { id = "dept_id" })
-                @Html.TextBoxFor(x => x.dept.DepartmentName, new { id = "dept", @class = "item-char-search", placeholder = "Search for a Department..." })
-                <input type="hidden" name="editButton" value="department" />
-                <input type="button" value="Search" class="button-search dept-search-button" id="" />
-            }*@
             <input id = "dept" class = "item-char-search" placeholder = "Search for a Department..." />
             <input type="button" value="Search" class="button-search dept-search-button" />
         </div>
@@ -48,13 +41,6 @@
         <h3 class="item-char">Categories (@Model.categorys.Count)</h3>
         <hr />
         <div class="search-box">
-        @*@using (Html.BeginForm())
-        {
-            @Html.HiddenFor(x => x.cat.CategoryID, new { id = "cat_id" })
-            @Html.TextBoxFor(x => x.cat.CategoryName, new { id = "cat", @class = "item-char-search", placeholder = "Search for a Category..." })
-            <input type="hidden" name="editButton" value="category" />
-            <input type="submit" value="Search" class="button-search" />
-        }*@
             <input id = "cat" class = "item-char-search" placeholder = "Search for a Category..." />
             <input type="submit" value="Search" class="button-search cat-search-button" />
         </div>
@@ -76,13 +62,6 @@
         <h3 class="item-char">Subcategories (@Model.subcats.Count)</h3>
         <hr />
         <div class="search-box">
-        @*@using (Html.BeginForm())
-        {
-            @Html.HiddenFor(x => x.subcat.SubcategoryID, new { id = "sub_id" })
-            @Html.TextBoxFor(x => x.subcat.SubcategoryName, new { id = "sub", @class = "item-char-search", placeholder = "Search for a Subcategory..." })
-            <input type="hidden" name="editButton" value="subcategory" />
-            <input type="submit" value="Search" class="button-search" />
-        }*@
             <input id = "sub" class = "item-char-search" placeholder = "Search for a Subcategory..." />
             <input type="submit" value="Search" class="button-search sub-search-button" />
         </div>
@@ -114,20 +93,21 @@
             <fieldset>
                 <legend>Department ID: @Model.departments[i].DepartmentID</legend>
                 <hr />
-                @Html.HiddenFor(x => x.departments[i].DepartmentID)
+                @Html.HiddenFor(x => x.dept.DepartmentID, new { @Value = Model.departments[i].DepartmentID })
                 <div class="editor-label">
                     @Html.Label("Department Name")
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(x => x.departments[i].DepartmentName)
+                    @Html.TextBoxFor(x => x.dept.DepartmentName, new { @Value = Model.departments[i].DepartmentName })
                 </div>
                 <br />
                 <div class="editor-label">
                     @Html.Label("Department Description")
                 </div>
                 <div class="editor-field">
-                    @Html.TextAreaFor(x => x.departments[i].DepartmentDescription)
+                    @Html.TextBoxFor(x => x.dept.DepartmentDescription, new { @Value = Model.departments[i].DepartmentDescription })
                 </div>
+                <br />
                 <input type="submit" class="button" value="Update" />
                 <input type="button" id="@(Model.departments[i].DepartmentID)" class="button-cancel dept-dialog-close" value="Cancel" />
             </fieldset>
@@ -141,22 +121,23 @@
         @using (Html.BeginForm("UpdateItemCharacteristics", "ItemManagement", new { editButton = "category" }, FormMethod.Post))
         {
             <fieldset>
-                <legend>Department ID: @Model.categorys[i].CategoryID</legend>
+                <legend>Category ID: @Model.categorys[i].CategoryID</legend>
                 <hr />
-                @Html.HiddenFor(x => x.categorys[i].CategoryID)
+                @Html.HiddenFor(x => x.cat.CategoryID, new { @Value = Model.categorys[i].CategoryID })
                 <div class="editor-label">
                     @Html.Label("Category Name")
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(x => x.categorys[i].CategoryName)
+                    @Html.TextBoxFor(x => x.cat.CategoryName, new { @Value = Model.categorys[i].CategoryName })
                 </div>
                 <br />
                 <div class="editor-label">
                     @Html.Label("Category Description")
                 </div>
                 <div class="editor-field">
-                    @Html.TextAreaFor(x => x.categorys[i].CategoryDescription)
+                    @Html.TextBoxFor(x => x.cat.CategoryDescription, new { @Value = Model.categorys[i].CategoryDescription })
                 </div>
+                <br />
                 <input type="submit" class="button" value="Update" />
                 <input type="button" id="@(Model.categorys[i].CategoryID)" class="button-cancel cat-dialog-close" value="Cancel" />
             </fieldset>
@@ -170,14 +151,14 @@
         @using (Html.BeginForm("UpdateItemCharacteristics", "ItemManagement", new { editButton = "subcategory" }, FormMethod.Post))
         {
             <fieldset>
-                <legend>Department ID: @Model.subcats[i].SubcategoryID</legend>
+                <legend>Subategory ID: @Model.subcats[i].SubcategoryID</legend>
                 <hr />
-                @Html.HiddenFor(x => x.subcats[i].SubcategoryID)
+                @Html.HiddenFor(x => x.subcat.SubcategoryID, new { @Value = Model.subcats[i].SubcategoryID })
                 <div class="editor-label">
                     @Html.Label("Subcategory Name")
                 </div>
                 <div class="editor-field">
-                    @Html.EditorFor(x => x.subcats[i].SubcategoryName)
+                    @Html.TextBoxFor(x => x.subcat.SubcategoryName, new { @Value = Model.subcats[i].SubcategoryName })
                 </div>
                 <br />
                 <input type="submit" class="button" value="Update" />
