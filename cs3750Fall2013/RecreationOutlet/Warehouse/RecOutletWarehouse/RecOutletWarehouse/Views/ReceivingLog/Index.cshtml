@@ -196,7 +196,7 @@
                 <td>
                     @*Qty Type ID: *@
                     @*@objPO.QtyTypeId*@
-                    @Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeID })
+                    @*@Html.HiddenFor(model => model.RL[count].QtyTypeID, new { @Value = @objPO.QtyTypeID })*@
                     @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
                     @*NEED: a more dynamic method. IE get a list of the options from the db and use that for the select list. *@
                     @Html.DropDownListFor(model => model.RL[count].QtyTypeID, new SelectList(
@@ -224,8 +224,8 @@
                 </td>
                 <td>
                     @*Qty Received:*@ 
-                    @*@Html.TextBoxFor(model => model.RL[count].ReceivedQty)*@ @*, new { @Value = @objPO.QtyOrdered })*@
-                    @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })
+                    @Html.TextBoxFor(model => model.RL[count].ReceivedQty) @*, new { @Value = @objPO.QtyOrdered })*@
+                   @* @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })*@
                     @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
                 </td>
                 <td>
