@@ -40,7 +40,7 @@
                     <td>@Html.DisplayFor(x => item.POOrderDate, "ShortDateTime")</td>
                     <td>@Html.DisplayFor(x => item.POEstimatedShipDate)</td>
                     <td>@Html.DisplayFor(x => item.EMPLOYEE.FirstName) @Html.DisplayFor(x => item.EMPLOYEE.LastName)</td>
-                    <td>@Html.DisplayFor(x => item.POFreightCost)</td>
+                    <td>@Html.DisplayFor(x => item.POFreightNotes)</td>
                     <td><input type="button" value="Edit" class="button"
                                                             onclick="location.href='@Url.Action("EditPO", "PurchaseOrder", 
                                                                         new {id = item.POID})'" /></td>
