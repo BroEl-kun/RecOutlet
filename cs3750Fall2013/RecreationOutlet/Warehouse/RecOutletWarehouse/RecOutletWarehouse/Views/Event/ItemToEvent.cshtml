@@ -1,0 +1,48 @@
+﻿@model IEnumerable <RecOutletWarehouse.Models.SALE_PRICING> 
+
+<div class=" potable-area">
+<table class="potable">
+    <tr class="leftjust">
+        <th>
+            Item Name
+        </th>
+        <th>
+            RPC
+        </th>
+        <th>
+            Original Selling Price
+        </th>
+        <th>
+            Sale Price
+        </th>
+        <th>
+            % Off
+        </th>
+        <th>
+            Actions
+        </th>
+    </tr>
+    @foreach(var item in Model){
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.ITEM.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.RecRPC)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.ITEM.SellPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.SalePrice)
+            </td>
+            <td>
+                @(String.Format("%{0:0.00}", (1 - item.SalePrice / item.ITEM.SellPrice) * 100))
+            </td>
+            <td>
+                TODO: Menu
+            </td>
+        </tr>
+    }
+</table>
+    </div>
