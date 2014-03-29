@@ -22,7 +22,7 @@ namespace RecOutletWarehouse.Models
 
         public string Attention { get; set; }
         public decimal TotalSalesTax { get; set; }
-        public decimal TotalAmount { get; set; }
+        //public decimal TotalAmount { get; set; }
 
         [DataType(DataType.Currency)]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
