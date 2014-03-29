@@ -28,7 +28,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.InvoiceCreatedDate).HasColumnName("InvoiceCreatedDate");
             this.Property(t => t.Attention).HasColumnName("Attention");
             this.Property(t => t.TotalSalesTax).HasColumnName("TotalSalesTax");
-            this.Property(t => t.TotalAmount).HasColumnName("TotalAmount");
+            //this.Property(t => t.TotalAmount).HasColumnName("TotalAmount");
             this.Property(t => t.TotalAmountPaid).HasColumnName("TotalAmountPaid");
             this.Property(t => t.LastPaymentReceived).HasColumnName("LastPaymentReceived");
             this.Property(t => t.InvoiceNotes).HasColumnName("InvoiceNotes");
