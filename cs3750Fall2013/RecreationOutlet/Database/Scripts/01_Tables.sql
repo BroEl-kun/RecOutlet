@@ -53,8 +53,8 @@ CREATE TABLE [dbo].[EMPLOYEE](
 	[Position] [nvarchar](50) NOT NULL,
 	[Username] [nvarchar](50) NOT NULL,
 	--[PIN] [nchar](4) NOT NULL
-	[Password] [nvarchar](50) NOT NULL,
-	[PasswordSalt] [nvarchar](16) NOT NULL
+	[Password] [nvarchar](100) NOT NULL,
+	[PasswordSalt] [nvarchar](60) NOT NULL
 ) ON [PRIMARY]
 GO
 
@@ -103,7 +103,7 @@ CREATE TABLE [dbo].[INVOICE](
 	[Attention] [nvarchar](50) NULL,
 	--[PaymentDue] [smalldatetime] NOT NULL,
 	[TotalSalesTax] [smallmoney] NOT NULL,
-	[TotalAmount] [smallmoney] NOT NULL,
+	--[TotalAmount] [smallmoney] NOT NULL,
 	[TotalAmountPaid] [smallmoney] NOT NULL,
 	[LastPaymentReceived] [smalldatetime] NULL,
 	[InvoiceNotes] [nvarchar](100) NULL
@@ -136,6 +136,7 @@ CREATE TABLE [dbo].[INVOICE_LINEITEM](
 	[InvoiceID] [bigint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[QtyTypeID] [tinyint] NOT NULL,
+	[TaxRateID] [tinyint] NOT NULL,
 	[ItemQty] [int] NOT NULL,
 	[UnitPrice] [smallmoney] NOT NULL,
 	[UnitCost] [smallmoney] NOT NULL
@@ -160,7 +161,7 @@ CREATE TABLE [dbo].[ITEM](
 	[ItemUPC] [bigint] NULL,
 	[Name] [nvarchar](30) NOT NULL,
 	[Description] [nvarchar](max) NOT NULL,
-	[VendorItemID] [int] NOT NULL,
+	[VendorItemID] [nvarchar](25) NULL,
 	[SeasonCode] [nvarchar](50) NULL,
 	[ItemID] [int] NOT NULL,
 	[MSRP] [money] NULL,
@@ -315,7 +316,7 @@ CREATE TABLE [dbo].[PURCHASE_ORDER](
 	[POOrderDate] [smalldatetime] NULL,
 	[POEstimatedShipDate] [smalldatetime] NULL,
 	[POCreatedDate] [smalldatetime] NOT NULL,
-	[POFreightCost] [nvarchar](50) NULL,
+	[POFreightNotes] [nvarchar](max) NULL,
 	[POTerms] [nvarchar](50) NULL,
 	[POComments] [nvarchar](50) NULL,
 	[ShippingID] [int] NULL,
