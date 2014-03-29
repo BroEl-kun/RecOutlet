@@ -66,13 +66,23 @@
                 <td>
                     @*Qty Type ID: *@
                     @*@objPO.QtyTypeId*@
-                    @Html.HiddenFor(model => model.RL[0].QtyTypeID, new { @Value = @ViewBag.editRL.QtyTypeID })
+                    @*@Html.HiddenFor(model => model.RL[0].QtyTypeID, new { @Value = @ViewBag.editRL.QtyTypeID })*@
                     @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
-                    <select>
+                    @Html.DropDownListFor(model => model.RL[0].QtyTypeID, new SelectList(
+                        new List<Object> {
+                            new { Value = 1, Text = "Each" },
+                            new { Value = 2, Text = "Case" },
+                            new { Value = 3, Text = "Pallet" }
+                        },
+                        "value",
+                        "text"
+                        ,1))
+                    
+                    @*<select>
                         <option selected>1 - Each</option>
                         <option>2 - Case</option>
                         <option>3 - Pallet</option>
-                    </select>
+                    </select>*@
                     
                 </td>
                 <td>
