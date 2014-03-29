@@ -26,7 +26,7 @@ namespace RecOutletWarehouse.Models
         public Nullable<long> ItemUPC { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int VendorItemID { get; set; }
+        public string VendorItemID { get; set; }
         public string SeasonCode { get; set; }
         public int ItemID { get; set; }
         public Nullable<decimal> MSRP { get; set; }

@@ -13,5 +13,7 @@ namespace RecOutletWarehouse.Models
         public Nullable<System.DateTime> EndDate { get; set; }
         public virtual LOCATION LOCATION { get; set; }
         public virtual TAX_TYPE TAX_TYPE { get; set; }
+        //public virtual INVOICE_LINEITEM INVOICE_LINEITEM { get; set; }
+        public virtual ICollection<INVOICE_LINEITEM> INVOICE_LINEITEM { get; set; }
     }
 }

@@ -36,7 +36,8 @@ namespace RecOutletWarehouse.Models
                ApplyFormatInEditMode = true)]
         public System.DateTime POCreatedDate { get; set; }
 
-        public string POFreightCost { get; set; }
+        //public string POFreightCost { get; set; }
+        public string POFreightNotes { get; set; }
         public string POTerms { get; set; }
         public string POComments { get; set; }
         public Nullable<int> ShippingID { get; set; }
