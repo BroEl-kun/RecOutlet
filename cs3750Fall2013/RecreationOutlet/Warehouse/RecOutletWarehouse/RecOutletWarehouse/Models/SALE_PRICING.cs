@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,11 @@ namespace RecOutletWarehouse.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> EndDate { get; set; }
         public string Comments { get; set; }
+
+        [JsonIgnore]
         public virtual EVENT_TYPE EVENT_TYPE { get; set; }
+
+        [JsonIgnore]
         public virtual ITEM ITEM { get; set; }
     }
 }
