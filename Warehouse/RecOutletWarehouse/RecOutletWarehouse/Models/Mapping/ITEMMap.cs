@@ -24,6 +24,9 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.SeasonCode)
                 .HasMaxLength(50);
 
+            this.Property(t => t.VendorItemID)
+                .HasMaxLength(25);
+
             // Table & Column Mappings
             this.ToTable("ITEM");
             this.Property(t => t.RecRPC).HasColumnName("RecRPC");

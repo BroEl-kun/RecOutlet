@@ -14,8 +14,8 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.POID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
-            this.Property(t => t.POFreightCost)
-                .HasMaxLength(50);
+            //this.Property(t => t.POFreightNotes)
+            //    .HasMaxLength(50);
 
             this.Property(t => t.POTerms)
                 .HasMaxLength(50);
@@ -31,7 +31,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.POOrderDate).HasColumnName("POOrderDate");
             this.Property(t => t.POEstimatedShipDate).HasColumnName("POEstimatedShipDate");
             this.Property(t => t.POCreatedDate).HasColumnName("POCreatedDate");
-            this.Property(t => t.POFreightCost).HasColumnName("POFreightCost");
+            this.Property(t => t.POFreightNotes).HasColumnName("POFreightNotes");
             this.Property(t => t.POTerms).HasColumnName("POTerms");
             this.Property(t => t.POComments).HasColumnName("POComments");
             this.Property(t => t.ShippingID).HasColumnName("ShippingID");

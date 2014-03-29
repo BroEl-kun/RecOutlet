@@ -20,6 +20,7 @@ namespace RecOutletWarehouse.Models.Mapping
             this.Property(t => t.InvoiceID).HasColumnName("InvoiceID");
             this.Property(t => t.RecRPC).HasColumnName("RecRPC");
             this.Property(t => t.QtyTypeID).HasColumnName("QtyTypeID");
+            this.Property(t => t.TaxRateID).HasColumnName("TaxRateID");
             this.Property(t => t.ItemQty).HasColumnName("ItemQty");
             this.Property(t => t.UnitPrice).HasColumnName("UnitPrice");
             this.Property(t => t.UnitCost).HasColumnName("UnitCost");
@@ -34,6 +35,9 @@ namespace RecOutletWarehouse.Models.Mapping
             this.HasRequired(t => t.QTY_TYPE)
                 .WithMany(t => t.INVOICE_LINEITEM)
                 .HasForeignKey(d => d.QtyTypeID);
+            this.HasRequired(t => t.TAX_RATE)
+                .WithMany(t => t.INVOICE_LINEITEM)
+                .HasForeignKey(d => d.TaxRateID);
 
         }
     }
