@@ -105,10 +105,12 @@ namespace RecOutletWarehouse.Controllers
     public class ItemApiController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Item> GetItems(string query = "")
+        public IEnumerable<ITEM> GetItems(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            return db.SearchItemsByName(query);
+            using (var db = new RecreationOutletContext()) {
+                return String.IsNullOrEmpty(query) ? db.ITEMs.ToList() :
+                    db.ITEMs.Where(i => i.Name.Contains(query)).ToList();
+            }
         }
     }
 

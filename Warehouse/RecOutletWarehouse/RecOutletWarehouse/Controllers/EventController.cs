@@ -169,24 +169,34 @@ namespace RecOutletWarehouse.Controllers
         public ActionResult ItemToEvent(ItemEventViewModel model)
         {
             // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
-            
-            if (!ModelState.IsValid)
-            {
+            try {
+                if (!ModelState.IsValid) {
+                    return PartialView("ItemToEvent");
+                }
+
+                SALE_PRICING priceToAdd = new SALE_PRICING {
+                    RecRPC = db.ITEMs.Single(x => x.Name == model.ItemName).RecRPC,
+                    SalePrice = model.SalePriceOfItem,
+                    EventTypeCode = model.EventToAddTo
+                };
+
+                db.SALE_PRICING.Add(priceToAdd);
+
+                db.SaveChanges();
+                List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(li => li.EventTypeCode == model.EventToAddTo).ToList();
+
+                //ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
+
+                return PartialView("ItemToEvent", listToReturn);
+            }
+            catch(Exception ex) {
                 return PartialView("ItemToEvent");
             }
+        }
 
-            SALE_PRICING priceToAdd = new SALE_PRICING{
-                RecRPC = db.ITEMs.Single(x => x.Name == model.ItemName).RecRPC,
-                SalePrice = model.SalePriceOfItem,
-                EventTypeCode = model.EventToAddTo};
-
-            db.SALE_PRICING.Add(priceToAdd);
-
-            db.SaveChanges();
-            List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(li => li.EventTypeCode == model.EventToAddTo).ToList();
-
-            //ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
-
+        [HttpPost]
+        public ActionResult getAllSalePricesForEvent(byte id = 0) {
+            List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == id).ToList();
             return PartialView("ItemToEvent", listToReturn);
         }
 

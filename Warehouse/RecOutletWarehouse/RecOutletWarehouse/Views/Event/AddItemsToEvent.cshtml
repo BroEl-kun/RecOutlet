@@ -14,19 +14,19 @@
             Add to Event:
         </div>
         <div>
-            @Html.DropDownList("EventToAddTo", Model.Events)
+            @Html.DropDownList("EventToAddTo", Model.Events, "--Select an Event--", new { @id="eventCode" })
         </div>
         <div>
             Item to add:
         </div>
         <div>
-            @Html.TextBoxFor(model => model.ItemName)
+            @Html.TextBoxFor(model => model.ItemName, new { @id = "searchItem" })
         </div>
         <div>
             Original price:
         </div>
         <div>
-            @Html.TextBoxFor(model => model.OrigPriceOfItem)
+            <input type="number" id="searchItemPrice" disabled="disabled"/>
         </div>
         <div>
             Sale Price:
@@ -40,3 +40,50 @@
 
 <div id="currentItems">@{Html.RenderPartial("ItemToEvent", Model.SalePrices);}</div>
 
+<script>
+    $(document).ready(function() {
+        $("#eventCode").change(function() {
+            var name = $("#eventCode").val();
+                $.ajax({
+                    type: "post",
+                    url: "/Event/getAllSalePricesForEvent",
+                    dataType: "html",
+                    data: "id="+name,
+                    contentType: "application/x-www-form-urlencoded;charset=utf-8",
+                    success: function (result) { validate(result); }
+                });
+        });
+    });
+    function validate(result) {
+        $("#currentItems").html("");
+        $("#currentItems").html(result);
+    }
+
+    $('#searchItem').autocomplete({
+        autoFocus: true,
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "ItemApi" })',
+                data: { query: request.term },
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            //label: item.Name + "(RPC: " + item.RecRPC + " | Product Line: " + item.PRODUCT_LINE.ProductLineName + ")",
+                            label:  item.Name + " | " + item.RecRPC,
+                            itemName: item.Name,
+                            itemPrice: item.SellPrice
+                        }
+                    }).slice(0, 10));
+                }
+            })
+        },
+            select: function (event, ui) {
+                $('#searchItem').val(ui.item.itemName);
+                $('#searchItemPrice').val(ui.item.itemPrice);
+                return false;
+            },
+            minLength: 1
+        });
+</script>

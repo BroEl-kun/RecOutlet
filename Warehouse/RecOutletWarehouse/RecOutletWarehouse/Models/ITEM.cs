@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -34,17 +35,41 @@ namespace RecOutletWarehouse.Models
         public Nullable<byte> RestrictedAge { get; set; }
         public short ItemCreatedBy { get; set; }
         public System.DateTime ItemCreatedDate { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<INVENTORY> INVENTORies { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<INVOICE_LINEITEM> INVOICE_LINEITEM { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<ITEM_IMAGE> ITEM_IMAGE { get; set; }
+
+        [JsonIgnore]
         public virtual ITEM_CATEGORY ITEM_CATEGORY { get; set; }
+
+        [JsonIgnore]
         public virtual ITEM_DEPARTMENT ITEM_DEPARTMENT { get; set; }
+
+        [JsonIgnore]
         public virtual ITEM_SUBCATEGORY ITEM_SUBCATEGORY { get; set; }
+
+        [JsonIgnore]
         public virtual PRODUCT_LINE PRODUCT_LINE { get; set; }
+
+        [JsonIgnore]
         public virtual TAX_TYPE TAX_TYPE { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<MERCHANDISE_TRANSFER> MERCHANDISE_TRANSFER { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<PO_LINEITEM> PO_LINEITEM { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<SALE_PRICING> SALE_PRICING { get; set; }
+
+        [JsonIgnore]
         public virtual ICollection<TRANSACTION_LINEITEM> TRANSACTION_LINEITEM { get; set; }
     }
 }
