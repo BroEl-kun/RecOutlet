@@ -5,6 +5,14 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+@section tabnavigation{
+    <ul class="nav clearfix">
+        <li>@Html.ActionLink("View Events", "ViewEvents")</li>
+         <li>@Html.ActionLink("View Sale Pricing Information", "ViewSalesPrice")</li>
+        <li class="active">@Html.ActionLink("Add an Item to an Event", "AddItemsToEvent")</li>
+    </ul>  
+}
+
 <h2>Add Items to an Event</h2>
 
  @using (Ajax.BeginForm("ItemToEvent", new AjaxOptions { UpdateTargetId = "currentItems" })) {
