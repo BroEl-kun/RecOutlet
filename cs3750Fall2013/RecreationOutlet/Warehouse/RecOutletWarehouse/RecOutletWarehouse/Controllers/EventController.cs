@@ -156,6 +156,7 @@ namespace RecOutletWarehouse.Controllers
                 Events = EventsToSelectListItems(db.EVENT_TYPE, id),
                 SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == id).ToList()
             };
+
             return View(ievm);
         }
 
@@ -163,15 +164,25 @@ namespace RecOutletWarehouse.Controllers
         public ActionResult AddItemsToEvent(ItemEventViewModel ievm) {
             ievm.Events = EventsToSelectListItems(db.EVENT_TYPE, ievm.EventToAddTo);
             ievm.SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == ievm.EventToAddTo).ToList();
+
             return View(ievm);
         }
 
         public ActionResult ItemToEvent(ItemEventViewModel model)
         {
-            // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
             try {
+                // The following "if" control is bad code. Essentially it only prevents
+                // attempted insertion of duplicate data into the database. It does not
+                // set any error message. That is done by a jQuery function in
+                // AddItemsToEvent.cshtml. If anyone wants to try finding a better way,
+                // I wish you luck!
+                if (db.SALE_PRICING.Any(x => x.ITEM.Name == model.ItemName && x.EventTypeCode == model.EventToAddTo)){
+                    //ViewBag.ErrorMessage = String.Format("The item \"{0}\" is already on this event. Please edit the existing entry.", model.ItemName);
+                    return PartialView("ItemToEvent", model.SalePrices);
+                }
+
                 if (!ModelState.IsValid) {
-                    return PartialView("ItemToEvent");
+                    return PartialView("ItemToEvent", model.SalePrices);
                 }
 
                 SALE_PRICING priceToAdd = new SALE_PRICING {
@@ -194,6 +205,17 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        public ActionResult RemoveSalesPriceFromEvent(byte etc = 0, long rpc = 0 ) {
+            SALE_PRICING lineItem = db.SALE_PRICING.Single(sp => sp.RecRPC == rpc && sp.EventTypeCode == etc);
+
+            db.SALE_PRICING.Remove(lineItem);
+
+            db.SaveChanges();
+            List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == etc).ToList();
+
+            return PartialView("ItemToEvent", listToReturn);
+        }
+
         [HttpPost]
         public ActionResult getAllSalePricesForEvent(byte id = 0) {
             List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == id).ToList();
@@ -210,6 +232,26 @@ namespace RecOutletWarehouse.Controllers
                                  Text = ev.EventDescription,
                                  Value = ev.EventTypeCode.ToString()
                              });
+        }
+
+        /// <summary>
+        /// This is a method that queries the database to see if a given
+        /// ITEM.Name/EventTypeCode combo already exists and returns true 
+        /// or false as JSON data.
+        /// </summary>
+        /// <param name="etc">The EventTypeCode to check</param>
+        /// <param name="item">The ITEM name property to check</param>
+        /// <returns>JSON data representing true or false</returns>
+        public JsonResult CheckForDuplicateSalePrice(byte etc = 0, string item ="") {
+            IEnumerable<SALE_PRICING> salePrices = db.SALE_PRICING.ToList();
+            var isDuplicate = false;
+            if (salePrices.Any(sp => sp.ITEM.Name == item && sp.EventTypeCode == etc)) {
+                isDuplicate = true;
+            }
+
+            var jsonData = new { isDuplicate };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
         }
     }
 }

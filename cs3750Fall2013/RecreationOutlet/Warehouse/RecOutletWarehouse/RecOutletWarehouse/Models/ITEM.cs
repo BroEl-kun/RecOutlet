@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecOutletWarehouse.Models
 {
@@ -31,7 +32,11 @@ namespace RecOutletWarehouse.Models
         public string SeasonCode { get; set; }
         public int ItemID { get; set; }
         public Nullable<decimal> MSRP { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
         public decimal SellPrice { get; set; }
+
         public Nullable<byte> RestrictedAge { get; set; }
         public short ItemCreatedBy { get; set; }
         public System.DateTime ItemCreatedDate { get; set; }
