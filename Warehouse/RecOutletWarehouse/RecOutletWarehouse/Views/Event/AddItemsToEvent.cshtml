@@ -15,20 +15,22 @@
 
 <h2>Add Items to an Event</h2>
 
- @using (Ajax.BeginForm("ItemToEvent", new AjaxOptions { UpdateTargetId = "currentItems" })) {
+ @using (Ajax.BeginForm("ItemToEvent", null, new AjaxOptions { UpdateTargetId = "currentItems" }, new { @id = "form" })) {
     <fieldset>
+        
         <legend>Information about the item</legend>
         <div>
             Add to Event:
         </div>
         <div>
-            @Html.DropDownList("EventToAddTo", Model.Events, "--Select an Event--", new { @id="eventCode" })
+            @Html.DropDownList("EventToAddTo", Model.Events, "--Select an Event--", new { @id = "eventCode" })
         </div>
         <div>
             Item to add:
         </div>
         <div>
             @Html.TextBoxFor(model => model.ItemName, new { @id = "searchItem" })
+            @Html.ValidationMessageFor(model => model.ItemName)
         </div>
         <div>
             Original price:
@@ -42,9 +44,13 @@
         <div>
             @Html.TextBoxFor(model => model.SalePriceOfItem)
         </div>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" class="button" id="addItem" />
     </fieldset>
-}
+ }
+
+<div id="error-modal" title="ERROR: Duplicate Entry">
+    That item is already on sale during the specified event. Please edit the existing entry.
+</div>
 
 <div id="currentItems">@{Html.RenderPartial("ItemToEvent", Model.SalePrices);}</div>
 
@@ -93,5 +99,27 @@
                 return false;
             },
             minLength: 1
-        });
+    });
+
+    $("#error-modal").dialog({
+        height: 140,
+        modal: true,
+        autoOpen: false
+    });
+
+    $("#form").submit(function ( event ) {
+        $.getJSON('@Url.Action("CheckForDuplicateSalePrice", "Event")',
+            {
+                item: $('#searchItem').val(),
+                etc: $('#eventCode').val()
+            },
+            function (data) {
+                if (data.isDuplicate) {
+                    $('#error-modal').dialog('open');
+                }
+            }
+        );
+        
+    });
+
 </script>
