@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using RecOutletWarehouse.Models;
 using RecOutletWarehouse.Models.ItemManagement;
 using RecOutletWarehouse.Utilities;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace RecOutletWarehouse.Controllers
 {
@@ -15,6 +15,8 @@ namespace RecOutletWarehouse.Controllers
     {
 
         RecreationOutletContext entityDb = new RecreationOutletContext();
+        public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
+
         //
         // GET: /ItemMangement/
 
@@ -42,6 +44,111 @@ namespace RecOutletWarehouse.Controllers
             public ITEM_DEPARTMENT dept { get; set; }
         }
 
+        public class BrowseItemViewModel {
+            public IEnumerable<ITEM> Items { get; set; }
+            public PagingInfo PagingInfo { get; set; }
+            public string search { get; set; }
+            public string startLetter { get; set; }
+        }
+
+        public class ItemCreationViewModel {
+            [Required]
+            public string VendorName { get; set; }
+            //public string DeptName { get; set; }
+            //public string DeptName { get; set; }
+            //public string CatName { get; set; }
+            //public string SubcatName { get; set; }
+            public ITEM Item { get; set; }
+        }
+
+        public ActionResult BrowseItemManagement(string itemNameSearch, string firstLetter, int page = 1) {
+            try {
+                // Declare model
+                BrowseItemViewModel model;
+
+                // Create master list
+                var items = from i in entityDb.ITEMs
+                            select i;
+
+                // Filter master list to only those members that start with a certain letter
+                // First letter is defined by rolodex selection in View
+                // For now, we want it to only filter if there is no search query
+                if (!String.IsNullOrEmpty(firstLetter) && String.IsNullOrEmpty(itemNameSearch)) {
+                    //vendors = vendors.Where(v => v.VendorName.ToUpper().StartsWith(firstLetter));
+                    items = items.Where(i => i.Name.ToUpper().StartsWith(firstLetter));
+                }
+
+                //IF the user doesn't provide a search query...
+                if (String.IsNullOrEmpty(itemNameSearch)) {
+                    model = new BrowseItemViewModel {
+                        Items = items
+                                  .OrderBy(i => i.Name)
+                                  .Skip((page - 1) * BrowsePageSize)
+                                  .Take(BrowsePageSize),
+                        PagingInfo = new PagingInfo {
+                            CurrentPage = page,
+                            ItemsPerPage = BrowsePageSize,
+                            TotalItems = items.Count() // Get the count of the FILTERED list
+                        },
+                        startLetter = firstLetter // The starting letter needs to be passed to the View
+                        // so the View can pass it back to the Controller.
+                        // If not included, pagination will not work correctly.
+                    };
+                }
+                // ELSE (the user did provide a vendor name search query)
+                else {
+                    model = new BrowseItemViewModel {
+                        Items = items
+                                  .Where(ve => ve.Name.ToUpper().Contains(itemNameSearch.ToUpper())) // Further filter the list to items that contain the search
+                                  .OrderBy(v => v.Name) // This is likely unnecessary (vendors is already sorted), but I'm leaving it here for now
+                                  .Skip((page - 1) * BrowsePageSize)
+                                  .Take(BrowsePageSize),
+                        PagingInfo = new PagingInfo {
+                            CurrentPage = page,
+                            ItemsPerPage = BrowsePageSize,
+                            TotalItems = items.Where(ve => ve.Name.ToUpper().Contains(itemNameSearch.ToUpper())).Count() // Again, we want the count to take our filters into account
+                        },
+                        search = itemNameSearch
+                        //startLetter = firstLetter // Leaving out -- it gives results the user might not expect
+                    };
+                }
+                return View(model);
+            }
+            catch (Exception ex) {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        /// <summary>
+        /// GET Method for editing a vendor
+        /// </summary>
+        /// <param name="id">The VendorID of the vendor to edit</param>
+        /// <returns>The EditVendor View, prefilled with the vendor information.</returns>
+        public ActionResult EditItem(int id = 0) {
+            ITEM item = entityDb.ITEMs.Find(id);
+            if (item == null) {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
+
+        /// <summary>
+        /// POST method for editing a vendor
+        /// </summary>
+        /// <param name="vendor">The vendor object that is modified</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditItem(ITEM item) {
+            if (ModelState.IsValid) {
+                entityDb.Entry(item).State = EntityState.Modified;
+                entityDb.SaveChanges();
+                return RedirectToAction("BrowseItemManagement");
+            }
+
+            return View(item);
+        }
+
         public ActionResult CreateNewItem()
         {
             try
@@ -61,95 +168,152 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateNewItem(Item item, string labelRedirect = "")
-        {
-            try
-            {
+        public ActionResult CreateNewItem(ItemCreationViewModel model, string labelRedirect = "") {
+            try {
                 DataFetcherSetter db = new DataFetcherSetter();
+                ITEM item = model.Item;
+                item.TaxTypeID = 1; //TODO: A lot of things :)
+                //item = db.ConvertNamesToIDs(item);
 
-                item.CreatedDate = DateTime.Now.Date;
-                item.CreatedBy = 1; //TODO: Associate with logged-in user   
-                item.TaxRate = 5; //TODO: A lot of things :)
-                if (item.UPC == null)
-                    item.UPC = 0; //TODO: Fix this
-                if (item.restrictedAge == null)
-                    item.restrictedAge = 0; //TODO: Fix this
-                item = db.ConvertNamesToIDs(item);
+                item.PRODUCT_LINE = entityDb.PRODUCT_LINE.Single(x => x.ProductLineName == model.Item.PRODUCT_LINE.ProductLineName);
+                item.ProductLineID = item.PRODUCT_LINE.ProductLineID;
+                item.ITEM_DEPARTMENT = entityDb.ITEM_DEPARTMENT.Single(x => x.DepartmentName == model.Item.ITEM_DEPARTMENT.DepartmentName);
+                item.DepartmentID = item.ITEM_DEPARTMENT.DepartmentID;
+                item.ITEM_CATEGORY = entityDb.ITEM_CATEGORY.Single(x => x.CategoryName == model.Item.ITEM_CATEGORY.CategoryName);
+                item.CategoryID = item.ITEM_CATEGORY.CategoryID;
+                item.ITEM_SUBCATEGORY = entityDb.ITEM_SUBCATEGORY.Single(x => x.SubcategoryName == model.Item.ITEM_SUBCATEGORY.SubcategoryName);
+                item.SubcategoryID = item.ITEM_SUBCATEGORY.SubcategoryID;
 
-                //CUSTOM VALIDATION FOLLOWS
-                //Check if Vendor exists or if too many vendors were returned
-                if (item.Vendor == "0")
-                {
-                    ModelState.AddModelError("Vendor", "That vendor doesn't exist.");
+                item.ItemCreatedDate = DateTime.Now.Date;
+                item.ItemCreatedBy = 1;
+
+                if (item.ItemUPC == null) {
+                    item.ItemUPC = 0; //TODO: Fix this
                 }
-                if (item.Vendor == "-1")
-                {
-                    ModelState.AddModelError("Vendor", "Multiple vendors have that name.");
+                if (item.RestrictedAge == null) {
+                    item.RestrictedAge = 0; //TODO: Fix this
                 }
-                //Check if Product Line exists or if too many were returned
-                if (item.ProductLine == "0")
-                {
+
+                //VENDOR vendor = entityDb.VENDORs.SingleOrDefault(x => x.VendorID == item.VendorItemID);
+
+                //check if vendor already exists... if it doesnt it needs to be inserted...
+                //if (!entityDb.VENDORs.Any(x => x.VendorID == item.VendorItemID))
+                //{
+                //    // no match
+                //    ModelState.AddModelError("Vendor", "That vendor doesn't exist.");
+                //}
+
+                //check if a product line exists if it does do nothing if it doesnt then let them enter a new product line.
+                if (!entityDb.PRODUCT_LINE.Any(i => i.ProductLineID == item.ProductLineID)) {
+                    // no match
                     ModelState.AddModelError("ProductLine", "That product line doesn't exist OR is not "
                                            + "associated with the specified vendor.");
                 }
-                if (item.ProductLine == "-1")
-                {
-                    ModelState.AddModelError("ProductLine", "Multiple product lines have that name and vendor.");
-                }
 
-                //Check if Department exists or if too many were returned
-                if (item.Department == "0")
-                {
+                //check if a department exists if it does do nothing if it doesnt then...
+                if (!entityDb.ITEM_DEPARTMENT.Any(i => i.DepartmentID == item.DepartmentID)) {
+                    // no match
                     ModelState.AddModelError("Department", "That department doesn't exist.");
                 }
-                if (item.Department == "-1")
-                {
-                    ModelState.AddModelError("Department", "Multiple departments have that name.");
-                }
 
-                //Check if Category exists or if too many were returned
-                if (item.Category == "0")
-                {
+                //check if a catagory exists if it does do nothing if it doesnt then...
+                if (!entityDb.ITEM_CATEGORY.Any(i => i.CategoryID == item.CategoryID)) {
+                    // no match
                     ModelState.AddModelError("Category", "That category doesn't exist.");
                 }
-                if (item.Category == "-1")
-                {
-                    ModelState.AddModelError("Category", "Multiple categories have that name.");
-                }
 
-                //Check if Subcategory exists or if too many were returned
-                if (item.Subcategory == "0")
-                {
+                //check if a subcatagory exists if it does do nothing if it doesnt then let them...
+                if (!entityDb.ITEM_SUBCATEGORY.Any(i => i.SubcategoryID == item.SubcategoryID)) {
+                    // no match
                     ModelState.AddModelError("Subcategory", "That subcategory doesn't exist.");
                 }
-                if (item.Subcategory == "-1")
-                {
-                    ModelState.AddModelError("Subcategory", "Multiple subcategories have that name.");
-                }
+
+
+
+                ////CUSTOM VALIDATION FOLLOWS
+                ////Check if Vendor exists or if too many vendors were returned
+                //if (item.Vendor == "0")
+                //{
+                //    ModelState.AddModelError("Vendor", "That vendor doesn't exist.");
+                //}
+                //if (item.Vendor == "-1")
+                //{
+                //    ModelState.AddModelError("Vendor", "Multiple vendors have that name.");
+                //}
+                ////Check if Product Line exists or if too many were returned
+                //if (item.ProductLine == "0")
+                //{
+                //    ModelState.AddModelError("ProductLine", "That product line doesn't exist OR is not "
+                //                           + "associated with the specified vendor.");
+                //}
+                //if (item.ProductLine == "-1")
+                //{
+                //    ModelState.AddModelError("ProductLine", "Multiple product lines have that name and vendor.");
+                //}
+
+                ////Check if Department exists or if too many were returned
+                //if (item.Department == "0")
+                //{
+                //    ModelState.AddModelError("Department", "That department doesn't exist.");
+                //}
+                //if (item.Department == "-1")
+                //{
+                //    ModelState.AddModelError("Department", "Multiple departments have that name.");
+                //}
+
+                ////Check if Category exists or if too many were returned
+                //if (item.Category == "0")
+                //{
+                //    ModelState.AddModelError("Category", "That category doesn't exist.");
+                //}
+                //if (item.Category == "-1")
+                //{
+                //    ModelState.AddModelError("Category", "Multiple categories have that name.");
+                //}
+
+                ////Check if Subcategory exists or if too many were returned
+                //if (item.Subcategory == "0")
+                //{
+                //    ModelState.AddModelError("Subcategory", "That subcategory doesn't exist.");
+                //}
+                //if (item.Subcategory == "-1")
+                //{
+                //    ModelState.AddModelError("Subcategory", "Multiple subcategories have that name.");
+                //}
 
                 //CUSTOM VALIDATION ENDS
 
-                item.ItemId = db.GetNextItemForDeptCatSubcat(Convert.ToByte(item.Department),
-                                                            Convert.ToByte(item.Category),
-                                                            Convert.ToInt16(item.Subcategory));
+                //item.ItemID = entityDb.ITEMs.(x => x.DepartmentID == item.DepartmentID
+                //                                && x.CategoryID == item.CategoryID
+                //                                && x.SubcategoryID == item.SubcategoryID);
+
+
+                var query = (from e in entityDb.ITEMs
+                             where e.DepartmentID == item.DepartmentID &&
+                             e.CategoryID == item.CategoryID &&
+                             e.SubcategoryID == item.SubcategoryID
+                             select (int?)e.ItemID).Max();
+
+                //add one to the item id so its not the same
+                item.ItemID = Convert.ToInt32(query) + 1;
+
+
                 item.RecRPC = WarehouseUtilities.GenerateRPC(item);
 
-                if (ModelState.IsValid)
-                {
-                    db.AddNewItem(item);
-                    ViewBag.ItemSuccessfulInsert = item.ItemName + " " + item.RecRPC + ".";
-                    if (labelRedirect == "Create Item and Print Labels")
-                    {
+                if (ModelState.IsValid) {
+                    entityDb.ITEMs.Add(item);
+                    entityDb.SaveChanges();
+                    ViewBag.ItemSuccessfulInsert = item.Name + " " + item.RecRPC + ".";
+                    if (labelRedirect == "Create Item and Print Labels") {
                         return RedirectToAction("PrintLabels", new { id = item.RecRPC });
                     }
 
-                    return View(new Item());
+                    return View(new ItemCreationViewModel());
                 }
 
-                return View(item);
+                return View(model);
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
             }
@@ -426,6 +590,24 @@ namespace RecOutletWarehouse.Controllers
             {
                 WarehouseUtilities.LogError(ex);
                 return RedirectToAction("Error", "Home");
+            }
+        }
+
+        public JsonResult getNextItemID(byte dept, int cat, int subcat) {
+            try {
+                var maxItemID = (from e in entityDb.ITEMs
+                                where e.DepartmentID == dept &&
+                                e.CategoryID == cat &&
+                                e.SubcategoryID == subcat
+                                select (int?)e.ItemID).Max();
+
+                var nextItemID = Convert.ToInt32(maxItemID) + 1;
+                var jsonData = new { nextItemID };
+
+                return Json(jsonData, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex) {
+                return Json(null, JsonRequestBehavior.AllowGet);
             }
         }
     }
