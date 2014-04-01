@@ -27,7 +27,6 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
     <fieldset>
         <legend>Filters</legend>
             <table>
@@ -65,7 +64,7 @@
             </table>
         <p><input type="submit" value="Filter" onclick="submit()" class="button"/></p>
     </fieldset>
-    
+    <br />
     <div class="center-element center-text potable-area">
         @*<p>There are no invoices to browse.</p>*@
         <table class="potable">
@@ -87,11 +86,12 @@
                         totalAmount += (price.UnitPrice * price.ItemQty);
                     }
                     <tr>
-                        <td>@item.InvoiceID</td>
-                        <td>@String.Format("{0:MM/dd/yyyy}", item.InvoiceCreatedDate)</td>
-                        <td>@item.INVOICE_CUSTOMER.CustomerName</td>
-                        <td>@totalAmount</td>
-                        <td>@item.TotalAmountPaid</td>
+                        <td>@Html.DisplayFor(x => item.InvoiceID)</td>
+                        @*<td>@String.Format("{0:MM/dd/yyyy}", item.InvoiceCreatedDate)</td>*@
+                        <td>@Html.DisplayFor(x => item.InvoiceCreatedDate)</td>
+                        <td>@Html.DisplayFor(x => item.INVOICE_CUSTOMER.CustomerName)</td>
+                        <td>@Html.DisplayFor(x => totalAmount)</td>
+                        <td>@Html.DisplayFor(x => item.TotalAmountPaid)</td>
                     </tr>
                 }
             </tbody>
@@ -105,5 +105,10 @@
 <script>
     $('.datepicker').each(function () {
         $(this).datepicker();
+    });
+</script>
+<script>
+    $('.collapse').accordion({
+        active: false
     });
 </script>
