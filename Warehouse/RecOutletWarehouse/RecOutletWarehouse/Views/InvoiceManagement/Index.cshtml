@@ -42,11 +42,10 @@
                         @Html.TextBoxFor(x => x.toDate, new { @class = "datepicker" })
                     </td>
                     <td>
-                        <input type="button" class="button" onclick="" value="Today" />
-                        <input type="button" class="button" onclick="" value="This Week" />
-                        <input type="button" class="button" onclick="" value="This Month" />
-                        <input type="button" class="button" onclick="" value="This Year" />
-                        <input type="button" class="button" onclick="" value="Clear" />
+                        <input type="submit" class="button" name="searchButton" value="Today" />
+                        <input type="submit" class="button" name="searchButton" value="Past Week" />
+                        <input type="submit" class="button" name="searchButton" value="This Month" />
+                        <input type="submit" class="button" name="searchButton" value="This Year" />
                     </td>
                 </tr>
                 <tr>
@@ -62,7 +61,12 @@
                     </td>
                 </tr>
             </table>
-        <p><input type="submit" value="Filter" onclick="submit()" class="button"/></p>
+        <p>
+            <span>
+                <input type="submit" value="Filter" onclick="submit()" class="button"/>
+                <input type="reset" class="button" name="searchButton" value="Clear" />
+            </span>
+        </p>
     </fieldset>
     <br />
     <div class="center-element center-text potable-area">
