@@ -60,6 +60,11 @@
                             @Html.TextBoxFor(newRec => newRec.CustomerZip, new { @id = "CustomerZip" })
                             @Html.ValidationMessageFor(newRec => newRec.CustomerZip)
                         </td>
+                        <td>&nbsp Country:<strong class="required">*</strong></td>
+                        <td>
+                            @Html.TextBoxFor(newRec => newRec.CustomerCountry, new { @id = "CustomerCountry" })
+                            @Html.ValidationMessageFor(newRec => newRec.CustomerCountry)
+                        </td>
                 </tr>
             </table>
         </fieldset>
@@ -68,10 +73,10 @@
         <legend>Contact Information</legend>
              <table>
                  <tr>
-                    <td>&nbsp E-Mail:<strong class="required">*</strong></td>
+                   <!-- <td>&nbsp E-Mail:<strong class="required">*</strong></td>
                     <td>
                         TO DO: Add e-mail to INVOICE_CUSTOMER table!
-                    </td>
+                    </td>-->
 
                     <td>&nbsp Phone Number:<strong class="required">*</strong></td>
                     <td>
