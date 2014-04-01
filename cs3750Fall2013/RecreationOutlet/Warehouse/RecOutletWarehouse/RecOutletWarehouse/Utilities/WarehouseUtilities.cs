@@ -34,13 +34,12 @@ namespace RecOutletWarehouse.Utilities
             errorFile.Close();
         }
 
-        public static long GenerateRPC(RecOutletWarehouse.Models.ItemManagement.Item item) {
-            DataFetcherSetter db = new DataFetcherSetter();
+        public static long GenerateRPC(RecOutletWarehouse.Models.ITEM item) {
             //Item convertedItem = db.ConvertNamesToIDs(item); //Convert dept, cat, subcat
-            string RPC = Convert.ToByte(item.Department).ToString("D2"); //better way to do this?
-            RPC += Convert.ToByte(item.Category).ToString("D2");
-            RPC += item.ItemId.ToString("D6");
-            RPC += Convert.ToInt16(item.Subcategory).ToString("D3");
+            string RPC = Convert.ToByte(item.DepartmentID).ToString("D2"); //better way to do this?
+            RPC += Convert.ToByte(item.CategoryID).ToString("D2");
+            RPC += item.ItemID.ToString("D6");
+            RPC += Convert.ToInt16(item.SubcategoryID).ToString("D3");
 
             return Convert.ToInt64(RPC);
         }

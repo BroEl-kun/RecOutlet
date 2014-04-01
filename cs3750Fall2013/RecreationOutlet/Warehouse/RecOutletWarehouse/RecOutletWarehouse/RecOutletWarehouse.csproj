@@ -308,6 +308,8 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\browsePageScripts.js" />
     <Content Include="Scripts\customScripts.js" />
+    <Content Include="Scripts\sprintf.js" />
+    <Content Include="Scripts\sprintf.min.js" />
     <Content Include="WebForms\POReport.aspx" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
