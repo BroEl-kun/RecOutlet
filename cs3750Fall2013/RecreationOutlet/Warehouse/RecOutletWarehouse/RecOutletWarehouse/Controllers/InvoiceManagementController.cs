@@ -41,23 +41,45 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                model.invoices = entityDb.INVOICEs.ToList();
+                model.invoices = entityDb.INVOICEs.ToList().OrderBy(x => x.InvoiceCreatedDate);
 
-                if (model.toDate != null)
+                if (searchButton == null)
                 {
-                    model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate <= model.toDate);
+                    if (model.toDate != null)
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate <= model.toDate);
+                    }
+                    if (model.fromDate != null)
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate >= model.fromDate);
+                    }
+                    if (model.customerName != null)
+                    {
+                        model.invoices = model.invoices.Where(x => x.INVOICE_CUSTOMER.CustomerName.Contains(model.customerName));
+                    }
+                    if (model.invoiceID != null)
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceID == model.invoiceID);
+                    }
                 }
-                if (model.fromDate != null)
+                else
                 {
-                    model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate >= model.fromDate);
-                }
-                if (model.customerName != null)
-                {
-                    model.invoices = model.invoices.Where(x => x.INVOICE_CUSTOMER.CustomerName.Contains(model.customerName));
-                }
-                if (model.invoiceID != null)
-                {
-                    model.invoices = model.invoices.Where(x => x.InvoiceID == model.invoiceID);
+                    if (searchButton == "Today")
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate == DateTime.Today);
+                    }
+                    else if (searchButton == "Past Week")
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate > DateTime.Today.AddDays(-7));
+                    }
+                    else if (searchButton == "This Month")
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate.Month == DateTime.Now.Month);
+                    }
+                    else if (searchButton == "This Year")
+                    {
+                        model.invoices = model.invoices.Where(x => x.InvoiceCreatedDate.Year == DateTime.Now.Year);
+                    }
                 }
 
                 model.PagingInfo = new PagingInfo
