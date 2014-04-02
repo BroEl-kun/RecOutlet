@@ -142,7 +142,7 @@
             <table class="potable" id="RLtable">
 
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         Current PO:
                         @ViewBag.CurrentPO
                     </td>
@@ -188,6 +188,7 @@
                 </td>
                 <td>
                     @Html.DisplayFor(x => desc)
+                    @Html.HiddenFor(model => model.ItemDescription[count], new { @Value = desc })
                 </td>
                 <td>
                     @*Qty Ordered: *@
@@ -220,12 +221,14 @@
                     @*Receive Date:*@ 
                     @Html.TextBoxFor(model => model.RL[count].ReceiveDate, new { type = "date", @Value = DateTime.Now.Date.ToString("MM/dd/yyyy"), id = "recDate", @class = "datepicker" })
                     @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
+                    <br />
                     @Html.ValidationMessageFor(model => model.RL[count].ReceiveDate)
                 </td>
                 <td>
                     @*Qty Received:*@ 
                     @Html.TextBoxFor(model => model.RL[count].ReceivedQty) @*, new { @Value = @objPO.QtyOrdered })*@
                    @* @Html.TextBoxFor(model => model.RL[count].ReceivedQty, new { @Value = @objPO.QtyOrdered })*@
+                    <br />
                     @Html.ValidationMessageFor(model => model.RL[count].ReceivedQty)
                 </td>
                 <td>
