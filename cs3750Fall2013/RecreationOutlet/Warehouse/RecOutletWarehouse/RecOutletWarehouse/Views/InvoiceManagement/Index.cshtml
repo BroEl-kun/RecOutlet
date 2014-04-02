@@ -27,47 +27,51 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Filters</legend>
-            <table>
-                <tr>
-                    <td>From Date:</td>
-                    <td>To Date:</td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.TextBoxFor(x => x.fromDate, new { @class = "datepicker" })
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => x.toDate, new { @class = "datepicker" })
-                    </td>
-                    <td>
-                        <input type="submit" class="button" name="searchButton" value="Today" />
-                        <input type="submit" class="button" name="searchButton" value="Past Week" />
-                        <input type="submit" class="button" name="searchButton" value="This Month" />
-                        <input type="submit" class="button" name="searchButton" value="This Year" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Customer Name</td>
-                    <td>Invoice ID</td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.TextBoxFor(x => x.customerName)
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => x.invoiceID)
-                    </td>
-                </tr>
-            </table>
-        <p>
-            <span>
-                <input type="submit" value="Filter" onclick="submit()" class="button"/>
-                <input type="reset" class="button" name="searchButton" value="Clear" />
-            </span>
-        </p>
-    </fieldset>
+    <div id="accordion">
+        <h3>Filters</h3>
+        <div>
+            <fieldset>
+                    <table>
+                        <tr>
+                            <td>From Date:</td>
+                            <td>To Date:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(x => x.fromDate, new { @class = "datepicker" })
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(x => x.toDate, new { @class = "datepicker" })
+                            </td>
+                            <td>
+                                <input type="submit" class="button" name="searchButton" value="Today" />
+                                <input type="submit" class="button" name="searchButton" value="Past Week" />
+                                <input type="submit" class="button" name="searchButton" value="This Month" />
+                                <input type="submit" class="button" name="searchButton" value="This Year" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Customer Name</td>
+                            <td>Invoice ID</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @Html.TextBoxFor(x => x.customerName)
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(x => x.invoiceID)
+                            </td>
+                        </tr>
+                    </table>
+                <p>
+                    <span>
+                        <input type="submit" value="Filter" onclick="submit()" class="button"/>
+                        <input type="reset" class="button" name="searchButton" value="Clear" />
+                    </span>
+                </p>
+            </fieldset>
+        </div>
+    </div>
     <br />
     <div class="center-element center-text potable-area">
         @*<p>There are no invoices to browse.</p>*@
@@ -82,21 +86,29 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.invoices)
+                @if(Model.invoices.Count() > 0)
                 {
-                    decimal totalAmount = 0;
-                    foreach (var price in item.INVOICE_LINEITEM)
+                    foreach (var item in Model.invoices)
                     {
-                        totalAmount += (price.UnitPrice * price.ItemQty);
+                        decimal totalAmount = 0;
+                        foreach (var price in item.INVOICE_LINEITEM)
+                        {
+                            totalAmount += (price.UnitPrice * price.ItemQty);
+                        }
+                        <tr>
+                            <td>@Html.DisplayFor(x => item.InvoiceID)</td>
+                            <td>@Html.DisplayFor(x => item.InvoiceCreatedDate)</td>
+                            <td>@Html.DisplayFor(x => item.INVOICE_CUSTOMER.CustomerName)</td>
+                            <td>@Html.DisplayFor(x => totalAmount)</td>
+                            <td>@Html.DisplayFor(x => item.TotalAmountPaid)</td>
+                        </tr>
                     }
+                }
+                else
+                {
                     <tr>
-                        <td>@Html.DisplayFor(x => item.InvoiceID)</td>
-                        @*<td>@String.Format("{0:MM/dd/yyyy}", item.InvoiceCreatedDate)</td>*@
-                        <td>@Html.DisplayFor(x => item.InvoiceCreatedDate)</td>
-                        <td>@Html.DisplayFor(x => item.INVOICE_CUSTOMER.CustomerName)</td>
-                        <td>@Html.DisplayFor(x => totalAmount)</td>
-                        <td>@Html.DisplayFor(x => item.TotalAmountPaid)</td>
-                    </tr>
+                        <td colspan="5">0 invoces were found.</td>
+                    </tr>   
                 }
             </tbody>
         </table>
@@ -112,7 +124,10 @@
     });
 </script>
 <script>
-    $('.collapse').accordion({
-        active: false
+    $(function () {
+        $("#accordion").accordion({
+            collapsible: true,
+            active: false
+        });
     });
-</script>
+  </script>
