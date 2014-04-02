@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.EMPLOYEE
+﻿@model RecOutletWarehouse.Controllers.EmployeeController.ConfirmPasswordViewModel
 
 @{
     ViewBag.Title = "EditEmployee";
@@ -8,51 +8,58 @@
 <h2>Edit Employee</h2>
 
 @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+    @Html.ValidationSummary(true, "Changes were not saved.")
 
     <fieldset>
         <legend>Employee Information</legend>
 
-        @Html.HiddenFor(model => model.EmployeeId)
+        @Html.HiddenFor(model => model.employee.EmployeeId)
 
         <div class="editor-label">
             First Name:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
+            @Html.EditorFor(model => model.employee.FirstName)
+            @Html.ValidationMessageFor(model => model.employee.FirstName)
         </div>
 
         <div class="editor-label">
             Last Name:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
+            @Html.EditorFor(model => model.employee.LastName)
+            @Html.ValidationMessageFor(model => model.employee.LastName)
         </div>
 
         <div class="editor-label">
             Position:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Position)
-            @Html.ValidationMessageFor(model => model.Position)
+            @Html.EditorFor(model => model.employee.Position)
+            @Html.ValidationMessageFor(model => model.employee.Position)
         </div>
 
         <div class="editor-label">
             Username:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Username)
-            @Html.ValidationMessageFor(model => model.Username)
+            @Html.EditorFor(model => model.employee.Username)
+            @Html.ValidationMessageFor(model => model.employee.Username)
         </div>
 
         <div class="editor-label">
-           Password:<strong class="required">*</strong>
+           New Password:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.PasswordFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
+            @Html.PasswordFor(model => model.NewPassword)
+            @Html.ValidationMessageFor(model => model.NewPassword)
+        </div>
+        <div class="editor-label">
+        Confirm Password:<strong class="required">*</strong>
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
 
         <p>
