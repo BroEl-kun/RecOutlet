@@ -28,10 +28,11 @@ namespace RecOutletWarehouse.Models
         [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
         public string Position { get; set; }
         [Display(Name = "Username: ")]
-        [Required(ErrorMessage = "Please provide a Username.")]
+        [Required]
         [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Please provide a Password.")]
+        [Required(ErrorMessage="Please provide a password.")]
+        [Display(Name = "Password: ")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string PasswordSalt{ get; set; }
