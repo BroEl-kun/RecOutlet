@@ -17,25 +17,38 @@ namespace RecOutletWarehouse.Controllers
         private RecreationOutletContext db = new RecreationOutletContext();
         public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
 
-        //public class ConfirmPINViewModel
-        //{
-        //    public EMPLOYEE employee { get; set; }
-
-        //    [DataType(DataType.Password)]
-        //    [StringLength(4, MinimumLength = 4)]
-        //    public string NewPIN { get; set; }
-
-        //    [DataType(DataType.Password)]
-        //    [StringLength(4, MinimumLength = 4)]
-        //    public string ConfirmPIN { get; set; }
-        //}
-
         public class BrowseEmployeeViewModel
         {
             public IEnumerable<EMPLOYEE> Employee { get; set; }
             public PagingInfo PagingInfo { get; set; }
             public string search { get; set; }
             public string startLetter { get; set; }
+        }
+        public class ConfirmPasswordViewModel
+        {
+            public EMPLOYEE employee { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]            
+            public string NewPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]            
+            public string ConfirmPassword { get; set; }
+        }
+
+
+        public class LoginViewModel
+        {
+            [Display(Name = "Username: ")]
+            [Required(ErrorMessage="Please provide a username.")]
+            [MaxLength(50, ErrorMessage = "Max Legth of 50 Characters")]
+            public string Username { get; set; }
+
+            [Required(ErrorMessage="Please provide a password.")]
+            [Display(Name = "Password: ")]
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
         }
 
         //
@@ -117,12 +130,10 @@ namespace RecOutletWarehouse.Controllers
             {
                 var crypto = new SimpleCrypto.PBKDF2();
 
-                EMPLOYEE emp = new EMPLOYEE();
-                emp = db.EMPLOYEEs.Find(id);
-
-
-
-                if (emp == null)
+                ConfirmPasswordViewModel emp = new ConfirmPasswordViewModel();
+                emp.employee = db.EMPLOYEEs.Find(id);
+                
+                if (emp.employee == null)
                 {
                     return HttpNotFound();
                 }
@@ -136,22 +147,29 @@ namespace RecOutletWarehouse.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditEmployee(EMPLOYEE emp)
+        public ActionResult EditEmployee(ConfirmPasswordViewModel emp)
         {
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
                     var crypto = new SimpleCrypto.PBKDF2();
 
-                    var encrpPass = crypto.Compute(emp.Password);
+                    if (emp.NewPassword.Equals(emp.ConfirmPassword))
+                    {
+                        var encrpPass = crypto.Compute(emp.NewPassword);
 
-                    emp.Password = encrpPass;
-                    emp.PasswordSalt = crypto.Salt;
+                        emp.employee.Password = encrpPass;
+                        emp.employee.PasswordSalt = crypto.Salt;
 
-                    db.Entry(emp).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("BrowseEmployee");
+                        db.Entry(emp.employee).State = EntityState.Modified;
+                        db.SaveChanges();
+                        return RedirectToAction("BrowseEmployee");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Passwords do not match.");
+                    }
                 }
 
                 return View(emp);
@@ -221,26 +239,26 @@ namespace RecOutletWarehouse.Controllers
         {
             FormsAuthentication.SignOut();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LogIn", "Employee");
         }
 
         [HttpPost]
-        public ActionResult LogIn(RecOutletWarehouse.Models.EMPLOYEE employee)
+        public ActionResult LogIn(LoginViewModel loginInfo)
         {
             if (ModelState.IsValid)
             {
-                if (IsValid(employee.Username, employee.Password))
+                if (IsValid(loginInfo.Username, loginInfo.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(employee.Username, false);
+                    FormsAuthentication.SetAuthCookie(loginInfo.Username, false);
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login Data is incorrect.");
+                    ModelState.AddModelError("", "Login failed. Please check your login details.");
                 }
             }
 
-            return View(employee);
+            return View();
 
         }
         private bool IsValid(string username, string password)
@@ -249,20 +267,20 @@ namespace RecOutletWarehouse.Controllers
 
             bool isValid = false;
 
-            using (var db = new RecreationOutletContext())
+            var user = db.EMPLOYEEs.FirstOrDefault(u => u.Username == username);            
+           
+            if (user != null)
             {
-                var user = db.EMPLOYEEs.FirstOrDefault(u => u.Username == username);
+                user.Password = user.Password.TrimEnd(' ');
+                user.PasswordSalt = user.PasswordSalt.TrimEnd(' ');
 
-                if (user != null)
+                if (user.Password == crypto.Compute(password, user.PasswordSalt))
                 {
-                    if (user.Password == crypto.Compute(password, user.PasswordSalt))
-                    {
-                        isValid = true;
-                    }
+                    isValid = true;
                 }
             }
 
-            return isValid;
+            return isValid; 
         }
     }
 }
