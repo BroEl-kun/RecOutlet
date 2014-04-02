@@ -14,32 +14,30 @@ namespace RecOutletWarehouse.Controllers
 
         public ActionResult Index()
         {
-            //if (Request.IsAuthenticated)
-            //{
-            //    try
-            //    {
-            //        //return View();
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        WarehouseUtilities.LogError(ex);
-            //        return RedirectToAction("Error", "Home");
-            //    }
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        return RedirectToAction("LogIn", "Employee");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        WarehouseUtilities.LogError(ex);
-            //        return RedirectToAction("Error", "Home");
-            //    }
-            //}
-
-            return View();
+            if (Request.IsAuthenticated)
+            {
+                try
+                {
+                    return View();
+                }
+                catch (Exception ex)
+                {
+                    WarehouseUtilities.LogError(ex);
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+            else
+            {
+                try
+                {
+                    return RedirectToAction("LogIn", "Employee");
+                }
+                catch (Exception ex)
+                {
+                    WarehouseUtilities.LogError(ex);
+                    return RedirectToAction("Error", "Home");
+                }
+            }
         }
 
         public ActionResult Error()
