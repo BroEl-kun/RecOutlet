@@ -59,7 +59,6 @@
             this.Controls.Add(this.tbPinNumber);
             this.Name = "PinNumberForm";
             this.Text = "PinNumberForm";
-            this.Load += new System.EventHandler(this.PinNumberForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

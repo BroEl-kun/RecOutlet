@@ -20,7 +20,7 @@ namespace RecreationOutletPOS
     public partial class PinNumberForm : Form
     {
         PriceOverideForm poForm;
-        int pinNumber = 1234;
+        int pinNumber = 1234; //TODO: Generate a unique 4-digit PIN number for the authorized user.
         bool confirmed = false;
 
         public PinNumberForm(PriceOverideForm inForm)
@@ -29,6 +29,13 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        #region PIN Number Comparisson
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 12/7/2013
+        ///
+        /// Functionality to compare entered PIN with correct PIN when the enter key is pressed.
+        /// </summary>
         private void tbPinNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -45,7 +52,7 @@ namespace RecreationOutletPOS
                         {
 
                             confirmed = true;
-                            poForm.Confirmed(confirmed);
+                            poForm.Confirmed(confirmed); //Confirmed() function in the Price Override code.
                             this.Close();
 
                         }
@@ -80,5 +87,7 @@ namespace RecreationOutletPOS
         {
 
         }
-}
+
+        #endregion
+    }
 }

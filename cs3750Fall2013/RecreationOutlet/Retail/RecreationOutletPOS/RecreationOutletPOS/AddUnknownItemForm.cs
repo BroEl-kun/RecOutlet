@@ -29,6 +29,13 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        #region Unknown Item's Price
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 1/16/2013
+        ///
+        /// Functionality to add the item's price when enter key is pressed
+        /// </summary>
         private void tbAddItemPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -87,7 +94,15 @@ namespace RecreationOutletPOS
                 }
             }
         }
+        #endregion
 
+        #region Unknown Item's Quantity
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 1/16/2013
+        ///
+        /// Functionality to add the item's quantity when the enter key is pressed.
+        /// </summary>
         private void tbQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
                if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
@@ -149,7 +164,16 @@ namespace RecreationOutletPOS
                    }
                }
         }
+        #endregion
 
+        #region Unknown Item's Name
+
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 1/16/2013
+        ///
+        /// Functionality to add the item's name when enter key is pressed.
+        /// </summary>
         private void tbItemName_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -208,5 +232,7 @@ namespace RecreationOutletPOS
                 }
             }
         }
+
+        #endregion
     }
 }
