@@ -39,6 +39,15 @@ namespace RecreationOutletPOS
             tbDiscountPrice.Focus();
         }
 
+        #region Discount Price Functionality (Currency)
+
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 01/7/2014
+        ///
+        /// Functionality to enter/update a discount price in currency form when enter key is pressed.
+        /// </summary>
+        /// 
         private void tbDiscountPrice_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -75,7 +84,16 @@ namespace RecreationOutletPOS
                 this.Close();
             }
         }
+        #endregion
 
+        #region Discount Price Functionality (Percentage)
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 01/7/2014
+        ///
+        /// Functionality to enter/update a discount price in percentage form when enter key is pressed.
+        /// </summary>
+        /// 
         private void tbDiscountPerc_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -116,5 +134,6 @@ namespace RecreationOutletPOS
                 this.Close();
             }
         }
+        #endregion
     }
 }

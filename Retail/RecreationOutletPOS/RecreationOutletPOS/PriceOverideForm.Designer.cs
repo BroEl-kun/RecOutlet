@@ -58,7 +58,6 @@
             this.Controls.Add(this.txtPriceOveride);
             this.Name = "PriceOverideForm";
             this.Text = "PriceOverideForm";
-            this.Load += new System.EventHandler(this.PriceOverideForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

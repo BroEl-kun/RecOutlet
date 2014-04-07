@@ -22,7 +22,6 @@ namespace RecreationOutletPOS
         /// </summary>
         int selectedItem;
         bool confirmed = false;
-        
 
         //Constructor for combined form -Aaron
         Combined combined;
@@ -34,7 +33,7 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
-
+        #region Pin Number Confirmation
         /// <summary>
         /// Programmer: Nate Maurer
         /// Last Updated: 12/7/2013
@@ -46,7 +45,15 @@ namespace RecreationOutletPOS
             confirmed = inConfirmed;
         }
         //------------------------------------
+        #endregion
 
+        #region Price Override Functionality
+        /// <summary>
+        /// Programmer: Nate Maurer
+        /// Last Updated: 01/7/2014
+        ///
+        /// Functionality to override a price when enter key is pressed.
+        /// </summary>
         private void txtPriceOveride_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Return)
@@ -91,10 +98,6 @@ namespace RecreationOutletPOS
                 this.Close();
             }
         }
-
-        private void PriceOverideForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }
