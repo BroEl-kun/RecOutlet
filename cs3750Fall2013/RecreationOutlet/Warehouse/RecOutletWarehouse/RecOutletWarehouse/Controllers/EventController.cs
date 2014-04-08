@@ -12,8 +12,13 @@ namespace RecOutletWarehouse.Controllers
 {
     public class EventController : Controller
     {
-        public class AddSalePriceViewModel {
+        public RecreationOutletContext db = new RecreationOutletContext();
 
+        /// <summary>
+        /// View Model for a new sales price to a current event
+        /// </summary>
+        public class AddSalePriceViewModel 
+        {
             public SALE_PRICING saleprice { get; set; }
             [Required(ErrorMessage = "Please provide the event.")]
             public string Event { get; set; }
@@ -21,7 +26,11 @@ namespace RecOutletWarehouse.Controllers
             public byte OldEvent { get; set; }
         }
 
-        public class ItemEventViewModel {
+        /// <summary>
+        /// Need to add comments here
+        /// </summary>
+        public class ItemEventViewModel
+        {
             //public EVENT_TYPE Event { get; set; }
             public IEnumerable<SelectListItem> Events { get; set; }
             //public string Event { get; set; }
@@ -33,103 +42,228 @@ namespace RecOutletWarehouse.Controllers
             public decimal SalePriceOfItem { get; set; }
         }
 
-        public RecreationOutletContext db = new RecreationOutletContext();
         //
         // GET: /Event/
 
+        /// <summary>
+        /// Page to view all existing events
+        /// </summary>
+        /// <returns>ViewEvents.cshtml</returns>
         public ActionResult ViewEvents()
         {
-            var eventTypes = from et in db.EVENT_TYPE
-                             select et;
+            try
+            {
+                var eventTypes = from et in db.EVENT_TYPE
+                                 select et;
 
-
-            return View(eventTypes.ToList());
-        }
-
-        public ActionResult EditEvent(int id = 0) {
-            EVENT_TYPE et = db.EVENT_TYPE.Find(id);
-            if (et == null) {
-                return HttpNotFound();
+                return View(eventTypes.ToList());
             }
-            return View(et);
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// Edit an existing event's data
+        /// </summary>
+        /// <param name="id">Event id</param>
+        /// <returns>EditEvent.cshtml</returns>
+        public ActionResult EditEvent(int id = 0)
+        {
+            try
+            {
+                EVENT_TYPE et = db.EVENT_TYPE.Find(id);
+                if (et == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(et);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        /// <summary>
+        /// POST for updating existing event's data
+        /// </summary>
+        /// <param name="et">EVENT_TYPE Model with modified data</param>
+        /// <returns>EditEvent.cshtml</returns>
         [HttpPost]
-        public ActionResult EditEvent(EVENT_TYPE et) {
+        public ActionResult EditEvent(EVENT_TYPE et)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Entry(et).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("ViewEvents");
+                }
 
-            if (ModelState.IsValid) {
-                db.Entry(et).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ViewEvents");
+                return View(et);
             }
-
-            return View(et);
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// Empty form to create a new event
+        /// </summary>
+        /// <returns>CreateEvent.cshtml</returns>
         public ActionResult CreateEvent()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// POST for form data to create a new event
+        /// </summary>
+        /// <param name="et">EVENT_TYPE model</param>
+        /// <returns>ActionResult ViewEvents</returns>
         [HttpPost]
         public ActionResult CreateEvent(EVENT_TYPE et)
         {
-
-            if (ModelState.IsValid)
+            try
             {
-                db.EVENT_TYPE.Add(et);
-                db.SaveChanges();
-                return RedirectToAction("ViewEvents");
+                if (ModelState.IsValid)
+                {
+                    db.EVENT_TYPE.Add(et);
+                    db.SaveChanges();
+                    return RedirectToAction("ViewEvents");
+                }
+
+                return View(et);
             }
-
-            return View(et);
-        }
-
-        public ActionResult ViewSalesPrice() {
-            var salesPrice = from sp in db.SALE_PRICING
-                             select sp;
-
-
-            return View(salesPrice.ToList());
-        }
-
-        public ActionResult EditSalesPrice(byte etc = 0, long rpc = 0) {
-            AddSalePriceViewModel model = new AddSalePriceViewModel();
-            model.saleprice = db.SALE_PRICING.Find(etc, rpc);
-            model.Event = model.saleprice.EVENT_TYPE.EventDescription;
-            model.OldRPC = model.saleprice.RecRPC;
-            model.OldEvent = model.saleprice.EventTypeCode;
-            if (model.saleprice == null) {
-                return HttpNotFound();
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
             }
-            return View(model);
         }
 
+        /// <summary>
+        /// View all sales prices
+        /// </summary>
+        /// <returns>ActionResult ViewSalesPrice</returns>
+        public ActionResult ViewSalesPrice()
+        {
+            try
+            {
+                var salesPrice = from sp in db.SALE_PRICING
+                                 select sp;
+
+                return View(salesPrice.ToList());
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        /// <summary>
+        /// Edit an existing sale's price
+        /// </summary>
+        /// <param name="etc">Event Type Code</param>
+        /// <param name="rpc">Item RPC</param>
+        /// <returns>ActionResult EditSalesPrice</returns>
+        public ActionResult EditSalesPrice(byte etc = 0, long rpc = 0)
+        {
+            try
+            {
+                AddSalePriceViewModel model = new AddSalePriceViewModel();
+                model.saleprice = db.SALE_PRICING.Find(etc, rpc);
+                model.Event = model.saleprice.EVENT_TYPE.EventDescription;
+                model.OldRPC = model.saleprice.RecRPC;
+                model.OldEvent = model.saleprice.EventTypeCode;
+
+                if (model.saleprice == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
+        }
+
+        /// <summary>
+        /// POST for modified data in an existing sale's price
+        /// </summary>
+        /// <param name="sp">AddSalesPriceViewModel</param>
+        /// <returns>ActionResult ViewSalesPrice</returns>
         [HttpPost]
-        public ActionResult EditSalesPrice(AddSalePriceViewModel sp) {
+        public ActionResult EditSalesPrice(AddSalePriceViewModel sp)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
 
-            if (ModelState.IsValid) {
+                    SALE_PRICING oldSalePrice = db.SALE_PRICING.Single(
+                        p => p.RecRPC == sp.OldRPC && p.EventTypeCode == sp.OldEvent);
 
-                SALE_PRICING oldSalePrice = db.SALE_PRICING.Single(
-                    p => p.RecRPC == sp.OldRPC && p.EventTypeCode == sp.OldEvent);
+                    db.SALE_PRICING.Remove(oldSalePrice);
 
-                db.SALE_PRICING.Remove(oldSalePrice);
+                    sp.saleprice.EVENT_TYPE = db.EVENT_TYPE.Single(et => et.EventDescription == sp.Event);
+                    sp.saleprice.ITEM = db.ITEMs.Single(i => i.RecRPC == sp.saleprice.RecRPC);
+                    db.SALE_PRICING.Add(sp.saleprice);
+                    db.SaveChanges();
+                    return RedirectToAction("ViewSalesPrice");
+                }
 
-                sp.saleprice.EVENT_TYPE = db.EVENT_TYPE.Single(et => et.EventDescription == sp.Event);
-                sp.saleprice.ITEM = db.ITEMs.Single(i => i.RecRPC == sp.saleprice.RecRPC);
-                db.SALE_PRICING.Add(sp.saleprice);
-                db.SaveChanges();
-                return RedirectToAction("ViewSalesPrice");
+                return View(sp);
             }
-
-            return View(sp);
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
-        public ActionResult CreateSalesPrice(int id = 0) {
-
-            return View();
+        /// <summary>
+        /// Empty form for creating a new sale's price
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ActionResult CreateSalesPrice</returns>
+        public ActionResult CreateSalesPrice(int id = 0)
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// POST for form data to create a new sale's price
+        /// </summary>
+        /// <param name="sp">AddSalePriceViewModel</param>
+        /// <returns>ActionResult CreateSalesPrice</returns>
         [HttpPost]
         public ActionResult CreateSalesPrice(AddSalePriceViewModel sp)
         {
@@ -151,23 +285,56 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        public ActionResult AddItemsToEvent(byte id = 0) {
-            ItemEventViewModel ievm = new ItemEventViewModel {
-                Events = EventsToSelectListItems(db.EVENT_TYPE, id),
-                SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == id).ToList()
-            };
+        /// <summary>
+        /// Method for adding items to an existing event.
+        /// Pulls a list of all existing items in in that event
+        /// </summary>
+        /// <param name="id">Event id</param>
+        /// <returns>ActionResult AddItemsToEvent</returns>
+        public ActionResult AddItemsToEvent(byte id = 0)
+        {
+            try
+            {
+                ItemEventViewModel ievm = new ItemEventViewModel
+                {
+                    Events = EventsToSelectListItems(db.EVENT_TYPE, id),
+                    SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == id).ToList()
+                };
 
-            return View(ievm);
+                return View(ievm);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// POST new items to add to an existing event
+        /// </summary>
+        /// <param name="ievm">ItemEventViewModel</param>
+        /// <returns>ActionResult AddItemsToEvent</returns>
         [HttpPost]
-        public ActionResult AddItemsToEvent(ItemEventViewModel ievm) {
-            ievm.Events = EventsToSelectListItems(db.EVENT_TYPE, ievm.EventToAddTo);
-            ievm.SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == ievm.EventToAddTo).ToList();
+        public ActionResult AddItemsToEvent(ItemEventViewModel ievm)
+        {
+            try
+            {
+                ievm.Events = EventsToSelectListItems(db.EVENT_TYPE, ievm.EventToAddTo);
+                ievm.SalePrices = db.SALE_PRICING.Where(x => x.EventTypeCode == ievm.EventToAddTo).ToList();
 
-            return View(ievm);
+                return View(ievm);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        //*************************NOTE:******************************
+        //I don't believe we are using this method anymore, but I'm not
+        //going to comment it out just something is dependent on this.
         public ActionResult ItemToEvent(ItemEventViewModel model)
         {
             try {
@@ -200,26 +367,56 @@ namespace RecOutletWarehouse.Controllers
 
                 return PartialView("ItemToEvent", listToReturn);
             }
-            catch(Exception ex) {
+            catch(Exception ex)
+            {
                 return PartialView("ItemToEvent");
             }
         }
 
-        public ActionResult RemoveSalesPriceFromEvent(byte etc = 0, long rpc = 0 ) {
-            SALE_PRICING lineItem = db.SALE_PRICING.Single(sp => sp.RecRPC == rpc && sp.EventTypeCode == etc);
+        /// <summary>
+        /// Pulls a list of all sales prices so the user can choose which ones to remove
+        /// </summary>
+        /// <param name="etc">Event Type Code</param>
+        /// <param name="rpc">RecRPC</param>
+        /// <returns>ActionResult RemoveSalesPriceFromEvent</returns>
+        public ActionResult RemoveSalesPriceFromEvent(byte etc = 0, long rpc = 0 )
+        {
+            try
+            {
+                SALE_PRICING lineItem = db.SALE_PRICING.Single(sp => sp.RecRPC == rpc && sp.EventTypeCode == etc);
 
-            db.SALE_PRICING.Remove(lineItem);
+                db.SALE_PRICING.Remove(lineItem);
 
-            db.SaveChanges();
-            List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == etc).ToList();
+                db.SaveChanges();
+                List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == etc).ToList();
 
-            return PartialView("ItemToEvent", listToReturn);
+                return PartialView("ItemToEvent", listToReturn);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// Pulls a list of all sales prices for a specified event
+        /// </summary>
+        /// <param name="id">Event ID</param>
+        /// <returns>ActionResult getAllSalePricesForEvent</returns>
         [HttpPost]
-        public ActionResult getAllSalePricesForEvent(byte id = 0) {
-            List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == id).ToList();
-            return PartialView("ItemToEvent", listToReturn);
+        public ActionResult getAllSalePricesForEvent(byte id = 0)
+        {
+            try
+            {
+                List<SALE_PRICING> listToReturn = db.SALE_PRICING.Where(sp => sp.EventTypeCode == id).ToList();
+                return PartialView("ItemToEvent", listToReturn);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // Extension methods follow
