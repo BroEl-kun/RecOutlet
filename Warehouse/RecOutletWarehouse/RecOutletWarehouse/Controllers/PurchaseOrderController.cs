@@ -29,7 +29,8 @@ namespace RecOutletWarehouse.Controllers
         /// <author>Tyler M.</author>
         public class PurchaseOrderCreationViewModel
         {
-            public PurchaseOrderCreationViewModel() {
+            public PurchaseOrderCreationViewModel()
+            {
                 VendorItems = new List<VendorItemsViewModel>();
             }
             public PURCHASE_ORDER PO { get; set; }
@@ -41,12 +42,19 @@ namespace RecOutletWarehouse.Controllers
             public String tempPOID { get; set; }
         }
 
-        public class VendorItemsViewModel {
+        /// <summary>
+        /// ViewModel for creating items to a purchase order
+        /// </summary>
+        public class VendorItemsViewModel
+        {
             public ITEM VendorItem { get; set; }
             public short QtyToOrder { get; set; }
             public decimal ItemCostEach { get; set; }
         }
 
+        /// <summary>
+        /// ViewModel for Browsing/Searching/Paging Purchase Orders
+        /// </summary>
         public class PurchaseOrderSearchViewModel
         {
             public List<PURCHASE_ORDER> POs { get; set; }
@@ -62,6 +70,10 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /PurchaseOrder/
 
+        /// <summary>
+        /// Index of the Purchase Order Controller
+        /// </summary>
+        /// <returns>ActionResult Index</returns>
         public ActionResult Index()
         {
             try
@@ -75,6 +87,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Form for creating a new Purchase Order
+        /// </summary>
+        /// <param name="vendorId">Id of the Vendor the Purchase Order is for</param>
+        /// <returns>ActionResult CreateNewPO</returns>
         [HttpGet]
         public ActionResult CreateNewPO(int vendorId = 0)
         {
@@ -266,42 +283,76 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        public ActionResult addItemToLineItems(decimal cost = 0, short qty = 0, int num = 0, long rpc = 0, long poid = 0 ){
-            // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
-            ITEM item = entityDb.ITEMs.Single(i => i.RecRPC == rpc);
-            PURCHASE_ORDER PO = entityDb.PURCHASE_ORDER.Single(p => p.POID == poid);
-            entityDb.PO_LINEITEM.Add(new PO_LINEITEM {
-                PURCHASE_ORDER = PO,
-                ITEM = item,
-                QtyOrdered = qty,
-                WholesaleCost = cost,
-                QtyTypeID = 1 // Need to re-evaluate the purpose of QtyType - esp. does it need to be here? 
-            });
-            if (!ModelState.IsValid) {
-                return PartialView("POLineItemListPart");
+        /// <summary>
+        /// Add item to line items
+        /// </summary>
+        /// <param name="cost">Cost of product</param>
+        /// <param name="qty">Number of product</param>
+        /// <param name="num"></param>
+        /// <param name="rpc">RecRPC</param>
+        /// <param name="poid">Purchase Order ID</param>
+        /// <returns>PartialView POLineItemsListPart</returns>
+        public ActionResult addItemToLineItems(decimal cost = 0, short qty = 0, int num = 0, long rpc = 0, long poid = 0 )
+        {
+            try
+            {
+                // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
+                ITEM item = entityDb.ITEMs.Single(i => i.RecRPC == rpc);
+                PURCHASE_ORDER PO = entityDb.PURCHASE_ORDER.Single(p => p.POID == poid);
+                entityDb.PO_LINEITEM.Add(new PO_LINEITEM
+                {
+                    PURCHASE_ORDER = PO,
+                    ITEM = item,
+                    QtyOrdered = qty,
+                    WholesaleCost = cost,
+                    QtyTypeID = 1 // Need to re-evaluate the purpose of QtyType - esp. does it need to be here? 
+                });
+                if (!ModelState.IsValid)
+                {
+                    return PartialView("POLineItemListPart");
+                }
+
+                entityDb.SaveChanges();
+                List<PO_LINEITEM> listToReturn = entityDb.PO_LINEITEM.Where(li => li.POID == PO.POID).ToList();
+
+                ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
+
+                return PartialView("POLineItemListPart", listToReturn);
             }
-
-            entityDb.SaveChanges();
-            List<PO_LINEITEM> listToReturn = entityDb.PO_LINEITEM.Where(li => li.POID == PO.POID).ToList();
-
-            ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
-
-            return PartialView("POLineItemListPart", listToReturn);
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
-        public ActionResult removeItemFromLineItems(int lineItemID = 0) {
-            // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
-            PO_LINEITEM lineItem = entityDb.PO_LINEITEM.Single(poli => poli.POLineItemID == lineItemID);
-            long POID = lineItem.POID;
+        /// <summary>
+        /// Removes an item for the the line items
+        /// </summary>
+        /// <param name="lineItemID">Line item ID</param>
+        /// <returns>PartialView POLineItemsListPart</returns>
+        public ActionResult removeItemFromLineItems(int lineItemID = 0)
+        {
+            try
+            {
+                // TODO: Find a more "maintainable" way to do this (i.e. pass a ViewModel instead of a bunch of parameters)
+                PO_LINEITEM lineItem = entityDb.PO_LINEITEM.Single(poli => poli.POLineItemID == lineItemID);
+                long POID = lineItem.POID;
 
-            entityDb.PO_LINEITEM.Remove(lineItem);
+                entityDb.PO_LINEITEM.Remove(lineItem);
 
-            entityDb.SaveChanges();
-            List<PO_LINEITEM> listToReturn = entityDb.PO_LINEITEM.Where(li => li.POID == POID).ToList();
+                entityDb.SaveChanges();
+                List<PO_LINEITEM> listToReturn = entityDb.PO_LINEITEM.Where(li => li.POID == POID).ToList();
 
-            ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
+                ViewBag.TotalPOCost = String.Format("{0:$0.00}", listToReturn.Sum(x => x.WholesaleCost * x.QtyOrdered));
 
-            return PartialView("POLineItemListPart", listToReturn);
+                return PartialView("POLineItemListPart", listToReturn);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
@@ -332,6 +383,13 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Utility for searching PO by orderdate. Also paging is included
+        /// for lists greater than 25 POs
+        /// </summary>
+        /// <param name="orderDate"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public ActionResult SearchPO(DateTime? orderDate, int page = 1)
         {
             try
@@ -394,6 +452,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Edit an existing Purchase Order's data
+        /// </summary>
+        /// <param name="id">Purchase Order ID</param>
+        /// <returns>ActionResult EditPO</returns>
         public ActionResult EditPO(int id)
         {
             try
@@ -411,6 +474,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST method for editing and existing PO's data
+        /// </summary>
+        /// <param name="po">PURCHASE_ORDER model</param>
+        /// <returns>ActionResult SearchPO</returns>
         [HttpPost]
         public ActionResult EditPO(PURCHASE_ORDER po)
         {
@@ -427,13 +495,31 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        public ActionResult PODocumentView(int id=0) {
-            Response.Redirect(@"~/WebForms/POReport.aspx?id=" + id.ToString());
-            return new EmptyResult();
+        /// <summary>
+        /// View Purchase Order in PDF format
+        /// </summary>
+        /// <param name="id">Purchase Order ID</param>
+        /// <returns>View of PDF version of Purchase Order</returns>
+        public ActionResult PODocumentView(int id=0)
+        {
+            try
+            {
+                Response.Redirect(@"~/WebForms/POReport.aspx?id=" + id.ToString());
+                return new EmptyResult();
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         //PURCHASE ORDER UTILITY METHODS FOLLOW
-
+        /// <summary>
+        /// Creates a PO form
+        /// </summary>
+        /// <param name="PO">Int Purchase Order ID</param>
+        /// <returns>String Purchase Order for form</returns>
         public static string createPOForForm(int PO)
         {
             string POforForm;
