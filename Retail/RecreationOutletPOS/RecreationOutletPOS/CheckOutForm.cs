@@ -205,16 +205,6 @@ namespace RecreationOutletPOS
             if (!isNum)
             {
                 txtCashTender.Text = "";
-
-                /*char last = txtCashTender.Text[txtCashTender.Text.Length - 1];
-                if (last == '?')
-                {
-                    txtCashTender.Text = "";
-                }
-                else
-                {
-                    txtCashTender.Text = txtCashTender.Text.Substring(0, txtCashTender.Text.Length - 1);
-                }*/
             }
         }
 
@@ -298,14 +288,12 @@ namespace RecreationOutletPOS
 
                         ReceiptGenerator receiptGenerator = new ReceiptGenerator(newTransaction.transactionDetails, transItems);
 
-                        //receiptGenerator.printReceiptToFile();
                         receiptGenerator.printToPrinter();
 
                         MessageBox.Show("Transaction complete.\n" + newTransaction.rowsInserted.ToString() + " transaction(s) recorded.", "Transaction",
                             MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
                         this.Close();
-                        //parent.voidTransaction();
                         combined.voidTransaction();
                     }
 

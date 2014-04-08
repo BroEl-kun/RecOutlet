@@ -28,21 +28,20 @@ namespace RecreationOutletPOS
     public partial class Combined : Form
     {
         private static readonly ILog log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        //private static readonly ILog log = LogManager.GetLogger(typeof(Combined));
 
         #region Class Properties
 
-        TransactionList tList = new TransactionList();  //list for sales
-        TransactionList tList2 = new TransactionList(); //list for returns
+        TransactionList tList = new TransactionList();      //list for sales
+        TransactionList tList2 = new TransactionList();    //list for returns
 
         public string selectedInventory;
         public string selectedSearchColumn;
 
-        public string fromDateFilter;
-        public string toDateFilter;
+        public string fromDateFilter;                           // used in reports tab
+        public string toDateFilter;                                // used in reports tab
 
-        public string empName;
-        public string empPosition;
+        public string empName;                                  // employee name
+        public string empPosition;                             // employee position
 
         // keyboard event handling
         bool modifierKeyHandled = false;
@@ -58,10 +57,14 @@ namespace RecreationOutletPOS
         public Combined()
         {
             InitializeComponent();
+
+            // default tab is the sales tab
             setTab(btnSales, grpSales);
 
+            // log4net error logging configuration
             log4net.Config.XmlConfigurator.Configure();
 
+            // required for barcode field, allows the program to intercept keypresses before they are sent to the handler
             this.KeyPreview = true;
 
             //Inventory form
@@ -125,8 +128,9 @@ namespace RecreationOutletPOS
             // SALES EVENT HANDLING
             if (grpSales.Visible)
             {
-                // make a list of ignored keys, usually keys that include
-                // important keyboard combinations like cut, copy, and paste
+                // Make a list of ignored keys, usually keys that include
+                // important keyboard combinations like cut, copy, and paste.
+                // REMEMBER to update this for every Windows default combination.
                 Keys[] ignoredKeys = {Keys.Z, Keys.X, Keys.C, Keys.V};
 
                 // control key is held
@@ -165,7 +169,6 @@ namespace RecreationOutletPOS
                             PriceOverideForm priceOverideForm = new PriceOverideForm(this, lvi.Index);
                             priceOverideForm.ShowDialog();
                         }
-
                         else
                         {
                             MessageBox.Show("Please select an item to change a price for.", "Change Price",
@@ -219,8 +222,6 @@ namespace RecreationOutletPOS
                             }
                         }
                     }
-
-
 
                     modifierKeyHandled = true;
                 }
@@ -513,6 +514,7 @@ namespace RecreationOutletPOS
             tax = tax.Substring(0, tax.Length - 1);
             newTotalText = newTotalText.Substring(0, newTotalText.Length - 1);
 
+            // adds general store information to the checkout
             if (lsvCheckOutItems.Items.Count > 0)
             {
                 try
@@ -536,7 +538,6 @@ namespace RecreationOutletPOS
 
                 catch (Exception ex)
                 {
-
                 }
             }
 
@@ -577,6 +578,13 @@ namespace RecreationOutletPOS
             addItemForm.ShowDialog();
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 1/14/2014
+        /// 
+        /// Calls an item deletion dialogue box, which requests a quantity.
+        /// NOTE: The delete hotkey bypasses this.
+        /// </summary>
         private void btnDeleteItem_Click(object sender, EventArgs e)
         {
             if (lsvCheckOutItems.SelectedItems.Count > 0)
@@ -593,11 +601,23 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: ?
+        /// Last Updated: ?
+        /// 
+        /// Prepare the checkout information before calling the checkout form.
+        /// </summary>
         private void btnCheckOut_Click(object sender, EventArgs e)
         {
             prepareCheckout();
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 1/14/2014
+        /// 
+        /// Voids the entire transaction.
+        /// </summary>
         private void btnClear_Click(object sender, EventArgs e)
         {
             if (lsvCheckOutItems.Items.Count > 0)
@@ -665,6 +685,14 @@ namespace RecreationOutletPOS
 
         #region Key Press Handling
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 11/28/2013
+        /// 
+        /// Handles barcode scanning by giving the field keyboard events.
+        /// NOTE: The barcode scanner handles input precisely like a keyboard, pressing the enter key at the end.
+        /// This automatically activates validation.
+        /// </summary>
         private void tbScanner_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Enter key is pressed
@@ -697,6 +725,10 @@ namespace RecreationOutletPOS
                         string ID = newText;
                         characterLength = ID.Length;
 
+                        // differentiate modes based on the number of characters
+                        //      RPCs have 13 characters
+                        //      UPCs have 12 characters
+                        //      miniUPCs have 6 characters
                         string mode = "";
 
                         if (characterLength == 13)
@@ -718,8 +750,6 @@ namespace RecreationOutletPOS
                         {
                             mode = "ItemUPC";
                             ds = dt.retrieveItem(2, ID);
-                            //ds = null;
-                            // error
                         }
 
                         if (tbItemQuantity.Text != "")
@@ -728,6 +758,7 @@ namespace RecreationOutletPOS
                         if (quantity < 1)
                             quantity = 1;
 
+                        // pull data from the returned dataset and insert it into the listview using addItem()
                         if (ds.Tables["Results"].Rows.Count != 0)
                         {
                             foreach (DataRow row in ds.Tables["Results"].Rows)
@@ -761,6 +792,12 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Forwards all digit and enter key events to the scanner field
+        /// </summary>
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
@@ -1165,6 +1202,12 @@ namespace RecreationOutletPOS
 
         #region --- Employee Login ---
 
+        /// <summary>
+        /// Programmer: Aaron Sorenson
+        /// Last Updated: 1/14/2014
+        /// 
+        /// Calls a login dialogue box.
+        /// </summary>
         private void btnLogin_MouseClick(object sender, MouseEventArgs e)
         {
             if (btnLogin.Text != "Logout")
@@ -1178,6 +1221,12 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Aaron Sorenson
+        /// Last Updated: 1/14/2014
+        /// 
+        /// Display-oriented handling concerning the login.
+        /// </summary>
        public void login(string name, string position)
         {
             btnLogin.Text = "Logout";
@@ -1189,6 +1238,12 @@ namespace RecreationOutletPOS
             empPosition = position;
         }
 
+       /// <summary>
+       /// Programmer: Aaron Sorenson
+       /// Last Updated: 1/14/2014
+       /// 
+       /// Display-oriented handling concerning the logout.
+       /// </summary>
         public void logout()
         {
             btnLogin.Text = "Login";
