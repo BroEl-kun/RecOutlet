@@ -10,6 +10,13 @@ using System.Web.Http;
 
 namespace RecOutletWarehouse.Controllers
 {
+    //***************************************************************************
+    //All ApiControllers are for Jquery AutoComplete functionality in the views
+    //                                **NOTE**
+    //Some Controllers are pulling from the old models and need to be updated
+    //using the new models and the Entity Framework
+    //***************************************************************************
+
     public class VendorApiController : ApiController
     {
         [HttpGet]
