@@ -342,5 +342,19 @@ namespace RecOutletWarehouse.Controllers
 
             return isValid; 
         }
+
+        public JsonResult CheckForDuplicateEmployees(string username = "")
+        {
+            IEnumerable<EMPLOYEE> emp = db.EMPLOYEEs.ToList();
+            var isDuplicate = false;
+            if (emp.Any(e => e.Username == username))
+            {
+                isDuplicate = true;
+            }
+
+            var jsonData = new { isDuplicate };
+
+            return Json(jsonData, JsonRequestBehavior.AllowGet);
+        }
     }
 }
