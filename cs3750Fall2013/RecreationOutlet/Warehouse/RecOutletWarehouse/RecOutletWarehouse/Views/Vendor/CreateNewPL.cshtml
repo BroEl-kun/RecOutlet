@@ -21,6 +21,8 @@
             $('.newrep').hide();
         });
 
+        // This function shows / hides the "Existing Rep" and "Add new Sales Rep" divs
+        // when the 'changerep' radio button is changed.
         $("input:radio[name$='existingrep']").click(function () {
             var $this = $(this);
             if ($this.val() == "Yes") {
@@ -93,6 +95,7 @@
 }
 
 <script>
+    // jQuery autocomplete for Vendor Name follows
     $('#vendor').autocomplete({
         autoFocus: true,
         source: function (request, response) {
@@ -112,12 +115,12 @@
         },
         select: function (event, ui) {
             $('#vendor').val(ui.item.label);
-            //$('#Id').val(ui.item.label);
             return false;
         },
         minLength: 1
     });
 
+    // jQuery autocomplete for sales rep name follows
     $('#searchrep').autocomplete({
         autoFocus: true,
         source: function (request, response) {
@@ -130,8 +133,8 @@
                     response($.map(data, function (item) {
                         return {
                             label: item.SalesRepFirstName + " " + item.SalesRepLastName,
-                            first: item.SalesRepFirstName,
-                            last: item.SalesRepLastName
+                            first: item.SalesRepFirstName, // Needs to be pulled from the JSON packet to fill the SalesRepFirstName field
+                            last: item.SalesRepLastName // Needs to be pulled from the JSON packet to fill the SalesRepLastName field
                         }
                     }).slice(0,10));
                 }
@@ -139,8 +142,8 @@
         },
         select: function (event, ui) {
             $('#searchrep').val(ui.item.label);
-            $('#existFirst').val(ui.item.first);
-            $('#existLast').val(ui.item.last);
+            $('#existFirst').val(ui.item.first); // This must be filled to properly fill the model for database insertion
+            $('#existLast').val(ui.item.last); // This must be filled to properly fill the model for database insertion
             return false;
         },
         minLength: 1

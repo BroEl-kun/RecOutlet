@@ -12,10 +12,13 @@
             $('.existrep').hide();
         });
 
+        // This function shows / hides the "Existing Rep" and "Add new Sales Rep" divs
+        // when the 'changerep' radio button is changed.
         $("input:radio[name$='changerep']").click(function () {
             var $this = $(this);
             if ($this.val() == "existing") {
                 $('.existrep').show();
+                // Auto-fill the current sales rep's name for the search field
                 $('#searchrep').val('@Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepFirstName) @Html.DisplayFor(model => model.productLine.SALES_REP.SalesRepLastName)');
                 $('.newrep').hide();
                 $('.newrepinput').val('');
@@ -110,11 +113,12 @@
 </div>
 
 <script>
+    // jQuery autocomplete for Vendor Name follows
     $('#vendor').autocomplete({
-        autoFocus: true,
+        autoFocus: true, // Automatically select first list item if user presses tab or enter
         source: function (request, response) {
             $.ajax({
-                url: '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "VendorApi" })',
+                url: '@Url.RouteUrl("DefaultApi", new { httproute = "", controller = "VendorApi" })', // API method call to interact with database
                 data: { query: request.term },
                 dataType: 'json',
                 type: 'GET',
@@ -123,17 +127,18 @@
                         return {
                             label: item.VendorName
                         }
-                    }).slice(0,10));
+                    }).slice(0,10)); // Restrict to 10 items in the list
                 }
             })
         },
         select: function (event, ui) {
-            $('#vendor').val(ui.item.label);
+            $('#vendor').val(ui.item.label); // Change this DOM ID when an item is selected
             return false;
         },
-        minLength: 1
+        minLength: 1 // Only autocomplete after one character has been typed
     });
 
+    // jQuery autocomplete for sales rep name follows
     $('#searchrep').autocomplete({
         autoFocus: true,
         source: function (request, response) {
