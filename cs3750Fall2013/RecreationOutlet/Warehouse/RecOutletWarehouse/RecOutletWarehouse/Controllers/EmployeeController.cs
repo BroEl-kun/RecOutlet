@@ -241,6 +241,10 @@ namespace RecOutletWarehouse.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    if (db.EMPLOYEEs.Any(e => e.Username == emp.Username))
+                    {
+                        return View(emp);
+                    }
                     var crypto = new SimpleCrypto.PBKDF2();
 
                     var encrpPass = crypto.Compute(emp.Password);
