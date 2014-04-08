@@ -20,13 +20,17 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /ItemMangement/
 
-        public class ItemDeptCatSubcatViewModel {
+        //OBSOLETE VIEWMODEL Use newItemDeptCatSubcatViewModel
+        public class ItemDeptCatSubcatViewModel
+        {
             public Department department { get; set; }
             public Category category { get; set; }
             public SubCategory subcat { get; set; }
         }
 
-        //New view model that incorporates the Entity Framework models
+        /// <summary>
+        /// ViewModel that is used for creating a new department, category and/or subcategory
+        /// </summary>
         public class newItemDeptCatSubcatViewModel
         {
             public ITEM_DEPARTMENT department { get; set; }
@@ -34,6 +38,9 @@ namespace RecOutletWarehouse.Controllers
             public ITEM_SUBCATEGORY subcat { get; set; }
         }
 
+        /// <summary>
+        /// ViewModel for Browsing/Editing all existing departments, categories and subcategories
+        /// </summary>
         public class allItemDeptCatSubcatViewModel
         {
             public List<ITEM_DEPARTMENT> departments { get; set; }
@@ -44,14 +51,22 @@ namespace RecOutletWarehouse.Controllers
             public ITEM_DEPARTMENT dept { get; set; }
         }
 
-        public class BrowseItemViewModel {
+        /// <summary>
+        /// ViewModel for browsing/paging all existing Items
+        /// </summary>
+        public class BrowseItemViewModel
+        {
             public IEnumerable<ITEM> Items { get; set; }
             public PagingInfo PagingInfo { get; set; }
             public string search { get; set; }
             public string startLetter { get; set; }
         }
 
-        public class ItemCreationViewModel {
+        /// <summary>
+        /// ViewModel for creation of a new item
+        /// </summary>
+        public class ItemCreationViewModel
+        {
             [Required]
             public string VendorName { get; set; }
             //public string DeptName { get; set; }
@@ -61,7 +76,16 @@ namespace RecOutletWarehouse.Controllers
             public ITEM Item { get; set; }
         }
 
-        public ActionResult BrowseItemManagement(string itemNameSearch, string firstLetter, int page = 1) {
+        /// <summary>
+        /// Browse capabilites of all items. Gives the ability to search for and item. A rollodex
+        /// is included. Also paging if item list is larger than 25.
+        /// </summary>
+        /// <param name="itemNameSearch">String for user to search by item's name</param>
+        /// <param name="firstLetter">String one character for rollodex feature</param>
+        /// <param name="page">Int page number</param>
+        /// <returns>ActionResult BrowseItemManagement</returns>
+        public ActionResult BrowseItemManagement(string itemNameSearch, string firstLetter, int page = 1)
+        {
             try {
                 // Declare model
                 BrowseItemViewModel model;
@@ -125,30 +149,57 @@ namespace RecOutletWarehouse.Controllers
         /// </summary>
         /// <param name="id">The VendorID of the vendor to edit</param>
         /// <returns>The EditVendor View, prefilled with the vendor information.</returns>
-        public ActionResult EditItem(int id = 0) {
-            ITEM item = entityDb.ITEMs.Find(id);
-            if (item == null) {
-                return HttpNotFound();
+        public ActionResult EditItem(int id = 0)
+        {
+            try
+            {
+                ITEM item = entityDb.ITEMs.Find(id);
+
+                if (item == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(item);
             }
-            return View(item);
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         /// <summary>
-        /// POST method for editing a vendor
+        /// POST method for editing an Item
         /// </summary>
-        /// <param name="vendor">The vendor object that is modified</param>
-        /// <returns></returns>
+        /// <param name="vendor">The item model that has been modified</param>
+        /// <returns>ActionResult EditItem</returns>
         [HttpPost]
-        public ActionResult EditItem(ITEM item) {
-            if (ModelState.IsValid) {
-                entityDb.Entry(item).State = EntityState.Modified;
-                entityDb.SaveChanges();
-                return RedirectToAction("BrowseItemManagement");
-            }
+        public ActionResult EditItem(ITEM item)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    entityDb.Entry(item).State = EntityState.Modified;
+                    entityDb.SaveChanges();
 
-            return View(item);
+                    return RedirectToAction("BrowseItemManagement");
+                }
+
+                return View(item);
+            }
+            catch (Exception ex)
+            {
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
+            }
         }
 
+        /// <summary>
+        /// Empty form to creating a new item
+        /// </summary>
+        /// <returns>ActionResult CreatenewItem</returns>
         public ActionResult CreateNewItem()
         {
             try
@@ -167,9 +218,17 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST method for creating a new item
+        /// </summary>
+        /// <param name="model">ItemCreationViewModel</param>
+        /// <param name="labelRedirect">String to see if user wants to proceed to printing labels</param>
+        /// <returns>ActionReslut CreateNewItem</returns>
         [HttpPost]
-        public ActionResult CreateNewItem(ItemCreationViewModel model, string labelRedirect = "") {
-            try {
+        public ActionResult CreateNewItem(ItemCreationViewModel model, string labelRedirect = "")
+        {
+            try
+            {
                 DataFetcherSetter db = new DataFetcherSetter();
                 ITEM item = model.Item;
                 item.TaxTypeID = 1; //TODO: A lot of things :)
@@ -319,6 +378,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Prints labels for an item
+        /// </summary>
+        /// <param name="id">Nullable long RecRPC</param>
+        /// <returns>ActionResult PrintLabels</returns>
         public ActionResult PrintLabels(long? id)
         {
             try
@@ -333,6 +397,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST method for printing labels
+        /// </summary>
+        /// <param name="labelModel">LabelPrinting model</param>
+        /// <returns>ActionResult PrintLables</returns>
         [HttpPost]
         public ActionResult PrintLabels(LabelPrinting labelModel)
         {
@@ -370,6 +439,10 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Form for creating a new Deptartment, Category or Subcategory
+        /// </summary>
+        /// <returns>ActionResult addNewDeptCatSubcat</returns>
         public ActionResult addNewDeptCatSubcat()
         {
             try
@@ -383,6 +456,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST method for creating a new Deptartment, Category or Subcategory
+        /// </summary>
+        /// <param name="model">newItemDeptCatSubcatViewModel</param>
+        /// <param name="submitButton">String to specify which item characteristic the user wants to create</param>
+        /// <returns>ActionResult addNewDeptCatSubcat</returns>
         [HttpPost]
         public ActionResult addNewDeptCatSubcat(newItemDeptCatSubcatViewModel model, string submitButton)
         {
@@ -451,6 +530,10 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// View/Browse/Edit all existing Deptartments, Categories or Subcategories
+        /// </summary>
+        /// <returns>ActionResult ItemCharacteristics</returns>
         public ActionResult ItemCharacteristics()
         {
             try
@@ -470,6 +553,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Select an existing Deptartment, Category or Subcategory for editing
+        /// </summary>
+        /// <param name="idcsvm">allItemDeptCatSubcatViewModel</param>
+        /// <param name="editButton">String for selecting specific characteristic</param>
+        /// <returns>ActionResult ItemCharacteristics</returns>
         [HttpPost]
         public ActionResult ItemCharacteristics(allItemDeptCatSubcatViewModel idcsvm, string editButton)
         {
@@ -504,6 +593,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Edit an existing Deptartment, Category or Subcategory
+        /// </summary>
+        /// <param name="id">ID of the item characterisitc</param>
+        /// <param name="editButton">String for selecting specific characteristic</param>
+        /// <returns>ActionResult EditItemCharacteristics</returns>
         public ActionResult EditItemCharacteristics(int id, string editButton)
         {
             try
@@ -533,6 +628,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST for modifing an existing Deptartment, Category or Subcategory
+        /// </summary>
+        /// <param name="model">newItemDeptCatSubcatViewModel</param>
+        /// <param name="editButton">String for selecting specific characteristic</param>
+        /// <returns>ActionResult ItemCharacteristics</returns>
         [HttpPost]
         public ActionResult EditItemCharacteristics(newItemDeptCatSubcatViewModel model, String editButton)
         {
@@ -563,6 +664,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Update an existing Deptartment, Category or Subcategory
+        /// </summary>
+        /// <param name="model">allItemDeptCatSubcatViewModel</param>
+        /// <param name="editButton">String for selecting specific characteristic</param>
+        /// <returns>ActionResult UpdateItemCharacteristics</returns>
         [HttpPost]
         public ActionResult UpdateItemCharacteristics(allItemDeptCatSubcatViewModel model, String editButton)
         {
@@ -593,7 +700,15 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        public JsonResult getNextItemID(byte dept, int cat, int subcat) {
+        /// <summary>
+        /// Generates the next Item ID available
+        /// </summary>
+        /// <param name="dept">Deptartment ID</param>
+        /// <param name="cat">Category</param>
+        /// <param name="subcat">Subcategory ID</param>
+        /// <returns>JsonResult of the next Item ID</returns>
+        public JsonResult getNextItemID(byte dept, int cat, int subcat)
+        {
             try {
                 var maxItemID = (from e in entityDb.ITEMs
                                 where e.DepartmentID == dept &&
