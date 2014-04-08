@@ -17,6 +17,9 @@ namespace RecOutletWarehouse.Controllers
         private RecreationOutletContext db = new RecreationOutletContext();
         public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
 
+        /// <summary>
+        /// View Model for browsing employees
+        /// </summary>
         public class BrowseEmployeeViewModel
         {
             public IEnumerable<EMPLOYEE> Employee { get; set; }
@@ -24,6 +27,10 @@ namespace RecOutletWarehouse.Controllers
             public string search { get; set; }
             public string startLetter { get; set; }
         }
+
+        /// <summary>
+        /// View Model for confirming a new/existing user's password
+        /// </summary>
         public class ConfirmPasswordViewModel
         {
             public EMPLOYEE employee { get; set; }
@@ -37,7 +44,9 @@ namespace RecOutletWarehouse.Controllers
             public string ConfirmPassword { get; set; }
         }
 
-
+        /// <summary>
+        /// View Model for the user login page
+        /// </summary>
         public class LoginViewModel
         {
             [Display(Name = "Username: ")]
@@ -54,11 +63,23 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /Employee/
 
+        /// <summary>
+        /// There is no reason to have an index page, but we add it just incase
+        /// the user types this url. This will redirect to Browse Employee action
+        /// </summary>
+        /// <returns>RedirectToAction "BrowseEmployees"</returns>
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("BrowseEmployees");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="empNameSearch">Input String for searching an employee</param>
+        /// <param name="firstLetter">Rollodex character selection for filtering</param>
+        /// <param name="page">Page number selection for paging employees</param>
+        /// <returns>Browse Employee view along with filtered/unfiltered BrowseEmployeeViewModel</returns>
         public ActionResult BrowseEmployee(string empNameSearch, string firstLetter, int page = 1)
         {
             try
@@ -124,6 +145,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Edits an existing employee's information
+        /// </summary>
+        /// <param name="id">The employee id of the employee that is being edited</param>
+        /// <returns>EditEmployee.cshtml along with a blank ConfirmPasswordViewModel class</returns>
         public ActionResult EditEmployee(int id = 0)
         {
             try
@@ -146,6 +172,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// This is a POST method for editing an existing employee
+        /// </summary>
+        /// <param name="emp">ConrifmPasswordViewModel class</param>
+        /// <returns>BrowseEmployees.cshtml</returns>
         [HttpPost]
         public ActionResult EditEmployee(ConfirmPasswordViewModel emp)
         {
@@ -181,6 +212,10 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Form to create a new employee
+        /// </summary>
+        /// <returns>CreateEmployee.cshtml</returns>
         public ActionResult CreateEmployee()
         {
             try
@@ -194,6 +229,11 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST for creating a new employee from a form
+        /// </summary>
+        /// <param name="emp">EMLOYEE Model</param>
+        /// <returns>CreateEmployee.cshtml</returns>
         [HttpPost]
         public ActionResult CreateEmployee(EMPLOYEE emp)
         {
@@ -229,12 +269,20 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Login page
+        /// </summary>
+        /// <returns>LogIn.cshtml</returns>
         [HttpGet]
         public ActionResult LogIn()
         {
             return View();
         }
 
+        /// <summary>
+        /// Logs out the user that is currently logged in
+        /// </summary>
+        /// <returns>LogIn.cshtml</returns>
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
@@ -242,6 +290,11 @@ namespace RecOutletWarehouse.Controllers
             return RedirectToAction("LogIn", "Employee");
         }
 
+        /// <summary>
+        /// POST to log in user with credentials that are in the LoginViewModel
+        /// </summary>
+        /// <param name="loginInfo">LoginViewModel that holds users credentials for validation</param>
+        /// <returns>Index.cshtml if the credentials are correct</returns>
         [HttpPost]
         public ActionResult LogIn(LoginViewModel loginInfo)
         {
@@ -261,6 +314,13 @@ namespace RecOutletWarehouse.Controllers
             return View();
 
         }
+
+        /// <summary>
+        /// Tests the username and password for validity
+        /// </summary>
+        /// <param name="username">username from login form</param>
+        /// <param name="password">password from login form</param>
+        /// <returns>bool (true if username/password are correct; false otherwise)</returns>
         private bool IsValid(string username, string password)
         {
             var crypto = new SimpleCrypto.PBKDF2();
