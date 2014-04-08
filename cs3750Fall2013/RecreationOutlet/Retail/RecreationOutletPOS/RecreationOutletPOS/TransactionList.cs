@@ -34,31 +34,11 @@ namespace RecreationOutletPOS
 
             try
             {
-                bool foundMatch = false;
+                newItem = new TransactionItem(id, name, price, quantity, discount);
+                if (newItem != null)
+                    transData.Add(newItem);
 
-                // This particular section combines all items with a given ID.
-                // It has been removed so items can be scanned separately
-                // with an additional quantity input, and discounts applied
-                // to each group.
-                /*foreach (TransactionItem t in transData)
-                {
-                    if (id == t.getID())
-                    {
-                        t.setQuantity(t.getQuantity() + quantity);
-                        t.updateTotal();
-                        foundMatch = true;
-                        break;
-                    }
-                }*/
-
-                //if (!foundMatch)
-                {
-                    newItem = new TransactionItem(id, name, price, quantity, discount);
-                    if (newItem != null)
-                        transData.Add(newItem);
-
-                    recalculate();
-                }
+                recalculate();
             }
             catch (Exception ex)
             {

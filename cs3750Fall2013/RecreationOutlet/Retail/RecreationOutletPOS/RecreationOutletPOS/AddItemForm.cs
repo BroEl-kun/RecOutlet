@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 
-// Alias to user the Enum's inner classes
 using Department = RecreationOutletPOS.Enum.Department;
 
 namespace RecreationOutletPOS
@@ -19,7 +18,6 @@ namespace RecreationOutletPOS
         
         private string searchTerm = "";
 
-        //Constuctor for combined form -Aaron
         Combined combined;
         public AddItemForm(Combined inForm, int list)
         {
@@ -28,23 +26,17 @@ namespace RecreationOutletPOS
 
             InitializeComponent();
         }
-        //------------------------------------
 
         /// <summary>
         /// Programmer: Michael Vuong
         /// Last Updated: 10/14/2013
         /// 
-        /// NOTE- this.iTEMTableAdapter.Fill(this.masterDataSet.ITEM); was commented to get the program to work with
-        /// the new connection string established
+        /// Form loading. Initializes the listview by pulling data from the database.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void AddItemForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'masterDataSet.ITEM' table. You can move, or remove it, as needed.
-            //this.iTEMTableAdapter.Fill(this.masterDataSet.ITEM);
-
-
             DataSet ds;
             ItemSearch dt = new ItemSearch();
 
@@ -73,16 +65,34 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Refreshes the listview if text changes.
+        /// </summary>
         private void tbItemSearch_TextChanged(object sender, EventArgs e)
         {
             refreshResults();
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Closes the form.
+        /// </summary>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Accepts user input and hands it back to the main form.
+        /// </summary>
         private void btnAddItem_Click(object sender, EventArgs e)
         {   
             if (lvData.SelectedItems.Count > 0)
@@ -137,6 +147,12 @@ namespace RecreationOutletPOS
             }
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Catches all non-digit inputs.
+        /// </summary>
         private void tbItemQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
@@ -203,12 +219,23 @@ namespace RecreationOutletPOS
             return selectedDepartment;
         }
 
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 12/08/2013
+        /// 
+        /// Refreshes the listview if the user selects another department radio button.
+        /// </summary>
         private void rbtnDepartment_CheckedChanged(object sender, EventArgs e)
         {
             refreshResults();
         }
 
-
+        /// <summary>
+        /// Programmer: Jaed Norberg
+        /// Last Updated: 10/14/2013
+        /// 
+        /// Refreshes the listview. This calls a live database selection.
+        /// </summary>
         private void refreshResults()
         {
             searchTerm = tbItemSearch.Text;
