@@ -54,7 +54,7 @@
             Username:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Username)
+            @Html.EditorFor(model => model.Username, new { @id = "username" })
             @Html.ValidationMessageFor(model => model.Username)
         </div>
 
@@ -71,7 +71,11 @@
             <input type="button" value="Cancel" onclick="prompt()" class="button" />
         </p>
     </fieldset>
+    
 }
+<div id="error-modal" title="ERROR: Duplicate Entry">
+    That username is taken. Please edit the username.
+</div>
 
 <script type ="text/javascript">
 
@@ -82,6 +86,25 @@
         if (p == true) {
             window.location = "@Url.Action("BrowseEmployee", "Employee")"
             }
-        }
+ }
+    $("#error-modal").dialog({
+        height: 140,
+        modal: true,
+        autoOpen: false
+    });
+
+    $("#form").submit(function (event) {
+        $.getJSON('@Url.Action("CheckForDuplicateEmployees", "Employee")',
+            {
+                username: $('#username').val()
+            },
+            function (data) {
+                if (data.isDuplicate) {
+                    $('#error-modal').dialog('open');
+                }
+            }
+        );
+
+    });
 </script>
 
