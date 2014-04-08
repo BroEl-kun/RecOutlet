@@ -27,6 +27,11 @@ namespace RecOutletWarehouse.Controllers
             public INVOICE_LINEITEM lineitem { get; set; }
         }
 
+        /// <summary>
+        /// View Model that helps with searching invoices.
+        /// Consists of a list of invoices. All of the 
+        /// other variables are for filtering that list
+        /// </summary>
         public class SearchInvoiceViewModel
         {
             public IEnumerable<INVOICE> invoices { get; set; }
@@ -37,6 +42,13 @@ namespace RecOutletWarehouse.Controllers
             public long? invoiceID { get; set; }
         }
 
+        /// <summary>
+        /// Shows a list of all the invoices and gives the ability to search/filter the list
+        /// </summary>
+        /// <param name="model">SearchInvoiceViewModel</param>
+        /// <param name="searchButton">String input for series of preset filter options</param>
+        /// <param name="page">Int for viewing certain page of the invoice list</param>
+        /// <returns>ActionResult Index</returns>
         public ActionResult Index(SearchInvoiceViewModel model, string searchButton, int page = 1)
         {
             try
@@ -98,6 +110,10 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Empty form for creating a new invoice
+        /// </summary>
+        /// <returns>ActionResult CreateNewInvoice</returns>
         public ActionResult CreateNewInvoice()
         {
             try
@@ -111,6 +127,15 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+
+        /// <summary>
+        /// ***NOTE: NEEDS TO BE UPDATED TO ENTITY FRAMEWORK***
+        /// Takes form data from user and creates a new invoice
+        /// to store in the database
+        /// </summary>
+        /// <param name="invoice">Invoice model</param>
+        /// <param name="labelRedirect"></param>
+        /// <returns>ActionResult CreateNewInvoice</returns>
         [HttpPost]
         public ActionResult CreateNewInvoice(Invoice invoice, string labelRedirect = "")
         {
@@ -134,7 +159,10 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-
+        /// <summary>
+        /// Creates a new invoice recipient
+        /// </summary>
+        /// <returns>ActionResult CreateInvoiceRecipient</returns>
         public ActionResult CreateInvoiceRecipient()
         {
             try
@@ -148,6 +176,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// POST data the creates a new invoice recipient
+        /// </summary>
+        /// <param name="customer">INVOICE_CUSTOMER model</param>
+        /// <param name="labelRedirect">String to see if user wants to proceed to creating a new invoice</param>
+        /// <returns>ActionResult CreateInvoiceRecipient</returns>
         [HttpPost]
         public ActionResult CreateInvoiceRecipient(INVOICE_CUSTOMER customer, string labelRedirect = "")
         {
