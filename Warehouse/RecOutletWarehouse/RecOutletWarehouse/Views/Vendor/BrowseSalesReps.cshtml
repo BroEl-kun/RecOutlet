@@ -1,5 +1,4 @@
-﻿@using RecOutletWarehouse.HtmlHelpers;
-@model RecOutletWarehouse.Controllers.VendorController.BrowseRepsViewModel
+﻿@model RecOutletWarehouse.Controllers.VendorController.BrowseRepsViewModel
 
 @{
     ViewBag.Title = "BrowseSalesReps";
@@ -30,8 +29,7 @@
         <input type="submit" value="Search" />
     </div>
 }
-<!-- IMPORTANT: To use the following syntax, make sure you have an appropriate
-     "using" statement at the beginning of the file -->
+
 <div class="roloLinks pager">
     @Html.RolodexLinks("lastNameBeginsWith", x => Url.Action("BrowseSalesReps"))
 </div>
@@ -76,5 +74,5 @@
 <div id="dialog"></div>
 
 @section eofscripts{
-    @Scripts.Render("~/Scripts/browsePageScripts.js")
+    @Scripts.Render("~/Scripts/browsePageScripts.js") 
 }
