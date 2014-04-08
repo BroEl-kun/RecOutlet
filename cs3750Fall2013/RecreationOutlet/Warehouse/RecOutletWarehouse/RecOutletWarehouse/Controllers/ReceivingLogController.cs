@@ -16,6 +16,9 @@ namespace RecOutletWarehouse.Controllers
         public RecreationOutletContext db = new RecreationOutletContext();
         public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
 
+        /// <summary>
+        /// ViewModel for creating a new Receivng Log
+        /// </summary>
         public class ReceivingLogCreationViewModel
         {
             //public List<RecOutletWarehouse.Models.RECEIVING_LOG> RL { get; set; }
@@ -25,6 +28,9 @@ namespace RecOutletWarehouse.Controllers
             public List<PO_LINEITEM> LineItems { get; set; }
         }
 
+        /// <summary>
+        /// ViewModel for Browsing Receiving Log
+        /// </summary>
         public class BrowseReceivingLogViewModel
         {
             public IEnumerable<RECEIVING_LOG> RLs { get; set; }
@@ -39,7 +45,6 @@ namespace RecOutletWarehouse.Controllers
 
         //
         // GET: /ReceivingLog/
-
         public ActionResult Index()
         {
             try
@@ -58,6 +63,10 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Generates a list of non-received Purchase Orders
+        /// </summary>
+        /// <returns>ActionResult GetNonReceivedPOs</returns>
         public ActionResult GetNonReceivedPOs()
         {
             List<PURCHASE_ORDER> objItem = new List<PURCHASE_ORDER>();
@@ -112,6 +121,11 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /ReceivingLog/Details/5
 
+        /// <summary>
+        /// Shows details of a specific Receiving Log
+        /// </summary>
+        /// <param name="id">Receiving Log ID</param>
+        /// <returns>ActionResult Details</returns>
         public ActionResult Details(int id)
         {
             try
@@ -215,7 +229,11 @@ namespace RecOutletWarehouse.Controllers
 
         //
         // GET: /ReceivingLog/Edit/5
-
+        /// <summary>
+        /// Edit an existing Receiving Log
+        /// </summary>
+        /// <param name="id">Receiving Log ID</param>
+        /// <returns>ActionResult EditRL</returns>
         public ActionResult EditRL(int id)
         {
             try
@@ -281,9 +299,13 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        //
+        //TODO
         // GET: /ReceivingLog/Delete/5
-
+        /// <summary>
+        /// Select a specific Receiving Log to remove
+        /// </summary>
+        /// <param name="id">Receiving Log ID</param>
+        /// <returns>ActionResult Delete</returns>
         public ActionResult Delete(int id)
         {
             try
@@ -297,9 +319,14 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
-        //
+        //TODO
         // POST: /ReceivingLog/Delete/5
-
+        /// <summary>
+        /// POST Deletion of specified Receiving Log
+        /// </summary>
+        /// <param name="id">Receiving Log ID</param>
+        /// <param name="collection">FormCollection</param>
+        /// <returns>ActionResult Index</returns>
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -317,6 +344,7 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        //TODO
         [HttpPost]
         public ActionResult findPO(string po)   //Validation. Also perhaps on success populate a box saying so upon return to index?
         //public void findPO(string po)
@@ -387,6 +415,12 @@ namespace RecOutletWarehouse.Controllers
             }
         }
 
+        /// <summary>
+        /// Update a non-received receiving log as received
+        /// </summary>
+        /// <param name="objItem">ReceivingLogCreationViewModel</param>
+        /// <param name="POID">Purchase Order ID</param>
+        /// <returns>ActionResult CreateReceived</returns>
         [HttpPost]
         public ActionResult CreateReceived(ReceivingLogCreationViewModel objItem, string POID)
         {
@@ -1001,9 +1035,5 @@ namespace RecOutletWarehouse.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
-
-
     }
-
 }
