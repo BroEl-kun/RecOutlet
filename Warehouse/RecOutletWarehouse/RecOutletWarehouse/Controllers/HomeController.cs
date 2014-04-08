@@ -12,34 +12,51 @@ namespace RecOutletWarehouse.Controllers
         //
         // GET: /Home/
 
+        /// <summary>
+        /// Index consists of a series of links to other parts of the application
+        /// </summary>
+        /// <returns>ActionResult Index</returns>
         public ActionResult Index()
         {
-            if (Request.IsAuthenticated)
+            try
             {
-                try
+                if (Request.IsAuthenticated)
                 {
-                    return View();
+                    try
+                    {
+                        return View();
+                    }
+                    catch (Exception ex)
+                    {
+                        WarehouseUtilities.LogError(ex);
+                        return RedirectToAction("Error", "Home");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    WarehouseUtilities.LogError(ex);
-                    return RedirectToAction("Error", "Home");
+                    try
+                    {
+                        return RedirectToAction("LogIn", "Employee");
+                    }
+                    catch (Exception ex)
+                    {
+                        WarehouseUtilities.LogError(ex);
+                        return RedirectToAction("Error", "Home");
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    return RedirectToAction("LogIn", "Employee");
-                }
-                catch (Exception ex)
-                {
-                    WarehouseUtilities.LogError(ex);
-                    return RedirectToAction("Error", "Home");
-                }
+                WarehouseUtilities.LogError(ex);
+                return RedirectToAction("Error", "Home");
             }
         }
 
+        /// <summary>
+        /// A simple error page to prevent the user
+        /// from seeing an ugly MVC error page
+        /// </summary>
+        /// <returns>ActionResult Error</returns>
         public ActionResult Error()
         {
             return View();
