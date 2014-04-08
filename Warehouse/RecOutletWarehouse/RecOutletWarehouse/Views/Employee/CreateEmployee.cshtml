@@ -20,7 +20,8 @@
     </ul>
 }
 
-@using (Html.BeginForm()) {
+@using (Ajax.BeginForm("CreateEmployee", null, new AjaxOptions { UpdateTargetId = "blah" }, new { @id = "form" }))
+{
 
 
     <fieldset>
@@ -54,7 +55,7 @@
             Username:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Username, new { @id = "username" })
+            @Html.TextBoxFor(model => model.Username, new { @id = "username" })
             @Html.ValidationMessageFor(model => model.Username)
         </div>
 
@@ -62,12 +63,12 @@
             Password:<strong class="required">*</strong>
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(model => model.Password, new { @type="password" })
+            @Html.TextBoxFor(model => model.Password, new { @type = "password" })
             @Html.ValidationMessageFor(model => model.Password)
         </div>
 
         <p>
-            <input type="submit" value="Create" class="button" />
+            <input type="submit" value="Create" class="button" id="form" />
             <input type="button" value="Cancel" onclick="prompt()" class="button" />
         </p>
     </fieldset>
