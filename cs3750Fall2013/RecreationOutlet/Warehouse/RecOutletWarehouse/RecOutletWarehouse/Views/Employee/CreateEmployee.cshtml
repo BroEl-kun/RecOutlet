@@ -14,11 +14,6 @@
 
 <h2>Create Employee</h2>
 
-@if (ViewBag.Success != null) {
-    <ul>
-        <li class="successful-insert">@ViewBag.Success</li>
-    </ul>
-}
 
 @using (Ajax.BeginForm("CreateEmployee", null, new AjaxOptions { UpdateTargetId = "blah" }, new { @id = "form" }))
 {
