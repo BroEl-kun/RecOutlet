@@ -15,7 +15,7 @@
 <h2>Create Employee</h2>
 
 
-@using (Ajax.BeginForm("CreateEmployee", null, new AjaxOptions { UpdateTargetId = "blah" }, new { @id = "form" }))
+@using (Ajax.BeginForm("CreateEmployee", null, null, new { @id = "form" }))
 {
 
 
@@ -70,7 +70,7 @@
     
 }
 <div id="error-modal" title="ERROR: Duplicate Entry">
-    That username is taken. Please edit the username.
+    That username is taken. Please change the username.
 </div>
 
 <script type ="text/javascript">
