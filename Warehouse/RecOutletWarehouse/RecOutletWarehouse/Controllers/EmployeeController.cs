@@ -255,9 +255,7 @@ namespace RecOutletWarehouse.Controllers
 
                     db.EMPLOYEEs.Add(emp);
                     db.SaveChanges();
-
-                    ViewBag.Success = "Employee successfully created.";
-
+                    
                     return View();
 
                 }
