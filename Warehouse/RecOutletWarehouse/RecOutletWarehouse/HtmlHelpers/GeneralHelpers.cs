@@ -15,7 +15,7 @@ namespace RecOutletWarehouse.HtmlHelpers {
         /// <param name="url">The URL of the page to open</param>
         /// <param name="text">The text to be displayed</param>
         /// <param name="targetNewTab">Boolean indicating whether we're targeting a new tab or not</param>
-        /// <returns></returns>
+        /// <returns>HTML markup for the tag</returns>
         public static MvcHtmlString SimpleExternalLink(this HtmlHelper html, string url, string text, Boolean targetNewTab) {
             StringBuilder result = new StringBuilder();
             TagBuilder tag = new TagBuilder("a");

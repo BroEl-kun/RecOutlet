@@ -14,7 +14,11 @@
 }
 
 <h2>Edit Event</h2>
-
+<ul class="field-validation-error">
+    <li>
+        TODO: This is an ideal candidate for conversion to a jQuery modal window.
+    </li>
+</ul>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

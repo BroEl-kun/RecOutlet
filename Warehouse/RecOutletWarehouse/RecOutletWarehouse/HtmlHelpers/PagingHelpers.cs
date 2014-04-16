@@ -10,9 +10,6 @@ using System.Text;
 namespace RecOutletWarehouse.HtmlHelpers {
     /// <summary>
     /// PagingHelpers is a static utility class that provides methods for list pagination.
-    /// IMPORTANT: If you want to use any of these methods in your View, make sure you include
-    /// a @using statement at the beginning of the .cshtml file (@using lines must come before
-    /// you declare your model). See BrowseVendors.cshtml for a working implementation.
     /// </summary>
     public static class PagingHelpers {
 
@@ -23,9 +20,6 @@ namespace RecOutletWarehouse.HtmlHelpers {
         /// <param name="pagingInfo">A PagingInfo object defining your page attributes.</param>
         /// <param name="pageUrl">The URL of the list View to be paginated.</param>
         /// <returns>An HTML string that creates the page links.</returns>
-        /// Changelog
-        ///     Version 1.0 (T.M.)
-        ///         - Initial creation
         public static MvcHtmlString PageLinks(this HtmlHelper html,
                                               PagingInfo pagingInfo, // PagingInfo is from the Utilities folder
                                               Func<int, string> pageUrl) {
@@ -66,14 +60,6 @@ namespace RecOutletWarehouse.HtmlHelpers {
                 tag.InnerHtml = "LAST >>>";
                 result.Append(tag.ToString());
             }
-            //for (int i = 1; i <= pagingInfo.TotalPages; i++) {
-            //    TagBuilder tag = new TagBuilder("a"); //this creates <a> elements
-            //    tag.MergeAttribute("href", pageUrl(i));
-            //    tag.InnerHtml = i.ToString();
-            //    if (i == pagingInfo.CurrentPage)
-            //        tag.AddCssClass("selected");
-            //    result.Append(tag.ToString());
-            //}
 
             return MvcHtmlString.Create(result.ToString());
         }
@@ -85,7 +71,6 @@ namespace RecOutletWarehouse.HtmlHelpers {
         /// <param name="html"></param>
         /// <param name="pageUrl">The URL of the list View to be paginated.</param>
         /// <returns>An HTML string containg A-Z anchor elements.</returns>
-        /// <author>T.M.</author>
         public static MvcHtmlString RolodexLinks(this HtmlHelper html, Func<int, string> pageUrl) {
             StringBuilder rolodex = new StringBuilder();
             for (int i = 65; i <= 90; i++) { // Using ASCII decimal equivalents of all capital letters
@@ -107,7 +92,6 @@ namespace RecOutletWarehouse.HtmlHelpers {
         /// <param name="varSpecifier">The name of the "first letter" variable of the Controller method</param>
         /// <param name="pageUrl">The URL of the list View to be paginated.</param>
         /// <returns>An HTML string containg A-Z anchor elements.</returns>
-        /// <author>T.M.</author>
         public static MvcHtmlString RolodexLinks(this HtmlHelper html, string varSpecifier, Func<int, string> pageUrl) {
             StringBuilder rolodex = new StringBuilder();
             for (int i = 65; i <= 90; i++) { // Using ASCII decimal equivalents of all capital letters
@@ -115,7 +99,6 @@ namespace RecOutletWarehouse.HtmlHelpers {
                 tag.InnerHtml = Convert.ToChar(i).ToString();
                 tag.MergeAttribute("href", pageUrl(i).ToString() + "?" + varSpecifier + "=" + Convert.ToChar(i));
                 rolodex.Append(tag.ToString());
-
             }
 
             return MvcHtmlString.Create(rolodex.ToString());

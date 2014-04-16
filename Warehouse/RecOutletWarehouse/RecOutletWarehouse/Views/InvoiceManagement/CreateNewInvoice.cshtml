@@ -1,5 +1,5 @@
 ﻿@using System.Web.Optimization;
-@model RecOutletWarehouse.Models.InvoiceManagement.Invoice
+@model RecOutletWarehouse.Models.INVOICE
 
 @{
     ViewBag.Title = "InvoiceManagement";
@@ -15,6 +15,15 @@
 }
 
 <h2>Invoice Creation</h2>
+<ul class="field-validation-error">
+    <li>
+        TODO: This page is currently non-functional. Implement the necessary logic
+        to make it insert INVOICEs into the database.
+    </li>
+    <li>
+        TODO: Make an InvoiceLineItem page, much like addPOLineItem
+    </li>
+</ul>
 @if (ViewBag.InvoiceSuccessfulInsert != null)
 {
 <ul>

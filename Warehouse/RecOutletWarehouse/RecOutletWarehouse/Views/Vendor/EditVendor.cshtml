@@ -6,7 +6,11 @@
 }
 
 <h2>@Html.DisplayFor(model => model.VendorName) - Modify Vendor Information</h2>
-
+<ul class="field-validation-error">
+    <li>
+        TODO: Implement the required ContactEmail field in this and the Details View
+    </li>
+</ul>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

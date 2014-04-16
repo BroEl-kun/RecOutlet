@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using RecOutletWarehouse.Models;
-using RecOutletWarehouse.Models.ItemManagement;
 using RecOutletWarehouse.Utilities;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,17 +14,6 @@ namespace RecOutletWarehouse.Controllers
 
         RecreationOutletContext entityDb = new RecreationOutletContext();
         public int BrowsePageSize = 25; // The number of results we want to show on each BrowseVendor page
-
-        //
-        // GET: /ItemMangement/
-
-        //OBSOLETE VIEWMODEL Use newItemDeptCatSubcatViewModel
-        public class ItemDeptCatSubcatViewModel
-        {
-            public Department department { get; set; }
-            public Category category { get; set; }
-            public SubCategory subcat { get; set; }
-        }
 
         /// <summary>
         /// ViewModel that is used for creating a new department, category and/or subcategory
@@ -69,10 +56,6 @@ namespace RecOutletWarehouse.Controllers
         {
             [Required]
             public string VendorName { get; set; }
-            //public string DeptName { get; set; }
-            //public string DeptName { get; set; }
-            //public string CatName { get; set; }
-            //public string SubcatName { get; set; }
             public ITEM Item { get; set; }
         }
 
@@ -98,7 +81,6 @@ namespace RecOutletWarehouse.Controllers
                 // First letter is defined by rolodex selection in View
                 // For now, we want it to only filter if there is no search query
                 if (!String.IsNullOrEmpty(firstLetter) && String.IsNullOrEmpty(itemNameSearch)) {
-                    //vendors = vendors.Where(v => v.VendorName.ToUpper().StartsWith(firstLetter));
                     items = items.Where(i => i.Name.ToUpper().StartsWith(firstLetter));
                 }
 
@@ -124,7 +106,7 @@ namespace RecOutletWarehouse.Controllers
                     model = new BrowseItemViewModel {
                         Items = items
                                   .Where(ve => ve.Name.ToUpper().Contains(itemNameSearch.ToUpper())) // Further filter the list to items that contain the search
-                                  .OrderBy(v => v.Name) // This is likely unnecessary (vendors is already sorted), but I'm leaving it here for now
+                                  .OrderBy(v => v.Name) // This is likely unnecessary (already sorted), but I'm leaving it here for now
                                   .Skip((page - 1) * BrowsePageSize)
                                   .Take(BrowsePageSize),
                         PagingInfo = new PagingInfo {
@@ -229,7 +211,6 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
                 ITEM item = model.Item;
                 item.TaxTypeID = 1; //TODO: A lot of things :)
                 //item = db.ConvertNamesToIDs(item);
@@ -252,15 +233,6 @@ namespace RecOutletWarehouse.Controllers
                 if (item.RestrictedAge == null) {
                     item.RestrictedAge = 0; //TODO: Fix this
                 }
-
-                //VENDOR vendor = entityDb.VENDORs.SingleOrDefault(x => x.VendorID == item.VendorItemID);
-
-                //check if vendor already exists... if it doesnt it needs to be inserted...
-                //if (!entityDb.VENDORs.Any(x => x.VendorID == item.VendorItemID))
-                //{
-                //    // no match
-                //    ModelState.AddModelError("Vendor", "That vendor doesn't exist.");
-                //}
 
                 //check if a product line exists if it does do nothing if it doesnt then let them enter a new product line.
                 if (!entityDb.PRODUCT_LINE.Any(i => i.ProductLineID == item.ProductLineID)) {
@@ -286,66 +258,6 @@ namespace RecOutletWarehouse.Controllers
                     // no match
                     ModelState.AddModelError("Subcategory", "That subcategory doesn't exist.");
                 }
-
-
-
-                ////CUSTOM VALIDATION FOLLOWS
-                ////Check if Vendor exists or if too many vendors were returned
-                //if (item.Vendor == "0")
-                //{
-                //    ModelState.AddModelError("Vendor", "That vendor doesn't exist.");
-                //}
-                //if (item.Vendor == "-1")
-                //{
-                //    ModelState.AddModelError("Vendor", "Multiple vendors have that name.");
-                //}
-                ////Check if Product Line exists or if too many were returned
-                //if (item.ProductLine == "0")
-                //{
-                //    ModelState.AddModelError("ProductLine", "That product line doesn't exist OR is not "
-                //                           + "associated with the specified vendor.");
-                //}
-                //if (item.ProductLine == "-1")
-                //{
-                //    ModelState.AddModelError("ProductLine", "Multiple product lines have that name and vendor.");
-                //}
-
-                ////Check if Department exists or if too many were returned
-                //if (item.Department == "0")
-                //{
-                //    ModelState.AddModelError("Department", "That department doesn't exist.");
-                //}
-                //if (item.Department == "-1")
-                //{
-                //    ModelState.AddModelError("Department", "Multiple departments have that name.");
-                //}
-
-                ////Check if Category exists or if too many were returned
-                //if (item.Category == "0")
-                //{
-                //    ModelState.AddModelError("Category", "That category doesn't exist.");
-                //}
-                //if (item.Category == "-1")
-                //{
-                //    ModelState.AddModelError("Category", "Multiple categories have that name.");
-                //}
-
-                ////Check if Subcategory exists or if too many were returned
-                //if (item.Subcategory == "0")
-                //{
-                //    ModelState.AddModelError("Subcategory", "That subcategory doesn't exist.");
-                //}
-                //if (item.Subcategory == "-1")
-                //{
-                //    ModelState.AddModelError("Subcategory", "Multiple subcategories have that name.");
-                //}
-
-                //CUSTOM VALIDATION ENDS
-
-                //item.ItemID = entityDb.ITEMs.(x => x.DepartmentID == item.DepartmentID
-                //                                && x.CategoryID == item.CategoryID
-                //                                && x.SubcategoryID == item.SubcategoryID);
-
 
                 var query = (from e in entityDb.ITEMs
                              where e.DepartmentID == item.DepartmentID &&
@@ -407,7 +319,6 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                //DataFetcherSetter db = new DataFetcherSetter();
                 ITEM tempItem = new ITEM();
                 if (!ModelState.IsValid)
                 {
@@ -415,7 +326,6 @@ namespace RecOutletWarehouse.Controllers
                 }
                 if (labelModel.RPC != 0)
                 {
-                    //tempItem = db.GetItemForRPC(Convert.ToInt64(labelModel.RPC));
                     tempItem = entityDb.ITEMs.Single(x => x.RecRPC == labelModel.RPC);
                 }
                 //TODO: add logic that will search for an item given a UPC or item info and NOT an RPC
@@ -467,7 +377,6 @@ namespace RecOutletWarehouse.Controllers
         {
             try
             {
-                DataFetcherSetter db = new DataFetcherSetter();
                 if (submitButton == "Department")
                 {
                     ViewBag.activeTab = "Department";

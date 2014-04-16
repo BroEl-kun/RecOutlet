@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecOutletWarehouse.Models;
-using RecOutletWarehouse.Models.InvoiceManagement;
 using RecOutletWarehouse.Utilities;
 
 
@@ -137,7 +136,7 @@ namespace RecOutletWarehouse.Controllers
         /// <param name="labelRedirect"></param>
         /// <returns>ActionResult CreateNewInvoice</returns>
         [HttpPost]
-        public ActionResult CreateNewInvoice(Invoice invoice, string labelRedirect = "")
+        public ActionResult CreateNewInvoice(INVOICE invoice, string labelRedirect = "")
         {
             try
             {
@@ -150,7 +149,7 @@ namespace RecOutletWarehouse.Controllers
                 }
 
                 //return View(invoice);
-                return View(new Invoice());
+                return View(new INVOICE());
             }
             catch (Exception ex)
             {
