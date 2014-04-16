@@ -1,22 +1,19 @@
 ﻿using RecOutletWarehouse.Models;
-using RecOutletWarehouse.Models.VendorManagement;
-using RecOutletWarehouse.Models.ItemManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace RecOutletWarehouse.Controllers
 {
     //***************************************************************************
-    //All ApiControllers are for Jquery AutoComplete functionality in the views
-    //                                **NOTE**
-    //Some Controllers are pulling from the old models and need to be updated
-    //using the new models and the Entity Framework
+    // All ApiControllers are for jQuery AutoComplete or other dynamic Ajax calls
+    // made from the Views
     //***************************************************************************
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the VENDOR model
+    /// </summary>
     public class VendorApiController : ApiController
     {
         [HttpGet]
@@ -29,25 +26,27 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the PRODUCT_LINE model
+    /// </summary>
     public class ProductLineApiController : ApiController
     {
         [HttpGet]
-        public IEnumerable<ProductLine> GetProductLines(string query = "")
+        public IEnumerable<PRODUCT_LINE> GetProductLines(string query = "")
         {
-            DataFetcherSetter db = new DataFetcherSetter();
-            List<ProductLine> productLines = db.SearchProductLinesByName(query);
-            return productLines;
+            using (var db = new RecreationOutletContext()) {
+                return String.IsNullOrEmpty(query) ? db.PRODUCT_LINE.ToList() :
+                db.PRODUCT_LINE.Where(p => p.ProductLineName.Contains(query)).ToList();
+            }
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the ITEM_DEPARTMENT model
+    /// </summary>
     public class DepartmentApiController : ApiController
     {
-        //[HttpGet]
-        //public IEnumerable<Department> GetDepartments(string query = "")
-        //{
-        //    DataFetcherSetter db = new DataFetcherSetter();
-        //    return db.SearchDepartmentsByName(query);
-        //}
+
         [HttpGet]
         public IEnumerable<ITEM_DEPARTMENT> GetDepartments(string query = "")
         {
@@ -59,14 +58,12 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the ITEM_CATEGORY model
+    /// </summary>
     public class CategoryApiController : ApiController
     {
-        //[HttpGet]
-        //public IEnumerable<Category> GetCategories(string query = "")
-        //{
-        //    DataFetcherSetter db = new DataFetcherSetter();
-        //    return db.SearchCategoriesByName(query);
-        //}
+
         [HttpGet]
         public IEnumerable<ITEM_CATEGORY> GetCategories(string query = "")
         {
@@ -78,14 +75,11 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the ITEM_SUBCATEGORY model
+    /// </summary>
     public class SubcategoryApiController : ApiController
     {
-        //[HttpGet]
-        //public IEnumerable<SubCategory> GetSubcategories(string query = "")
-        //{
-        //    DataFetcherSetter db = new DataFetcherSetter();
-        //    return db.SearchSubcategoriesByName(query);
-        //}
         [HttpGet]
         public IEnumerable<ITEM_SUBCATEGORY> GetSubcategories(string query = "")
         {
@@ -97,6 +91,9 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the SALES_REP model
+    /// </summary>
     public class SalesRepApiController : ApiController {
         [HttpGet]
         public IEnumerable<SALES_REP> GetSalesReps(string query = "") {
@@ -109,6 +106,9 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the ITEM model
+    /// </summary>
     public class ItemApiController : ApiController
     {
         [HttpGet]
@@ -121,6 +121,9 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the EVENT_TYPE model
+    /// </summary>
     public class EventTypeApiController : ApiController {
         [HttpGet]
         public IEnumerable<EVENT_TYPE> GetEventType(string query = "") {
@@ -131,6 +134,9 @@ namespace RecOutletWarehouse.Controllers
         }
     }
 
+    /// <summary>
+    /// Autocomplete ApiController Class for the ITEM_CATEGORY model (POTENTIAL DUPLICATE)
+    /// </summary>
     public class SearchCategoryApiController : ApiController
     {
         [HttpGet]

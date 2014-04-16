@@ -1,4 +1,4 @@
-﻿@model RecOutletWarehouse.Models.ItemManagement.LabelPrinting
+﻿@model RecOutletWarehouse.Utilities.LabelPrinting
 
 @{
     ViewBag.Title = "PrintLabels";
@@ -14,7 +14,14 @@
 }
 
 <h2>Print RPC or UPC Labels</h2>
-
+<ul class="field-validation-error">
+    <li>
+        TODO: This page is an ideal candidate for conversion to a jQuery modal window (like VendorDetails)
+    </li>
+    <li>
+        TODO: Fix navigation tab inconsistencies
+    </li>
+</ul>
 @if(ViewBag.ItemSuccessfulInsert != null){
 <ul>
     <li class="successful-insert">@ViewBag.ItemSuccessfulInsert</li>

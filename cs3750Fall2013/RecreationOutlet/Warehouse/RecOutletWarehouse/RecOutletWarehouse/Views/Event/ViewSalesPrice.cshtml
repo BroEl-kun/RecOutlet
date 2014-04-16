@@ -14,7 +14,11 @@
 }
 
 <h2>View Sale Pricing Information</h2>
-
+<ul class="field-validation-error">
+    <li>
+        TODO: Adjust the design of this table
+    </li>
+</ul>
 <h3>
     @Html.ActionLink("Create", "CreateSalesPrice")
 </h3>
@@ -30,47 +34,48 @@
     @Html.RolodexLinks(x => Url.Action("VieSalesPrice"))
 </div>
 <div class=" potable-area">
-<table id="priceTable" class="potable">
-    <tr class="leftjust">
-        <th>
-            Item Name
-        </th>
-        <th>
-            RPC
-        </th>
-        <th>
-            Original Selling Price
-        </th>
-        <th>
-            Sale Price
-        </th>
-        <th>
-            Comments
-        </th>
-        <th></th>
-    </tr>
+    <table class="potable">
+        <tr class="leftjust">
+            <th>
+                Item Name
+            </th>
+            <th>
+                RPC
+            </th>
+            <th>
+                Original Selling Price
+            </th>
+            <th>
+                Sale Price
+            </th>
+            <th>
+                Comments
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ITEM.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RecRPC)
-        </td>
-        <td class="right">
-            @Html.DisplayFor(modelItem => item.ITEM.SellPrice)
-        </td>
-        <td class="right">
-            @Html.DisplayFor(modelItem => item.SalePrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Comments)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "EditSalesPrice", new { etc = item.EventTypeCode, rpc = item.RecRPC })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ITEM.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecRPC)
+            </td>
+            <td class="right">
+                @Html.DisplayFor(modelItem => item.ITEM.SellPrice)
+            </td>
+            <td class="right">
+                @Html.DisplayFor(modelItem => item.SalePrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditSalesPrice", new { etc = item.EventTypeCode, rpc = item.RecRPC })
+            </td>
+        </tr>
+    }
 
-</table>
+    </table>
+</div>
