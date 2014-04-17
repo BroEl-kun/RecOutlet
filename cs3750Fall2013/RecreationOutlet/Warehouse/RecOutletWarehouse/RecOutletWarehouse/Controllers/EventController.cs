@@ -27,18 +27,20 @@ namespace RecOutletWarehouse.Controllers
         }
 
         /// <summary>
-        /// Need to add comments here
+        /// View model for linking an item to an event and giving it a sale price.
         /// </summary>
         public class ItemEventViewModel
         {
-            //public EVENT_TYPE Event { get; set; }
             public IEnumerable<SelectListItem> Events { get; set; }
-            //public string Event { get; set; }
             public List<ITEM> Items { get; set; }
             public List<SALE_PRICING> SalePrices { get; set; }
+            [Required(ErrorMessage = "Please provide the event.")]
             public byte EventToAddTo { get; set; }
+            [Required(ErrorMessage = "Please provide the item.")]
             public string ItemName { get; set; }
+            [Required(ErrorMessage = "Please provide the original price")]
             public decimal OrigPriceOfItem { get; set; }
+            [Required(ErrorMessage = "Please provide the sale price")]
             public decimal SalePriceOfItem { get; set; }
         }
 
