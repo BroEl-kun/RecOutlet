@@ -55,19 +55,23 @@
 <div id="currentItems">@{Html.RenderPartial("ItemToEvent", Model.SalePrices);}</div>
 
 <script>
+
+    //Updates the currentItems list when an eventCode is modified in the dropdown list.
     $(document).ready(function() {
         $("#eventCode").change(function() {
             var name = $("#eventCode").val();
                 $.ajax({
                     type: "post",
-                    url: "/Event/getAllSalePricesForEvent",
+                    url: "/Event/getAllSalePricesForEvent", //Controller method.
                     dataType: "html",
-                    data: "id="+name,
+                    data: "id="+name, //id that is passed into the controller method.
                     contentType: "application/x-www-form-urlencoded;charset=utf-8",
                     success: function (result) { validate(result); }
                 });
         });
     });
+
+    //Generates the list based on the result of the above jQuery function.
     function validate(result) {
         $("#currentItems").html("");
         $("#currentItems").html(result);
@@ -84,7 +88,6 @@
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            //label: item.Name + "(RPC: " + item.RecRPC + " | Product Line: " + item.PRODUCT_LINE.ProductLineName + ")",
                             label:  item.Name + " | " + item.RecRPC,
                             itemName: item.Name,
                             itemPrice: item.SellPrice
@@ -101,18 +104,22 @@
             minLength: 1
     });
 
+    //jQuery modal that is used when duplicate data is entered.
     $("#error-modal").dialog({
         height: 140,
         modal: true,
         autoOpen: false
     });
 
+    //Checkes for duplicate sale prices in the database.
     $("#form").submit(function ( event ) {
-        $.getJSON('@Url.Action("CheckForDuplicateSalePrice", "Event")',
+        $.getJSON('@Url.Action("CheckForDuplicateSalePrice", "Event")', //Controller method.
             {
-                item: $('#searchItem').val(),
-                etc: $('#eventCode').val()
+                item: $('#searchItem').val(), //Paramaters of the controller method.
+                etc: $('#eventCode').val() //Paramaters of the controller method.
             },
+
+            //Checks to see if the return data is valid.
             function (data) {
                 if (data.isDuplicate) {
                     $('#error-modal').dialog('open');
