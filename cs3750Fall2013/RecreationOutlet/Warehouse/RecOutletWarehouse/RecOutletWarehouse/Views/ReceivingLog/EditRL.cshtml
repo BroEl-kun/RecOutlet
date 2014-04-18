@@ -1,5 +1,4 @@
-﻿@*model RecOutletWarehouse.Models.RECEIVING_LOG*@
-@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
+﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.ReceivingLogCreationViewModel
 
 @{
     ViewBag.Title = "EditRL";
@@ -19,9 +18,8 @@
 <div class="center-element center-text">
    
 
-                  @using (Html.BeginForm("EditRL", "ReceivingLog", FormMethod.Post))
+    @using (Html.BeginForm("EditRL", "ReceivingLog", FormMethod.Post))
     {
-        //<fieldset>
             <div class="potable-area">
 
             <table class="potable" id="RLtable">
@@ -37,12 +35,10 @@
                   <th></th>
                   <th></th>
                 <th>Item RPC:</th>
-               @* <th>Qty Ordered:</th>*@
                 <th>Qty Type ID:</th>
                 <th>Receive Date:</th>
                 <th>Qty Received:</th>
                 <th>Notes:</th>
-                @*<th></th>*@
               </tr>
 
             <tr>   
@@ -60,14 +56,7 @@
                     @Html.HiddenFor(model => model.RL[0].POLineItemID, new { @Value = @ViewBag.editRL.POLineItemID })
                 </td>
 
-                @*<td>
-                    @ViewBag.editRL.ReceivedQty
-                </td>*@
                 <td>
-                    @*Qty Type ID: *@
-                    @*@objPO.QtyTypeId*@
-                    @*@Html.HiddenFor(model => model.RL[0].QtyTypeID, new { @Value = @ViewBag.editRL.QtyTypeID })*@
-                    @*FOR NOW: HARDCODED. later options will be retrieved from the db and will be dynamically added.*@
                     @Html.DropDownListFor(model => model.RL[0].QtyTypeID, new SelectList(
                         new List<Object> {
                             new { Value = 1, Text = "Each" },
@@ -78,17 +67,10 @@
                         "text"
                         ,1))
                     
-                    @*<select>
-                        <option selected>1 - Each</option>
-                        <option>2 - Case</option>
-                        <option>3 - Pallet</option>
-                    </select>*@
-                    
                 </td>
                 <td>
                     @*Receive Date:*@ 
                     @Html.TextBoxFor(model => model.RL[0].ReceiveDate, new { type = "date", @Value = @ViewBag.editRL.ReceiveDate})
-                    @*Html.TextBox("ReceiveDate", DateTime.Now, new { type = "date" })*@
                     @Html.ValidationMessageFor(model => model.RL[0].ReceiveDate)
                 </td>
                 <td>
@@ -100,23 +82,14 @@
                     @*Notes:*@ 
                     @Html.TextAreaFor(model => model.RL[0].ReceivingNotes, new { @Value = @ViewBag.editRL.ReceivingNotes })
                 </td>
-                @*<td><input type="submit" value="Record Received" /></td>*@
             </tr>
             
-           @*RecOutletWarehouse.Models.PurchaseOrder.PurchaseOrderLineItem item = objItem;*@
-
-
             </table>
         </div>
-           // </fieldset>
                   
-       
-
         <br />
-            @*Html.Hidden("count", count)*@
             <input type="submit" value="Update Log" class="button" />
-}
-         
-    </div>
+    }
+</div>
        
     
