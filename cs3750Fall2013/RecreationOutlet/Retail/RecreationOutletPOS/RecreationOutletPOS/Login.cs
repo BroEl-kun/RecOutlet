@@ -29,6 +29,7 @@ namespace RecreationOutletPOS
             InitializeComponent();
         }
 
+        //Runs when login form is loaded
         private void Login_Load(object sender, EventArgs e)
         {
             lblMessage.Hide();
