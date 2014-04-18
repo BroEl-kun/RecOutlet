@@ -268,7 +268,7 @@ namespace RecOutletWarehouse.Controllers
         }
 
         /// <summary>
-        /// TODO: find bugs
+        /// Posts new receiving log records to the server
         /// </summary>
         /// <param name="objItem"></param>
         /// <param name="POID"></param>
@@ -368,12 +368,14 @@ namespace RecOutletWarehouse.Controllers
         }
 
         /// <summary>
-        /// TODO: find bugs
+        /// Filters results based on the search parameters passed in.
+        /// On initial page load, it will do the first if (return all results
+        /// unfiltered)
         /// </summary>
-        /// <param name="receiveDate"></param>
-        /// <param name="receivingLogID"></param>
-        /// <param name="page"></param>
-        /// <returns></returns>
+        /// <param name="receiveDate">Filter by date</param>
+        /// <param name="receivingLogID">Filter by ID</param>
+        /// <param name="page">N/A</param>
+        /// <returns>A filtered result set of receiving logs.</returns>
         public ActionResult BrowseReceivingLogs(DateTime? receiveDate, String receivingLogID, int page = 1)
         {
             try
@@ -476,7 +478,11 @@ namespace RecOutletWarehouse.Controllers
 
                         for (int i = 0; i < model.RLs.Count(); i++)
                         {
-                            model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                            //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                            //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ToList().ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                            byte temp3 = model.RLs.ElementAt(i).QtyTypeID.Value;
+                            var temp2 = from qt in db.QTY_TYPE where qt.QtyTypeID == temp3 select qt.QtyTypeDescription;
+                            model.qtytype[i] = temp2.First();
                         }
 
                         model.CreatorIDs = new short[model.RLs.Count()];
@@ -533,7 +539,10 @@ namespace RecOutletWarehouse.Controllers
 
                         for (int i = 0; i < model.RLs.Count(); i++)
                         {
-                            model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                            //model.qtytype[i] = db.QTY_TYPE.Where(ve => ve.QtyTypeID == model.RLs.ElementAt(i).QtyTypeID).Select(v => v.QtyTypeDescription).ToString();
+                            byte temp3 = model.RLs.ElementAt(i).QtyTypeID.Value;
+                            var temp2 = from qt in db.QTY_TYPE where qt.QtyTypeID == temp3 select qt.QtyTypeDescription;
+                            model.qtytype[i] = temp2.First();
                         }
 
                         model.CreatorIDs = new short[model.RLs.Count()];
