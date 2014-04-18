@@ -21,24 +21,7 @@
 
 <h2>Browse and View Receiving Logs</h2>
 
-@*<h3>
-    @Html.ActionLink("Create New", "AddVendor")
-</h3>*@
 <h3>Search</h3>
-@*@using (Html.BeginForm())
-{
-    <div class="search">
-        Vendor's name contains: @Html.TextBox("venNameSearch")
-        <input type="submit" value="Search" />
-    </div>
-}*@
-
-<!-- IMPORTANT: To use the following syntax, make sure you have an appropriate
-     "using" statement at the beginning of the file -->
-@*<div class="roloLinks pager">
-    @Html.RolodexLinks(x => Url.Action("SearchRL"))
-</div>*@
-
 
 <table>
     <tr>
@@ -82,7 +65,8 @@
         <td>
             @Html.DisplayFor(modelItem => v.ReceivingNotes)
         </td>
-        <td>
+        <td>   
+            <!-- If you at some point add an actions context on hover menu -->
             @*<ul class="actionMenu">
                 <li>
                     Actions
@@ -98,8 +82,3 @@
     </tr>
 }
 </table>
-
-@*<div class="searchTotal">@Model.PagingInfo.TotalItems vendors match current sorting criteria</div>
-<div class="pager">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("BrowseVendors", new {page = x, venNameSearch = Model.search, firstLetter = Model.startLetter}))
-</div>*@

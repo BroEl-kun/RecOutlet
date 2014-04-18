@@ -1,5 +1,4 @@
-﻿@*@using RecOutletWarehouse.HtmlHelpers;*@
-@model RecOutletWarehouse.Controllers.ReceivingLogController.BrowseReceivingLogViewModel
+﻿@model RecOutletWarehouse.Controllers.ReceivingLogController.BrowseReceivingLogViewModel
 
 @{
     ViewBag.Title = "SearchRL";
@@ -9,7 +8,7 @@
 @section tabnavigation{
     <ul class="nav clearfix">
         <li>@Html.ActionLink("Create Receiving Log", "Index")</li>
-        <li class="active">@Html.ActionLink("Browse Receiving Logs", "")</li>
+        <li class="active">@Html.ActionLink("Browse Receiving Logs", "BrowseReceivingLogs")</li>
     </ul>  
 }
 
@@ -20,44 +19,15 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
 
-<script>
-@*<script type="text/javascript">*@
-    @*$(function () {
-        $(".actionMenu").menu();
-    });*@
-
-    //$(function () {
-    //    $("#accordion").accordion();
-    //});
-    //$('#togButton').click(function (id) {
-    //$(function() {
-    //    function togRow (id) {
-    //        var effect = blind;
-    //        var options = {};
-    //        $('a\\'+id).toggle(effect, options, 400);
-    //    }
-    //});
-
-    //function togglez(ID) {
-    //    document.getElementById("a\\"+ID).
-    //}
-</script>
-
 <h2>Browse and View Receiving Logs</h2>
 
 @using (Html.BeginForm())
 {    
-    //Need to search by date, rl id
     <div class="search">
         By Received Date: @Html.TextBox("receiveDate", DateTime.Now.ToString("MM/dd/yyyy"), new { @class = "datepicker" })
         By Log ID: @Html.TextBox("receivingLogID")
         <input type="submit" value="Search" />
-    </div>@*
-            
-    <div class="search">
-        By Log ID: @Html.TextBox("reaceivingLogID")
-        <input type="submit" value="Search" />
-    </div>*@
+    </div>
 }
 <hr />
 <div class="center-element center-text potable-area">
@@ -84,17 +54,13 @@
                 var rpc = Model.RPCs[index];
                 var createdby = Model.CreatorIDs[index];
                 var poids = Model.POIDs[index];
-                @*<div id="accordion">
-                    <h3>*@
                  <tr>
                      
                     <td>@Html.DisplayFor(x => item.ReceivingID)</td>
-                    @*<td>@Html.DisplayFor(x => item.POLineItemID)</td>*@
                      <td>@Html.DisplayFor(x => poids)</td>
                      <td>@Html.DisplayFor(x => createdby)</td>
                      <td>@Html.DisplayFor(x => rpc)</td>
                     <td>@Html.DisplayFor(x => item.ReceiveDate, "ShortDateTime")</td>
-                    @*<td>@Html.DisplayFor(x => item.QtyTypeID)</td>*@
                      <td>@Html.DisplayFor(x => qty)</td>
                     <td>@Html.DisplayFor(x => item.ReceivedQty)</td>
                     <td>@Html.DisplayFor(x => item.ReceivingNotes)</td>
@@ -104,19 +70,6 @@
                         value="Edit" /></td>
                      
                 </tr>
-                @*</h3>
-                    <p>*@
-               @* <tr id="a\@item.ReceivingID">
-                    <td>hi</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>*@
-                @* </p>
-                </div>*@
             }
         </tbody>
     </table>
