@@ -7,10 +7,11 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
+        <li>@Html.ActionLink("Item Management","BrowseItemManagement")</li>
         <li>@Html.ActionLink("Create New Item","CreateNewItem")</li>
         <li class="active">@Html.ActionLink("Print Item Labels","PrintLabels")</li>
         <li>@Html.ActionLink("Item Characteristics","ItemCharacteristics")</li>
-    </ul>  
+    </ul>   
 }
 
 <h2>Print RPC or UPC Labels</h2>
@@ -18,9 +19,7 @@
     <li>
         TODO: This page is an ideal candidate for conversion to a jQuery modal window (like VendorDetails)
     </li>
-    <li>
-        TODO: Fix navigation tab inconsistencies
-    </li>
+
 </ul>
 @if(ViewBag.ItemSuccessfulInsert != null){
 <ul>

@@ -8,18 +8,15 @@
 
 @section tabnavigation{
     <ul class="nav clearfix">
+        <li>@Html.ActionLink("Item Management","BrowseItemManagement")</li>
         <li class="active">@Html.ActionLink("Create New Item","CreateNewItem")</li>
         <li>@Html.ActionLink("Print Item Labels","PrintLabels")</li>
         <li>@Html.ActionLink("Item Characteristics","ItemCharacteristics")</li>
-        <li>@Html.ActionLink("Browse Items","BrowseItemManagement")</li>
     </ul>  
 }
 
 <h2>Create a New Item</h2>
 <ul class="field-validation-error">
-    <li>
-        TODO: Fix navigation tab inconsistencies
-    </li>
     <li>
         TODO: Implement Ajax Autocomplete on the Product Line field. Make sure it sorts on the Vendor Name provided, not just the user's query string!
     </li>
