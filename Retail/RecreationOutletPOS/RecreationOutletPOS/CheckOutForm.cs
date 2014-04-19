@@ -194,7 +194,7 @@ namespace RecreationOutletPOS
         /// Programmer: Aaron Sorensen
         /// Last Updated: 12/3/2013
         /// 
-        /// Keeps valid input in cash field
+        /// Keeps valid input in cash field, clears textfield if not (in case they slide a card when cash is selected)
         /// </summary>
         private void checkCash(object sender, KeyEventArgs e)
         {
@@ -246,7 +246,7 @@ namespace RecreationOutletPOS
 
                 else
                 {
-                    //Card Checkout
+                    //Check if card has been swiped
                     if (PAN == null)
                     {
                         MessageBox.Show("Please Swipe Card");
