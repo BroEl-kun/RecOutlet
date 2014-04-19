@@ -83,6 +83,7 @@
                     <th>Customer Name</th>
                     <th>Total Amount</th>
                     <th>Total Amount Paid</th>
+                    @*<th></th>*@
                 </tr>
             </thead>
             <tbody>
@@ -101,6 +102,9 @@
                             <td>@Html.DisplayFor(x => item.INVOICE_CUSTOMER.CustomerName)</td>
                             <td>@Html.DisplayFor(x => totalAmount)</td>
                             <td>@Html.DisplayFor(x => item.TotalAmountPaid)</td>
+                            @*<td><input type="button" value="Edit" class="button"
+                                                            onclick="location.href='@Url.Action("EditInvoice", "InvoiceManagement", 
+                                                                        new {id = item.po})'" /></td>*@
                         </tr>
                     }
                 }
