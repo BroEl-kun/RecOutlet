@@ -34,6 +34,7 @@ namespace RecOutletWarehouse.Controllers
             public List<string> ItemNames { get; set; }
             public List<int> VendorIds { get; set; }
             public String tempPOID { get; set; }
+            public String tempVendorName { get; set; }
         }
 
         /// <summary>

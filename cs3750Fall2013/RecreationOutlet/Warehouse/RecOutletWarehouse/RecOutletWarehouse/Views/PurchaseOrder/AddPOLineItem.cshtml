@@ -42,26 +42,31 @@
 <h3>Add new items to this purchase order</h3>
 <div class="potable-area">
     <table class="potable">
-        <tr class="leftjust">
-            <th>Item Name</th>
-            <th>Vendor Item</th>
-            <th>Add Qty</th>
-            <th>Cost Each</th>
-        </tr>
-        @for (int i = 0; i < Model.VendorItems.Count; i++) {
-            <tr>
-                @using (Ajax.BeginForm("addItemToLineItems", new AjaxOptions { UpdateTargetId = "currentLines" })) {
-                    @* THE FOLLOWING FIELD USES AN EDITORFOR TEMPLATE, DO NOT MODIFY IN THIS VIEW *@
-                    @Html.EditorFor(model => Model.VendorItems[i])
-                    <td>
-                        <input type="hidden" name="poid" value="@Model.PO.POID") />
-                        <input type="hidden" name="num" value="@(i)" />
-                        <input type="submit" value="Add to PO" class="button" />
-                    </td>
-                }
+        <thead>
+            <tr class="leftjust">
+                <th>Item Name</th>
+                <th>Vendor Item</th>
+                <th>Add Qty</th>
+                <th>Cost Each</th>
+                <th></th>
             </tr>
-        }
-    
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.VendorItems.Count; i++)
+            {
+                <tr>
+                    @using (Ajax.BeginForm("addItemToLineItems", new AjaxOptions { UpdateTargetId = "currentLines" })) {
+                        @* THE FOLLOWING FIELD USES AN EDITORFOR TEMPLATE, DO NOT MODIFY IN THIS VIEW *@
+                        @Html.EditorFor(model => Model.VendorItems[i])
+                        <td>
+                            <input type="hidden" name="poid" value="@Model.PO.POID") />
+                            <input type="hidden" name="num" value="@(i)" />
+                            <input type="submit" value="Add to PO" class="button" />
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
     </table>
 </div>
 <hr />
