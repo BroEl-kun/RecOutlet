@@ -46,7 +46,8 @@ namespace RecreationOutletPOS
                 DataSet ds = new DataSet();
 
                 EmployeeLogin dt = new EmployeeLogin();
-
+                
+            //Query database to attempt login
                 try
                 {
                     ds = dt.searchInventoryFor("Username", user);
