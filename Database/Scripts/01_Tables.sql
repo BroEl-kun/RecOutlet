@@ -34,16 +34,6 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-/****** Object:  Table [dbo].[BACKORDER]    Script Date: 1/14/2014 7:10:16 PM ******/
-
---CREATE TABLE [dbo].[BACKORDER](
---	[BackorderID] [int] NOT NULL,
---	--[POLineItemID] [int] NOT NULL,
---	[ReceivingID] [int] NOT NULL,
---	[BackorderQty] [int] NOT NULL
---) ON [PRIMARY]
---GO
-
 /****** Object:  Table [dbo].[EMPLOYEE]    Script Date: 1/14/2014 7:19:46 PM ******/
 
 CREATE TABLE [dbo].[EMPLOYEE](
@@ -69,7 +59,7 @@ GO
 /****** Object:  Table [dbo].[EXCEPTIONS]    Script Date: 1/14/2014 7:22:10 PM ******/
 
 CREATE TABLE [dbo].[EXCEPTIONS](
-	[ExceptionsID] [int] NOT NULL, --Need IDENTITY(1,1)?
+	[ExceptionsID] [int] NOT NULL,
 	[ManagerID] [int] NULL,
 	[TransactionLineItemID] [int] NOT NULL,
 	[PreviousTransactionLineItemID] [int] NOT NULL,
@@ -95,19 +85,16 @@ GO
 /****** Object:  Table [dbo].[INVOICE]    Script Date: 1/14/2014 7:25:50 PM ******/
 
 CREATE TABLE [dbo].[INVOICE](
-	[InvoiceID] [bigint] NOT NULL, --Need IDENTITY(1,1)?
+	[InvoiceID] [bigint] NOT NULL,
 	[CustomerID] [int] NOT NULL,
-	--[ShippingID] [int] NOT NULL,	
 	[InvoiceCreatedBy] [smallint] NOT NULL,
 	[InvoiceCreatedDate] [smalldatetime] NOT NULL,
 	[Attention] [nvarchar](50) NULL,
-	--[PaymentDue] [smalldatetime] NOT NULL,
 	[TotalSalesTax] [smallmoney] NOT NULL,
-	--[TotalAmount] [smallmoney] NOT NULL,
 	[TotalAmountPaid] [smallmoney] NOT NULL,
 	[LastPaymentReceived] [smalldatetime] NULL,
 	[InvoiceNotes] [nvarchar](100) NULL
-) ON [PRIMARY] -- TEXTIMAGE_ON [PRIMARY]	--So would it be more efficient to actually use nvarchar(max) at least once then use the TEXTIMAGE_ON?
+) ON [PRIMARY] 
 
 GO
 
@@ -125,7 +112,7 @@ CREATE TABLE [dbo].[INVOICE_CUSTOMER](
 	[CustomerZip] [nvarchar](10) NULL,
 	[CustomerCountry] [nvarchar](50) NULL,
 	[CustomerPhone] [nvarchar](15) NULL
-) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY]
 
 GO
 
@@ -149,13 +136,9 @@ GO
 CREATE TABLE [dbo].[ITEM](
 	[RecRPC] [bigint] NOT NULL,
 	[CategoryID] [tinyint] NOT NULL,
-	--[CategoryID] [smallint] NOT NULL,
 	[DepartmentID] [tinyint] NOT NULL,
-	--[DepartmentID] [smallint] NOT NULL,
-	--[SubcategoryID] [tinyint] NOT NULL,
 	[SubcategoryID] [smallint] NOT NULL,
 	[ProductLineID] [int] NOT NULL,
-	--[TaxRateID] [tinyint] NOT NULL,
 	[TaxTypeID] [tinyint] NOT NULL,
 	[LegacyID] [smallint] NULL,
 	[ItemUPC] [bigint] NULL,
@@ -207,7 +190,6 @@ GO
 /****** Object:  Table [dbo].[ITEM_SUBCATEGORY]    Script Date: 1/15/2014 8:30:35 PM ******/
 
 CREATE TABLE [dbo].[ITEM_SUBCATEGORY](
-	--[SubcategoryID] [tinyint] IDENTITY(1,1) NOT NULL,
 	[SubcategoryID] [smallint] IDENTITY(1,1) NOT NULL,
 	[SubcategoryName] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
@@ -268,7 +250,6 @@ CREATE TABLE [dbo].[PAYMENT](
 	[PaymentID] [smallint] IDENTITY(1,1) NOT NULL,
 	[PaymentTypeID] [tinyint] NOT NULL,
 	[TransactionID] [int] NOT NULL,
-	--[LocationID] [tinyint] NOT NULL,
 	[PaymentAmount] [smallmoney] NOT NULL
 ) ON [PRIMARY]
 
@@ -339,7 +320,6 @@ GO
 CREATE TABLE [dbo].[RECEIVING_LOG](
 	[ReceivingID] [int] IDENTITY(1,1) NOT NULL,
 	[POLineItemID] [int] NULL,		--They can receive items without first ordering them. Ex. samples
-	--[BackorderID] [int] NULL,
 	[QtyTypeID] [tinyint] NULL,
 	[ReceiveDate] [smalldatetime] NOT NULL,
 	[ReceivingNotes] [nvarchar](max) NULL,
@@ -387,9 +367,6 @@ GO
 CREATE TABLE [dbo].[SHIPPING_LOG](
 	[ShippingID] [int] NOT NULL,
 	[InvoiceID] [bigint] NOT NULL,
-	--[ID] [bigint] NOT NULL,
-	--[OrderType] [nchar](1) NOT NULL,
-	--[BackorderID] [int] NULL,
 	[ShippingNotes] [nvarchar](max) NULL,
 	[ShippingWeight] [int] NULL,
 	[ShippingFrieghtCost] [smallmoney] NOT NULL,
@@ -414,7 +391,6 @@ CREATE TABLE [dbo].[STORE_TRANSACTION](
 	[TransTotal] [money] NOT NULL,
 	[TransTax] [money] NOT NULL,
 	[ManagerID] [int] NULL,
-	--[PaymentID] [smallint] NOT NULL,
 	[PreviousTransactionID] [int] NOT NULL
 ) ON [PRIMARY]
 
@@ -426,7 +402,7 @@ CREATE TABLE [dbo].[TAX_RATE](
 	[TaxRateID] [tinyint] IDENTITY(1,1) NOT NULL,
 	[TaxTypeID] [tinyint] NOT NULL,
 	[LocationID] [tinyint] NULL,
-	[TaxRate] [decimal] NOT NULL, --Is this the correct data type?
+	[TaxRate] [decimal] NOT NULL,
 	[StartDate] [smalldatetime] NOT NULL,
 	[EndDate] [smalldatetime] NULL
 ) ON [PRIMARY]
@@ -437,8 +413,6 @@ GO
 
 CREATE TABLE [dbo].[TAX_TYPE](
 	[TaxTypeID] [tinyint] IDENTITY(1,1) NOT NULL,
-	--[TaxRateType] [nvarchar](50) NOT NULL,
-	--[TaxRate] [decimal](5, 3) NOT NULL
 	[TaxTypeName] [nvarchar](50) NOT NULL
 ) ON [PRIMARY]
 
@@ -449,15 +423,11 @@ GO
 CREATE TABLE [dbo].[TRANSACTION_LINEITEM](
 	[TransactionLineItemID] [int] IDENTITY(1,1) NOT NULL,
 	[TransactionID] [int] NOT NULL,
-	--[LocationID] [tinyint] NOT NULL,
 	[RecRPC] [bigint] NOT NULL,
 	[Quantity] [int] NOT NULL,
-	--[SaleEach] [money] NOT NULL,
 	[UnitPrice] [money] NOT NULL,
 	[UnitCost] [money] NOT NULL,
 	[CommissionEmployeeID] [smallint] NOT NULL,
-	--[OverrideCode] [int] NULL,
-	--[RefundCode] [int] NULL
 	[ItemTaxTotal] [money] NOT NULL,
 	[ItemTotal] [money] NOT NULL,
 ) ON [PRIMARY]
@@ -480,7 +450,7 @@ CREATE TABLE [dbo].[VENDOR](
 	[VendorZip] [nvarchar](10) NULL,
 	[VendorCountry] [nvarchar](50) NULL,
 	[VendorWebsite] [nvarchar](100) NULL
-) ON [PRIMARY] --TEXTIMAGE_ON [PRIMARY]
+) ON [PRIMARY] 
 
 GO
 
